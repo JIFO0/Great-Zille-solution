@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>GreatZilleSolution</AssemblyName>
+    <RootNamespace>GreatZilleSolution</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MelonLoader Core & Harmony -->
+    <Reference Include="MelonLoader">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\net6\MelonLoader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\net6\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <!-- Game Dummy DLL for compilation -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\dumps\DummyDll\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Post-build step: auto-deploy to Suzerain/Mods -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="H:\SteamLibrary\steamapps\common\Suzerain\Mods\" ContinueOnError="true" />
+  </Target>
+
+</Project>
