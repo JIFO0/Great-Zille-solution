@@ -20,6 +20,9 @@ namespace GreatZilleSolution
             MelonLogger.Msg($"[WAR ENGINE] Doctrine Selected: {path}");
             MelonLogger.Msg("============================================================");
 
+            // Apply global diplomatic realignment
+            ZilleCampaignState.ApplyGeopoliticalShifts();
+
             // Verify Two-Front War state
             if (ZilleCampaignState.IsTwoFrontWarThreat())
             {

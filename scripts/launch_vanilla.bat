@@ -7,15 +7,16 @@ echo ========================================================
 
 REM Disable MelonLoader
 if exist "%GAME_DIR%\version.dll" (
-    echo Disabling MelonLoader (version.dll -> version.dll.disabled)...
+    echo Disabling MelonLoader...
     ren "%GAME_DIR%\version.dll" "version.dll.disabled"
 )
 
-REM Disable BepInEx / Doorstop
+REM Disable BepInEx if present
 if exist "%GAME_DIR%\winhttp.dll" (
-    echo Disabling Doorstop (winhttp.dll -> winhttp.dll.disabled)...
+    echo Disabling Doorstop...
     ren "%GAME_DIR%\winhttp.dll" "winhttp.dll.disabled"
 )
+
 if exist "%GAME_DIR%\doorstop_config.ini" (
     powershell -Command "(Get-Content '%GAME_DIR%\doorstop_config.ini') -replace 'enabled=true', 'enabled=false' | Set-Content '%GAME_DIR%\doorstop_config.ini'"
 )

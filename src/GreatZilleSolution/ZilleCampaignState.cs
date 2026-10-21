@@ -30,7 +30,7 @@ namespace GreatZilleSolution
         public static ZilleOperationPath ChosenPath { get; set; } = ZilleOperationPath.None;
 
         public static bool IsNavalBlockadeActive { get; set; } = false;
-        public static bool IsLespiaArcasiaSupportActive { get; set; } = false;
+        public static bool IsLespiaPactAccepted { get; set; } = false;
         public static bool IsMotherCaptured { get; set; } = false;
         public static bool IsBrenasLost { get; set; } = false;
 
@@ -39,12 +39,15 @@ namespace GreatZilleSolution
         public static int UnitsCommittedToZille { get; set; } = 0;
 
         /// <summary>
-        /// Detects if Rizia is actively at war with Pales or declared military intent against Pales.
+        /// Detects if Rizia is actively preparing for or at war with Pales.
         /// </summary>
         public static bool IsTwoFrontWarThreat()
         {
             try
             {
+                // If Lespia pact was accepted, Pales war is called off!
+                if (IsLespiaPactAccepted) return false;
+
                 bool palesPrep = DialogueLua.GetVariable("Diplomacy_Pales_PrepareForWar").asBool;
                 bool palesWar = DialogueLua.GetVariable("Diplomacy_Pales_DeclareWar").asBool;
                 bool palesActive = DialogueLua.GetVariable("Pales_War").asBool;
@@ -59,6 +62,41 @@ namespace GreatZilleSolution
         }
 
         /// <summary>
+        /// Applies profound geopolitical shifts across Merkopa upon military escalation with Wehlen:
+        /// - Malenyevist bloc (Valgsland, Morella, CSP) relations plummet.
+        /// - Capitalist bloc (Lespia, Arcasia, ATO) relations rise; aid provided.
+        /// </summary>
+        public static void ApplyGeopoliticalShifts()
+        {
+            try
+            {
+                MelonLogger.Msg("============================================================");
+                MelonLogger.Msg("[GEOPOLITICS] Applying global diplomatic shocks from Zille conflict:");
+                MelonLogger.Msg(" - Malenyevist bloc (Valgsland / Morella / CSP): Heavy negative drop");
+                MelonLogger.Msg(" - Capitalist bloc (Lespia / Arcasia / ATO): Significant improvement");
+                MelonLogger.Msg("============================================================");
+
+                // Malenyevist / Eastern relations drop
+                DialogueLua.SetVariable("Diplomacy_Valgsland_Alliance", false);
+                DialogueLua.SetVariable("CountryRelation_Valgsland_Hostile", true);
+                DialogueLua.SetVariable("Diplomacy_Morella_NegotiatingPower", -2);
+
+                // Capitalist / Western relations rise
+                DialogueLua.SetVariable("CountryRelation_Lespia_Friendly", true);
+                DialogueLua.SetVariable("Diplomacy_Arcasia_Military_Infl", 2);
+                DialogueLua.SetVariable("Diplomacy_Lespia_WehlenHelp", true);
+
+                // Domestic house shifts
+                DialogueLua.SetVariable("Country_HouseToras_Opinion", 2); // Rico and patriots ecstatic
+                DialogueLua.SetVariable("Country_HouseAzaro_Opinion", 1);  // Lucita gets green light on southern theater
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"Failed to apply geopolitical shifts: {ex.Message}");
+            }
+        }
+
+        /// <summary>
         /// Updates the Lua story flags to synchronize with Suzerain's narrative database.
         /// </summary>
         public static void SyncToLua()
@@ -68,6 +106,7 @@ namespace GreatZilleSolution
                 DialogueLua.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
                 DialogueLua.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
                 DialogueLua.SetVariable("Zille_NavalBlockadeActive", IsNavalBlockadeActive);
+                DialogueLua.SetVariable("Zille_LespiaPactAccepted", IsLespiaPactAccepted);
                 DialogueLua.SetVariable("Zille_MotherCaptured", IsMotherCaptured);
                 DialogueLua.SetVariable("Zille_BrenasLost", IsBrenasLost);
             }
