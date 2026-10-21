@@ -26,9 +26,17 @@
       <Private>False</Private>
     </Reference>
 
-    <!-- Game Dummy DLL for compilation -->
+    <!-- Game Assemblies -->
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\dumps\DummyDll\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\dumps\DummyDll\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\dumps\DummyDll\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
