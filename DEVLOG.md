@@ -22,11 +22,6 @@
 - Updated `launch_vanilla.bat` and `launch_modded.bat` to dynamically toggle `version.dll` / `version.dll.disabled`.
 - Created C# solution `src/GreatZilleSolution` targeting `net6.0`.
 
-### [2026-10-21] Implementation: Full Specification & Dialogue/War Foundation
-- Authored [docs/SPECIFICATION_GREAT_ZILLE.md](file:///C:/Projects/Great%20Zille%20solution/docs/SPECIFICATION_GREAT_ZILLE.md).
-- Implemented `ZilleCampaignState`, `DialogueInjectionPatches`, and `WarOperationZilleManager`.
-- Built and deployed `GreatZilleSolution.dll` into `Suzerain/Mods/`.
-
 ### [2026-10-21] Fixes, Lespia Pact & Global Geopolitics
 - Fixed batch syntax in launcher scripts (eliminated unescaped parenthesis in nested echo/rem blocks). Verified clean execution of both `launch_modded.bat` and `launch_vanilla.bat`.
 - Implemented **Lespia / Alvarez Backchannel Pact**:
@@ -35,7 +30,14 @@
 - Implemented **Global Geopolitical Shifts**:
   - Malenyevist bloc (Valgsland, Morella, CSP): Hegel denounces Rizia feudal aggression; Morella MITZ negotiations stall.
   - Capitalist bloc (Lespia, Arcasia, ATO): Major relations boost and military intelligence flow.
-- Added domestic nobility tensions in Crown Council:
-  - Rico Toras & Su Omina eager to form volunteer shock battalions.
-  - Angelica Sazon terrified for Brenas and demanding Crown protection.
-- Compiled `GreatZilleSolution.dll` clean (0 errors, 0 warnings) and auto-deployed into `Suzerain/Mods/`.
+
+### [2026-10-21] Runtime Bugfix (TypeLoadException) & Extended Geopolitics (v0.2.0)
+- **Resolved MelonLoader TypeLoadException:** Replaced early attribute-based scanning with manual runtime Harmony registration in `OnInitializeMelon()`. Built `DialogueHelper` for decoupled, dynamic reflection over Pixel Crushers Dialogue System.
+- **English Localization & [MOD] Tag:** Formatted all injected dialogue choices in English with explicit `[MOD]` prefixes.
+- **Derdia Hybrid Warfare (Azmal):** Added holy irregular sabotage behind Wehzek oil refineries if relations with Derdia are high.
+- **Sordland Integration (Anton Rayne):** Integrated diplomatic reaction based on whether Sordland participated in Operation Bear Trap with Smolak.
+- **Economic Crisis Mechanics:**
+  - Instant cancellation of Wehlen trade agreement and oil supplies.
+  - -2 Energy per turn deficit.
+  - Two-front war triggers soaring military upkeep and gold drain, mitigated by Lespian emergency credits if the backchannel pact was accepted.
+- Successfully built `GreatZilleSolution.dll` (0 errors, 0 warnings) and auto-deployed into `Suzerain/Mods/`.

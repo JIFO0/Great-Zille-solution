@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using MelonLoader;
-using PixelCrushers.DialogueSystem;
 
 namespace GreatZilleSolution
 {
@@ -20,10 +18,10 @@ namespace GreatZilleSolution
             MelonLogger.Msg($"[WAR ENGINE] Doctrine Selected: {path}");
             MelonLogger.Msg("============================================================");
 
-            // Apply global diplomatic realignment
+            // Apply global diplomatic and economic shocks
             ZilleCampaignState.ApplyGeopoliticalShifts();
 
-            // Verify Two-Front War state
+            // Verify Two-Front War state and unit commitments
             if (ZilleCampaignState.IsTwoFrontWarThreat())
             {
                 MelonLogger.Warning("[WAR ENGINE] WARNING: Two-Front War Active! Pales theatre has committed royal assets.");
@@ -47,10 +45,10 @@ namespace GreatZilleSolution
 
             try
             {
-                DialogueLua.SetVariable("ZilleReturn_Success", true);
-                DialogueLua.SetVariable("_Zille_OwnState", 1);
-                DialogueLua.SetVariable("Zille_PromisedToHouseToras", true);
-                DialogueLua.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                DialogueHelper.SetVariable("ZilleReturn_Success", true);
+                DialogueHelper.SetVariable("_Zille_OwnState", 1);
+                DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
+                DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
             }
             catch (Exception ex)
             {
@@ -74,10 +72,10 @@ namespace GreatZilleSolution
 
             try
             {
-                DialogueLua.SetVariable("ZilleReturn_Success", false);
-                DialogueLua.SetVariable("ZilleReferendum_Lost", true);
-                if (brenasLost) DialogueLua.SetVariable("Brenas_Lost_To_Wehlen", true);
-                if (motherDied) DialogueLua.SetVariable("QueenMother_Estela_Dead", true);
+                DialogueHelper.SetVariable("ZilleReturn_Success", false);
+                DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                if (brenasLost) DialogueHelper.SetVariable("Brenas_Lost_To_Wehlen", true);
+                if (motherDied) DialogueHelper.SetVariable("QueenMother_Estela_Dead", true);
             }
             catch (Exception ex)
             {
@@ -89,20 +87,18 @@ namespace GreatZilleSolution
 
         public static void CalculateUnitReserves()
         {
-            // Read active military decrees / army size
-            int totalBattalions = 8; // base standing army in Rizia
+            int totalBattalions = 8;
             try
             {
-                totalBattalions += DialogueLua.GetVariable("Military_Expanded_Infantry").asInt * 2;
-                totalBattalions += DialogueLua.GetVariable("Military_Expanded_Tanks").asInt * 2;
+                totalBattalions += DialogueHelper.GetIntVariable("Military_Expanded_Infantry") * 2;
+                totalBattalions += DialogueHelper.GetIntVariable("Military_Expanded_Tanks") * 2;
             }
             catch { }
 
-            // Deduct units sent to Pales
             int palesTokens = 0;
             if (ZilleCampaignState.IsTwoFrontWarThreat())
             {
-                palesTokens = 5; // standard deployment to Pales
+                palesTokens = 5;
             }
 
             ZilleCampaignState.UnitsCommittedToPales = palesTokens;

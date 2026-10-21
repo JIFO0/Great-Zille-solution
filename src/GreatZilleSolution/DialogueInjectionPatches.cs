@@ -6,49 +6,89 @@ using PixelCrushers.DialogueSystem;
 
 namespace GreatZilleSolution
 {
-    [HarmonyPatch(typeof(AbstractDialogueUI), nameof(AbstractDialogueUI.ShowResponses), new Type[] { typeof(Subtitle), typeof(Response[]), typeof(float) })]
-    public static class Patch_AbstractDialogueUI_ShowResponses
+    public static class DialogueInjectionPatches
     {
-        public static void Prefix(AbstractDialogueUI __instance, Subtitle subtitle, ref Response[] responses, float timeout)
+        public static void RegisterManualPatches(HarmonyLib.Harmony harmony)
+        {
+            try
+            {
+                // Patch ConversationView.StartResponses
+                var startResponsesMethod = AccessTools.Method(
+                    typeof(ConversationView), 
+                    nameof(ConversationView.StartResponses), 
+                    new Type[] { typeof(Subtitle), typeof(Response[]) }
+                );
+
+                if (startResponsesMethod != null)
+                {
+                    var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(StartResponsesPrefix));
+                    harmony.Patch(startResponsesMethod, prefix: new HarmonyMethod(prefix));
+                    MelonLogger.Msg("[Great Zille] Successfully hooked ConversationView.StartResponses!");
+                }
+                else
+                {
+                    MelonLogger.Warning("[Great Zille] Failed to locate ConversationView.StartResponses!");
+                }
+
+                // Patch ConversationView.OnSelectedResponse
+                var onSelectedMethod = AccessTools.Method(
+                    typeof(ConversationView), 
+                    "OnSelectedResponse", 
+                    new Type[] { typeof(object), typeof(SelectedResponseEventArgs) }
+                );
+
+                if (onSelectedMethod != null)
+                {
+                    var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnSelectedResponsePrefix));
+                    harmony.Patch(onSelectedMethod, prefix: new HarmonyMethod(prefix));
+                    MelonLogger.Msg("[Great Zille] Successfully hooked ConversationView.OnSelectedResponse!");
+                }
+                else
+                {
+                    MelonLogger.Warning("[Great Zille] Failed to locate ConversationView.OnSelectedResponse!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[Great Zille] Manual patch registration error: {ex.Message}");
+            }
+        }
+
+        public static void StartResponsesPrefix(ConversationView __instance, Subtitle subtitle, ref Response[] responses)
         {
             try
             {
                 if (responses == null) return;
 
-                string convTitle = DialogueManager.lastConversationStarted;
+                string convTitle = DialogueHelper.GetCurrentConversationTitle();
                 if (string.IsNullOrEmpty(convTitle)) return;
 
-                // 1. TURN 01: Zille Visit / Speech
+                // 1. Turn 01: Zille Visit / Speech
                 if (convTitle.Contains("Turn01_ZilleVisit") || convTitle.Contains("ZilleVisit_HostileSpeech"))
                 {
                     InjectTurn01Response(ref responses);
                 }
-                // 2. TURN 02: Friendship Day / Trade Demands
+                // 2. Turn 02: Friendship Day / Trade Demands
                 else if (convTitle.Contains("Turn02_Zille") || convTitle.Contains("FriendshipDayPrep"))
                 {
                     InjectTurn02Response(ref responses);
                 }
-                // 3. TURN 03: Bombing Incident in Zille
+                // 3. Turn 03: Bombing Incident in Zille
                 else if (convTitle.Contains("Turn03_Zille") || convTitle.Contains("ZilleIncidentRespons"))
                 {
                     InjectTurn03Response(ref responses);
                 }
-                // 4. TURN 04 / TURN 08: Lespia / Alvarez Backchannel Deal regarding Pales & Zille
+                // 4. Turn 04 / Turn 08: Lespia Backchannel Offer
                 else if (convTitle.Contains("Turn04_Pales_NavalWithdrawal") || convTitle.Contains("Turn08_AlvarezVisit"))
                 {
                     InjectLespiaProposal(ref responses);
                 }
-                // 5. TURN 05: Morella MITZ Reaction to Military Buildup
-                else if (convTitle.Contains("Turn05_MorellaITZ") || convTitle.Contains("MorellaITZ_Shares"))
+                // 5. Turn 07: Derdia Hybrid Warfare Offer
+                else if (convTitle.Contains("Turn07_Derdia") || convTitle.Contains("Derdia_FavorsDone"))
                 {
-                    InjectMorellaWarning(ref responses);
+                    InjectDerdiaOffer(ref responses);
                 }
-                // 6. TURN 06 / TURN 08: Crown Council Debates (Rico vs Angelica Sazon)
-                else if (convTitle.Contains("Turn06_CouncilMeeting") || convTitle.Contains("Turn08_Council"))
-                {
-                    InjectCouncilDebate(ref responses);
-                }
-                // 7. TURN 08: Final Negotiations / Breakout of War
+                // 6. Turn 08: Final Breakdown / Outbreak of War
                 else if (convTitle.Contains("Turn08_Zille") || convTitle.Contains("ZilleNegotiat") || convTitle.Contains("ZilleNeg_Agree"))
                 {
                     InjectTurn08WarResponse(ref responses);
@@ -56,94 +96,157 @@ namespace GreatZilleSolution
             }
             catch (Exception ex)
             {
-                MelonLogger.Warning($"[Great Zille] Dialogue patch prefix exception: {ex.Message}");
+                MelonLogger.Warning($"[Great Zille] StartResponsesPrefix error: {ex.Message}");
             }
         }
 
         private static void InjectTurn01Response(ref Response[] responses)
         {
-            if (HasOption(responses, "odbierzemy ją siłą")) return;
+            if (HasOption(responses, "Zille_Mil_T1")) return;
 
-            string choiceText = "[Great Zille] \"Jeśli ten klaun nie odda naszej ziemi po dobroci, odbierzemy ją siłą i żelazem.\"";
+            string choiceText = "[MOD] \"If this clown won't return our land willingly, we will take it by blood and iron.\"";
             DialogueEntry entry = CreateCustomEntry(1001, choiceText, "Zille_Mil_T1");
             AddResponse(ref responses, choiceText, entry);
-            MelonLogger.Msg("[Great Zille] Injected military dialogue choice into Turn 01.");
+            MelonLogger.Msg("[Great Zille] Injected Turn 01 military dialogue option.");
         }
 
         private static void InjectTurn02Response(ref Response[] responses)
         {
-            if (HasOption(responses, "uderzenia prewencyjnego")) return;
+            if (HasOption(responses, "Zille_Mil_T2")) return;
 
-            string choiceText = "[Great Zille] \"Żądania Smolaka są bezczelne. Sztab musi natychmiast przygotować plan uderzenia prewencyjnego.\"";
+            string choiceText = "[MOD] \"Smolak's demands are an insult to the Crown. Order the General Staff to draft a preemptive invasion plan.\"";
             DialogueEntry entry = CreateCustomEntry(1002, choiceText, "Zille_Mil_T2");
             AddResponse(ref responses, choiceText, entry);
-            MelonLogger.Msg("[Great Zille] Injected staff study dialogue choice into Turn 02.");
+            MelonLogger.Msg("[Great Zille] Injected Turn 02 staff study dialogue option.");
         }
 
         private static void InjectTurn03Response(ref Response[] responses)
         {
-            if (HasOption(responses, "stan podwyższonej gotowości bojowej")) return;
+            if (HasOption(responses, "Zille_Mil_T3")) return;
 
-            string choiceText = "[Great Zille] \"Ten zamach to prowokacja Smolaka. Ogłaszam stan podwyższonej gotowości na granicy Brenas!\"";
+            string choiceText = "[MOD] \"This bombing is Smolak's blatant false-flag. I declare heightened combat readiness along the Brenas border!\"";
             DialogueEntry entry = CreateCustomEntry(1003, choiceText, "Zille_Mil_T3");
             AddResponse(ref responses, choiceText, entry);
-            MelonLogger.Msg("[Great Zille] Injected border mobilization dialogue choice into Turn 03.");
+            MelonLogger.Msg("[Great Zille] Injected Turn 03 mobilization dialogue option.");
         }
 
         private static void InjectLespiaProposal(ref Response[] responses)
         {
-            if (HasOption(responses, "Układ z Lespią") || ZilleCampaignState.IsLespiaPactAccepted) return;
+            if (HasOption(responses, "Lespia_Pact_Accept") || ZilleCampaignState.IsLespiaPactAccepted) return;
 
-            // Alvarez proposes backchannel deal
-            string choiceAccept = "[Great Zille] \"[Układ z Lespią] 'Zgoda, Alvarez. Odpuszczamy Pales, ale w zamian Lespia i Arcasia dadzą nam wolną rękę i wsparcie przeciwko Wehlen.'\"";
+            string choiceAccept = "[MOD] [Lespia Backchannel] \"'Agreed, Alvarez. We stand down on Pales, but Lespia and Arcasia must back us against Wehlen with intel and heavy munitions.'\"";
             DialogueEntry entryAccept = CreateCustomEntry(10041, choiceAccept, "Lespia_Pact_Accept");
             AddResponse(ref responses, choiceAccept, entryAccept);
 
-            string choiceRefuse = "[Great Zille] \"'Rizia nie będzie tańczyć pod dyktando Lespii. Poradzimy sobie zarówno z Pales, jak i ze Smolakiem.'\"";
+            string choiceRefuse = "[MOD] \"'Rizia does not need Lespian charity. We will handle both Pales and Smolak on our sovereign terms.'\"";
             DialogueEntry entryRefuse = CreateCustomEntry(10042, choiceRefuse, "Lespia_Pact_Refuse");
             AddResponse(ref responses, choiceRefuse, entryRefuse);
-
-            MelonLogger.Msg("[Great Zille] Injected Alvarez backchannel proposal into diplomatic talks.");
+            MelonLogger.Msg("[Great Zille] Injected Alvarez backchannel proposal.");
         }
 
-        private static void InjectMorellaWarning(ref Response[] responses)
+        private static void InjectDerdiaOffer(ref Response[] responses)
         {
-            if (HasOption(responses, "spraw wewnętrznych Rizii")) return;
+            if (HasOption(responses, "Derdia_Hybrid_Accept") || ZilleCampaignState.IsDerdiaHybridSupportActive) return;
 
-            string choiceText = "[Great Zille] \"Nasza obecność wojskowa w Brenas to kwestia bezpieczeństwa narodowego, nie sprawa Morelli.\"";
-            DialogueEntry entry = CreateCustomEntry(10051, choiceText, "Morella_Mil_Warn");
-            AddResponse(ref responses, choiceText, entry);
-        }
-
-        private static void InjectCouncilDebate(ref Response[] responses)
-        {
-            if (HasOption(responses, "kwestię obrony Brenas")) return;
-
-            string choiceText = "[Great Zille] \"Rico, powstrzymaj bojówki Su Omina. Brenas musi pozostać pod ścisłą kontrolą armii regularnej.\"";
-            DialogueEntry entry = CreateCustomEntry(10061, choiceText, "Council_Brenas_Debate");
-            AddResponse(ref responses, choiceText, entry);
+            string choiceAccept = "[MOD] [Derdia Intervention] \"'Accept Azmal's offer: Unleash holy irregulars behind Wehzek lines to sabotage their refineries.'\"";
+            DialogueEntry entryAccept = CreateCustomEntry(10071, choiceAccept, "Derdia_Hybrid_Accept");
+            AddResponse(ref responses, choiceAccept, entryAccept);
+            MelonLogger.Msg("[Great Zille] Injected Derdia hybrid warfare proposal.");
         }
 
         private static void InjectTurn08WarResponse(ref Response[] responses)
         {
-            if (HasOption(responses, "Operację Righteous Sword")) return;
+            if (HasOption(responses, "Zille_War_Alfa")) return;
 
-            string choiceA = "[Great Zille] \"Dość upokorzeń. Operacja Righteous Sword — Wariant Alfa: Frontalny szturm na Zille!\"";
+            string choiceA = "[MOD] \"Order: Operation Righteous Sword — Plan Alpha: Direct frontal assault on Zille!\"";
             DialogueEntry entryA = CreateCustomEntry(10081, choiceA, "Zille_War_Alfa");
             AddResponse(ref responses, choiceA, entryA);
 
-            string choiceB = "[Great Zille] \"Dość upokorzeń. Operacja Righteous Sword — Wariant Beta: Obejście przez Viktrany i port Munat!\"";
+            string choiceB = "[MOD] \"Order: Operation Righteous Sword — Plan Beta: Flank through Viktrany and seize the deepwater port of Munat!\"";
             DialogueEntry entryB = CreateCustomEntry(10082, choiceB, "Zille_War_Beta");
             AddResponse(ref responses, choiceB, entryB);
-
-            MelonLogger.Msg("[Great Zille] Injected Operation Righteous Sword war options into Turn 08.");
+            MelonLogger.Msg("[Great Zille] Injected Operation Righteous Sword war commands into Turn 08.");
         }
 
-        private static bool HasOption(Response[] responses, string snippet)
+        public static void OnSelectedResponsePrefix(object sender, SelectedResponseEventArgs e)
+        {
+            try
+            {
+                if (e == null || e.DestinationEntry == null) return;
+
+                string script = e.DestinationEntry.userScript;
+                if (string.IsNullOrEmpty(script)) return;
+
+                if (script == "Zille_Mil_T1")
+                {
+                    ZilleCampaignState.MilitarySentimentLevel = 1;
+                    DialogueHelper.ShowAlert("[MOD] Hugo: 'Your Majesty, in the name of God! The treaty with Wehlen is international law. AN embargoes will crush us before our guns even unlimber!'");
+                    DialogueHelper.ShowAlert("[MOD] Lucita: 'I admire your resolve, sire, but our army is still reconstituting after the civil crisis. Give me time to draft plans.'");
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Zille_Mil_T2")
+                {
+                    ZilleCampaignState.MilitarySentimentLevel = 2;
+                    DialogueHelper.ShowAlert("[MOD] Lucita: 'Smolak has crossed the line. I will quietly begin operational war studies for the southern front. But do not provoke Pales at the same time.'");
+                    DialogueHelper.ShowAlert("[MOD] Grand Archon Sal: 'Zille is sanctified Rizian soil. The righteous sword of Saint Wruhec will purge the infidel occupiers!'");
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Zille_Mil_T3")
+                {
+                    ZilleCampaignState.MilitarySentimentLevel = 3;
+                    if (ZilleCampaignState.IsTwoFrontWarThreat())
+                    {
+                        DialogueHelper.ShowAlert("[MOD] Hugo (shouting): 'HAVE YOU LOST YOUR SENSES, ROMUS?! Our battalions are assembling against Pales! A two-front war is a death sentence for the House of Toras!'");
+                        DialogueHelper.ShowAlert("[MOD] Lucita: 'Your Majesty, I plead with you! We do not have the manpower to besiege Pales while fighting Wehlen! Our supply lines will snap!'");
+                    }
+                    else
+                    {
+                        DialogueHelper.ShowAlert("[MOD] Lucita: 'Southern Command acknowledges. Artillery regiments are fortifying Brenas heights. We await your word of command.'");
+                    }
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Lespia_Pact_Accept")
+                {
+                    ZilleCampaignState.IsLespiaPactAccepted = true;
+                    DialogueHelper.SetVariable("Diplomacy_Pales_PrepareForWar", false);
+                    DialogueHelper.SetVariable("Diplomacy_Pales_DeclareWar", false);
+                    DialogueHelper.ShowAlert("[MOD] Alvarez: 'A wise trade, Romus. Reinhard keeps his gas, and we ensure Smolak chokes on every barrel in Zille. Arcasian satellite feeds and heavy munitions are yours.'");
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Lespia_Pact_Refuse")
+                {
+                    ZilleCampaignState.IsLespiaPactAccepted = false;
+                    DialogueHelper.ShowAlert("[MOD] Alvarez: 'Pride is expensive, Your Majesty. Let us see how long your crown lasts under the weight of two simultaneous wars.'");
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Derdia_Hybrid_Accept")
+                {
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    DialogueHelper.ShowAlert("[MOD] Grand Council Azmal: 'The fire of the righteous shall consume the oil fields of Zille. Smolak will find no rest behind his lines.'");
+                    ZilleCampaignState.SyncToLua();
+                }
+                else if (script == "Zille_War_Alfa")
+                {
+                    DialogueHelper.ShowAlert("[MOD] WAR DECLARED: Operation Righteous Sword initiated! Crown forces assault Zille directly.");
+                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
+                }
+                else if (script == "Zille_War_Beta")
+                {
+                    DialogueHelper.ShowAlert("[MOD] WAR DECLARED: Operation Righteous Sword initiated! Pincer maneuver through Viktrany & port Munat.");
+                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[Great Zille] Response selection error: {ex.Message}");
+            }
+        }
+
+        private static bool HasOption(Response[] responses, string scriptSnippet)
         {
             foreach (var r in responses)
             {
-                if (r != null && r.formattedText != null && r.formattedText.text != null && r.formattedText.text.Contains(snippet))
+                if (r != null && r.destinationEntry != null && r.destinationEntry.userScript != null && r.destinationEntry.userScript.Contains(scriptSnippet))
                     return true;
             }
             return false;
@@ -166,127 +269,6 @@ namespace GreatZilleSolution
             var list = new List<Response>(responses);
             list.Add(newResp);
             responses = list.ToArray();
-        }
-    }
-
-    [HarmonyPatch(typeof(ConversationController), nameof(ConversationController.OnSelectedResponse))]
-    public static class Patch_ConversationController_OnSelectedResponse
-    {
-        public static void Prefix(ConversationController __instance, object sender, SelectedResponseEventArgs e)
-        {
-            try
-            {
-                if (e == null || e.DestinationEntry == null) return;
-
-                string script = e.DestinationEntry.userScript;
-                if (string.IsNullOrEmpty(script)) return;
-
-                if (script == "Zille_Mil_T1")
-                {
-                    HandleTurn01Reaction();
-                }
-                else if (script == "Zille_Mil_T2")
-                {
-                    HandleTurn02Reaction();
-                }
-                else if (script == "Zille_Mil_T3")
-                {
-                    HandleTurn03Reaction();
-                }
-                else if (script == "Lespia_Pact_Accept")
-                {
-                    HandleLespiaPactAccept();
-                }
-                else if (script == "Lespia_Pact_Refuse")
-                {
-                    HandleLespiaPactRefuse();
-                }
-                else if (script == "Morella_Mil_Warn")
-                {
-                    HandleMorellaWarning();
-                }
-                else if (script == "Council_Brenas_Debate")
-                {
-                    HandleCouncilDebate();
-                }
-                else if (script == "Zille_War_Alfa")
-                {
-                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
-                }
-                else if (script == "Zille_War_Beta")
-                {
-                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
-                }
-            }
-            catch (Exception ex)
-            {
-                MelonLogger.Warning($"[Great Zille] Response selection handling error: {ex.Message}");
-            }
-        }
-
-        private static void HandleTurn01Reaction()
-        {
-            ZilleCampaignState.MilitarySentimentLevel = 1;
-            DialogueManager.ShowAlert("Hugo: 'Wasza Wysokość, traktat z Wehlen to prawo międzynarodowe! Sankcje AN zniszczą nas w zarodku.'");
-            DialogueManager.ShowAlert("Lucita: 'Armia po wojnie domowej nie jest gotowa na uderzenie w Wehlen. Potrzebujemy floty i czasu.'");
-            ZilleCampaignState.SyncToLua();
-        }
-
-        private static void HandleTurn02Reaction()
-        {
-            ZilleCampaignState.MilitarySentimentLevel = 2;
-            DialogueManager.ShowAlert("Lucita: 'Smolak przesadził. Sztab sporządzi tajne plany, lecz pamiętaj: otwarcie frontu z Pales pokrzyżuje wszystko.'");
-            DialogueManager.ShowAlert("Sal: 'Zille należy do Rizii z boskiego nadania. Miecz Wruheca zetrze bezbożników.'");
-            ZilleCampaignState.SyncToLua();
-        }
-
-        private static void HandleTurn03Reaction()
-        {
-            ZilleCampaignState.MilitarySentimentLevel = 3;
-
-            if (ZilleCampaignState.IsTwoFrontWarThreat())
-            {
-                MelonLogger.Warning("[Great Zille] PANIC TRIGGERED: Active Two-Front War Threat detected!");
-                DialogueManager.ShowAlert("Hugo: 'CZYŚ TY OSZALAŁ?! Wojska szykują się na Pales! Wojna na dwa fronty to wyrok śmierci dla Korony!'");
-                DialogueManager.ShowAlert("Lucita: 'Wasza Królewska Mość, błagam o rozsądek! Nie mamy batalionów na oba teatry jednocześnie!'");
-            }
-            else
-            {
-                DialogueManager.ShowAlert("Lucita: 'Bataliony Południowe zajmują pozycje w Brenas. Czekamy na rozkaz uderzenia.'");
-            }
-
-            ZilleCampaignState.SyncToLua();
-        }
-
-        private static void HandleLespiaPactAccept()
-        {
-            ZilleCampaignState.IsLespiaPactAccepted = true;
-            MelonLogger.Msg("[Great Zille] Lespia Backchannel Pact Accepted: Standing down on Pales in exchange for Zille backing.");
-
-            // Call off Pales invasion
-            DialogueLua.SetVariable("Diplomacy_Pales_PrepareForWar", false);
-            DialogueLua.SetVariable("Diplomacy_Pales_DeclareWar", false);
-
-            DialogueManager.ShowAlert("Alvarez: 'Mądry wybór, Romus. Kupujesz gaz w Pales, a my dopilnujemy, by Smolak pożałował każdego dnia okupacji Zille. Dostaniecie nasze satelity i sprzęt.'");
-            ZilleCampaignState.SyncToLua();
-        }
-
-        private static void HandleLespiaPactRefuse()
-        {
-            ZilleCampaignState.IsLespiaPactAccepted = false;
-            DialogueManager.ShowAlert("Alvarez: 'Cóż, twoja duma będzie cię drogo kosztować, Wasza Wysokość. Zobaczymy, jak twoja korona zniesie walkę na dwa fronty naraz.'");
-            ZilleCampaignState.SyncToLua();
-        }
-
-        private static void HandleMorellaWarning()
-        {
-            DialogueManager.ShowAlert("Salva: 'Morella ostrzega: jeśli wasz militaryzm podpali południe, zapomnijcie o jakiejkolwiek współpracy przy MITZ.'");
-        }
-
-        private static void HandleCouncilDebate()
-        {
-            DialogueManager.ShowAlert("Rico: 'Wuju! Su Omina jest gotowa przelać krew za Zille!'");
-            DialogueManager.ShowAlert("Angelica Sazon: 'Rico jest szaleńcem! Jeśli Wehzekowie przełamią Brenas, ród Sazonów obciąży winą Koronę!'");
         }
     }
 }

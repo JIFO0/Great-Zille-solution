@@ -1,6 +1,5 @@
 using System;
 using MelonLoader;
-using PixelCrushers.DialogueSystem;
 
 namespace GreatZilleSolution
 {
@@ -31,8 +30,13 @@ namespace GreatZilleSolution
 
         public static bool IsNavalBlockadeActive { get; set; } = false;
         public static bool IsLespiaPactAccepted { get; set; } = false;
+        public static bool IsDerdiaHybridSupportActive { get; set; } = false;
         public static bool IsMotherCaptured { get; set; } = false;
         public static bool IsBrenasLost { get; set; } = false;
+
+        // Economic Impact Trackers
+        public static int GoldBudgetDrainPerTurn { get; set; } = 0;
+        public static int EnergyDeficitPerTurn { get; set; } = 0;
 
         // Unit Tracking & Allocation
         public static int UnitsCommittedToPales { get; set; } = 0;
@@ -48,10 +52,10 @@ namespace GreatZilleSolution
                 // If Lespia pact was accepted, Pales war is called off!
                 if (IsLespiaPactAccepted) return false;
 
-                bool palesPrep = DialogueLua.GetVariable("Diplomacy_Pales_PrepareForWar").asBool;
-                bool palesWar = DialogueLua.GetVariable("Diplomacy_Pales_DeclareWar").asBool;
-                bool palesActive = DialogueLua.GetVariable("Pales_War").asBool;
-                bool palesIntervention = DialogueLua.GetVariable("Pales_War_Played").asBool;
+                bool palesPrep = DialogueHelper.GetBoolVariable("Diplomacy_Pales_PrepareForWar");
+                bool palesWar = DialogueHelper.GetBoolVariable("Diplomacy_Pales_DeclareWar");
+                bool palesActive = DialogueHelper.GetBoolVariable("Pales_War");
+                bool palesIntervention = DialogueHelper.GetBoolVariable("Pales_War_Played");
 
                 return palesPrep || palesWar || palesActive || palesIntervention;
             }
@@ -65,30 +69,76 @@ namespace GreatZilleSolution
         /// Applies profound geopolitical shifts across Merkopa upon military escalation with Wehlen:
         /// - Malenyevist bloc (Valgsland, Morella, CSP) relations plummet.
         /// - Capitalist bloc (Lespia, Arcasia, ATO) relations rise; aid provided.
+        /// - Sordland reaction calculated based on Operation Bear Trap status.
+        /// - Economic shocks applied: energy deficit and massive gold drain if on two fronts.
         /// </summary>
         public static void ApplyGeopoliticalShifts()
         {
             try
             {
                 MelonLogger.Msg("============================================================");
-                MelonLogger.Msg("[GEOPOLITICS] Applying global diplomatic shocks from Zille conflict:");
+                MelonLogger.Msg("[GEOPOLITICS] Applying global diplomatic & economic shocks from Zille conflict:");
                 MelonLogger.Msg(" - Malenyevist bloc (Valgsland / Morella / CSP): Heavy negative drop");
                 MelonLogger.Msg(" - Capitalist bloc (Lespia / Arcasia / ATO): Significant improvement");
                 MelonLogger.Msg("============================================================");
 
+                // Instantly sever all Wehlen trade & energy commitments
+                DialogueHelper.SetVariable("Diplomacy_Wehlen_Trade", false);
+                DialogueHelper.SetVariable("EnergyCommitment_Wehlen_Failed", true);
+                DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+
                 // Malenyevist / Eastern relations drop
-                DialogueLua.SetVariable("Diplomacy_Valgsland_Alliance", false);
-                DialogueLua.SetVariable("CountryRelation_Valgsland_Hostile", true);
-                DialogueLua.SetVariable("Diplomacy_Morella_NegotiatingPower", -2);
+                DialogueHelper.SetVariable("Diplomacy_Valgsland_Alliance", false);
+                DialogueHelper.SetVariable("CountryRelation_Valgsland_Hostile", true);
+                DialogueHelper.SetVariable("Diplomacy_Morella_NegotiatingPower", -2);
 
                 // Capitalist / Western relations rise
-                DialogueLua.SetVariable("CountryRelation_Lespia_Friendly", true);
-                DialogueLua.SetVariable("Diplomacy_Arcasia_Military_Infl", 2);
-                DialogueLua.SetVariable("Diplomacy_Lespia_WehlenHelp", true);
+                DialogueHelper.SetVariable("CountryRelation_Lespia_Friendly", true);
+                DialogueHelper.SetVariable("Diplomacy_Arcasia_Military_Infl", 2);
+                DialogueHelper.SetVariable("Diplomacy_Lespia_WehlenHelp", true);
 
-                // Domestic house shifts
-                DialogueLua.SetVariable("Country_HouseToras_Opinion", 2); // Rico and patriots ecstatic
-                DialogueLua.SetVariable("Country_HouseAzaro_Opinion", 1);  // Lucita gets green light on southern theater
+                // Check Sordland (Anton Rayne) status regarding Bear Trap
+                bool sordlandBearTrap = DialogueHelper.GetBoolVariable("Diplomacy_Sordland_BearTrap");
+                if (sordlandBearTrap)
+                {
+                    DialogueHelper.SetVariable("CountryRelation_Sordland_Strained", true);
+                    MelonLogger.Msg("[GEOPOLITICS] Sordland participated in Bear Trap: Diplomatic friction with Rizia over Wehlen attack.");
+                }
+                else
+                {
+                    DialogueHelper.SetVariable("CountryRelation_Sordland_Friendly", true);
+                    MelonLogger.Msg("[GEOPOLITICS] Sordland rejected Bear Trap: Anton Rayne remains open to diplomatic channels.");
+                }
+
+                // Check Derdia Hybrid War Support
+                bool derdiaFriendly = DialogueHelper.GetBoolVariable("Deal_Derdia") || DialogueHelper.GetBoolVariable("CountryRelation_Derdia_Friendly");
+                if (derdiaFriendly)
+                {
+                    IsDerdiaHybridSupportActive = true;
+                    DialogueHelper.SetVariable("Zille_Derdia_HybridWarfare", true);
+                    MelonLogger.Msg("[GEOPOLITICS] Derdia hybrid warfare active: Holy irregulars deployed behind Wehzek lines!");
+                }
+
+                // Economic fallout: Energy and Gold calculation
+                EnergyDeficitPerTurn = 2; // loss of Wehlen oil
+                if (IsTwoFrontWarThreat())
+                {
+                    GoldBudgetDrainPerTurn = 3; // two-front war causes massive budget drain
+                    DialogueHelper.ShowAlert("[ECONOMIC CRISIS] Two-front mobilization! Royal treasury under severe strain, inflation soaring.");
+                }
+                else if (IsLespiaPactAccepted)
+                {
+                    GoldBudgetDrainPerTurn = 1; // subsidized by Lespia/Arcasia
+                    EnergyDeficitPerTurn = 1;   // emergency oil credits
+                    DialogueHelper.ShowAlert("[ECONOMIC AID] Lespian capital and emergency Arcasian energy stabilize Rizia's war budget.");
+                }
+                else
+                {
+                    GoldBudgetDrainPerTurn = 2;
+                }
+
+                DialogueHelper.SetVariable("Economy_Gold_Drain", GoldBudgetDrainPerTurn);
+                DialogueHelper.SetVariable("Economy_Energy_Deficit", EnergyDeficitPerTurn);
             }
             catch (Exception ex)
             {
@@ -96,19 +146,17 @@ namespace GreatZilleSolution
             }
         }
 
-        /// <summary>
-        /// Updates the Lua story flags to synchronize with Suzerain's narrative database.
-        /// </summary>
         public static void SyncToLua()
         {
             try
             {
-                DialogueLua.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
-                DialogueLua.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
-                DialogueLua.SetVariable("Zille_NavalBlockadeActive", IsNavalBlockadeActive);
-                DialogueLua.SetVariable("Zille_LespiaPactAccepted", IsLespiaPactAccepted);
-                DialogueLua.SetVariable("Zille_MotherCaptured", IsMotherCaptured);
-                DialogueLua.SetVariable("Zille_BrenasLost", IsBrenasLost);
+                DialogueHelper.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
+                DialogueHelper.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
+                DialogueHelper.SetVariable("Zille_NavalBlockadeActive", IsNavalBlockadeActive);
+                DialogueHelper.SetVariable("Zille_LespiaPactAccepted", IsLespiaPactAccepted);
+                DialogueHelper.SetVariable("Zille_DerdiaHybridActive", IsDerdiaHybridSupportActive);
+                DialogueHelper.SetVariable("Zille_MotherCaptured", IsMotherCaptured);
+                DialogueHelper.SetVariable("Zille_BrenasLost", IsBrenasLost);
             }
             catch (Exception ex)
             {
