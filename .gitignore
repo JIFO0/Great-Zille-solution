@@ -1,0 +1,16 @@
+# Binaries and build artifacts
+bin/
+obj/
+*.user
+*.suo
+
+# Dumps (Il2CppDumper output - very large)
+dumps/
+
+# Tools
+tools/
+
+# OS / Editor
+.vs/
+.vscode/
+Thumbs.db
