@@ -28,15 +28,31 @@
 
     <!-- Assemblies for Types & Compilation -->
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\dumps\DummyDll\Assembly-CSharp.dll</HintPath>
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\dumps\DummyDll\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\dumps\DummyDll\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

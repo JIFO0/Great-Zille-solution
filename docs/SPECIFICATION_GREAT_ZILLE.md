@@ -1,97 +1,87 @@
-# Projekt: Great Zille Solution — Pełna Specyfikacja Projektowa i Fabularna
+# Projekt: Great Zille Solution — Specyfikacja Projektowa i Fabularna (v0.3.0)
 
 ## 1. Założenia Główne
 
 Mod wprowadza alternatywną, militarną ścieżkę rozwiązania kryzysu Zille w kampanii Rizia (DLC do gry Suzerain).
-Gracz od samego początku panowania Romulusa (Turn 01) otrzymuje możliwość rozważenia i forsowania opcji siłowej wobec Wiktora Smolaka, co spotyka się z dynamiczną ewolucją nastrojów na Dworze Królewskim, wpływa na światowe sojusze geopolityczne oraz otwiera pełnoprawny teatr wojenny.
+Gracz od samego początku panowania Romulusa (Tura 1) otrzymuje możliwość rozważenia i forsowania opcji siłowej wobec Wiktora Smolaka, co spotyka się z dynamiczną ewolucją nastrojów na Dworze Królewskim, wpływa na światowe sojusze geopolityczne oraz otwiera pełnoprawny teatr wojenny.
 
 ---
 
-## 2. Architektura Narracyjna i Ewolucja Postaw
+## 2. Zweryfikowana Chronologia Gry (Z bazy danych gry Suzerain)
 
-### Faza Początkowa (Tura 1–2): Sceptycyzm i Ostrzeżenia
-- **Tura 01 (`Turn01_ZilleVisit_HostileSpeech`):**
-  - Opcja: *"Jeśli ten błazen nie odda naszej ziemi po dobroci, odbierzemy ją siłą i żelazem."*
-  - **Hugo Toras:** Kategoryczny sprzeciw. Ostrzega przed potępieniem przez Sojusz Narodów (AN), sankcjami i złamaniem traktatu z Wehlen podpisanego przez króla Valero.
-  - **Lucita Azaro:** Chłodny realizm wojskowy. Po kryzysie sukcesyjnym armia dopiero odzyskuje spójność; uderzenie teraz to samobójstwo.
-  - **Titus Griz:** Podkreśla zagrożenie dywersją i terroryzmem wehzekowskim w stolicy i Brenas.
-  - **Księżniczka Vina:** Przerażenie i prośba o umiar.
+Wszystkie momenty narracyjne i identyfikatory konwersacji zostały wyciągnięte bezpośrednio z bazy dialogowej gry (`database_assets_all`):
 
-- **Tura 02 (`Turn02_Zille_FriendshipDayPrep`):**
-  - Smolak odrzuca wstępne ustępstwa i żąda taniej ropy oraz uległości.
-  - Opcja: *"Smolak posuwa się za daleko. Czas polecić sztabowi przygotowanie planu uderzenia prewencyjnego."*
-  - **Przesunięcie nastrojów:** Lucita rozpoczyna tajne studia sztabowe na południu. Arcykapłan Sal ogłasza odzyskanie Zille świętym obowiązkiem wobec Wruheca.
+### Tura 1: Koronacja i Pierwsze Narady Sztabowe
+- **Identyfikatory w silniku:**
+  - `Rizia/Turn 1/SnO_SecurityMilitaryMeeting` (Spotkanie bezpieczeństwa z Lucitą Azaro, Titusem Grizem i Hugo Torasem)
+  - `Rizia/Turn 1/EnT_CouncilBriefing`
+- **Wstrzykiwana opcja:**
+  > `[MOD] "Let me be unequivocal with my council: We will recover Zille, even if it requires force of arms."`
+- **Reakcja doradców:**
+  - **Hugo:** Ostrzega, że umowa króla Valero z Wehlen jest traktatem międzynarodowym, a AN natychmiast nałoży sankcje.
+  - **Lucita:** Zwraca uwagę na odbudowę armii po kryzysie i zagrożenie prowokacjami ze strony Księstwa Pales na północy.
+  - **Titus:** Ostrzega przed komórkami dywersyjnymi Wehlen w stolicy i na granicy Brenas.
 
-### Faza Eskalacji (Tura 3–7): Zamach, Lespia i Panika Dwóch Frontów
-- **Tura 03 (`Turn03_ZilleIncidentRespons` — Zamach w Zille):**
-  - Po wybuchu bomby Romus ogłasza stan podwyższonej gotowości na granicy Brenas.
-  - **Panika Dwóch Frontów (Two-Front War Check):**
-    - Jeżeli Rizia szykuje się na wojnę z Pales, doradcy wpadają w skrajną panikę. Hugo krzyczy o upadku dynastii, a Lucita protestuje, że armia pęknie pod naporem dwóch wojen naraz.
+### Tura 2: Narada Dyplomatyczna i Dzień Przyjaźni w Zille
+- **Identyfikatory w silniku:**
+  1. `Rizia/Turn 2/FPnT_DiplomacyBriefing` (Debata Rady Królewskiej o sytuacji międzynarodowej przed podróżą)
+     - **Wstrzykiwana opcja:**
+       > `[MOD] "Regarding Wehlen: I want the General Staff to draft a preemptive operational invasion plan for Zille before I meet Smolak."`
+     - **Skutek:** Lucita w tajemnicy zleca oficerom rodu Azaro wstępne rozpoznanie podejść południowych. Hugo zarzuca Romusowi szaleństwo mogące zniszczyć delegację.
+  2. `Rizia/Turn 2/FPnT_ZilleVisit` (Obchody Dnia Przyjaźni w Zille z Wiktorem Smolakiem)
+     - **Wstrzykiwana opcja:**
+       > `[MOD] "Smolak's insulting jokes and outrageous demands will not stand. Rizia's patience has limits, Wiktor."`
+     - **Skutek:** Ostra wymiana zdań ze Smolakiem tuż przed zamachem bombowym.
 
-- **Tura 04 / 08: Oferta Patricio Alvareza (Układ Kulisowy z Lespią):**
-  - Gdy Lespia widzi determinację wojskową Rizii w regionie Pales, Alvarez osobiście wysuwa bezwzględną, pragmatyczną ofertę:
-    - *"Słuchaj, Romus. Reinhard z Pales to nasz klient i przyjaciel wolnego rynku. Nie chcemy tam waszych czołgów. Ale słyszymy, że Smolak kręci wam lody w Zille. Zróbmy interes: podpisujesz ugodę z Pales, a Lespia i Arcasia dadzą wam dane satelitarne, nowoczesną broń i zielone światło na spacyfikowanie Wehlen."*
-  - **Wybór gracza:**
-    - **Przyjęcie oferty:** Wstrzymanie inwazji na Pales (`Diplomacy_Pales_PrepareForWar = false`), aktywacja wsparcia satelitarnego Arcasii i dostaw amunicji z Lespii. Lucita może skierować 100% armii na front Zille!
-    - **Odrzucenie oferty:** Alvarez grozi, że duma Romusa zakończy się klęską na dwóch frontach.
+### Tura 3: Zamach w Zille i Decyzja Kryzysowa
+- **Identyfikator w silniku:**
+  - `Rizia/Turn 3/SnO_ZilleSecurityDebrief` (Narada Rady Bezpieczeństwa po eksplozji na trybunie w Zille)
+- **Dwie wstrzykiwane opcje:**
+  1. **Opcja A (Kalkulowana Mobilizacja):**
+     > `[MOD] "This bombing is Smolak's blatant false-flag. I declare heightened combat readiness along the Brenas border!"`
+     - Sprawdzenie stanu dwóch frontów (`IsTwoFrontWarThreat`). Jeśli gracz szykuje się na Pales — panika doradców. Jeśli nie — Południowe Dowództwo obsadza wzgórza Brenas.
+  2. **Opcja B (Samobójcza / Natychmiastowa Wojna — "Głupia opcja"):**
+     > `[MOD] [SUICIDAL] "Enough talk! Order the Third and Fourth Corps across the border immediately! We take Zille by force TODAY!"`
+     - **Natychmiastowa katastrofa militarna:** Wojska bez zaopatrzenia wpadają w zasadzkę Wehlen. Smolak dokonuje przełamania, prowincja Brenas zostaje anektowana przez Wehlen, a Królowa Matka Estela zostaje schwytana i stracona.
 
-- **Tura 05: Ostrzeżenie z Morelli (Salva i MITZ):**
-  - Premier Salva w trakcie rozmów o udziałach w MITZ wyraża ostry niepokój koncentracją wojsk Rizii w Brenas, ostrzegając przed imperializmem.
+### Tura 4 & 8: Tajny Pakt z Patricio Alvarezem (Lespia)
+- **Identyfikatory w silniku:** `Rizia/Turn 4/FPnT_AlvarezCall` oraz `Rizia/Turn 8/FPnT_AlvarezVisit`
+- **Wybór:**
+  - `Lespia_Pact_Accept`: Zobowiązanie do nieatakowania Pales. W zamian Lespia i Arcasia dostarczają dane satelitarne, ciężką amunicję i znoszą koszty energetyczne.
+  - `Lespia_Pact_Refuse`: Odmowa jałmużny Lespii.
 
-- **Tura 06 / 08: Spór w Radzie Koronnej (Rico Toras vs Angelica Sazon):**
-  - **Książę Rico (Su Omina):** Euforia. Żąda sformowania bojówek ochotniczych do walki z Wehzekami.
-  - **Księżna Angelica Sazon:** Przerażenie o rodzinną prowincję Brenas. Żąda gwarancji, że regularna armia obroni jej posiadłości, zamiast wystawiać je na pastwę odwetu Smolaka.
+### Tura 5: Bezpośrednie Negocjacje z Wehlen
+- **Identyfikator w silniku:** `Rizia/Turn 5/FPnT_WehlenNegotiations`
+- **Opcja:** Otwarta presja artyleryjska na Smolaka przy stole negocjacyjnym.
 
-### Faza Kulminacyjna (Tura 8): Wybuch Wojny
-- **Tura 08 (`Turn08_ZilleNegotiat`):**
-  - Smolak odrzuca ostateczne warunki handlowe.
-  - Gracz wydaje rozkaz: **"Dość upokorzeń. Operacja Righteous Sword. Odzyskujemy Zille orężem!"**
+### Tura 7: Wsparcie Derdii (Azmal)
+- **Identyfikatory w silniku:** `Rizia/Turn 7/FPnT_DerdiaNegotiations` oraz `Rizia/Turn 7/Zille Treaty Discussion`
+- **Opcja:** Porozumienie z Azmalem — przerzut nuryckich bojowników na tyły Wehlen w celu dywersji w rafineriach ropy.
 
----
-
-## 3. Globalne Przesunięcia Geopolityczne
-
-Wypowiedzenie wojny Wehlen wywołuje tektoniczne wstrząsy w układzie sił:
-
-| Blok Geopolityczny | Państwa | Skutek eskalacji |
-|---|---|---|
-| **Blok Malyenkiewistyczny / Wschodni** | **Valgsland (Hegel)**, **Morella (Salva)**, **CSP** | **Drastyczny spadek relacji.** Valgsland potępia agresję feudalną, zrywa pakt i grozi blokadą. Morella usztywnia negocjacje MITZ. |
-| **Blok Kapitalistyczny / Zachodni** | **Lespia (Alvarez)**, **Arcasia (Walker)**, **ATO** | **Znacząca poprawa relacji.** Alvarez dostarcza dane satelitarne i broń. Arcasia widzi w Rizii stabilizatora przeciwko pro-socjalistycznemu Wehlen. |
-| **Derdia** | **Azmal** | Poprawa relacji, jeśli gracz wcześniej nie ugiął się przed Wehlen w kwestii zwalczania bojówek Nurystów. |
-
----
-
-## 4. Teatr Działań Wojennych (Mechanika i Struktura Mapy)
-
-```
-       [ MORZE PÓŁNOCNE / ZATOKA ]  <--- (Strefa Blokady Morskiej)
-                 |
-      [ Port MUNAT ] ======== [ Węzeł VIKTRANY ]
-            \                     /
-             \                   /
-              [ Miasto ZILLE ] (Główna Twierdza Smolaka)
-                     |
-       [ Równiny Naftowe i Rafinerie ]
-                     |
-       [ Pozycje Graniczne BRENAS ]  <--- (Punkt Wyjścia Wojsk Rizii)
-```
-
-### Faza 1: Operacja "Righteous Sword" (Sprawiedliwy Miecz)
-- **Wariant Alfa — Szturm Frontalny na Zille:** Bezpośrednie uderzenie przez pola naftowe na miasto. Wysokie ryzyko strat i podpaleń szybów naftowych przez Wehzeków.
-- **Wariant Beta — Manewr Obejścia (Viktrany & Munat):** Uderzenie w przesmyk -> zdobycie garnizonu **Viktrany** -> uderzenie na głębokowodny port **Munat**, paraliżujące zaopatrzenie wroga.
-
-### Faza 2: Operacja "Total Repayment" (Całkowita Spłata)
-- Ostateczna likwidacja okrążonych sił Wehlen i zdobycie pałacu gubernatorskiego.
-
-### Zasady Specjalne:
-1. **Anti-Duplication Rule:** Jednostki wysłane na front Pales nie mogą brać udziału w Zille.
-2. **Blokada Morska Półwyspu:** Silna flota blokuje dostawy do Munat, nakładając trwały debuff na wojska Wehlen.
-3. **Wsparcie Wywiadowcze Arcasii:** Dostępne po zawarciu paktu z Alvarezem.
+### Tura 8: Ostateczny Rozłam i Wybuch Wojny
+- **Identyfikatory w silniku:** `Rizia/Turn 8/FPnT_ZilleNegotiations`, `SnO_SecurityBriefAndZille`, `Zille Territory Issue`
+- **Wybór Doktryny Wojennej:**
+  - **Plan Alfa:** Bezpośredni szturm frontalny na miasto Zille.
+  - **Plan Beta:** Manewr oskrzydlający przez hub logistyczny Wiktrany i uderzenie na port Munat.
 
 ---
 
-## 5. Konsekwencje i Scenariusze Klęski
+## 3. Teatr Działań Wojennych — Architektura 4 Miast
 
-- **Zwycięstwo:** Odzyskanie Zille, rozbicie Smolaka, dominacja Rizii w południowej Merkopie.
-- **Tragedia Królowej Matki Esteli:** Przy załamaniu frontu Estela jedzie do rodowej posiadłości w Brenas/Zille, zostaje schwytana i zamordowana z rozkazu Smolaka.
-- **Totalna Klęska (Utrata Prowincji Brenas):** Smolak anektuje całe Brenas. Bunt generalicji Azaro i pucz militarny kończą panowanie Romulusa.
+Planowana siatka taktyczna Zille opiera się na 4 kluczowych punktach miejskich wykorzystujących prefaby i systemy walki z Pales:
+
+1. **Zille (Stolica, Zachód Półwyspu):**
+   - Główna baza wojskowa i administracyjna Smolaka. Silnie ufortyfikowana, osłonięta instalacjami naftowymi.
+2. **Nanta (Wschód Półwyspu):**
+   - Wschodnie skrzydło osłaniające Zille, rejon posterunków granicznych i magazynów paliw.
+3. **Wiktrany (Środek Półwyspu):**
+   - Centralny węzeł komunikacyjny i hub zaopatrzeniowy łączący północ z południem. Klucz do odcięcia garnizonu Zille.
+4. **Munat (Północ Półwyspu):**
+   - Głęboki port morski, przez który Wehlen otrzymuje dostawy i posiłki. Cel desantu lub blokady morskiej.
+
+---
+
+## 4. UI i Diagnostyka w Grze
+
+- **Wskaźnik w rogu:** Stały indykator w prawym górnym rogu ekranu (`[ Great Zille Solution v0.3.0 | ACTIVE (F9: Menu) ]`).
+- **Panel testowy F9:** Manualny wyzwalacz operacji wojennych, katastroficznej klęski Tury 3, sprawdzania rezerw i synchronizacji stanu.

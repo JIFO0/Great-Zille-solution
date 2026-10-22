@@ -1,74 +1,34 @@
 using System;
-using System.Reflection;
-using HarmonyLib;
 using MelonLoader;
+using Il2CppPixelCrushers.DialogueSystem;
 
 namespace GreatZilleSolution
 {
     public static class DialogueHelper
     {
-        private static Type _dialogueLuaType;
-        private static Type _dialogueManagerType;
-        private static MethodInfo _getVarMethod;
-        private static MethodInfo _setVarMethod;
-        private static MethodInfo _showAlertMethod;
-        private static PropertyInfo _lastConvStartedProp;
-
-        static DialogueHelper()
-        {
-            Init();
-        }
-
         public static void Init()
         {
-            try
-            {
-                _dialogueLuaType = AccessTools.TypeByName("PixelCrushers.DialogueSystem.DialogueLua");
-                _dialogueManagerType = AccessTools.TypeByName("PixelCrushers.DialogueSystem.DialogueManager");
-
-                if (_dialogueLuaType != null)
-                {
-                    _getVarMethod = AccessTools.Method(_dialogueLuaType, "GetVariable", new Type[] { typeof(string) });
-                    _setVarMethod = AccessTools.Method(_dialogueLuaType, "SetVariable", new Type[] { typeof(string), typeof(object) });
-                }
-
-                if (_dialogueManagerType != null)
-                {
-                    _showAlertMethod = AccessTools.Method(_dialogueManagerType, "ShowAlert", new Type[] { typeof(string) });
-                    _lastConvStartedProp = AccessTools.Property(_dialogueManagerType, "lastConversationStarted");
-                }
-            }
-            catch (Exception ex)
-            {
-                MelonLogger.Warning($"[DialogueHelper] Init error: {ex.Message}");
-            }
+            MelonLogger.Msg("[DialogueHelper] Dialogue subsystem ready.");
         }
 
         public static string GetCurrentConversationTitle()
         {
             try
             {
-                if (_lastConvStartedProp != null)
-                {
-                    return _lastConvStartedProp.GetValue(null) as string;
-                }
+                return DialogueManager.lastConversationStarted;
             }
-            catch { }
-            return null;
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[DialogueHelper] GetCurrentConversationTitle failed: {ex.Message}");
+                return null;
+            }
         }
 
         public static void ShowAlert(string message)
         {
             try
             {
-                if (_showAlertMethod != null)
-                {
-                    _showAlertMethod.Invoke(null, new object[] { message });
-                }
-                else
-                {
-                    MelonLogger.Msg($"[ALERT] {message}");
-                }
+                DialogueManager.ShowAlert(message);
             }
             catch (Exception ex)
             {
@@ -80,9 +40,22 @@ namespace GreatZilleSolution
         {
             try
             {
-                if (_setVarMethod != null)
+                if (value is bool b)
                 {
-                    _setVarMethod.Invoke(null, new object[] { name, value });
+                    Lua.Run($"Variable[\"{name}\"] = {(b ? "true" : "false")};");
+                }
+                else if (value is int i)
+                {
+                    Lua.Run($"Variable[\"{name}\"] = {i};");
+                }
+                else if (value is string s)
+                {
+                    string escaped = s.Replace("\\", "\\\\").Replace("\"", "\\\"");
+                    Lua.Run($"Variable[\"{name}\"] = \"{escaped}\";");
+                }
+                else if (value != null)
+                {
+                    Lua.Run($"Variable[\"{name}\"] = {value};");
                 }
             }
             catch (Exception ex)
@@ -95,42 +68,24 @@ namespace GreatZilleSolution
         {
             try
             {
-                if (_getVarMethod != null)
-                {
-                    object result = _getVarMethod.Invoke(null, new object[] { name });
-                    if (result != null)
-                    {
-                        var prop = result.GetType().GetProperty("asBool") ?? result.GetType().GetProperty("AsBool");
-                        if (prop != null)
-                        {
-                            return (bool)prop.GetValue(result);
-                        }
-                    }
-                }
+                return DialogueLua.GetVariable(name).asBool;
             }
-            catch { }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 
         public static int GetIntVariable(string name)
         {
             try
             {
-                if (_getVarMethod != null)
-                {
-                    object result = _getVarMethod.Invoke(null, new object[] { name });
-                    if (result != null)
-                    {
-                        var prop = result.GetType().GetProperty("asInt") ?? result.GetType().GetProperty("AsInt");
-                        if (prop != null)
-                        {
-                            return (int)prop.GetValue(result);
-                        }
-                    }
-                }
+                return DialogueLua.GetVariable(name).asInt;
             }
-            catch { }
-            return 0;
+            catch
+            {
+                return 0;
+            }
         }
     }
 }
