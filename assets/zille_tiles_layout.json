@@ -1,0 +1,99 @@
+{
+  "MapTitle": "Great Zille Theatre of War",
+  "Version": "1.0",
+  "BackgroundTexture": "T_Map_Zille_Full_Composite.png",
+  "Tiles": [
+    {
+      "Id": "tile_zille",
+      "Name": "Zille (Capital)",
+      "TextureFile": "Frame 41.png",
+      "NormalizedX": 0.56508857,
+      "NormalizedY": 0.6418911,
+      "Width": 350.31177,
+      "Height": 350.31177,
+      "Allegiance": "Wehlen",
+      "FortLevel": 2,
+      "IsPort": false,
+      "IsAirfield": false,
+      "IsSupplyHub": true,
+      "AdjacentIds": [
+        "tile_wiktrany",
+        "tile_munat"
+      ]
+    },
+    {
+      "Id": "tile_munat",
+      "Name": "Munat (Deepwater Port)",
+      "TextureFile": "Frame 44.png",
+      "NormalizedX": 0.53289735,
+      "NormalizedY": 0.6431935,
+      "Width": 336.88248,
+      "Height": 336.88248,
+      "Allegiance": "Wehlen",
+      "FortLevel": 0,
+      "IsPort": true,
+      "IsAirfield": false,
+      "IsSupplyHub": false,
+      "AdjacentIds": [
+        "tile_zille",
+        "tile_wiktrany"
+      ]
+    },
+    {
+      "Id": "tile_wiktrany",
+      "Name": "Wiktrany (Logistics Hub)",
+      "TextureFile": "Frame 43.png",
+      "NormalizedX": 0.51488185,
+      "NormalizedY": 0.62108666,
+      "Width": 347.6259,
+      "Height": 347.6259,
+      "Allegiance": "Wehlen",
+      "FortLevel": 0,
+      "IsPort": false,
+      "IsAirfield": false,
+      "IsSupplyHub": true,
+      "AdjacentIds": [
+        "tile_zille",
+        "tile_munat",
+        "tile_nanta",
+        "tile_brenas"
+      ]
+    },
+    {
+      "Id": "tile_nanta",
+      "Name": "Nanta (East Gate)",
+      "TextureFile": "Frame 42.png",
+      "NormalizedX": 0.48384506,
+      "NormalizedY": 0.62038755,
+      "Width": 323.45325,
+      "Height": 323.45325,
+      "Allegiance": "Wehlen",
+      "FortLevel": 0,
+      "IsPort": false,
+      "IsAirfield": false,
+      "IsSupplyHub": false,
+      "AdjacentIds": [
+        "tile_wiktrany",
+        "tile_brenas"
+      ]
+    },
+    {
+      "Id": "tile_brenas",
+      "Name": "Brenas Border (Rizia Staging)",
+      "TextureFile": "Frame 45.png",
+      "NormalizedX": 0.4974811,
+      "NormalizedY": 0.6553044,
+      "Width": 352.9976,
+      "Height": 352.9976,
+      "Allegiance": "Rizia",
+      "FortLevel": 0,
+      "IsPort": false,
+      "IsAirfield": false,
+      "IsSupplyHub": false,
+      "AdjacentIds": [
+        "tile_wiktrany",
+        "tile_nanta"
+      ]
+    }
+  ]
+}
