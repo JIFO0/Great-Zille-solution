@@ -77,3 +77,41 @@
   - Added gold button `[🚀 ODPAL WOJNĘ (3D MAP)]` directly in the Bottom-Left Dock and in the `F9` menu.
   - Added `[🏳️ Mapa cywilna]` return button.
 - Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and deployed to `Suzerain/Mods/`.
+
+### [2026-10-22] Dedicated War Operation & Dialogue System Breakthrough (v0.4.6)
+- **Resolved Blank Dialogue Canvas & Non-blocking Civilian Tokens:**
+  - **Reverse-engineered `ConversationModel.get_hasValidEntry()` (`0x66F220`):** `StartConversation` aborts immediately (`jmp 0x63e32d`) if `npcResponses` and `pcResponses` on `firstState` are empty.
+  - **Root Cause 1 (`fields` population):** `DialogueEntry` text resolution in Suzerain evaluates `fields` (`Dialogue Text`, `en`, `Menu Text`, `Sequence`, `Actor`, `Conversant`). Entries initialized with empty `fields` returned empty strings, causing `ConversationHandler.OnConversationLine` (`0x99E87A`) to skip text rendering entirely.
+  - **Root Cause 2 (Link Priority):** In C#, `new Link()` defaulted `priority = ConditionPriority.Low` (0). Vanilla Suzerain conversations strictly require `ConditionPriority.Normal` (2).
+  - **Root Cause 3 (Entry 0 pass-through):** Corrected `entry0.isGroup = false`, `entry0.Sequence = "Continue();"`, and outgoing link to Entry 1 with `ConditionPriority.Normal`.
+  - **Integrated Story Fragment Lifecycle:** Activated `InputBlockerPanel` via `GameFlowManager.OnStoryFragmentStart()` to prevent civilian token clicks during dialogue, with clean lifecycle closure via `GameFlowManager.FinishStoryFragment`.
+- **Created Dedicated Native War Operation ("Operation: Righteous Sword - Phase I"):**
+  - **Eliminated Golden Shield Phase IV Dependency:** Separated Zille completely from vanilla `Operation_1`. Created dedicated `OperationData` (`Operation_Zille_1`) with title `"Operation: Righteous Sword"` and phase `["WarFragment_Zille_1_1"]`.
+  - **Cloned & Configured Scene `WarOperation`:** Instantiated `"Operation_Zille_1"` under `"Pales Operations Container"`, cloned its `WarOperationData` ScriptableObject, and registered `zilleWarOp` in `Managers.Instance.Operations`.
+  - **Isolated Tactical Tiles (No Excess Pales Grid):** Set `includedTileNames = ["tile_zille", "tile_munat", "tile_wiktrany", "tile_nanta", "tile_brenas"]`. `WarTileManager.SetupCoroutine` enables only these 5 tiles and disables the remaining 95 tiles automatically.
+  - **Native City & Garrison Token Deployment:**
+    - Player City Token spawned on `tile_brenas` (Rizian staging base) using native City `WarUnitTypeData`.
+    - Enemy City Tokens spawned on `tile_zille`, `tile_munat`, `tile_wiktrany`, and `tile_nanta`.
+    - Wehlen Garrisons (Infantry and Tanks) deployed on `tile_wiktrany` and `tile_zille`.
+  - **Harmonized Harmony Hook:** Added prefix on `WarFlowManager.SetupWarFragment(WarFragmentData)` to guarantee theatre synchronization whenever `WarFragment_Zille_1_1` is launched.
+- Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and auto-deployed to `H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleSolution.dll`.
+
+### [2026-10-22] Dialogue Engine Articy ID Discovery & War Theatre Performance Overhaul (v0.4.7)
+- **Resolved Blank Dialogue Canvas & Progression Lock (Porte Drazon War Briefing):**
+  - **Reverse-engineered `ConversationHandler.OnConversationLine` (`0x99E84D` - `0x99E965` in `GameAssembly.dll`):**
+    Disassembled native execution stream. At `0x18099e95d`, `ConversationHandler` executes `List<Field>.Find` with lambda `<OnConversationLine>b__28_0` checking `f.title == "Articy Id"`. At `0x18099e965`, it executes `test rax, rax; je 0x18099f04e`. If `"Articy Id"` is null/missing, it jumps straight to the abort exit, completely skipping line creation, speaker portraits, text rendering, and continue buttons!
+  - **Injected Mandatory Articy Fields:** Added `Field("Articy Id", $"0x0100005A_Zille_{entryId}", FieldType.Text)` to all entries including Entry 0.
+  - **Fixed Entry 0 Sequence Command:** Aligned with vanilla standard `Continue()` (without semicolon).
+  - **Prevented Token Interaction Bleed-Through:** Enabled `convPanel.inputBlockerPanel` and disabled minimization (`convPanel.isMinimizable = false`) while conversation is active.
+- **Eliminated Severe War Transition Freeze & Infinite Allocation Loop:**
+  - **Root Cause Identified in `UpdateWarTheatreState()`:** Line was calling `SetupCustomZilleOperation()` 60 times a second inside `OnUpdate()`. Every frame was executing `ScriptableObject.Instantiate(palesWarOp.warOperationData)` and allocating dozens of Il2Cpp lists and token objects.
+  - **Engine Guard Implementation:** Added `_customOperationConfigured` guard in `SetupCustomZilleOperation()`.
+  - **Decoupled from Per-Frame Update:** Removed operation configuration from `UpdateWarTheatreState()`. Operations now configure strictly once on theatre launch.
+  - **Reliable Scene Transition:** Explicitly invoked `Managers.Instance.MapManager.LoadMap(MapConfiguration.MapType.War)` in `EnterZilleWarTheatre()`.
+- **Eliminated Erroneous Turn 2 Pales War Pawn:**
+  - Removed erroneous `palesWarTemplate.SetActive(true)`. The vanilla Pales template remains strictly inactive in Turn 2, and only the separate cloned `InvasionOfZille Event Variant` is activated.
+- **Resolved Stale Tooltip & Info Card on Zille War Pawn:**
+  - Added Harmony hook on `TokenNamePanel.Setup(Token token)`: dynamically sets `tokenNameText = "Invasion of Zille"`.
+  - In `TokenInteractionPanelSetupPostfix`: sets `titleText = "Invasion of Zille"` and `subtitleText = "Military Operation"`.
+  - Directly assigned `tok.tokenData = zilleMtd` on spawn.
+- Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and auto-deployed to `H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleSolution.dll`.

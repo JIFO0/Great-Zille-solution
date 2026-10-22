@@ -47,6 +47,7 @@ namespace GreatZilleSolution
             {
                 ZilleMapLayoutManager.EnsureTexturesLoaded();
                 WarOperationZilleManager.RegisterNativeZilleEntities();
+                DialogueInjectionPatches.InjectWarOptionsIntoVanillaConversations();
             }
             catch (System.Exception ex)
             {
