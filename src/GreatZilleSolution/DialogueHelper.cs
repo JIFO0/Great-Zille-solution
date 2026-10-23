@@ -87,5 +87,17 @@ namespace GreatZilleSolution
                 return 0;
             }
         }
+
+        public static string GetStringVariable(string name)
+        {
+            try
+            {
+                return DialogueLua.GetVariable(name).asString ?? "";
+            }
+            catch
+            {
+                return "";
+            }
+        }
     }
 }

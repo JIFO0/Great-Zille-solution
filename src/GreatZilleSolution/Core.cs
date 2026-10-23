@@ -3,7 +3,7 @@ using UnityEngine;
 using Il2Cpp;
 using System.Reflection;
 
-[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.3", "RIOT")]
+[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.8", "RIOT")]
 [assembly: MelonGame("Torpor Games", "Suzerain")]
 
 namespace GreatZilleSolution
@@ -22,7 +22,7 @@ namespace GreatZilleSolution
             Log = LoggerInstance;
             Log.Msg("=================================================");
             Log.Msg(" [Great Zille Solution] Military & Narrative Mod ");
-            Log.Msg(" Version: 0.4.3 (War Event & 3D Units Injection) ");
+            Log.Msg(" Version: 0.4.8 (Suzerain War Council & Zille Theatre) ");
             Log.Msg(" Initializing Dialogue & War Hooks manually...   ");
             Log.Msg("=================================================");
 
@@ -85,7 +85,7 @@ namespace GreatZilleSolution
 
                 // Top-right watermark indicator
                 GUI.color = Color.white;
-                string statusText = "[ Great Zille Solution v0.4.3 | ACTIVE (F9: Wojna | F10: Mapa) ]";
+                string statusText = "[ Great Zille Solution v0.4.8 | ACTIVE (F9: Wojna | F10: Mapa) ]";
                 GUI.Box(new Rect(Screen.width - 440, 10, 430, 28), statusText);
 
                 // Draw Bottom-Left Quick Action Toolbar

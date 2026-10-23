@@ -115,3 +115,24 @@
   - In `TokenInteractionPanelSetupPostfix`: sets `titleText = "Invasion of Zille"` and `subtitleText = "Military Operation"`.
   - Directly assigned `tok.tokenData = zilleMtd` on spawn.
 - Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and auto-deployed to `H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleSolution.dll`.
+
+### [2026-10-23] Authentic Suzerain English War Council, _Diffuse Shader Fix & Native WarFlowManager Pipeline (v0.4.8)
+- **Authentic Suzerain-Style Dynamic English War Council (`EnsureWarCouncilConversationRegistered`):**
+  - Rewrote the entire Porte Drazon war briefing in **English** in authentic Suzerain style: short consecutive lines spoken by `Narrator` (ID 10), `Player_Romus` (ID 95), `Hugo Toras` (ID 68), `Lucita Azaro` (ID 73), `Titus Gordion` (ID 81), and `Laurento Esquibel` (ID 70).
+  - **Dynamic Savegame State Evaluation (No Raw Numbers):**
+    - Evaluates `RiziaDLC.Resources_Budget` and `RiziaDLC.Resources_Energy` into natural qualitative tiers (abundant/overflowing reserves, acceptable operational margins, or strained/depleted treasury) without ever citing artificial numbers like `+5`.
+    - Evaluates `RiziaDLC.Resources_Manpower`, `RiziaDLC.Resources_MilitaryEquipment`, `RiziaDLC.PalesWar_Preparation_WarDeclared` (two-front war warning), `RiziaDLC.Zille_SuOmina_Funded` / `RiziaDLC.Zille_Resistance_Strength`, and Lespia diplomatic posture (`RiziaDLC.Diplomacy_Lespia_Allied` / `RiziaDLC.Lespia_Cooperation`).
+    - Evaluates **Lucita Azaro Romance & Marriage** (`RiziaDLC.Lucita_Married`, `RiziaDLC.Lucita_Marriage_Happened`, `RiziaDLC.Relations_Lucita_Together`, `RiziaDLC.Lucita_RomanceHappened`, `RiziaDLC.Relations_Lucita_Romance`), adapting her greeting (`"My King—and my husband"` vs. `"Your Majesty"`), narrative descriptions, and final battle vows.
+  - **Interactive Strategic Discussion Hub:**
+    - Allows Romus to set his initial royal posture, question individual advisors on 4 distinct axes (Wehlen's defensive grid & terrain, economic & energy stability, Lespia & AN diplomatic fallout, and Su Omina & Queen Mother Estela's childhood home in Zille), voice his own strategic opinion after each topic, and observe advisor reactions before authorizing **Plan Alpha**, **Plan Beta**, or **Postponing**.
+- **Decoupled Post-Briefing Flow (Spawn Zille Event Pawn Instead of Immediate Map Transition):**
+  - Finishing the war council in Porte Drazon and authorizing Plan Alpha or Plan Beta no longer forces an immediate camera jump into the 3D War Map.
+  - Instead, concluding the briefing sets `PendingZilleTokenSpawnAfterBriefing = true` and spawns only the **Zille War Event pawn (`InvasionOfZille Event Variant`)** next to Zille when the dialogue panel closes.
+  - The 3D War Theatre launches only when the player clicks the Zille War Event pawn and selects **"Operation: Righteous Sword - Phase I"**.
+- **Resolved "Black Box" on War Map (`_Diffuse` Shader Property & `Pales Map_01..06` Grid):**
+  - **Root Cause Identified via Bundle Inspection (`UnityPy`):** Torpor's custom map shaders (`MA_MapPales_01`..`06` on `Pales Map_01 `..`06` inside `Map_Rizia_PalesWar` and `MA_MapWorldBorder` on `PalesWarMapBackground`) use the texture property **`_Diffuse`** (not `_MainTex` or `_BaseMap`) and on `MA_MapWorldBorder` had `_AO_Multiplier = 0.0` and `_AlphaClip = 1.0`. Furthermore, `MA_PalesTile` on `WarTile`s uses **`_Tile_Texture`**.
+  - Updated `ApplyWarTableTexture()` and `ApplyTextureToMaterial()` to assign `T_Map_Zille_01`..`06` directly to `_Diffuse` on `Pales Map_01`..`06`, assign the composite Zille map to `_Diffuse` on `PalesWarMapBackground` (with `_AO_Multiplier = 1f`, `_AlphaClip = 0f`, `_Brightness_Multiplier = 1.15f`), and assign region textures to `_Tile_Texture` on `WarTile`s.
+- **Full Native War Operation Pipeline (`WarFlowManager.<SetupWarFragmentCoroutine>d__65`):**
+  - Disassembled `EntityDataManager.get_OperationData` (`0x180856980`): discovered it dynamically filters the private static backing field `EntityDataManager.operationData` (`+0x258`) using `EntityDataManager.IsDataAvailable(item.AppBundleProperties)`.
+  - Injected `Operation_Zille_1`, `MapToken_Zille_War`, `WarFragment_Zille_1_1`, and `WarCouncil_Zille_Briefing` directly into `EntityDataManager`'s backing lists with `AppBundleProperties.StoryPacks = ["StoryPack_Rizia"]`, non-null string properties, and initialized `SaveData.warSaveData` so `WarFlowManager.SetupWarFragment(wfd)` executes natively from start to finish (hiding civilian tokens, switching `MapManager` to `MapType.War`, starting war music, and opening `WarDeploymentPanel`).
+- Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and deployed to `H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleSolution.dll`.

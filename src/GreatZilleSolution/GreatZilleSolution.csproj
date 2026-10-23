@@ -83,7 +83,7 @@
 
   <!-- Post-build step: auto-deploy to Suzerain/Mods -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="H:\SteamLibrary\steamapps\common\Suzerain\Mods\" ContinueOnError="true" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="H:\SteamLibrary\steamapps\common\Suzerain\Mods\" Retries="1" RetryDelayMilliseconds="100" ContinueOnError="true" />
   </Target>
 
 </Project>

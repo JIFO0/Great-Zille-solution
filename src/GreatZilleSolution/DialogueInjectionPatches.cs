@@ -350,7 +350,21 @@ namespace GreatZilleSolution
                 // Case 1: Porte Drazon (Capital Royal War Council Briefing)
                 if (tName.Contains("PorteDrazon") || tName.Contains("Porte Drazon") || entityName.Contains("PorteDrazon"))
                 {
-                    EnsureButtonExists(__instance, "A royal briefing before the invasion of Zille", "Council Chambers, Palas Rezna", () => {
+                    ConversationData cd = null;
+                    var convs = EntityDataManager.AllConversationsData;
+                    if (convs != null)
+                    {
+                        for (int i = 0; i < convs.Count; i++)
+                        {
+                            if (convs[i] != null && convs[i].NameInDatabase == "Turn_Zille_WarBriefing")
+                            {
+                                cd = convs[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    EnsureButtonExists(__instance, "A royal briefing before the invasion of Zille", "Council Chambers, Palas Rezna", cd, () => {
                         MelonLogger.Msg("[TOKEN PANEL] Starting Royal Briefing conversation from Porte Drazon event button!");
                         WarOperationZilleManager.TriggerZilleWarBriefingConversation();
                     });
@@ -367,7 +381,21 @@ namespace GreatZilleSolution
                         __instance.subtitleText.text = "Military Operation";
                     }
 
-                    EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", () => {
+                    WarFragmentData wfd = null;
+                    var frags = EntityDataManager.AllWarFragmentsData;
+                    if (frags != null)
+                    {
+                        for (int i = 0; i < frags.Count; i++)
+                        {
+                            if (frags[i] != null && frags[i].NameInDatabase == "WarFragment_Zille_1_1")
+                            {
+                                wfd = frags[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", wfd, () => {
                         MelonLogger.Msg("[TOKEN PANEL] Starting Zille War Theatre from Zille war event button!");
                         WarOperationZilleManager.EnterZilleWarTheatre();
                     });
@@ -379,7 +407,7 @@ namespace GreatZilleSolution
             }
         }
 
-        private static void EnsureButtonExists(TokenInteractionPanel panel, string title, string subtitle, Action onClick)
+        private static void EnsureButtonExists(TokenInteractionPanel panel, string title, string subtitle, StoryFragmentData fragmentData, Action onClick)
         {
             if (panel == null || panel.templateInteractionButton == null || panel.contentHolder == null) return;
 
@@ -391,6 +419,7 @@ namespace GreatZilleSolution
                     var existing = panel.instantiatedInteractionButtons[i];
                     if (existing != null && existing.titleText != null && existing.titleText.text == title)
                     {
+                        if (fragmentData != null) existing.storyFragmentData = fragmentData;
                         if (existing.button != null)
                         {
                             existing.button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
@@ -411,6 +440,7 @@ namespace GreatZilleSolution
             var tib = btnObj.GetComponent<TemplateInteractionButton>();
             if (tib != null)
             {
+                if (fragmentData != null) tib.storyFragmentData = fragmentData;
                 if (tib.titleText != null) tib.titleText.text = title;
                 if (tib.subtitleText != null) tib.subtitleText.text = subtitle;
                 if (tib.button != null)
@@ -487,27 +517,24 @@ namespace GreatZilleSolution
                 // Check for war initiation via native Royal War Council Briefing or vanilla choice
                 if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
                 {
-                    MelonLogger.Msg("[WAR COUNCIL] Plan Alpha chosen by player in native dialogue! Scheduling War Theatre transition...");
-                    DialogueHelper.ShowAlert("[Zille] Rozkaz natarcia frontalnego wydany. Sztab otwiera teatr wojenny.");
+                    MelonLogger.Msg("[WAR COUNCIL] Plan Alpha chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
-                    WarOperationZilleManager.ScheduleWarTheatreTransition();
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
                 else if (script.Contains("Zille_War_Beta") || title.Contains("Choice_Beta") || menuText.Contains("Plan Beta"))
                 {
-                    MelonLogger.Msg("[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Scheduling War Theatre transition...");
-                    DialogueHelper.ShowAlert("[Zille] Rozkaz manewru oskrzydlajacego wydany. Sztab otwiera teatr wojenny.");
+                    MelonLogger.Msg("[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
-                    WarOperationZilleManager.ScheduleWarTheatreTransition();
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
-                else if (script.Contains("Zille_War_Postpone") || title.Contains("Choice_Postpone") || menuText.Contains("Wstrzymajmy"))
+                else if (script.Contains("Zille_War_Postpone") || title.Contains("Choice_Postpone") || menuText.Contains("Postpone") || menuText.Contains("Wstrzymajmy"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Postponing Zille invasion as requested by player.");
-                    DialogueHelper.ShowAlert("[Zille] Operacja wstrzymana w oczekiwaniu na dalsze przygotowania.");
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = false;
                 }
                 else if (title.Contains("Zille_War_Ultimatum") || title.Contains("Zille_Smolak_FaceToFace"))
                 {
                     MelonLogger.Msg("[DIPLOMACY] Player threatened Wehlen with military invasion! Activating Zille war pathway.");
-                    DialogueHelper.ShowAlert("[Zille] Postawiono ultimatum Wehlenowi. Sztab krolewski rozpoczyna mobilizacje.");
                     ZilleCampaignState.MilitarySentimentLevel = 2;
                 }
             }
