@@ -3,7 +3,7 @@ using UnityEngine;
 using Il2Cpp;
 using System.Reflection;
 
-[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.8", "RIOT")]
+[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.9", "RIOT")]
 [assembly: MelonGame("Torpor Games", "Suzerain")]
 
 namespace GreatZilleSolution
@@ -15,6 +15,7 @@ namespace GreatZilleSolution
         private bool _showDebugMenu = false;
         private Rect _debugWindowRect = new Rect(20, 20, 450, 480);
         private ZilleWarMapEditorUI _editorUI;
+        private ZilleTheatreMenu _theatreMenu;
         private bool _dockExpanded = false;
 
         public override void OnInitializeMelon()
@@ -22,7 +23,7 @@ namespace GreatZilleSolution
             Log = LoggerInstance;
             Log.Msg("=================================================");
             Log.Msg(" [Great Zille Solution] Military & Narrative Mod ");
-            Log.Msg(" Version: 0.4.8 (Suzerain War Council & Zille Theatre) ");
+            Log.Msg(" Version: 0.4.9 (Theatre menu: scale, provinces, units) ");
             Log.Msg(" Initializing Dialogue & War Hooks manually...   ");
             Log.Msg("=================================================");
 
@@ -34,8 +35,9 @@ namespace GreatZilleSolution
             // Initialize Zille Map Layout & Textures
             ZilleMapLayoutManager.Initialize();
 
-            // Initialize Interactive Map Editor UI
+            // Initialize Interactive Map Editor UI and the in-game theatre menu
             _editorUI = new ZilleWarMapEditorUI();
+            _theatreMenu = new ZilleTheatreMenu();
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -62,6 +64,7 @@ namespace GreatZilleSolution
                 WarOperationZilleManager.CheckScheduledTransition(Time.deltaTime);
                 WarOperationZilleManager.UpdateWarTheatreState();
                 WarOperationZilleManager.UpdateEventTokenInteractions();
+                ZilleTheatreMenu.TickOrders();
             }
             catch { }
         }
@@ -81,12 +84,34 @@ namespace GreatZilleSolution
                     {
                         if (_editorUI != null) _editorUI.IsOpen = !_editorUI.IsOpen;
                     }
+                    else if (Event.current.keyCode == KeyCode.F6)
+                    {
+                        // Enter the Zille war theatre (same as the [TEATR 3D ZILLE] dock button)
+                        WarOperationZilleManager.EnterZilleWarTheatre();
+                    }
+                    else if (Event.current.keyCode == KeyCode.F7)
+                    {
+                        // Toggle the Zille skin on the live war table (Zille <-> vanilla Pales)
+                        ZilleWarTable.SkinEnabled = !ZilleWarTable.SkinEnabled;
+                        Log.Msg($"[ZTABLE] SkinEnabled = {ZilleWarTable.SkinEnabled}");
+                    }
+                    else if (Event.current.keyCode == KeyCode.F8)
+                    {
+                        ZilleWarTable.Diagnose("F8");
+                    }
+                    else if (Event.current.keyCode == KeyCode.F11)
+                    {
+                        if (_theatreMenu != null) _theatreMenu.IsOpen = !_theatreMenu.IsOpen;
+                    }
                 }
+
+                ZilleWarTable.HandlePlacementEvent(Event.current);
+                if (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout) ZilleWarTable.DrawPlacementHud();
 
                 // Top-right watermark indicator
                 GUI.color = Color.white;
-                string statusText = "[ Great Zille Solution v0.4.8 | ACTIVE (F9: Wojna | F10: Mapa) ]";
-                GUI.Box(new Rect(Screen.width - 440, 10, 430, 28), statusText);
+                string statusText = "[ Great Zille v0.4.9 | F9 Wojna | F10 Mapa | F11 Teatr ]";
+                GUI.Box(new Rect(Screen.width - 470, 10, 460, 28), statusText);
 
                 // Draw Bottom-Left Quick Action Toolbar
                 DrawBottomLeftToolbar();
@@ -101,6 +126,11 @@ namespace GreatZilleSolution
                 if (_editorUI != null && _editorUI.IsOpen)
                 {
                     _editorUI.DrawGUI();
+                }
+
+                if (_theatreMenu != null && _theatreMenu.IsOpen)
+                {
+                    _theatreMenu.DrawGUI();
                 }
             }
             catch (System.Exception ex)
@@ -126,7 +156,7 @@ namespace GreatZilleSolution
 
             // Expanded Bottom-Left Panel
             float panelWidth = 205f;
-            float panelHeight = 350f;
+            float panelHeight = 392f;
             float panelX = padding;
             float panelY = Screen.height - panelHeight - padding;
             Rect panelRect = new Rect(panelX, panelY, panelWidth, panelHeight);
@@ -170,6 +200,15 @@ namespace GreatZilleSolution
             if (GUI.Button(new Rect(btnX, curY, btnW, 28f), "[REGIONY (F10)]"))
             {
                 if (_editorUI != null) _editorUI.IsOpen = !_editorUI.IsOpen;
+            }
+            GUI.color = Color.white;
+            curY += 32f;
+
+            bool theatreOpen = _theatreMenu != null && _theatreMenu.IsOpen;
+            GUI.color = theatreOpen ? new Color(1f, 0.75f, 0.35f) : new Color(0.95f, 0.7f, 0.35f);
+            if (GUI.Button(new Rect(btnX, curY, btnW, 28f), "[TEATR MENU (F11)]"))
+            {
+                if (_theatreMenu != null) _theatreMenu.IsOpen = !_theatreMenu.IsOpen;
             }
             GUI.color = Color.white;
             curY += 32f;

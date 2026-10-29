@@ -32,6 +32,7 @@ namespace GreatZilleSolution
         private static readonly List<Vector3> _originalTilePositions = new List<Vector3>();
         private static readonly List<Vector3> _originalTileScales = new List<Vector3>();
         private static bool _tilesConfiguredForZille = false;
+        private static float _theatreEnteredAt = -1000f;
 
         private static bool _transitionScheduled = false;
         private static float _transitionTimer = 0f;
@@ -1354,62 +1355,41 @@ namespace GreatZilleSolution
                 {
                     for (int i = 0; i < config.Tiles.Count; i++)
                     {
-                        zilleOpData.includedTileNames.Add(config.Tiles[i].Id);
+                        zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName(config.Tiles[i].Id));
                     }
                 }
                 else
                 {
-                    zilleOpData.includedTileNames.Add("tile_zille");
-                    zilleOpData.includedTileNames.Add("tile_munat");
-                    zilleOpData.includedTileNames.Add("tile_wiktrany");
-                    zilleOpData.includedTileNames.Add("tile_nanta");
-                    zilleOpData.includedTileNames.Add("tile_brenas");
+                    zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName("tile_zille"));
+                    zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName("tile_munat"));
+                    zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName("tile_wiktrany"));
+                    zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName("tile_nanta"));
+                    zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName("tile_brenas"));
                 }
 
-                // Configure tactical tile data
+                // Every layout province, including ones added from the theatre menu, becomes real tile data.
                 zilleOpData.tileData = new Il2CppSystem.Collections.Generic.List<ConditionalWarTileData>();
                 var condTileData = new ConditionalWarTileData();
                 condTileData.condition = "";
                 condTileData.tiles = new Il2CppSystem.Collections.Generic.List<WarTileData>();
-
-                var tBrenas = new WarTileData();
-                tBrenas.tileName = "tile_brenas";
-                tBrenas.startingAllegiance = WarToken.WarAllegiance.Player;
-                tBrenas.isInitialDeploymentTile = true;
-                tBrenas.isBorderTile = true;
-                tBrenas.fortLevel = 0;
-                condTileData.tiles.Add(tBrenas);
-
-                var tWiktrany = new WarTileData();
-                tWiktrany.tileName = "tile_wiktrany";
-                tWiktrany.startingAllegiance = WarToken.WarAllegiance.Enemy;
-                tWiktrany.isInitialDeploymentTile = false;
-                tWiktrany.fortLevel = 1;
-                condTileData.tiles.Add(tWiktrany);
-
-                var tMunat = new WarTileData();
-                tMunat.tileName = "tile_munat";
-                tMunat.startingAllegiance = WarToken.WarAllegiance.Enemy;
-                tMunat.isInitialDeploymentTile = false;
-                tMunat.isShoreTile = true;
-                tMunat.fortLevel = 0;
-                condTileData.tiles.Add(tMunat);
-
-                var tNanta = new WarTileData();
-                tNanta.tileName = "tile_nanta";
-                tNanta.startingAllegiance = WarToken.WarAllegiance.Enemy;
-                tNanta.isInitialDeploymentTile = false;
-                tNanta.fortLevel = 0;
-                condTileData.tiles.Add(tNanta);
-
-                var tZille = new WarTileData();
-                tZille.tileName = "tile_zille";
-                tZille.startingAllegiance = WarToken.WarAllegiance.Enemy;
-                tZille.isInitialDeploymentTile = false;
-                tZille.fortLevel = 2;
-                tZille.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
-                condTileData.tiles.Add(tZille);
-
+                if (config != null && config.Tiles != null)
+                {
+                    for (int i = 0; i < config.Tiles.Count; i++)
+                    {
+                        var src = config.Tiles[i];
+                        var wtd = new WarTileData();
+                        wtd.tileName = string.IsNullOrEmpty(src.TileNumber) ? ZilleMapLayoutManager.GameTileName(src.Id) : src.TileNumber;
+                        bool ours = src.Allegiance == "Rizia";
+                        wtd.startingAllegiance = ours ? WarToken.WarAllegiance.Player : WarToken.WarAllegiance.Enemy;
+                        wtd.isInitialDeploymentTile = ours;
+                        wtd.isBorderTile = ours;
+                        wtd.isShoreTile = src.IsPort;
+                        wtd.isEnemyAirfield = src.IsAirfield;
+                        wtd.fortLevel = src.FortLevel;
+                        if (src.FortLevel >= 2) wtd.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
+                        condTileData.tiles.Add(wtd);
+                    }
+                }
                 zilleOpData.tileData.Add(condTileData);
 
                 // Extract City Unit Type from Pales operation template
@@ -1434,7 +1414,7 @@ namespace GreatZilleSolution
                     playerCities.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
                     var brenasCity = new WarTokenData();
-                    brenasCity.startingTileName = "tile_brenas";
+                    brenasCity.startingTileName = ZilleMapLayoutManager.GameTileName("tile_brenas");
                     brenasCity.guid = "city_brenas";
                     brenasCity.allegiance = WarToken.WarAllegiance.Player;
                     brenasCity.unitType = cityUnitType;
@@ -1451,12 +1431,12 @@ namespace GreatZilleSolution
                     enemyCities.condition = "";
                     enemyCities.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
-                    string[] enemyCityTiles = new string[] { "tile_zille", "tile_munat", "tile_wiktrany", "tile_nanta" };
+                    string[] enemyCityTiles = new string[] { ZilleMapLayoutManager.GameTileName("tile_zille"), ZilleMapLayoutManager.GameTileName("tile_munat"), ZilleMapLayoutManager.GameTileName("tile_wiktrany"), ZilleMapLayoutManager.GameTileName("tile_nanta") };
                     for (int c = 0; c < enemyCityTiles.Length; c++)
                     {
                         var cToken = new WarTokenData();
                         cToken.startingTileName = enemyCityTiles[c];
-                        cToken.guid = $"city_{enemyCityTiles[c]}";
+                        cToken.guid = $"city_zille_{enemyCityTiles[c]}";
                         cToken.allegiance = WarToken.WarAllegiance.Enemy;
                         cToken.unitType = cityUnitType;
                         enemyCities.tokens.Add(cToken);
@@ -1495,14 +1475,14 @@ namespace GreatZilleSolution
                 if (infUnitType != null)
                 {
                     var infWik = new WarTokenData();
-                    infWik.startingTileName = "tile_wiktrany";
+                    infWik.startingTileName = ZilleMapLayoutManager.GameTileName("tile_wiktrany");
                     infWik.guid = "wehlen_inf_wiktrany";
                     infWik.allegiance = WarToken.WarAllegiance.Enemy;
                     infWik.unitType = infUnitType;
                     garrisonCond.tokens.Add(infWik);
 
                     var infZille = new WarTokenData();
-                    infZille.startingTileName = "tile_zille";
+                    infZille.startingTileName = ZilleMapLayoutManager.GameTileName("tile_zille");
                     infZille.guid = "wehlen_inf_zille";
                     infZille.allegiance = WarToken.WarAllegiance.Enemy;
                     infZille.unitType = infUnitType;
@@ -1512,7 +1492,7 @@ namespace GreatZilleSolution
                 if (tankUnitType != null)
                 {
                     var tankZille = new WarTokenData();
-                    tankZille.startingTileName = "tile_zille";
+                    tankZille.startingTileName = ZilleMapLayoutManager.GameTileName("tile_zille");
                     tankZille.guid = "wehlen_tank_zille";
                     tankZille.allegiance = WarToken.WarAllegiance.Enemy;
                     tankZille.unitType = tankUnitType;
@@ -1548,12 +1528,23 @@ namespace GreatZilleSolution
                 zilleOpObj.SetActive(true);
                 op1Obj.SetActive(false);
 
+                // IMPORTANT: "Pales Operations Container" also holds the war "Map Container" (the Addressables loader of
+                // Map_Rizia_PalesWar) and the table background. Disabling those stops the map from ever loading
+                // (a coroutine cannot run on an inactive object) - this was the long-standing "no map" bug.
+                // So only switch off the OTHER WarOperation objects, and make sure the map loader stays enabled.
                 for (int i = 0; i < palesOps.transform.childCount; i++)
                 {
                     var child = palesOps.transform.GetChild(i);
-                    if (child != null && child.name != "Operation_Zille_1")
+                    if (child == null || child.name == "Operation_Zille_1") continue;
+                    bool isOperation = child.GetComponent<WarOperation>() != null || child.name.StartsWith("Operation_");
+                    if (isOperation)
                     {
                         child.gameObject.SetActive(false);
+                    }
+                    else if (child.GetComponent<MapContainer>() != null && !child.gameObject.activeSelf)
+                    {
+                        child.gameObject.SetActive(true);
+                        MelonLogger.Msg($"[WAR ENGINE] Re-enabled '{child.name}' (war map loader).");
                     }
                 }
 
@@ -1579,7 +1570,7 @@ namespace GreatZilleSolution
         public static bool EnterZilleWarTheatre()
         {
             MelonLogger.Msg("============================================================");
-            MelonLogger.Msg("[WAR ENGINE] Entering Native 3D Zille War Theatre via WarFlowManager...");
+            MelonLogger.Msg("[WAR ENGINE] Entering Native 3D Zille War Theatre (Golden Shield Parity)...");
             MelonLogger.Msg("============================================================");
 
             try
@@ -1587,11 +1578,25 @@ namespace GreatZilleSolution
                 CurrentTheatre = ActiveWarTheatre.Zille;
                 _tilesConfiguredForZille = false;
 
-                // Ensure textures are loaded into GPU memory and native entities registered
+                // 1. Deselect tokens & hide all panels (matching vanilla TemplateInteractionButton.OnClick)
+                try
+                {
+                    var tokenMgr = Managers.Instance?.TokenManager ?? UnityEngine.Object.FindObjectOfType<TokenManager>();
+                    tokenMgr?.DeselectAllTokens();
+                    Panels.Instance?.TokenInteractionPanel?.Hide();
+                    Panels.Instance?.HideAllRightPanels();
+                    Panels.Instance?.HideAllCenterPanels();
+                }
+                catch (Exception ex)
+                {
+                    MelonLogger.Warning($"[WAR ENGINE] Deselect/Hide warning: {ex.Message}");
+                }
+
+                // 2. Ensure textures are loaded into GPU memory and native entities registered
                 ZilleMapLayoutManager.EnsureTexturesLoaded();
                 RegisterNativeZilleEntities();
 
-                // 1. Fetch WarFragmentData for Zille
+                // 3. Fetch WarFragmentData for Zille
                 WarFragmentData wfd = null;
                 var warFragments = EntityDataManager.AllWarFragmentsData ?? EntityDataManager.WarFragmentsData;
                 if (warFragments != null)
@@ -1625,10 +1630,10 @@ namespace GreatZilleSolution
                     }
                 }
 
-                // 2. Setup custom Zille 3D operation in scene
+                // 4. Setup custom Zille 3D operation in scene
                 SetupCustomZilleOperation();
 
-                // 3. Ensure SaveData.warSaveData is initialized so WarFlowManager.SetupWarFragmentCoroutine never hits a NullRef at 0x1809810f3!
+                // 5. Ensure SaveData.warSaveData is initialized so WarFlowManager.SetupWarFragmentCoroutine never hits a NullRef!
                 try
                 {
                     var pm = PersistenceManager.Instance;
@@ -1662,9 +1667,14 @@ namespace GreatZilleSolution
                                     else if (wsdField != null) wsdField.SetValue(saveDataObj, wsd);
                                     MelonLogger.Msg("[WAR ENGINE] Initialized CurrentSaveFile.saveData.warSaveData for Zille Operation!");
                                 }
-                                else if (curWsd.warObjectiveSaveData == null)
+                                else
                                 {
-                                    curWsd.warObjectiveSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarObjectiveSaveData>();
+                                    if (curWsd.warTokenSaveData == null) curWsd.warTokenSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTokenSaveData>();
+                                    if (curWsd.warBattleSaveData == null) curWsd.warBattleSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarBattleSaveData>();
+                                    if (curWsd.warObjectiveSaveData == null) curWsd.warObjectiveSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarObjectiveSaveData>();
+                                    if (curWsd.warTileSaveData == null) curWsd.warTileSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTileSaveData>();
+                                    if (curWsd.tileAllegianceChangeSaveData == null) curWsd.tileAllegianceChangeSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.TileAllegianceChangeSaveData>();
+                                    if (curWsd.warStartBattleEventSaveData == null) curWsd.warStartBattleEventSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarStartBattleEventSaveData>();
                                 }
                             }
                         }
@@ -1675,21 +1685,47 @@ namespace GreatZilleSolution
                     MelonLogger.Warning($"[WAR ENGINE] WarSaveData init check: {ex.Message}");
                 }
 
-                // 4. Launch native WarFlowManager (which hides civilian tokens, switches MapManager to War, plays war music, and opens WarDeploymentPanel!)
+                // 6. Explicitly load War Map via MapManager (unloads Map_Rizia_Base civilian map and instantiates Map_Rizia_PalesWar)
+                var mapManager = Managers.Instance?.MapManager ?? UnityEngine.Object.FindObjectOfType<MapManager>();
+                if (mapManager != null)
+                {
+                    mapManager.LoadMap(MapConfiguration.MapType.War);
+                    MelonLogger.Msg("[WAR ENGINE] Called MapManager.LoadMap(MapConfiguration.MapType.War)!");
+                }
+
+                // 7. Launch native WarFlowManager (which sets up HUD, deployment panel, unit tokens, and objectives)
                 var warFlowMgr = Managers.Instance?.WarFlowManager ?? UnityEngine.Object.FindObjectOfType<WarFlowManager>();
                 if (warFlowMgr != null && wfd != null)
                 {
                     MelonLogger.Msg("[WAR ENGINE] Starting native WarFlowManager with WarFragment_Zille_1_1!");
                     warFlowMgr.SetupWarFragment(wfd);
                 }
-                else
+
+                // 8. Start War Music and stop civilian ambience
+                try
                 {
-                    var mapManager = Managers.Instance?.MapManager ?? UnityEngine.Object.FindObjectOfType<MapManager>();
-                    if (mapManager != null) mapManager.LoadMap(MapConfiguration.MapType.War);
+                    var audioMgr = Managers.Instance?.AudioManager ?? UnityEngine.Object.FindObjectOfType<AudioManager>();
+                    if (audioMgr != null)
+                    {
+                        audioMgr.StopMapMusic();
+                        audioMgr.StopMapAmbience();
+                        string intro = warFlowMgr?.warConfiguration?.WarMapIntroTrackName ?? "Track_War_Intro";
+                        string loop = warFlowMgr?.warConfiguration?.WarMapLoopTrackName ?? "Track_War_Loop";
+                        if (!string.IsNullOrEmpty(intro) && !string.IsNullOrEmpty(loop))
+                        {
+                            audioMgr.PlayLoopedMusic(intro, loop);
+                            MelonLogger.Msg($"[WAR ENGINE] War music started: {intro} / {loop}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MelonLogger.Warning($"[WAR ENGINE] War music start: {ex.Message}");
                 }
 
-                // 5. Lock table background to Zille composite map & modular tiles
-                ApplyWarTableTexture();
+                // 9. Skin the live (vanilla Pales) war table with the Zille map + provinces; kept alive by ZilleWarTable.Tick()
+                ZilleWarTable.SkinEnabled = true;
+                _theatreEnteredAt = Time.unscaledTime;
 
                 return true;
             }
@@ -1705,253 +1741,16 @@ namespace GreatZilleSolution
 
         public static void UpdateWarTheatreState()
         {
-            if (CurrentTheatre != ActiveWarTheatre.Zille) return;
+            // The table skin handles its own enable/disable (restores vanilla Pales when disabled).
+            ZilleWarTable.Tick();
 
+            if (CurrentTheatre != ActiveWarTheatre.Zille) return;
             try
             {
-                // 1. Maintain Table Texture
-                ApplyWarTableTexture();
-
-                // 2. Configure WarTiles once WarTileManager has active tiles ready
-                if (!_tilesConfiguredForZille)
-                {
-                    var tileMgr = UnityEngine.Object.FindObjectOfType<WarTileManager>() ?? Managers.Instance?.WarTileManager;
-                    if (tileMgr != null && tileMgr.allTiles != null && tileMgr.allTiles.Count > 0)
-                    {
-                        var palesBg = GameObject.Find("PalesWarMapBackground");
-                        AlignNativeWarTilesWithZilleLayout(palesBg);
-                        _tilesConfiguredForZille = true;
-                        MelonLogger.Msg($"[WAR THEATRE] Successfully configured {tileMgr.allTiles.Count} war tiles for Zille campaign!");
-                    }
-                }
-
-                // 3. Ensure WarDeploymentPanel is active for placing units
-                ActivateWarDeploymentPanel();
+                // Vanilla WarFlowManager opens the deployment panel itself; only help shortly after entering.
+                if (Time.unscaledTime < _theatreEnteredAt + 20f) ActivateWarDeploymentPanel();
             }
             catch { }
-        }
-
-        private static void ApplyWarTableTexture()
-        {
-            var zilleTex = ZilleMapLayoutManager.FullMapTexture ?? ZilleMapLayoutManager.MapBackgroundTexture;
-            if (zilleTex == null && ZilleMapLayoutManager.GridMapTiles.Count == 0) return;
-
-            // 1. Apply 6 high-res 4096x4096 Zille map tiles to "Pales Map_01 " .. "Pales Map_06" inside "Map_Rizia_PalesWar" / "Map Container"
-            var allRenderers = Resources.FindObjectsOfTypeAll<Renderer>();
-            if (allRenderers != null)
-            {
-                for (int i = 0; i < allRenderers.Length; i++)
-                {
-                    var rend = allRenderers[i];
-                    if (rend == null || rend.gameObject == null) continue;
-                    string rName = rend.gameObject.name.Trim();
-
-                    // Check for the 6 strategic map tiles: "Pales Map_01", "Pales Map_02", ..., "Pales Map_06"
-                    if (rName.StartsWith("Pales Map_0", StringComparison.OrdinalIgnoreCase) && rName.Length >= 11)
-                    {
-                        char digitChar = rName[10];
-                        if (digitChar >= '1' && digitChar <= '6')
-                        {
-                            int tileIdx = digitChar - '0';
-                            if (ZilleMapLayoutManager.GridMapTiles.TryGetValue(tileIdx, out var tileTex) && tileTex != null)
-                            {
-                                ApplySpecificTextureToRenderer(rend, tileTex);
-                            }
-                            else if (zilleTex != null)
-                            {
-                                ApplySpecificTextureToRenderer(rend, zilleTex);
-                            }
-                        }
-                    }
-                    else if (rName == "PalesWarMapBackground" || rName == "PalesReferenceMap")
-                    {
-                        if (zilleTex != null)
-                        {
-                            ApplySpecificTextureToRenderer(rend, zilleTex);
-                        }
-                    }
-                }
-            }
-
-            // 2. Also ensure PalesWarMapBackground has the composite fallback texture if active
-            GameObject palesBg = GameObject.Find("PalesWarMapBackground");
-            if (palesBg != null && zilleTex != null)
-            {
-                var bgRend = palesBg.GetComponent<Renderer>();
-                if (bgRend != null) ApplySpecificTextureToRenderer(bgRend, zilleTex);
-            }
-        }
-
-        private static void ApplySpecificTextureToRenderer(Renderer rend, Texture2D tex)
-        {
-            if (rend == null || tex == null) return;
-
-            if (rend.materials != null)
-            {
-                for (int m = 0; m < rend.materials.Length; m++)
-                {
-                    var mat = rend.materials[m];
-                    if (mat != null) ApplyTextureToMaterial(mat, tex);
-                }
-            }
-
-            if (rend.sharedMaterials != null)
-            {
-                for (int m = 0; m < rend.sharedMaterials.Length; m++)
-                {
-                    var mat = rend.sharedMaterials[m];
-                    if (mat != null) ApplyTextureToMaterial(mat, tex);
-                }
-            }
-        }
-
-        private static void ApplyTextureToMaterial(Material mat, Texture2D tex)
-        {
-            if (mat == null || tex == null) return;
-            // Torpor's custom map shader (MA_MapPales_01..06 / MA_MapWorldBorder) uses _Diffuse!
-            if (mat.HasProperty("_Diffuse")) mat.SetTexture("_Diffuse", tex);
-            if (mat.HasProperty("_BaseMap")) mat.SetTexture("_BaseMap", tex);
-            if (mat.HasProperty("_MainTex")) mat.SetTexture("_MainTex", tex);
-            if (mat.HasProperty("_Tile_Texture")) mat.SetTexture("_Tile_Texture", tex);
-
-            // Ensure MA_MapWorldBorder / MA_MapPales_* does not alpha-clip or darken the texture to black
-            if (mat.HasProperty("_AO_Multiplier")) mat.SetFloat("_AO_Multiplier", 1f);
-            if (mat.HasProperty("_AlphaClip")) mat.SetFloat("_AlphaClip", 0f);
-            if (mat.HasProperty("_Cutoff")) mat.SetFloat("_Cutoff", 0f);
-            if (mat.HasProperty("_Brightness_Multiplier")) mat.SetFloat("_Brightness_Multiplier", 1.15f);
-            if (mat.HasProperty("_Base_Colour")) mat.SetColor("_Base_Colour", new Color(1f, 0.9725f, 0.8823f, 1f));
-            if (mat.HasProperty("_BaseColor")) mat.SetColor("_BaseColor", Color.white);
-            if (mat.HasProperty("_Color")) mat.SetColor("_Color", Color.white);
-        }
-
-        private static void AlignNativeWarTilesWithZilleLayout(GameObject palesBg)
-        {
-            try
-            {
-                var tileMgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
-                if (tileMgr == null && Managers.Instance != null) tileMgr = Managers.Instance.WarTileManager;
-                if (tileMgr == null)
-                {
-                    var allTileMgrs = Resources.FindObjectsOfTypeAll<WarTileManager>();
-                    if (allTileMgrs.Length > 0) tileMgr = allTileMgrs[0];
-                }
-
-                List<WarTile> tilesList = new List<WarTile>();
-                if (tileMgr != null && tileMgr.allTiles != null && tileMgr.allTiles.Count > 0)
-                {
-                    for (int i = 0; i < tileMgr.allTiles.Count; i++)
-                    {
-                        var t = tileMgr.allTiles[i];
-                        if (t != null) tilesList.Add(t);
-                    }
-                }
-                else
-                {
-                    var found = Resources.FindObjectsOfTypeAll<WarTile>();
-                    if (found != null)
-                    {
-                        for (int i = 0; i < found.Length; i++)
-                        {
-                            if (found[i] != null) tilesList.Add(found[i]);
-                        }
-                    }
-                }
-
-                if (tilesList.Count == 0) return;
-
-                var config = ZilleMapLayoutManager.CurrentConfig;
-                if (config == null || config.Tiles == null || config.Tiles.Count == 0) return;
-
-                Vector3 tablePos = palesBg != null ? palesBg.transform.position : new Vector3(0f, 0.05f, 0f);
-                Vector3 tableScale = palesBg != null ? palesBg.transform.localScale : new Vector3(2.4f, 1.6f, 1f);
-
-                int zilleCount = config.Tiles.Count;
-                int totalTiles = tilesList.Count;
-
-                MelonLogger.Msg($"[WAR ENGINE] Positioning {zilleCount} Zille WarTiles on table...");
-
-                if (_originalTilePositions.Count == 0)
-                {
-                    for (int i = 0; i < totalTiles; i++)
-                    {
-                        var t = tilesList[i];
-                        _originalTilePositions.Add(t.transform.position);
-                        _originalTileScales.Add(t.transform.localScale);
-                    }
-                }
-
-                for (int i = 0; i < totalTiles; i++)
-                {
-                    var warTile = tilesList[i];
-                    if (warTile == null) continue;
-
-                    if (i < zilleCount)
-                    {
-                        var tileData = config.Tiles[i];
-                        warTile.gameObject.name = tileData.Id;
-                        warTile.gameObject.SetActive(true);
-
-                        // Position aligned with 3x2 map table coordinate space
-                        float normX = tileData.NormalizedX - 0.5f;
-                        float normY = 0.5f - tileData.NormalizedY;
-                        Vector3 targetPos = tablePos + new Vector3(normX * tableScale.x * 0.72f, 0.005f, normY * tableScale.y * 0.72f);
-                        warTile.transform.position = targetPos;
-
-                        // Native tactical scale derived from original Pales tile dimensions
-                        Vector3 baseScale = (_originalTileScales.Count > i && _originalTileScales[i].magnitude > 0.001f) 
-                            ? _originalTileScales[i] 
-                            : new Vector3(0.08f, 0.08f, 0.08f);
-                        float scaleMult = (tileData.Width > 100f) ? (tileData.Width / 512f) : (tileData.Width / 32f);
-                        if (scaleMult < 0.8f) scaleMult = 0.8f;
-                        if (scaleMult > 1.25f) scaleMult = 1.25f;
-                        warTile.transform.localScale = baseScale * scaleMult;
-
-                        // Region Texture & Material Opacity (No magenta shader errors)
-                        if (ZilleMapLayoutManager.LoadedTextures.TryGetValue(tileData.TextureFile, out Texture2D regionTex) && regionTex != null)
-                        {
-                            warTile.warTileTexture = regionTex;
-                            var rend = warTile.GetWarTileRenderer();
-                            if (rend != null && rend.material != null)
-                            {
-                                if (rend.material.HasProperty("_Tile_Texture")) rend.material.SetTexture("_Tile_Texture", regionTex);
-                                if (rend.material.HasProperty("_Diffuse")) rend.material.SetTexture("_Diffuse", regionTex);
-                                if (rend.material.HasProperty("_BaseMap")) rend.material.SetTexture("_BaseMap", regionTex);
-                                if (rend.material.HasProperty("_MainTex")) rend.material.SetTexture("_MainTex", regionTex);
-                                if (rend.material.HasProperty("_BaseColor")) rend.material.SetColor("_BaseColor", new Color(1f, 1f, 1f, 0.88f));
-                                if (rend.material.HasProperty("_Color")) rend.material.SetColor("_Color", new Color(1f, 1f, 1f, 0.88f));
-                            }
-                        }
-
-                        // Tactical Allegiance & Initial Deployment Permissions
-                        bool isPlayerZone = (i < 2 || tileData.Allegiance == "Rizia");
-                        if (warTile.currentWarTileData != null)
-                        {
-                            warTile.currentWarTileData.isInitialDeploymentTile = isPlayerZone;
-                            warTile.currentWarTileData.startingAllegiance = isPlayerZone ? WarToken.WarAllegiance.Player : WarToken.WarAllegiance.Enemy;
-                        }
-
-                        if (isPlayerZone)
-                        {
-                            warTile.SetTilePlayer();
-                            warTile.SetIsReinforcementTile(true);
-                        }
-                        else
-                        {
-                            warTile.SetTileEnemy();
-                            warTile.SetIsReinforcementTile(false);
-                        }
-                    }
-                    else
-                    {
-                        // Hide excess tiles belonging to Pales theatre
-                        warTile.gameObject.SetActive(false);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MelonLogger.Error($"[WAR ENGINE] Error aligning WarTiles: {ex.Message}");
-            }
         }
 
         private static void ActivateWarDeploymentPanel()
@@ -1982,40 +1781,14 @@ namespace GreatZilleSolution
 
             try
             {
-                // Restore PalesWarMapBackground texture
-                if (_originalPalesTexture != null)
-                {
-                    var palesBg = GameObject.Find("PalesWarMapBackground");
-                    if (palesBg != null)
-                    {
-                        var rend = palesBg.GetComponent<Renderer>();
-                        if (rend != null && rend.material != null)
-                        {
-                            if (rend.material.HasProperty("_BaseMap")) rend.material.SetTexture("_BaseMap", _originalPalesTexture);
-                            if (rend.material.HasProperty("_MainTex")) rend.material.SetTexture("_MainTex", _originalPalesTexture);
-                        }
-                    }
-                }
+                // Put the live war table back to vanilla Pales (per-renderer material instances are dropped, tiles restored).
+                ZilleWarTable.SkinEnabled = false;
+                ZilleWarTable.Restore();
 
-                // Restore Pales Operations Container
-                var palesOps = GameObject.Find("Pales Operations Container");
-                if (palesOps != null) palesOps.SetActive(true);
-
-                // Restore tile positions and scales
-                var tileMgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
-                if (tileMgr != null && tileMgr.allTiles != null && _originalTilePositions.Count == tileMgr.allTiles.Count)
-                {
-                    for (int i = 0; i < tileMgr.allTiles.Count; i++)
-                    {
-                        var t = tileMgr.allTiles[i];
-                        if (t != null)
-                        {
-                            t.gameObject.SetActive(true);
-                            t.transform.position = _originalTilePositions[i];
-                            t.transform.localScale = _originalTileScales[i];
-                        }
-                    }
-                }
+                // Re-enable the Pales operations that SetupCustomZilleOperation switched off, and forget our cached operation
+                // (the war map scene objects are destroyed when the base map is loaded again).
+                _customOperationConfigured = false;
+                _zilleWarOp = null;
 
                 var mapManager = UnityEngine.Object.FindObjectOfType<MapManager>();
                 if (mapManager != null)

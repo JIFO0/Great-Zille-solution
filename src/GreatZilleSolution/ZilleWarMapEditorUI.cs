@@ -322,6 +322,11 @@ namespace GreatZilleSolution
                 }
                 iy += 24f;
 
+                GUI.Label(new Rect(4, iy, 300, 18), $"<b>Skala w grze (3D):</b> {selTile.WorldScale:F3}"); iy += 18f;
+                float newWorld = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.WorldScale <= 0f ? 0.22f : selTile.WorldScale, 0.05f, 0.70f);
+                if (Mathf.Abs(newWorld - selTile.WorldScale) > 0.0005f) selTile.WorldScale = newWorld;
+                iy += 24f;
+
                 // Allegiance selector
                 GUI.Label(new Rect(4, iy, 300, 18), "<b>Frakcja kontrolujaca:</b>"); iy += 20f;
                 if (GUI.Button(new Rect(4, iy, 95, 24), selTile.Allegiance == "Rizia" ? "[V Rizia]" : "Rizia")) selTile.Allegiance = "Rizia";
@@ -376,26 +381,15 @@ namespace GreatZilleSolution
             float botY = 675f;
             if (GUI.Button(new Rect(780, botY, 160, 30), "+ Nowy Region"))
             {
-                int newIdx = tiles.Count + 1;
-                tiles.Add(new ZilleTileData
-                {
-                    Id = $"tile_{newIdx}",
-                    Name = $"Nowy Sektor {newIdx}",
-                    TextureFile = $"Frame {41 + (newIdx % 5)}.png",
-                    NormalizedX = 0.5f,
-                    NormalizedY = 0.5f,
-                    Width = 50f,
-                    Height = 50f
-                });
-                _selectedTileIndex = tiles.Count - 1;
+                string anchor = tiles.Count > 0 ? tiles[Mathf.Clamp(_selectedTileIndex, 0, tiles.Count - 1)].Id : null;
+                var added = ZilleMapLayoutManager.AddProvinceNear(anchor, 0);
+                if (added != null) _selectedTileIndex = tiles.Count - 1;
             }
 
             if (GUI.Button(new Rect(955, botY, 160, 30), "- Usun Region") && tiles.Count > 1)
             {
-                string removeId = tiles[_selectedTileIndex].Id;
-                tiles.RemoveAt(_selectedTileIndex);
-                foreach (var t in tiles) t.AdjacentIds.Remove(removeId);
-                _selectedTileIndex = Mathf.Clamp(_selectedTileIndex, 0, tiles.Count - 1);
+                if (ZilleMapLayoutManager.RemoveProvinceAt(_selectedTileIndex))
+                    _selectedTileIndex = Mathf.Clamp(_selectedTileIndex, 0, tiles.Count - 1);
             }
 
             GUI.DragWindow(new Rect(0, 0, 1130, 24));

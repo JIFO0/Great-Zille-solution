@@ -1,0 +1,11 @@
+== Candidate GameObjects: 2
+
+### Environments/War/Pales Operations Container  (go pid=580, active=True, layer=0)
+   localPos {'x': 1.8350000381469727, 'y': 3.0444003641605377e-05, 'z': 0.2460000067949295} localRot {'x': 0.0, 'y': 0.0, 'z': 0.0, 'w': 1.0} localScale {'x': 1.0, 'y': 1.0, 'z': 1.0}
+
+### Environments/War/Pales Operations Container/PalesWarMapBackground  (go pid=4553, active=True, layer=6)
+   localPos {'x': 0.004503726959228516, 'y': -0.0001304447796428576, 'z': -0.0005466341972351074} localRot {'x': 0.7049942016601562, 'y': 0.05461873486638069, 'z': -0.05461873486638069, 'w': 0.7049942016601562} localScale {'x': 1.3906090259552002, 'y': 0.6953043937683105, 'z': 0.6953045129776001}
+   MeshFilter mesh=MA_NavalBlockade (pid 3)
+   MeshRenderer enabled=True materials=[2850394067002106758]
+      material pid 2850394067002106758 not in this bundle (external)
+   MonoBehaviour script=? fields=[]

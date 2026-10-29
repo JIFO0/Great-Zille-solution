@@ -79,6 +79,18 @@
       <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Unity.Addressables.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Unity.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
 
   <!-- Post-build step: auto-deploy to Suzerain/Mods -->

@@ -216,8 +216,8 @@ namespace GreatZilleSolution
             choice.ActorID = romusId;
             choice.ConversantID = laurentoId;
             choice.Title = "Zille_War_Ultimatum_Choice";
-            choice.MenuText = "Jezeli Smolak nie odda Zille w terminie, odbierzemy prowincje sila militarna.";
-            choice.DialogueText = "Jezeli Smolak nie odda Zille w wyznaczonym terminie, odbierzemy prowincje sila militarna. Armia musi byc w pelnej gotowosci.";
+            choice.MenuText = "If Smolak does not return Zille on schedule, we will reclaim our province by force of arms.";
+            choice.DialogueText = "If Smolak does not return Zille on schedule, we will reclaim our ancestral province by force of arms. The armed forces must be placed on immediate alert.";
             choice.userScript = "Variable[\"RiziaDLC.CountryRelation_Wehlen_AtWar\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_War_Ultimatum_Given\"] = true;";
 
             // 2. Laurento response entry
@@ -229,7 +229,7 @@ namespace GreatZilleSolution
             reply.ActorID = laurentoId;
             reply.ConversantID = romusId;
             reply.Title = "Zille_War_Ultimatum_Reply";
-            reply.DialogueText = "Wasza Krolewska Mosc, otwarta inwazja na Zille wywola wscieklosc Smolaka i grozi interwencja CSP. Jednakze sztab generalny Azaro przygotuje plany natarcia na wypadek zerwania ukladu.";
+            reply.DialogueText = "Your Majesty, an armed invasion of Zille will provoke Smolak to outright fury and risks triggering a severe response from the Contanan Security Pact. Nevertheless, the General Staff shall draw up offensive battle plans should the agreement collapse.";
             reply.MenuText = reply.DialogueText;
 
             choice.outgoingLinks.Add(new Link(conv.id, choiceId, conv.id, replyId));
@@ -303,8 +303,8 @@ namespace GreatZilleSolution
             choice.ActorID = romusId;
             choice.ConversantID = smolakId;
             choice.Title = "Zille_Smolak_FaceToFace_Choice";
-            choice.MenuText = "To nasza ziemia, Wiktorze. Jezeli nie opuscicie Zille dobrowolnie, wkrocza tu moje czolgi.";
-            choice.DialogueText = "To nasza ziemia, Wiktorze. Jezeli nie opuscicie Zille dobrowolnie, wkrocza tu moje czolgi.";
+            choice.MenuText = "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily, my tanks will remove you.";
+            choice.DialogueText = "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the lease expires, my tanks will remove you.";
             choice.userScript = "Variable[\"RiziaDLC.CountryRelation_Wehlen_AtWar\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Smolak_Threatened\"] = true;";
 
             var reply = new DialogueEntry();
@@ -315,7 +315,7 @@ namespace GreatZilleSolution
             reply.ActorID = smolakId;
             reply.ConversantID = romusId;
             reply.Title = "Zille_Smolak_FaceToFace_Reply";
-            reply.DialogueText = "Grozby, Romusie? W moim wlasnym miescie? Wehlen nie boi sie Waszych paradnych mundurow. Sprobujcie tylko przekroczyc rzeke, a zobaczycie, jak plonie poludnie!";
+            reply.DialogueText = "Threats, Romus? In my own city? Wehlen does not fear your parade-ground uniforms. Just dare to cross that river, and you will see South Merkopa burn!";
             reply.MenuText = reply.DialogueText;
 
             choice.outgoingLinks.Add(new Link(conv.id, choiceId, conv.id, replyId));

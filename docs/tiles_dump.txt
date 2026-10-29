@@ -1,0 +1,113 @@
+SHADER Shader Graphs/S_IndividualTile
+   prop _Tile_Texture type 4 default None None
+   prop _Tile_Colour type 0 default None None
+   prop _Outline_Toggle type 2 default None None
+   prop _Outline_Thickness type 2 default None None
+   prop _Outline_Colour type 0 default None None
+   prop _Outline_Gradient_Toggle type 2 default None None
+   prop _Outline_Gradient_Power type 3 default None None
+   prop _Outline_Gradient_Pulse_Toggle type 2 default None None
+   prop _Outline_Gradient_Pulse_Speed_Size type 1 default None None
+   prop _Gradient_Toggle type 2 default None None
+   prop _Gradient_Is_Transparent type 2 default None None
+   prop _Gradient_Colour type 0 default None None
+   prop _Gradient_Power type 3 default None None
+   prop _Gradient_Pulse_Toggle type 2 default None None
+   prop _Gradient_Pulse_Speed_Size type 1 default None None
+   prop _Highlight_Toggle type 2 default None None
+   prop _Highlight_Opacity type 3 default None None
+   prop _Pattern_Toggle type 2 default None None
+   prop _Pattern_Colour type 0 default None None
+   prop _Pattern_Texture type 4 default None None
+   prop _Pattern_Rotation type 2 default None None
+   prop _Pattern_Tiling type 1 default None None
+   prop _QueueOffset type 2 default None None
+   prop _QueueControl type 2 default None None
+   prop unity_Lightmaps type 4 default None None
+   prop unity_LightmapsInd type 4 default None None
+   prop unity_ShadowMasks type 4 default None None
+   pass tags {'m_Name': 'Universal Forward', 'zTest': {'val': 4.0, 'name': '<noninit>'}, 'zWrite': {'val': 0.0, 'name': '<noninit>'}, 'culling': {'val': 2.0, 'name': '<noninit>'}}
+      blend rt0: {'srcBlend': {'val': 5.0, 'name': '<noninit>'}, 'destBlend': {'val': 10.0, 'name': '<noninit>'}, 'srcBlendAlpha': {'val': 1.0, 'name': '<noninit>'}, 'destBlendAlpha': {'val': 10.0, 'name': '<noninit>'}, 'blendOp': {'val': 0.0, 'name': '<noninit>'}, 'blendOpAlpha': {'val': 0.0, 'name': '<noninit>'}, 'colMask': {'val': 15.0, 'name': '<noninit>'}} zwrite {'val': 0.0, 'name': '<noninit>'} ztest {'val': 4.0, 'name': '<noninit>'}
+      tags {'tags': []}
+   pass tags {'m_Name': 'MotionVectors', 'zTest': {'val': 4.0, 'name': '<noninit>'}, 'zWrite': {'val': 1.0, 'name': '<noninit>'}, 'culling': {'val': 2.0, 'name': '<noninit>'}}
+      blend rt0: {'srcBlend': {'val': 1.0, 'name': '<noninit>'}, 'destBlend': {'val': 0.0, 'name': '<noninit>'}, 'srcBlendAlpha': {'val': 1.0, 'name': '<noninit>'}, 'destBlendAlpha': {'val': 0.0, 'name': '<noninit>'}, 'blendOp': {'val': 0.0, 'name': '<noninit>'}, 'blendOpAlpha': {'val': 0.0, 'name': '<noninit>'}, 'colMask': {'val': 12.0, 'name': '<noninit>'}} zwrite {'val': 1.0, 'name': '<noninit>'} ztest {'val': 4.0, 'name': '<noninit>'}
+      tags {'tags': []}
+   pass tags {'m_Name': 'DepthNormalsOnly', 'zTest': {'val': 4.0, 'name': '<noninit>'}, 'zWrite': {'val': 1.0, 'name': '<noninit>'}, 'culling': {'val': 2.0, 'name': '<noninit>'}}
+      blend rt0: {'srcBlend': {'val': 1.0, 'name': '<noninit>'}, 'destBlend': {'val': 0.0, 'name': '<noninit>'}, 'srcBlendAlpha': {'val': 1.0, 'name': '<noninit>'}, 'destBlendAlpha': {'val': 0.0, 'name': '<noninit>'}, 'blendOp': {'val': 0.0, 'name': '<noninit>'}, 'blendOpAlpha': {'val': 0.0, 'name': '<noninit>'}, 'colMask': {'val': 15.0, 'name': '<noninit>'}} zwrite {'val': 1.0, 'name': '<noninit>'} ztest {'val': 4.0, 'name': '<noninit>'}
+      tags {'tags': []}
+   pass tags {'m_Name': 'ShadowCaster', 'zTest': {'val': 4.0, 'name': '<noninit>'}, 'zWrite': {'val': 1.0, 'name': '<noninit>'}, 'culling': {'val': 2.0, 'name': '<noninit>'}}
+      blend rt0: {'srcBlend': {'val': 1.0, 'name': '<noninit>'}, 'destBlend': {'val': 0.0, 'name': '<noninit>'}, 'srcBlendAlpha': {'val': 1.0, 'name': '<noninit>'}, 'destBlendAlpha': {'val': 0.0, 'name': '<noninit>'}, 'blendOp': {'val': 0.0, 'name': '<noninit>'}, 'blendOpAlpha': {'val': 0.0, 'name': '<noninit>'}, 'colMask': {'val': 0.0, 'name': '<noninit>'}} zwrite {'val': 1.0, 'name': '<noninit>'} ztest {'val': 4.0, 'name': '<noninit>'}
+      tags {'tags': []}
+SHADER Hidden/Shader Graph/FallbackError
+   pass tags {'m_Name': '', 'zTest': {'val': 4.0, 'name': '<noninit>'}, 'zWrite': {'val': 1.0, 'name': '<noninit>'}, 'culling': {'val': 2.0, 'name': '<noninit>'}}
+      blend rt0: {'srcBlend': {'val': 1.0, 'name': '<noninit>'}, 'destBlend': {'val': 0.0, 'name': '<noninit>'}, 'srcBlendAlpha': {'val': 1.0, 'name': '<noninit>'}, 'destBlendAlpha': {'val': 0.0, 'name': '<noninit>'}, 'blendOp': {'val': 0.0, 'name': '<noninit>'}, 'blendOpAlpha': {'val': 0.0, 'name': '<noninit>'}, 'colMask': {'val': 15.0, 'name': '<noninit>'}} zwrite {'val': 1.0, 'name': '<noninit>'} ztest {'val': 4.0, 'name': '<noninit>'}
+      tags {'tags': []}
+MATERIAL MA_PalesTile queue -1 keywords None tags []
+   tex _Pattern_Texture {'m_FileID': 0, 'm_PathID': 0}
+   tex _Tile_Texture {'m_FileID': 0, 'm_PathID': 479684364547911716}
+   tex unity_Lightmaps {'m_FileID': 0, 'm_PathID': 0}
+   tex unity_LightmapsInd {'m_FileID': 0, 'm_PathID': 0}
+   tex unity_ShadowMasks {'m_FileID': 0, 'm_PathID': 0}
+   float _Curves 8.0
+   float _FadeMultiplier 1.0
+   float _Flag_Waving_Toggle 0.0
+   float _Float 1.2000000476837158
+   float _Gradient_Is_Transparent 0.0
+   float _Gradient_Power 1.0
+   float _Gradient_Pulse_Toggle 0.0
+   float _Gradient_Strength 0.0
+   float _Gradient_Toggle 0.0
+   float _Highlight_Opacity 0.800000011920929
+   float _Highlight_Toggle 0.0
+   float _Opacity 0.6000000238418579
+   float _OutlineToggle 0.0
+   float _Outline_Depixelation -0.0020000000949949026
+   float _Outline_Gradient_Power 1.0
+   float _Outline_Gradient_Pulse_Toggle 0.0
+   float _Outline_Gradient_Toggle 0.0
+   float _Outline_Opacity 0.6000000238418579
+   float _Outline_Thickness 0.00800000037997961
+   float _Outline_Toggle 0.0
+   float _Pattern_Rotation 45.0
+   float _Pattern_Toggle 0.0
+   float _QueueControl 0.0
+   float _QueueOffset 0.0
+   float _SupplyLine_Scroll_Rotation 270.0
+   float _SupplyLine_Scroll_Toggle 1.0
+   float _SupplyLine_Toggle 1.0
+   float _Toggle_Pattern 0.0
+   float _UVRotation 0.0
+   float _UV_Rotation 0.0
+   float _WindIntensity 0.10000000149011612
+   float _WindSpeed 0.20000000298023224
+   float _WindStrength 0.009999999776482582
+   color _Base_Colour {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 0.0}
+   color _ColorInput {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 0.0}
+   color _Color_Input {'r': 0.12941177189350128, 'g': 0.18039216101169586, 'b': 0.3686274588108063, 'a': 0.0}
+   color _Gradient_Colour {'r': 1.0, 'g': 0.04245281219482422, 'b': 0.04245281219482422, 'a': 0.0}
+   color _Gradient_Pulse_Speed_Size {'r': 1.0, 'g': 0.4000000059604645, 'b': 0.0, 'a': 0.0}
+   color _Offset {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 0.0}
+   color _OutlineColour {'r': 0.9138849973678589, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   color _Outline_Colour {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 0.0}
+   color _Outline_Gradient_Pulse_Speed_Size {'r': 1.0, 'g': 0.5, 'b': 0.0, 'a': 0.0}
+   color _Pattern_Colour {'r': 0.9811320900917053, 'g': 0.3563544750213623, 'b': 0.3563544750213623, 'a': 0.7882353067398071}
+   color _Pattern_Tiling {'r': 6.0, 'g': 2.0, 'b': 0.0, 'a': 0.0}
+   color _SupplyLine_Colour {'r': 0.8705882430076599, 'g': 0.886274516582489, 'b': 0.6078431606292725, 'a': 1.0}
+   color _SupplyLine_Scroll_Colour {'r': 0.354978084564209, 'g': 0.7647058963775635, 'b': 0.32156866788864136, 'a': 0.0}
+   color _SupplyLine_Scroll_Speed {'r': 0.0, 'g': -0.25, 'b': 0.0, 'a': 0.0}
+   color _TIle_Colour {'r': 1.0, 'g': 0.8326735496520996, 'b': 0.0, 'a': 0.0}
+   color _Tile_Colour {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 0.4274509847164154}
+   color _Tile_Mask_Precision {'r': 0.009999999776482582, 'g': 0.009999999776482582, 'b': 0.0, 'a': 0.0}
+   color _Tiling {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+
+GAMEOBJECTS 6
+GO 'Tile02' active=True layer=0 pos=(-0.0993,0.0010,-0.0191) scale=(0.0965,0.0965,0.0965) rot=(0.707,0.000,0.000,0.707) comps=['Transform', 'MeshFilter', 'MeshRenderer']
+GO 'Pales Tiles' active=True layer=6 pos=(0.0000,0.0000,0.0000) scale=(1.0000,1.0000,1.0000) rot=(-0.000,-0.000,-0.000,1.000) comps=['Transform']
+GO 'Tile03' active=True layer=0 pos=(-0.0718,0.0010,-0.0624) scale=(0.0965,0.0965,0.0965) rot=(0.707,0.000,0.000,0.707) comps=['Transform', 'MeshFilter', 'MeshRenderer']
+GO 'Tile04' active=True layer=0 pos=(-0.0478,0.0010,-0.0622) scale=(0.0965,0.0965,0.0965) rot=(0.707,0.000,0.000,0.707) comps=['Transform', 'MeshFilter', 'MeshRenderer']
+GO 'Tile05' active=True layer=0 pos=(-0.0111,0.0010,-0.0467) scale=(0.0965,0.0965,0.0965) rot=(0.707,0.000,0.000,0.707) comps=['Transform', 'MeshFilter', 'MeshRenderer']
+GO 'Tile01' active=True layer=0 pos=(-0.0682,0.0010,-0.0234) scale=(0.0965,0.0965,0.0965) rot=(0.707,0.000,0.000,0.707) comps=['Transform', 'MeshFilter', 'MeshRenderer']
+
+MONOBEHAVIOURS
+count MB 0
+MeshFilter mesh {'m_FileID': 1, 'm_PathID': 10210}

@@ -26,9 +26,25 @@ namespace GreatZilleSolution
         public bool IsPort { get; set; } = false;
         public bool IsAirfield { get; set; } = false;
         public bool IsSupplyHub { get; set; } = false;
+
+        // Enemy reinforcement waves may spawn on this province (WarTile.SetIsReinforcementTile).
+        public bool IsReinforcementTile { get; set; } = false;
         
         // IDs of adjacent connected tiles
         public List<string> AdjacentIds { get; set; } = new List<string>();
+
+        // ---- In-game placement (see docs/ZILLE_MAP_INTEGRATION.md) ----
+        // The game identifies a tile by the suffix of its GameObject name: "Tile_" + TileNumber (string.Format("Tile_{0}")).
+        // Operation data must therefore use these numbers ("1", "2", ...), NOT free-form ids like "tile_zille".
+        public string TileNumber { get; set; } = "";
+
+        // Tile centre in FULL-RES map pixels of the 3x2 grid of 4096x4096 map textures (x 0..12288, y 0..8192, y down).
+        // Negative = not set yet (falls back to the built-in default placement).
+        public float MapPxX { get; set; } = -1f;
+        public float MapPxY { get; set; } = -1f;
+
+        // World size of the tile quad (root-local units). Vanilla Pales land tiles use 0.1543, sea tiles 0.2761.
+        public float WorldScale { get; set; } = 0.30f;
     }
 
     [Serializable]
@@ -38,5 +54,29 @@ namespace GreatZilleSolution
         public string Version { get; set; } = "1.0";
         public string BackgroundTexture { get; set; } = "T_Map_Zille_01.png";
         public List<ZilleTileData> Tiles { get; set; } = new List<ZilleTileData>();
+
+        // Author-placed units. Triggers are evaluated while the Zille war table is live.
+        public List<ZilleUnitOrder> Orders { get; set; } = new List<ZilleUnitOrder>();
+    }
+
+    /// <summary>
+    /// A unit the author wants on the table.
+    /// Trigger: Manual (button only), Start (as soon as the war map is up), Turn (war turn &gt;= Turn),
+    /// Allegiance (watch province flips to WatchAllegiance).
+    /// </summary>
+    [Serializable]
+    public class ZilleUnitOrder
+    {
+        public string Id { get; set; } = "";
+        public string Label { get; set; } = "Unit";
+        public string Side { get; set; } = "Player";
+        public string UnitAssetName { get; set; } = "";
+        public string TileId { get; set; } = "";
+        public string Trigger { get; set; } = "Manual";
+        public int Turn { get; set; } = 2;
+        public string WatchTileId { get; set; } = "";
+        public string WatchAllegiance { get; set; } = "Player";
+        public bool Armed { get; set; } = true;
+        public bool Fired { get; set; } = false;
     }
 }

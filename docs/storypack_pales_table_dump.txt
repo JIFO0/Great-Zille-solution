@@ -1,0 +1,438 @@
+== Candidate GameObjects: 8
+
+### Map_Rizia_PalesWar  (go pid=8932068762699139272, active=True, layer=0)
+   localPos {'x': 0.0, 'y': 0.0, 'z': 0.0} localRot {'x': 0.0, 'y': 0.0, 'z': 0.0, 'w': 1.0} localScale {'x': 1.0, 'y': 1.0, 'z': 1.0}
+
+### Map_Rizia_PalesWar/Pales Map_01   (go pid=1399923038353066184, active=True, layer=6)
+   localPos {'x': -0.16599999368190765, 'y': 0.34709998965263367, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[3406162284497422059]
+      Material 'MA_MapPales_01' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=-3935384279696585328 T_Map_Pales_01 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/Pales Map_02   (go pid=6904680602574358728, active=True, layer=6)
+   localPos {'x': 0.5, 'y': 0.34709998965263367, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[-966110052387609229]
+      Material 'MA_MapPales_02' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=-4055546178390527960 T_Map_Pales_02 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/Pales Map_03  (go pid=2332905506465024200, active=True, layer=6)
+   localPos {'x': 1.1660000085830688, 'y': 0.34709998965263367, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[8212142022780711041]
+      Material 'MA_MapPales_03' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=2481477441486441197 T_Map_Pales_03 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/Pales Map_04  (go pid=-732802847806027576, active=True, layer=6)
+   localPos {'x': -0.16599999368190765, 'y': -0.3190000057220459, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[-5932542530920466371]
+      Material 'MA_MapPales_04' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=-5972580817765938073 T_Map_Pales_04 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/Pales Map_05  (go pid=1107122414329825480, active=True, layer=6)
+   localPos {'x': 0.5, 'y': -0.31850001215934753, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[7499175553374755572]
+      Material 'MA_MapPales_05' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=-7577196903001800329 T_Map_Pales_05 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/Pales Map_06  (go pid=6553804127663130824, active=True, layer=6)
+   localPos {'x': 1.1660000085830688, 'y': -0.3190000057220459, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 0.6660000085830688, 'y': 0.6660000085830688, 'z': 0.6660000085830688}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[-7086816790671594433]
+      Material 'MA_MapPales_06' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=-4141925634031621951 T_Map_Pales_06 4096x4096 fmt=12 scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]
+
+### Map_Rizia_PalesWar/PalesReferenceMap  (go pid=-561945701144622904, active=False, layer=6)
+   localPos {'x': 0.47718435525894165, 'y': 0.006263736169785261, 'z': 0.0} localRot {'x': -0.0, 'y': -0.0, 'z': -0.0, 'w': 1.0} localScale {'x': 1.7908397912979126, 'y': 0.8954199552536011, 'z': 1.0836551189422607}
+   MeshFilter mesh=None (pid 10210)
+   MeshRenderer enabled=True materials=[5564409150379744088]
+      Material 'MA_PalesReferenceMap' shader={'m_FileID': 2, 'm_PathID': 4061114932540783343}
+        tex _Diffuse: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Normal: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex _Packed: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_Lightmaps: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_LightmapsInd: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        tex unity_ShadowMasks: pid=0   scale={'x': 1.0, 'y': 1.0} offset={'x': 0.0, 'y': 0.0}
+        float _AO_Multiplier = 1.0
+        float _AlphaClip = 1.0
+        float _Alpha_Clip_Threshold = 0.5
+        float _Blend = 0.0
+        float _Brightness_Multiplier = 1.149999976158142
+        float _BumpScale = 1.0
+        float _ClearCoatMask = 0.0
+        float _ClearCoatSmoothness = 0.0
+        float _Cull = 2.0
+        float _Cutoff = 1.0
+        float _DetailAlbedoMapScale = 1.0
+        float _DetailNormalMapScale = 1.0
+        float _DstBlend = 0.0
+        float _ENVIRONMENTREFLECTIONS_OFF = 0.0
+        float _EnvironmentReflections = 1.0
+        float _Fake_Specular_Brightness = 2.0
+        float _Fake_Specular_Distance_Multiplier = 0.0
+        float _Fake_Specular_Minimum_Distance = 5.0
+        float _Fake_Specular_Smoothness = 4.0
+        float _Fake_Specular_Toggle = 0.0
+        float _GlossMapScale = 0.0
+        float _Glossiness = 0.0
+        float _GlossyReflections = 0.0
+        float _IsHighlighted = 0.0
+        float _Metallic = 0.0
+        float _Mode = 1.0
+        float _OcclusionStrength = 1.0
+        float _Parallax = 0.019999999552965164
+        float _QueueControl = 0.0
+        float _QueueOffset = 0.0
+        float _ReceiveShadows = 1.0
+        float _Roughness = 1.0
+        float _SPECULARHIGHLIGHTS_OFF = 0.0
+        float _Smoothness = 0.0
+        float _SmoothnessTextureChannel = 0.0
+        float _SpecularHighlights = 0.0
+        float _SrcBlend = 1.0
+        float _Surface = 0.0
+        float _UVSec = 0.0
+        float _WorkflowMode = 1.0
+        float _ZWrite = 1.0
+        color _BaseColor = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _Base_Colour = {'r': 1.0, 'g': 0.9725490212440491, 'b': 0.8823529481887817, 'a': 1.0}
+        color _Color = {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}
+        color _EmissionColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _HighlightColour = {'r': 0.8679245114326477, 'g': 0.8679245114326477, 'b': 0.8679245114326477, 'a': 0.0}
+        color _SpecColor = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        color _Tiling = {'r': 1.0, 'g': 1.0, 'b': 0.0, 'a': 0.0}
+   BoxCollider
+   MonoBehaviour script=? fields=[]

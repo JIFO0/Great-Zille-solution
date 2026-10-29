@@ -69,6 +69,11 @@ namespace GreatZilleSolution
                     if (cfg != null && cfg.Tiles != null && cfg.Tiles.Count > 0)
                     {
                         CurrentConfig = cfg;
+                        if (CurrentConfig.Orders == null) CurrentConfig.Orders = new List<ZilleUnitOrder>();
+                        if (CurrentConfig.Tiles != null)
+                            foreach (var t in CurrentConfig.Tiles)
+                                if (t.AdjacentIds == null) t.AdjacentIds = new List<string>();
+                        EnsurePlacementDefaults(CurrentConfig);
                         MelonLogger.Msg($"[ZilleMap] Loaded layout with {CurrentConfig.Tiles.Count} tiles from config.");
                         return;
                     }
@@ -81,7 +86,148 @@ namespace GreatZilleSolution
 
             MelonLogger.Msg("[ZilleMap] Generating default 4-city tactical layout for Zille...");
             CurrentConfig = CreateDefaultConfig();
+            EnsurePlacementDefaults(CurrentConfig);
             SaveConfig();
+        }
+
+        // ---- Game tile identity & placement -------------------------------------------------------------
+        // Suzerain looks tiles up with string.Format("Tile_{0}", tileName), so every tile referenced by operation
+        // data (includedTileNames, WarTileData.tileName, WarTokenData.startingTileName) must be a real tile NUMBER.
+        // We re-purpose five vanilla Pales tile objects (Tile_1..Tile_5) and move/re-texture them onto the Zille map.
+        private static readonly Dictionary<string, (string num, float px, float py, float scale)> DefaultPlacement =
+            new Dictionary<string, (string, float, float, float)>
+            {
+                // map pixel coordinates are FULL-RES (12288 x 8192). These are PLACEHOLDERS to be refined with tools/placement.
+                { "tile_zille",    ("1", 7680f, 5640f, 0.26f) },
+                { "tile_nanta",    ("2", 7320f, 2820f, 0.26f) },
+                { "tile_munat",    ("3", 9480f, 1320f, 0.26f) },
+                { "tile_wiktrany", ("4", 9240f, 3960f, 0.26f) },
+                { "tile_brenas",   ("5", 8400f, 7200f, 0.26f) },
+            };
+
+        public static void EnsurePlacementDefaults(ZilleMapConfig cfg)
+        {
+            if (cfg == null || cfg.Tiles == null) return;
+            int fallbackNum = 1;
+            var used = new HashSet<string>();
+            foreach (var t in cfg.Tiles) if (!string.IsNullOrEmpty(t.TileNumber)) used.Add(t.TileNumber);
+            foreach (var t in cfg.Tiles)
+            {
+                DefaultPlacement.TryGetValue(t.Id ?? "", out var d);
+                if (string.IsNullOrEmpty(t.TileNumber))
+                {
+                    string n = d.num;
+                    while (string.IsNullOrEmpty(n) || used.Contains(n)) n = (fallbackNum++).ToString();
+                    t.TileNumber = n; used.Add(n);
+                }
+                if (t.MapPxX < 0f || t.MapPxY < 0f)
+                {
+                    t.MapPxX = d.num != null ? d.px : 6144f;
+                    t.MapPxY = d.num != null ? d.py : 4096f;
+                    t.WorldScale = d.num != null ? d.scale : 0.26f;
+                }
+            }
+        }
+
+        /// <summary>Next vanilla WarTile suffix that this layout does not already claim ("1".."100", then "S1".."S33").</summary>
+        public static string NextFreeTileNumber()
+        {
+            var used = new HashSet<string>();
+            if (CurrentConfig?.Tiles != null)
+                foreach (var t in CurrentConfig.Tiles)
+                    if (!string.IsNullOrEmpty(t.TileNumber)) used.Add(t.TileNumber);
+            for (int i = 1; i <= 100; i++)
+            {
+                string n = i.ToString();
+                if (!used.Contains(n)) return n;
+            }
+            for (int i = 1; i <= 33; i++)
+            {
+                string n = "S" + i;
+                if (!used.Contains(n)) return n;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Claims one unused vanilla province tile and drops it beside <paramref name="anchorId"/> (or the last tile).
+        /// offsetIndex spaces a batch so they do not stack. Returns null when every vanilla tile number is taken.
+        /// </summary>
+        public static ZilleTileData AddProvinceNear(string anchorId, int offsetIndex)
+        {
+            if (CurrentConfig == null) CurrentConfig = CreateDefaultConfig();
+            if (CurrentConfig.Tiles == null) CurrentConfig.Tiles = new List<ZilleTileData>();
+            if (CurrentConfig.Orders == null) CurrentConfig.Orders = new List<ZilleUnitOrder>();
+            EnsurePlacementDefaults(CurrentConfig);
+
+            string num = NextFreeTileNumber();
+            if (num == null) return null;
+
+            ZilleTileData anchor = null;
+            if (!string.IsNullOrEmpty(anchorId))
+                anchor = CurrentConfig.Tiles.Find(t => t.Id == anchorId);
+            if (anchor == null && CurrentConfig.Tiles.Count > 0)
+                anchor = CurrentConfig.Tiles[CurrentConfig.Tiles.Count - 1];
+
+            float ax = anchor != null && anchor.MapPxX >= 0f ? anchor.MapPxX : 6144f;
+            float ay = anchor != null && anchor.MapPxY >= 0f ? anchor.MapPxY : 4096f;
+            int col = offsetIndex % 4;
+            int row = offsetIndex / 4;
+            float px = Mathf.Clamp(ax + 480f * (col + 1), 200f, 12000f);
+            float py = Mathf.Clamp(ay + 480f * row, 200f, 8000f);
+
+            string id = "tile_" + num;
+            if (CurrentConfig.Tiles.Exists(t => t.Id == id)) id = "tile_extra_" + num;
+
+            var tile = new ZilleTileData
+            {
+                Id = id,
+                Name = "Province " + num,
+                TextureFile = $"Frame {41 + (CurrentConfig.Tiles.Count % 5)}.png",
+                NormalizedX = Mathf.Clamp01(px / 12288f),
+                NormalizedY = Mathf.Clamp01(py / 8192f),
+                Width = 80f,
+                Height = 80f,
+                Allegiance = "Contested",
+                TileNumber = num,
+                MapPxX = px,
+                MapPxY = py,
+                WorldScale = num.StartsWith("S") ? 0.28f : (anchor != null && anchor.WorldScale > 0.03f ? anchor.WorldScale : 0.22f),
+                AdjacentIds = new List<string>()
+            };
+            if (anchor != null)
+            {
+                tile.AdjacentIds.Add(anchor.Id);
+                if (anchor.AdjacentIds == null) anchor.AdjacentIds = new List<string>();
+                if (!anchor.AdjacentIds.Contains(tile.Id)) anchor.AdjacentIds.Add(tile.Id);
+            }
+            CurrentConfig.Tiles.Add(tile);
+            MelonLogger.Msg($"[ZilleMap] Added province {tile.Id} as Tile_{num} at ({px:F0},{py:F0}) scale {tile.WorldScale:F3}.");
+            return tile;
+        }
+
+        public static bool RemoveProvinceAt(int index)
+        {
+            var tiles = CurrentConfig?.Tiles;
+            if (tiles == null || index < 0 || index >= tiles.Count || tiles.Count <= 1) return false;
+            string removeId = tiles[index].Id;
+            string num = tiles[index].TileNumber;
+            tiles.RemoveAt(index);
+            foreach (var t in tiles)
+                if (t.AdjacentIds != null) t.AdjacentIds.Remove(removeId);
+            if (!string.IsNullOrEmpty(num)) ZilleWarTable.DeactivateLiveTile(num);
+            return true;
+        }
+
+        /// <summary>Maps a Zille layout id ("tile_zille") to the in-game tile name/number ("1").</summary>
+        public static string GameTileName(string zilleId)
+        {
+            if (CurrentConfig?.Tiles != null)
+            {
+                foreach (var t in CurrentConfig.Tiles)
+                    if (t.Id == zilleId && !string.IsNullOrEmpty(t.TileNumber)) return t.TileNumber;
+            }
+            return DefaultPlacement.TryGetValue(zilleId ?? "", out var d) ? d.num : zilleId;
         }
 
         public static bool SaveConfig()
@@ -127,22 +273,22 @@ namespace GreatZilleSolution
                 FullMapTexture = MapBackgroundTexture;
             }
 
-            // Fallback if composite doesn't exist yet: load 01 preview or 01 full
+            // Fallback if composite doesn't exist yet: load 01 full or 01 preview
             if (MapBackgroundTexture == null)
             {
-                string bgPreview = Path.Combine(_primaryAssetsDir, "map", "T_Map_Zille_01_preview.png");
                 string bgFull = Path.Combine(_primaryAssetsDir, "map", "T_Map_Zille_01.png");
-                if (File.Exists(bgPreview)) MapBackgroundTexture = LoadTextureFromFile(bgPreview);
-                else if (File.Exists(bgFull)) MapBackgroundTexture = LoadTextureFromFile(bgFull);
+                string bgPreview = Path.Combine(_primaryAssetsDir, "map", "T_Map_Zille_01_preview.png");
+                if (File.Exists(bgFull)) MapBackgroundTexture = LoadTextureFromFile(bgFull);
+                else if (File.Exists(bgPreview)) MapBackgroundTexture = LoadTextureFromFile(bgPreview);
                 FullMapTexture = MapBackgroundTexture;
             }
 
             // 2. Also load all 6 individual map grid tiles (01..06) for modular 3D map tile meshes
             for (int t = 1; t <= 6; t++)
             {
-                string tPrev = Path.Combine(_primaryAssetsDir, "map", $"T_Map_Zille_0{t}_preview.png");
                 string tFull = Path.Combine(_primaryAssetsDir, "map", $"T_Map_Zille_0{t}.png");
-                string usePath = File.Exists(tPrev) ? tPrev : tFull;
+                string tPrev = Path.Combine(_primaryAssetsDir, "map", $"T_Map_Zille_0{t}_preview.png");
+                string usePath = File.Exists(tFull) ? tFull : tPrev;
                 if (File.Exists(usePath))
                 {
                     var tex = LoadTextureFromFile(usePath);
@@ -204,11 +350,17 @@ namespace GreatZilleSolution
 
                 // Standard uncompressed RGBA texture container for ImageConversion
                 Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-                bool success = ImageConversion.LoadImage(tex, fileData);
+                // Big map pages are never read back on the CPU -> mark non-readable (halves RAM). Region masks stay readable.
+                bool bigMap = fileData.Length > 600000;
+                bool success = ImageConversion.LoadImage(tex, fileData, bigMap);
                 if (success && tex.width > 2)
                 {
-                    tex.filterMode = FilterMode.Bilinear;
+                    tex.filterMode = FilterMode.Bilinear;          // same as the vanilla T_Map_Pales_* import settings
                     tex.wrapMode = TextureWrapMode.Clamp;
+                    tex.anisoLevel = 1;
+                    // Without this Unity destroys script-created textures on the next scene load (UnloadUnusedAssets),
+                    // which is why the old code re-read all PNGs at every scene change.
+                    tex.hideFlags = HideFlags.HideAndDontSave;
                     tex.name = Path.GetFileName(filePath);
                     MelonLogger.Msg($"[ZilleMap] Successfully loaded: {tex.name} ({tex.width}x{tex.height}, {fileData.Length} bytes)");
                     return tex;
