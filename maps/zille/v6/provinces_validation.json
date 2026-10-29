@@ -1,0 +1,30 @@
+{
+ "overlaps": [],
+ "land_on_water": [],
+ "sea_on_land": [],
+ "zille_uncovered_pieces": [],
+ "zille_uncovered_total": 11328,
+ "brenas_holes": [],
+ "wehlen_holes": [],
+ "sea_holes": [
+  21770
+ ],
+ "tile_violations": [],
+ "cities": [
+  "Munat",
+  "Nanta",
+  "Isor",
+  "Lido Isora",
+  "Mave Nortus",
+  "Sabbiano",
+  "Wiktrany",
+  "Vela Nova",
+  "Zille",
+  "Rivamare",
+  "Dapalle",
+  "Praia Velha",
+  "Marbelas",
+  "Kratsna"
+ ],
+ "max_alpha": 491
+}

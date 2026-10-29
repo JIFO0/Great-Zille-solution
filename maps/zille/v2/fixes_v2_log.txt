@@ -1,0 +1,34 @@
+A river dup removed 3 overlap 0.65 len 814 at [ 785. 3307.]
+A river dup removed 10 overlap 0.92 len 134 at [3657. 4477.]
+A2 roads1 duplicate of double/main removed 169 px at [5435.  593.]
+B junk connector removed (roads1) len 215 at [10795.   338.]
+B junk connector removed (roads1) len 217 at [2940. 1616.]
+D gap healed roads2 gap 167 px at [3379. 4262.]
+D gap healed roads2 gap 189 px at [10790.   386.]
+D gap healed roads2 gap 260 px at [2939. 1618.]
+D gap healed mains gap 83 px at [7692. 6831.]
+D gap healed rivers gap 103 px at [ 683. 3338.]
+D gap healed borders gap 211 px at [8567. 6360.]
+C hub [5555.  482.] roads2 9 attached
+C hub [9088. 2898.] mains 0 attached
+C hub [9088. 2898.] rails 0 attached
+C hub [10515.  4039.] roads1 0 attached
+C hub [10515.  4039.] roads2 0 attached
+C hub [10515.  4039.] roads2 1 attached
+C hub [3665. 4295.] roads2 3 attached
+C hub [3665. 4295.] roads2 7 attached
+C hub [3665. 4295.] rails 1 attached
+C hub [7835. 5995.] roads2 4 reached from 332 px
+C hub [7835. 5995.] mains 1 attached
+C hub [7835. 5995.] mains 2 attached
+C hub [7835. 5995.] mains 3 attached
+C hub [7835. 5995.] rails 0 attached
+C hub [7835. 5995.] rails 2 attached
+E river joined to lake, gap 152 px at [10845.  6423.]
+F extended to frame roads1 3 114 px at [10546.  7806.]
+F extended to frame rivers 9 114 px at [11922.  5950.]
+F extended to frame rivers 9 122 px at [10515.  7798.]
+F extended to frame rivers 11 163 px at [ 416. 3251.]
+G top-right railway reconstructed y=290 x 11330-12036
+H rail offset beside road at hub [3665. 4295.] points 52
+H rail offset beside road at hub [7835. 5995.] points 54
