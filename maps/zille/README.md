@@ -60,3 +60,29 @@ A new double road, `road_to_cape`, runs to the northern cape beyond Nanta for a 
 `v3/topography_only.svg` and `v3/topography_preview.png` isolate the relief. `v3/style_compare.png` compares the styled result.
 
 Files: `v3/zille_vector.svg`, `v3/zille_preview.png`, `v3/topography_preview.png`, `v3/topography_only.svg`, `v3/style_compare.png`.
+
+### v4
+
+v3 plus more mountains and hills, and cities drawn in the Pales style.
+
+Urban areas, markers, and labels are editable SVG text in Times New Roman. Groups:
+
+- `urban_areas`
+- `city_markers`
+- `labels` / `labels_major`
+- `labels_key`
+- `labels_towns`
+- `towns_invented`
+
+Key strategic cities are drawn like Ziqes and Arces in Pales: a major label and a small urban area.
+
+- **WIKTRANY** — road junction north of Zille
+- **MUNAT** — northern cape
+
+A new double road, `road_mave_nortus_wiktrany`, runs through a mountain valley.
+
+27 invented villages in Wehlen, the Zille peninsula, and Brenas are kept in `towns_invented` so they can be renamed.
+
+`v4/crops_cities.png` crops the city treatment. `v4/style_compare.png` compares the styled result.
+
+Files: `v4/zille_vector.svg`, `v4/zille_preview.png`, `v4/crops_cities.png`, `v4/style_compare.png`.
