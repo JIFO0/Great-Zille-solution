@@ -86,3 +86,20 @@ A new double road, `road_mave_nortus_wiktrany`, runs through a mountain valley.
 `v4/crops_cities.png` crops the city treatment. `v4/style_compare.png` compares the styled result.
 
 Files: `v4/zille_vector.svg`, `v4/zille_preview.png`, `v4/crops_cities.png`, `v4/style_compare.png`.
+
+### v5
+
+v4 plus larger cities, new roads, and more settlements.
+
+- The Zille urban area is enlarged to the dotted-outline extent from the source map.
+- Kratsna, capital of Wehlen, is much larger and has five road connections, including roads that leave the map to the north and west.
+- Nanta, Mave Nortus, and Munat are slightly larger.
+- New Wehlen roads run south, including the single road `road_kratsna_yol`, plus `road_lerlow_south` and `road_strebna_south`.
+- 16 diverse resort towns sit on the west coast of the Zille peninsula and Brenas.
+- Port Rotsla and Walsholm, on Rotsla island, are linked by `road_rotsla`.
+- More invented villages were added in Wehlen.
+- Label placement was adjusted.
+
+`v5/crops_cities.png` crops the city treatment.
+
+Files: `v5/zille_vector.svg`, `v5/zille_preview.png`, `v5/crops_cities.png`.
