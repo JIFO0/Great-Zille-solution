@@ -103,3 +103,22 @@ v4 plus larger cities, new roads, and more settlements.
 `v5/crops_cities.png` crops the city treatment.
 
 Files: `v5/zille_vector.svg`, `v5/zille_preview.png`, `v5/crops_cities.png`.
+
+### v6
+
+v5 with the Zille urban area shrunk to 0.76×, plus game province tiles.
+
+212 provinces in total:
+
+- 93 Zille-region land provinces (`ZilleTile_1`–`93`)
+- 22 northern Brenas (`ZilleTile_94`–`115`)
+- 44 Wehlen (`ZilleTile_116`–`159`)
+- 53 sea provinces (`ZilleTile_S1`–`S53`) in the channel between Rizia and Wehlen
+
+14 of them are city provinces.
+
+Tile style: fill `#FF0000`, stroke `#00F800` at width 20, layer blur 12 (`feGaussianBlur` with `stdDeviation` 6). Each tile is at most 512×512, including effects. `provinces/` holds each tile as `ZilleTile_N` or `ZilleTile_SN` in both `.svg` and `.png`.
+
+`provinces_manifest.json` and `provinces_manifest.csv` give `tile_x` / `tile_y` map position, region, type (`land` or `sea`), `is_city`, and neighbours. `provinces_overlay.svg`, `provinces_preview.png`, and `provinces_zille_crop.png` show the set. `provinces_validation.json` records the check. `scripts/` holds the build and export scripts that produced this set.
+
+Files: `v6/zille_vector.svg`, `v6/zille_preview.png`, and the province files above.
