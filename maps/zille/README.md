@@ -194,3 +194,28 @@ Sea tiles cover the whole channel between Isor and Kratsna, including Port Rotsl
 All province names are unique.
 
 Files: `v9/zille_vector.svg`, `v9/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
+
+### v10
+
+Final candidate. Edits on top of the v9 partition, on the unchanged base map. 135 provinces.
+
+Land:
+
+- 39 Zille
+- 28 northern Brenas
+- 29 Wehlen
+
+Sea: 39 provinces (`ZilleTile_S1`–`S39`).
+
+The north-east sea is re-tiled. The route from Tarnes and Mave Nortus north round the bay to Munat is 2–3 provinces wide, and the Nanta bay is tiled. 16 provinces replace the 9 earlier ones there. The Isor–Kratsna channel is extended south with 2 provinces (Yol Waters and Yol Roads), so the Yol bay is reachable by water.
+
+City provinces are reshaped from the urban outline, the main road directions, and the coast, with lobes instead of round blobs. Mave Nortus, Nanta, Isor, and Wiktrany are multi-lobed. Munat is a hook along its cape. Isor and Munat are now normal-size provinces. The land cells around Wiktrany and Mave Nortus were re-grown to fit the new forms.
+
+The size rule is unchanged: every province is under 980 map px including stroke and blur (max 961) and over 512. The exceptions are Dapalle (small city) and Rotsla (small island).
+
+Deliverable layout:
+
+- `map/` — the main map without provinces. `T_Map_Zille_01`–`06` are a 3×2 grid of 4096×4096 tiles, numbered row by row from the top-left. `T_Map_Zille_Full_Composite` is 12288×8192. Each comes as a native PNG and as an SVG cropped by `viewBox`.
+- `regions/` — `ZilleTile_N` / `ZilleTile_SN` at 512×512, PNG and SVG, scaled 512/980; fill `#FF0000`, stroke `#00F800` width 20, blur `stdDeviation` 6. The manifest (JSON and CSV), overlay, and validation sit alongside.
+
+Files in this step: `v10/map/T_Map_Zille_01`–`06` and `v10/map/T_Map_Zille_Full_Composite`, each as `.png` and `.svg`.
