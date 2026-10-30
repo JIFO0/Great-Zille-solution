@@ -387,8 +387,8 @@ namespace GreatZilleSolution
                 if (wt.IsReinforcementTile() != td.IsReinforcementTile)
                     wt.SetIsReinforcementTile(td.IsReinforcementTile);
 
-                // adjacency: only Zille neighbours (vanilla neighbours are Pales tiles that are disabled in this operation)
-                if (td.AdjacentIds != null)
+                // Adjacency stays untouched until a reviewed neighbour list is supplied.
+                if (td.AdjacentIds != null && td.AdjacentIds.Count > 0)
                 {
                     var cur = wt.adjacentWarTiles;
                     bool needs = !tb.AdjApplied || cur == null || cur.Count != CountResolved(td, resolved);
@@ -403,7 +403,32 @@ namespace GreatZilleSolution
                 }
                 ok++;
             }
+
+            if (ZilleMapLayoutManager.UsingProvinceManifest)
+                HideUnusedVanillaTiles(cfg);
             return ok;
+        }
+
+        /// <summary>
+        /// The Pales table has Tile_1..100 and Tile_S1..S33. Provinces that are not in the Zille manifest
+        /// are switched off so the old Pales shapes do not stay on the Zille map. Restore() turns them back on.
+        /// </summary>
+        private static void HideUnusedVanillaTiles(ZilleMapConfig cfg)
+        {
+            var used = new HashSet<string>();
+            if (cfg?.Tiles != null)
+                foreach (var td in cfg.Tiles)
+                    if (!string.IsNullOrEmpty(td.TileNumber)) used.Add(td.TileNumber);
+            for (int i = 1; i <= 100; i++)
+            {
+                string n = i.ToString();
+                if (!used.Contains(n)) DeactivateLiveTile(n);
+            }
+            for (int i = 1; i <= 33; i++)
+            {
+                string n = "S" + i;
+                if (!used.Contains(n)) DeactivateLiveTile(n);
+            }
         }
 
         private static int CountResolved(ZilleTileData td, Dictionary<string, WarTile> resolved)

@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using MelonLoader;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ namespace GreatZilleSolution
         public static Texture2D MapBackgroundTexture { get; private set; }
         public static Texture2D FullMapTexture { get; private set; }
 
+        /// <summary>True when the live layout came from maps/zille/v11/regions/provinces_manifest.json. Neighbours are not copied.</summary>
+        public static bool UsingProvinceManifest { get; private set; }
+
         public static void Initialize()
         {
             DetermineAssetDirectories();
@@ -34,12 +38,49 @@ namespace GreatZilleSolution
             LoadAllTextures();
         }
 
+        private static bool IsV11Pack(string dir)
+        {
+            return !string.IsNullOrEmpty(dir)
+                && File.Exists(Path.Combine(dir, "map", "T_Map_Zille_01.png"))
+                && File.Exists(Path.Combine(dir, "regions", "provinces_manifest.json"));
+        }
+
+        private static string FindV11Pack()
+        {
+            string mod = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Mods", "GreatZilleAssets"));
+            string[] named =
+            {
+                mod,
+                Path.Combine(mod, "v11"),
+                Path.Combine(mod, "maps", "zille", "v11"),
+                @"c:\Projects\Great Zille solution\maps\zille\v11",
+            };
+            foreach (var dir in named)
+                if (IsV11Pack(dir)) return Path.GetFullPath(dir);
+
+            string cursor = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
+            for (int i = 0; i < 8 && !string.IsNullOrEmpty(cursor); i++)
+            {
+                string pack = Path.Combine(cursor, "maps", "zille", "v11");
+                if (IsV11Pack(pack)) return Path.GetFullPath(pack);
+                var parent = Directory.GetParent(cursor);
+                if (parent == null) break;
+                cursor = parent.FullName;
+            }
+            return null;
+        }
+
         private static void DetermineAssetDirectories()
         {
             string suzerainModAssets = Path.Combine(Application.dataPath, "..", "Mods", "GreatZilleAssets");
             string projectAssets = @"c:\Projects\Great Zille solution\assets";
+            string v11 = FindV11Pack();
 
-            if (Directory.Exists(suzerainModAssets))
+            if (!string.IsNullOrEmpty(v11))
+            {
+                _primaryAssetsDir = v11;
+            }
+            else if (Directory.Exists(suzerainModAssets))
             {
                 _primaryAssetsDir = Path.GetFullPath(suzerainModAssets);
             }
@@ -60,6 +101,10 @@ namespace GreatZilleSolution
 
         public static void LoadConfig()
         {
+            UsingProvinceManifest = false;
+            if (TryLoadProvinceManifest())
+                return;
+
             try
             {
                 if (File.Exists(_configFilePath))
@@ -90,10 +135,79 @@ namespace GreatZilleSolution
             SaveConfig();
         }
 
+        private static bool TryLoadProvinceManifest()
+        {
+            string path = Path.Combine(_primaryAssetsDir, "regions", "provinces_manifest.json");
+            if (!File.Exists(path)) return false;
+            try
+            {
+                var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var file = JsonSerializer.Deserialize<ProvinceManifestFile>(File.ReadAllText(path), opts);
+                if (file?.Provinces == null || file.Provinces.Count == 0) return false;
+
+                float footprint = file.TileSizeMap > 1f ? file.TileSizeMap : 980f;
+                float world = footprint * ZilleWarTable.PxToWorld;
+                var cfg = new ZilleMapConfig
+                {
+                    MapTitle = "Great Zille Theatre of War",
+                    Version = "v11",
+                    BackgroundTexture = "T_Map_Zille_Full_Composite.png",
+                    Tiles = new List<ZilleTileData>(),
+                    Orders = new List<ZilleUnitOrder>()
+                };
+
+                foreach (var p in file.Provinces)
+                {
+                    if (p == null || string.IsNullOrEmpty(p.Id)) continue;
+                    string number = p.Id.StartsWith("ZilleTile_", StringComparison.Ordinal)
+                        ? p.Id.Substring("ZilleTile_".Length)
+                        : p.Id;
+                    float size = p.TileSizeMap > 1f ? p.TileSizeMap : footprint;
+                    float cx = p.TileCenterX;
+                    float cy = p.TileCenterY;
+                    if (cx == 0f && cy == 0f)
+                    {
+                        cx = p.TileX + size * 0.5f;
+                        cy = p.TileY + size * 0.5f;
+                    }
+                    string tex = string.IsNullOrEmpty(p.PngFile) ? p.Id + ".png" : Path.GetFileName(p.PngFile);
+                    string allegiance = p.Region == "Brenas" ? "Rizia" : (p.Type == "sea" ? "Contested" : "Wehlen");
+                    cfg.Tiles.Add(new ZilleTileData
+                    {
+                        Id = p.Id,
+                        Name = string.IsNullOrEmpty(p.Name) ? p.Id : p.Name,
+                        TextureFile = tex,
+                        NormalizedX = Mathf.Clamp01(cx / 12288f),
+                        NormalizedY = Mathf.Clamp01(cy / 8192f),
+                        Width = 48f,
+                        Height = 48f,
+                        Allegiance = allegiance,
+                        TileNumber = number,
+                        MapPxX = cx,
+                        MapPxY = cy,
+                        WorldScale = size * ZilleWarTable.PxToWorld,
+                        AdjacentIds = null
+                    });
+                }
+
+                if (cfg.Tiles.Count == 0) return false;
+                CurrentConfig = cfg;
+                UsingProvinceManifest = true;
+                MelonLogger.Msg($"[ZilleMap] Loaded {cfg.Tiles.Count} provinces from {path}. Footprint {footprint:F0}px, world scale {world:F4}. Neighbours were not applied.");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[ZilleMap] Failed to read province manifest {path}: {ex.Message}");
+                return false;
+            }
+        }
+
         // ---- Game tile identity & placement -------------------------------------------------------------
         // Suzerain looks tiles up with string.Format("Tile_{0}", tileName), so every tile referenced by operation
         // data (includedTileNames, WarTileData.tileName, WarTokenData.startingTileName) must be a real tile NUMBER.
-        // We re-purpose five vanilla Pales tile objects (Tile_1..Tile_5) and move/re-texture them onto the Zille map.
+        // The v11 manifest reuses the vanilla WarTile objects (Tile_1..100 and Tile_S1..S33) by number.
+        // The five entries below are only the fallback when that manifest is not installed.
         private static readonly Dictionary<string, (string num, float px, float py, float scale)> DefaultPlacement =
             new Dictionary<string, (string, float, float, float)>
             {
@@ -226,6 +340,21 @@ namespace GreatZilleSolution
             {
                 foreach (var t in CurrentConfig.Tiles)
                     if (t.Id == zilleId && !string.IsNullOrEmpty(t.TileNumber)) return t.TileNumber;
+
+                string city = zilleId switch
+                {
+                    "tile_zille" => "Zille City",
+                    "tile_munat" => "Munat",
+                    "tile_nanta" => "Nanta",
+                    "tile_wiktrany" => "Wiktrany",
+                    "tile_brenas" => "Dapalle",
+                    _ => null
+                };
+                if (city != null)
+                {
+                    foreach (var t in CurrentConfig.Tiles)
+                        if (t.Name == city && !string.IsNullOrEmpty(t.TileNumber)) return t.TileNumber;
+                }
             }
             return DefaultPlacement.TryGetValue(zilleId ?? "", out var d) ? d.num : zilleId;
         }
@@ -304,25 +433,34 @@ namespace GreatZilleSolution
                 MapBackgroundTexture = CreateFallbackMapTexture();
             }
 
-            // 3. Load Region tiles (Frame 41..45)
+            // 3. Load province masks. v11 uses ZilleTile_N.png / ZilleTile_SN.png; older packs used Frame 41..45.
             string regDir = Path.Combine(_primaryAssetsDir, "regions");
             if (Directory.Exists(regDir))
             {
-                for (int i = 41; i <= 45; i++)
+                string[] zilleTiles = Directory.GetFiles(regDir, "ZilleTile_*.png");
+                if (zilleTiles != null && zilleTiles.Length > 0)
                 {
-                    string fname = $"Frame {i}.png";
-                    string fpath = Path.Combine(regDir, fname);
-                    if (File.Exists(fpath))
+                    for (int i = 0; i < zilleTiles.Length; i++)
                     {
-                        var tex = LoadTextureFromFile(fpath);
-                        if (tex != null)
-                        {
-                            LoadedTextures[fname] = tex;
-                        }
+                        var tex = LoadTextureFromFile(zilleTiles[i]);
+                        if (tex != null) LoadedTextures[Path.GetFileName(zilleTiles[i])] = tex;
                     }
-                    else
+                }
+                else
+                {
+                    for (int i = 41; i <= 45; i++)
                     {
-                        MelonLogger.Warning($"[ZilleMap] Tile file missing: {fpath}");
+                        string fname = $"Frame {i}.png";
+                        string fpath = Path.Combine(regDir, fname);
+                        if (File.Exists(fpath))
+                        {
+                            var tex = LoadTextureFromFile(fpath);
+                            if (tex != null) LoadedTextures[fname] = tex;
+                        }
+                        else
+                        {
+                            MelonLogger.Warning($"[ZilleMap] Tile file missing: {fpath}");
+                        }
                     }
                 }
             }
@@ -476,6 +614,26 @@ namespace GreatZilleSolution
             });
 
             return cfg;
+        }
+
+        private sealed class ProvinceManifestFile
+        {
+            [JsonPropertyName("tile_size_map")] public float TileSizeMap { get; set; }
+            [JsonPropertyName("provinces")] public List<ProvinceManifestEntry> Provinces { get; set; }
+        }
+
+        private sealed class ProvinceManifestEntry
+        {
+            [JsonPropertyName("id")] public string Id { get; set; }
+            [JsonPropertyName("name")] public string Name { get; set; }
+            [JsonPropertyName("type")] public string Type { get; set; }
+            [JsonPropertyName("region")] public string Region { get; set; }
+            [JsonPropertyName("tile_x")] public float TileX { get; set; }
+            [JsonPropertyName("tile_y")] public float TileY { get; set; }
+            [JsonPropertyName("tile_center_x")] public float TileCenterX { get; set; }
+            [JsonPropertyName("tile_center_y")] public float TileCenterY { get; set; }
+            [JsonPropertyName("tile_size_map")] public float TileSizeMap { get; set; }
+            [JsonPropertyName("png_file")] public string PngFile { get; set; }
         }
     }
 }
