@@ -201,9 +201,9 @@ Final candidate. Edits on top of the v9 partition, on the unchanged base map. 13
 
 Land:
 
-- 39 Zille
-- 28 northern Brenas
-- 29 Wehlen
+- 39 Zille (`ZilleTile_1`–`39`)
+- 28 northern Brenas (`ZilleTile_40`–`67`)
+- 29 Wehlen (`ZilleTile_68`–`96`)
 
 Sea: 39 provinces (`ZilleTile_S1`–`S39`).
 
@@ -218,4 +218,4 @@ Deliverable layout:
 - `map/` — the main map without provinces. `T_Map_Zille_01`–`06` are a 3×2 grid of 4096×4096 tiles, numbered row by row from the top-left. `T_Map_Zille_Full_Composite` is 12288×8192. Each comes as a native PNG and as an SVG cropped by `viewBox`.
 - `regions/` — `ZilleTile_N` / `ZilleTile_SN` at 512×512, PNG and SVG, scaled 512/980; fill `#FF0000`, stroke `#00F800` width 20, blur `stdDeviation` 6. The manifest (JSON and CSV), overlay, and validation sit alongside.
 
-Files in this step: `v10/map/T_Map_Zille_01`–`06` and `v10/map/T_Map_Zille_Full_Composite`, each as `.png` and `.svg`.
+Files: `v10/map/` (`T_Map_Zille_01`–`06` and `T_Map_Zille_Full_Composite`, each as `.png` and `.svg`), `v10/regions/` (135 tiles, manifest, overlay, validation), `v10/previews/`, and `v10/scripts/`.
