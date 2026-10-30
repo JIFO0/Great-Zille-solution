@@ -142,3 +142,29 @@ Sea provinces form an irregular angular corridor from the Rizia north coast to K
 Tiles stay 512×512, fill `#FF0000`, stroke `#00F800` at width 20, blur `stdDeviation` 6.
 
 Files: `v7/zille_vector.svg`, `v7/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
+
+### v8
+
+Province revision on the unchanged v6/v7 map, exported at true tile scale. 190 provinces (limit 224).
+
+Land:
+
+- 79 Zille (`ZilleTile_1`–`79`)
+- 42 northern Brenas (`ZilleTile_80`–`121`)
+- 42 Wehlen (`ZilleTile_122`–`163`)
+
+Sea: 27 provinces (`ZilleTile_S1`–`S27`).
+
+One tile covers 980 map px and is stored as 512×512 px, so each province is exported scaled by 512/980 (about 0.5224). Every province, blur included, fits within 980 map px (the largest is 863). The manifest records the scale, the map bbox, and the tile placement (`tile_x` / `tile_y` is the top-left of the 980 px footprint).
+
+Tile style is unchanged at 512 px: fill `#FF0000`, stroke `#00F800` at width 20, layer blur 12 (`stdDeviation` 6). `provinces_overlay.svg` draws the tiles at map scale (stroke about 38.28, `stdDeviation` about 11.48).
+
+City provinces are the same 8 cities. Zille covers the whole urban area, sprawl included. Kratsna has a proper margin again.
+
+Tiny provinces are merged: Manes Riuz is one province, and the two Kreleck islets form one Kreleck Islands province. Thin coastal pockets (Bellacosta) are attached to a neighbour. A Brenas cell is still named Mave Nortus South (`ZilleTile_84`).
+
+Zones: the Brenas border zone is at least 2 provinces deep, Marbelas included. The Zille zone is at least 2 deep. Wehlen is at least 2 deep toward Kratsna.
+
+Sea is an angular, coast-hugging lane from Mave Nortus north around the Munat cape and down to Isor, plus 1–2 tile straits to Kratsna (the northern Brenas link) and Port Rotsla. There are no sea provinces elsewhere.
+
+Files: `v8/zille_vector.svg`, `v8/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
