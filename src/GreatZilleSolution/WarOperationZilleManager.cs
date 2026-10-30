@@ -494,8 +494,7 @@ namespace GreatZilleSolution
             {
                 TokenManager tokenMgr = Managers.Instance?.TokenManager ?? UnityEngine.Object.FindObjectOfType<TokenManager>();
 
-                // Coordinates placed nicely next to Zille city token on land (Zille city is at 0.4673, 0.08, 0.8262)
-                Vector3 zilleWarPos = new Vector3(0.405f, 0.08f, 0.775f);
+                Vector3 zilleWarPos = BorderEventPosition();
                 TokenBasePos = zilleWarPos;
 
                 // 1. First, search for existing cloned InvasionOfZille Event Variant
@@ -558,10 +557,11 @@ namespace GreatZilleSolution
                     }
                 }
 
-                if (_spawnedZilleWarToken != null)
-                {
-                    _spawnedZilleWarToken.transform.position = zilleWarPos;
-                    _spawnedZilleWarToken.SetActive(true);
+                    if (_spawnedZilleWarToken != null)
+                    {
+                        _spawnedZilleWarToken.transform.position = zilleWarPos;
+                        _spawnedZilleWarToken.SetActive(true);
+                        MatchTokenHeight(_spawnedZilleWarToken, _borderAnchor);
 
                     // Fetch or verify zilleMtd from EntityDataManager
                     MapTokenData zilleMtd = null;
@@ -592,18 +592,6 @@ namespace GreatZilleSolution
                             Managers.Instance.Tokens.Add(tok);
                         }
 
-                        if (tokenMgr != null)
-                        {
-                            tokenMgr.SelectToken(tok);
-                        }
-
-                        var tip = Panels.Instance?.TokenInteractionPanel ?? UnityEngine.Object.FindObjectOfType<TokenInteractionPanel>();
-                        if (tip != null)
-                        {
-                            tip.gameObject.SetActive(true);
-                            tip.Setup(tok);
-                            tip.Show();
-                        }
                     }
 
                     DialogueHelper.ShowAlert("[Zille] Pionek wojenny i operacja Operation Righteous Sword Phase I aktywne w Zille.");
@@ -617,6 +605,133 @@ namespace GreatZilleSolution
                 MelonLogger.Error($"[WAR ENGINE] SpawnZilleWarEventToken failed: {ex.Message}\n{ex.StackTrace}");
             }
             return false;
+        }
+
+        /// <summary>Prepares Operation_Zille_1 so the pawn's own Suzerain button can play the Pales deployment intro.</summary>
+        public static void ArmNativeZilleDeployment()
+        {
+            EnsureWarSave();
+            SetupCustomZilleOperation();
+            ZilleWarTable.SkinEnabled = true;
+            MelonLogger.Msg("[WAR ENGINE] Armed native Zille deployment. The operation button keeps the Pales intro.");
+        }
+
+        /// <summary>SetupWarFragment dies without a war save, which is why the event click never plays the Pales intro.</summary>
+        public static void EnsureWarSave()
+        {
+            try
+            {
+                var file = PersistenceManager.Instance != null ? PersistenceManager.Instance.activeSaveFile : null;
+                var save = file != null ? file.saveData : null;
+                if (save == null)
+                {
+                    MelonLogger.Warning("[WAR ENGINE] No active save file, so the Pales intro cannot store the war.");
+                    return;
+                }
+                var cur = save.warSaveData;
+                if (cur == null)
+                {
+                    cur = new WarSaveData();
+                    cur.warFragmentName = "WarFragment_Zille_1_1";
+                    save.warSaveData = cur;
+                    MelonLogger.Msg("[WAR ENGINE] Created war save data on the active campaign.");
+                }
+                if (cur.warTokenSaveData == null) cur.warTokenSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTokenSaveData>();
+                if (cur.warBattleSaveData == null) cur.warBattleSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarBattleSaveData>();
+                if (cur.warObjectiveSaveData == null) cur.warObjectiveSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarObjectiveSaveData>();
+                if (cur.warTileSaveData == null) cur.warTileSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTileSaveData>();
+                if (cur.tileAllegianceChangeSaveData == null) cur.tileAllegianceChangeSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.TileAllegianceChangeSaveData>();
+                if (cur.warStartBattleEventSaveData == null) cur.warStartBattleEventSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarStartBattleEventSaveData>();
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[WAR ENGINE] War save: " + ex.Message);
+            }
+        }
+
+        private static Token _borderAnchor;
+
+        private static Vector3 BorderEventPosition()
+        {
+            var zille = FindCityToken("zille");
+            // Bronaz is the Rizian province that touches Zille. Porte Drazon is the capital, far past that border.
+            var rizia = FindCityToken("bronaz") ?? FindCityToken("brenas") ?? FindCityToken("iza");
+            _borderAnchor = rizia ?? zille;
+            Vector3 zillePos = zille != null ? zille.transform.position : new Vector3(0.4673f, 0.02f, 0.8262f);
+            if (rizia != null && zille != null)
+            {
+                var p = Vector3.Lerp(zillePos, rizia.transform.position, 0.5f);
+                p.y = rizia.transform.position.y;
+                MelonLogger.Msg($"[WAR ENGINE] Event marker on the Zille–Rizia border at {p} (midpoint of {zille.name} and {rizia.name}).");
+                return p;
+            }
+            var fallback = zillePos + new Vector3(0f, 0f, -0.04f);
+            MelonLogger.Msg($"[WAR ENGINE] Event marker south of Zille at {fallback}.");
+            return fallback;
+        }
+
+        private static Token FindCityToken(string needle)
+        {
+            Token[] tokens = null;
+            try { tokens = UnityEngine.Object.FindObjectsOfType<Token>(); } catch { return null; }
+            if (tokens == null) return null;
+            needle = needle.ToLowerInvariant();
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                var t = tokens[i];
+                if (t == null) continue;
+                string name = t.gameObject.name ?? "";
+                string blob = (name + " " + (t.tokenDataEntityName ?? "")).ToLowerInvariant();
+                if (blob.Contains("event") || blob.Contains("invasion")) continue;
+                if (blob.Contains(needle)) return t;
+            }
+            return null;
+        }
+
+        /// <summary>Puts the pawn's collider at the same height as a city token the player can already click.</summary>
+        private static void MatchTokenHeight(GameObject go, Token reference)
+        {
+            if (go == null) return;
+            if (reference == null)
+            {
+                MelonLogger.Warning("[WAR ENGINE] No city token to copy the event height from.");
+                return;
+            }
+            var refCol = reference.GetComponentInChildren<Collider>();
+            var cols = go.GetComponentsInChildren<Collider>(true);
+            float refY = refCol != null ? refCol.bounds.center.y : reference.transform.position.y;
+            float myY = refY;
+            if (cols != null && cols.Length > 0 && cols[0] != null) myY = cols[0].bounds.center.y;
+            float dy = refY - myY;
+            if (Mathf.Abs(dy) > 0.002f)
+                go.transform.position += new Vector3(0f, dy, 0f);
+            MelonLogger.Msg($"[WAR ENGINE] Event hitbox matched to {reference.name}. Collider center {go.transform.position}.");
+        }
+
+        /// <summary>Drops the pawn so the bottom of its collider sits on the map, not above the province.</summary>
+        private static void SeatTokenOnMap(GameObject go, float mapY)
+        {
+            if (go == null) return;
+            var cols = go.GetComponentsInChildren<Collider>(true);
+            float minY = float.MaxValue;
+            bool any = false;
+            for (int i = 0; i < cols.Length; i++)
+            {
+                var c = cols[i];
+                if (c == null) continue;
+                any = true;
+                if (c.bounds.min.y < minY) minY = c.bounds.min.y;
+            }
+            if (!any)
+            {
+                var p = go.transform.position;
+                go.transform.position = new Vector3(p.x, mapY, p.z);
+                return;
+            }
+            float dy = minY - mapY;
+            if (Mathf.Abs(dy) > 0.004f)
+                go.transform.position -= new Vector3(0f, dy, 0f);
+            MelonLogger.Msg($"[WAR ENGINE] Event hitbox seated. Bottom was {minY:F3}, map Y {mapY:F3}, now {go.transform.position}.");
         }
 
         // ================= HOVER AND CLICK RAYCAST INTERACTION =================
@@ -1378,15 +1493,9 @@ namespace GreatZilleSolution
                     {
                         var src = config.Tiles[i];
                         var wtd = new WarTileData();
-                        wtd.tileName = string.IsNullOrEmpty(src.TileNumber) ? ZilleMapLayoutManager.GameTileName(src.Id) : src.TileNumber;
-                        bool ours = src.Allegiance == "Rizia";
-                        wtd.startingAllegiance = ours ? WarToken.WarAllegiance.Player : WarToken.WarAllegiance.Enemy;
-                        wtd.isInitialDeploymentTile = ours;
-                        wtd.isBorderTile = ours;
-                        wtd.isShoreTile = src.IsPort;
-                        wtd.isEnemyAirfield = src.IsAirfield;
-                        wtd.fortLevel = src.FortLevel;
-                        if (src.FortLevel >= 2) wtd.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
+                        ZilleWarTable.FillWarTileData(src, wtd);
+                        if (string.IsNullOrEmpty(wtd.tileName))
+                            wtd.tileName = ZilleMapLayoutManager.GameTileName(src.Id);
                         condTileData.tiles.Add(wtd);
                     }
                 }
@@ -1413,14 +1522,23 @@ namespace GreatZilleSolution
                     playerCities.condition = "";
                     playerCities.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
-                    var brenasCity = new WarTokenData();
-                    brenasCity.startingTileName = ZilleMapLayoutManager.GameTileName("tile_brenas");
-                    brenasCity.guid = "city_brenas";
-                    brenasCity.allegiance = WarToken.WarAllegiance.Player;
-                    brenasCity.unitType = cityUnitType;
-                    playerCities.tokens.Add(brenasCity);
-
-                    zilleOpData.playerCityTokens.Add(playerCities);
+                    if (config?.Tiles != null)
+                    {
+                        for (int i = 0; i < config.Tiles.Count; i++)
+                        {
+                            var src = config.Tiles[i];
+                            if (!src.IsCity || src.Allegiance != "Rizia" || string.IsNullOrEmpty(src.TileNumber)) continue;
+                            if (!ZilleMapLayoutManager.IsScenarioCity(src.Name)) continue;
+                            var token = new WarTokenData();
+                            token.startingTileName = src.TileNumber;
+                            token.guid = "city_" + src.Id;
+                            token.allegiance = WarToken.WarAllegiance.Player;
+                            token.unitType = cityUnitType;
+                            playerCities.tokens.Add(token);
+                        }
+                    }
+                    if (playerCities.tokens.Count > 0)
+                        zilleOpData.playerCityTokens.Add(playerCities);
                 }
 
                 // Configure Enemy Cities (Zille, Munat, Wiktrany, Nanta)
@@ -1431,8 +1549,25 @@ namespace GreatZilleSolution
                     enemyCities.condition = "";
                     enemyCities.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
-                    string[] enemyCityTiles = new string[] { ZilleMapLayoutManager.GameTileName("tile_zille"), ZilleMapLayoutManager.GameTileName("tile_munat"), ZilleMapLayoutManager.GameTileName("tile_wiktrany"), ZilleMapLayoutManager.GameTileName("tile_nanta") };
-                    for (int c = 0; c < enemyCityTiles.Length; c++)
+                    var enemyCityTiles = new List<string>();
+                    if (config?.Tiles != null)
+                    {
+                        for (int i = 0; i < config.Tiles.Count; i++)
+                        {
+                            var src = config.Tiles[i];
+                            if (src.IsCity && src.Allegiance != "Rizia" && !string.IsNullOrEmpty(src.TileNumber)
+                                && ZilleMapLayoutManager.IsScenarioCity(src.Name))
+                                enemyCityTiles.Add(src.TileNumber);
+                        }
+                    }
+                    if (enemyCityTiles.Count == 0)
+                    {
+                        enemyCityTiles.Add(ZilleMapLayoutManager.GameTileName("tile_zille"));
+                        enemyCityTiles.Add(ZilleMapLayoutManager.GameTileName("tile_munat"));
+                        enemyCityTiles.Add(ZilleMapLayoutManager.GameTileName("tile_wiktrany"));
+                        enemyCityTiles.Add(ZilleMapLayoutManager.GameTileName("tile_nanta"));
+                    }
+                    for (int c = 0; c < enemyCityTiles.Count; c++)
                     {
                         var cToken = new WarTokenData();
                         cToken.startingTileName = enemyCityTiles[c];
@@ -1472,27 +1607,36 @@ namespace GreatZilleSolution
                 garrisonCond.condition = "";
                 garrisonCond.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
+                string TileNum(string provinceName, string fallbackId)
+                {
+                    var found = ZilleMapLayoutManager.FindByName(provinceName);
+                    if (found != null && !string.IsNullOrEmpty(found.TileNumber)) return found.TileNumber;
+                    return ZilleMapLayoutManager.GameTileName(fallbackId);
+                }
+                string wiktranyTile = TileNum("Wiktrany", "tile_wiktrany");
+                string zilleTile = TileNum("Zille City", "tile_zille");
+                string kratsnaTile = TileNum("Kratsna", "tile_nanta");
+
                 if (infUnitType != null)
                 {
-                    var infWik = new WarTokenData();
-                    infWik.startingTileName = ZilleMapLayoutManager.GameTileName("tile_wiktrany");
-                    infWik.guid = "wehlen_inf_wiktrany";
-                    infWik.allegiance = WarToken.WarAllegiance.Enemy;
-                    infWik.unitType = infUnitType;
-                    garrisonCond.tokens.Add(infWik);
-
-                    var infZille = new WarTokenData();
-                    infZille.startingTileName = ZilleMapLayoutManager.GameTileName("tile_zille");
-                    infZille.guid = "wehlen_inf_zille";
-                    infZille.allegiance = WarToken.WarAllegiance.Enemy;
-                    infZille.unitType = infUnitType;
-                    garrisonCond.tokens.Add(infZille);
+                    void AddInf(string tileName, string guid)
+                    {
+                        var inf = new WarTokenData();
+                        inf.startingTileName = tileName;
+                        inf.guid = guid;
+                        inf.allegiance = WarToken.WarAllegiance.Enemy;
+                        inf.unitType = infUnitType;
+                        garrisonCond.tokens.Add(inf);
+                    }
+                    AddInf(wiktranyTile, "wehlen_inf_wiktrany");
+                    AddInf(zilleTile, "wehlen_inf_zille");
+                    AddInf(kratsnaTile, "wehlen_inf_kratsna");
                 }
 
                 if (tankUnitType != null)
                 {
                     var tankZille = new WarTokenData();
-                    tankZille.startingTileName = ZilleMapLayoutManager.GameTileName("tile_zille");
+                    tankZille.startingTileName = zilleTile;
                     tankZille.guid = "wehlen_tank_zille";
                     tankZille.allegiance = WarToken.WarAllegiance.Enemy;
                     tankZille.unitType = tankUnitType;
@@ -1505,7 +1649,7 @@ namespace GreatZilleSolution
                 }
 
                 // Initialize remaining lists on WarOperationData so WarFlowManager & WarOperationManager never NullRef
-                zilleOpData.supplyLines = new Il2CppSystem.Collections.Generic.List<WarSupplyLine>();
+                zilleOpData.supplyLines = ZilleWarTable.BuildSupplyLines();
                 zilleOpData.tileAllegianceChangeEvents = new Il2CppSystem.Collections.Generic.List<ConditionalTileAllegianceChangeEvent>();
                 zilleOpData.warFlowEvents = new Il2CppSystem.Collections.Generic.List<ConditionalWarFlowEvent>();
                 zilleOpData.onStartBattleEvents = new Il2CppSystem.Collections.Generic.List<ConditionalWarStartBattleEvent>();
@@ -1633,57 +1777,8 @@ namespace GreatZilleSolution
                 // 4. Setup custom Zille 3D operation in scene
                 SetupCustomZilleOperation();
 
-                // 5. Ensure SaveData.warSaveData is initialized so WarFlowManager.SetupWarFragmentCoroutine never hits a NullRef!
-                try
-                {
-                    var pm = PersistenceManager.Instance;
-                    if (pm != null)
-                    {
-                        var saveFileProp = HarmonyLib.AccessTools.Property(typeof(PersistenceManager), "CurrentSaveFile")
-                                        ?? HarmonyLib.AccessTools.Property(typeof(PersistenceManager), "currentSaveFile");
-                        var saveFileObj = saveFileProp != null ? saveFileProp.GetValue(pm) : HarmonyLib.AccessTools.Field(typeof(PersistenceManager), "currentSaveFile")?.GetValue(pm);
-                        if (saveFileObj != null)
-                        {
-                            var saveDataProp = HarmonyLib.AccessTools.Property(saveFileObj.GetType(), "saveData")
-                                            ?? HarmonyLib.AccessTools.Property(saveFileObj.GetType(), "SaveData");
-                            var saveDataObj = saveDataProp != null ? saveDataProp.GetValue(saveFileObj) : HarmonyLib.AccessTools.Field(saveFileObj.GetType(), "saveData")?.GetValue(saveFileObj);
-                            if (saveDataObj != null)
-                            {
-                                var wsdProp = HarmonyLib.AccessTools.Property(saveDataObj.GetType(), "warSaveData")
-                                           ?? HarmonyLib.AccessTools.Property(saveDataObj.GetType(), "WarSaveData");
-                                var wsdField = HarmonyLib.AccessTools.Field(saveDataObj.GetType(), "warSaveData");
-                                var curWsd = (wsdProp != null ? wsdProp.GetValue(saveDataObj) : wsdField?.GetValue(saveDataObj)) as WarSaveData;
-                                if (curWsd == null)
-                                {
-                                    var wsd = new WarSaveData();
-                                    wsd.warFragmentName = "WarFragment_Zille_1_1";
-                                    wsd.warTokenSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTokenSaveData>();
-                                    wsd.warBattleSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarBattleSaveData>();
-                                    wsd.warObjectiveSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarObjectiveSaveData>();
-                                    wsd.warTileSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTileSaveData>();
-                                    wsd.tileAllegianceChangeSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.TileAllegianceChangeSaveData>();
-                                    wsd.warStartBattleEventSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarStartBattleEventSaveData>();
-                                    if (wsdProp != null && wsdProp.CanWrite) wsdProp.SetValue(saveDataObj, wsd);
-                                    else if (wsdField != null) wsdField.SetValue(saveDataObj, wsd);
-                                    MelonLogger.Msg("[WAR ENGINE] Initialized CurrentSaveFile.saveData.warSaveData for Zille Operation!");
-                                }
-                                else
-                                {
-                                    if (curWsd.warTokenSaveData == null) curWsd.warTokenSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTokenSaveData>();
-                                    if (curWsd.warBattleSaveData == null) curWsd.warBattleSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarBattleSaveData>();
-                                    if (curWsd.warObjectiveSaveData == null) curWsd.warObjectiveSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarObjectiveSaveData>();
-                                    if (curWsd.warTileSaveData == null) curWsd.warTileSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarTileSaveData>();
-                                    if (curWsd.tileAllegianceChangeSaveData == null) curWsd.tileAllegianceChangeSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.TileAllegianceChangeSaveData>();
-                                    if (curWsd.warStartBattleEventSaveData == null) curWsd.warStartBattleEventSaveData = new Il2CppSystem.Collections.Generic.List<WarSaveData.WarStartBattleEventSaveData>();
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MelonLogger.Warning($"[WAR ENGINE] WarSaveData init check: {ex.Message}");
-                }
+                // 5. The Pales intro reads the campaign war save. Without it the coroutine stops before the Start button.
+                EnsureWarSave();
 
                 // 6. Explicitly load War Map via MapManager (unloads Map_Rizia_Base civilian map and instantiates Map_Rizia_PalesWar)
                 var mapManager = Managers.Instance?.MapManager ?? UnityEngine.Object.FindObjectOfType<MapManager>();
@@ -1747,30 +1842,51 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Zille) return;
             try
             {
-                // Vanilla WarFlowManager opens the deployment panel itself; only help shortly after entering.
-                if (Time.unscaledTime < _theatreEnteredAt + 20f) ActivateWarDeploymentPanel();
+                // The Pales deployment list is a UI panel. Open it once the table exists and leave it up.
+                if (ZilleWarTable.HasLiveMap) ActivateWarDeploymentPanel();
             }
             catch { }
         }
 
+        private static bool _deploymentOpened;
+
         private static void ActivateWarDeploymentPanel()
         {
+            if (_deploymentOpened) return;
             try
             {
-                var deployPanel = UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
+                var deployPanel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
+                if (deployPanel == null) deployPanel = UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
                 if (deployPanel == null)
                 {
                     var allPanels = Resources.FindObjectsOfTypeAll<WarDeploymentPanel>();
-                    if (allPanels.Length > 0) deployPanel = allPanels[0];
+                    if (allPanels != null && allPanels.Length > 0) deployPanel = allPanels[0];
                 }
-
-                if (deployPanel != null && !deployPanel.gameObject.activeInHierarchy)
+                if (deployPanel == null) return;
+                if (!deployPanel.gameObject.activeSelf) deployPanel.gameObject.SetActive(true);
+                ZilleWarTable.EnsurePlayerPool();
+                try { deployPanel.Setup(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Deployment Setup: " + ex.Message); }
+                try { deployPanel.Show(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Deployment Show: " + ex.Message); }
+                var hud = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
+                if (hud != null && !ZilleWarTable.ScenarioStarted)
                 {
-                    deployPanel.gameObject.SetActive(true);
-                    MelonLogger.Msg("[WAR THEATRE] WarDeploymentPanel successfully activated for Zille campaign!");
+                    if (!hud.gameObject.activeSelf) hud.gameObject.SetActive(true);
+                    try { hud.Setup(WarHUDPanel.WarHUDButtonState.OperationStart); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Start button setup: " + ex.Message); }
+                    try { hud.Show(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Start button show: " + ex.Message); }
                 }
+                var portraits = UnityEngine.Object.FindObjectsOfType<PortraitPanel>();
+                if (portraits != null)
+                {
+                    for (int i = 0; i < portraits.Length; i++)
+                        if (portraits[i] != null) portraits[i].gameObject.SetActive(false);
+                }
+                _deploymentOpened = true;
+                MelonLogger.Msg("[WAR THEATRE] Pales deployment panel and Start button opened for Zille.");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[WAR THEATRE] Deployment panel: " + ex.Message);
+            }
         }
 
         public static void ReturnToCivilianMap()
@@ -1778,6 +1894,7 @@ namespace GreatZilleSolution
             MelonLogger.Msg("[WAR ENGINE] Returning to civilian map...");
             CurrentTheatre = ActiveWarTheatre.Civilian;
             _tilesConfiguredForZille = false;
+            _deploymentOpened = false;
 
             try
             {

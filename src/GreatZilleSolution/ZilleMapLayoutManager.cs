@@ -75,7 +75,6 @@ namespace GreatZilleSolution
                                 if (t.AdjacentIds == null) t.AdjacentIds = new List<string>();
                         EnsurePlacementDefaults(CurrentConfig);
                         MelonLogger.Msg($"[ZilleMap] Loaded layout with {CurrentConfig.Tiles.Count} tiles from config.");
-                        return;
                     }
                 }
             }
@@ -84,10 +83,315 @@ namespace GreatZilleSolution
                 MelonLogger.Error($"[ZilleMap] Failed to read {_configFilePath}: {ex.Message}");
             }
 
-            MelonLogger.Msg("[ZilleMap] Generating default 4-city tactical layout for Zille...");
-            CurrentConfig = CreateDefaultConfig();
-            EnsurePlacementDefaults(CurrentConfig);
+            if (CurrentConfig?.Tiles == null || CurrentConfig.Tiles.Count == 0)
+            {
+                MelonLogger.Msg("[ZilleMap] Generating default 4-city tactical layout for Zille...");
+                CurrentConfig = CreateDefaultConfig();
+                EnsurePlacementDefaults(CurrentConfig);
+                SaveConfig();
+            }
+
+            bool fresh = CurrentConfig == null || CurrentConfig.Tiles == null || CurrentConfig.Tiles.Count < 40
+                || string.IsNullOrEmpty(CurrentConfig.Version) || !CurrentConfig.Version.StartsWith("v12");
+            if (fresh)
+                TryUpgradeToV12();
+            else
+                ImportRoadsIfMissing(CurrentConfig);
+        }
+
+        /// <summary>Reads the saved file and puts it back on the live table. Does not rebuild provinces.</summary>
+        public static bool ReloadSavedLayout()
+        {
+            if (string.IsNullOrEmpty(_configFilePath) || !File.Exists(_configFilePath)) return false;
+            try
+            {
+                var cfg = JsonSerializer.Deserialize<ZilleMapConfig>(File.ReadAllText(_configFilePath));
+                if (cfg?.Tiles == null || cfg.Tiles.Count == 0) return false;
+                CurrentConfig = cfg;
+                if (CurrentConfig.Orders == null) CurrentConfig.Orders = new List<ZilleUnitOrder>();
+                foreach (var t in CurrentConfig.Tiles)
+                {
+                    if (t.AdjacentIds == null) t.AdjacentIds = new List<string>();
+                    if (t.RoadToIds == null) t.RoadToIds = new List<string>();
+                }
+                ImportRoadsIfMissing(CurrentConfig);
+                ZilleWarTable.InvalidateLiveTiles();
+                MelonLogger.Msg($"[ZilleMap] Reloaded saved layout ({CurrentConfig.Tiles.Count} tiles, version {CurrentConfig.Version}).");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[ZilleMap] Reload failed: {ex.Message}");
+                return false;
+            }
+        }
+
+        // Southern foothold, plus the two cities the player holds: Mave Nortus and Dapalle.
+        private static readonly HashSet<string> RizianStrip = new HashSet<string>
+        {
+            "Celle Vaz", "Celle Vaz East",
+            "Marbelas", "Marbelas Northeast",
+            "Brivane", "Brivane East", "Brivane Southwest", "Brivane South",
+            "Morsa Southeast",
+            "Mave Nortus", "Dapalle"
+        };
+
+        // City markers are placed on these provinces. Mave Nortus and Dapalle are Rizian; the rest are Wehlen.
+        public static readonly string[] ScenarioCities =
+        {
+            "Zille City", "Kratsna", "Wiktrany", "Mave Nortus", "Munat", "Nanta", "Isor", "Dapalle", "Grodzizg"
+        };
+
+        public static bool IsScenarioCity(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return false;
+            for (int i = 0; i < ScenarioCities.Length; i++)
+                if (ScenarioCities[i] == name) return true;
+            return false;
+        }
+
+        public static void ApplyPoliticalControl(ZilleMapConfig cfg)
+        {
+            if (cfg?.Tiles == null) return;
+            var byId = new Dictionary<string, ZilleTileData>();
+            foreach (var t in cfg.Tiles)
+                if (!string.IsNullOrEmpty(t.Id)) byId[t.Id] = t;
+            int ours = 0;
+            foreach (var t in cfg.Tiles)
+            {
+                if (t.IsSea) { t.Allegiance = "EmptySea"; t.IsBorder = false; continue; }
+                bool rizia = RizianStrip.Contains(t.Name ?? "");
+                t.Allegiance = rizia ? "Rizia" : "Wehlen";
+                for (int c = 0; c < ScenarioCities.Length; c++)
+                    if (t.Name == ScenarioCities[c]) { t.IsCity = true; break; }
+                t.IsBorder = false;
+                if (rizia) ours++;
+            }
+            foreach (var t in cfg.Tiles)
+            {
+                if (t.Allegiance != "Rizia" || t.AdjacentIds == null) continue;
+                foreach (var id in t.AdjacentIds)
+                {
+                    if (byId.TryGetValue(id, out var other) && !other.IsSea && other.Allegiance != "Rizia")
+                    {
+                        t.IsBorder = true;
+                        break;
+                    }
+                }
+            }
+            MelonLogger.Msg($"[ZilleMap] Political control: {ours} Rizian provinces on the southern strip, the rest of the land is Wehlen.");
+        }
+
+        /// <summary>
+        /// Replaces the old 5-city placeholder with the v12 province partition (map, masks, adjacency,
+        /// terrain, roads) the first time that data is on disk. A saved layout already marked v12 is left alone.
+        /// </summary>
+        private static void TryUpgradeToV12()
+        {
+            if (CurrentConfig != null && CurrentConfig.Tiles != null && CurrentConfig.Tiles.Count > 40
+                && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v12"))
+                return;
+            var built = TryBuildV12();
+            if (built == null) return;
+            if (CurrentConfig?.Orders != null && CurrentConfig.Orders.Count > 0)
+                built.Orders = CurrentConfig.Orders;
+            CurrentConfig = built;
             SaveConfig();
+        }
+
+        public const float V12FootprintPx = 980f;
+
+        public static ZilleTileData FindByName(string name)
+        {
+            if (CurrentConfig?.Tiles == null || string.IsNullOrEmpty(name)) return null;
+            for (int i = 0; i < CurrentConfig.Tiles.Count; i++)
+                if (CurrentConfig.Tiles[i].Name == name) return CurrentConfig.Tiles[i];
+            return null;
+        }
+
+        private static string V12RegionsDir()
+        {
+            string local = Path.Combine(_primaryAssetsDir ?? "", "regions");
+            if (File.Exists(Path.Combine(local, "provinces_manifest.json"))) return local;
+            string repo = @"c:\Projects\Great Zille solution\maps\zille\v12\regions";
+            if (File.Exists(Path.Combine(repo, "provinces_manifest.json"))) return repo;
+            return null;
+        }
+
+        private static ZilleMapConfig TryBuildV12()
+        {
+            try
+            {
+                string dir = V12RegionsDir();
+                if (dir == null) return null;
+                string manifestPath = Path.Combine(dir, "provinces_manifest.json");
+                string adjacencyPath = Path.Combine(dir, "provinces_adjacency.json");
+                using var manifest = JsonDocument.Parse(File.ReadAllText(manifestPath));
+                JsonDocument adjacency = null;
+                if (File.Exists(adjacencyPath))
+                    adjacency = JsonDocument.Parse(File.ReadAllText(adjacencyPath));
+
+                var cfg = new ZilleMapConfig
+                {
+                    MapTitle = "Great Zille Theatre of War",
+                    Version = "v12.1",
+                    BackgroundTexture = "T_Map_Zille_Full_Composite.png",
+                    Tiles = new List<ZilleTileData>(),
+                    Orders = new List<ZilleUnitOrder>()
+                };
+
+                var byProvince = new Dictionary<string, ZilleTileData>();
+                var provinces = manifest.RootElement.GetProperty("provinces");
+                foreach (var p in provinces.EnumerateArray())
+                {
+                    string pid = Str(p, "id");
+                    if (string.IsNullOrEmpty(pid) || !pid.StartsWith("ZilleTile_")) continue;
+                    string number = pid.Substring("ZilleTile_".Length);
+                    bool sea = Str(p, "type") == "sea";
+                    string region = Str(p, "region");
+                    string terrain = Str(p, "terrain");
+                    bool city = Bool(p, "is_city");
+                    float cx = Num(p, "tile_center_x");
+                    float cy = Num(p, "tile_center_y");
+                    string allegiance = sea ? "EmptySea" : "Wehlen";
+                    int fort = 0;
+                    string display = Str(p, "name");
+                    if (city)
+                    {
+                        if (display == "Zille City" || display == "Kratsna") fort = 2;
+                        else fort = 1;
+                    }
+
+                    var tile = new ZilleTileData
+                    {
+                        Id = "tile_" + number.ToLowerInvariant(),
+                        Name = display,
+                        TextureFile = string.IsNullOrEmpty(Str(p, "png_file")) ? pid + ".png" : Str(p, "png_file"),
+                        NormalizedX = cx / 12288f,
+                        NormalizedY = cy / 8192f,
+                        Width = 60f,
+                        Height = 60f,
+                        Allegiance = allegiance,
+                        FortLevel = fort,
+                        IsPort = Bool(p, "is_port"),
+                        IsSupplyHub = city && (display == "Wiktrany" || display == "Zille City" || display == "Kratsna"),
+                        IsReinforcementTile = display == "Kratsna" || display == "Grodzizg",
+                        IsSea = sea,
+                        IsCity = city,
+                        IsCoastal = Bool(p, "is_coastal"),
+                        Region = region,
+                        Terrain = terrain,
+                        RoadClass = string.IsNullOrEmpty(Str(p, "road_class")) ? "none" : Str(p, "road_class"),
+                        HasMainRoad = Bool(p, "has_main_road"),
+                        HasRailway = Bool(p, "has_railway"),
+                        TileNumber = number,
+                        MapPxX = cx,
+                        MapPxY = cy,
+                        WorldScale = V12FootprintPx * ZilleWarTable.PlaneWorld / 4096f,
+                        AdjacentIds = new List<string>()
+                    };
+                    cfg.Tiles.Add(tile);
+                    byProvince[pid] = tile;
+                }
+
+                int roadLinks = 0;
+                if (adjacency != null && adjacency.RootElement.TryGetProperty("provinces", out var adjRoot))
+                {
+                    foreach (var entry in adjRoot.EnumerateObject())
+                    {
+                        if (!byProvince.TryGetValue(entry.Name, out var tile)) continue;
+                        if (!entry.Value.TryGetProperty("neighbours", out var nbs)) continue;
+                        var seen = new HashSet<string>();
+                        foreach (var nb in nbs.EnumerateArray())
+                        {
+                            string nid = Str(nb, "id");
+                            if (!byProvince.TryGetValue(nid, out var other)) continue;
+                            if (seen.Add(other.Id)) tile.AdjacentIds.Add(other.Id);
+                            if (Bool(nb, "road_link"))
+                            {
+                                tile.RoadLinkCount++;
+                                roadLinks++;
+                                if (tile.RoadToIds == null) tile.RoadToIds = new List<string>();
+                                if (!tile.RoadToIds.Contains(other.Id)) tile.RoadToIds.Add(other.Id);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var p in provinces.EnumerateArray())
+                    {
+                        string pid = Str(p, "id");
+                        if (!byProvince.TryGetValue(pid, out var tile)) continue;
+                        if (!p.TryGetProperty("neighbours", out var nbs)) continue;
+                        foreach (var nb in nbs.EnumerateArray())
+                        {
+                            if (nb.ValueKind != JsonValueKind.String) continue;
+                            if (byProvince.TryGetValue(nb.GetString(), out var other) && !tile.AdjacentIds.Contains(other.Id))
+                                tile.AdjacentIds.Add(other.Id);
+                        }
+                    }
+                }
+
+                int mountains = 0, borders = 0;
+                foreach (var tile in cfg.Tiles)
+                {
+                    if (tile.Terrain == "mountains") mountains++;
+                    if (tile.IsSea || tile.Region != "Brenas") continue;
+                    for (int i = 0; i < tile.AdjacentIds.Count; i++)
+                    {
+                        var other = cfg.Tiles.Find(t => t.Id == tile.AdjacentIds[i]);
+                        if (other != null && !other.IsSea && (other.Region == "Zille" || other.Region == "Wehlen"))
+                        {
+                            tile.IsBorder = true;
+                            borders++;
+                            break;
+                        }
+                    }
+                }
+                foreach (var tile in cfg.Tiles)
+                {
+                    if (tile.IsSea || tile.IsCity || tile.Terrain == "mountains" || tile.Terrain == "hills") continue;
+                    for (int i = 0; i < tile.AdjacentIds.Count; i++)
+                    {
+                        var other = cfg.Tiles.Find(t => t.Id == tile.AdjacentIds[i]);
+                        if (other != null && other.IsCity && !other.IsSea)
+                        {
+                            tile.IsCitySurroundings = true;
+                            break;
+                        }
+                    }
+                }
+
+                ApplyPoliticalControl(cfg);
+                adjacency?.Dispose();
+                int landCount = 0, seaCount = 0;
+                foreach (var t in cfg.Tiles) { if (t.IsSea) seaCount++; else landCount++; }
+                MelonLogger.Msg($"[ZilleMap] Built v12 theatre: {cfg.Tiles.Count} provinces ({landCount} land, {seaCount} sea), {mountains} mountain, {borders} Rizian border, {roadLinks / 2} road crossings.");
+                return cfg.Tiles.Count > 0 ? cfg : null;
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[ZilleMap] v12 build failed: {ex.Message}");
+                return null;
+            }
+        }
+
+        private static string Str(JsonElement e, string name)
+        {
+            if (!e.TryGetProperty(name, out var p) || p.ValueKind != JsonValueKind.String) return "";
+            return p.GetString() ?? "";
+        }
+
+        private static bool Bool(JsonElement e, string name)
+        {
+            return e.TryGetProperty(name, out var p) && p.ValueKind == JsonValueKind.True;
+        }
+
+        private static float Num(JsonElement e, string name)
+        {
+            if (!e.TryGetProperty(name, out var p) || p.ValueKind != JsonValueKind.Number) return 0f;
+            return (float)p.GetDouble();
         }
 
         // ---- Game tile identity & placement -------------------------------------------------------------
@@ -230,6 +534,74 @@ namespace GreatZilleSolution
             return DefaultPlacement.TryGetValue(zilleId ?? "", out var d) ? d.num : zilleId;
         }
 
+        private static void ImportRoadsIfMissing(ZilleMapConfig cfg)
+        {
+            if (cfg?.Tiles == null) return;
+            foreach (var t in cfg.Tiles)
+                if (t.RoadToIds == null) t.RoadToIds = new List<string>();
+            bool any = false;
+            foreach (var t in cfg.Tiles)
+                if (t.RoadToIds.Count > 0) { any = true; break; }
+            if (any) return;
+            try
+            {
+                string dir = V12RegionsDir();
+                if (dir == null) return;
+                string adjacencyPath = Path.Combine(dir, "provinces_adjacency.json");
+                if (!File.Exists(adjacencyPath)) return;
+                using var adjacency = JsonDocument.Parse(File.ReadAllText(adjacencyPath));
+                if (!adjacency.RootElement.TryGetProperty("provinces", out var adjRoot)) return;
+                var byProvince = new Dictionary<string, ZilleTileData>();
+                foreach (var t in cfg.Tiles)
+                    if (!string.IsNullOrEmpty(t.TileNumber)) byProvince["ZilleTile_" + t.TileNumber] = t;
+                int n = 0;
+                foreach (var entry in adjRoot.EnumerateObject())
+                {
+                    if (!byProvince.TryGetValue(entry.Name, out var tile)) continue;
+                    if (!entry.Value.TryGetProperty("neighbours", out var nbs)) continue;
+                    foreach (var nb in nbs.EnumerateArray())
+                    {
+                        if (!Bool(nb, "road_link")) continue;
+                        string nid = Str(nb, "id");
+                        if (!byProvince.TryGetValue(nid, out var other)) continue;
+                        if (!tile.RoadToIds.Contains(other.Id)) tile.RoadToIds.Add(other.Id);
+                        if (other.RoadToIds != null && !other.RoadToIds.Contains(tile.Id)) other.RoadToIds.Add(tile.Id);
+                        tile.HasMainRoad = true;
+                        other.HasMainRoad = true;
+                        n++;
+                    }
+                }
+                if (n > 0) MelonLogger.Msg($"[ZilleMap] Imported {n} road ends onto the saved layout.");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZilleMap] Road import: " + ex.Message);
+            }
+        }
+
+        public static void ToggleRoad(ZilleTileData a, ZilleTileData b)
+        {
+            if (a == null || b == null || a == b) return;
+            if (a.RoadToIds == null) a.RoadToIds = new List<string>();
+            if (b.RoadToIds == null) b.RoadToIds = new List<string>();
+            bool on = a.RoadToIds.Contains(b.Id);
+            if (on)
+            {
+                a.RoadToIds.Remove(b.Id);
+                b.RoadToIds.Remove(a.Id);
+            }
+            else
+            {
+                a.RoadToIds.Add(b.Id);
+                b.RoadToIds.Add(a.Id);
+                if (!a.AdjacentIds.Contains(b.Id)) a.AdjacentIds.Add(b.Id);
+                if (!b.AdjacentIds.Contains(a.Id)) b.AdjacentIds.Add(a.Id);
+            }
+            a.HasMainRoad = a.RoadToIds.Count > 0;
+            b.HasMainRoad = b.RoadToIds.Count > 0;
+            ZilleWarTable.RequestApply();
+        }
+
         public static bool SaveConfig()
         {
             try
@@ -287,6 +659,8 @@ namespace GreatZilleSolution
             for (int t = 1; t <= 6; t++)
             {
                 string tFull = Path.Combine(_primaryAssetsDir, "map", $"T_Map_Zille_0{t}.png");
+                if (!File.Exists(tFull))
+                    tFull = Path.Combine(@"c:\Projects\Great Zille solution\maps\zille\v12\map", $"T_Map_Zille_0{t}.png");
                 string tPrev = Path.Combine(_primaryAssetsDir, "map", $"T_Map_Zille_0{t}_preview.png");
                 string usePath = File.Exists(tFull) ? tFull : tPrev;
                 if (File.Exists(usePath))
@@ -304,27 +678,31 @@ namespace GreatZilleSolution
                 MapBackgroundTexture = CreateFallbackMapTexture();
             }
 
-            // 3. Load Region tiles (Frame 41..45)
-            string regDir = Path.Combine(_primaryAssetsDir, "regions");
-            if (Directory.Exists(regDir))
+            // 3. Province masks. Each PNG is a 512 mask (red interior, green outline, transparent outside)
+            //    drawn by the Pales tile shader, so the map art stays visible underneath.
+            var wanted = new HashSet<string>();
+            if (CurrentConfig?.Tiles != null)
             {
-                for (int i = 41; i <= 45; i++)
+                foreach (var t in CurrentConfig.Tiles)
+                    if (!string.IsNullOrEmpty(t.TextureFile)) wanted.Add(t.TextureFile);
+            }
+            if (wanted.Count == 0)
+            {
+                for (int i = 41; i <= 45; i++) wanted.Add($"Frame {i}.png");
+            }
+            string regDir = Path.Combine(_primaryAssetsDir, "regions");
+            string repoDir = @"c:\Projects\Great Zille solution\maps\zille\v12\regions";
+            foreach (var fname in wanted)
+            {
+                string fpath = Path.Combine(regDir, fname);
+                if (!File.Exists(fpath)) fpath = Path.Combine(repoDir, fname);
+                if (!File.Exists(fpath))
                 {
-                    string fname = $"Frame {i}.png";
-                    string fpath = Path.Combine(regDir, fname);
-                    if (File.Exists(fpath))
-                    {
-                        var tex = LoadTextureFromFile(fpath);
-                        if (tex != null)
-                        {
-                            LoadedTextures[fname] = tex;
-                        }
-                    }
-                    else
-                    {
-                        MelonLogger.Warning($"[ZilleMap] Tile file missing: {fpath}");
-                    }
+                    MelonLogger.Warning($"[ZilleMap] Tile file missing: {fname}");
+                    continue;
                 }
+                var tex = LoadTextureFromFile(fpath);
+                if (tex != null) LoadedTextures[fname] = tex;
             }
 
             _texturesLoaded = true;

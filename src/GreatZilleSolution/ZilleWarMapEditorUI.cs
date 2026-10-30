@@ -1,14 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Il2Cpp;
 
 namespace GreatZilleSolution
 {
     public class ZilleWarMapEditorUI
     {
-        public bool IsOpen { get; set; } = false;
+        public static bool AnyOpen { get; private set; }
+        private bool _open;
+        public bool IsOpen
+        {
+            get => _open;
+            set { _open = value; AnyOpen = value; }
+        }
 
-        private Rect _windowRect = new Rect(30, 20, 1130, 715);
+        private Rect _windowRect = new Rect(30, 20, 1130, 760);
         private int _selectedTileIndex = 0;
         private bool _isDraggingTile = false;
         private int _draggedTileIndex = -1;
@@ -21,6 +28,12 @@ namespace GreatZilleSolution
         private Vector2 _pan = Vector2.zero;
         private bool _isPanning = false;
         private Vector2 _lastMousePos;
+        private int _unitPick;
+        private bool _spawnEnemy;
+        private int _unitKind;
+        private string _spawnStatus = "Wybierz region, strone i jednostke.";
+        private int _roadSourceIndex = -1;
+        private readonly List<WarUnitTypeData> _units = new List<WarUnitTypeData>();
 
         public void Initialize()
         {
@@ -73,8 +86,7 @@ namespace GreatZilleSolution
             }
             if (GUI.Button(new Rect(605, 22, 75, 26), "Wczytaj"))
             {
-                ZilleMapLayoutManager.LoadConfig();
-                ZilleMapLayoutManager.LoadAllTextures();
+                ZilleMapLayoutManager.ReloadSavedLayout();
             }
             if (GUI.Button(new Rect(685, 22, 140, 26), "Uklad 4 Miast"))
             {
@@ -193,8 +205,18 @@ namespace GreatZilleSolution
                 Rect tileRect = GetTileRectLocal(tile, mapRect);
 
                 // Mouse Down on Tile (Left Click = Select & Drag)
-                if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0 && tileRect.Contains(localMousePos))
+                if (!ZilleWarTable.LayoutLocked && currentEvent.type == EventType.MouseDown && currentEvent.button == 0 && tileRect.Contains(localMousePos))
                 {
+                    if (_roadSourceIndex >= 0 && _roadSourceIndex != i && _roadSourceIndex < tiles.Count)
+                    {
+                        var from = tiles[_roadSourceIndex];
+                        ZilleMapLayoutManager.ToggleRoad(from, tile);
+                        _roadSourceIndex = -1;
+                        _spawnStatus = "Droga: " + from.Name + " — " + tile.Name + ".";
+                        currentEvent.Use();
+                        _selectedTileIndex = i;
+                        continue;
+                    }
                     _selectedTileIndex = i;
                     _isDraggingTile = true;
                     _draggedTileIndex = i;
@@ -203,20 +225,21 @@ namespace GreatZilleSolution
                 }
 
                 // Dragging Tile
-                if (_isDraggingTile && _draggedTileIndex == i && currentEvent.type == EventType.MouseDrag)
+                if (!ZilleWarTable.LayoutLocked && _isDraggingTile && _draggedTileIndex == i && currentEvent.type == EventType.MouseDrag)
                 {
                     float newPxX = localMousePos.x - _dragOffset.x + tileRect.width * 0.5f;
                     float newPxY = localMousePos.y - _dragOffset.y + tileRect.height * 0.5f;
 
                     tile.NormalizedX = Mathf.Clamp01((newPxX - mapRect.x) / mapRect.width);
                     tile.NormalizedY = Mathf.Clamp01((newPxY - mapRect.y) / mapRect.height);
+                    ZilleWarTable.CommitEditorPosition(tile);
                     currentEvent.Use();
                 }
 
                 // Tile Background Backing
                 Color allegColor = GetAllegianceColor(tile.Allegiance);
                 Color backColor = allegColor;
-                backColor.a = 0.28f;
+                backColor.a = ZilleWarTable.LayoutLocked ? 0.25f : 0.28f;
                 DrawSolidRect(tileRect, backColor);
 
                 // Draw Tile Texture
@@ -228,7 +251,10 @@ namespace GreatZilleSolution
 
                 if (tileTex != null)
                 {
+                    Color savedTex = GUI.color;
+                    if (ZilleWarTable.LayoutLocked) GUI.color = new Color(1f, 1f, 1f, 0.25f);
                     GUI.DrawTexture(tileRect, tileTex, ScaleMode.ScaleToFit);
+                    GUI.color = savedTex;
                 }
 
                 // Outline
@@ -241,12 +267,16 @@ namespace GreatZilleSolution
                     DrawRectOutline(tileRect, allegColor, 1.5f);
                 }
 
-                // Label below tile
-                Color savedC = GUI.color;
-                GUI.color = allegColor;
-                GUI.Label(new Rect(tileRect.x - 30, tileRect.yMax - 4, tileRect.width + 60, 22),
-                    $"<b>{tile.Name}</b>");
-                GUI.color = savedC;
+                // Names only on the selected province once the full partition is on the table,
+                // otherwise the labels sit on top of the map.
+                if (i == _selectedTileIndex || tiles.Count <= 12)
+                {
+                    Color savedC = GUI.color;
+                    GUI.color = allegColor;
+                    GUI.Label(new Rect(tileRect.x - 30, tileRect.yMax - 4, tileRect.width + 60, 22),
+                        $"<b>{tile.Name}</b>");
+                    GUI.color = savedC;
+                }
             }
 
             if (currentEvent.type == EventType.MouseUp)
@@ -261,20 +291,34 @@ namespace GreatZilleSolution
             DrawRectOutline(canvasViewport, new Color(0.4f, 0.35f, 0.25f, 0.9f), 2f);
 
             // Help tooltip under canvas
-            GUI.Label(new Rect(20, 672, 600, 20), "<size=11><color=#a0aec0>LPM: Przesuń sektor | PPM / ŚPM: Przesuwanie mapy (Pan) | Kółko myszy: Zoom in/out</color></size>");
+            string lockHint = ZilleWarTable.LayoutLocked
+                ? "Uklad ZABLOKOWANY. Regiony sa na 25% opacity i nie da sie ich przesuwac."
+                : "LPM: Przesun sektor | PPM / SPM: Pan | Kolko: Zoom";
+            GUI.Label(new Rect(20, 672, 740, 20), "<size=11><color=#a0aec0>" + lockHint + "</color></size>");
 
             // ================= RIGHT: INSPECTOR & CONTROLS =================
-            Rect inspectorBox = new Rect(780, 55, 335, 615);
+            Rect inspectorBox = new Rect(780, 55, 335, 360);
             GUI.Box(inspectorBox, GUIContent.none);
 
-            float scrollHeight = 620f + (tiles.Count * 24f);
+            float scrollHeight = 420f + (tiles.Count * 24f);
             _inspectorScroll = GUI.BeginScrollView(
-                new Rect(785, 60, 325, 605),
+                new Rect(785, 60, 325, 350),
                 _inspectorScroll,
                 new Rect(0, 0, 305, scrollHeight)
             );
 
             float iy = 4f;
+            bool locked = ZilleWarTable.LayoutLocked;
+            if (GUI.Button(new Rect(4, iy, 295, 26), locked ? "[Uklad zablokowany]" : "Zablokuj uklad"))
+            {
+                ZilleWarTable.LayoutLocked = !ZilleWarTable.LayoutLocked;
+                ZilleWarTable.RequestApply();
+            }
+            iy += 30f;
+            GUI.Label(new Rect(4, iy, 295, 32), "<size=10>" + (locked
+                ? "Kazdy region ma 25% opacity. Przesuwanie jest wylaczone."
+                : "Po zablokowaniu regiony bledna i nie da sie ich ruszyc.") + "</size>");
+            iy += 34f;
 
             if (tiles.Count > 0 && _selectedTileIndex >= 0 && _selectedTileIndex < tiles.Count)
             {
@@ -304,18 +348,30 @@ namespace GreatZilleSolution
 
                 // Position X
                 GUI.Label(new Rect(4, iy, 300, 18), $"<b>Pozycja X:</b> {selTile.NormalizedX:F3}"); iy += 18f;
-                selTile.NormalizedX = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.NormalizedX, 0.05f, 0.95f); iy += 22f;
+                float nx = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.NormalizedX, 0.05f, 0.95f);
+                if (!locked && Mathf.Abs(nx - selTile.NormalizedX) > 0.0001f)
+                {
+                    selTile.NormalizedX = nx;
+                    ZilleWarTable.CommitEditorPosition(selTile);
+                }
+                iy += 22f;
 
                 // Position Y
                 GUI.Label(new Rect(4, iy, 300, 18), $"<b>Pozycja Y:</b> {selTile.NormalizedY:F3}"); iy += 18f;
-                selTile.NormalizedY = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.NormalizedY, 0.05f, 0.95f); iy += 22f;
+                float ny = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.NormalizedY, 0.05f, 0.95f);
+                if (!locked && Mathf.Abs(ny - selTile.NormalizedY) > 0.0001f)
+                {
+                    selTile.NormalizedY = ny;
+                    ZilleWarTable.CommitEditorPosition(selTile);
+                }
+                iy += 22f;
 
                 // Size
                 float displayWidth = (selTile.Width > 100f) ? 512f : selTile.Width;
                 GUI.Label(new Rect(4, iy, 300, 18), $"<b>Rozmiar:</b> {displayWidth:F0}px (Asset 512x512)"); iy += 18f;
                 float sliderVal = (selTile.Width > 100f) ? (selTile.Width / 512f) * 48f : selTile.Width;
                 float newSize = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), sliderVal, 20f, 90f);
-                if (Mathf.Abs(newSize - sliderVal) > 0.5f)
+                if (!locked && Mathf.Abs(newSize - sliderVal) > 0.5f)
                 {
                     selTile.Width = (newSize / 48f) * 512f;
                     selTile.Height = selTile.Width;
@@ -323,22 +379,32 @@ namespace GreatZilleSolution
                 iy += 24f;
 
                 GUI.Label(new Rect(4, iy, 300, 18), $"<b>Skala w grze (3D):</b> {selTile.WorldScale:F3}"); iy += 18f;
-                float newWorld = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), selTile.WorldScale <= 0f ? 0.22f : selTile.WorldScale, 0.05f, 0.70f);
-                if (Mathf.Abs(newWorld - selTile.WorldScale) > 0.0005f) selTile.WorldScale = newWorld;
+                float shownWorld = selTile.WorldScale <= 0f ? 0.22f : selTile.WorldScale;
+                float newWorld = GUI.HorizontalSlider(new Rect(4, iy, 290, 18), shownWorld, 0.05f, 0.70f);
+                if (!locked && Mathf.Abs(newWorld - selTile.WorldScale) > 0.0005f)
+                {
+                    selTile.WorldScale = newWorld;
+                    ZilleWarTable.RequestApply();
+                }
                 iy += 24f;
 
                 // Allegiance selector
                 GUI.Label(new Rect(4, iy, 300, 18), "<b>Frakcja kontrolujaca:</b>"); iy += 20f;
-                if (GUI.Button(new Rect(4, iy, 95, 24), selTile.Allegiance == "Rizia" ? "[V Rizia]" : "Rizia")) selTile.Allegiance = "Rizia";
-                if (GUI.Button(new Rect(103, iy, 95, 24), selTile.Allegiance == "Wehlen" ? "[V Wehlen]" : "Wehlen")) selTile.Allegiance = "Wehlen";
-                if (GUI.Button(new Rect(202, iy, 95, 24), selTile.Allegiance == "Contested" ? "[V Sporny]" : "Sporny")) selTile.Allegiance = "Contested";
+                if (GUI.Button(new Rect(4, iy, 95, 24), selTile.Allegiance == "Rizia" ? "[V Rizia]" : "Rizia"))
+                { selTile.Allegiance = "Rizia"; ZilleWarTable.RequestApply(); }
+                if (GUI.Button(new Rect(103, iy, 95, 24), selTile.Allegiance == "Wehlen" ? "[V Wehlen]" : "Wehlen"))
+                { selTile.Allegiance = "Wehlen"; ZilleWarTable.RequestApply(); }
+                if (GUI.Button(new Rect(202, iy, 95, 24), selTile.Allegiance == "EmptySea" ? "[V Morze]" : "Morze"))
+                { selTile.Allegiance = "EmptySea"; ZilleWarTable.RequestApply(); }
                 iy += 30f;
 
                 // Strategic attributes
                 GUI.Label(new Rect(4, iy, 300, 18), "<b>Wlasciwosci taktyczne:</b>"); iy += 20f;
                 selTile.IsSupplyHub = GUI.Toggle(new Rect(4, iy, 290, 20), selTile.IsSupplyHub, " Wezel zaopatrzenia (Hub)"); iy += 22f;
                 selTile.IsPort = GUI.Toggle(new Rect(4, iy, 290, 20), selTile.IsPort, " Port morski"); iy += 22f;
-                selTile.IsAirfield = GUI.Toggle(new Rect(4, iy, 290, 20), selTile.IsAirfield, " Lotnisko wojskowe"); iy += 24f;
+                bool air = GUI.Toggle(new Rect(4, iy, 290, 20), selTile.IsAirfield, " Lotnisko wojskowe");
+                if (air != selTile.IsAirfield) { selTile.IsAirfield = air; ZilleWarTable.RequestApply(); }
+                iy += 24f;
 
                 // Fort level
                 GUI.Label(new Rect(4, iy, 120, 20), $"Fortyfikacje: {selTile.FortLevel}");
@@ -355,8 +421,18 @@ namespace GreatZilleSolution
                 {
                     if (o == _selectedTileIndex) continue;
                     var other = tiles[o];
-                    bool isConnected = selTile.AdjacentIds.Contains(other.Id);
-                    bool toggle = GUI.Toggle(new Rect(8, iy, 285, 20), isConnected, $" Polacz z: {other.Name}");
+                    bool isConnected = selTile.AdjacentIds != null && selTile.AdjacentIds.Contains(other.Id);
+                    bool hasRoad = selTile.RoadToIds != null && selTile.RoadToIds.Contains(other.Id);
+                    bool toggle = GUI.Toggle(new Rect(8, iy, 200, 20), isConnected, $" Polacz: {other.Name}");
+                    if (isConnected)
+                    {
+                        bool roadNow = GUI.Toggle(new Rect(210, iy, 80, 20), hasRoad, hasRoad ? "[Droga]" : "Droga");
+                        if (roadNow != hasRoad)
+                        {
+                            ZilleMapLayoutManager.ToggleRoad(selTile, other);
+                            ZilleWarTable.InvalidateRoads();
+                        }
+                    }
                     iy += 22f;
 
                     if (toggle != isConnected)
@@ -377,8 +453,11 @@ namespace GreatZilleSolution
 
             GUI.EndScrollView();
 
+            if (tiles.Count > 0 && _selectedTileIndex >= 0 && _selectedTileIndex < tiles.Count)
+                DrawUnitPlacement(tiles[_selectedTileIndex]);
+
             // Bottom action buttons under Inspector
-            float botY = 675f;
+            float botY = 720f;
             if (GUI.Button(new Rect(780, botY, 160, 30), "+ Nowy Region"))
             {
                 string anchor = tiles.Count > 0 ? tiles[Mathf.Clamp(_selectedTileIndex, 0, tiles.Count - 1)].Id : null;
@@ -393,6 +472,107 @@ namespace GreatZilleSolution
             }
 
             GUI.DragWindow(new Rect(0, 0, 1130, 24));
+        }
+
+        private void DrawUnitPlacement(ZilleTileData selTile)
+        {
+            EnsureUnits();
+            const float x = 785f;
+            float y = 420f;
+            GUI.Box(new Rect(780, y, 335, 248), GUIContent.none);
+            y += 4f;
+            GUI.Label(new Rect(x, y, 320, 18), "<b>Stawianie na mapie — " + selTile.Name + "</b>");
+            y += 20f;
+            if (GUI.Button(new Rect(x, y, 155, 22), _spawnEnemy ? "Rizia" : "[Rizia]")) _spawnEnemy = false;
+            if (GUI.Button(new Rect(x + 160, y, 155, 22), _spawnEnemy ? "[Wehlen]" : "Wehlen")) _spawnEnemy = true;
+            y += 26f;
+
+            string[] kinds = { "Wszystkie", "Miasta", "Lotniska", "Wojska" };
+            for (int k = 0; k < kinds.Length; k++)
+            {
+                if (GUI.Button(new Rect(x + k * 78, y, 76, 20), _unitKind == k ? "[" + kinds[k] + "]" : kinds[k]))
+                {
+                    _unitKind = k;
+                    _unitPick = 0;
+                }
+            }
+            y += 24f;
+
+            var shown = FilteredUnits();
+            if (shown.Count == 0)
+            {
+                GUI.Label(new Rect(x, y, 320, 32), "<size=10>Brak jednostek tej kategorii. Wejdz do teatru (F6).</size>");
+                y += 34f;
+            }
+            else
+            {
+                _unitPick = Mathf.Clamp(_unitPick, 0, shown.Count - 1);
+                if (GUI.Button(new Rect(x, y, 28, 22), "<")) _unitPick = (_unitPick + shown.Count - 1) % shown.Count;
+                GUI.Label(new Rect(x + 32, y, 250, 22), ZilleWarTable.UnitLabel(shown[_unitPick]));
+                if (GUI.Button(new Rect(x + 286, y, 28, 22), ">")) _unitPick = (_unitPick + 1) % shown.Count;
+                y += 26f;
+                string side = _spawnEnemy ? "Wehlen" : "Rizia";
+                if (GUI.Button(new Rect(x, y, 314, 24), "Postaw (" + side + "): " + ZilleWarTable.UnitLabel(shown[_unitPick])))
+                {
+                    var ut = shown[_unitPick];
+                    if (ZilleWarTable.IsCityUnit(ut)) selTile.IsCity = true;
+                    if (ZilleWarTable.IsAirUnit(ut)) selTile.IsAirfield = true;
+                    ZilleWarTable.RequestApply();
+                    _spawnStatus = ZilleWarTable.PlaceUnit(selTile, ut, _spawnEnemy);
+                }
+                y += 28f;
+            }
+
+            string roadLabel = _roadSourceIndex == _selectedTileIndex ? "[Droga z tej prowincji]" : "Droga z tej prowincji";
+            if (GUI.Button(new Rect(x, y, 314, 22), roadLabel))
+                _roadSourceIndex = _roadSourceIndex == _selectedTileIndex ? -1 : _selectedTileIndex;
+            y += 26f;
+            if (GUI.Button(new Rect(x, y, 154, 22), "Miasto tutaj"))
+            {
+                selTile.IsCity = true;
+                if (!_spawnEnemy) selTile.Allegiance = "Rizia";
+                else if (selTile.Allegiance == "Rizia") selTile.Allegiance = "Wehlen";
+                ZilleWarTable.RequestApply();
+                var city = ZilleWarTable.FindUnit(ZilleWarTable.IsCityUnit, _spawnEnemy ? "arces" : "rizia");
+                _spawnStatus = city == null ? "Brak typu miasta." : ZilleWarTable.PlaceUnit(selTile, city, _spawnEnemy);
+            }
+            if (GUI.Button(new Rect(x + 160, y, 154, 22), "Lotnisko tutaj"))
+            {
+                selTile.IsAirfield = true;
+                ZilleWarTable.RequestApply();
+                var air = ZilleWarTable.FindUnit(ZilleWarTable.IsAirUnit, null);
+                _spawnStatus = air == null
+                    ? "Lotnisko oznaczone. Brak modelu samolotu w pamieci."
+                    : ZilleWarTable.PlaceUnit(selTile, air, _spawnEnemy);
+            }
+            y += 26f;
+            GUI.Label(new Rect(x, y, 320, 36), "<size=10>Rizia to twoje jednostki z menu po lewej. Wehlen to wrog. Droga: zaznacz prowincje, potem kliknij druga.</size>");
+            y += 36f;
+            GUI.Label(new Rect(x, y, 320, 32), "<size=10><color=#d6d3c4>" + _spawnStatus + "</color></size>");
+        }
+
+        private List<WarUnitTypeData> FilteredUnits()
+        {
+            var list = new List<WarUnitTypeData>();
+            for (int i = 0; i < _units.Count; i++)
+            {
+                var u = _units[i];
+                if (u == null) continue;
+                if (_unitKind == 1 && !ZilleWarTable.IsCityUnit(u)) continue;
+                if (_unitKind == 2 && !ZilleWarTable.IsAirUnit(u)) continue;
+                if (_unitKind == 3 && !ZilleWarTable.IsTroopUnit(u)) continue;
+                list.Add(u);
+            }
+            return list;
+        }
+
+        private void EnsureUnits()
+        {
+            if (_units.Count > 0 && _units[0] != null) return;
+            _units.Clear();
+            var src = ZilleWarTable.UnitTypes();
+            for (int i = 0; i < src.Count; i++)
+                if (src[i] != null) _units.Add(src[i]);
         }
 
         private Vector2 GetTileCenterLocal(ZilleTileData tile, Rect mapRect)
@@ -416,9 +596,11 @@ namespace GreatZilleSolution
         {
             return allegiance switch
             {
-                "Rizia" => new Color(0.3f, 0.95f, 0.4f),
-                "Wehlen" => new Color(0.95f, 0.3f, 0.3f),
-                _ => new Color(0.9f, 0.85f, 0.3f)
+                "Rizia" => new Color(0.45f, 0.75f, 0.95f),
+                "Wehlen" => new Color(0.85f, 0.45f, 0.40f),
+                "Empty" => new Color(0.75f, 0.75f, 0.75f),
+                "EmptySea" => new Color(0.55f, 0.62f, 0.68f),
+                _ => new Color(0.75f, 0.75f, 0.75f)
             };
         }
 

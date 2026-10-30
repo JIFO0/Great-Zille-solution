@@ -12,6 +12,101 @@ namespace GreatZilleSolution
     {
         private static bool _vanillaConvsPatched = false;
 
+        public static void IsInitialDeploymentTilePostfix(WarTile __instance, ref bool __result)
+        {
+            if (__result || __instance == null || ZilleWarTable.ScenarioStarted) return;
+            if (IsRiziaLand(__instance)) __result = true;
+        }
+
+        public static void IsSelectedDeploymentUnitDeployableToTilePostfix(WarTile __instance, ref bool __result)
+        {
+            if (__result || __instance == null || ZilleWarTable.ScenarioStarted) return;
+            if (IsRiziaLand(__instance)) __result = true;
+        }
+
+        public static void CanDeploySelectedUnitToTilePostfix(WarTile __0, ref bool __result)
+        {
+            if (__result || __0 == null || ZilleWarTable.ScenarioStarted) return;
+            if (IsRiziaLand(__0)) __result = true;
+        }
+
+        private static bool IsRiziaLand(WarTile tile)
+        {
+            string name = tile.gameObject != null ? tile.gameObject.name : "";
+            if (name.StartsWith("Tile_")) name = name.Substring("Tile_".Length);
+            var cfg = ZilleMapLayoutManager.CurrentConfig;
+            if (cfg?.Tiles == null) return false;
+            for (int i = 0; i < cfg.Tiles.Count; i++)
+            {
+                var t = cfg.Tiles[i];
+                if (t.TileNumber == name && t.Allegiance == "Rizia" && !t.IsSea) return true;
+            }
+            return false;
+        }
+
+        public static void SupplyLineSetupTilesPostfix(WarSupplyLine __instance)
+        {
+            if (__instance?.tileNames == null || __instance.tileNames.Count < 2) return;
+            var list = new Il2CppSystem.Collections.Generic.List<WarTile>();
+            for (int i = 0; i < __instance.tileNames.Count; i++)
+            {
+                var wt = ZilleWarTable.FindLiveTile(__instance.tileNames[i]);
+                if (wt != null) list.Add(wt);
+            }
+            if (list.Count >= 2) __instance.Tiles = list;
+        }
+
+        public static void OnInitialDeploymentFinishedPostfix()
+        {
+            ZilleWarTable.MarkOperationBegun();
+        }
+
+        public static bool CanFastMoveOnSupplyTilePrefix(ref bool __result)
+        {
+            __result = false;
+            return false;
+        }
+
+        /// <summary>
+        /// The stock check samples the mask alpha and rejects our provinces, so the outline and the hold timer never start.
+        /// A hit on the province mesh is already inside that province.
+        /// </summary>
+        public static bool IsHoveringPrefix(RaycastHit hit, ref bool __result)
+        {
+            try
+            {
+                var tile = hit.collider != null ? hit.collider.GetComponentInParent<WarTile>() : null;
+                if (tile == null) return true;
+                var rend = tile.GetWarTileRenderer();
+                var tex = rend != null ? rend.material.GetTexture("_Tile_Texture") as Texture2D : null;
+                if (tex != null && tex.isReadable)
+                {
+                    var sample = tex.GetPixelBilinear(hit.textureCoord.x, hit.textureCoord.y);
+                    __result = sample.a >= 0.5f;
+                    return false;
+                }
+                __result = true;
+                return false;
+            }
+            catch { }
+            return true;
+        }
+
+        public static bool IsCurrentOperationTutorialPrefix(WarOperationManager __instance, ref bool __result)
+        {
+            try
+            {
+                var op = __instance != null ? __instance.GetCurrentOperation() : null;
+                var data = op != null ? op.GetOperationData() : null;
+                __result = data != null && data.OperationProperties != null && data.OperationProperties.IsTutorial;
+            }
+            catch
+            {
+                __result = false;
+            }
+            return false;
+        }
+
         public static void RegisterManualPatches(HarmonyLib.Harmony harmony)
         {
             try
@@ -36,6 +131,64 @@ namespace GreatZilleSolution
                     nameof(TokenInteractionPanel.Setup),
                     new Type[] { typeof(Token) }
                 );
+
+                var deployFlag = AccessTools.Method(typeof(WarTile), nameof(WarTile.IsInitialDeploymentTile));
+                if (deployFlag != null)
+                {
+                    var post = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsInitialDeploymentTilePostfix));
+                    harmony.Patch(deployFlag, postfix: new HarmonyMethod(post));
+                    MelonLogger.Msg("[Great Zille] Rizian provinces stay deployable from the side menu.");
+                }
+                var selectedFlag = AccessTools.Method(typeof(WarTile), nameof(WarTile.IsSelectedDeploymentUnitDeployableToTile));
+                if (selectedFlag != null)
+                {
+                    var post = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsSelectedDeploymentUnitDeployableToTilePostfix));
+                    harmony.Patch(selectedFlag, postfix: new HarmonyMethod(post));
+                }
+                var canDeploy = AccessTools.Method(typeof(WarDeploymentPanel), "CanDeploySelectedUnitToTile");
+                if (canDeploy != null)
+                {
+                    var post = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CanDeploySelectedUnitToTilePostfix));
+                    harmony.Patch(canDeploy, postfix: new HarmonyMethod(post));
+                }
+
+                var fastMove = AccessTools.Method(typeof(WarToken), "CanFastMoveOnSupplyTile");
+                if (fastMove != null)
+                {
+                    var fastPrefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CanFastMoveOnSupplyTilePrefix));
+                    harmony.Patch(fastMove, prefix: new HarmonyMethod(fastPrefix));
+                    MelonLogger.Msg("[Great Zille] Supply-line check no longer aborts deployment.");
+                }
+
+                var hovering = AccessTools.Method(typeof(WarTileRaycaster), "IsHovering");
+                if (hovering != null)
+                {
+                    var hoverPrefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsHoveringPrefix));
+                    harmony.Patch(hovering, prefix: new HarmonyMethod(hoverPrefix));
+                    MelonLogger.Msg("[Great Zille] Province hover uses the tile under the cursor.");
+                }
+
+                var setupTiles = AccessTools.Method(typeof(WarSupplyLine), nameof(WarSupplyLine.SetupTiles));
+                if (setupTiles != null)
+                {
+                    var tilesPost = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SupplyLineSetupTilesPostfix));
+                    harmony.Patch(setupTiles, postfix: new HarmonyMethod(tilesPost));
+                }
+
+                var begun = AccessTools.Method(typeof(WarFlowManager), nameof(WarFlowManager.OnInitialDeploymentFinished));
+                if (begun != null)
+                {
+                    var begunPost = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnInitialDeploymentFinishedPostfix));
+                    harmony.Patch(begun, postfix: new HarmonyMethod(begunPost));
+                }
+
+                var tutorialMethod = AccessTools.Method(typeof(WarOperationManager), nameof(WarOperationManager.IsCurrentOperationTutorial));
+                if (tutorialMethod != null)
+                {
+                    var tutorialPrefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsCurrentOperationTutorialPrefix));
+                    harmony.Patch(tutorialMethod, prefix: new HarmonyMethod(tutorialPrefix));
+                    MelonLogger.Msg("[Great Zille] Hooked IsCurrentOperationTutorial so unit placement does not crash.");
+                }
 
                 if (panelSetupMethod != null)
                 {
@@ -108,6 +261,7 @@ namespace GreatZilleSolution
                 {
                     MelonLogger.Msg("[WAR ENGINE] Intercepted SetupWarFragment for WarFragment_Zille_1_1! Activating Zille Theatre...");
                     WarOperationZilleManager.CurrentTheatre = ActiveWarTheatre.Zille;
+                    WarOperationZilleManager.EnsureWarSave();
                     ZilleMapLayoutManager.EnsureTexturesLoaded();
                     WarOperationZilleManager.RegisterNativeZilleEntities();
                     WarOperationZilleManager.SetupCustomZilleOperation();
@@ -395,10 +549,11 @@ namespace GreatZilleSolution
                         }
                     }
 
+                    WarOperationZilleManager.ArmNativeZilleDeployment();
                     EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", wfd, () => {
-                        MelonLogger.Msg("[TOKEN PANEL] Starting Zille War Theatre from Zille war event button!");
-                        WarOperationZilleManager.EnterZilleWarTheatre();
-                    });
+                        MelonLogger.Msg("[TOKEN PANEL] Native Zille operation click — skin the table when the war map arrives.");
+                        ZilleWarTable.SkinEnabled = true;
+                    }, keepNativeClick: true);
                 }
             }
             catch (Exception ex)
@@ -407,7 +562,9 @@ namespace GreatZilleSolution
             }
         }
 
-        private static void EnsureButtonExists(TokenInteractionPanel panel, string title, string subtitle, StoryFragmentData fragmentData, Action onClick)
+        private static readonly HashSet<int> _nativeClickArmed = new HashSet<int>();
+
+        private static void EnsureButtonExists(TokenInteractionPanel panel, string title, string subtitle, StoryFragmentData fragmentData, Action onClick, bool keepNativeClick = false)
         {
             if (panel == null || panel.templateInteractionButton == null || panel.contentHolder == null) return;
 
@@ -420,13 +577,7 @@ namespace GreatZilleSolution
                     if (existing != null && existing.titleText != null && existing.titleText.text == title)
                     {
                         if (fragmentData != null) existing.storyFragmentData = fragmentData;
-                        if (existing.button != null)
-                        {
-                            existing.button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
-                            existing.button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => {
-                                onClick?.Invoke();
-                            }));
-                        }
+                        WireButton(existing.button, onClick, keepNativeClick);
                         MakeButtonVisible(existing, panel);
                         return;
                     }
@@ -443,13 +594,7 @@ namespace GreatZilleSolution
                 if (fragmentData != null) tib.storyFragmentData = fragmentData;
                 if (tib.titleText != null) tib.titleText.text = title;
                 if (tib.subtitleText != null) tib.subtitleText.text = subtitle;
-                if (tib.button != null)
-                {
-                    tib.button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
-                    tib.button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => {
-                        onClick?.Invoke();
-                    }));
-                }
+                WireButton(tib.button, onClick, keepNativeClick);
 
                 MakeButtonVisible(tib, panel);
 
@@ -460,6 +605,16 @@ namespace GreatZilleSolution
 
                 MelonLogger.Msg($"[TOKEN PANEL] Successfully injected visible native action button: '{title}'");
             }
+        }
+
+        private static void WireButton(UnityEngine.UI.Button button, Action onClick, bool keepNativeClick)
+        {
+            if (button == null) return;
+            if (!keepNativeClick)
+                button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            int id = button.GetInstanceID();
+            if (keepNativeClick && !_nativeClickArmed.Add(id)) return;
+            button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => { onClick?.Invoke(); }));
         }
 
         private static void MakeButtonVisible(TemplateInteractionButton tib, TokenInteractionPanel panel)

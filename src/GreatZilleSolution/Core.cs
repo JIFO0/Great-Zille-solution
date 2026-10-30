@@ -13,10 +13,11 @@ namespace GreatZilleSolution
         public static MelonLogger.Instance Log { get; private set; }
 
         private bool _showDebugMenu = false;
-        private Rect _debugWindowRect = new Rect(20, 20, 450, 480);
+        private Rect _debugWindowRect = new Rect(20, 20, 450, 640);
+        private int _roadProv;
         private ZilleWarMapEditorUI _editorUI;
         private ZilleTheatreMenu _theatreMenu;
-        private bool _dockExpanded = false;
+        private bool _dockExpanded = true;
 
         public override void OnInitializeMelon()
         {
@@ -106,15 +107,21 @@ namespace GreatZilleSolution
                 }
 
                 ZilleWarTable.HandlePlacementEvent(Event.current);
-                if (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout) ZilleWarTable.DrawPlacementHud();
+                ZilleWarTable.HandleMapEdit(Event.current);
+                bool nativeDeployment = ZilleWarTable.NativeDeploymentOpen();
+                if (nativeDeployment) _dockExpanded = false;
+                ZilleWarTable.DrawMapEditBar();
+                ZilleRightDock.Draw();
+                if (!nativeDeployment && (Event.current.type == EventType.Repaint || Event.current.type == EventType.Layout))
+                    ZilleWarTable.DrawPlacementHud();
 
-                // Top-right watermark indicator
-                GUI.color = Color.white;
-                string statusText = "[ Great Zille v0.4.9 | F9 Wojna | F10 Mapa | F11 Teatr ]";
-                GUI.Box(new Rect(Screen.width - 470, 10, 460, 28), statusText);
-
-                // Draw Bottom-Left Quick Action Toolbar
-                DrawBottomLeftToolbar();
+                if (!nativeDeployment)
+                {
+                    GUI.color = Color.white;
+                    string statusText = "[ Great Zille v0.4.9 | F9 Wojna | F10 Mapa | F11 Teatr ]";
+                    GUI.Box(new Rect(Screen.width - 470, 10, 460, 28), statusText);
+                    DrawBottomLeftToolbar();
+                }
 
                 // Draw Debug War Menu
                 if (_showDebugMenu)
@@ -224,7 +231,7 @@ namespace GreatZilleSolution
             // Button 6: Quick Reload Layout
             if (GUI.Button(new Rect(btnX, curY, btnW, 24f), "[Wczytaj uklad]"))
             {
-                ZilleMapLayoutManager.LoadConfig();
+                ZilleMapLayoutManager.ReloadSavedLayout();
                 ZilleMapLayoutManager.LoadAllTextures();
                 DialogueHelper.ShowAlert("[Zille] Konfiguracja i tekstury zaladowane.");
             }
@@ -283,6 +290,7 @@ namespace GreatZilleSolution
             y += 36f;
 
             GUI.color = Color.white;
+            DrawRoadDebug(x, w, ref y);
             if (GUI.Button(new Rect(x, y, w, 26f), "[Wroc do Mapy Glownej Rizii]"))
             {
                 WarOperationZilleManager.ReturnToCivilianMap();
@@ -317,6 +325,39 @@ namespace GreatZilleSolution
             }
 
             GUI.DragWindow(new Rect(0, 0, 450, 24));
+        }
+
+        private void DrawRoadDebug(float x, float w, ref float y)
+        {
+            var tiles = ZilleMapLayoutManager.CurrentConfig?.Tiles;
+            if (tiles == null || tiles.Count == 0) return;
+            GUI.Label(new Rect(x, y, w, 18f), "<b>Drogi (dodaj / usun)</b>");
+            y += 20f;
+            _roadProv = Mathf.Clamp(_roadProv, 0, tiles.Count - 1);
+            if (GUI.Button(new Rect(x, y, 28f, 22f), "<")) _roadProv = (_roadProv + tiles.Count - 1) % tiles.Count;
+            GUI.Label(new Rect(x + 32f, y, w - 64f, 22f), tiles[_roadProv].Name);
+            if (GUI.Button(new Rect(x + w - 28f, y, 28f, 22f), ">")) _roadProv = (_roadProv + 1) % tiles.Count;
+            y += 26f;
+            var sel = tiles[_roadProv];
+            if (sel.AdjacentIds == null) return;
+            int shown = 0;
+            for (int i = 0; i < sel.AdjacentIds.Count && shown < 6; i++)
+            {
+                ZilleTileData other = null;
+                for (int t = 0; t < tiles.Count; t++)
+                    if (tiles[t].Id == sel.AdjacentIds[i]) { other = tiles[t]; break; }
+                if (other == null || other.IsSea) continue;
+                bool has = sel.RoadToIds != null && sel.RoadToIds.Contains(other.Id);
+                if (GUI.Button(new Rect(x, y, w, 20f), (has ? "[usun] " : "[dodaj] ") + other.Name))
+                {
+                    ZilleMapLayoutManager.ToggleRoad(sel, other);
+                    ZilleWarTable.InvalidateRoads();
+                    ZilleMapLayoutManager.SaveConfig();
+                }
+                y += 22f;
+                shown++;
+            }
+            y += 6f;
         }
     }
 }

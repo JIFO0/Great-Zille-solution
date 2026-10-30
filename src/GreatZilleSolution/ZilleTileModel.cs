@@ -29,8 +29,29 @@ namespace GreatZilleSolution
 
         // Enemy reinforcement waves may spawn on this province (WarTile.SetIsReinforcementTile).
         public bool IsReinforcementTile { get; set; } = false;
-        
-        // IDs of adjacent connected tiles
+
+        // From the v12 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
+        public bool IsSea { get; set; } = false;
+        public bool IsCity { get; set; } = false;
+        public bool IsCoastal { get; set; } = false;
+        // Placed from the right-hand authoring menu. The game already understands these tile roles.
+        public bool HasCoastalArtillery { get; set; } = false;
+        public bool HasNoAirZone { get; set; } = false;
+        public bool HasNoNavalLanding { get; set; } = false;
+        public bool IsBorder { get; set; } = false;
+        public bool IsCitySurroundings { get; set; } = false;
+        public string Region { get; set; } = "";
+        // plains | hills | mountains. Mountains become WarTile.GroundType.Mountain.
+        public string Terrain { get; set; } = "";
+        // main | secondary | minor | none — the best road drawn inside the province.
+        public string RoadClass { get; set; } = "none";
+        public bool HasMainRoad { get; set; } = false;
+        public bool HasRailway { get; set; } = false;
+        public int RoadLinkCount { get; set; } = 0;
+        // Neighbour tile ids this province has a drawn road to.
+        public List<string> RoadToIds { get; set; } = new List<string>();
+
+        // IDs of adjacent connected tiles (the v12 movement graph, including road and strait links).
         public List<string> AdjacentIds { get; set; } = new List<string>();
 
         // ---- In-game placement (see docs/ZILLE_MAP_INTEGRATION.md) ----
