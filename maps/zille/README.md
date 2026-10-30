@@ -168,3 +168,29 @@ Zones: the Brenas border zone is at least 2 provinces deep, Marbelas included. T
 Sea is an angular, coast-hugging lane from Mave Nortus north around the Munat cape and down to Isor, plus 1–2 tile straits to Kratsna (the northern Brenas link) and Port Rotsla. There are no sea provinces elsewhere.
 
 Files: `v8/zille_vector.svg`, `v8/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
+
+### v9
+
+A new province partition at true tile scale, built from scratch on the unchanged v6–v8 map. 127 provinces.
+
+Land:
+
+- 40 Zille (`ZilleTile_1`–`40`)
+- 28 northern Brenas (`ZilleTile_41`–`68`)
+- 29 Wehlen (`ZilleTile_69`–`97`)
+
+Sea: 30 provinces (`ZilleTile_S1`–`S30`).
+
+On the 12288×8192 map, every province’s longest bbox side, including stroke and blur, is under 980 px (max 961) and over 512 px (median 808; 114 of 127 fall in 650–950). The allowed exceptions are the small cities Munat, Isor, and Dapalle, and the small island Rotsla.
+
+Tiles are 512×512, with the province scaled by 512/980. Style: fill `#FF0000`, stroke `#00F800` at width 20, blur `stdDeviation` 6. The map overlay uses stroke about 38.28 and `stdDeviation` about 11.48. The manifest records the scale, the map bbox, and the tile placement.
+
+Land cells are organic watershed fragments, agglomerated under a min/max bbox rule, then rebalanced and edge-smoothed. The same 8 city provinces remain. Zille covers the whole urban area and is named Zille City. Wiktrany, Mave Nortus, and Nanta are grown around their urban outlines to reach the size rule.
+
+Zones are deeper for the bigger provinces: Brenas at least 2 deep, including Marbelas; Zille about the same extent; Wehlen 2 or more deep toward Kratsna.
+
+Sea tiles cover the whole channel between Isor and Kratsna, including Port Rotsla. The lane from the Munat cape to Mave Nortus and the northern Brenas link are kept.
+
+All province names are unique.
+
+Files: `v9/zille_vector.svg`, `v9/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
