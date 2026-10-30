@@ -1,0 +1,92 @@
+{
+ "counts": {
+  "Zille": 79,
+  "Brenas": 42,
+  "Wehlen": 42,
+  "Sea": 27
+ },
+ "total": 190,
+ "overlaps": [],
+ "land_on_water": [],
+ "sea_on_land": [],
+ "land_zone_holes": [],
+ "land_zone_uncovered_total": 355,
+ "sea_corridor_holes": [],
+ "tile_violations": [],
+ "max_tile_alpha_extent_px": 451,
+ "max_map_extent_incl_effects": 863.2,
+ "limit_map": 980,
+ "max_shape_bbox_map": 763.5,
+ "tiles_512": true,
+ "count_ok": true,
+ "cities": [
+  [
+   "ZilleTile_1",
+   "Munat"
+  ],
+  [
+   "ZilleTile_16",
+   "Nanta"
+  ],
+  [
+   "ZilleTile_18",
+   "Isor"
+  ],
+  [
+   "ZilleTile_49",
+   "Mave Nortus"
+  ],
+  [
+   "ZilleTile_57",
+   "Wiktrany"
+  ],
+  [
+   "ZilleTile_72",
+   "Zille"
+  ],
+  [
+   "ZilleTile_96",
+   "Dapalle"
+  ],
+  [
+   "ZilleTile_127",
+   "Kratsna"
+  ]
+ ],
+ "smallest_land": [
+  [
+   13872,
+   "ZilleTile_1"
+  ],
+  [
+   22536,
+   "ZilleTile_96"
+  ],
+  [
+   22827,
+   "ZilleTile_18"
+  ],
+  [
+   32529,
+   "ZilleTile_57"
+  ],
+  [
+   46618,
+   "ZilleTile_16"
+  ]
+ ],
+ "smallest_sea": [
+  [
+   88325,
+   "ZilleTile_S21"
+  ],
+  [
+   96766,
+   "ZilleTile_S18"
+  ],
+  [
+   97931,
+   "ZilleTile_S26"
+  ]
+ ]
+}

@@ -1,0 +1,390 @@
+from,from_name,to,to_name,link_type,direction,road_link,road_link_class,rail_link,road_ids,shared_border,water_distance,centroid_distance,source
+ZilleTile_1,Corvis North,ZilleTile_2,Munat,land,both,true,secondary,false,road_to_cape,528,,537,border
+ZilleTile_1,Corvis North,ZilleTile_4,Corvis East,land,both,false,none,false,,116,,710,border
+ZilleTile_1,Corvis North,ZilleTile_6,Quella,land,both,false,none,false,,372,,656,border
+ZilleTile_1,Corvis North,ZilleTile_7,Corvis,land,both,true,secondary,false,road_to_cape,520,,601,border
+ZilleTile_1,Corvis North,ZilleTile_S15,Corvis Waters,coastal,land<->sea (embark/landing),false,none,false,,468,,605,border
+ZilleTile_1,Corvis North,ZilleTile_S19,Quella Roads,coastal,land<->sea (embark/landing),false,none,false,,196,,677,border
+ZilleTile_2,Munat,ZilleTile_3,Manes Riuz,strait,both,false,none,false,,,396,972,strait
+ZilleTile_2,Munat,ZilleTile_4,Corvis East,land,both,false,none,false,,624,,565,border
+ZilleTile_2,Munat,ZilleTile_S10,Munat Banks,coastal,land<->sea (embark/landing),false,none,false,,724,,694,border
+ZilleTile_2,Munat,ZilleTile_S15,Corvis Waters,coastal,land<->sea (embark/landing),false,none,false,,404,,669,border
+ZilleTile_2,Munat,ZilleTile_S16,Munat Shoals,coastal,land<->sea (embark/landing),false,none,false,,600,,487,border
+ZilleTile_3,Manes Riuz,ZilleTile_5,Tirsa Northwest,strait,both,false,none,false,,,351,841,strait
+ZilleTile_3,Manes Riuz,ZilleTile_S11,Manes Riuz Sound,coastal,land<->sea (embark/landing),false,none,false,,148,,553,border
+ZilleTile_3,Manes Riuz,ZilleTile_S12,Munat Deep,coastal,land<->sea (embark/landing),false,none,false,,428,,550,border
+ZilleTile_3,Manes Riuz,ZilleTile_S16,Munat Shoals,coastal,land<->sea (embark/landing),false,none,false,,956,,486,border
+ZilleTile_3,Manes Riuz,ZilleTile_S20,Nanta Waters,coastal,land<->sea (embark/landing),false,none,false,,460,,495,border
+ZilleTile_4,Corvis East,ZilleTile_7,Corvis,land,both,false,none,false,,512,,758,border
+ZilleTile_4,Corvis East,ZilleTile_8,Nanta West,land,both,false,none,false,,964,,400,border
+ZilleTile_4,Corvis East,ZilleTile_S16,Munat Shoals,coastal,land<->sea (embark/landing),false,none,false,,524,,587,border
+ZilleTile_4,Corvis East,ZilleTile_S20,Nanta Waters,coastal,land<->sea (embark/landing),false,none,false,,156,,766,border
+ZilleTile_5,Tirsa Northwest,ZilleTile_9,Nanta,land,both,false,none,false,,16,,748,manual
+ZilleTile_5,Tirsa Northwest,ZilleTile_10,Tirsa,land,both,true,secondary,false,road_isor_mave_nortus,796,,458,border
+ZilleTile_5,Tirsa Northwest,ZilleTile_S17,Tirsa Roads,coastal,land<->sea (embark/landing),false,none,false,,504,,523,border
+ZilleTile_5,Tirsa Northwest,ZilleTile_S20,Nanta Waters,coastal,land<->sea (embark/landing),false,none,false,,1060,,488,border
+ZilleTile_5,Tirsa Northwest,ZilleTile_S21,Tirsa Bight,coastal,land<->sea (embark/landing),false,none,false,,664,,663,border
+ZilleTile_6,Quella,ZilleTile_7,Corvis,land,both,true,secondary,false,road_isor_mave_nortus,1088,,417,border
+ZilleTile_6,Quella,ZilleTile_11,Isor,land,both,true,secondary,false,road_isor_mave_nortus,624,,617,border
+ZilleTile_6,Quella,ZilleTile_12,Lido Isora,land,both,false,none,false,,216,,740,border
+ZilleTile_6,Quella,ZilleTile_S19,Quella Roads,coastal,land<->sea (embark/landing),false,none,false,,840,,447,border
+ZilleTile_6,Quella,ZilleTile_S24,Quella Reach,coastal,land<->sea (embark/landing),false,none,false,,684,,626,border
+ZilleTile_6,Quella,ZilleTile_S29,Isor Waters,coastal,land<->sea (embark/landing),false,none,false,,80,,1081,border
+ZilleTile_7,Corvis,ZilleTile_8,Nanta West,land,both,true,secondary,false,road_isor_mave_nortus,180,,725,border
+ZilleTile_7,Corvis,ZilleTile_12,Lido Isora,land,both,false,none,false,,260,,853,border
+ZilleTile_7,Corvis,ZilleTile_13,Lenta Northwest,land,both,false,none,false,,1088,,547,border
+ZilleTile_7,Corvis,ZilleTile_16,Sostra,land,both,false,none,false,,216,,858,border
+ZilleTile_8,Nanta West,ZilleTile_9,Nanta,land,both,true,secondary,false,road_isor_mave_nortus,916,,429,border
+ZilleTile_8,Nanta West,ZilleTile_13,Lenta Northwest,land,both,false,none,false,,880,,447,border
+ZilleTile_8,Nanta West,ZilleTile_14,Lenta Northeast,land,both,false,none,false,,284,,832,border
+ZilleTile_8,Nanta West,ZilleTile_S20,Nanta Waters,coastal,land<->sea (embark/landing),false,none,false,,248,,804,border
+ZilleTile_9,Nanta,ZilleTile_10,Tirsa,land,both,true,secondary,false,road_isor_mave_nortus,404,,760,border
+ZilleTile_9,Nanta,ZilleTile_14,Lenta Northeast,land,both,true,main,true,main_nanta_wiktrany,556,,631,border
+ZilleTile_9,Nanta,ZilleTile_S20,Nanta Waters,coastal,land<->sea (embark/landing),false,none,false,,724,,517,border
+ZilleTile_10,Tirsa,ZilleTile_14,Lenta Northeast,land,both,false,none,false,,304,,769,border
+ZilleTile_10,Tirsa,ZilleTile_15,Venna Northeast,land,both,true,secondary,false,road_isor_mave_nortus,316,,684,border
+ZilleTile_10,Tirsa,ZilleTile_19,Venna Northwest,land,both,false,none,false,,508,,550,border
+ZilleTile_10,Tirsa,ZilleTile_S25,Tirsa Banks,coastal,land<->sea (embark/landing),false,none,false,,320,,754,border
+ZilleTile_11,Isor,ZilleTile_12,Lido Isora,land,both,true,main,false,main_isor_zille,808,,240,border
+ZilleTile_11,Isor,ZilleTile_S29,Isor Waters,coastal,land<->sea (embark/landing),false,none,false,,624,,595,border
+ZilleTile_11,Isor,ZilleTile_S36,Lido Isora Waters,coastal,land<->sea (embark/landing),false,none,false,,256,,594,border
+ZilleTile_12,Lido Isora,ZilleTile_16,Sostra,land,both,true,main,false,main_isor_zille,980,,482,border
+ZilleTile_12,Lido Isora,ZilleTile_S36,Lido Isora Waters,coastal,land<->sea (embark/landing),false,none,false,,696,,497,border
+ZilleTile_13,Lenta Northwest,ZilleTile_14,Lenta Northeast,land,both,true,main,false,main_nanta_wiktrany,408,,865,border
+ZilleTile_13,Lenta Northwest,ZilleTile_16,Sostra,land,both,false,none,false,,504,,736,border
+ZilleTile_13,Lenta Northwest,ZilleTile_17,Ardo North,land,both,false,none,false,,344,,696,border
+ZilleTile_13,Lenta Northwest,ZilleTile_18,Lenta,land,both,true,main,false,main_nanta_wiktrany,368,,881,border
+ZilleTile_14,Lenta Northeast,ZilleTile_18,Lenta,land,both,false,none,true,,448,,732,border
+ZilleTile_14,Lenta Northeast,ZilleTile_19,Venna Northwest,land,both,false,none,false,,784,,543,border
+ZilleTile_14,Lenta Northeast,ZilleTile_22,Ossa North,land,both,false,none,false,,496,,672,border
+ZilleTile_15,Venna Northeast,ZilleTile_19,Venna Northwest,land,both,true,secondary,false,road_isor_mave_nortus,780,,632,border
+ZilleTile_15,Venna Northeast,ZilleTile_20,Venna,land,both,true,secondary,false,road_mave_nortus_wiktrany,604,,539,border
+ZilleTile_15,Venna Northeast,ZilleTile_23,Mave Nortus,land,both,true,secondary,false,road_isor_mave_nortus,404,,655,border
+ZilleTile_15,Venna Northeast,ZilleTile_S25,Tirsa Banks,coastal,land<->sea (embark/landing),false,none,false,,664,,576,border
+ZilleTile_15,Venna Northeast,ZilleTile_S30,Mave Nortus Waters,coastal,land<->sea (embark/landing),false,none,false,,696,,471,border
+ZilleTile_16,Sostra,ZilleTile_17,Ardo North,land,both,true,main,false,main_isor_zille,936,,373,border
+ZilleTile_16,Sostra,ZilleTile_21,Marenta,land,both,false,none,false,,84,,775,border
+ZilleTile_16,Sostra,ZilleTile_S36,Lido Isora Waters,coastal,land<->sea (embark/landing),false,none,false,,340,,773,border
+ZilleTile_16,Sostra,ZilleTile_S44,Marenta Waters,coastal,land<->sea (embark/landing),false,none,false,,196,,784,border
+ZilleTile_17,Ardo North,ZilleTile_18,Lenta,land,both,false,none,false,,960,,494,border
+ZilleTile_17,Ardo North,ZilleTile_21,Marenta,land,both,true,main,false,main_isor_zille,432,,646,border
+ZilleTile_18,Lenta,ZilleTile_21,Marenta,land,both,true,main,false,main_isor_zille,396,,811,border
+ZilleTile_18,Lenta,ZilleTile_22,Ossa North,land,both,false,none,false,,816,,615,border
+ZilleTile_18,Lenta,ZilleTile_24,Ardo Southeast,land,both,true,main,true,main_nanta_wiktrany,620,,676,border
+ZilleTile_18,Lenta,ZilleTile_25,Ossa,land,both,false,none,false,,488,,817,border
+ZilleTile_19,Venna Northwest,ZilleTile_20,Venna,land,both,true,secondary,false,road_mave_nortus_wiktrany,688,,470,border
+ZilleTile_19,Venna Northwest,ZilleTile_22,Ossa North,land,both,true,secondary,false,road_mave_nortus_wiktrany,640,,710,border
+ZilleTile_20,Venna,ZilleTile_22,Ossa North,land,both,false,none,false,,216,,786,border
+ZilleTile_20,Venna,ZilleTile_23,Mave Nortus,land,both,false,none,false,,124,,673,border
+ZilleTile_20,Venna,ZilleTile_26,Ossa East,land,both,false,none,false,,192,,792,border
+ZilleTile_20,Venna,ZilleTile_41,Mave Nortus Southwest,land,both,false,none,false,,396,,557,border
+ZilleTile_20,Venna,ZilleTile_43,Venna South,land,both,false,none,false,,364,,629,border
+ZilleTile_21,Marenta,ZilleTile_24,Ardo Southeast,land,both,true,main,false,main_isor_zille,532,,414,border
+ZilleTile_21,Marenta,ZilleTile_27,Sabbiano,land,both,false,minor,false,,128,,768,border
+ZilleTile_21,Marenta,ZilleTile_28,Wiktrany,land,both,false,none,false,,308,,645,border
+ZilleTile_21,Marenta,ZilleTile_S43,Sabbiano Roads,coastal,land<->sea (embark/landing),false,none,false,,272,,603,border
+ZilleTile_21,Marenta,ZilleTile_S44,Marenta Waters,coastal,land<->sea (embark/landing),false,none,false,,808,,540,border
+ZilleTile_22,Ossa North,ZilleTile_25,Ossa,land,both,true,secondary,false,road_mave_nortus_wiktrany,428,,843,border
+ZilleTile_22,Ossa North,ZilleTile_26,Ossa East,land,both,false,none,false,,812,,490,border
+ZilleTile_23,Mave Nortus,ZilleTile_40,Tarnes Northwest,land,both,true,secondary,false,road_mave_nortus_tarnes,736,,610,border
+ZilleTile_23,Mave Nortus,ZilleTile_41,Mave Nortus Southwest,land,both,false,none,false,,788,,398,border
+ZilleTile_23,Mave Nortus,ZilleTile_44,Zelles,land,both,false,minor,false,,444,,578,border
+ZilleTile_23,Mave Nortus,ZilleTile_S30,Mave Nortus Waters,coastal,land<->sea (embark/landing),false,none,false,,448,,583,border
+ZilleTile_24,Ardo Southeast,ZilleTile_25,Ossa,land,both,false,none,true,,528,,422,border
+ZilleTile_24,Ardo Southeast,ZilleTile_28,Wiktrany,land,both,true,main,false,main_isor_zille main_nanta_wiktrany,720,,472,border
+ZilleTile_25,Ossa,ZilleTile_26,Ossa East,land,both,false,none,false,,312,,815,border
+ZilleTile_25,Ossa,ZilleTile_28,Wiktrany,land,both,true,secondary,true,road_mave_nortus_wiktrany,536,,577,border
+ZilleTile_25,Ossa,ZilleTile_29,Ossa South,land,both,true,secondary,false,road_mave_nortus_wiktrany,696,,616,border
+ZilleTile_25,Ossa,ZilleTile_32,Wiktrany Southeast,land,both,false,none,true,,836,,685,border
+ZilleTile_26,Ossa East,ZilleTile_29,Ossa South,land,both,false,none,false,,508,,559,border
+ZilleTile_26,Ossa East,ZilleTile_43,Venna South,land,both,false,none,false,,396,,549,border
+ZilleTile_26,Ossa East,ZilleTile_46,Dapalle North,land,both,false,none,false,,476,,495,border
+ZilleTile_27,Sabbiano,ZilleTile_28,Wiktrany,land,both,false,none,false,,512,,569,border
+ZilleTile_27,Sabbiano,ZilleTile_30,Ondaro Southeast,land,both,false,minor,false,,740,,436,border
+ZilleTile_27,Sabbiano,ZilleTile_S43,Sabbiano Roads,coastal,land<->sea (embark/landing),false,none,false,,736,,482,border
+ZilleTile_27,Sabbiano,ZilleTile_S48,Bellacosta Roads,coastal,land<->sea (embark/landing),false,none,false,,1332,,730,border
+ZilleTile_28,Wiktrany,ZilleTile_30,Ondaro Southeast,land,both,false,none,false,,312,,605,border
+ZilleTile_28,Wiktrany,ZilleTile_31,Zille Northeast,land,both,true,main,false,main_isor_zille,248,,590,border
+ZilleTile_28,Wiktrany,ZilleTile_32,Wiktrany Southeast,land,both,false,none,false,,244,,614,border
+ZilleTile_29,Ossa South,ZilleTile_32,Wiktrany Southeast,land,both,false,none,false,,564,,770,border
+ZilleTile_29,Ossa South,ZilleTile_33,Dapalle West,land,both,false,none,false,,564,,473,border
+ZilleTile_29,Ossa South,ZilleTile_46,Dapalle North,land,both,false,none,false,,356,,499,border
+ZilleTile_30,Ondaro Southeast,ZilleTile_31,Zille Northeast,land,both,false,none,false,,280,,526,border
+ZilleTile_30,Ondaro Southeast,ZilleTile_34,Vela Nova,land,both,false,minor,false,,800,,521,border
+ZilleTile_30,Ondaro Southeast,ZilleTile_35,Zille City,land,both,false,none,false,,720,,587,border
+ZilleTile_30,Ondaro Southeast,ZilleTile_S48,Bellacosta Roads,coastal,land<->sea (embark/landing),false,none,false,,244,,928,border
+ZilleTile_31,Zille Northeast,ZilleTile_32,Wiktrany Southeast,land,both,false,none,true,,1036,,315,border
+ZilleTile_31,Zille Northeast,ZilleTile_35,Zille City,land,both,true,main,true,main_isor_zille,676,,476,border
+ZilleTile_31,Zille Northeast,ZilleTile_36,Pomara Northwest,land,both,false,none,false,,272,,659,border
+ZilleTile_32,Wiktrany Southeast,ZilleTile_33,Dapalle West,land,both,false,none,false,,368,,602,border
+ZilleTile_32,Wiktrany Southeast,ZilleTile_37,Pomara North,land,both,false,none,false,,688,,556,border
+ZilleTile_33,Dapalle West,ZilleTile_37,Pomara North,land,both,false,none,false,,608,,417,border
+ZilleTile_33,Dapalle West,ZilleTile_46,Dapalle North,land,both,false,none,false,,216,,783,border
+ZilleTile_33,Dapalle West,ZilleTile_50,Dapalle Southwest,land,both,false,none,false,,892,,426,border
+ZilleTile_34,Vela Nova,ZilleTile_35,Zille City,land,both,false,none,false,,268,,704,border
+ZilleTile_34,Vela Nova,ZilleTile_38,Rivamare,land,both,false,none,false,,0,,781,manual
+ZilleTile_34,Vela Nova,ZilleTile_S47,Capo Lisso Waters,coastal,land<->sea (embark/landing),false,none,false,,376,,1004,border
+ZilleTile_34,Vela Nova,ZilleTile_S48,Bellacosta Roads,coastal,land<->sea (embark/landing),false,none,false,,852,,758,border
+ZilleTile_34,Vela Nova,ZilleTile_S51,Azzurra Waters,coastal,land<->sea (embark/landing),false,none,false,,1560,,799,border
+ZilleTile_34,Vela Nova,ZilleTile_S52,Zille Bay,coastal,land<->sea (embark/landing),false,none,false,,832,,459,border
+ZilleTile_35,Zille City,ZilleTile_36,Pomara Northwest,land,both,true,main,true,main_zille_brivane road_zille_pomara,752,,489,border
+ZilleTile_35,Zille City,ZilleTile_38,Rivamare,land,both,false,minor,false,,440,,924,border
+ZilleTile_35,Zille City,ZilleTile_39,Celle Vaz North,land,both,true,main,false,main_zille_marbelas,440,,604,border
+ZilleTile_35,Zille City,ZilleTile_S52,Zille Bay,coastal,land<->sea (embark/landing),false,none,false,,472,,964,border
+ZilleTile_36,Pomara Northwest,ZilleTile_37,Pomara North,land,both,false,none,false,,816,,564,border
+ZilleTile_36,Pomara Northwest,ZilleTile_39,Celle Vaz North,land,both,false,none,false,,284,,690,border
+ZilleTile_36,Pomara Northwest,ZilleTile_55,Pomara,land,both,true,main,true,main_zille_brivane,572,,500,border
+ZilleTile_36,Pomara Northwest,ZilleTile_60,Celle Vaz East,land,both,false,none,false,,228,,610,border
+ZilleTile_37,Pomara North,ZilleTile_56,Pomara East,land,both,false,none,false,,480,,562,border
+ZilleTile_37,Pomara North,ZilleTile_57,Morsa,land,both,false,none,false,,280,,684,border
+ZilleTile_38,Rivamare,ZilleTile_39,Celle Vaz North,land,both,false,none,false,,716,,564,border
+ZilleTile_38,Rivamare,ZilleTile_59,Celle Vaz,land,both,false,minor,false,,416,,588,border
+ZilleTile_38,Rivamare,ZilleTile_64,Marbelas,land,both,false,none,false,,164,,902,border
+ZilleTile_38,Rivamare,ZilleTile_S52,Zille Bay,coastal,land<->sea (embark/landing),false,none,false,,824,,473,border
+ZilleTile_39,Celle Vaz North,ZilleTile_59,Celle Vaz,land,both,true,main,false,main_zille_marbelas,644,,333,border
+ZilleTile_39,Celle Vaz North,ZilleTile_60,Celle Vaz East,land,both,false,none,false,,316,,422,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_42,Tarnes,land,both,true,secondary,false,road_mave_nortus_tarnes,492,,683,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_44,Zelles,land,both,false,none,false,,752,,740,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_45,Zelles East,land,both,false,none,false,,96,,939,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_S30,Mave Nortus Waters,coastal,land<->sea (embark/landing),false,none,false,,760,,574,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_S31,Mave Nortus Roads,coastal,land<->sea (embark/landing),false,none,false,,296,,721,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_S32,Tarnes Roads,coastal,land<->sea (embark/landing),false,none,false,,548,,715,border
+ZilleTile_40,Tarnes Northwest,ZilleTile_S37,Tarnes Reach,coastal,land<->sea (embark/landing),false,none,false,,104,,696,border
+ZilleTile_41,Mave Nortus Southwest,ZilleTile_43,Venna South,land,both,false,none,false,,1032,,405,border
+ZilleTile_41,Mave Nortus Southwest,ZilleTile_44,Zelles,land,both,false,none,false,,276,,627,border
+ZilleTile_41,Mave Nortus Southwest,ZilleTile_48,Zelles Southwest,land,both,false,none,false,,220,,769,border
+ZilleTile_42,Tarnes,ZilleTile_45,Zelles East,land,both,false,none,false,,1068,,388,border
+ZilleTile_42,Tarnes,ZilleTile_S37,Tarnes Reach,coastal,land<->sea (embark/landing),false,none,false,,1132,,378,border
+ZilleTile_43,Venna South,ZilleTile_46,Dapalle North,land,both,false,none,false,,596,,488,border
+ZilleTile_43,Venna South,ZilleTile_47,Dapalle Northeast,land,both,false,none,false,,468,,691,border
+ZilleTile_43,Venna South,ZilleTile_48,Zelles Southwest,land,both,false,none,false,,480,,804,border
+ZilleTile_44,Zelles,ZilleTile_45,Zelles East,land,both,false,none,false,,1080,,755,border
+ZilleTile_44,Zelles,ZilleTile_48,Zelles Southwest,land,both,false,none,false,,456,,584,border
+ZilleTile_44,Zelles,ZilleTile_49,Isalba Northwest,land,both,false,minor,false,,624,,750,border
+ZilleTile_45,Zelles East,ZilleTile_49,Isalba Northwest,land,both,false,none,false,,656,,591,border
+ZilleTile_46,Dapalle North,ZilleTile_47,Dapalle Northeast,land,both,false,none,false,,640,,458,border
+ZilleTile_46,Dapalle North,ZilleTile_51,Dapalle,land,both,false,none,false,,212,,505,border
+ZilleTile_47,Dapalle Northeast,ZilleTile_48,Zelles Southwest,land,both,false,none,false,,660,,601,border
+ZilleTile_47,Dapalle Northeast,ZilleTile_50,Dapalle Southwest,land,both,false,none,false,,212,,670,border
+ZilleTile_47,Dapalle Northeast,ZilleTile_51,Dapalle,land,both,false,minor,false,,200,,438,border
+ZilleTile_47,Dapalle Northeast,ZilleTile_53,Ostrabe,land,both,false,minor,false,,520,,718,border
+ZilleTile_47,Dapalle Northeast,ZilleTile_54,Ostrabe Northeast,land,both,false,none,false,,348,,991,border
+ZilleTile_48,Zelles Southwest,ZilleTile_49,Isalba Northwest,land,both,false,none,false,,876,,734,border
+ZilleTile_48,Zelles Southwest,ZilleTile_54,Ostrabe Northeast,land,both,false,none,false,,532,,830,border
+ZilleTile_49,Isalba Northwest,ZilleTile_54,Ostrabe Northeast,land,both,false,none,false,,504,,855,border
+ZilleTile_50,Dapalle Southwest,ZilleTile_51,Dapalle,land,both,false,none,false,,568,,256,border
+ZilleTile_50,Dapalle Southwest,ZilleTile_52,Morsa East,land,both,false,none,false,,384,,511,border
+ZilleTile_50,Dapalle Southwest,ZilleTile_53,Ostrabe,land,both,false,none,false,,204,,822,border
+ZilleTile_50,Dapalle Southwest,ZilleTile_57,Morsa,land,both,false,none,false,,724,,604,border
+ZilleTile_52,Morsa East,ZilleTile_53,Ostrabe,land,both,false,none,false,,824,,487,border
+ZilleTile_52,Morsa East,ZilleTile_57,Morsa,land,both,true,secondary,false,road_balle_pomara,616,,461,border
+ZilleTile_52,Morsa East,ZilleTile_58,Ostrabe South,land,both,true,secondary,false,road_balle_pomara,400,,685,border
+ZilleTile_53,Ostrabe,ZilleTile_54,Ostrabe Northeast,land,both,false,minor,false,,1172,,507,border
+ZilleTile_53,Ostrabe,ZilleTile_58,Ostrabe South,land,both,true,secondary,false,road_balle_pomara,632,,654,border
+ZilleTile_54,Ostrabe Northeast,ZilleTile_58,Ostrabe South,land,both,true,secondary,false,road_balle_pomara,344,,858,border
+ZilleTile_55,Pomara,ZilleTile_56,Pomara East,land,both,false,secondary,true,,664,,469,border
+ZilleTile_55,Pomara,ZilleTile_60,Celle Vaz East,land,both,false,none,false,,712,,400,border
+ZilleTile_55,Pomara,ZilleTile_61,Brivane,land,both,true,main,false,main_zille_brivane,220,,588,border
+ZilleTile_55,Pomara,ZilleTile_66,Brivane Southwest,land,both,false,none,false,,596,,730,border
+ZilleTile_56,Pomara East,ZilleTile_57,Morsa,land,both,true,secondary,false,road_balle_pomara,780,,440,border
+ZilleTile_56,Pomara East,ZilleTile_61,Brivane,land,both,false,none,true,,348,,496,border
+ZilleTile_57,Morsa,ZilleTile_58,Ostrabe South,land,both,false,none,false,,108,,932,border
+ZilleTile_57,Morsa,ZilleTile_61,Brivane,land,both,false,none,false,,644,,656,border
+ZilleTile_57,Morsa,ZilleTile_62,Brivane East,land,both,false,none,false,,140,,869,border
+ZilleTile_57,Morsa,ZilleTile_63,Morsa Southeast,land,both,false,none,false,,440,,833,border
+ZilleTile_58,Ostrabe South,ZilleTile_63,Morsa Southeast,land,both,false,none,false,,988,,460,border
+ZilleTile_59,Celle Vaz,ZilleTile_60,Celle Vaz East,land,both,false,none,false,,536,,457,border
+ZilleTile_59,Celle Vaz,ZilleTile_64,Marbelas,land,both,true,main,false,main_zille_marbelas,1012,,516,border
+ZilleTile_59,Celle Vaz,ZilleTile_65,Marbelas Northeast,land,both,false,none,false,,224,,661,border
+ZilleTile_60,Celle Vaz East,ZilleTile_65,Marbelas Northeast,land,both,false,none,false,,448,,652,border
+ZilleTile_60,Celle Vaz East,ZilleTile_66,Brivane Southwest,land,both,false,none,false,,104,,789,border
+ZilleTile_61,Brivane,ZilleTile_62,Brivane East,land,both,false,none,true,,408,,548,border
+ZilleTile_61,Brivane,ZilleTile_66,Brivane Southwest,land,both,false,none,false,,468,,671,border
+ZilleTile_61,Brivane,ZilleTile_67,Brivane South,land,both,true,main,false,main_zille_brivane,616,,539,border
+ZilleTile_62,Brivane East,ZilleTile_63,Morsa Southeast,land,both,false,none,false,,1012,,407,border
+ZilleTile_62,Brivane East,ZilleTile_67,Brivane South,land,both,true,main,false,main_zille_brivane,1060,,486,border
+ZilleTile_64,Marbelas,ZilleTile_65,Marbelas Northeast,land,both,false,none,false,,1116,,519,border
+ZilleTile_65,Marbelas Northeast,ZilleTile_66,Brivane Southwest,land,both,false,none,false,,1080,,531,border
+ZilleTile_66,Brivane Southwest,ZilleTile_67,Brivane South,land,both,false,none,false,,1072,,543,border
+ZilleTile_68,Kessin West,ZilleTile_69,Kessin,land,both,false,minor,false,,720,,654,border
+ZilleTile_68,Kessin West,ZilleTile_73,Dornatz North,land,both,false,none,false,,896,,564,border
+ZilleTile_69,Kessin,ZilleTile_70,Harlitz North,land,both,false,minor,false,,1044,,453,border
+ZilleTile_69,Kessin,ZilleTile_73,Dornatz North,land,both,false,none,false,,392,,770,border
+ZilleTile_69,Kessin,ZilleTile_74,Dornatz Northeast,land,both,false,none,false,,712,,584,border
+ZilleTile_70,Harlitz North,ZilleTile_71,Kratsna,land,both,true,secondary,false,road_kratsna_northwest road_kratsna_strebna,1252,,508,border
+ZilleTile_70,Harlitz North,ZilleTile_74,Dornatz Northeast,land,both,false,none,false,,92,,750,border
+ZilleTile_70,Harlitz North,ZilleTile_75,Kratsna Southeast,land,both,false,minor,false,,80,,963,border
+ZilleTile_70,Harlitz North,ZilleTile_77,Harlitz,land,both,true,secondary,false,road_kratsna_strebna,796,,772,border
+ZilleTile_71,Kratsna,ZilleTile_75,Kratsna Southeast,land,both,false,minor,false,,464,,616,border
+ZilleTile_71,Kratsna,ZilleTile_S1,Kreleck Sound,coastal,land<->sea (embark/landing),false,none,false,,948,,498,border
+ZilleTile_72,Kreleck Islands,ZilleTile_75,Kratsna Southeast,strait,both,false,none,false,,,245,854,strait
+ZilleTile_72,Kreleck Islands,ZilleTile_S1,Kreleck Sound,coastal,land<->sea (embark/landing),false,none,false,,868,,501,border
+ZilleTile_72,Kreleck Islands,ZilleTile_S2,Kratsna Waters,coastal,land<->sea (embark/landing),false,none,false,,424,,453,border
+ZilleTile_73,Dornatz North,ZilleTile_74,Dornatz Northeast,land,both,false,none,false,,692,,602,border
+ZilleTile_73,Dornatz North,ZilleTile_79,Dornatz,land,both,false,none,false,,508,,727,border
+ZilleTile_74,Dornatz Northeast,ZilleTile_76,Dornatz East,land,both,false,none,false,,892,,506,border
+ZilleTile_74,Dornatz Northeast,ZilleTile_77,Harlitz,land,both,true,secondary,false,road_kratsna_strebna,704,,715,border
+ZilleTile_74,Dornatz Northeast,ZilleTile_79,Dornatz,land,both,true,secondary,false,road_kratsna_strebna,124,,827,border
+ZilleTile_75,Kratsna Southeast,ZilleTile_77,Harlitz,land,both,false,none,false,,532,,673,border
+ZilleTile_75,Kratsna Southeast,ZilleTile_78,Trebnow,land,both,false,none,false,,716,,494,border
+ZilleTile_75,Kratsna Southeast,ZilleTile_82,Trebnow East,land,both,false,none,false,,308,,797,border
+ZilleTile_75,Kratsna Southeast,ZilleTile_S1,Kreleck Sound,coastal,land<->sea (embark/landing),false,none,false,,924,,517,border
+ZilleTile_75,Kratsna Southeast,ZilleTile_S8,Trebnow Waters,coastal,land<->sea (embark/landing),false,none,false,,752,,690,border
+ZilleTile_76,Dornatz East,ZilleTile_77,Harlitz,land,both,false,none,false,,212,,739,border
+ZilleTile_76,Dornatz East,ZilleTile_79,Dornatz,land,both,false,none,false,,536,,613,border
+ZilleTile_76,Dornatz East,ZilleTile_80,Sulkov Northeast,land,both,false,minor,false,,748,,404,border
+ZilleTile_76,Dornatz East,ZilleTile_85,Sulkov,land,both,false,minor,false,,428,,609,border
+ZilleTile_77,Harlitz,ZilleTile_78,Trebnow,land,both,false,minor,false,,692,,498,border
+ZilleTile_77,Harlitz,ZilleTile_80,Sulkov Northeast,land,both,false,none,false,,404,,680,border
+ZilleTile_77,Harlitz,ZilleTile_81,Trebnow Southwest,land,both,false,none,false,,164,,756,border
+ZilleTile_78,Trebnow,ZilleTile_81,Trebnow Southwest,land,both,false,minor,false,,480,,656,border
+ZilleTile_78,Trebnow,ZilleTile_82,Trebnow East,land,both,false,none,false,,616,,420,border
+ZilleTile_79,Dornatz,ZilleTile_83,Mirlow South,land,both,false,none,false,,508,,820,border
+ZilleTile_79,Dornatz,ZilleTile_84,Sulkov Southwest,land,both,false,none,false,,680,,658,border
+ZilleTile_79,Dornatz,ZilleTile_85,Sulkov,land,both,false,none,false,,452,,680,border
+ZilleTile_80,Sulkov Northeast,ZilleTile_81,Trebnow Southwest,land,both,false,minor,false,,1016,,460,border
+ZilleTile_80,Sulkov Northeast,ZilleTile_85,Sulkov,land,both,false,none,false,,448,,569,border
+ZilleTile_80,Sulkov Northeast,ZilleTile_86,Sulkov Southeast,land,both,false,none,false,,160,,702,border
+ZilleTile_81,Trebnow Southwest,ZilleTile_86,Sulkov Southeast,land,both,false,none,false,,384,,756,border
+ZilleTile_81,Trebnow Southwest,ZilleTile_87,Trebnow South,land,both,false,none,false,,1100,,358,border
+ZilleTile_82,Trebnow East,ZilleTile_87,Trebnow South,land,both,false,none,false,,548,,625,border
+ZilleTile_82,Trebnow East,ZilleTile_92,Walsholm North,land,both,false,none,false,,100,,867,border
+ZilleTile_82,Trebnow East,ZilleTile_S8,Trebnow Waters,coastal,land<->sea (embark/landing),false,none,false,,384,,754,border
+ZilleTile_82,Trebnow East,ZilleTile_S14,Trebnow Roads,coastal,land<->sea (embark/landing),false,none,false,,756,,558,border
+ZilleTile_83,Mirlow South,ZilleTile_84,Sulkov Southwest,land,both,false,none,false,,740,,493,border
+ZilleTile_83,Mirlow South,ZilleTile_88,Brannitz West,land,both,false,none,false,,576,,652,border
+ZilleTile_83,Mirlow South,ZilleTile_89,Brannitz,land,both,false,none,false,,208,,795,border
+ZilleTile_84,Sulkov Southwest,ZilleTile_85,Sulkov,land,both,false,none,false,,600,,634,border
+ZilleTile_84,Sulkov Southwest,ZilleTile_89,Brannitz,land,both,false,none,false,,480,,640,border
+ZilleTile_84,Sulkov Southwest,ZilleTile_90,Brannitz Northeast,land,both,false,none,false,,580,,703,border
+ZilleTile_85,Sulkov,ZilleTile_86,Sulkov Southeast,land,both,false,none,false,,804,,495,border
+ZilleTile_85,Sulkov,ZilleTile_90,Brannitz Northeast,land,both,false,minor,false,,204,,729,border
+ZilleTile_86,Sulkov Southeast,ZilleTile_87,Trebnow South,land,both,false,none,false,,172,,820,border
+ZilleTile_86,Sulkov Southeast,ZilleTile_90,Brannitz Northeast,land,both,false,none,false,,628,,642,border
+ZilleTile_86,Sulkov Southeast,ZilleTile_91,Port Rotsla Northwest,land,both,false,none,false,,916,,413,border
+ZilleTile_87,Trebnow South,ZilleTile_91,Port Rotsla Northwest,land,both,false,none,false,,324,,768,border
+ZilleTile_87,Trebnow South,ZilleTile_92,Walsholm North,land,both,false,none,false,,1072,,332,border
+ZilleTile_88,Brannitz West,ZilleTile_89,Brannitz,land,both,false,none,false,,852,,592,border
+ZilleTile_88,Brannitz West,ZilleTile_93,Yol Northwest,land,both,false,none,false,,920,,418,border
+ZilleTile_89,Brannitz,ZilleTile_90,Brannitz Northeast,land,both,false,none,false,,472,,599,border
+ZilleTile_89,Brannitz,ZilleTile_94,Grodzizg,land,both,true,secondary,false,road_grodzizg_brannitz,244,,839,border
+ZilleTile_89,Brannitz,ZilleTile_95,Brannitz Southwest,land,both,false,minor,false,,824,,607,border
+ZilleTile_89,Brannitz,ZilleTile_S40,Grodzizg Waters,coastal,land<->sea (embark/landing),false,none,false,,112,,733,border
+ZilleTile_90,Brannitz Northeast,ZilleTile_91,Port Rotsla Northwest,land,both,false,none,false,,288,,808,border
+ZilleTile_90,Brannitz Northeast,ZilleTile_94,Grodzizg,land,both,false,minor,false,,1244,,459,border
+ZilleTile_91,Port Rotsla Northwest,ZilleTile_92,Walsholm North,land,both,false,none,false,,388,,640,border
+ZilleTile_91,Port Rotsla Northwest,ZilleTile_94,Grodzizg,land,both,false,none,false,,140,,805,border
+ZilleTile_91,Port Rotsla Northwest,ZilleTile_S27,Rotsla Sound,coastal,land<->sea (embark/landing),false,none,false,,748,,512,border
+ZilleTile_91,Port Rotsla Northwest,ZilleTile_S33,Port Rotsla Waters,coastal,land<->sea (embark/landing),false,none,false,,292,,778,border
+ZilleTile_92,Walsholm North,ZilleTile_S14,Trebnow Roads,coastal,land<->sea (embark/landing),false,none,false,,80,,952,border
+ZilleTile_92,Walsholm North,ZilleTile_S23,Walsholm Waters,coastal,land<->sea (embark/landing),false,none,false,,992,,508,border
+ZilleTile_92,Walsholm North,ZilleTile_S27,Rotsla Sound,coastal,land<->sea (embark/landing),false,none,false,,248,,762,border
+ZilleTile_92,Walsholm North,ZilleTile_S28,Walsholm Roads,coastal,land<->sea (embark/landing),false,none,false,,392,,642,border
+ZilleTile_93,Yol Northwest,ZilleTile_95,Brannitz Southwest,land,both,false,none,false,,464,,667,border
+ZilleTile_94,Grodzizg,ZilleTile_S33,Port Rotsla Waters,coastal,land<->sea (embark/landing),false,none,false,,876,,504,border
+ZilleTile_94,Grodzizg,ZilleTile_S39,Yol Roads,coastal,land<->sea (embark/landing),false,none,false,,128,,909,border
+ZilleTile_94,Grodzizg,ZilleTile_S40,Grodzizg Waters,coastal,land<->sea (embark/landing),false,none,false,,760,,457,border
+ZilleTile_95,Brannitz Southwest,ZilleTile_S38,Yol Waters,coastal,land<->sea (embark/landing),false,none,false,,160,,728,border
+ZilleTile_95,Brannitz Southwest,ZilleTile_S40,Grodzizg Waters,coastal,land<->sea (embark/landing),false,none,false,,868,,428,border
+ZilleTile_96,Rotsla,ZilleTile_S27,Rotsla Sound,coastal,land<->sea (embark/landing),false,none,false,,428,,467,border
+ZilleTile_96,Rotsla,ZilleTile_S28,Walsholm Roads,coastal,land<->sea (embark/landing),false,none,false,,532,,385,border
+ZilleTile_96,Rotsla,ZilleTile_S34,Port Rotsla Roads,coastal,land<->sea (embark/landing),false,none,false,,460,,441,border
+ZilleTile_96,Rotsla,ZilleTile_S35,Walsholm Reach,coastal,land<->sea (embark/landing),false,none,false,,196,,597,border
+ZilleTile_S1,Kreleck Sound,ZilleTile_S2,Kratsna Waters,sea,both,false,none,false,,340,,933,border
+ZilleTile_S1,Kreleck Sound,ZilleTile_S8,Trebnow Waters,sea,both,false,none,false,,116,,886,border
+ZilleTile_S2,Kratsna Waters,ZilleTile_S3,Munat Waters,sea,both,false,none,false,,536,,524,border
+ZilleTile_S2,Kratsna Waters,ZilleTile_S5,Munat Reach,sea,both,false,none,false,,704,,544,border
+ZilleTile_S2,Kratsna Waters,ZilleTile_S8,Trebnow Waters,sea,both,false,none,false,,396,,792,border
+ZilleTile_S3,Munat Waters,ZilleTile_S4,Munat Roads,sea,both,false,none,false,,532,,742,border
+ZilleTile_S3,Munat Waters,ZilleTile_S5,Munat Reach,sea,both,false,none,false,,476,,790,border
+ZilleTile_S3,Munat Waters,ZilleTile_S6,Munat Bight,sea,both,false,none,false,,608,,734,border
+ZilleTile_S4,Munat Roads,ZilleTile_S6,Munat Bight,sea,both,false,none,false,,568,,857,border
+ZilleTile_S4,Munat Roads,ZilleTile_S7,Munat Narrows,sea,both,false,none,false,,380,,956,border
+ZilleTile_S4,Munat Roads,ZilleTile_S10,Munat Banks,sea,both,false,none,false,,292,,720,border
+ZilleTile_S5,Munat Reach,ZilleTile_S6,Munat Bight,sea,both,false,none,false,,516,,609,border
+ZilleTile_S5,Munat Reach,ZilleTile_S8,Trebnow Waters,sea,both,false,none,false,,532,,571,border
+ZilleTile_S5,Munat Reach,ZilleTile_S9,Quella Waters,sea,both,false,none,false,,572,,624,border
+ZilleTile_S6,Munat Bight,ZilleTile_S10,Munat Banks,sea,both,false,none,false,,644,,529,border
+ZilleTile_S6,Munat Bight,ZilleTile_S15,Corvis Waters,sea,both,false,none,false,,480,,433,border
+ZilleTile_S7,Munat Narrows,ZilleTile_S10,Munat Banks,sea,both,false,none,false,,824,,505,border
+ZilleTile_S7,Munat Narrows,ZilleTile_S11,Manes Riuz Sound,sea,both,false,none,false,,644,,494,border
+ZilleTile_S7,Munat Narrows,ZilleTile_S16,Munat Shoals,sea,both,false,none,false,,376,,599,border
+ZilleTile_S8,Trebnow Waters,ZilleTile_S9,Quella Waters,sea,both,false,none,false,,540,,712,border
+ZilleTile_S8,Trebnow Waters,ZilleTile_S14,Trebnow Roads,sea,both,false,none,false,,448,,810,border
+ZilleTile_S9,Quella Waters,ZilleTile_S14,Trebnow Roads,sea,both,false,none,false,,572,,631,border
+ZilleTile_S9,Quella Waters,ZilleTile_S15,Corvis Waters,sea,both,false,none,false,,536,,676,border
+ZilleTile_S9,Quella Waters,ZilleTile_S19,Quella Roads,sea,both,false,none,false,,612,,584,border
+ZilleTile_S10,Munat Banks,ZilleTile_S15,Corvis Waters,sea,both,false,none,false,,628,,664,border
+ZilleTile_S11,Manes Riuz Sound,ZilleTile_S12,Munat Deep,sea,both,false,none,false,,904,,501,border
+ZilleTile_S11,Manes Riuz Sound,ZilleTile_S16,Munat Shoals,sea,both,false,none,false,,512,,673,border
+ZilleTile_S12,Munat Deep,ZilleTile_S13,Tirsa Waters,sea,both,false,none,false,,660,,520,border
+ZilleTile_S12,Munat Deep,ZilleTile_S17,Tirsa Roads,sea,both,false,none,false,,632,,678,border
+ZilleTile_S12,Munat Deep,ZilleTile_S20,Nanta Waters,sea,both,false,none,false,,84,,947,border
+ZilleTile_S13,Tirsa Waters,ZilleTile_S17,Tirsa Roads,sea,both,false,none,false,,620,,767,border
+ZilleTile_S13,Tirsa Waters,ZilleTile_S18,Tirsa Reach,sea,both,false,none,false,,816,,873,border
+ZilleTile_S14,Trebnow Roads,ZilleTile_S19,Quella Roads,sea,both,false,none,false,,328,,737,border
+ZilleTile_S14,Trebnow Roads,ZilleTile_S23,Walsholm Waters,sea,both,false,none,false,,452,,665,border
+ZilleTile_S14,Trebnow Roads,ZilleTile_S24,Quella Reach,sea,both,false,none,false,,468,,687,border
+ZilleTile_S15,Corvis Waters,ZilleTile_S19,Quella Roads,sea,both,false,none,false,,476,,903,border
+ZilleTile_S16,Munat Shoals,ZilleTile_S20,Nanta Waters,sea,both,false,none,false,,592,,726,border
+ZilleTile_S17,Tirsa Roads,ZilleTile_S18,Tirsa Reach,sea,both,false,none,false,,164,,806,border
+ZilleTile_S17,Tirsa Roads,ZilleTile_S20,Nanta Waters,sea,both,false,none,false,,428,,728,border
+ZilleTile_S17,Tirsa Roads,ZilleTile_S21,Tirsa Bight,sea,both,false,none,false,,844,,560,border
+ZilleTile_S18,Tirsa Reach,ZilleTile_S21,Tirsa Bight,sea,both,false,none,false,,740,,610,border
+ZilleTile_S18,Tirsa Reach,ZilleTile_S22,Tirsa Narrows,sea,both,false,none,false,,968,,599,border
+ZilleTile_S19,Quella Roads,ZilleTile_S24,Quella Reach,sea,both,false,none,false,,780,,505,border
+ZilleTile_S21,Tirsa Bight,ZilleTile_S22,Tirsa Narrows,sea,both,false,none,false,,240,,891,border
+ZilleTile_S21,Tirsa Bight,ZilleTile_S25,Tirsa Banks,sea,both,false,none,false,,896,,510,border
+ZilleTile_S22,Tirsa Narrows,ZilleTile_S25,Tirsa Banks,sea,both,false,none,false,,236,,998,border
+ZilleTile_S22,Tirsa Narrows,ZilleTile_S26,Tarnes Waters,sea,both,false,none,false,,792,,796,border
+ZilleTile_S22,Tirsa Narrows,ZilleTile_S31,Mave Nortus Roads,sea,both,false,none,false,,500,,805,border
+ZilleTile_S23,Walsholm Waters,ZilleTile_S24,Quella Reach,sea,both,false,none,false,,528,,602,border
+ZilleTile_S23,Walsholm Waters,ZilleTile_S28,Walsholm Roads,sea,both,false,none,false,,620,,575,border
+ZilleTile_S23,Walsholm Waters,ZilleTile_S29,Isor Waters,sea,both,false,none,false,,344,,713,border
+ZilleTile_S24,Quella Reach,ZilleTile_S29,Isor Waters,sea,both,false,none,false,,628,,681,border
+ZilleTile_S25,Tirsa Banks,ZilleTile_S30,Mave Nortus Waters,sea,both,false,none,false,,528,,560,border
+ZilleTile_S25,Tirsa Banks,ZilleTile_S31,Mave Nortus Roads,sea,both,false,none,false,,476,,709,border
+ZilleTile_S26,Tarnes Waters,ZilleTile_S31,Mave Nortus Roads,sea,both,false,none,false,,540,,595,border
+ZilleTile_S26,Tarnes Waters,ZilleTile_S32,Tarnes Roads,sea,both,false,none,false,,644,,436,border
+ZilleTile_S27,Rotsla Sound,ZilleTile_S28,Walsholm Roads,sea,both,false,none,false,,504,,584,border
+ZilleTile_S27,Rotsla Sound,ZilleTile_S33,Port Rotsla Waters,sea,both,false,none,false,,648,,584,border
+ZilleTile_S27,Rotsla Sound,ZilleTile_S34,Port Rotsla Roads,sea,both,false,none,false,,344,,615,border
+ZilleTile_S28,Walsholm Roads,ZilleTile_S29,Isor Waters,sea,both,false,none,false,,504,,585,border
+ZilleTile_S28,Walsholm Roads,ZilleTile_S35,Walsholm Reach,sea,both,false,none,false,,296,,780,border
+ZilleTile_S29,Isor Waters,ZilleTile_S35,Walsholm Reach,sea,both,false,none,false,,580,,675,border
+ZilleTile_S29,Isor Waters,ZilleTile_S36,Lido Isora Waters,sea,both,false,none,false,,480,,654,border
+ZilleTile_S30,Mave Nortus Waters,ZilleTile_S31,Mave Nortus Roads,sea,both,false,none,false,,480,,587,border
+ZilleTile_S31,Mave Nortus Roads,ZilleTile_S32,Tarnes Roads,sea,both,false,none,false,,700,,574,border
+ZilleTile_S32,Tarnes Roads,ZilleTile_S37,Tarnes Reach,sea,both,false,none,false,,956,,567,border
+ZilleTile_S33,Port Rotsla Waters,ZilleTile_S34,Port Rotsla Roads,sea,both,false,none,false,,704,,702,border
+ZilleTile_S33,Port Rotsla Waters,ZilleTile_S39,Yol Roads,sea,both,false,none,false,,936,,680,border
+ZilleTile_S34,Port Rotsla Roads,ZilleTile_S35,Walsholm Reach,sea,both,false,none,false,,572,,716,border
+ZilleTile_S34,Port Rotsla Roads,ZilleTile_S41,Port Rotsla Channel,sea,both,false,none,false,,324,,646,border
+ZilleTile_S35,Walsholm Reach,ZilleTile_S36,Lido Isora Waters,sea,both,false,none,false,,512,,714,border
+ZilleTile_S35,Walsholm Reach,ZilleTile_S41,Port Rotsla Channel,sea,both,false,none,false,,404,,553,border
+ZilleTile_S35,Walsholm Reach,ZilleTile_S42,Sabbiano Waters,sea,both,false,none,false,,424,,639,border
+ZilleTile_S36,Lido Isora Waters,ZilleTile_S42,Sabbiano Waters,sea,both,false,none,false,,364,,731,border
+ZilleTile_S36,Lido Isora Waters,ZilleTile_S44,Marenta Waters,sea,both,false,none,false,,680,,578,border
+ZilleTile_S38,Yol Waters,ZilleTile_S39,Yol Roads,sea,both,false,none,false,,604,,561,border
+ZilleTile_S38,Yol Waters,ZilleTile_S40,Grodzizg Waters,sea,both,false,none,false,,472,,584,border
+ZilleTile_S39,Yol Roads,ZilleTile_S40,Grodzizg Waters,sea,both,false,none,false,,316,,830,border
+ZilleTile_S41,Port Rotsla Channel,ZilleTile_S42,Sabbiano Waters,sea,both,false,none,false,,404,,653,border
+ZilleTile_S41,Port Rotsla Channel,ZilleTile_S45,Bellacosta Waters,sea,both,false,none,false,,568,,737,border
+ZilleTile_S41,Port Rotsla Channel,ZilleTile_S46,Capo Lisso Channel,sea,both,false,none,false,,760,,661,border
+ZilleTile_S42,Sabbiano Waters,ZilleTile_S43,Sabbiano Roads,sea,both,false,none,false,,636,,663,border
+ZilleTile_S42,Sabbiano Waters,ZilleTile_S44,Marenta Waters,sea,both,false,none,false,,284,,688,border
+ZilleTile_S42,Sabbiano Waters,ZilleTile_S45,Bellacosta Waters,sea,both,false,none,false,,688,,611,border
+ZilleTile_S43,Sabbiano Roads,ZilleTile_S44,Marenta Waters,sea,both,false,none,false,,872,,345,border
+ZilleTile_S43,Sabbiano Roads,ZilleTile_S48,Bellacosta Roads,sea,both,false,none,false,,276,,785,border
+ZilleTile_S45,Bellacosta Waters,ZilleTile_S46,Capo Lisso Channel,sea,both,false,none,false,,384,,622,border
+ZilleTile_S45,Bellacosta Waters,ZilleTile_S47,Capo Lisso Waters,sea,both,false,none,false,,496,,519,border
+ZilleTile_S45,Bellacosta Waters,ZilleTile_S48,Bellacosta Roads,sea,both,false,none,false,,700,,410,border
+ZilleTile_S46,Capo Lisso Channel,ZilleTile_S47,Capo Lisso Waters,sea,both,false,none,false,,516,,703,border
+ZilleTile_S46,Capo Lisso Channel,ZilleTile_S49,Azzurra Channel,sea,both,false,none,false,,640,,925,border
+ZilleTile_S47,Capo Lisso Waters,ZilleTile_S48,Bellacosta Roads,sea,both,false,none,false,,480,,568,border
+ZilleTile_S47,Capo Lisso Waters,ZilleTile_S49,Azzurra Channel,sea,both,false,none,false,,380,,792,border
+ZilleTile_S47,Capo Lisso Waters,ZilleTile_S50,Capo Lisso Roads,sea,both,false,none,false,,384,,620,border
+ZilleTile_S47,Capo Lisso Waters,ZilleTile_S51,Azzurra Waters,sea,both,false,none,false,,576,,535,border
+ZilleTile_S49,Azzurra Channel,ZilleTile_S50,Capo Lisso Roads,sea,both,false,none,false,,1016,,392,border
+ZilleTile_S50,Capo Lisso Roads,ZilleTile_S51,Azzurra Waters,sea,both,false,none,false,,544,,501,border
+ZilleTile_S51,Azzurra Waters,ZilleTile_S52,Zille Bay,sea,both,false,none,false,,288,,517,border

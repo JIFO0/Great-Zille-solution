@@ -1,0 +1,182 @@
+{
+ "counts": {
+  "Zille": 40,
+  "Brenas": 28,
+  "Wehlen": 29,
+  "Sea": 30
+ },
+ "total": 127,
+ "overlaps": [],
+ "land_on_water": [],
+ "sea_on_land": [],
+ "land_zone_holes": [],
+ "land_zone_uncovered_total": 916,
+ "sea_corridor_holes": [],
+ "tile_violations": [],
+ "max_tile_alpha_extent_px": 502,
+ "max_map_extent_incl_effects": 960.9,
+ "limit_map": 980,
+ "max_shape_bbox_map": 860.0,
+ "tiles_512": true,
+ "count_ok": true,
+ "cities": [
+  [
+   "ZilleTile_1",
+   "Munat"
+  ],
+  [
+   "ZilleTile_10",
+   "Nanta"
+  ],
+  [
+   "ZilleTile_12",
+   "Isor"
+  ],
+  [
+   "ZilleTile_24",
+   "Mave Nortus"
+  ],
+  [
+   "ZilleTile_29",
+   "Wiktrany"
+  ],
+  [
+   "ZilleTile_36",
+   "Zille"
+  ],
+  [
+   "ZilleTile_52",
+   "Dapalle"
+  ],
+  [
+   "ZilleTile_72",
+   "Kratsna"
+  ]
+ ],
+ "smallest_land": [
+  [
+   13872,
+   "ZilleTile_1"
+  ],
+  [
+   22536,
+   "ZilleTile_52"
+  ],
+  [
+   22827,
+   "ZilleTile_12"
+  ],
+  [
+   48053,
+   "ZilleTile_4"
+  ],
+  [
+   48504,
+   "ZilleTile_73"
+  ]
+ ],
+ "smallest_sea": [
+  [
+   157769,
+   "ZilleTile_S17"
+  ],
+  [
+   166732,
+   "ZilleTile_S1"
+  ],
+  [
+   170147,
+   "ZilleTile_S30"
+  ]
+ ],
+ "size_rule": "map extent incl. stroke+blur (longest bbox side) must be >512 and <980 map px; target 650-950",
+ "size_all": {
+  "n": 127,
+  "min": 248.8,
+  "p10": 663.82,
+  "median": 807.7,
+  "p90": 903.4,
+  "max": 960.9,
+  "hist": {
+   "450-500": 1,
+   "550-600": 1,
+   "600-650": 7,
+   "650-700": 9,
+   "700-750": 18,
+   "750-800": 23,
+   "800-850": 31,
+   "850-900": 20,
+   "900-950": 13,
+   "950-1000": 1
+  }
+ },
+ "size_land_cells": {
+  "n": 86,
+  "min": 620.2,
+  "p10": 702.45,
+  "median": 825.95,
+  "p90": 909.2,
+  "max": 960.9,
+  "hist": {
+   "600-650": 3,
+   "650-700": 5,
+   "700-750": 11,
+   "750-800": 13,
+   "800-850": 23,
+   "850-900": 18,
+   "900-950": 12,
+   "950-1000": 1
+  }
+ },
+ "size_sea": {
+  "n": 30,
+  "min": 639.3,
+  "p10": 688.52,
+  "median": 779.0,
+  "p90": 838.78,
+  "max": 937.9,
+  "hist": {
+   "600-650": 1,
+   "650-700": 3,
+   "700-750": 6,
+   "750-800": 10,
+   "800-850": 8,
+   "850-900": 1,
+   "900-950": 1
+  }
+ },
+ "size_in_target_650_950": 114,
+ "size_exceptions_allowed": [
+  [
+   "ZilleTile_1",
+   "Munat",
+   248.8,
+   "small city (allowed)"
+  ],
+  [
+   "ZilleTile_12",
+   "Isor",
+   283.3,
+   "small city (allowed)"
+  ],
+  [
+   "ZilleTile_52",
+   "Dapalle",
+   275.6,
+   "small city (allowed)"
+  ],
+  [
+   "ZilleTile_97",
+   "Rotsla",
+   478.5,
+   "island, physically small (allowed)"
+  ]
+ ],
+ "size_violations": [],
+ "shape_bbox_min_max": [
+  148.6,
+  860.0
+ ],
+ "duplicate_names": [],
+ "tiles_clip_free": true
+}
