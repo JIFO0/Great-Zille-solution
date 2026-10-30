@@ -219,3 +219,25 @@ Deliverable layout:
 - `regions/` — `ZilleTile_N` / `ZilleTile_SN` at 512×512, PNG and SVG, scaled 512/980; fill `#FF0000`, stroke `#00F800` width 20, blur `stdDeviation` 6. The manifest (JSON and CSV), overlay, and validation sit alongside.
 
 Files: `v10/map/` (`T_Map_Zille_01`–`06` and `T_Map_Zille_Full_Composite`, each as `.png` and `.svg`), `v10/regions/` (135 tiles, manifest, overlay, validation), `v10/previews/`, and `v10/scripts/`.
+
+### v11
+
+A fix round on top of v10. 136 provinces. Ids stay stable versus v10.
+
+Land:
+
+- 39 Zille
+- 28 northern Brenas
+- 29 Wehlen
+
+Sea: 40 provinces (`ZilleTile_S1`–`S40`).
+
+**Grodzizg** is a new Wehlen port on the Yol-bay coast, where `ZilleTile_94` (Brannitz East) was. On the base map it is about Nanta-sized (urban area about 219×177, Nanta 190×166), with a Nanta-tier label (108 bold). A new double road links it to the Kratsna–Yol road at Brannitz. In the regions it is city province `ZilleTile_94` (the id is reused, `is_city` true): the urban outline plus coast and road-directed lobes, covering the headland. Neighbours 86, 90, and 91 were redrawn around it.
+
+The bay between Brannitz, Yol, and the Grodzizg shore is sea province `ZilleTile_S40` (Grodzizg Waters). `S38` (Yol Waters) was re-cut with it, so `S38` now holds the Yol coast. Both connect to `S39` and the channel (`S33`).
+
+`T_Map_Zille_01`–`06` and `T_Map_Zille_Full_Composite` are regenerated from the updated base map, as native PNG and viewBox-cropped SVG. The manifest adds `tile_center_x` / `tile_center_y` and a `fields` block describing every field.
+
+The size rule is unchanged: every province is over 512 and under 980 map px including stroke and blur (max 961). The exceptions are Dapalle (small city) and Rotsla (small island). No overlaps, no gaps, and all names are unique.
+
+Files in this step: `v11/map/T_Map_Zille_01`–`06` and `v11/map/T_Map_Zille_Full_Composite`, each as `.png` and `.svg`.
