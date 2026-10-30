@@ -241,3 +241,17 @@ The bay between Brannitz, Yol, and the Grodzizg shore is sea province `ZilleTile
 The size rule is unchanged: every province is over 512 and under 980 map px including stroke and blur (max 961). The exceptions are Dapalle (small city) and Rotsla (small island). No overlaps, no gaps, and all names are unique.
 
 Files: `v11/map/` (`T_Map_Zille_01`–`06` and `T_Map_Zille_Full_Composite`, each as `.png` and `.svg`), `v11/regions/` (136 tiles, manifest, overlay, validation), `v11/previews/`, and `v11/scripts/`.
+
+### v12
+
+Built on top of v11. 148 provinces: 96 land (39 Zille, 28 northern Brenas, 29 Wehlen) and 52 sea (`ZilleTile_S1`–`S52`).
+
+The 136 v11 provinces keep their ids, names, and geometry. The new sea provinces are `ZilleTile_S41`–`S52`, a west-coast corridor 2–3 tiles wide from the Sor/Isor channel south along the Zille coast into the bay at Zille City. `S52` (Zille Bay) follows the inlet up to Zille City, so Zille City (`ZilleTile_35`) is a port. In narrow coves the sea inset is 16 instead of 32.
+
+Adjacency is in `regions/provinces_adjacency.json` and `.csv`: 389 links (221 land, 98 sea, 67 coastal, 3 strait). Rotsla (`ZilleTile_96`) is sea-only. Manual land links: 5 Tirsa Northwest ↔ 9 Nanta, and 34 Vela Nova ↔ 38 Rivamare across the Zille Bay inlet. Kept straits: 3–2, 3–5, and 72–75. The graph is symmetric and one component. Every province has at least 2 links.
+
+Land provinces in the manifest carry coastal, port, terrain, and road fields. Terrain from the contour bands: 72 plains, 12 hills, 12 mountains. Edge flags mark roads and railways that cross a shared border: 50 road links (21 main, 29 secondary), 22 minor-only, and 13 rail.
+
+The base map is unchanged from v11. This drop is the manifest, adjacency, scripts, and previews. Tile images and the map grid stay in `v11/`.
+
+Previews: `previews/sea_corridor_preview.png`, `sea_corridor_zille_bay_crop.png`, `terrain_roads_preview.png`, `terrain_roads_zille_crop.png`, `provinces_zille_bay_corridor_crop.png`, and the adjacency crops under `regions/`.

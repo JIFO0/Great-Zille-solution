@@ -1,0 +1,270 @@
+{
+ "provinces": 148,
+ "land": 96,
+ "sea": 52,
+ "edges": 389,
+ "edge_types": {
+  "land": 221,
+  "coastal": 67,
+  "sea": 98,
+  "strait": 3
+ },
+ "road_links": 50,
+ "road_links_main": 21,
+ "road_links_secondary": 29,
+ "minor_road_only_links": 22,
+ "rail_links": 13,
+ "min_neighbours": 2,
+ "max_neighbours": 8,
+ "provinces_without_neighbours": [],
+ "symmetric": true,
+ "connected_components_all": 1,
+ "rotsla_96_neighbours": [
+  [
+   "ZilleTile_S27",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S28",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S34",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S35",
+   "coastal"
+  ]
+ ],
+ "rotsla_sea_only": true,
+ "land_components_with_straits": [
+  [
+   67,
+   [
+    "ZilleTile_1",
+    "ZilleTile_2",
+    "ZilleTile_3",
+    "ZilleTile_4"
+   ]
+  ],
+  [
+   28,
+   [
+    "ZilleTile_68",
+    "ZilleTile_69",
+    "ZilleTile_70",
+    "ZilleTile_71"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_96"
+   ]
+  ]
+ ],
+ "land_components_without_straits": [
+  [
+   66,
+   [
+    "ZilleTile_1",
+    "ZilleTile_2",
+    "ZilleTile_4",
+    "ZilleTile_5"
+   ]
+  ],
+  [
+   27,
+   [
+    "ZilleTile_68",
+    "ZilleTile_69",
+    "ZilleTile_70",
+    "ZilleTile_71"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_3"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_96"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_72"
+   ]
+  ]
+ ],
+ "sea_components": [
+  [
+   52,
+   [
+    "ZilleTile_S1",
+    "ZilleTile_S2",
+    "ZilleTile_S3",
+    "ZilleTile_S4"
+   ]
+  ]
+ ],
+ "coastal_land_provinces": 32,
+ "manual_links": [
+  [
+   "ZilleTile_5",
+   "ZilleTile_9",
+   "owner request v12: Tirsa Northwest <-> Nanta"
+  ],
+  [
+   "ZilleTile_34",
+   "ZilleTile_38",
+   "kept from v11: Vela Nova <-> Rivamare across the narrow Zille Bay inlet (S52 now fills the inlet and splits the border)"
+  ]
+ ],
+ "straits": [
+  [
+   "ZilleTile_2",
+   "ZilleTile_3",
+   "Munat",
+   "Manes Riuz",
+   396
+  ],
+  [
+   "ZilleTile_3",
+   "ZilleTile_5",
+   "Manes Riuz",
+   "Tirsa Northwest",
+   351
+  ],
+  [
+   "ZilleTile_72",
+   "ZilleTile_75",
+   "Kreleck Islands",
+   "Kratsna Southeast",
+   245
+  ]
+ ],
+ "short_borders_to_review": [
+  [
+   "ZilleTile_70",
+   "ZilleTile_75",
+   "land",
+   80
+  ],
+  [
+   "ZilleTile_92",
+   "ZilleTile_S14",
+   "coastal",
+   80
+  ],
+  [
+   "ZilleTile_6",
+   "ZilleTile_S29",
+   "coastal",
+   80
+  ],
+  [
+   "ZilleTile_S12",
+   "ZilleTile_S20",
+   "sea",
+   84
+  ],
+  [
+   "ZilleTile_16",
+   "ZilleTile_21",
+   "land",
+   84
+  ],
+  [
+   "ZilleTile_70",
+   "ZilleTile_74",
+   "land",
+   92
+  ],
+  [
+   "ZilleTile_40",
+   "ZilleTile_45",
+   "land",
+   96
+  ],
+  [
+   "ZilleTile_82",
+   "ZilleTile_92",
+   "land",
+   100
+  ],
+  [
+   "ZilleTile_40",
+   "ZilleTile_S37",
+   "coastal",
+   104
+  ],
+  [
+   "ZilleTile_60",
+   "ZilleTile_66",
+   "land",
+   104
+  ],
+  [
+   "ZilleTile_57",
+   "ZilleTile_58",
+   "land",
+   108
+  ],
+  [
+   "ZilleTile_89",
+   "ZilleTile_S40",
+   "coastal",
+   112
+  ],
+  [
+   "ZilleTile_S1",
+   "ZilleTile_S8",
+   "sea",
+   116
+  ],
+  [
+   "ZilleTile_1",
+   "ZilleTile_4",
+   "land",
+   116
+  ],
+  [
+   "ZilleTile_74",
+   "ZilleTile_79",
+   "land",
+   124
+  ],
+  [
+   "ZilleTile_20",
+   "ZilleTile_23",
+   "land",
+   124
+  ],
+  [
+   "ZilleTile_94",
+   "ZilleTile_S39",
+   "coastal",
+   128
+  ],
+  [
+   "ZilleTile_21",
+   "ZilleTile_27",
+   "land",
+   128
+  ]
+ ],
+ "main_secondary_road_crossings_without_edge": [],
+ "rule": {
+  "method": "gap-voronoi shared edge",
+  "gap_reach": 95,
+  "min_shared_border": 80,
+  "review_below": 140,
+  "road_link": "main or secondary road line crosses from one province cell into the other (sampled every 2 map px on the gap-Voronoi raster)"
+ }
+}
