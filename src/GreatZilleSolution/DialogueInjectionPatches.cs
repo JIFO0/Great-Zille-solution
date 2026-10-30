@@ -14,34 +14,60 @@ namespace GreatZilleSolution
 
         public static void IsInitialDeploymentTilePostfix(WarTile __instance, ref bool __result)
         {
-            if (__result || __instance == null || ZilleWarTable.ScenarioStarted) return;
-            if (IsRiziaLand(__instance)) __result = true;
+            if (__result || __instance == null || !DeploymentAllows(__instance)) return;
+            if (IsRiziaLand(__instance) || IsNavalStart(__instance)) __result = true;
         }
 
         public static void IsSelectedDeploymentUnitDeployableToTilePostfix(WarTile __instance, ref bool __result)
         {
-            if (__result || __instance == null || ZilleWarTable.ScenarioStarted) return;
-            if (IsRiziaLand(__instance)) __result = true;
+            if (__result || __instance == null || !DeploymentAllows(__instance)) return;
+            if (IsRiziaLand(__instance) || IsNavalStart(__instance)) __result = true;
         }
 
         public static void CanDeploySelectedUnitToTilePostfix(WarTile __0, ref bool __result)
         {
-            if (__result || __0 == null || ZilleWarTable.ScenarioStarted) return;
-            if (IsRiziaLand(__0)) __result = true;
+            if (__result || __0 == null || !DeploymentAllows(__0)) return;
+            if (IsRiziaLand(__0) || IsNavalStart(__0)) __result = true;
+        }
+
+        /// <summary>Reinforcement uses the same deploy colours and rules, without the opening frontline requirement.</summary>
+        public static bool IsBorderTilePrefix(ref bool __result)
+        {
+            if (!ZilleWarTable.ScenarioStarted) return true;
+            var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
+            if (panel == null || !panel.IsShowing()) return true;
+            __result = false;
+            return false;
+        }
+
+        private static bool DeploymentAllows(WarTile tile)
+        {
+            if (!ZilleWarTable.ScenarioStarted) return true;
+            var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
+            return panel != null && panel.IsShowing();
         }
 
         private static bool IsRiziaLand(WarTile tile)
         {
-            string name = tile.gameObject != null ? tile.gameObject.name : "";
+            var t = TileData(tile);
+            return t != null && t.Allegiance == "Rizia" && !t.IsSea;
+        }
+
+        private static bool IsNavalStart(WarTile tile)
+        {
+            var t = TileData(tile);
+            return t != null && t.IsNavalStart;
+        }
+
+        private static ZilleTileData TileData(WarTile tile)
+        {
+            string name = tile != null && tile.gameObject != null ? tile.gameObject.name : "";
             if (name.StartsWith("Tile_")) name = name.Substring("Tile_".Length);
             var cfg = ZilleMapLayoutManager.CurrentConfig;
-            if (cfg?.Tiles == null) return false;
+            if (cfg?.Tiles == null) return null;
             for (int i = 0; i < cfg.Tiles.Count; i++)
-            {
-                var t = cfg.Tiles[i];
-                if (t.TileNumber == name && t.Allegiance == "Rizia" && !t.IsSea) return true;
-            }
-            return false;
+                if (cfg.Tiles[i].TileNumber == name) return cfg.Tiles[i];
+            return null;
         }
 
         public static void SupplyLineSetupTilesPostfix(WarSupplyLine __instance)
@@ -158,6 +184,14 @@ namespace GreatZilleSolution
                     var fastPrefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CanFastMoveOnSupplyTilePrefix));
                     harmony.Patch(fastMove, prefix: new HarmonyMethod(fastPrefix));
                     MelonLogger.Msg("[Great Zille] Supply-line check no longer aborts deployment.");
+                }
+
+                var border = AccessTools.Method(typeof(WarTile), nameof(WarTile.IsBorderTile));
+                if (border != null)
+                {
+                    var borderPrefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsBorderTilePrefix));
+                    harmony.Patch(border, prefix: new HarmonyMethod(borderPrefix));
+                    MelonLogger.Msg("[Great Zille] Reinforcement deployment does not demand a full frontline.");
                 }
 
                 var hovering = AccessTools.Method(typeof(WarTileRaycaster), "IsHovering");

@@ -97,6 +97,44 @@ namespace GreatZilleSolution
                 TryUpgradeToV12();
             else
                 ImportRoadsIfMissing(CurrentConfig);
+            MarkNavalStarts(CurrentConfig);
+        }
+
+        /// <summary>
+        /// A few sea provinces directly north of the current Rizian land become the naval deployment row.
+        /// Recomputed from the saved allegiance, so a later edit of the coast moves the row with it.
+        /// </summary>
+        public static void MarkNavalStarts(ZilleMapConfig cfg)
+        {
+            if (cfg?.Tiles == null) return;
+            var byId = new Dictionary<string, ZilleTileData>();
+            foreach (var t in cfg.Tiles)
+            {
+                t.IsNavalStart = false;
+                if (!string.IsNullOrEmpty(t.Id)) byId[t.Id] = t;
+            }
+            var ranked = new List<ZilleTileData>();
+            foreach (var sea in cfg.Tiles)
+            {
+                if (!sea.IsSea || sea.AdjacentIds == null || sea.MapPxY < 0f) continue;
+                bool northOfRizia = false;
+                foreach (var id in sea.AdjacentIds)
+                {
+                    if (!byId.TryGetValue(id, out var land) || land.IsSea || land.Allegiance != "Rizia") continue;
+                    if (land.MapPxY < 0f) continue;
+                    if (sea.MapPxY < land.MapPxY - 8f) northOfRizia = true;
+                }
+                if (northOfRizia) ranked.Add(sea);
+            }
+            ranked.Sort((a, b) => a.MapPxY.CompareTo(b.MapPxY));
+            int kept = 0;
+            for (int i = 0; i < ranked.Count && kept < 5; i++)
+            {
+                ranked[i].IsNavalStart = true;
+                kept++;
+            }
+            if (kept > 0)
+                MelonLogger.Msg("[ZilleMap] Rizian naval starts north of the coast: " + kept + ".");
         }
 
         /// <summary>Reads the saved file and puts it back on the live table. Does not rebuild provinces.</summary>

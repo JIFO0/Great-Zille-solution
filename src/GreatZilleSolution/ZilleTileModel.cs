@@ -39,6 +39,8 @@ namespace GreatZilleSolution
         public bool HasNoAirZone { get; set; } = false;
         public bool HasNoNavalLanding { get; set; } = false;
         public bool IsBorder { get; set; } = false;
+        // Sea just north of the Rizian coast. Ships may deploy here at the start; it is not enemy water.
+        public bool IsNavalStart { get; set; } = false;
         public bool IsCitySurroundings { get; set; } = false;
         public string Region { get; set; } = "";
         // plains | hills | mountains. Mountains become WarTile.GroundType.Mountain.
