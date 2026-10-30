@@ -20,8 +20,14 @@ namespace GreatZilleSolution
         public static Texture2D MapBackgroundTexture { get; private set; }
         public static Texture2D FullMapTexture { get; private set; }
 
-        /// <summary>True when the live layout came from maps/zille/v11/regions/provinces_manifest.json. Neighbours are not copied.</summary>
+        /// <summary>True when the live layout came from maps/zille/v12/regions/provinces_manifest.json.</summary>
         public static bool UsingProvinceManifest { get; private set; }
+
+        /// <summary>
+        /// Directed adjacency from provinces_adjacency.json (each border twice).
+        /// Terrain and roads live on each ZilleTileData. Neither is a Pales combat modifier.
+        /// </summary>
+        public static List<ZilleProvinceLink> ProvinceLinks { get; } = new List<ZilleProvinceLink>();
 
         public static void Initialize()
         {
@@ -38,31 +44,31 @@ namespace GreatZilleSolution
             LoadAllTextures();
         }
 
-        private static bool IsV11Pack(string dir)
+        private static bool IsV12Pack(string dir)
         {
             return !string.IsNullOrEmpty(dir)
                 && File.Exists(Path.Combine(dir, "map", "T_Map_Zille_01.png"))
                 && File.Exists(Path.Combine(dir, "regions", "provinces_manifest.json"));
         }
 
-        private static string FindV11Pack()
+        private static string FindV12Pack()
         {
             string mod = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Mods", "GreatZilleAssets"));
             string[] named =
             {
                 mod,
-                Path.Combine(mod, "v11"),
-                Path.Combine(mod, "maps", "zille", "v11"),
-                @"c:\Projects\Great Zille solution\maps\zille\v11",
+                Path.Combine(mod, "v12"),
+                Path.Combine(mod, "maps", "zille", "v12"),
+                @"c:\Projects\Great Zille solution\maps\zille\v12",
             };
             foreach (var dir in named)
-                if (IsV11Pack(dir)) return Path.GetFullPath(dir);
+                if (IsV12Pack(dir)) return Path.GetFullPath(dir);
 
             string cursor = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
             for (int i = 0; i < 8 && !string.IsNullOrEmpty(cursor); i++)
             {
-                string pack = Path.Combine(cursor, "maps", "zille", "v11");
-                if (IsV11Pack(pack)) return Path.GetFullPath(pack);
+                string pack = Path.Combine(cursor, "maps", "zille", "v12");
+                if (IsV12Pack(pack)) return Path.GetFullPath(pack);
                 var parent = Directory.GetParent(cursor);
                 if (parent == null) break;
                 cursor = parent.FullName;
@@ -74,11 +80,11 @@ namespace GreatZilleSolution
         {
             string suzerainModAssets = Path.Combine(Application.dataPath, "..", "Mods", "GreatZilleAssets");
             string projectAssets = @"c:\Projects\Great Zille solution\assets";
-            string v11 = FindV11Pack();
+            string v12 = FindV12Pack();
 
-            if (!string.IsNullOrEmpty(v11))
+            if (!string.IsNullOrEmpty(v12))
             {
-                _primaryAssetsDir = v11;
+                _primaryAssetsDir = v12;
             }
             else if (Directory.Exists(suzerainModAssets))
             {
@@ -102,6 +108,7 @@ namespace GreatZilleSolution
         public static void LoadConfig()
         {
             UsingProvinceManifest = false;
+            ProvinceLinks.Clear();
             if (TryLoadProvinceManifest())
                 return;
 
@@ -150,7 +157,7 @@ namespace GreatZilleSolution
                 var cfg = new ZilleMapConfig
                 {
                     MapTitle = "Great Zille Theatre of War",
-                    Version = "v11",
+                    Version = "v12",
                     BackgroundTexture = "T_Map_Zille_Full_Composite.png",
                     Tiles = new List<ZilleTileData>(),
                     Orders = new List<ZilleUnitOrder>()
@@ -171,7 +178,8 @@ namespace GreatZilleSolution
                         cy = p.TileY + size * 0.5f;
                     }
                     string tex = string.IsNullOrEmpty(p.PngFile) ? p.Id + ".png" : Path.GetFileName(p.PngFile);
-                    string allegiance = p.Region == "Brenas" ? "Rizia" : (p.Type == "sea" ? "Contested" : "Wehlen");
+                    bool sea = p.Type == "sea";
+                    string allegiance = p.Region == "Brenas" ? "Rizia" : (sea ? "Contested" : "Wehlen");
                     cfg.Tiles.Add(new ZilleTileData
                     {
                         Id = p.Id,
@@ -182,6 +190,13 @@ namespace GreatZilleSolution
                         Width = 48f,
                         Height = 48f,
                         Allegiance = allegiance,
+                        ProvinceType = sea ? "sea" : "land",
+                        IsCoastal = !sea && p.IsCoastal == true,
+                        IsPort = !sea && p.IsPort == true,
+                        Terrain = sea ? "" : (p.Terrain ?? ""),
+                        RoadClass = sea ? "" : (p.RoadClass ?? ""),
+                        HasMainRoad = !sea && p.HasMainRoad == true,
+                        HasRailway = !sea && p.HasRailway == true,
                         TileNumber = number,
                         MapPxX = cx,
                         MapPxY = cy,
@@ -192,8 +207,9 @@ namespace GreatZilleSolution
 
                 if (cfg.Tiles.Count == 0) return false;
                 CurrentConfig = cfg;
+                ApplyAdjacency(cfg);
                 UsingProvinceManifest = true;
-                MelonLogger.Msg($"[ZilleMap] Loaded {cfg.Tiles.Count} provinces from {path}. Footprint {footprint:F0}px, world scale {world:F4}. Neighbours were not applied.");
+                MelonLogger.Msg($"[ZilleMap] Loaded {cfg.Tiles.Count} provinces from {path}. Footprint {footprint:F0}px, world scale {world:F4}.");
                 return true;
             }
             catch (Exception ex)
@@ -206,7 +222,7 @@ namespace GreatZilleSolution
         // ---- Game tile identity & placement -------------------------------------------------------------
         // Suzerain looks tiles up with string.Format("Tile_{0}", tileName), so every tile referenced by operation
         // data (includedTileNames, WarTileData.tileName, WarTokenData.startingTileName) must be a real tile NUMBER.
-        // The v11 manifest reuses the vanilla WarTile objects (Tile_1..100 and Tile_S1..S33) by number.
+        // The v12 manifest reuses Tile_1..100 and Tile_S1..S33. Tile_S34..S52 are cloned at runtime.
         // The five entries below are only the fallback when that manifest is not installed.
         private static readonly Dictionary<string, (string num, float px, float py, float scale)> DefaultPlacement =
             new Dictionary<string, (string, float, float, float)>
@@ -348,6 +364,10 @@ namespace GreatZilleSolution
                     "tile_nanta" => "Nanta",
                     "tile_wiktrany" => "Wiktrany",
                     "tile_brenas" => "Dapalle",
+                    "tile_isor" => "Isor",
+                    "tile_mave_nortus" => "Mave Nortus",
+                    "tile_kratsna" => "Kratsna",
+                    "tile_grodzizg" => "Grodzizg",
                     _ => null
                 };
                 if (city != null)
@@ -433,7 +453,7 @@ namespace GreatZilleSolution
                 MapBackgroundTexture = CreateFallbackMapTexture();
             }
 
-            // 3. Load province masks. v11 uses ZilleTile_N.png / ZilleTile_SN.png; older packs used Frame 41..45.
+            // 3. Load province masks. v12 uses ZilleTile_N.png / ZilleTile_SN.png; older packs used Frame 41..45.
             string regDir = Path.Combine(_primaryAssetsDir, "regions");
             if (Directory.Exists(regDir))
             {
@@ -634,6 +654,101 @@ namespace GreatZilleSolution
             [JsonPropertyName("tile_center_y")] public float TileCenterY { get; set; }
             [JsonPropertyName("tile_size_map")] public float TileSizeMap { get; set; }
             [JsonPropertyName("png_file")] public string PngFile { get; set; }
+            [JsonPropertyName("is_coastal")] public bool? IsCoastal { get; set; }
+            [JsonPropertyName("is_port")] public bool? IsPort { get; set; }
+            [JsonPropertyName("terrain")] public string Terrain { get; set; }
+            [JsonPropertyName("road_class")] public string RoadClass { get; set; }
+            [JsonPropertyName("has_main_road")] public bool? HasMainRoad { get; set; }
+            [JsonPropertyName("has_railway")] public bool? HasRailway { get; set; }
+        }
+
+        /// <summary>
+        /// Pales movement is one list, WarTile.adjacentWarTiles, plus WarTileData.isShoreTile.
+        /// Every curated link is written into that list, replacing the vanilla Pales neighbours:
+        /// land and strait are land-land steps (strait is only 3–2, 3–5, 72–75; Pales has no separate strait channel),
+        /// sea is a naval step between Tile_S* provinces, and coastal is embark/landing.
+        /// The land end of a coastal link is marked isShoreTile. Sea tiles are not shore tiles.
+        /// Road and terrain values are kept on ZilleTileData and ProvinceLinks. WarTile has no field for them.
+        /// </summary>
+        private static void ApplyAdjacency(ZilleMapConfig cfg)
+        {
+            ProvinceLinks.Clear();
+            string path = Path.Combine(_primaryAssetsDir, "regions", "provinces_adjacency.json");
+            if (!File.Exists(path))
+            {
+                MelonLogger.Warning("[ZilleMap] provinces_adjacency.json is missing. Vanilla Pales neighbours will be left in place.");
+                return;
+            }
+            try
+            {
+                var opts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var file = JsonSerializer.Deserialize<AdjacencyFile>(File.ReadAllText(path), opts);
+                if (file?.Provinces == null || file.Provinces.Count == 0)
+                {
+                    MelonLogger.Warning("[ZilleMap] provinces_adjacency.json has no provinces.");
+                    return;
+                }
+
+                var byId = new Dictionary<string, ZilleTileData>();
+                foreach (var t in cfg.Tiles)
+                {
+                    if (t == null || string.IsNullOrEmpty(t.Id)) continue;
+                    byId[t.Id] = t;
+                    t.AdjacentIds = new List<string>();
+                }
+
+                int land = 0, sea = 0, coastal = 0, strait = 0, other = 0;
+                foreach (var kv in file.Provinces)
+                {
+                    if (!byId.TryGetValue(kv.Key, out var src) || kv.Value?.Neighbours == null) continue;
+                    foreach (var n in kv.Value.Neighbours)
+                    {
+                        if (n == null || string.IsNullOrEmpty(n.Id) || !byId.ContainsKey(n.Id)) continue;
+                        if (!src.AdjacentIds.Contains(n.Id)) src.AdjacentIds.Add(n.Id);
+                        string kind = n.Type ?? "";
+                        if (kind == "land") land++;
+                        else if (kind == "sea") sea++;
+                        else if (kind == "coastal") coastal++;
+                        else if (kind == "strait") strait++;
+                        else other++;
+                        ProvinceLinks.Add(new ZilleProvinceLink
+                        {
+                            FromId = src.Id,
+                            ToId = n.Id,
+                            LinkType = kind,
+                            RoadLink = n.RoadLink,
+                            RoadLinkClass = n.RoadLinkClass ?? "",
+                            RailLink = n.RailLink
+                        });
+                    }
+                }
+
+                int directed = land + sea + coastal + strait + other;
+                MelonLogger.Msg($"[ZilleMap] Adjacency {directed / 2} links ({land / 2} land, {sea / 2} sea, {coastal / 2} coastal, {strait / 2} strait). Stored {ProvinceLinks.Count} directed records. Road and terrain stay on the province data.");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[ZilleMap] Failed to read adjacency {path}: {ex.Message}");
+            }
+        }
+
+        private sealed class AdjacencyFile
+        {
+            [JsonPropertyName("provinces")] public Dictionary<string, AdjacencyProvince> Provinces { get; set; }
+        }
+
+        private sealed class AdjacencyProvince
+        {
+            [JsonPropertyName("neighbours")] public List<AdjacencyNeighbour> Neighbours { get; set; }
+        }
+
+        private sealed class AdjacencyNeighbour
+        {
+            [JsonPropertyName("id")] public string Id { get; set; }
+            [JsonPropertyName("type")] public string Type { get; set; }
+            [JsonPropertyName("road_link")] public bool RoadLink { get; set; }
+            [JsonPropertyName("road_link_class")] public string RoadLinkClass { get; set; }
+            [JsonPropertyName("rail_link")] public bool RailLink { get; set; }
         }
     }
 }

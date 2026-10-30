@@ -16,6 +16,7 @@ namespace GreatZilleSolution
     ///    x = -0.166 / 0.5 / 1.166, y = 0.3471 / -0.3185). Material MA_MapPales_0N, texture property "_Diffuse" (4096x4096, no mips,
     ///    bilinear, clamp, sRGB), _AlphaClip = 1 with threshold 0.5 (alpha 0 pixels are discarded).
     ///  * "Tile Map/Tile_N" holds 133 WarTile objects (N = 1..100 and S1..S33). The game finds them with string.Format("Tile_{0}", name).
+    ///    v12 sea provinces S34–S52 are cloned from a sea Tile_S quad at runtime, named Tile_S34..Tile_S52, and parented beside the vanilla tiles.
     ///    Each tile is a unit quad (scale 0.1543 land / 0.2761 sea) using material MA_PalesTile / shader S_IndividualTile whose
     ///    "_Tile_Texture" is a 512x512 red/green MASK (R = interior, G = outline falloff). The shader does all the colouring
     ///    (tint, outline, gradient, pulse, highlight) - the red/green image is NOT meant to be seen directly.
@@ -41,6 +42,7 @@ namespace GreatZilleSolution
             public WarTile Tile; public Vector3 LocalPos; public Vector3 LocalScale; public Texture2D Tex;
             public Il2CppSystem.Collections.Generic.List<WarTile> Adj; public float RootZ; public bool AdjApplied;
             public bool OrigActive; public bool OrigActiveStored;
+            public bool Spawned;
         }
 
         private static Transform _root;
@@ -50,6 +52,7 @@ namespace GreatZilleSolution
         private static float _nextFind = 0f;
         private static bool _loggedApplied = false;
         private static readonly HashSet<string> _warnedMissing = new HashSet<string>();
+        private static readonly HashSet<int> _spawnedTileIds = new HashSet<int>();
 
         // ================================================================== public API
 
@@ -71,7 +74,7 @@ namespace GreatZilleSolution
                     _nextFind = Time.unscaledTime + 0.5f;
                     _root = FindWarMapRoot();
                     if (_root == null) return;
-                    _planes.Clear(); _tiles.Clear(); _loggedApplied = false;
+                    _planes.Clear(); _tiles.Clear(); _spawnedTileIds.Clear(); _loggedApplied = false;
                     MelonLogger.Msg($"[ZTABLE] War map instance found: '{_root.name}' (id {_root.gameObject.GetInstanceID()}), applying Zille skin...");
                 }
 
@@ -109,6 +112,12 @@ namespace GreatZilleSolution
                 {
                     var tb = kv.Value;
                     if (tb.Tile == null) continue;
+                    if (tb.Spawned)
+                    {
+                        UnregisterSpawnedTile(tb.Tile);
+                        UnityEngine.Object.Destroy(tb.Tile.gameObject);
+                        continue;
+                    }
                     tb.Tile.transform.localPosition = tb.LocalPos;
                     tb.Tile.transform.localScale = tb.LocalScale;
                     tb.Tile.warTileTexture = tb.Tex;
@@ -127,7 +136,7 @@ namespace GreatZilleSolution
             }
             finally
             {
-                _planes.Clear(); _tiles.Clear(); _root = null; _loggedApplied = false;
+                _planes.Clear(); _tiles.Clear(); _spawnedTileIds.Clear(); _root = null; _loggedApplied = false;
             }
         }
 
@@ -253,7 +262,7 @@ namespace GreatZilleSolution
                 data.tileName = td.TileNumber;
                 data.startingAllegiance = ToAllegiance(td.Allegiance);
                 data.fortLevel = td.FortLevel;
-                data.isShoreTile = td.IsPort;
+                data.isShoreTile = td.CountsAsShore;
                 data.isEnemyAirfield = td.IsAirfield;
                 data.isInitialDeploymentTile = td.Allegiance == "Rizia";
                 data.isBorderTile = td.Allegiance == "Rizia";
@@ -318,6 +327,9 @@ namespace GreatZilleSolution
                 if (wt != null) byName[wt.gameObject.name] = wt;
             }
 
+            if (ZilleMapLayoutManager.UsingProvinceManifest)
+                EnsureMissingSeaTiles(cfg, byName);
+
             // 1. resolve config -> WarTile
             var resolved = new Dictionary<string, WarTile>();
             foreach (var td in cfg.Tiles)
@@ -344,7 +356,8 @@ namespace GreatZilleSolution
                         Adj = wt.adjacentWarTiles,
                         RootZ = root.InverseTransformPoint(wt.transform.position).z,
                         OrigActive = wt.gameObject.activeSelf,
-                        OrigActiveStored = true
+                        OrigActiveStored = true,
+                        Spawned = _spawnedTileIds.Contains(id)
                     };
                     _tiles[id] = tb;
                 }
@@ -387,8 +400,11 @@ namespace GreatZilleSolution
                 if (wt.IsReinforcementTile() != td.IsReinforcementTile)
                     wt.SetIsReinforcementTile(td.IsReinforcementTile);
 
-                // Adjacency stays untouched until a reviewed neighbour list is supplied.
-                if (td.AdjacentIds != null && td.AdjacentIds.Count > 0)
+                // Replace the vanilla Pales neighbour list when this province has a curated list.
+                // land/strait, sea, and coastal links all go in adjacentWarTiles. isShoreTile marks the land end of a coastal link.
+                bool replaceNeighbours = td.AdjacentIds != null
+                    && (td.AdjacentIds.Count > 0 || ZilleMapLayoutManager.UsingProvinceManifest);
+                if (replaceNeighbours)
                 {
                     var cur = wt.adjacentWarTiles;
                     bool needs = !tb.AdjApplied || cur == null || cur.Count != CountResolved(td, resolved);
@@ -410,8 +426,113 @@ namespace GreatZilleSolution
         }
 
         /// <summary>
+        /// Tile_S34..Tile_S52 do not exist on the Pales table. Clone one sea quad (Tile_S1 when it is present)
+        /// under the same parent, with its own material, and register it on WarTileManager.allTiles.
+        /// The operation already lists these numbers because every manifest province is written into
+        /// includedTileNames and tileData. The game's Tile_{number} lookup is the child name.
+        /// </summary>
+        private static void EnsureMissingSeaTiles(ZilleMapConfig cfg, Dictionary<string, WarTile> byName)
+        {
+            if (cfg?.Tiles == null) return;
+            if (!byName.TryGetValue("Tile_S1", out var template) || template == null)
+            {
+                foreach (var kv in byName)
+                {
+                    if (kv.Key.StartsWith("Tile_S", StringComparison.Ordinal) && kv.Value != null)
+                    {
+                        template = kv.Value;
+                        break;
+                    }
+                }
+            }
+            if (template == null)
+            {
+                if (_warnedMissing.Add("sea-template"))
+                    MelonLogger.Warning("[ZTABLE] No sea WarTile to clone. Tile_S34–Tile_S52 will be missing.");
+                return;
+            }
+
+            int made = 0;
+            foreach (var td in cfg.Tiles)
+            {
+                if (td == null || string.IsNullOrEmpty(td.TileNumber) || td.TileNumber[0] != 'S') continue;
+                if (!int.TryParse(td.TileNumber.Substring(1), out int n) || n <= 33) continue;
+                string goName = "Tile_" + td.TileNumber;
+                if (byName.ContainsKey(goName)) continue;
+                var clone = SpawnSeaTile(template, goName);
+                if (clone == null) continue;
+                byName[goName] = clone;
+                made++;
+            }
+            if (made > 0)
+                MelonLogger.Msg($"[ZTABLE] Cloned {made} sea tiles from {template.gameObject.name} as Tile_S34–Tile_S52.");
+        }
+
+        private static WarTile SpawnSeaTile(WarTile template, string goName)
+        {
+            var parent = template.transform.parent;
+            var go = (GameObject)UnityEngine.Object.Instantiate(template.gameObject, parent, false);
+            go.name = goName;
+            go.SetActive(true);
+            var wt = go.GetComponent<WarTile>();
+            if (wt == null)
+            {
+                UnityEngine.Object.Destroy(go);
+                MelonLogger.Warning("[ZTABLE] Clone of " + template.gameObject.name + " has no WarTile.");
+                return null;
+            }
+            var rend = wt.GetWarTileRenderer();
+            if (rend != null && rend.sharedMaterial != null)
+                rend.material = new Material(rend.sharedMaterial);
+            wt.adjacentWarTiles = new Il2CppSystem.Collections.Generic.List<WarTile>();
+            _spawnedTileIds.Add(wt.GetInstanceID());
+            RegisterSpawnedTile(wt);
+            return wt;
+        }
+
+        private static void RegisterSpawnedTile(WarTile wt)
+        {
+            try
+            {
+                var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
+                var list = mgr?.allTiles;
+                if (list == null) return;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var existing = list[i];
+                    if (existing != null && existing.gameObject.name == wt.gameObject.name) return;
+                }
+                list.Add(wt);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] Could not register " + wt.gameObject.name + " on WarTileManager: " + ex.Message);
+            }
+        }
+
+        private static void UnregisterSpawnedTile(WarTile wt)
+        {
+            try
+            {
+                var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
+                var list = mgr?.allTiles;
+                if (list == null || wt == null) return;
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    var existing = list[i];
+                    if (existing == null || existing == wt) list.RemoveAt(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] Could not unregister a cloned sea tile: " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// The Pales table has Tile_1..100 and Tile_S1..S33. Provinces that are not in the Zille manifest
         /// are switched off so the old Pales shapes do not stay on the Zille map. Restore() turns them back on.
+        /// Cloned Tile_S34..S52 are not in this range; Restore() destroys them.
         /// </summary>
         private static void HideUnusedVanillaTiles(ZilleMapConfig cfg)
         {

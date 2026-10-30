@@ -27,6 +27,21 @@ namespace GreatZilleSolution
         public bool IsAirfield { get; set; } = false;
         public bool IsSupplyHub { get; set; } = false;
 
+        // "land" or "sea". Sea provinces use Tile_S* and are not shore tiles.
+        public string ProvinceType { get; set; } = "";
+
+        // Land province that shares a border with a sea province. Pales reads this as WarTileData.isShoreTile
+        // (embark / landing). Ports are coastal cities and are also shore tiles.
+        public bool IsCoastal { get; set; } = false;
+
+        // From the v12 manifest. The Pales WarTile has no terrain or road field, so these are data only.
+        public string Terrain { get; set; } = "";
+        public string RoadClass { get; set; } = "";
+        public bool HasMainRoad { get; set; } = false;
+        public bool HasRailway { get; set; } = false;
+
+        public bool CountsAsShore => ProvinceType != "sea" && (IsPort || IsCoastal);
+
         // Enemy reinforcement waves may spawn on this province (WarTile.SetIsReinforcementTile).
         public bool IsReinforcementTile { get; set; } = false;
         
@@ -78,5 +93,24 @@ namespace GreatZilleSolution
         public string WatchAllegiance { get; set; } = "Player";
         public bool Armed { get; set; } = true;
         public bool Fired { get; set; } = false;
+    }
+
+    /// <summary>
+    /// One directed neighbour from provinces_adjacency.json.
+    /// The file is symmetric, so each undirected border is stored twice.
+    /// Pales has a single adjacentWarTiles list and no road-bonus or terrain-cost field.
+    /// LinkType is recorded here and also used when that list is filled:
+    /// land and strait are land-land steps, sea is a naval step, coastal is an embark/landing step
+    /// (the land end is isShoreTile). RoadLink and RailLink are not applied as modifiers.
+    /// </summary>
+    [Serializable]
+    public class ZilleProvinceLink
+    {
+        public string FromId { get; set; } = "";
+        public string ToId { get; set; } = "";
+        public string LinkType { get; set; } = "";
+        public bool RoadLink { get; set; } = false;
+        public string RoadLinkClass { get; set; } = "";
+        public bool RailLink { get; set; } = false;
     }
 }

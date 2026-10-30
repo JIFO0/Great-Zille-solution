@@ -1383,7 +1383,7 @@ namespace GreatZilleSolution
                         wtd.startingAllegiance = ours ? WarToken.WarAllegiance.Player : WarToken.WarAllegiance.Enemy;
                         wtd.isInitialDeploymentTile = ours;
                         wtd.isBorderTile = ours;
-                        wtd.isShoreTile = src.IsPort;
+                        wtd.isShoreTile = src.CountsAsShore;
                         wtd.isEnemyAirfield = src.IsAirfield;
                         wtd.fortLevel = src.FortLevel;
                         if (src.FortLevel >= 2) wtd.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
@@ -1423,7 +1423,8 @@ namespace GreatZilleSolution
                     zilleOpData.playerCityTokens.Add(playerCities);
                 }
 
-                // Configure Enemy Cities (Zille, Munat, Wiktrany, Nanta)
+                // Enemy city tokens. The war flow spawns these from WarTokenData; there is no scene token to clone.
+                // The original four keep guid city_zille_{tile number}. Isor, Mave Nortus, Kratsna and Grodzizg use their own guids.
                 zilleOpData.enemyCityTokens = new Il2CppSystem.Collections.Generic.List<ConditionalWarTokenData>();
                 if (cityUnitType != null)
                 {
@@ -1431,12 +1432,28 @@ namespace GreatZilleSolution
                     enemyCities.condition = "";
                     enemyCities.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
 
-                    string[] enemyCityTiles = new string[] { ZilleMapLayoutManager.GameTileName("tile_zille"), ZilleMapLayoutManager.GameTileName("tile_munat"), ZilleMapLayoutManager.GameTileName("tile_wiktrany"), ZilleMapLayoutManager.GameTileName("tile_nanta") };
-                    for (int c = 0; c < enemyCityTiles.Length; c++)
+                    var enemyCitySpecs = new (string alias, string guid)[]
                     {
+                        ("tile_zille", null),
+                        ("tile_munat", null),
+                        ("tile_wiktrany", null),
+                        ("tile_nanta", null),
+                        ("tile_isor", "city_isor"),
+                        ("tile_mave_nortus", "city_mave_nortus"),
+                        ("tile_kratsna", "city_kratsna"),
+                        ("tile_grodzizg", "city_grodzizg"),
+                    };
+                    for (int c = 0; c < enemyCitySpecs.Length; c++)
+                    {
+                        string tileName = ZilleMapLayoutManager.GameTileName(enemyCitySpecs[c].alias);
+                        if (string.IsNullOrEmpty(tileName) || tileName.StartsWith("tile_", StringComparison.Ordinal))
+                        {
+                            MelonLogger.Warning($"[WAR ENGINE] City token {enemyCitySpecs[c].alias} did not resolve to a tile number.");
+                            continue;
+                        }
                         var cToken = new WarTokenData();
-                        cToken.startingTileName = enemyCityTiles[c];
-                        cToken.guid = $"city_zille_{enemyCityTiles[c]}";
+                        cToken.startingTileName = tileName;
+                        cToken.guid = string.IsNullOrEmpty(enemyCitySpecs[c].guid) ? $"city_zille_{tileName}" : enemyCitySpecs[c].guid;
                         cToken.allegiance = WarToken.WarAllegiance.Enemy;
                         cToken.unitType = cityUnitType;
                         enemyCities.tokens.Add(cToken);
