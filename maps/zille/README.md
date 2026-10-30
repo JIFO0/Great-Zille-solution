@@ -226,9 +226,9 @@ A fix round on top of v10. 136 provinces. Ids stay stable versus v10.
 
 Land:
 
-- 39 Zille
-- 28 northern Brenas
-- 29 Wehlen
+- 39 Zille (`ZilleTile_1`–`39`)
+- 28 northern Brenas (`ZilleTile_40`–`67`)
+- 29 Wehlen (`ZilleTile_68`–`96`)
 
 Sea: 40 provinces (`ZilleTile_S1`–`S40`).
 
@@ -240,4 +240,4 @@ The bay between Brannitz, Yol, and the Grodzizg shore is sea province `ZilleTile
 
 The size rule is unchanged: every province is over 512 and under 980 map px including stroke and blur (max 961). The exceptions are Dapalle (small city) and Rotsla (small island). No overlaps, no gaps, and all names are unique.
 
-Files in this step: `v11/map/T_Map_Zille_01`–`06` and `v11/map/T_Map_Zille_Full_Composite`, each as `.png` and `.svg`.
+Files: `v11/map/` (`T_Map_Zille_01`–`06` and `T_Map_Zille_Full_Composite`, each as `.png` and `.svg`), `v11/regions/` (136 tiles, manifest, overlay, validation), `v11/previews/`, and `v11/scripts/`.
