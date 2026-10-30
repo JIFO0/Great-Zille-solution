@@ -122,3 +122,23 @@ Tile style: fill `#FF0000`, stroke `#00F800` at width 20, layer blur 12 (`feGaus
 `provinces_manifest.json` and `provinces_manifest.csv` give `tile_x` / `tile_y` map position, region, type (`land` or `sea`), `is_city`, and neighbours. `provinces_overlay.svg`, `provinces_preview.png`, and `provinces_zille_crop.png` show the set. `provinces_validation.json` records the check. `scripts/` holds the build and export scripts that produced this set.
 
 Files: `v6/zille_vector.svg`, `v6/zille_preview.png`, and the province files above.
+
+### v7
+
+Province revision on the unchanged v6 map. 214 provinces.
+
+Land:
+
+- 117 Zille (`ZilleTile_1`–`117`)
+- 21 northern Brenas (`ZilleTile_118`–`138`)
+- 40 Wehlen (`ZilleTile_139`–`178`)
+
+Sea: 36 provinces (`ZilleTile_S1`–`S36`).
+
+Land cells are organic: a compact watershed over the relief, rivers, and roads, with variable-density seeds. City provinces exist only for Zille, Wiktrany, Mave Nortus, Dapalle, Nanta, Isor, Munat, and Kratsna, shaped from their urban outlines. Zille uses its core outline. Inland zone edges are smooth, and tiny cells are merged where the 512 limit allows.
+
+Sea provinces form an irregular angular corridor from the Rizia north coast to Kratsna, and along the Rizia coast to Isor and Port Rotsla.
+
+Tiles stay 512×512, fill `#FF0000`, stroke `#00F800` at width 20, blur `stdDeviation` 6.
+
+Files: `v7/zille_vector.svg`, `v7/zille_preview.png`, and the province set (`provinces/`, manifests, overlay, previews, validation, `scripts/`).
