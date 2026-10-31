@@ -396,7 +396,7 @@ namespace GreatZilleSolution
             try
             {
                 var alleg = _side == "Enemy" ? WarToken.WarAllegiance.Enemy : WarToken.WarAllegiance.Player;
-                mgr.DeployToken(ut, wt, alleg);
+                ZilleWarTable.RunScripted(() => mgr.DeployToken(ut, wt, alleg));
                 return $"DeployToken: {UnitLabel(ut)} on {tile.Name} ({_side}).";
             }
             catch (Exception ex)

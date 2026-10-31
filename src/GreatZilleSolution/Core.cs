@@ -163,7 +163,7 @@ namespace GreatZilleSolution
 
             // Expanded Bottom-Left Panel
             float panelWidth = 205f;
-            float panelHeight = 392f;
+            float panelHeight = 428f;
             float panelX = padding;
             float panelY = Screen.height - panelHeight - padding;
             Rect panelRect = new Rect(panelX, panelY, panelWidth, panelHeight);
@@ -200,6 +200,15 @@ namespace GreatZilleSolution
             }
             GUI.color = Color.white;
             curY += 38f;
+
+            GUI.color = new Color(0.75f, 0.9f, 1f);
+            if (GUI.Button(new Rect(btnX, curY, btnW, 32f), "[TRYB EDYCJI]"))
+            {
+                WarOperationZilleManager.EnterZilleWarTheatre(true);
+                if (_editorUI != null) _editorUI.IsOpen = true;
+            }
+            GUI.color = Color.white;
+            curY += 36f;
 
             // Button 4: Map & Region Editor
             bool isEditorOpen = _editorUI != null && _editorUI.IsOpen;

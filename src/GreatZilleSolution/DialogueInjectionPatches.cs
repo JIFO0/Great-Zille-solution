@@ -14,23 +14,63 @@ namespace GreatZilleSolution
 
         public static void IsInitialDeploymentTilePostfix(WarTile __instance, ref bool __result)
         {
-            if (__result || __instance == null || !DeploymentAllows(__instance)) return;
-            if (IsRiziaLand(__instance) || IsNavalStart(__instance)) __result = true;
+            if (!ZilleWarTable.ScenarioStarted) return;
+            __result = ZilleWarTable.IsZilleFrontTile(__instance);
         }
 
         public static void IsSelectedDeploymentUnitDeployableToTilePostfix(WarTile __instance, ref bool __result)
         {
-            if (__result || __instance == null || !DeploymentAllows(__instance)) return;
-            if (IsRiziaLand(__instance) || IsNavalStart(__instance)) __result = true;
+            if (__result || !ForcedDeploy(__instance)) return;
+            __result = true;
         }
 
         public static void CanDeploySelectedUnitToTilePostfix(WarTile __0, ref bool __result)
         {
-            if (__result || __0 == null || !DeploymentAllows(__0)) return;
-            if (IsRiziaLand(__0) || IsNavalStart(__0)) __result = true;
+            if (__result || !ForcedDeploy(__0)) return;
+            __result = true;
+        }
+
+        /// <summary>Ships only on the naval starts. Land units only on Rizian land. A ship must not light up the coast.</summary>
+        private static bool ForcedDeploy(WarTile tile)
+        {
+            if (tile == null || !DeploymentAllows(tile)) return false;
+            try
+            {
+                var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
+                if (panel == null || !panel.IsDeploymentUnitSelected()) return false;
+                var unit = panel.GetSelectedUnitTypeData();
+                if (unit == null) return false;
+                if (unit.unitType == WarUnitTypeData.UnitType.NavalUnit) return IsNavalStart(tile);
+                if (unit.unitType == WarUnitTypeData.UnitType.LandUnit) return IsRiziaLand(tile);
+            }
+            catch { }
+            return false;
         }
 
         /// <summary>Reinforcement uses the same deploy colours and rules, without the opening frontline requirement.</summary>
+        public static void TileActionPostfix(WarTile __instance, ref WarTile.TileActionType __result)
+        {
+            if ((__result == WarTile.TileActionType.None || __result == WarTile.TileActionType.Select)
+                && ZilleWarTable.IsDeploymentTarget(__instance))
+            {
+                __result = WarTile.TileActionType.Deploy;
+                return;
+            }
+            if (__result == WarTile.TileActionType.Fortify && !ZilleWarTable.FortifyArmed)
+                __result = WarTile.TileActionType.Select;
+            if (__result == WarTile.TileActionType.Move && !ZilleWarTable.CanMoveOnto(__instance))
+                __result = WarTile.TileActionType.None;
+        }
+
+        public static void ArmFortifyPrefix() => ZilleWarTable.ArmFortify();
+
+        public static void ClearFortifyPostfix() => ZilleWarTable.ClearFortify();
+
+        public static bool SelectionShowPrefix() => ZilleWarTable.FortifyArmed;
+
+        /// <summary>A raw click must not deploy or move. Those run only after the hold opens the gate.</summary>
+        public static bool BlockUntilHoldPrefix() => ZilleWarTable.CommitAllowed;
+
         public static bool IsBorderTilePrefix(ref bool __result)
         {
             if (!ZilleWarTable.ScenarioStarted) return true;
@@ -85,6 +125,16 @@ namespace GreatZilleSolution
         public static void OnInitialDeploymentFinishedPostfix()
         {
             ZilleWarTable.MarkOperationBegun();
+        }
+
+        /// <summary>
+        /// The stock walk InsertRange's a null collection and aborts the line.
+        /// A road we built is connected; the manager can instantiate the animated segment.
+        /// </summary>
+        public static bool SupplyConnectPrefix(ref bool __result)
+        {
+            __result = true;
+            return false;
         }
 
         public static bool CanFastMoveOnSupplyTilePrefix(ref bool __result)
@@ -178,6 +228,13 @@ namespace GreatZilleSolution
                     harmony.Patch(canDeploy, postfix: new HarmonyMethod(post));
                 }
 
+                var connect = AccessTools.Method(typeof(WarSupplyLineManager), "IsTileConnectedToSupplySource");
+                if (connect != null)
+                {
+                    harmony.Patch(connect, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SupplyConnectPrefix))));
+                    MelonLogger.Msg("[Great Zille] Supply lines get a list before the connection walk.");
+                }
+
                 var fastMove = AccessTools.Method(typeof(WarToken), "CanFastMoveOnSupplyTile");
                 if (fastMove != null)
                 {
@@ -185,6 +242,40 @@ namespace GreatZilleSolution
                     harmony.Patch(fastMove, prefix: new HarmonyMethod(fastPrefix));
                     MelonLogger.Msg("[Great Zille] Supply-line check no longer aborts deployment.");
                 }
+
+                var action = AccessTools.Method(typeof(WarTile), nameof(WarTile.GetTileActionType));
+                if (action != null)
+                {
+                    var actionPost = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(TileActionPostfix));
+                    harmony.Patch(action, postfix: new HarmonyMethod(actionPost));
+                    MelonLogger.Msg("[Great Zille] Move and fortify prompts follow the real action.");
+                }
+                var armFortify = AccessTools.Method(typeof(WarPlayerActionsPanel), nameof(WarPlayerActionsPanel.OnWarFortify));
+                if (armFortify != null)
+                    harmony.Patch(armFortify, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ArmFortifyPrefix))));
+                foreach (var name in new[] { "OnWarAirStrike", "OnWarAirSupport", "OnWarParatrooper", "OnWarNavalInvasion" })
+                {
+                    var other = AccessTools.Method(typeof(WarPlayerActionsPanel), name);
+                    if (other != null)
+                        harmony.Patch(other, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ClearFortifyPostfix))));
+                }
+                var block = new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BlockUntilHoldPrefix)));
+                foreach (var gate in new[]
+                {
+                    AccessTools.Method(typeof(WarTileRaycaster), "OnClickWarTile"),
+                    AccessTools.Method(typeof(WarTile), nameof(WarTile.OnTileCommitAction)),
+                    AccessTools.Method(typeof(WarDeploymentPanel), "DeployToken"),
+                    AccessTools.Method(typeof(WarTokenManager), "DeployToken"),
+                    AccessTools.Method(typeof(WarActionHoverPanel), "PerformAction")
+                })
+                {
+                    if (gate != null) harmony.Patch(gate, prefix: block);
+                }
+                MelonLogger.Msg("[Great Zille] Deploy and move wait until the mouse has been held.");
+
+                var selectionShow = AccessTools.Method(typeof(WarTokenSelectionPanel), nameof(WarTokenSelectionPanel.Show));
+                if (selectionShow != null)
+                    harmony.Patch(selectionShow, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SelectionShowPrefix))));
 
                 var border = AccessTools.Method(typeof(WarTile), nameof(WarTile.IsBorderTile));
                 if (border != null)

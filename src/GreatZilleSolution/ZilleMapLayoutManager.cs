@@ -98,6 +98,7 @@ namespace GreatZilleSolution
             else
                 ImportRoadsIfMissing(CurrentConfig);
             MarkNavalStarts(CurrentConfig);
+            RecomputeFrontline(CurrentConfig);
         }
 
         /// <summary>
@@ -135,6 +136,33 @@ namespace GreatZilleSolution
             }
             if (kept > 0)
                 MelonLogger.Msg("[ZilleMap] Rizian naval starts north of the coast: " + kept + ".");
+        }
+
+        /// <summary>
+        /// The front is Rizian land that touches Wehlen land. The imported flag followed region names and marked the wrong provinces.
+        /// </summary>
+        public static void RecomputeFrontline(ZilleMapConfig cfg)
+        {
+            if (cfg?.Tiles == null) return;
+            var byId = new Dictionary<string, ZilleTileData>();
+            foreach (var t in cfg.Tiles)
+            {
+                t.IsBorder = false;
+                if (!string.IsNullOrEmpty(t.Id)) byId[t.Id] = t;
+            }
+            int n = 0;
+            foreach (var t in cfg.Tiles)
+            {
+                if (t.IsSea || t.IsCity || t.Allegiance != "Rizia" || t.AdjacentIds == null) continue;
+                foreach (var id in t.AdjacentIds)
+                {
+                    if (!byId.TryGetValue(id, out var other) || other.IsSea || other.Allegiance == "Rizia") continue;
+                    t.IsBorder = true;
+                    n++;
+                    break;
+                }
+            }
+            MelonLogger.Msg("[ZilleMap] Frontline is the Rizian land touching Wehlen: " + n + ".");
         }
 
         /// <summary>Reads the saved file and puts it back on the live table. Does not rebuild provinces.</summary>

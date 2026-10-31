@@ -1711,10 +1711,13 @@ namespace GreatZilleSolution
             }
         }
 
-        public static bool EnterZilleWarTheatre()
+        public static bool EnterZilleWarTheatre(bool editOnly = false)
         {
+            ZilleWarTable.EditMode = editOnly;
             MelonLogger.Msg("============================================================");
-            MelonLogger.Msg("[WAR ENGINE] Entering Native 3D Zille War Theatre (Golden Shield Parity)...");
+            MelonLogger.Msg(editOnly
+                ? "[WAR ENGINE] Entering the Zille table in edit mode."
+                : "[WAR ENGINE] Entering Native 3D Zille War Theatre (Golden Shield Parity)...");
             MelonLogger.Msg("============================================================");
 
             try
@@ -1842,8 +1845,10 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Zille) return;
             try
             {
-                // The Pales deployment list is a UI panel. Open it once the table exists and leave it up.
-                if (ZilleWarTable.HasLiveMap) ActivateWarDeploymentPanel();
+                if (ZilleWarTable.EditMode)
+                    ZilleWarTable.SuppressInvasionChrome();
+                else if (ZilleWarTable.HasLiveMap)
+                    ActivateWarDeploymentPanel();
             }
             catch { }
         }
