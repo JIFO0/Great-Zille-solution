@@ -1,5 +1,7 @@
 # Wehlen deployment scenarios (v13 review 2)
 
+The game loads **suspicious** unless `Mods/GreatZilleAssets/zille_scenario.json` exists. That file is one line, `{"deployment":"minimal"}`, `{"deployment":"suspicious"}` or `{"deployment":"prepared"}`. Restart Suzerain after editing it. The mod log names the preset and the file it read.
+
 Rule (owner, review 2): **every province holds at most ONE unit, and city provinces hold none** (Munat 2, Nanta 9, Isor 11, Wiktrany 28, Zille City 35, Kratsna 71, Grodzizg 94). "Groups" are clusters of adjacent provinces with one unit each.
 
 Files: `deployment_minimal.json`, `deployment_suspicious.json`, `deployment_prepared.json` - each has `deployment` = list of `{province_id, province_name, unit_type}` (one unit per entry) and `summary` (totals per type, land/naval totals, units per region). `deployments_all.csv` = all three variants (one row per unit). `deployments_summary.json` = the three summaries. Previews: `deployment_<variant>_preview.png` (one symbol per province).

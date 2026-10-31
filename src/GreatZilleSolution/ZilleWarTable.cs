@@ -131,6 +131,7 @@ namespace GreatZilleSolution
         {
             try
             {
+                DestroyClonedTiles();
                 foreach (var kv in _planes)
                 {
                     var pb = kv.Value;
@@ -164,6 +165,7 @@ namespace GreatZilleSolution
             {
                 ShowProfileChrome();
                 _planes.Clear(); _tiles.Clear(); _root = null; _loggedApplied = false; _palesColorsRead = false; _colorAttempted = false;
+                _tilesAdopted = false;
             }
         }
 
@@ -330,7 +332,7 @@ namespace GreatZilleSolution
             data.isBorderTile = td.IsBorder;
             if (td.IsCity) data.tileDefenceType = WarTile.TileDefenceType.City;
             else if (td.FortLevel >= 2) data.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
-            else if (td.Terrain == "hills") data.tileDefenceType = WarTile.TileDefenceType.DefencePoint;
+            else if (td.FortLevel > 0 || td.Terrain == "hills") data.tileDefenceType = WarTile.TileDefenceType.DefencePoint;
             else if (td.IsCitySurroundings) data.tileDefenceType = WarTile.TileDefenceType.CitySurroundings;
             else data.tileDefenceType = WarTile.TileDefenceType.None;
         }
@@ -520,49 +522,50 @@ namespace GreatZilleSolution
             return ok;
         }
 
+        private static readonly List<WarTile> _clonedTiles = new List<WarTile>();
+
         /// <summary>
-        /// Vanilla Pales has Tile_1..100 and Tile_S1..S33. v12 sea runs to S52, so the extra sea provinces
-        /// are clones of a real sea tile, renamed, and then placed like the rest.
+        /// Vanilla Pales has Tile_1..100 and Tile_S1..S33. v13 land runs to 118 and sea to S57.
+        /// Extra land provinces are clones of a land tile. Extra sea provinces are clones of a sea tile.
         /// </summary>
         private static void EnsureClonedTiles(ZilleMapConfig cfg, Dictionary<string, WarTile> byName)
         {
-            WarTile template = null;
+            WarTile landTemplate = null;
+            WarTile seaTemplate = null;
             foreach (var kv in byName)
             {
-                if (kv.Key.StartsWith("Tile_S", StringComparison.Ordinal)) { template = kv.Value; break; }
+                if (kv.Key == "Tile_1") landTemplate = kv.Value;
+                else if (landTemplate == null && IsLandTileObject(kv.Key)) landTemplate = kv.Value;
+                if (kv.Key == "Tile_S1") seaTemplate = kv.Value;
+                else if (seaTemplate == null && kv.Key.StartsWith("Tile_S", StringComparison.Ordinal)) seaTemplate = kv.Value;
             }
-            if (template == null) return;
-            var parent = template.transform.parent;
-            if (parent == null) return;
-            // The cached tile list lags behind new clones, so the old check cloned the same sea province
-            // every tick and stacked copies on top of each other.
-            var live = parent.GetComponentsInChildren<WarTile>(true);
+            if (landTemplate == null && _warnedMissing.Add("no-land-template"))
+                MelonLogger.Warning("[ZTABLE] No land Tile_1..100 to clone Tile_101-Tile_118 from.");
+            if (seaTemplate == null && _warnedMissing.Add("no-sea-template"))
+                MelonLogger.Warning("[ZTABLE] No sea Tile_S1..S33 to clone Tile_S34-Tile_S57 from.");
+            Transform landParent = landTemplate != null ? landTemplate.transform.parent : null;
+            Transform seaParent = seaTemplate != null ? seaTemplate.transform.parent : null;
+            if (landParent == null && seaParent == null) return;
+
             var seen = new HashSet<string>();
             byName.Clear();
             int dupes = 0;
-            if (live != null)
-            {
-                for (int i = 0; i < live.Length; i++)
-                {
-                    var existing = live[i];
-                    if (existing == null) continue;
-                    string n = existing.gameObject.name ?? "";
-                    if (!seen.Add(n))
-                    {
-                        UnityEngine.Object.Destroy(existing.gameObject);
-                        dupes++;
-                        continue;
-                    }
-                    byName[n] = existing;
-                }
-            }
+            AbsorbTiles(landParent, byName, seen, ref dupes);
+            if (seaParent != null && seaParent != landParent)
+                AbsorbTiles(seaParent, byName, seen, ref dupes);
             if (dupes > 0 && _warnedMissing.Add("duplicate-tiles"))
                 MelonLogger.Msg("[ZTABLE] Removed " + dupes + " duplicate provinces.");
+
+            int landCloned = 0, seaCloned = 0;
             foreach (var td in cfg.Tiles)
             {
                 if (string.IsNullOrEmpty(td.TileNumber)) continue;
                 string goName = "Tile_" + td.TileNumber;
                 if (byName.ContainsKey(goName)) continue;
+                bool sea = td.IsSea || td.TileNumber.StartsWith("S", StringComparison.Ordinal);
+                WarTile template = sea ? seaTemplate : landTemplate;
+                Transform parent = sea ? seaParent : landParent;
+                if (template == null || parent == null) continue;
                 var clone = UnityEngine.Object.Instantiate(template.gameObject, parent);
                 clone.name = goName;
                 clone.SetActive(true);
@@ -574,8 +577,94 @@ namespace GreatZilleSolution
                 }
                 wt.adjacentWarTiles = new Il2CppSystem.Collections.Generic.List<WarTile>();
                 byName[goName] = wt;
-                MelonLogger.Msg($"[ZTABLE] Cloned missing province {goName} ({td.Name}).");
+                _clonedTiles.Add(wt);
+                RegisterLiveTile(wt);
+                if (sea) seaCloned++; else landCloned++;
             }
+            if (landCloned + seaCloned > 0)
+            {
+                string landFrom = landTemplate != null ? landTemplate.gameObject.name : "(none)";
+                string seaFrom = seaTemplate != null ? seaTemplate.gameObject.name : "(none)";
+                MelonLogger.Msg("[ZTABLE] Cloned " + landCloned + " land tiles Tile_101-Tile_118 from " + landFrom
+                    + " and " + seaCloned + " sea tiles Tile_S34-Tile_S57 from " + seaFrom + ".");
+            }
+        }
+
+        private static bool IsLandTileObject(string name)
+        {
+            if (string.IsNullOrEmpty(name) || !name.StartsWith("Tile_", StringComparison.Ordinal)) return false;
+            if (name.StartsWith("Tile_S", StringComparison.Ordinal)) return false;
+            string rest = name.Substring("Tile_".Length);
+            if (rest.Length == 0) return false;
+            for (int i = 0; i < rest.Length; i++)
+                if (rest[i] < '0' || rest[i] > '9') return false;
+            return true;
+        }
+
+        private static void AbsorbTiles(Transform parent, Dictionary<string, WarTile> byName, HashSet<string> seen, ref int dupes)
+        {
+            if (parent == null) return;
+            var live = parent.GetComponentsInChildren<WarTile>(true);
+            if (live == null) return;
+            for (int i = 0; i < live.Length; i++)
+            {
+                var existing = live[i];
+                if (existing == null) continue;
+                string n = existing.gameObject.name ?? "";
+                if (!seen.Add(n))
+                {
+                    UnityEngine.Object.Destroy(existing.gameObject);
+                    dupes++;
+                    continue;
+                }
+                byName[n] = existing;
+            }
+        }
+
+        private static void RegisterLiveTile(WarTile wt)
+        {
+            if (wt == null) return;
+            var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
+            if (mgr == null) return;
+            var list = mgr.allTiles;
+            if (list == null)
+            {
+                list = new Il2CppSystem.Collections.Generic.List<WarTile>();
+                mgr.allTiles = list;
+            }
+            int id = wt.GetInstanceID();
+            for (int j = 0; j < list.Count; j++)
+                if (list[j] != null && list[j].GetInstanceID() == id) return;
+            list.Add(wt);
+        }
+
+        private static void DestroyClonedTiles()
+        {
+            if (_clonedTiles.Count == 0) return;
+            var doomed = new HashSet<int>();
+            int n = 0;
+            for (int i = 0; i < _clonedTiles.Count; i++)
+            {
+                var wt = _clonedTiles[i];
+                if (wt == null) continue;
+                doomed.Add(wt.GetInstanceID());
+                _tiles.Remove(wt.GetInstanceID());
+                UnityEngine.Object.Destroy(wt.gameObject);
+                n++;
+            }
+            _clonedTiles.Clear();
+            var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
+            var list = mgr != null ? mgr.allTiles : null;
+            if (list != null)
+            {
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    var w = list[i];
+                    if (w == null || doomed.Contains(w.GetInstanceID())) list.RemoveAt(i);
+                }
+            }
+            if (n > 0)
+                MelonLogger.Msg("[ZTABLE] Removed " + n + " cloned Zille provinces from the Pales table.");
         }
 
         private static int CountResolved(ZilleTileData td, Dictionary<string, WarTile> resolved)
@@ -1018,6 +1107,140 @@ namespace GreatZilleSolution
             return named ?? any;
         }
 
+        private static readonly Dictionary<string, WarUnitTypeData> _matchedUnits = new Dictionary<string, WarUnitTypeData>();
+        private static readonly HashSet<string> _unmatchedLogged = new HashSet<string>();
+
+        /// <summary>
+        /// Maps a v13 deployment id onto a real WarUnitTypeData. Specific kinds are matched before plain infantry.
+        /// A miss is logged once and that entry is skipped. There is no silent fallback to infantry.
+        /// </summary>
+        public static WarUnitTypeData MatchDeploymentUnit(string unitId, IList<WarUnitTypeData> extra)
+        {
+            if (string.IsNullOrEmpty(unitId)) return null;
+            if (_matchedUnits.TryGetValue(unitId, out var cached) && cached != null) return cached;
+            if (!DeploymentRule(unitId, out var needles, out var avoid, out bool naval)) return null;
+
+            var pool = new List<WarUnitTypeData>();
+            var seen = new HashSet<string>();
+            void Take(WarUnitTypeData u)
+            {
+                if (u == null || string.IsNullOrEmpty(u.name) || !seen.Add(u.name)) return;
+                pool.Add(u);
+            }
+            if (extra != null)
+                for (int i = 0; i < extra.Count; i++) Take(extra[i]);
+            var known = UnitTypes();
+            for (int i = 0; i < known.Count; i++) Take(known[i]);
+            if (pool.Count == 0) return null;
+
+            WarUnitTypeData found = null;
+            for (int i = 0; i < pool.Count; i++)
+            {
+                var u = pool[i];
+                if (naval && u.unitType != WarUnitTypeData.UnitType.NavalUnit) continue;
+                if (!naval && u.unitType != WarUnitTypeData.UnitType.LandUnit) continue;
+                string blob = UnitBlob(u);
+                bool blocked = false;
+                for (int a = 0; a < avoid.Length; a++)
+                    if (blob.Contains(avoid[a])) { blocked = true; break; }
+                if (blocked) continue;
+                for (int n = 0; n < needles.Length; n++)
+                {
+                    if (!blob.Contains(needles[n])) continue;
+                    found = u;
+                    break;
+                }
+                if (found != null) break;
+            }
+            if (found == null)
+            {
+                if (_unmatchedLogged.Add(unitId))
+                    MelonLogger.Warning("[ZilleMap] Unit type '" + unitId + "' has no WarUnitTypeData equivalent; those entries were skipped.");
+                return null;
+            }
+            _matchedUnits[unitId] = found;
+            MelonLogger.Msg("[ZilleMap] Unit type '" + unitId + "' -> '" + found.name + "' (" + UnitLabel(found) + ", " + found.unitType + ").");
+            return found;
+        }
+
+        private static string UnitBlob(WarUnitTypeData u)
+        {
+            string unitName = "";
+            string proper = "";
+            try { unitName = u.unitName ?? ""; } catch { }
+            try { proper = u.UnitName ?? ""; } catch { }
+            string kind = "";
+            try { kind = u.unitType.ToString(); } catch { }
+            return (u.name + " " + unitName + " " + proper + " " + kind).ToLowerInvariant();
+        }
+
+        private static bool DeploymentRule(string unitId, out string[] needles, out string[] avoid, out bool naval)
+        {
+            avoid = Array.Empty<string>();
+            naval = false;
+            switch (unitId)
+            {
+                case "mountain_infantry":
+                    needles = new[] { "mountain", "alpine", "highland" };
+                    return true;
+                case "mechanized_infantry":
+                    needles = new[] { "mechan", "motor", "apc" };
+                    avoid = new[] { "mountain" };
+                    return true;
+                case "paratroopers":
+                    needles = new[] { "paratroop", "airborne", "para" };
+                    return true;
+                case "militia":
+                    needles = new[] { "militia", "irregular", "partisan" };
+                    return true;
+                case "tanks":
+                    needles = new[] { "tank", "panzer", "armor", "armour" };
+                    avoid = new[] { "infantry", "anti" };
+                    return true;
+                case "submarine":
+                    needles = new[] { "submarine", "u-boat", "uboat" };
+                    naval = true;
+                    return true;
+                case "destroyer":
+                    needles = new[] { "destroyer" };
+                    naval = true;
+                    return true;
+                case "flagship":
+                    needles = new[] { "flagship", "battleship", "dreadnought" };
+                    naval = true;
+                    return true;
+                case "infantry":
+                    needles = new[] { "infantry" };
+                    avoid = new[] { "mountain", "mechan", "motor", "para", "militia" };
+                    return true;
+                default:
+                    needles = Array.Empty<string>();
+                    return false;
+            }
+        }
+
+        public static void QueueDeployment(Il2CppSystem.Collections.Generic.List<WarTokenData> tokens, IList<WarUnitTypeData> pool)
+        {
+            if (tokens == null) return;
+            int queued = 0;
+            var seen = new HashSet<string>();
+            for (int i = 0; i < ZilleDeployment.Units.Count; i++)
+            {
+                var entry = ZilleDeployment.Units[i];
+                if (entry == null || string.IsNullOrEmpty(entry.TileNumber) || !seen.Add(entry.TileNumber)) continue;
+                var ut = MatchDeploymentUnit(entry.UnitType, pool);
+                if (ut == null) continue;
+                var tok = new WarTokenData();
+                tok.startingTileName = entry.TileNumber;
+                tok.guid = "wehlen_" + entry.UnitType + "_" + entry.TileNumber;
+                tok.allegiance = WarToken.WarAllegiance.Enemy;
+                tok.unitType = ut;
+                tokens.Add(tok);
+                queued++;
+            }
+            MelonLogger.Msg("[WAR ENGINE] Wehlen deployment '" + ZilleDeployment.Preset + "': " + queued + " tokens queued.");
+        }
+
         /// <summary>
         /// Puts a unit on a live province. DeployToken is what the deployment box uses.
         /// SpawnWarToken is the story-script path, used when deployment is already closed.
@@ -1091,7 +1314,7 @@ namespace GreatZilleSolution
         /// <summary>The Pales hover, hold-to-place and refund path only sees tiles the war tile manager registered.</summary>
         private static void AdoptGameTiles()
         {
-            if (_root == null) return;
+            if (_root == null || _tilesAdopted) return;
             var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
             if (mgr == null) return;
             // Il2Cpp exposes the private list as a property. AccessTools.Field never finds it, which left the list empty.
@@ -1101,29 +1324,28 @@ namespace GreatZilleSolution
                 list = new Il2CppSystem.Collections.Generic.List<WarTile>();
                 mgr.allTiles = list;
             }
-            if (list.Count >= 40)
-            {
-                _tilesAdopted = true;
-                return;
-            }
             var tiles = _root.GetComponentsInChildren<WarTile>(true);
+            var have = new HashSet<int>();
+            for (int j = 0; j < list.Count; j++)
+                if (list[j] != null) have.Add(list[j].GetInstanceID());
+            int added = 0;
             for (int i = 0; i < tiles.Length; i++)
             {
                 var wt = tiles[i];
                 if (wt == null || !wt.gameObject.activeInHierarchy) continue;
                 int id = wt.GetInstanceID();
-                bool has = false;
-                for (int j = 0; j < list.Count; j++)
-                {
-                    if (list[j] != null && list[j].GetInstanceID() == id) { has = true; break; }
-                }
-                if (!has) list.Add(wt);
+                if (!have.Add(id)) continue;
+                list.Add(wt);
+                added++;
             }
-            if (list.Count >= 40 && !_tilesAdopted)
+            int want = ZilleMapLayoutManager.CurrentConfig?.Tiles?.Count ?? 0;
+            if (want > 0 && list.Count >= want)
             {
                 _tilesAdopted = true;
                 MelonLogger.Msg("[ZTABLE] Pales tile manager now owns " + list.Count + " Zille provinces (hover, hold to deploy, refund).");
             }
+            else if (added > 0 && _warnedMissing.Add("adopt-partial"))
+                MelonLogger.Msg("[ZTABLE] Registered " + added + " provinces on the tile manager (" + list.Count + " so far).");
         }
 
         private static bool _clutterHidden;
@@ -2490,12 +2712,71 @@ namespace GreatZilleSolution
             MelonLogger.Msg("[ZTABLE] Frontline land units placed through the Pales panel: " + placed + ".");
         }
 
+        /// <summary>Places the selected v13 Wehlen preset. One unit per province, never on a city, never on a Rizia ship sea.</summary>
+        private static void PlaceV13Deployment()
+        {
+            if (ZilleDeployment.Units.Count == 0)
+            {
+                if (_warnedMissing.Add("no-deployment"))
+                    MelonLogger.Warning("[ZTABLE] No Wehlen deployment units loaded.");
+                _garrisonsPlaced = true;
+                return;
+            }
+            if (UnitTypes().Count == 0) return;
+            int placed = 0, occupied = 0, unmatched = 0, missingTile = 0, skipped = 0;
+            for (int i = 0; i < ZilleDeployment.Units.Count; i++)
+            {
+                var entry = ZilleDeployment.Units[i];
+                ZilleTileData td = null;
+                var tiles = ZilleMapLayoutManager.CurrentConfig?.Tiles;
+                if (tiles != null)
+                {
+                    for (int t = 0; t < tiles.Count; t++)
+                        if (tiles[t].TileNumber == entry.TileNumber) { td = tiles[t]; break; }
+                }
+                if (td == null || td.IsCity || ZilleDeployment.IsForbiddenCity(td.TileNumber))
+                {
+                    skipped++;
+                    continue;
+                }
+                var wt = FindLiveTile(td.TileNumber);
+                if (wt == null)
+                {
+                    missingTile++;
+                    continue;
+                }
+                if (wt.GetCurrentToken() != null)
+                {
+                    occupied++;
+                    continue;
+                }
+                var ut = MatchDeploymentUnit(entry.UnitType, null);
+                if (ut == null)
+                {
+                    unmatched++;
+                    continue;
+                }
+                string msg = PlaceUnit(td, ut, true);
+                if (msg.StartsWith("Postawiono")) placed++;
+            }
+            if (missingTile > ZilleDeployment.Units.Count / 2) return;
+            _garrisonsPlaced = true;
+            MelonLogger.Msg("[ZTABLE] Wehlen deployment '" + ZilleDeployment.Preset + "': placed " + placed
+                + ", already occupied " + occupied + ", unmatched " + unmatched
+                + ", tile missing " + missingTile + ", skipped " + skipped + ".");
+        }
+
         /// <summary>Wehlen units sit on the border the way Pales garrisons do, without stacking on a city star.</summary>
         private static void EnsureEnemyGarrisons()
         {
             if (_garrisonsPlaced || _root == null) return;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             RemoveEnemyFromRizianStart(cfg);
+            if (cfg != null && !string.IsNullOrEmpty(cfg.Version) && cfg.Version.StartsWith("v13"))
+            {
+                PlaceV13Deployment();
+                return;
+            }
             if (cfg?.Tiles == null) return;
             var infantry = FindUnit(u => u != null && u.unitType == WarUnitTypeData.UnitType.LandUnit, "infantry");
             var tank = FindUnit(u => u != null && u.unitType == WarUnitTypeData.UnitType.LandUnit, "tank");

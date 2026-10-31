@@ -1580,24 +1580,18 @@ namespace GreatZilleSolution
                     zilleOpData.enemyCityTokens.Add(enemyCities);
                 }
 
-                // Extract Infantry and Tank Unit Types for Wehlen garrisons
-                WarUnitTypeData infUnitType = null;
-                WarUnitTypeData tankUnitType = null;
+                // Wehlen starts from the selected v13 deployment. City provinces stay empty of combat units.
+                var deploymentPool = new List<WarUnitTypeData>();
                 if (palesWarOp.warOperationData?.enemyTokens != null)
                 {
                     for (int e = 0; e < palesWarOp.warOperationData.enemyTokens.Count; e++)
                     {
                         var cond = palesWarOp.warOperationData.enemyTokens[e];
-                        if (cond?.tokens != null)
+                        if (cond?.tokens == null) continue;
+                        for (int t = 0; t < cond.tokens.Count; t++)
                         {
-                            for (int t = 0; t < cond.tokens.Count; t++)
-                            {
-                                var ut = cond.tokens[t]?.unitType;
-                                if (ut == null) continue;
-                                string uName = (ut.unitName ?? ut.name ?? "").ToLowerInvariant();
-                                if (infUnitType == null && uName.Contains("infantry")) infUnitType = ut;
-                                if (tankUnitType == null && (uName.Contains("tank") || uName.Contains("armor") || uName.Contains("panzer"))) tankUnitType = ut;
-                            }
+                            var ut = cond.tokens[t]?.unitType;
+                            if (ut != null) deploymentPool.Add(ut);
                         }
                     }
                 }
@@ -1606,47 +1600,9 @@ namespace GreatZilleSolution
                 var garrisonCond = new ConditionalWarTokenData();
                 garrisonCond.condition = "";
                 garrisonCond.tokens = new Il2CppSystem.Collections.Generic.List<WarTokenData>();
-
-                string TileNum(string provinceName, string fallbackId)
-                {
-                    var found = ZilleMapLayoutManager.FindByName(provinceName);
-                    if (found != null && !string.IsNullOrEmpty(found.TileNumber)) return found.TileNumber;
-                    return ZilleMapLayoutManager.GameTileName(fallbackId);
-                }
-                string wiktranyTile = TileNum("Wiktrany", "tile_wiktrany");
-                string zilleTile = TileNum("Zille City", "tile_zille");
-                string kratsnaTile = TileNum("Kratsna", "tile_nanta");
-
-                if (infUnitType != null)
-                {
-                    void AddInf(string tileName, string guid)
-                    {
-                        var inf = new WarTokenData();
-                        inf.startingTileName = tileName;
-                        inf.guid = guid;
-                        inf.allegiance = WarToken.WarAllegiance.Enemy;
-                        inf.unitType = infUnitType;
-                        garrisonCond.tokens.Add(inf);
-                    }
-                    AddInf(wiktranyTile, "wehlen_inf_wiktrany");
-                    AddInf(zilleTile, "wehlen_inf_zille");
-                    AddInf(kratsnaTile, "wehlen_inf_kratsna");
-                }
-
-                if (tankUnitType != null)
-                {
-                    var tankZille = new WarTokenData();
-                    tankZille.startingTileName = zilleTile;
-                    tankZille.guid = "wehlen_tank_zille";
-                    tankZille.allegiance = WarToken.WarAllegiance.Enemy;
-                    tankZille.unitType = tankUnitType;
-                    garrisonCond.tokens.Add(tankZille);
-                }
-
+                ZilleWarTable.QueueDeployment(garrisonCond.tokens, deploymentPool);
                 if (garrisonCond.tokens.Count > 0)
-                {
                     zilleOpData.enemyTokens.Add(garrisonCond);
-                }
 
                 // Initialize remaining lists on WarOperationData so WarFlowManager & WarOperationManager never NullRef
                 zilleOpData.supplyLines = ZilleWarTable.BuildSupplyLines();

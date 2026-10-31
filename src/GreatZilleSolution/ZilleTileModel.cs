@@ -23,6 +23,10 @@ namespace GreatZilleSolution
         
         // Tactical attributes
         public int FortLevel { get; set; } = 0;
+        // none | light | heavy. Light is fort level 1, heavy is fort level 2. Not drawn on the map.
+        public string FortKind { get; set; } = "none";
+        // border_west | border_east | north_line, or empty. Data only.
+        public string DefenseLine { get; set; } = "";
         public bool IsPort { get; set; } = false;
         public bool IsAirfield { get; set; } = false;
         public bool IsSupplyHub { get; set; } = false;
@@ -30,7 +34,7 @@ namespace GreatZilleSolution
         // Enemy reinforcement waves may spawn on this province (WarTile.SetIsReinforcementTile).
         public bool IsReinforcementTile { get; set; } = false;
 
-        // From the v12 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
+        // From the v13 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
         public bool IsSea { get; set; } = false;
         public bool IsCity { get; set; } = false;
         public bool IsCoastal { get; set; } = false;
@@ -39,7 +43,7 @@ namespace GreatZilleSolution
         public bool HasNoAirZone { get; set; } = false;
         public bool HasNoNavalLanding { get; set; } = false;
         public bool IsBorder { get; set; } = false;
-        // Sea just north of the Rizian coast. Ships may deploy here at the start; it is not enemy water.
+        // Sea from rizia_ship_placement. Ships may deploy here at the start; it is not enemy water.
         public bool IsNavalStart { get; set; } = false;
         public bool IsCitySurroundings { get; set; } = false;
         public string Region { get; set; } = "";
@@ -53,7 +57,7 @@ namespace GreatZilleSolution
         // Neighbour tile ids this province has a drawn road to.
         public List<string> RoadToIds { get; set; } = new List<string>();
 
-        // IDs of adjacent connected tiles (the v12 movement graph, including road and strait links).
+        // IDs of adjacent connected tiles (the v13 movement graph, including road and strait links).
         public List<string> AdjacentIds { get; set; } = new List<string>();
 
         // ---- In-game placement (see docs/ZILLE_MAP_INTEGRATION.md) ----
@@ -101,5 +105,15 @@ namespace GreatZilleSolution
         public string WatchAllegiance { get; set; } = "Player";
         public bool Armed { get; set; } = true;
         public bool Fired { get; set; } = false;
+    }
+
+    /// <summary>One Wehlen unit from the selected v13 deployment preset.</summary>
+    [Serializable]
+    public class ZilleDeploymentUnit
+    {
+        public string ProvinceId { get; set; } = "";
+        public string ProvinceName { get; set; } = "";
+        public string UnitType { get; set; } = "";
+        public string TileNumber { get; set; } = "";
     }
 }

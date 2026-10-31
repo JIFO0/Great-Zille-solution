@@ -276,7 +276,7 @@ Terrain in the manifest: 91 plains, 12 hills, 15 mountains. The version log says
 
 Forts (`regions/forts.json`): heavy on the west border (36, 37, 39, 117, 118), light on the east border (20, 26, 33, 104, 108, 114), light on the inner line (21, 17, 13, 8, 97).
 
-`regions/deployments/` holds three Wehlen setups, `minimal`, `suspicious` and `prepared`. Each entry is one unit. At most one unit per province, and none on the Wehlen cities 2, 9, 11, 28, 35, 71 and 94. Exactly one flagship. No Wehlen ship on the Rizia ship seas.
+`regions/deployments/` holds three Wehlen setups, `minimal`, `suspicious` and `prepared`. Each entry is one unit. At most one unit per province, and none on the Wehlen cities 2, 9, 11, 28, 35, 71 and 94. Exactly one flagship. No Wehlen ship on the Rizia ship seas. The game uses `suspicious` unless `Mods/GreatZilleAssets/zille_scenario.json` contains `{"deployment":"minimal"}` or `{"deployment":"prepared"}`. Restart after changing it.
 
 Each province is a 512×512 PNG and SVG. The only size exception left is Rotsla.
 
