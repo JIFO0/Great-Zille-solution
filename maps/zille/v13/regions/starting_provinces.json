@@ -1,0 +1,1171 @@
+{
+ "version": "v13",
+ "rule": "Land provinces start with the side of the Rizia-Wehlen border (borders_land layer of the source map) that holds the province area. Zille (with the Wiktrany/Zille/Nanta/Isor/Munat cities) and the Wehlen region incl. Kratsna, Grodzizg, Rotsla and the Kreleck Islands are Wehlen; the Brenas region (Dapalle, Marbelas ...) and the Mave Nortus city are Rizia. All sea provinces are neutral (no owner).",
+ "ship_rule": "Rizia may place ships at start only in the 7 seas listed in rizia_ship_placement: 2 on the west coast and 5 on the east coast, the seas closest to Rizian land on each side.",
+ "west_ship_seas_note": "The west Rizian coast (Praia Velha border point at y~7120 down to Costa Dalle / Marbelas) had no sea provinces in v12. v13 extends the sea to the bottom edge with S54-S57; the two bottom seas S56 Costa Dalle Waters and S57 Marbelas Bight are the only seas whose coast is Rizian (S57 touches Rizian land, S56 lies directly offshore of it), so they are the 2 west ship-placement seas. S54/S55 lie off the Wehlen-held Praia Velha / Santa Calla coast and are neutral without ship placement.",
+ "east_ship_seas_note": "East: S37, S30, S32, S31 touch the Rizian coast at the Mave Nortus inlet / Tarnes; the 5th sea is S26 Tarnes Waters (owner choice in review 1, instead of S25 Tirsa Banks which only touches the Wehlen Tirsa/Venna coast). S26 lies off Tarnes, north of S31/S32.",
+ "counts": {
+  "rizia": 29,
+  "wehlen": 89,
+  "neutral_sea": 57,
+  "rizia_ship_seas": 7
+ },
+ "rizia": [
+  {
+   "id": "ZilleTile_23",
+   "name": "Mave Nortus",
+   "region": "Brenas",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_40",
+   "name": "Mave Nortus East",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_41",
+   "name": "Mave Nortus South",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_42",
+   "name": "Tarnes",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_43",
+   "name": "Venna South",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_44",
+   "name": "Zelles",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_45",
+   "name": "Tarnes Southeast",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_46",
+   "name": "Dapalle North",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_47",
+   "name": "Dapalle East",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_48",
+   "name": "Zelles Southwest",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_49",
+   "name": "Zelles Southeast",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_50",
+   "name": "Morsa North",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_51",
+   "name": "Dapalle",
+   "region": "Brenas",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_52",
+   "name": "Ostrabe West",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_53",
+   "name": "Ostrabe",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_54",
+   "name": "Ostrabe Northeast",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_55",
+   "name": "Pomara Southwest",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_56",
+   "name": "Morsa West",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_57",
+   "name": "Morsa",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_58",
+   "name": "Ostrabe South",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_59",
+   "name": "Celle Vaz",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_60",
+   "name": "Celle Vaz East",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_61",
+   "name": "Brivane",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_62",
+   "name": "Brivane East",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_63",
+   "name": "Morsa Southeast",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_64",
+   "name": "Marbelas",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_65",
+   "name": "Marbelas East",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_66",
+   "name": "Brivane West",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_67",
+   "name": "Brivane South",
+   "region": "Brenas",
+   "is_city": false,
+   "terrain": "plains"
+  }
+ ],
+ "wehlen": [
+  {
+   "id": "ZilleTile_1",
+   "name": "Corvis",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_2",
+   "name": "Munat",
+   "region": "Zille",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_3",
+   "name": "Manes Riuz",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_4",
+   "name": "Corvis East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_5",
+   "name": "Tirsa",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_6",
+   "name": "Quella",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_7",
+   "name": "Corvis West",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_8",
+   "name": "Nanta West",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_9",
+   "name": "Nanta",
+   "region": "Zille",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_10",
+   "name": "Tirsa West",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_11",
+   "name": "Isor",
+   "region": "Zille",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_12",
+   "name": "Lido Isora",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_13",
+   "name": "Lenta North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_14",
+   "name": "Nanta Southwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_15",
+   "name": "Mave Nortus Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_16",
+   "name": "Sostra Northeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_17",
+   "name": "Lenta Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_18",
+   "name": "Lenta",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_19",
+   "name": "Venna Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_20",
+   "name": "Venna",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_21",
+   "name": "Ardo",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_22",
+   "name": "Ossa North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_24",
+   "name": "Cala Vessa East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_25",
+   "name": "Wiktrany East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_26",
+   "name": "Ossa East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_27",
+   "name": "Sabbiano",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_28",
+   "name": "Wiktrany",
+   "region": "Zille",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_29",
+   "name": "Ossa South",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_30",
+   "name": "Ondaro Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_31",
+   "name": "Zille North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_32",
+   "name": "Wiktrany Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_33",
+   "name": "Dapalle West",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_34",
+   "name": "Vela Nova",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_35",
+   "name": "Zille City",
+   "region": "Zille",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_36",
+   "name": "Pomara Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_37",
+   "name": "Pomara North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_38",
+   "name": "Rivamare",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_39",
+   "name": "Celle Vaz North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_68",
+   "name": "Kessin West",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_69",
+   "name": "Kessin",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_70",
+   "name": "Harlitz North",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_71",
+   "name": "Kratsna",
+   "region": "Wehlen",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_72",
+   "name": "Kreleck Islands",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_73",
+   "name": "Dornatz North",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_74",
+   "name": "Dornatz Northeast",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_75",
+   "name": "Kratsna Southeast",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_76",
+   "name": "Dornatz East",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_77",
+   "name": "Harlitz",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_78",
+   "name": "Trebnow",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_79",
+   "name": "Dornatz",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_80",
+   "name": "Sulkov Northeast",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_81",
+   "name": "Trebnow Southwest",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_82",
+   "name": "Trebnow East",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_83",
+   "name": "Mirlow South",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_84",
+   "name": "Sulkov Southwest",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_85",
+   "name": "Sulkov",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_86",
+   "name": "Sulkov Southeast",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_87",
+   "name": "Trebnow South",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_88",
+   "name": "Brannitz West",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_89",
+   "name": "Brannitz",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_90",
+   "name": "Brannitz Northeast",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_91",
+   "name": "Port Rotsla Northwest",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_92",
+   "name": "Walsholm North",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_93",
+   "name": "Yol Northwest",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_94",
+   "name": "Grodzizg",
+   "region": "Wehlen",
+   "is_city": true,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_95",
+   "name": "Brannitz Southwest",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_96",
+   "name": "Rotsla",
+   "region": "Wehlen",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_97",
+   "name": "Nanta Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_98",
+   "name": "Quella Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_99",
+   "name": "Corvis South",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_100",
+   "name": "Quella Highlands",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_101",
+   "name": "Nanta Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_102",
+   "name": "Venna North",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_103",
+   "name": "Lenta East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "mountains"
+  },
+  {
+   "id": "ZilleTile_104",
+   "name": "Venna East",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_105",
+   "name": "Ardo Northeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_106",
+   "name": "Ossa Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_107",
+   "name": "Ossa Northeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_108",
+   "name": "Venna Southwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_109",
+   "name": "Portoserra",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_110",
+   "name": "Ardo Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_111",
+   "name": "Ossa",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_112",
+   "name": "Ondaro Hills",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "hills"
+  },
+  {
+   "id": "ZilleTile_113",
+   "name": "Portoserra Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_114",
+   "name": "Dapalle Northwest",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_115",
+   "name": "Azzurra",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_116",
+   "name": "Vela Nova Southeast",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_117",
+   "name": "Pomara West",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  },
+  {
+   "id": "ZilleTile_118",
+   "name": "Praia Velha",
+   "region": "Zille",
+   "is_city": false,
+   "terrain": "plains"
+  }
+ ],
+ "neutral_seas": [
+  {
+   "id": "ZilleTile_S1",
+   "name": "Kreleck Sound"
+  },
+  {
+   "id": "ZilleTile_S2",
+   "name": "Kratsna Waters"
+  },
+  {
+   "id": "ZilleTile_S3",
+   "name": "Munat Waters"
+  },
+  {
+   "id": "ZilleTile_S4",
+   "name": "Munat Roads"
+  },
+  {
+   "id": "ZilleTile_S5",
+   "name": "Munat Reach"
+  },
+  {
+   "id": "ZilleTile_S6",
+   "name": "Munat Bight"
+  },
+  {
+   "id": "ZilleTile_S7",
+   "name": "Munat Narrows"
+  },
+  {
+   "id": "ZilleTile_S8",
+   "name": "Trebnow Waters"
+  },
+  {
+   "id": "ZilleTile_S9",
+   "name": "Quella Waters"
+  },
+  {
+   "id": "ZilleTile_S10",
+   "name": "Munat Banks"
+  },
+  {
+   "id": "ZilleTile_S11",
+   "name": "Manes Riuz Sound"
+  },
+  {
+   "id": "ZilleTile_S12",
+   "name": "Munat Deep"
+  },
+  {
+   "id": "ZilleTile_S13",
+   "name": "Tirsa Waters"
+  },
+  {
+   "id": "ZilleTile_S14",
+   "name": "Trebnow Roads"
+  },
+  {
+   "id": "ZilleTile_S15",
+   "name": "Corvis Waters"
+  },
+  {
+   "id": "ZilleTile_S16",
+   "name": "Munat Shoals"
+  },
+  {
+   "id": "ZilleTile_S17",
+   "name": "Tirsa Roads"
+  },
+  {
+   "id": "ZilleTile_S18",
+   "name": "Tirsa Reach"
+  },
+  {
+   "id": "ZilleTile_S19",
+   "name": "Quella Roads"
+  },
+  {
+   "id": "ZilleTile_S20",
+   "name": "Nanta Waters"
+  },
+  {
+   "id": "ZilleTile_S21",
+   "name": "Tirsa Bight"
+  },
+  {
+   "id": "ZilleTile_S22",
+   "name": "Tirsa Narrows"
+  },
+  {
+   "id": "ZilleTile_S23",
+   "name": "Walsholm Waters"
+  },
+  {
+   "id": "ZilleTile_S24",
+   "name": "Quella Reach"
+  },
+  {
+   "id": "ZilleTile_S25",
+   "name": "Tirsa Banks"
+  },
+  {
+   "id": "ZilleTile_S26",
+   "name": "Tarnes Waters"
+  },
+  {
+   "id": "ZilleTile_S27",
+   "name": "Rotsla Sound"
+  },
+  {
+   "id": "ZilleTile_S28",
+   "name": "Walsholm Roads"
+  },
+  {
+   "id": "ZilleTile_S29",
+   "name": "Isor Waters"
+  },
+  {
+   "id": "ZilleTile_S30",
+   "name": "Mave Nortus Waters"
+  },
+  {
+   "id": "ZilleTile_S31",
+   "name": "Mave Nortus Roads"
+  },
+  {
+   "id": "ZilleTile_S32",
+   "name": "Tarnes Roads"
+  },
+  {
+   "id": "ZilleTile_S33",
+   "name": "Port Rotsla Waters"
+  },
+  {
+   "id": "ZilleTile_S34",
+   "name": "Port Rotsla Roads"
+  },
+  {
+   "id": "ZilleTile_S35",
+   "name": "Walsholm Reach"
+  },
+  {
+   "id": "ZilleTile_S36",
+   "name": "Lido Isora Waters"
+  },
+  {
+   "id": "ZilleTile_S37",
+   "name": "Tarnes Reach"
+  },
+  {
+   "id": "ZilleTile_S38",
+   "name": "Yol Waters"
+  },
+  {
+   "id": "ZilleTile_S39",
+   "name": "Yol Roads"
+  },
+  {
+   "id": "ZilleTile_S40",
+   "name": "Grodzizg Waters"
+  },
+  {
+   "id": "ZilleTile_S41",
+   "name": "Port Rotsla Channel"
+  },
+  {
+   "id": "ZilleTile_S42",
+   "name": "Sabbiano Waters"
+  },
+  {
+   "id": "ZilleTile_S43",
+   "name": "Sabbiano Roads"
+  },
+  {
+   "id": "ZilleTile_S44",
+   "name": "Marenta Waters"
+  },
+  {
+   "id": "ZilleTile_S45",
+   "name": "Bellacosta Waters"
+  },
+  {
+   "id": "ZilleTile_S46",
+   "name": "Capo Lisso Channel"
+  },
+  {
+   "id": "ZilleTile_S47",
+   "name": "Capo Lisso Waters"
+  },
+  {
+   "id": "ZilleTile_S48",
+   "name": "Bellacosta Roads"
+  },
+  {
+   "id": "ZilleTile_S49",
+   "name": "Azzurra Channel"
+  },
+  {
+   "id": "ZilleTile_S50",
+   "name": "Capo Lisso Roads"
+  },
+  {
+   "id": "ZilleTile_S51",
+   "name": "Azzurra Waters"
+  },
+  {
+   "id": "ZilleTile_S52",
+   "name": "Zille Bay"
+  },
+  {
+   "id": "ZilleTile_S53",
+   "name": "Rotsla Deep"
+  },
+  {
+   "id": "ZilleTile_S54",
+   "name": "Santa Calla Banks"
+  },
+  {
+   "id": "ZilleTile_S55",
+   "name": "Praia Velha Roads"
+  },
+  {
+   "id": "ZilleTile_S56",
+   "name": "Costa Dalle Waters"
+  },
+  {
+   "id": "ZilleTile_S57",
+   "name": "Marbelas Bight"
+  }
+ ],
+ "rizia_ship_placement": {
+  "west": [
+   {
+    "id": "ZilleTile_S56",
+    "name": "Costa Dalle Waters",
+    "side": "west",
+    "coast_neighbours": [],
+    "sea_neighbours": [
+     "ZilleTile_S54",
+     "ZilleTile_S55",
+     "ZilleTile_S57"
+    ]
+   },
+   {
+    "id": "ZilleTile_S57",
+    "name": "Marbelas Bight",
+    "side": "west",
+    "coast_neighbours": [
+     "ZilleTile_59 Celle Vaz (Rizia)",
+     "ZilleTile_64 Marbelas (Rizia)",
+     "ZilleTile_118 Praia Velha (Wehlen)"
+    ],
+    "sea_neighbours": [
+     "ZilleTile_S55",
+     "ZilleTile_S56"
+    ]
+   }
+  ],
+  "east": [
+   {
+    "id": "ZilleTile_S26",
+    "name": "Tarnes Waters",
+    "side": "east",
+    "coast_neighbours": [],
+    "sea_neighbours": [
+     "ZilleTile_S22",
+     "ZilleTile_S31",
+     "ZilleTile_S32"
+    ]
+   },
+   {
+    "id": "ZilleTile_S30",
+    "name": "Mave Nortus Waters",
+    "side": "east",
+    "coast_neighbours": [
+     "ZilleTile_15 Mave Nortus Northwest (Wehlen)",
+     "ZilleTile_23 Mave Nortus (Rizia)",
+     "ZilleTile_40 Mave Nortus East (Rizia)",
+     "ZilleTile_104 Venna East (Wehlen)"
+    ],
+    "sea_neighbours": [
+     "ZilleTile_S25",
+     "ZilleTile_S31"
+    ]
+   },
+   {
+    "id": "ZilleTile_S31",
+    "name": "Mave Nortus Roads",
+    "side": "east",
+    "coast_neighbours": [
+     "ZilleTile_40 Mave Nortus East (Rizia)"
+    ],
+    "sea_neighbours": [
+     "ZilleTile_S22",
+     "ZilleTile_S25",
+     "ZilleTile_S26",
+     "ZilleTile_S30",
+     "ZilleTile_S32"
+    ]
+   },
+   {
+    "id": "ZilleTile_S32",
+    "name": "Tarnes Roads",
+    "side": "east",
+    "coast_neighbours": [
+     "ZilleTile_40 Mave Nortus East (Rizia)",
+     "ZilleTile_42 Tarnes (Rizia)"
+    ],
+    "sea_neighbours": [
+     "ZilleTile_S26",
+     "ZilleTile_S31",
+     "ZilleTile_S37"
+    ]
+   },
+   {
+    "id": "ZilleTile_S37",
+    "name": "Tarnes Reach",
+    "side": "east",
+    "coast_neighbours": [
+     "ZilleTile_42 Tarnes (Rizia)",
+     "ZilleTile_45 Tarnes Southeast (Rizia)"
+    ],
+    "sea_neighbours": [
+     "ZilleTile_S32"
+    ]
+   }
+  ]
+ }
+}

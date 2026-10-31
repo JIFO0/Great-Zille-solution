@@ -259,3 +259,25 @@ The base map is unchanged from v11. `v12/map/` is a copy of `v11/map/` (`T_Map_Z
 Files: `v12/map/`, `v12/regions/` (148 tiles, manifest, adjacency, overlay, validation), `v12/previews/`, and `v12/scripts/`.
 
 Previews: `provinces_preview.png`, `provinces_zille_crop.png`, `provinces_zille_bay_corridor_crop.png`, `provinces_channel_yol_crop.png`, `provinces_northeast_sea_crop.png`, `provinces_yol_grodzizg_crop.png`, `sea_corridor_preview.png`, `sea_corridor_zille_bay_crop.png`, `terrain_roads_preview.png`, `terrain_roads_zille_crop.png`, and the adjacency crops under `regions/`.
+
+### v13
+
+Built on top of v12. 175 provinces: 118 land (60 Zille, 29 Brenas, 29 Wehlen) and 57 sea (`ZilleTile_S1`–`S57`).
+
+Zille was re-partitioned. Ids 1, 4–8, 10, 12–22, 24–27, 29–34 and 36–38 are reused for new shapes, 39 is reshaped, and the new land ids are `ZilleTile_97`–`118`. Brenas 40–50 and 52–67 were re-partitioned. Dapalle (`ZilleTile_51`) is enlarged and is no longer a size exception. Mave Nortus (`ZilleTile_23`) is rebuilt fully inside Rizia, so its region is now Brenas. New seas are `ZilleTile_S53`–`S57`. Wehlen `ZilleTile_68`–`96`, cities 2, 3, 9, 11, 28 and 35, and seas `S1`–`S52` are byte-identical to v12. The full id map is `regions/id_mapping_v12_v13.json`.
+
+The base map changed: the Isor–Zille main road is re-routed, Quella Highlands and Ondaro Hills are new relief, the Mave Nortus urban area is clipped to the Rizian side, and the outer frame is black. Forts are data only and are not drawn on the map. This archive does not include `map/`. The re-cut `T_Map_Zille_01`–`06` grid and `T_Map_Zille_Full_Composite` follow in a separate drop.
+
+Starting owners are in `regions/starting_provinces.json`: Rizia 29 (Brenas, including Mave Nortus), Wehlen 89 (Zille and Wehlen), seas neutral. Rizia may place ships only in `S56` and `S57` (west) and `S37`, `S30`, `S32`, `S31` and `S26` (east).
+
+Adjacency is 471 links (279 land, 111 sea, 78 coastal, 3 strait), symmetric, one component, at least 2 links each. The version log's first paragraph says 469 links and 76 coastal; the adjacency file and `provinces_adjacency_validation.json` both say 471 and 78. Straits stay 3–2, 3–5 and 72–75. Rotsla (`ZilleTile_96`) is sea-only. Manual land links: 5 Tirsa Northwest ↔ 9 Nanta, and 38 Rivamare ↔ 115 Azzurra. The v12 link 34 ↔ 38 is gone. Road crossings in the validation file: 47 (19 main, 28 secondary), 28 minor-only, 14 rail.
+
+Terrain in the manifest: 91 plains, 12 hills, 15 mountains. The version log says 92 plains and 11 hills.
+
+Forts (`regions/forts.json`): heavy on the west border (36, 37, 39, 117, 118), light on the east border (20, 26, 33, 104, 108, 114), light on the inner line (21, 17, 13, 8, 97).
+
+`regions/deployments/` holds three Wehlen setups, `minimal`, `suspicious` and `prepared`. Each entry is one unit. At most one unit per province, and none on the Wehlen cities 2, 9, 11, 28, 35, 71 and 94. Exactly one flagship. No Wehlen ship on the Rizia ship seas.
+
+Each province is a 512×512 PNG and SVG. The only size exception left is Rotsla.
+
+Files: `v13/regions/` (175 tiles, manifest, adjacency, starting owners, forts, id map, deployments, overlay, validation), `v13/previews/`, and `v13/scripts/` (including `validate_pack.py`). `v13/map/` is not in this drop.

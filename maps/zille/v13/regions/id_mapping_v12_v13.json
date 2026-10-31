@@ -1,0 +1,5631 @@
+{
+ "brenas_vs_v13_pre_review1": [
+  {
+   "id": "ZilleTile_23",
+   "name_now": "Mave Nortus",
+   "name_before": "Mave Nortus",
+   "iou_same_id_vs_pre_review1": 1.0,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_23",
+     "share_of_now": 1.0
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_40",
+   "name_now": "Mave Nortus East",
+   "name_before": "Tarnes Northwest",
+   "iou_same_id_vs_pre_review1": 0.529,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_40",
+     "share_of_now": 0.841
+    },
+    {
+     "id": "ZilleTile_44",
+     "share_of_now": 0.121
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_41",
+   "name_now": "Mave Nortus South",
+   "name_before": "Mave Nortus Southwest",
+   "iou_same_id_vs_pre_review1": 0.456,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_41",
+     "share_of_now": 0.51
+    },
+    {
+     "id": "ZilleTile_43",
+     "share_of_now": 0.231
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_42",
+   "name_now": "Tarnes",
+   "name_before": "Tarnes",
+   "iou_same_id_vs_pre_review1": 0.199,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_42",
+     "share_of_now": 0.275
+    },
+    {
+     "id": "ZilleTile_40",
+     "share_of_now": 0.272
+    },
+    {
+     "id": "ZilleTile_45",
+     "share_of_now": 0.144
+    },
+    {
+     "id": "ZilleTile_44",
+     "share_of_now": 0.08
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_43",
+   "name_now": "Venna South",
+   "name_before": "Venna South",
+   "iou_same_id_vs_pre_review1": 0.402,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_43",
+     "share_of_now": 0.744
+    },
+    {
+     "id": "ZilleTile_41",
+     "share_of_now": 0.084
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_44",
+   "name_now": "Zelles",
+   "name_before": "Zelles",
+   "iou_same_id_vs_pre_review1": 0.459,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_44",
+     "share_of_now": 0.706
+    },
+    {
+     "id": "ZilleTile_49",
+     "share_of_now": 0.064
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_45",
+   "name_now": "Tarnes Southeast",
+   "name_before": "Zelles East",
+   "iou_same_id_vs_pre_review1": 0.325,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_45",
+     "share_of_now": 0.539
+    },
+    {
+     "id": "ZilleTile_42",
+     "share_of_now": 0.339
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_46",
+   "name_now": "Dapalle North",
+   "name_before": "Dapalle North",
+   "iou_same_id_vs_pre_review1": 0.329,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_46",
+     "share_of_now": 0.447
+    },
+    {
+     "id": "ZilleTile_43",
+     "share_of_now": 0.148
+    },
+    {
+     "id": "ZilleTile_47",
+     "share_of_now": 0.125
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_47",
+   "name_now": "Dapalle East",
+   "name_before": "Dapalle Northeast",
+   "iou_same_id_vs_pre_review1": 0.494,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_47",
+     "share_of_now": 0.718
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_48",
+   "name_now": "Zelles Southwest",
+   "name_before": "Zelles Southwest",
+   "iou_same_id_vs_pre_review1": 0.641,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_48",
+     "share_of_now": 0.833
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_49",
+   "name_now": "Zelles Southeast",
+   "name_before": "Isalba Northwest",
+   "iou_same_id_vs_pre_review1": 0.477,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_49",
+     "share_of_now": 0.588
+    },
+    {
+     "id": "ZilleTile_45",
+     "share_of_now": 0.171
+    },
+    {
+     "id": "ZilleTile_44",
+     "share_of_now": 0.052
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_50",
+   "name_now": "Morsa North",
+   "name_before": "Dapalle Southwest",
+   "iou_same_id_vs_pre_review1": 0.365,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_50",
+     "share_of_now": 0.505
+    },
+    {
+     "id": "ZilleTile_57",
+     "share_of_now": 0.227
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_51",
+   "name_now": "Dapalle",
+   "name_before": "Dapalle",
+   "iou_same_id_vs_pre_review1": 0.131,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_50",
+     "share_of_now": 0.188
+    },
+    {
+     "id": "ZilleTile_46",
+     "share_of_now": 0.145
+    },
+    {
+     "id": "ZilleTile_51",
+     "share_of_now": 0.139
+    },
+    {
+     "id": "ZilleTile_47",
+     "share_of_now": 0.089
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_52",
+   "name_now": "Ostrabe West",
+   "name_before": "Morsa East",
+   "iou_same_id_vs_pre_review1": 0.28,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_53",
+     "share_of_now": 0.377
+    },
+    {
+     "id": "ZilleTile_52",
+     "share_of_now": 0.362
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_53",
+   "name_now": "Ostrabe",
+   "name_before": "Ostrabe",
+   "iou_same_id_vs_pre_review1": 0.307,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_53",
+     "share_of_now": 0.561
+    },
+    {
+     "id": "ZilleTile_54",
+     "share_of_now": 0.236
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_54",
+   "name_now": "Ostrabe Northeast",
+   "name_before": "Ostrabe Northeast",
+   "iou_same_id_vs_pre_review1": 0.493,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_54",
+     "share_of_now": 0.872
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_55",
+   "name_now": "Pomara Southwest",
+   "name_before": "Pomara",
+   "iou_same_id_vs_pre_review1": 0.433,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_55",
+     "share_of_now": 0.688
+    },
+    {
+     "id": "ZilleTile_60",
+     "share_of_now": 0.104
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_56",
+   "name_now": "Morsa West",
+   "name_before": "Pomara East",
+   "iou_same_id_vs_pre_review1": 0.389,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_56",
+     "share_of_now": 0.426
+    },
+    {
+     "id": "ZilleTile_57",
+     "share_of_now": 0.283
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_57",
+   "name_now": "Morsa",
+   "name_before": "Morsa",
+   "iou_same_id_vs_pre_review1": 0.339,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_57",
+     "share_of_now": 0.686
+    },
+    {
+     "id": "ZilleTile_52",
+     "share_of_now": 0.119
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_58",
+   "name_now": "Ostrabe South",
+   "name_before": "Ostrabe South",
+   "iou_same_id_vs_pre_review1": 0.355,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_58",
+     "share_of_now": 0.594
+    },
+    {
+     "id": "ZilleTile_54",
+     "share_of_now": 0.107
+    },
+    {
+     "id": "ZilleTile_53",
+     "share_of_now": 0.074
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_59",
+   "name_now": "Celle Vaz",
+   "name_before": "Celle Vaz",
+   "iou_same_id_vs_pre_review1": 0.361,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_59",
+     "share_of_now": 0.385
+    },
+    {
+     "id": "ZilleTile_64",
+     "share_of_now": 0.364
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_60",
+   "name_now": "Celle Vaz East",
+   "name_before": "Celle Vaz East",
+   "iou_same_id_vs_pre_review1": 0.322,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_60",
+     "share_of_now": 0.376
+    },
+    {
+     "id": "ZilleTile_65",
+     "share_of_now": 0.226
+    },
+    {
+     "id": "ZilleTile_55",
+     "share_of_now": 0.085
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_61",
+   "name_now": "Brivane",
+   "name_before": "Brivane",
+   "iou_same_id_vs_pre_review1": 0.509,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_61",
+     "share_of_now": 0.691
+    },
+    {
+     "id": "ZilleTile_67",
+     "share_of_now": 0.073
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_62",
+   "name_now": "Brivane East",
+   "name_before": "Brivane East",
+   "iou_same_id_vs_pre_review1": 0.375,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_62",
+     "share_of_now": 0.443
+    },
+    {
+     "id": "ZilleTile_63",
+     "share_of_now": 0.36
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_63",
+   "name_now": "Morsa Southeast",
+   "name_before": "Morsa Southeast",
+   "iou_same_id_vs_pre_review1": 0.283,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_63",
+     "share_of_now": 0.459
+    },
+    {
+     "id": "ZilleTile_58",
+     "share_of_now": 0.356
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_64",
+   "name_now": "Marbelas",
+   "name_before": "Marbelas",
+   "iou_same_id_vs_pre_review1": 0.381,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_64",
+     "share_of_now": 0.557
+    },
+    {
+     "id": "ZilleTile_65",
+     "share_of_now": 0.29
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_65",
+   "name_now": "Marbelas East",
+   "name_before": "Marbelas Northeast",
+   "iou_same_id_vs_pre_review1": 0.247,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_65",
+     "share_of_now": 0.442
+    },
+    {
+     "id": "ZilleTile_66",
+     "share_of_now": 0.402
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_66",
+   "name_now": "Brivane West",
+   "name_before": "Brivane Southwest",
+   "iou_same_id_vs_pre_review1": 0.307,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_66",
+     "share_of_now": 0.507
+    },
+    {
+     "id": "ZilleTile_55",
+     "share_of_now": 0.107
+    },
+    {
+     "id": "ZilleTile_61",
+     "share_of_now": 0.07
+    }
+   ]
+  },
+  {
+   "id": "ZilleTile_67",
+   "name_now": "Brivane South",
+   "name_before": "Brivane South",
+   "iou_same_id_vs_pre_review1": 0.696,
+   "overlaps_pre_review1": [
+    {
+     "id": "ZilleTile_67",
+     "share_of_now": 0.858
+    }
+   ]
+  }
+ ],
+ "brenas_note": "v13 review 1 (owner request): the whole Brenas region was re-partitioned (roads/relief aware, nothing across the Rizia/Zille border, clear shapes around Marbelas 64). Brenas ids 40-50 and 52-67 were re-assigned to the new cells by largest overlap with the previous v13 cells, so the same id now covers a similar but NOT identical area (see share_of_v13/share_of_v12). Mave Nortus 23 is unchanged from v13; Dapalle 51 was enlarged (city-shaped, ~5x the area). No Brenas id was added or removed.",
+ "note": "share_of_v13 = part of the v13 province covered by the v12 province; share_of_v12 = part of the v12 province that went into the v13 province. Shares <2% are omitted (borders/gaps moved slightly).",
+ "v13": [
+  {
+   "v13_id": "ZilleTile_1",
+   "v13_name": "Corvis",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.476,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_1",
+     "v12_name": "Corvis North",
+     "share_of_v13": 0.488,
+     "share_of_v12": 0.95
+    },
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.337,
+     "share_of_v12": 0.219
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_2",
+   "v13_name": "Munat",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_2",
+     "v12_name": "Munat",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_3",
+   "v13_name": "Manes Riuz",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_3",
+     "v12_name": "Manes Riuz",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_4",
+   "v13_name": "Corvis East",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.412,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_4",
+     "v12_name": "Corvis East",
+     "share_of_v13": 0.671,
+     "share_of_v12": 0.517
+    },
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.089,
+     "share_of_v12": 0.038
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_5",
+   "v13_name": "Tirsa",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.5,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_5",
+     "v12_name": "Tirsa Northwest",
+     "share_of_v13": 0.616,
+     "share_of_v12": 0.727
+    },
+    {
+     "v12_id": "ZilleTile_10",
+     "v12_name": "Tirsa",
+     "share_of_v13": 0.216,
+     "share_of_v12": 0.261
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_6",
+   "v13_name": "Quella",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.428,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_6",
+     "v12_name": "Quella",
+     "share_of_v13": 1.0,
+     "share_of_v12": 0.428
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_7",
+   "v13_name": "Corvis West",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.125,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.4,
+     "share_of_v12": 0.154
+    },
+    {
+     "v12_id": "ZilleTile_6",
+     "v12_name": "Quella",
+     "share_of_v13": 0.357,
+     "share_of_v12": 0.204
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_8",
+   "v13_name": "Nanta West",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.356,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_8",
+     "v12_name": "Nanta West",
+     "share_of_v13": 0.626,
+     "share_of_v12": 0.452
+    },
+    {
+     "v12_id": "ZilleTile_4",
+     "v12_name": "Corvis East",
+     "share_of_v13": 0.049,
+     "share_of_v12": 0.036
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_9",
+   "v13_name": "Nanta",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_9",
+     "v12_name": "Nanta",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_10",
+   "v13_name": "Tirsa West",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.358,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_10",
+     "v12_name": "Tirsa",
+     "share_of_v13": 0.599,
+     "share_of_v12": 0.471
+    },
+    {
+     "v12_id": "ZilleTile_5",
+     "v12_name": "Tirsa Northwest",
+     "share_of_v13": 0.092,
+     "share_of_v12": 0.071
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_11",
+   "v13_name": "Isor",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_11",
+     "v12_name": "Isor",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_12",
+   "v13_name": "Lido Isora",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.408,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_12",
+     "v12_name": "Lido Isora",
+     "share_of_v13": 0.476,
+     "share_of_v12": 0.741
+    },
+    {
+     "v12_id": "ZilleTile_16",
+     "v12_name": "Sostra",
+     "share_of_v13": 0.285,
+     "share_of_v12": 0.264
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_13",
+   "v13_name": "Lenta North",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.24,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_13",
+     "v12_name": "Lenta Northwest",
+     "share_of_v13": 0.773,
+     "share_of_v12": 0.258
+    },
+    {
+     "v12_id": "ZilleTile_8",
+     "v12_name": "Nanta West",
+     "share_of_v13": 0.096,
+     "share_of_v12": 0.06
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_14",
+   "v13_name": "Nanta Southwest",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.24,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_14",
+     "v12_name": "Lenta Northeast",
+     "share_of_v13": 0.784,
+     "share_of_v12": 0.257
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_15",
+   "v13_name": "Mave Nortus Northwest",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.402,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_15",
+     "v12_name": "Venna Northeast",
+     "share_of_v13": 0.721,
+     "share_of_v12": 0.476
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_16",
+   "v13_name": "Sostra Northeast",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.334,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_16",
+     "v12_name": "Sostra",
+     "share_of_v13": 0.713,
+     "share_of_v12": 0.385
+    },
+    {
+     "v12_id": "ZilleTile_17",
+     "v12_name": "Ardo North",
+     "share_of_v13": 0.119,
+     "share_of_v12": 0.07
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_17",
+   "v13_name": "Lenta Northwest",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.36,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_17",
+     "v12_name": "Ardo North",
+     "share_of_v13": 0.611,
+     "share_of_v12": 0.467
+    },
+    {
+     "v12_id": "ZilleTile_13",
+     "v12_name": "Lenta Northwest",
+     "share_of_v13": 0.121,
+     "share_of_v12": 0.05
+    },
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.031,
+     "share_of_v12": 0.013
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_18",
+   "v13_name": "Lenta",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.239,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.521,
+     "share_of_v12": 0.307
+    },
+    {
+     "v12_id": "ZilleTile_14",
+     "v12_name": "Lenta Northeast",
+     "share_of_v13": 0.173,
+     "share_of_v12": 0.104
+    },
+    {
+     "v12_id": "ZilleTile_13",
+     "v12_name": "Lenta Northwest",
+     "share_of_v13": 0.045,
+     "share_of_v12": 0.025
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_19",
+   "v13_name": "Venna Northwest",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.218,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_19",
+     "v12_name": "Venna Northwest",
+     "share_of_v13": 0.556,
+     "share_of_v12": 0.263
+    },
+    {
+     "v12_id": "ZilleTile_14",
+     "v12_name": "Lenta Northeast",
+     "share_of_v13": 0.3,
+     "share_of_v12": 0.117
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_20",
+   "v13_name": "Venna",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.425,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_20",
+     "v12_name": "Venna",
+     "share_of_v13": 0.628,
+     "share_of_v12": 0.568
+    },
+    {
+     "v12_id": "ZilleTile_19",
+     "v12_name": "Venna Northwest",
+     "share_of_v13": 0.12,
+     "share_of_v12": 0.06
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_21",
+   "v13_name": "Ardo",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.301,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_21",
+     "v12_name": "Marenta",
+     "share_of_v13": 0.493,
+     "share_of_v12": 0.435
+    },
+    {
+     "v12_id": "ZilleTile_17",
+     "v12_name": "Ardo North",
+     "share_of_v13": 0.186,
+     "share_of_v12": 0.156
+    },
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.053,
+     "share_of_v12": 0.026
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_22",
+   "v13_name": "Ossa North",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.266,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_22",
+     "v12_name": "Ossa North",
+     "share_of_v13": 0.966,
+     "share_of_v12": 0.268
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_23",
+   "v13_name": "Mave Nortus",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.333,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_23",
+     "v12_name": "Mave Nortus",
+     "share_of_v13": 0.452,
+     "share_of_v12": 0.558
+    },
+    {
+     "v12_id": "ZilleTile_40",
+     "v12_name": "Tarnes Northwest",
+     "share_of_v13": 0.114,
+     "share_of_v12": 0.07
+    },
+    {
+     "v12_id": "ZilleTile_41",
+     "v12_name": "Mave Nortus Southwest",
+     "share_of_v13": 0.023,
+     "share_of_v12": 0.019
+    }
+   ],
+   "brenas_review1_note": "unchanged in review 1"
+  },
+  {
+   "v13_id": "ZilleTile_24",
+   "v13_name": "Cala Vessa East",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.284,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_24",
+     "v12_name": "Ardo Southeast",
+     "share_of_v13": 0.442,
+     "share_of_v12": 0.442
+    },
+    {
+     "v12_id": "ZilleTile_21",
+     "v12_name": "Marenta",
+     "share_of_v13": 0.171,
+     "share_of_v12": 0.099
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_25",
+   "v13_name": "Wiktrany East",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.293,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_25",
+     "v12_name": "Ossa",
+     "share_of_v13": 0.892,
+     "share_of_v12": 0.304
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_26",
+   "v13_name": "Ossa East",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.489,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_26",
+     "v12_name": "Ossa East",
+     "share_of_v13": 0.924,
+     "share_of_v12": 0.509
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_27",
+   "v13_name": "Sabbiano",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.429,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_27",
+     "v12_name": "Sabbiano",
+     "share_of_v13": 0.706,
+     "share_of_v12": 0.522
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_28",
+   "v13_name": "Wiktrany",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_28",
+     "v12_name": "Wiktrany",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_29",
+   "v13_name": "Ossa South",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.228,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_29",
+     "v12_name": "Ossa South",
+     "share_of_v13": 0.399,
+     "share_of_v12": 0.347
+    },
+    {
+     "v12_id": "ZilleTile_32",
+     "v12_name": "Wiktrany Southeast",
+     "share_of_v13": 0.195,
+     "share_of_v12": 0.134
+    },
+    {
+     "v12_id": "ZilleTile_33",
+     "v12_name": "Dapalle West",
+     "share_of_v13": 0.051,
+     "share_of_v12": 0.065
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_30",
+   "v13_name": "Ondaro Southeast",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.42,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_30",
+     "v12_name": "Ondaro Southeast",
+     "share_of_v13": 0.908,
+     "share_of_v12": 0.439
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_31",
+   "v13_name": "Zille North",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.218,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_31",
+     "v12_name": "Zille Northeast",
+     "share_of_v13": 0.364,
+     "share_of_v12": 0.351
+    },
+    {
+     "v12_id": "ZilleTile_30",
+     "v12_name": "Ondaro Southeast",
+     "share_of_v13": 0.242,
+     "share_of_v12": 0.085
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_32",
+   "v13_name": "Wiktrany Southeast",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.389,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_32",
+     "v12_name": "Wiktrany Southeast",
+     "share_of_v13": 0.641,
+     "share_of_v12": 0.498
+    },
+    {
+     "v12_id": "ZilleTile_37",
+     "v12_name": "Pomara North",
+     "share_of_v13": 0.08,
+     "share_of_v12": 0.127
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_33",
+   "v13_name": "Dapalle West",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.452,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_33",
+     "v12_name": "Dapalle West",
+     "share_of_v13": 0.824,
+     "share_of_v12": 0.5
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_34",
+   "v13_name": "Vela Nova",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.32,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_34",
+     "v12_name": "Vela Nova",
+     "share_of_v13": 0.984,
+     "share_of_v12": 0.321
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_35",
+   "v13_name": "Zille City",
+   "region": "Zille",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_35",
+     "v12_name": "Zille City",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_36",
+   "v13_name": "Pomara Northwest",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.318,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_36",
+     "v12_name": "Pomara Northwest",
+     "share_of_v13": 0.626,
+     "share_of_v12": 0.393
+    },
+    {
+     "v12_id": "ZilleTile_31",
+     "v12_name": "Zille Northeast",
+     "share_of_v13": 0.061,
+     "share_of_v12": 0.083
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_37",
+   "v13_name": "Pomara North",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.355,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_37",
+     "v12_name": "Pomara North",
+     "share_of_v13": 0.477,
+     "share_of_v12": 0.582
+    },
+    {
+     "v12_id": "ZilleTile_36",
+     "v12_name": "Pomara Northwest",
+     "share_of_v13": 0.092,
+     "share_of_v12": 0.067
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_38",
+   "v13_name": "Rivamare",
+   "region": "Zille",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.418,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_38",
+     "v12_name": "Rivamare",
+     "share_of_v13": 0.999,
+     "share_of_v12": 0.418
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_39",
+   "v13_name": "Celle Vaz North",
+   "region": "Zille",
+   "status": "kept (reshaped)",
+   "iou_same_id": 0.61,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_39",
+     "v12_name": "Celle Vaz North",
+     "share_of_v13": 0.72,
+     "share_of_v12": 0.799
+    },
+    {
+     "v12_id": "ZilleTile_38",
+     "v12_name": "Rivamare",
+     "share_of_v13": 0.084,
+     "share_of_v12": 0.031
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_40",
+   "v13_name": "Mave Nortus East",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.424,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_40",
+     "v12_name": "Tarnes Northwest",
+     "share_of_v13": 0.715,
+     "share_of_v12": 0.51
+    },
+    {
+     "v12_id": "ZilleTile_44",
+     "v12_name": "Zelles",
+     "share_of_v13": 0.093,
+     "share_of_v12": 0.061
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_41",
+   "v13_name": "Mave Nortus South",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.38,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_41",
+     "v12_name": "Mave Nortus Southwest",
+     "share_of_v13": 0.456,
+     "share_of_v12": 0.696
+    },
+    {
+     "v12_id": "ZilleTile_43",
+     "v12_name": "Venna South",
+     "share_of_v13": 0.204,
+     "share_of_v12": 0.216
+    },
+    {
+     "v12_id": "ZilleTile_48",
+     "v12_name": "Zelles Southwest",
+     "share_of_v13": 0.039,
+     "share_of_v12": 0.034
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_42",
+   "v13_name": "Tarnes",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.199,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_42",
+     "v12_name": "Tarnes",
+     "share_of_v13": 0.275,
+     "share_of_v12": 0.416
+    },
+    {
+     "v12_id": "ZilleTile_40",
+     "v12_name": "Tarnes Northwest",
+     "share_of_v13": 0.191,
+     "share_of_v12": 0.218
+    },
+    {
+     "v12_id": "ZilleTile_45",
+     "v12_name": "Zelles East",
+     "share_of_v13": 0.144,
+     "share_of_v12": 0.133
+    },
+    {
+     "v12_id": "ZilleTile_44",
+     "v12_name": "Zelles",
+     "share_of_v13": 0.073,
+     "share_of_v12": 0.077
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_43",
+   "v13_name": "Venna South",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.383,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_43",
+     "v12_name": "Venna South",
+     "share_of_v13": 0.686,
+     "share_of_v12": 0.464
+    },
+    {
+     "v12_id": "ZilleTile_41",
+     "v12_name": "Mave Nortus Southwest",
+     "share_of_v13": 0.065,
+     "share_of_v12": 0.063
+    },
+    {
+     "v12_id": "ZilleTile_46",
+     "v12_name": "Dapalle North",
+     "share_of_v13": 0.028,
+     "share_of_v12": 0.03
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_44",
+   "v13_name": "Zelles",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.419,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_44",
+     "v12_name": "Zelles",
+     "share_of_v13": 0.604,
+     "share_of_v12": 0.578
+    },
+    {
+     "v12_id": "ZilleTile_49",
+     "v12_name": "Isalba Northwest",
+     "share_of_v13": 0.064,
+     "share_of_v12": 0.064
+    },
+    {
+     "v12_id": "ZilleTile_48",
+     "v12_name": "Zelles Southwest",
+     "share_of_v13": 0.035,
+     "share_of_v12": 0.028
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_45",
+   "v13_name": "Tarnes Southeast",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.325,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_45",
+     "v12_name": "Zelles East",
+     "share_of_v13": 0.539,
+     "share_of_v12": 0.451
+    },
+    {
+     "v12_id": "ZilleTile_42",
+     "v12_name": "Tarnes",
+     "share_of_v13": 0.339,
+     "share_of_v12": 0.462
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_46",
+   "v13_name": "Dapalle North",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.329,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_46",
+     "v12_name": "Dapalle North",
+     "share_of_v13": 0.447,
+     "share_of_v12": 0.555
+    },
+    {
+     "v12_id": "ZilleTile_43",
+     "v12_name": "Venna South",
+     "share_of_v13": 0.142,
+     "share_of_v12": 0.111
+    },
+    {
+     "v12_id": "ZilleTile_47",
+     "v12_name": "Dapalle Northeast",
+     "share_of_v13": 0.125,
+     "share_of_v12": 0.108
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_47",
+   "v13_name": "Dapalle East",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.494,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_47",
+     "v12_name": "Dapalle Northeast",
+     "share_of_v13": 0.718,
+     "share_of_v12": 0.613
+    },
+    {
+     "v12_id": "ZilleTile_48",
+     "v12_name": "Zelles Southwest",
+     "share_of_v13": 0.023,
+     "share_of_v12": 0.015
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_48",
+   "v13_name": "Zelles Southwest",
+   "region": "Brenas",
+   "status": "kept (reshaped)",
+   "iou_same_id": 0.641,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_48",
+     "v12_name": "Zelles Southwest",
+     "share_of_v13": 0.833,
+     "share_of_v12": 0.736
+    },
+    {
+     "v12_id": "ZilleTile_54",
+     "v12_name": "Ostrabe Northeast",
+     "share_of_v13": 0.026,
+     "share_of_v12": 0.019
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_49",
+   "v13_name": "Zelles Southeast",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.477,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_49",
+     "v12_name": "Isalba Northwest",
+     "share_of_v13": 0.588,
+     "share_of_v12": 0.717
+    },
+    {
+     "v12_id": "ZilleTile_45",
+     "v12_name": "Zelles East",
+     "share_of_v13": 0.171,
+     "share_of_v12": 0.175
+    },
+    {
+     "v12_id": "ZilleTile_44",
+     "v12_name": "Zelles",
+     "share_of_v13": 0.021,
+     "share_of_v12": 0.024
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_50",
+   "v13_name": "Morsa North",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.365,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_50",
+     "v12_name": "Dapalle Southwest",
+     "share_of_v13": 0.505,
+     "share_of_v12": 0.568
+    },
+    {
+     "v12_id": "ZilleTile_57",
+     "v12_name": "Morsa",
+     "share_of_v13": 0.227,
+     "share_of_v12": 0.124
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_51",
+   "v13_name": "Dapalle",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.131,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_50",
+     "v12_name": "Dapalle Southwest",
+     "share_of_v13": 0.188,
+     "share_of_v12": 0.129
+    },
+    {
+     "v12_id": "ZilleTile_46",
+     "v12_name": "Dapalle North",
+     "share_of_v13": 0.145,
+     "share_of_v12": 0.101
+    },
+    {
+     "v12_id": "ZilleTile_51",
+     "v12_name": "Dapalle",
+     "share_of_v13": 0.139,
+     "share_of_v12": 0.716
+    },
+    {
+     "v12_id": "ZilleTile_47",
+     "v12_name": "Dapalle Northeast",
+     "share_of_v13": 0.089,
+     "share_of_v12": 0.043
+    }
+   ],
+   "brenas_review1_note": "Dapalle enlarged (city)"
+  },
+  {
+   "v13_id": "ZilleTile_52",
+   "v13_name": "Ostrabe West",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.28,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_53",
+     "v12_name": "Ostrabe",
+     "share_of_v13": 0.377,
+     "share_of_v12": 0.28
+    },
+    {
+     "v12_id": "ZilleTile_52",
+     "v12_name": "Morsa East",
+     "share_of_v13": 0.362,
+     "share_of_v12": 0.554
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_53",
+   "v13_name": "Ostrabe",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.307,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_53",
+     "v12_name": "Ostrabe",
+     "share_of_v13": 0.561,
+     "share_of_v12": 0.404
+    },
+    {
+     "v12_id": "ZilleTile_54",
+     "v12_name": "Ostrabe Northeast",
+     "share_of_v13": 0.236,
+     "share_of_v12": 0.127
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_54",
+   "v13_name": "Ostrabe Northeast",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.493,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_54",
+     "v12_name": "Ostrabe Northeast",
+     "share_of_v13": 0.872,
+     "share_of_v12": 0.531
+    },
+    {
+     "v12_id": "ZilleTile_49",
+     "v12_name": "Isalba Northwest",
+     "share_of_v13": 0.049,
+     "share_of_v12": 0.043
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_55",
+   "v13_name": "Pomara Southwest",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.433,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_55",
+     "v12_name": "Pomara",
+     "share_of_v13": 0.688,
+     "share_of_v12": 0.539
+    },
+    {
+     "v12_id": "ZilleTile_60",
+     "v12_name": "Celle Vaz East",
+     "share_of_v13": 0.104,
+     "share_of_v12": 0.127
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_56",
+   "v13_name": "Morsa West",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.389,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_56",
+     "v12_name": "Pomara East",
+     "share_of_v13": 0.426,
+     "share_of_v12": 0.818
+    },
+    {
+     "v12_id": "ZilleTile_57",
+     "v12_name": "Morsa",
+     "share_of_v13": 0.283,
+     "share_of_v12": 0.198
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_57",
+   "v13_name": "Morsa",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.339,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_57",
+     "v12_name": "Morsa",
+     "share_of_v13": 0.686,
+     "share_of_v12": 0.401
+    },
+    {
+     "v12_id": "ZilleTile_52",
+     "v12_name": "Morsa East",
+     "share_of_v13": 0.119,
+     "share_of_v12": 0.177
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_58",
+   "v13_name": "Ostrabe South",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.355,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_58",
+     "v12_name": "Ostrabe South",
+     "share_of_v13": 0.594,
+     "share_of_v12": 0.47
+    },
+    {
+     "v12_id": "ZilleTile_54",
+     "v12_name": "Ostrabe Northeast",
+     "share_of_v13": 0.107,
+     "share_of_v12": 0.058
+    },
+    {
+     "v12_id": "ZilleTile_53",
+     "v12_name": "Ostrabe",
+     "share_of_v13": 0.074,
+     "share_of_v12": 0.053
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_59",
+   "v13_name": "Celle Vaz",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.361,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_59",
+     "v12_name": "Celle Vaz",
+     "share_of_v13": 0.385,
+     "share_of_v12": 0.853
+    },
+    {
+     "v12_id": "ZilleTile_64",
+     "v12_name": "Marbelas",
+     "share_of_v13": 0.364,
+     "share_of_v12": 0.333
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_60",
+   "v13_name": "Celle Vaz East",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.322,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_60",
+     "v12_name": "Celle Vaz East",
+     "share_of_v13": 0.376,
+     "share_of_v12": 0.691
+    },
+    {
+     "v12_id": "ZilleTile_65",
+     "v12_name": "Marbelas Northeast",
+     "share_of_v13": 0.226,
+     "share_of_v12": 0.178
+    },
+    {
+     "v12_id": "ZilleTile_55",
+     "v12_name": "Pomara",
+     "share_of_v13": 0.085,
+     "share_of_v12": 0.1
+    },
+    {
+     "v12_id": "ZilleTile_66",
+     "v12_name": "Brivane Southwest",
+     "share_of_v13": 0.024,
+     "share_of_v12": 0.022
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_61",
+   "v13_name": "Brivane",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.509,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_61",
+     "v12_name": "Brivane",
+     "share_of_v13": 0.691,
+     "share_of_v12": 0.659
+    },
+    {
+     "v12_id": "ZilleTile_67",
+     "v12_name": "Brivane South",
+     "share_of_v13": 0.073,
+     "share_of_v12": 0.042
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_62",
+   "v13_name": "Brivane East",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.375,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_62",
+     "v12_name": "Brivane East",
+     "share_of_v13": 0.443,
+     "share_of_v12": 0.708
+    },
+    {
+     "v12_id": "ZilleTile_63",
+     "v12_name": "Morsa Southeast",
+     "share_of_v13": 0.36,
+     "share_of_v12": 0.38
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_63",
+   "v13_name": "Morsa Southeast",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.283,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_63",
+     "v12_name": "Morsa Southeast",
+     "share_of_v13": 0.459,
+     "share_of_v12": 0.425
+    },
+    {
+     "v12_id": "ZilleTile_58",
+     "v12_name": "Ostrabe South",
+     "share_of_v13": 0.356,
+     "share_of_v12": 0.311
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_64",
+   "v13_name": "Marbelas",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.381,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_64",
+     "v12_name": "Marbelas",
+     "share_of_v13": 0.557,
+     "share_of_v12": 0.548
+    },
+    {
+     "v12_id": "ZilleTile_65",
+     "v12_name": "Marbelas Northeast",
+     "share_of_v13": 0.29,
+     "share_of_v12": 0.245
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_65",
+   "v13_name": "Marbelas East",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.247,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_65",
+     "v12_name": "Marbelas Northeast",
+     "share_of_v13": 0.442,
+     "share_of_v12": 0.358
+    },
+    {
+     "v12_id": "ZilleTile_66",
+     "v12_name": "Brivane Southwest",
+     "share_of_v13": 0.402,
+     "share_of_v12": 0.373
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_66",
+   "v13_name": "Brivane West",
+   "region": "Brenas",
+   "status": "id reused (new shape)",
+   "iou_same_id": 0.307,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_66",
+     "v12_name": "Brivane Southwest",
+     "share_of_v13": 0.507,
+     "share_of_v12": 0.437
+    },
+    {
+     "v12_id": "ZilleTile_55",
+     "v12_name": "Pomara",
+     "share_of_v13": 0.107,
+     "share_of_v12": 0.12
+    },
+    {
+     "v12_id": "ZilleTile_61",
+     "v12_name": "Brivane",
+     "share_of_v13": 0.07,
+     "share_of_v12": 0.087
+    },
+    {
+     "v12_id": "ZilleTile_67",
+     "v12_name": "Brivane South",
+     "share_of_v13": 0.042,
+     "share_of_v12": 0.032
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_67",
+   "v13_name": "Brivane South",
+   "region": "Brenas",
+   "status": "kept (reshaped)",
+   "iou_same_id": 0.696,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_67",
+     "v12_name": "Brivane South",
+     "share_of_v13": 0.858,
+     "share_of_v12": 0.787
+    },
+    {
+     "v12_id": "ZilleTile_62",
+     "v12_name": "Brivane East",
+     "share_of_v13": 0.025,
+     "share_of_v12": 0.049
+    }
+   ],
+   "brenas_review1_note": "re-partitioned in review 1; id kept by overlap"
+  },
+  {
+   "v13_id": "ZilleTile_68",
+   "v13_name": "Kessin West",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_68",
+     "v12_name": "Kessin West",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_69",
+   "v13_name": "Kessin",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_69",
+     "v12_name": "Kessin",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_70",
+   "v13_name": "Harlitz North",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_70",
+     "v12_name": "Harlitz North",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_71",
+   "v13_name": "Kratsna",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_71",
+     "v12_name": "Kratsna",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_72",
+   "v13_name": "Kreleck Islands",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_72",
+     "v12_name": "Kreleck Islands",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_73",
+   "v13_name": "Dornatz North",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_73",
+     "v12_name": "Dornatz North",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_74",
+   "v13_name": "Dornatz Northeast",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_74",
+     "v12_name": "Dornatz Northeast",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_75",
+   "v13_name": "Kratsna Southeast",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_75",
+     "v12_name": "Kratsna Southeast",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_76",
+   "v13_name": "Dornatz East",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_76",
+     "v12_name": "Dornatz East",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_77",
+   "v13_name": "Harlitz",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_77",
+     "v12_name": "Harlitz",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_78",
+   "v13_name": "Trebnow",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_78",
+     "v12_name": "Trebnow",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_79",
+   "v13_name": "Dornatz",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_79",
+     "v12_name": "Dornatz",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_80",
+   "v13_name": "Sulkov Northeast",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_80",
+     "v12_name": "Sulkov Northeast",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_81",
+   "v13_name": "Trebnow Southwest",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_81",
+     "v12_name": "Trebnow Southwest",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_82",
+   "v13_name": "Trebnow East",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_82",
+     "v12_name": "Trebnow East",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_83",
+   "v13_name": "Mirlow South",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_83",
+     "v12_name": "Mirlow South",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_84",
+   "v13_name": "Sulkov Southwest",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_84",
+     "v12_name": "Sulkov Southwest",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_85",
+   "v13_name": "Sulkov",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_85",
+     "v12_name": "Sulkov",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_86",
+   "v13_name": "Sulkov Southeast",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_86",
+     "v12_name": "Sulkov Southeast",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_87",
+   "v13_name": "Trebnow South",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_87",
+     "v12_name": "Trebnow South",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_88",
+   "v13_name": "Brannitz West",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_88",
+     "v12_name": "Brannitz West",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_89",
+   "v13_name": "Brannitz",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_89",
+     "v12_name": "Brannitz",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_90",
+   "v13_name": "Brannitz Northeast",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_90",
+     "v12_name": "Brannitz Northeast",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_91",
+   "v13_name": "Port Rotsla Northwest",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_91",
+     "v12_name": "Port Rotsla Northwest",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_92",
+   "v13_name": "Walsholm North",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_92",
+     "v12_name": "Walsholm North",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_93",
+   "v13_name": "Yol Northwest",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_93",
+     "v12_name": "Yol Northwest",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_94",
+   "v13_name": "Grodzizg",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_94",
+     "v12_name": "Grodzizg",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_95",
+   "v13_name": "Brannitz Southwest",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_95",
+     "v12_name": "Brannitz Southwest",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_96",
+   "v13_name": "Rotsla",
+   "region": "Wehlen",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_96",
+     "v12_name": "Rotsla",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_97",
+   "v13_name": "Nanta Northwest",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_8",
+     "v12_name": "Nanta West",
+     "share_of_v13": 0.413,
+     "share_of_v12": 0.312
+    },
+    {
+     "v12_id": "ZilleTile_4",
+     "v12_name": "Corvis East",
+     "share_of_v13": 0.306,
+     "share_of_v12": 0.234
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_98",
+   "v13_name": "Quella Southeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.295,
+     "share_of_v12": 0.106
+    },
+    {
+     "v12_id": "ZilleTile_6",
+     "v12_name": "Quella",
+     "share_of_v13": 0.248,
+     "share_of_v12": 0.133
+    },
+    {
+     "v12_id": "ZilleTile_12",
+     "v12_name": "Lido Isora",
+     "share_of_v13": 0.157,
+     "share_of_v12": 0.152
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_99",
+   "v13_name": "Corvis South",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.454,
+     "share_of_v12": 0.151
+    },
+    {
+     "v12_id": "ZilleTile_13",
+     "v12_name": "Lenta Northwest",
+     "share_of_v13": 0.329,
+     "share_of_v12": 0.104
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_100",
+   "v13_name": "Quella Highlands",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_13",
+     "v12_name": "Lenta Northwest",
+     "share_of_v13": 0.56,
+     "share_of_v12": 0.217
+    },
+    {
+     "v12_id": "ZilleTile_16",
+     "v12_name": "Sostra",
+     "share_of_v13": 0.139,
+     "share_of_v12": 0.091
+    },
+    {
+     "v12_id": "ZilleTile_7",
+     "v12_name": "Corvis",
+     "share_of_v13": 0.068,
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_101",
+   "v13_name": "Nanta Southeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_19",
+     "v12_name": "Venna Northwest",
+     "share_of_v13": 0.273,
+     "share_of_v12": 0.067
+    },
+    {
+     "v12_id": "ZilleTile_14",
+     "v12_name": "Lenta Northeast",
+     "share_of_v13": 0.136,
+     "share_of_v12": 0.028
+    },
+    {
+     "v12_id": "ZilleTile_10",
+     "v12_name": "Tirsa",
+     "share_of_v13": 0.119,
+     "share_of_v12": 0.046
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_102",
+   "v13_name": "Venna North",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_19",
+     "v12_name": "Venna Northwest",
+     "share_of_v13": 0.368,
+     "share_of_v12": 0.21
+    },
+    {
+     "v12_id": "ZilleTile_15",
+     "v12_name": "Venna Northeast",
+     "share_of_v13": 0.246,
+     "share_of_v12": 0.225
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_103",
+   "v13_name": "Lenta East",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_14",
+     "v12_name": "Lenta Northeast",
+     "share_of_v13": 0.501,
+     "share_of_v12": 0.216
+    },
+    {
+     "v12_id": "ZilleTile_22",
+     "v12_name": "Ossa North",
+     "share_of_v13": 0.128,
+     "share_of_v12": 0.055
+    },
+    {
+     "v12_id": "ZilleTile_19",
+     "v12_name": "Venna Northwest",
+     "share_of_v13": 0.083,
+     "share_of_v12": 0.043
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_104",
+   "v13_name": "Venna East",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_20",
+     "v12_name": "Venna",
+     "share_of_v13": 0.254,
+     "share_of_v12": 0.173
+    },
+    {
+     "v12_id": "ZilleTile_23",
+     "v12_name": "Mave Nortus",
+     "share_of_v13": 0.21,
+     "share_of_v12": 0.176
+    },
+    {
+     "v12_id": "ZilleTile_15",
+     "v12_name": "Venna Northeast",
+     "share_of_v13": 0.082,
+     "share_of_v12": 0.05
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_105",
+   "v13_name": "Ardo Northeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.914,
+     "share_of_v12": 0.278
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_106",
+   "v13_name": "Ossa Northwest",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.21,
+     "share_of_v12": 0.04
+    },
+    {
+     "v12_id": "ZilleTile_22",
+     "v12_name": "Ossa North",
+     "share_of_v13": 0.186,
+     "share_of_v12": 0.036
+    },
+    {
+     "v12_id": "ZilleTile_25",
+     "v12_name": "Ossa",
+     "share_of_v13": 0.122,
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_107",
+   "v13_name": "Ossa Northeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_22",
+     "v12_name": "Ossa North",
+     "share_of_v13": 0.651,
+     "share_of_v12": 0.206
+    },
+    {
+     "v12_id": "ZilleTile_26",
+     "v12_name": "Ossa East",
+     "share_of_v13": 0.095,
+     "share_of_v12": 0.059
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_108",
+   "v13_name": "Venna Southwest",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_22",
+     "v12_name": "Ossa North",
+     "share_of_v13": 0.342,
+     "share_of_v12": 0.116
+    },
+    {
+     "v12_id": "ZilleTile_26",
+     "v12_name": "Ossa East",
+     "share_of_v13": 0.142,
+     "share_of_v12": 0.094
+    },
+    {
+     "v12_id": "ZilleTile_20",
+     "v12_name": "Venna",
+     "share_of_v13": 0.049,
+     "share_of_v12": 0.036
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_109",
+   "v13_name": "Portoserra",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_21",
+     "v12_name": "Marenta",
+     "share_of_v13": 0.647,
+     "share_of_v12": 0.232
+    },
+    {
+     "v12_id": "ZilleTile_27",
+     "v12_name": "Sabbiano",
+     "share_of_v13": 0.09,
+     "share_of_v12": 0.03
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_110",
+   "v13_name": "Ardo Southeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_25",
+     "v12_name": "Ossa",
+     "share_of_v13": 0.355,
+     "share_of_v12": 0.262
+    },
+    {
+     "v12_id": "ZilleTile_24",
+     "v12_name": "Ardo Southeast",
+     "share_of_v13": 0.217,
+     "share_of_v12": 0.427
+    },
+    {
+     "v12_id": "ZilleTile_18",
+     "v12_name": "Lenta",
+     "share_of_v13": 0.08,
+     "share_of_v12": 0.05
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_111",
+   "v13_name": "Ossa",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_25",
+     "v12_name": "Ossa",
+     "share_of_v13": 0.253,
+     "share_of_v12": 0.121
+    },
+    {
+     "v12_id": "ZilleTile_29",
+     "v12_name": "Ossa South",
+     "share_of_v13": 0.223,
+     "share_of_v12": 0.169
+    },
+    {
+     "v12_id": "ZilleTile_26",
+     "v12_name": "Ossa East",
+     "share_of_v13": 0.039,
+     "share_of_v12": 0.032
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_112",
+   "v13_name": "Ondaro Hills",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_27",
+     "v12_name": "Sabbiano",
+     "share_of_v13": 0.397,
+     "share_of_v12": 0.264
+    },
+    {
+     "v12_id": "ZilleTile_30",
+     "v12_name": "Ondaro Southeast",
+     "share_of_v13": 0.316,
+     "share_of_v12": 0.174
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_113",
+   "v13_name": "Portoserra Southeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_32",
+     "v12_name": "Wiktrany Southeast",
+     "share_of_v13": 0.406,
+     "share_of_v12": 0.132
+    },
+    {
+     "v12_id": "ZilleTile_31",
+     "v12_name": "Zille Northeast",
+     "share_of_v13": 0.112,
+     "share_of_v12": 0.095
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_114",
+   "v13_name": "Dapalle Northwest",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_29",
+     "v12_name": "Ossa South",
+     "share_of_v13": 0.554,
+     "share_of_v12": 0.197
+    },
+    {
+     "v12_id": "ZilleTile_33",
+     "v12_name": "Dapalle West",
+     "share_of_v13": 0.195,
+     "share_of_v12": 0.101
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_115",
+   "v13_name": "Azzurra",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_34",
+     "v12_name": "Vela Nova",
+     "share_of_v13": 1.0,
+     "share_of_v12": 0.264
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_116",
+   "v13_name": "Vela Nova Southeast",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_34",
+     "v12_name": "Vela Nova",
+     "share_of_v13": 0.52,
+     "share_of_v12": 0.244
+    },
+    {
+     "v12_id": "ZilleTile_30",
+     "v12_name": "Ondaro Southeast",
+     "share_of_v13": 0.11,
+     "share_of_v12": 0.046
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_117",
+   "v13_name": "Pomara West",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_36",
+     "v12_name": "Pomara Northwest",
+     "share_of_v13": 0.838,
+     "share_of_v12": 0.34
+    },
+    {
+     "v12_id": "ZilleTile_39",
+     "v12_name": "Celle Vaz North",
+     "share_of_v13": 0.022,
+     "share_of_v12": 0.014
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_118",
+   "v13_name": "Praia Velha",
+   "region": "Zille",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_38",
+     "v12_name": "Rivamare",
+     "share_of_v13": 0.998,
+     "share_of_v12": 0.38
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S1",
+   "v13_name": "Kreleck Sound",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S1",
+     "v12_name": "Kreleck Sound",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S2",
+   "v13_name": "Kratsna Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S2",
+     "v12_name": "Kratsna Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S3",
+   "v13_name": "Munat Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S3",
+     "v12_name": "Munat Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S4",
+   "v13_name": "Munat Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S4",
+     "v12_name": "Munat Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S5",
+   "v13_name": "Munat Reach",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S5",
+     "v12_name": "Munat Reach",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S6",
+   "v13_name": "Munat Bight",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S6",
+     "v12_name": "Munat Bight",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S7",
+   "v13_name": "Munat Narrows",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S7",
+     "v12_name": "Munat Narrows",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S8",
+   "v13_name": "Trebnow Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S8",
+     "v12_name": "Trebnow Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S9",
+   "v13_name": "Quella Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S9",
+     "v12_name": "Quella Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S10",
+   "v13_name": "Munat Banks",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S10",
+     "v12_name": "Munat Banks",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S11",
+   "v13_name": "Manes Riuz Sound",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S11",
+     "v12_name": "Manes Riuz Sound",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S12",
+   "v13_name": "Munat Deep",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S12",
+     "v12_name": "Munat Deep",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S13",
+   "v13_name": "Tirsa Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S13",
+     "v12_name": "Tirsa Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S14",
+   "v13_name": "Trebnow Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S14",
+     "v12_name": "Trebnow Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S15",
+   "v13_name": "Corvis Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S15",
+     "v12_name": "Corvis Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S16",
+   "v13_name": "Munat Shoals",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S16",
+     "v12_name": "Munat Shoals",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S17",
+   "v13_name": "Tirsa Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S17",
+     "v12_name": "Tirsa Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S18",
+   "v13_name": "Tirsa Reach",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S18",
+     "v12_name": "Tirsa Reach",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S19",
+   "v13_name": "Quella Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S19",
+     "v12_name": "Quella Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S20",
+   "v13_name": "Nanta Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S20",
+     "v12_name": "Nanta Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S21",
+   "v13_name": "Tirsa Bight",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S21",
+     "v12_name": "Tirsa Bight",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S22",
+   "v13_name": "Tirsa Narrows",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S22",
+     "v12_name": "Tirsa Narrows",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S23",
+   "v13_name": "Walsholm Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S23",
+     "v12_name": "Walsholm Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S24",
+   "v13_name": "Quella Reach",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S24",
+     "v12_name": "Quella Reach",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S25",
+   "v13_name": "Tirsa Banks",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S25",
+     "v12_name": "Tirsa Banks",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S26",
+   "v13_name": "Tarnes Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S26",
+     "v12_name": "Tarnes Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S27",
+   "v13_name": "Rotsla Sound",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S27",
+     "v12_name": "Rotsla Sound",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S28",
+   "v13_name": "Walsholm Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S28",
+     "v12_name": "Walsholm Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S29",
+   "v13_name": "Isor Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S29",
+     "v12_name": "Isor Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S30",
+   "v13_name": "Mave Nortus Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S30",
+     "v12_name": "Mave Nortus Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S31",
+   "v13_name": "Mave Nortus Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S31",
+     "v12_name": "Mave Nortus Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S32",
+   "v13_name": "Tarnes Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S32",
+     "v12_name": "Tarnes Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S33",
+   "v13_name": "Port Rotsla Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S33",
+     "v12_name": "Port Rotsla Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S34",
+   "v13_name": "Port Rotsla Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S34",
+     "v12_name": "Port Rotsla Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S35",
+   "v13_name": "Walsholm Reach",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S35",
+     "v12_name": "Walsholm Reach",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S36",
+   "v13_name": "Lido Isora Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S36",
+     "v12_name": "Lido Isora Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S37",
+   "v13_name": "Tarnes Reach",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S37",
+     "v12_name": "Tarnes Reach",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S38",
+   "v13_name": "Yol Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S38",
+     "v12_name": "Yol Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S39",
+   "v13_name": "Yol Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S39",
+     "v12_name": "Yol Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S40",
+   "v13_name": "Grodzizg Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S40",
+     "v12_name": "Grodzizg Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S41",
+   "v13_name": "Port Rotsla Channel",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S41",
+     "v12_name": "Port Rotsla Channel",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S42",
+   "v13_name": "Sabbiano Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S42",
+     "v12_name": "Sabbiano Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S43",
+   "v13_name": "Sabbiano Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S43",
+     "v12_name": "Sabbiano Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S44",
+   "v13_name": "Marenta Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S44",
+     "v12_name": "Marenta Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S45",
+   "v13_name": "Bellacosta Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S45",
+     "v12_name": "Bellacosta Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S46",
+   "v13_name": "Capo Lisso Channel",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S46",
+     "v12_name": "Capo Lisso Channel",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S47",
+   "v13_name": "Capo Lisso Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S47",
+     "v12_name": "Capo Lisso Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S48",
+   "v13_name": "Bellacosta Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S48",
+     "v12_name": "Bellacosta Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S49",
+   "v13_name": "Azzurra Channel",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S49",
+     "v12_name": "Azzurra Channel",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S50",
+   "v13_name": "Capo Lisso Roads",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S50",
+     "v12_name": "Capo Lisso Roads",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S51",
+   "v13_name": "Azzurra Waters",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S51",
+     "v12_name": "Azzurra Waters",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S52",
+   "v13_name": "Zille Bay",
+   "region": "Sea",
+   "status": "unchanged",
+   "iou_same_id": 1.0,
+   "v12_overlaps": [
+    {
+     "v12_id": "ZilleTile_S52",
+     "v12_name": "Zille Bay",
+     "share_of_v13": 1.0,
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v13_id": "ZilleTile_S53",
+   "v13_name": "Rotsla Deep",
+   "region": "Sea",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": []
+  },
+  {
+   "v13_id": "ZilleTile_S54",
+   "v13_name": "Santa Calla Banks",
+   "region": "Sea",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": []
+  },
+  {
+   "v13_id": "ZilleTile_S55",
+   "v13_name": "Praia Velha Roads",
+   "region": "Sea",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": []
+  },
+  {
+   "v13_id": "ZilleTile_S56",
+   "v13_name": "Costa Dalle Waters",
+   "region": "Sea",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": []
+  },
+  {
+   "v13_id": "ZilleTile_S57",
+   "v13_name": "Marbelas Bight",
+   "region": "Sea",
+   "status": "new",
+   "iou_same_id": 0,
+   "v12_overlaps": []
+  }
+ ],
+ "v12": [
+  {
+   "v12_id": "ZilleTile_1",
+   "v12_name": "Corvis North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_1",
+     "share_of_v12": 0.95
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_2",
+   "v12_name": "Munat",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_2",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_3",
+   "v12_name": "Manes Riuz",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_3",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_4",
+   "v12_name": "Corvis East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_4",
+     "share_of_v12": 0.517
+    },
+    {
+     "v13_id": "ZilleTile_97",
+     "share_of_v12": 0.234
+    },
+    {
+     "v13_id": "ZilleTile_8",
+     "share_of_v12": 0.036
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_5",
+   "v12_name": "Tirsa Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_5",
+     "share_of_v12": 0.727
+    },
+    {
+     "v13_id": "ZilleTile_10",
+     "share_of_v12": 0.071
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_6",
+   "v12_name": "Quella",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_6",
+     "share_of_v12": 0.428
+    },
+    {
+     "v13_id": "ZilleTile_7",
+     "share_of_v12": 0.204
+    },
+    {
+     "v13_id": "ZilleTile_98",
+     "share_of_v12": 0.133
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_7",
+   "v12_name": "Corvis",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_1",
+     "share_of_v12": 0.219
+    },
+    {
+     "v13_id": "ZilleTile_7",
+     "share_of_v12": 0.154
+    },
+    {
+     "v13_id": "ZilleTile_99",
+     "share_of_v12": 0.151
+    },
+    {
+     "v13_id": "ZilleTile_98",
+     "share_of_v12": 0.106
+    },
+    {
+     "v13_id": "ZilleTile_4",
+     "share_of_v12": 0.038
+    },
+    {
+     "v13_id": "ZilleTile_100",
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_8",
+   "v12_name": "Nanta West",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_8",
+     "share_of_v12": 0.452
+    },
+    {
+     "v13_id": "ZilleTile_97",
+     "share_of_v12": 0.312
+    },
+    {
+     "v13_id": "ZilleTile_13",
+     "share_of_v12": 0.06
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_9",
+   "v12_name": "Nanta",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_9",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_10",
+   "v12_name": "Tirsa",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_10",
+     "share_of_v12": 0.471
+    },
+    {
+     "v13_id": "ZilleTile_5",
+     "share_of_v12": 0.261
+    },
+    {
+     "v13_id": "ZilleTile_101",
+     "share_of_v12": 0.046
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_11",
+   "v12_name": "Isor",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_11",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_12",
+   "v12_name": "Lido Isora",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_12",
+     "share_of_v12": 0.741
+    },
+    {
+     "v13_id": "ZilleTile_98",
+     "share_of_v12": 0.152
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_13",
+   "v12_name": "Lenta Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_13",
+     "share_of_v12": 0.258
+    },
+    {
+     "v13_id": "ZilleTile_100",
+     "share_of_v12": 0.217
+    },
+    {
+     "v13_id": "ZilleTile_99",
+     "share_of_v12": 0.104
+    },
+    {
+     "v13_id": "ZilleTile_17",
+     "share_of_v12": 0.05
+    },
+    {
+     "v13_id": "ZilleTile_18",
+     "share_of_v12": 0.025
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_14",
+   "v12_name": "Lenta Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_14",
+     "share_of_v12": 0.257
+    },
+    {
+     "v13_id": "ZilleTile_103",
+     "share_of_v12": 0.216
+    },
+    {
+     "v13_id": "ZilleTile_19",
+     "share_of_v12": 0.117
+    },
+    {
+     "v13_id": "ZilleTile_18",
+     "share_of_v12": 0.104
+    },
+    {
+     "v13_id": "ZilleTile_101",
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_15",
+   "v12_name": "Venna Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_15",
+     "share_of_v12": 0.476
+    },
+    {
+     "v13_id": "ZilleTile_102",
+     "share_of_v12": 0.225
+    },
+    {
+     "v13_id": "ZilleTile_104",
+     "share_of_v12": 0.05
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_16",
+   "v12_name": "Sostra",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_16",
+     "share_of_v12": 0.385
+    },
+    {
+     "v13_id": "ZilleTile_12",
+     "share_of_v12": 0.264
+    },
+    {
+     "v13_id": "ZilleTile_100",
+     "share_of_v12": 0.091
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_17",
+   "v12_name": "Ardo North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_17",
+     "share_of_v12": 0.467
+    },
+    {
+     "v13_id": "ZilleTile_21",
+     "share_of_v12": 0.156
+    },
+    {
+     "v13_id": "ZilleTile_16",
+     "share_of_v12": 0.07
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_18",
+   "v12_name": "Lenta",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_18",
+     "share_of_v12": 0.307
+    },
+    {
+     "v13_id": "ZilleTile_105",
+     "share_of_v12": 0.278
+    },
+    {
+     "v13_id": "ZilleTile_110",
+     "share_of_v12": 0.05
+    },
+    {
+     "v13_id": "ZilleTile_106",
+     "share_of_v12": 0.04
+    },
+    {
+     "v13_id": "ZilleTile_21",
+     "share_of_v12": 0.026
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_19",
+   "v12_name": "Venna Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_19",
+     "share_of_v12": 0.263
+    },
+    {
+     "v13_id": "ZilleTile_102",
+     "share_of_v12": 0.21
+    },
+    {
+     "v13_id": "ZilleTile_101",
+     "share_of_v12": 0.067
+    },
+    {
+     "v13_id": "ZilleTile_20",
+     "share_of_v12": 0.06
+    },
+    {
+     "v13_id": "ZilleTile_103",
+     "share_of_v12": 0.043
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_20",
+   "v12_name": "Venna",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_20",
+     "share_of_v12": 0.568
+    },
+    {
+     "v13_id": "ZilleTile_104",
+     "share_of_v12": 0.173
+    },
+    {
+     "v13_id": "ZilleTile_108",
+     "share_of_v12": 0.036
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_21",
+   "v12_name": "Marenta",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_21",
+     "share_of_v12": 0.435
+    },
+    {
+     "v13_id": "ZilleTile_109",
+     "share_of_v12": 0.232
+    },
+    {
+     "v13_id": "ZilleTile_24",
+     "share_of_v12": 0.099
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_22",
+   "v12_name": "Ossa North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_22",
+     "share_of_v12": 0.268
+    },
+    {
+     "v13_id": "ZilleTile_107",
+     "share_of_v12": 0.206
+    },
+    {
+     "v13_id": "ZilleTile_108",
+     "share_of_v12": 0.116
+    },
+    {
+     "v13_id": "ZilleTile_103",
+     "share_of_v12": 0.055
+    },
+    {
+     "v13_id": "ZilleTile_106",
+     "share_of_v12": 0.036
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_23",
+   "v12_name": "Mave Nortus",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_23",
+     "share_of_v12": 0.558
+    },
+    {
+     "v13_id": "ZilleTile_104",
+     "share_of_v12": 0.176
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_24",
+   "v12_name": "Ardo Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_24",
+     "share_of_v12": 0.442
+    },
+    {
+     "v13_id": "ZilleTile_110",
+     "share_of_v12": 0.427
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_25",
+   "v12_name": "Ossa",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_25",
+     "share_of_v12": 0.304
+    },
+    {
+     "v13_id": "ZilleTile_110",
+     "share_of_v12": 0.262
+    },
+    {
+     "v13_id": "ZilleTile_111",
+     "share_of_v12": 0.121
+    },
+    {
+     "v13_id": "ZilleTile_106",
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_26",
+   "v12_name": "Ossa East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_26",
+     "share_of_v12": 0.509
+    },
+    {
+     "v13_id": "ZilleTile_108",
+     "share_of_v12": 0.094
+    },
+    {
+     "v13_id": "ZilleTile_107",
+     "share_of_v12": 0.059
+    },
+    {
+     "v13_id": "ZilleTile_111",
+     "share_of_v12": 0.032
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_27",
+   "v12_name": "Sabbiano",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_27",
+     "share_of_v12": 0.522
+    },
+    {
+     "v13_id": "ZilleTile_112",
+     "share_of_v12": 0.264
+    },
+    {
+     "v13_id": "ZilleTile_109",
+     "share_of_v12": 0.03
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_28",
+   "v12_name": "Wiktrany",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_28",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_29",
+   "v12_name": "Ossa South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_29",
+     "share_of_v12": 0.347
+    },
+    {
+     "v13_id": "ZilleTile_114",
+     "share_of_v12": 0.197
+    },
+    {
+     "v13_id": "ZilleTile_111",
+     "share_of_v12": 0.169
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_30",
+   "v12_name": "Ondaro Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_30",
+     "share_of_v12": 0.439
+    },
+    {
+     "v13_id": "ZilleTile_112",
+     "share_of_v12": 0.174
+    },
+    {
+     "v13_id": "ZilleTile_31",
+     "share_of_v12": 0.085
+    },
+    {
+     "v13_id": "ZilleTile_116",
+     "share_of_v12": 0.046
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_31",
+   "v12_name": "Zille Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_31",
+     "share_of_v12": 0.351
+    },
+    {
+     "v13_id": "ZilleTile_113",
+     "share_of_v12": 0.095
+    },
+    {
+     "v13_id": "ZilleTile_36",
+     "share_of_v12": 0.083
+    },
+    {
+     "v13_id": "ZilleTile_32",
+     "share_of_v12": 0.04
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_32",
+   "v12_name": "Wiktrany Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_32",
+     "share_of_v12": 0.498
+    },
+    {
+     "v13_id": "ZilleTile_29",
+     "share_of_v12": 0.134
+    },
+    {
+     "v13_id": "ZilleTile_113",
+     "share_of_v12": 0.132
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_33",
+   "v12_name": "Dapalle West",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_33",
+     "share_of_v12": 0.5
+    },
+    {
+     "v13_id": "ZilleTile_114",
+     "share_of_v12": 0.101
+    },
+    {
+     "v13_id": "ZilleTile_29",
+     "share_of_v12": 0.065
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_34",
+   "v12_name": "Vela Nova",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_34",
+     "share_of_v12": 0.321
+    },
+    {
+     "v13_id": "ZilleTile_115",
+     "share_of_v12": 0.264
+    },
+    {
+     "v13_id": "ZilleTile_116",
+     "share_of_v12": 0.244
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_35",
+   "v12_name": "Zille City",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_35",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_36",
+   "v12_name": "Pomara Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_36",
+     "share_of_v12": 0.393
+    },
+    {
+     "v13_id": "ZilleTile_117",
+     "share_of_v12": 0.34
+    },
+    {
+     "v13_id": "ZilleTile_37",
+     "share_of_v12": 0.067
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_37",
+   "v12_name": "Pomara North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_37",
+     "share_of_v12": 0.582
+    },
+    {
+     "v13_id": "ZilleTile_32",
+     "share_of_v12": 0.127
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_38",
+   "v12_name": "Rivamare",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_38",
+     "share_of_v12": 0.418
+    },
+    {
+     "v13_id": "ZilleTile_118",
+     "share_of_v12": 0.38
+    },
+    {
+     "v13_id": "ZilleTile_39",
+     "share_of_v12": 0.031
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_39",
+   "v12_name": "Celle Vaz North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_39",
+     "share_of_v12": 0.799
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_40",
+   "v12_name": "Tarnes Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_40",
+     "share_of_v12": 0.51
+    },
+    {
+     "v13_id": "ZilleTile_42",
+     "share_of_v12": 0.218
+    },
+    {
+     "v13_id": "ZilleTile_23",
+     "share_of_v12": 0.07
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_41",
+   "v12_name": "Mave Nortus Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_41",
+     "share_of_v12": 0.696
+    },
+    {
+     "v13_id": "ZilleTile_43",
+     "share_of_v12": 0.063
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_42",
+   "v12_name": "Tarnes",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_45",
+     "share_of_v12": 0.462
+    },
+    {
+     "v13_id": "ZilleTile_42",
+     "share_of_v12": 0.416
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_43",
+   "v12_name": "Venna South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_43",
+     "share_of_v12": 0.464
+    },
+    {
+     "v13_id": "ZilleTile_41",
+     "share_of_v12": 0.216
+    },
+    {
+     "v13_id": "ZilleTile_46",
+     "share_of_v12": 0.111
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_44",
+   "v12_name": "Zelles",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_44",
+     "share_of_v12": 0.578
+    },
+    {
+     "v13_id": "ZilleTile_42",
+     "share_of_v12": 0.077
+    },
+    {
+     "v13_id": "ZilleTile_40",
+     "share_of_v12": 0.061
+    },
+    {
+     "v13_id": "ZilleTile_49",
+     "share_of_v12": 0.024
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_45",
+   "v12_name": "Zelles East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_45",
+     "share_of_v12": 0.451
+    },
+    {
+     "v13_id": "ZilleTile_49",
+     "share_of_v12": 0.175
+    },
+    {
+     "v13_id": "ZilleTile_42",
+     "share_of_v12": 0.133
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_46",
+   "v12_name": "Dapalle North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_46",
+     "share_of_v12": 0.555
+    },
+    {
+     "v13_id": "ZilleTile_51",
+     "share_of_v12": 0.101
+    },
+    {
+     "v13_id": "ZilleTile_43",
+     "share_of_v12": 0.03
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_47",
+   "v12_name": "Dapalle Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_47",
+     "share_of_v12": 0.613
+    },
+    {
+     "v13_id": "ZilleTile_46",
+     "share_of_v12": 0.108
+    },
+    {
+     "v13_id": "ZilleTile_51",
+     "share_of_v12": 0.043
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_48",
+   "v12_name": "Zelles Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_48",
+     "share_of_v12": 0.736
+    },
+    {
+     "v13_id": "ZilleTile_41",
+     "share_of_v12": 0.034
+    },
+    {
+     "v13_id": "ZilleTile_44",
+     "share_of_v12": 0.028
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_49",
+   "v12_name": "Isalba Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_49",
+     "share_of_v12": 0.717
+    },
+    {
+     "v13_id": "ZilleTile_44",
+     "share_of_v12": 0.064
+    },
+    {
+     "v13_id": "ZilleTile_54",
+     "share_of_v12": 0.043
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_50",
+   "v12_name": "Dapalle Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_50",
+     "share_of_v12": 0.568
+    },
+    {
+     "v13_id": "ZilleTile_51",
+     "share_of_v12": 0.129
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_51",
+   "v12_name": "Dapalle",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_51",
+     "share_of_v12": 0.716
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_52",
+   "v12_name": "Morsa East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_52",
+     "share_of_v12": 0.554
+    },
+    {
+     "v13_id": "ZilleTile_57",
+     "share_of_v12": 0.177
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_53",
+   "v12_name": "Ostrabe",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_53",
+     "share_of_v12": 0.404
+    },
+    {
+     "v13_id": "ZilleTile_52",
+     "share_of_v12": 0.28
+    },
+    {
+     "v13_id": "ZilleTile_58",
+     "share_of_v12": 0.053
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_54",
+   "v12_name": "Ostrabe Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_54",
+     "share_of_v12": 0.531
+    },
+    {
+     "v13_id": "ZilleTile_53",
+     "share_of_v12": 0.127
+    },
+    {
+     "v13_id": "ZilleTile_58",
+     "share_of_v12": 0.058
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_55",
+   "v12_name": "Pomara",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_55",
+     "share_of_v12": 0.539
+    },
+    {
+     "v13_id": "ZilleTile_66",
+     "share_of_v12": 0.12
+    },
+    {
+     "v13_id": "ZilleTile_60",
+     "share_of_v12": 0.1
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_56",
+   "v12_name": "Pomara East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_56",
+     "share_of_v12": 0.818
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_57",
+   "v12_name": "Morsa",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_57",
+     "share_of_v12": 0.401
+    },
+    {
+     "v13_id": "ZilleTile_56",
+     "share_of_v12": 0.198
+    },
+    {
+     "v13_id": "ZilleTile_50",
+     "share_of_v12": 0.124
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_58",
+   "v12_name": "Ostrabe South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_58",
+     "share_of_v12": 0.47
+    },
+    {
+     "v13_id": "ZilleTile_63",
+     "share_of_v12": 0.311
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_59",
+   "v12_name": "Celle Vaz",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_59",
+     "share_of_v12": 0.853
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_60",
+   "v12_name": "Celle Vaz East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_60",
+     "share_of_v12": 0.691
+    },
+    {
+     "v13_id": "ZilleTile_55",
+     "share_of_v12": 0.127
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_61",
+   "v12_name": "Brivane",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_61",
+     "share_of_v12": 0.659
+    },
+    {
+     "v13_id": "ZilleTile_66",
+     "share_of_v12": 0.087
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_62",
+   "v12_name": "Brivane East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_62",
+     "share_of_v12": 0.708
+    },
+    {
+     "v13_id": "ZilleTile_67",
+     "share_of_v12": 0.049
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_63",
+   "v12_name": "Morsa Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_63",
+     "share_of_v12": 0.425
+    },
+    {
+     "v13_id": "ZilleTile_62",
+     "share_of_v12": 0.38
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_64",
+   "v12_name": "Marbelas",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_64",
+     "share_of_v12": 0.548
+    },
+    {
+     "v13_id": "ZilleTile_59",
+     "share_of_v12": 0.333
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_65",
+   "v12_name": "Marbelas Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_65",
+     "share_of_v12": 0.358
+    },
+    {
+     "v13_id": "ZilleTile_64",
+     "share_of_v12": 0.245
+    },
+    {
+     "v13_id": "ZilleTile_60",
+     "share_of_v12": 0.178
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_66",
+   "v12_name": "Brivane Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_66",
+     "share_of_v12": 0.437
+    },
+    {
+     "v13_id": "ZilleTile_65",
+     "share_of_v12": 0.373
+    },
+    {
+     "v13_id": "ZilleTile_60",
+     "share_of_v12": 0.022
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_67",
+   "v12_name": "Brivane South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_67",
+     "share_of_v12": 0.787
+    },
+    {
+     "v13_id": "ZilleTile_61",
+     "share_of_v12": 0.042
+    },
+    {
+     "v13_id": "ZilleTile_66",
+     "share_of_v12": 0.032
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_68",
+   "v12_name": "Kessin West",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_68",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_69",
+   "v12_name": "Kessin",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_69",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_70",
+   "v12_name": "Harlitz North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_70",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_71",
+   "v12_name": "Kratsna",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_71",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_72",
+   "v12_name": "Kreleck Islands",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_72",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_73",
+   "v12_name": "Dornatz North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_73",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_74",
+   "v12_name": "Dornatz Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_74",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_75",
+   "v12_name": "Kratsna Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_75",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_76",
+   "v12_name": "Dornatz East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_76",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_77",
+   "v12_name": "Harlitz",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_77",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_78",
+   "v12_name": "Trebnow",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_78",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_79",
+   "v12_name": "Dornatz",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_79",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_80",
+   "v12_name": "Sulkov Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_80",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_81",
+   "v12_name": "Trebnow Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_81",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_82",
+   "v12_name": "Trebnow East",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_82",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_83",
+   "v12_name": "Mirlow South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_83",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_84",
+   "v12_name": "Sulkov Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_84",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_85",
+   "v12_name": "Sulkov",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_85",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_86",
+   "v12_name": "Sulkov Southeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_86",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_87",
+   "v12_name": "Trebnow South",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_87",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_88",
+   "v12_name": "Brannitz West",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_88",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_89",
+   "v12_name": "Brannitz",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_89",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_90",
+   "v12_name": "Brannitz Northeast",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_90",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_91",
+   "v12_name": "Port Rotsla Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_91",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_92",
+   "v12_name": "Walsholm North",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_92",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_93",
+   "v12_name": "Yol Northwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_93",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_94",
+   "v12_name": "Grodzizg",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_94",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_95",
+   "v12_name": "Brannitz Southwest",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_95",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_96",
+   "v12_name": "Rotsla",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_96",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S1",
+   "v12_name": "Kreleck Sound",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S1",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S2",
+   "v12_name": "Kratsna Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S2",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S3",
+   "v12_name": "Munat Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S3",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S4",
+   "v12_name": "Munat Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S4",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S5",
+   "v12_name": "Munat Reach",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S5",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S6",
+   "v12_name": "Munat Bight",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S6",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S7",
+   "v12_name": "Munat Narrows",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S7",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S8",
+   "v12_name": "Trebnow Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S8",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S9",
+   "v12_name": "Quella Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S9",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S10",
+   "v12_name": "Munat Banks",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S10",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S11",
+   "v12_name": "Manes Riuz Sound",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S11",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S12",
+   "v12_name": "Munat Deep",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S12",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S13",
+   "v12_name": "Tirsa Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S13",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S14",
+   "v12_name": "Trebnow Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S14",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S15",
+   "v12_name": "Corvis Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S15",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S16",
+   "v12_name": "Munat Shoals",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S16",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S17",
+   "v12_name": "Tirsa Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S17",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S18",
+   "v12_name": "Tirsa Reach",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S18",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S19",
+   "v12_name": "Quella Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S19",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S20",
+   "v12_name": "Nanta Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S20",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S21",
+   "v12_name": "Tirsa Bight",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S21",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S22",
+   "v12_name": "Tirsa Narrows",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S22",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S23",
+   "v12_name": "Walsholm Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S23",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S24",
+   "v12_name": "Quella Reach",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S24",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S25",
+   "v12_name": "Tirsa Banks",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S25",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S26",
+   "v12_name": "Tarnes Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S26",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S27",
+   "v12_name": "Rotsla Sound",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S27",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S28",
+   "v12_name": "Walsholm Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S28",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S29",
+   "v12_name": "Isor Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S29",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S30",
+   "v12_name": "Mave Nortus Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S30",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S31",
+   "v12_name": "Mave Nortus Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S31",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S32",
+   "v12_name": "Tarnes Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S32",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S33",
+   "v12_name": "Port Rotsla Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S33",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S34",
+   "v12_name": "Port Rotsla Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S34",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S35",
+   "v12_name": "Walsholm Reach",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S35",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S36",
+   "v12_name": "Lido Isora Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S36",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S37",
+   "v12_name": "Tarnes Reach",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S37",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S38",
+   "v12_name": "Yol Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S38",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S39",
+   "v12_name": "Yol Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S39",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S40",
+   "v12_name": "Grodzizg Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S40",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S41",
+   "v12_name": "Port Rotsla Channel",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S41",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S42",
+   "v12_name": "Sabbiano Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S42",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S43",
+   "v12_name": "Sabbiano Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S43",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S44",
+   "v12_name": "Marenta Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S44",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S45",
+   "v12_name": "Bellacosta Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S45",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S46",
+   "v12_name": "Capo Lisso Channel",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S46",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S47",
+   "v12_name": "Capo Lisso Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S47",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S48",
+   "v12_name": "Bellacosta Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S48",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S49",
+   "v12_name": "Azzurra Channel",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S49",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S50",
+   "v12_name": "Capo Lisso Roads",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S50",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S51",
+   "v12_name": "Azzurra Waters",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S51",
+     "share_of_v12": 1.0
+    }
+   ]
+  },
+  {
+   "v12_id": "ZilleTile_S52",
+   "v12_name": "Zille Bay",
+   "v13": [
+    {
+     "v13_id": "ZilleTile_S52",
+     "share_of_v12": 1.0
+    }
+   ]
+  }
+ ]
+}

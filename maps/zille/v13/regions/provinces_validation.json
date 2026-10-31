@@ -1,0 +1,198 @@
+{
+ "counts": {
+  "Zille": 60,
+  "Brenas": 29,
+  "Wehlen": 29,
+  "Sea": 57
+ },
+ "total": 175,
+ "overlaps": [],
+ "land_on_water": [],
+ "sea_on_land": [],
+ "land_zone_holes": [],
+ "land_zone_uncovered_total": 7900,
+ "sea_corridor_holes": [],
+ "tile_violations": [],
+ "max_tile_alpha_extent_px": 500,
+ "max_map_extent_incl_effects": 957.0,
+ "limit_map": 980,
+ "max_shape_bbox_map": 857.2,
+ "tiles_512": true,
+ "count_ok": true,
+ "cities": [
+  [
+   "ZilleTile_2",
+   "Munat"
+  ],
+  [
+   "ZilleTile_9",
+   "Nanta"
+  ],
+  [
+   "ZilleTile_11",
+   "Isor"
+  ],
+  [
+   "ZilleTile_23",
+   "Mave Nortus"
+  ],
+  [
+   "ZilleTile_28",
+   "Wiktrany"
+  ],
+  [
+   "ZilleTile_35",
+   "Zille"
+  ],
+  [
+   "ZilleTile_51",
+   "Dapalle"
+  ],
+  [
+   "ZilleTile_71",
+   "Kratsna"
+  ],
+  [
+   "ZilleTile_94",
+   "Grodzizg"
+  ]
+ ],
+ "smallest_land": [
+  [
+   48053,
+   "ZilleTile_3"
+  ],
+  [
+   48504,
+   "ZilleTile_72"
+  ],
+  [
+   52675,
+   "ZilleTile_96"
+  ],
+  [
+   57194,
+   "ZilleTile_115"
+  ],
+  [
+   64900,
+   "ZilleTile_114"
+  ]
+ ],
+ "smallest_sea": [
+  [
+   62149,
+   "ZilleTile_S52"
+  ],
+  [
+   146168,
+   "ZilleTile_S37"
+  ],
+  [
+   163489,
+   "ZilleTile_S48"
+  ]
+ ],
+ "size_rule": "map extent incl. stroke+blur (longest bbox side) must be >512 and <980 map px; target 650-950",
+ "size_all": {
+  "n": 175,
+  "min": 478.5,
+  "p10": 563.46,
+  "median": 769.5,
+  "p90": 886.2,
+  "max": 957.0,
+  "hist": {
+   "450-500": 1,
+   "500-550": 7,
+   "550-600": 27,
+   "600-650": 13,
+   "650-700": 15,
+   "700-750": 13,
+   "750-800": 36,
+   "800-850": 30,
+   "850-900": 20,
+   "900-950": 12,
+   "950-1000": 1
+  }
+ },
+ "size_land_cells": {
+  "n": 106,
+  "min": 532.1,
+  "p10": 557.0,
+  "median": 691.95,
+  "p90": 869.0,
+  "max": 957.0,
+  "hist": {
+   "500-550": 7,
+   "550-600": 26,
+   "600-650": 11,
+   "650-700": 10,
+   "700-750": 5,
+   "750-800": 19,
+   "800-850": 14,
+   "850-900": 8,
+   "900-950": 5,
+   "950-1000": 1
+  }
+ },
+ "size_sea": {
+  "n": 57,
+  "min": 645.0,
+  "p10": 747.64,
+  "median": 826.9,
+  "p90": 904.9599999999999,
+  "max": 949.4,
+  "hist": {
+   "600-650": 1,
+   "700-750": 6,
+   "750-800": 17,
+   "800-850": 15,
+   "850-900": 11,
+   "900-950": 7
+  }
+ },
+ "size_in_target_650_950": 126,
+ "size_exceptions_allowed": [
+  [
+   "ZilleTile_96",
+   "Rotsla",
+   478.5,
+   "island, physically small (allowed)"
+  ]
+ ],
+ "size_violations": [],
+ "shape_bbox_min_max": [
+  379.2,
+  857.2
+ ],
+ "duplicate_names": [],
+ "tiles_clip_free": true,
+ "count_in_target_170_180": true,
+ "mave_nortus": {
+  "id": "ZilleTile_23",
+  "region": "Brenas",
+  "owner": "Rizia",
+  "area_outside_rizia": 0.0,
+  "min_distance_to_border": 31.9,
+  "fully_inside_rizia": true
+ },
+ "owners": {
+  "Rizia": 29,
+  "Wehlen": 89,
+  "neutral": 57
+ },
+ "land_provinces_crossing_border": [],
+ "ship_placement": {
+  "west": [
+   "ZilleTile_S56",
+   "ZilleTile_S57"
+  ],
+  "east": [
+   "ZilleTile_S26",
+   "ZilleTile_S30",
+   "ZilleTile_S31",
+   "ZilleTile_S32",
+   "ZilleTile_S37"
+  ]
+ }
+}

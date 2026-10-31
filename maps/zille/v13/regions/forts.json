@@ -1,0 +1,228 @@
+{
+ "version": "v13 review 1",
+ "fort_types": {
+  "none": "no fort",
+  "light": "light fort",
+  "heavy": "heavy fort"
+ },
+ "defense_lines": {
+  "border_west": "Brenas-Zille border, western half (west coast - Celle Vaz - Pomara - Zille City): HEAVY forts on the Zille (Wehlen) side",
+  "border_east": "Brenas-Zille border, eastern half (Dapalle - Ossa - Venna - Mave Nortus inlet): LIGHT forts on the Zille (Wehlen) side",
+  "north_line": "inner (second) defence line Marenta - north of Nanta across the Zille peninsula: LIGHT forts; it shields the north-west of the peninsula (Isor, Quella, Corvis, Munat)"
+ },
+ "cities_note": "no forts in city provinces (owner request); the vector base map never had fort symbols in cities",
+ "map_art_note": "review 2: forts are data only - not drawn in the base map, map tiles or composite. symbol_x/symbol_y = suggested marker position (map px) used only by the forts overlay previews.",
+ "counts": {
+  "border_west": 5,
+  "border_east": 6,
+  "north_line": 5
+ },
+ "forts": [
+  {
+   "province_id": "ZilleTile_20",
+   "province_name": "Venna",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 9759.6,
+   "symbol_y": 4085.6,
+   "faces": [
+    "ZilleTile_43"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_26",
+   "province_name": "Ossa East",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 9368.2,
+   "symbol_y": 4791.2,
+   "faces": [
+    "ZilleTile_43",
+    "ZilleTile_46"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_33",
+   "province_name": "Dapalle West",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 9037.3,
+   "symbol_y": 5678.7,
+   "faces": [
+    "ZilleTile_50",
+    "ZilleTile_51"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_104",
+   "province_name": "Venna East",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 10135.6,
+   "symbol_y": 4018.0,
+   "faces": [
+    "ZilleTile_23",
+    "ZilleTile_41",
+    "ZilleTile_43"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_108",
+   "province_name": "Venna Southwest",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 9553.8,
+   "symbol_y": 4264.9,
+   "faces": [
+    "ZilleTile_43"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_114",
+   "province_name": "Dapalle Northwest",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "border_east",
+   "symbol_x": 9332.1,
+   "symbol_y": 5192.7,
+   "faces": [
+    "ZilleTile_46",
+    "ZilleTile_51"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_36",
+   "province_name": "Pomara Northwest",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "heavy",
+   "defense_line": "border_west",
+   "symbol_x": 8518.0,
+   "symbol_y": 6217.4,
+   "faces": [
+    "ZilleTile_55",
+    "ZilleTile_56"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_37",
+   "province_name": "Pomara North",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "heavy",
+   "defense_line": "border_west",
+   "symbol_x": 8880.0,
+   "symbol_y": 5975.8,
+   "faces": [
+    "ZilleTile_50",
+    "ZilleTile_56"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_39",
+   "province_name": "Celle Vaz North",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "heavy",
+   "defense_line": "border_west",
+   "symbol_x": 7715.9,
+   "symbol_y": 6672.1,
+   "faces": [
+    "ZilleTile_59",
+    "ZilleTile_60"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_117",
+   "province_name": "Pomara West",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "heavy",
+   "defense_line": "border_west",
+   "symbol_x": 8233.9,
+   "symbol_y": 6346.7,
+   "faces": [
+    "ZilleTile_55"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_118",
+   "province_name": "Praia Velha",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "heavy",
+   "defense_line": "border_west",
+   "symbol_x": 7096.7,
+   "symbol_y": 6789.6,
+   "faces": [
+    "ZilleTile_59"
+   ]
+  },
+  {
+   "province_id": "ZilleTile_8",
+   "province_name": "Nanta West",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "north_line",
+   "symbol_x": 8536.4,
+   "symbol_y": 2924.3,
+   "faces": []
+  },
+  {
+   "province_id": "ZilleTile_13",
+   "province_name": "Lenta North",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "north_line",
+   "symbol_x": 8450.8,
+   "symbol_y": 3387.0,
+   "faces": []
+  },
+  {
+   "province_id": "ZilleTile_17",
+   "province_name": "Lenta Northwest",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "north_line",
+   "symbol_x": 8132.1,
+   "symbol_y": 3838.9,
+   "faces": []
+  },
+  {
+   "province_id": "ZilleTile_21",
+   "province_name": "Ardo",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "north_line",
+   "symbol_x": 7910.3,
+   "symbol_y": 4122.0,
+   "faces": []
+  },
+  {
+   "province_id": "ZilleTile_97",
+   "province_name": "Nanta Northwest",
+   "region": "Zille",
+   "owner": "Wehlen",
+   "fort": "light",
+   "defense_line": "north_line",
+   "symbol_x": 8795.8,
+   "symbol_y": 2660.5,
+   "faces": []
+  }
+ ]
+}
