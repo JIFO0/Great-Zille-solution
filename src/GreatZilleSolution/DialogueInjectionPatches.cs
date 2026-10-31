@@ -61,10 +61,21 @@ namespace GreatZilleSolution
                 __result = WarTile.TileActionType.Deploy;
                 return;
             }
+            if (!ZilleWarTable.TurnHasPoints()
+                && __result != WarTile.TileActionType.None
+                && __result != WarTile.TileActionType.Select
+                && __result != WarTile.TileActionType.Refund
+                && __result != WarTile.TileActionType.Deploy)
+            {
+                __result = WarTile.TileActionType.None;
+                return;
+            }
             if (__result == WarTile.TileActionType.Fortify && !ZilleWarTable.FortifyArmed)
                 __result = WarTile.TileActionType.Select;
             if (__result == WarTile.TileActionType.Attack && ZilleWarTable.AllySupportTarget(__instance))
                 __result = WarTile.TileActionType.Support;
+            if (__result == WarTile.TileActionType.Support && !ZilleWarTable.LiveSupport(__instance))
+                __result = ZilleWarTable.CanMoveOnto(__instance) ? WarTile.TileActionType.Move : WarTile.TileActionType.None;
             if (__result == WarTile.TileActionType.Move && !ZilleWarTable.CanMoveOnto(__instance))
                 __result = WarTile.TileActionType.None;
         }
@@ -175,6 +186,85 @@ namespace GreatZilleSolution
         public static void OnInitialDeploymentFinishedPostfix()
         {
             ZilleWarTable.MarkOperationBegun();
+        }
+
+        /// <summary>A supply line whose tile list was never built used to throw inside every allegiance change.</summary>
+        public static void SetupSupplyLinesPrefix(ref Il2CppSystem.Collections.Generic.List<WarSupplyLine> supplyLines)
+        {
+            supplyLines = ZilleWarTable.SanitizeSupplyLines(supplyLines);
+        }
+
+        /// <summary>EndBattle is the stock end of a fight. Settle it even when the method itself throws before it can clear the prompt.</summary>
+        public static Exception EndBattleFinalizer(WarBattleManager.WarBattle __0, Exception __exception)
+        {
+            try { ZilleWarTable.FinishBattle(__0); }
+            catch (Exception ex) { MelonLogger.Warning("[ZTABLE] battle end: " + ex.GetBaseException().Message); }
+            return __exception;
+        }
+
+        private static int _pointsGrantedForTurn = int.MinValue;
+
+        /// <summary>PlayerTurn is the return from the enemy phase. The phase flag has to be down or the next hold commits nothing.</summary>
+        public static void PlayerTurnPostfix(WarFlowManager __instance)
+        {
+            if (__instance == null) return;
+            try
+            {
+                __instance.isDisplayingEnemyMoves = false;
+                int turn = __instance.currentWarTurn;
+                if (turn != _pointsGrantedForTurn)
+                {
+                    _pointsGrantedForTurn = turn;
+                    if (__instance.GetCurrentActionPoints() <= 0)
+                        __instance.currentActionPoints = Math.Max(1, __instance.ActionPointsPerTurn);
+                }
+                var mgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (mgr != null) mgr.SetAllTokenActions();
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] player turn: " + ex.GetBaseException().Message);
+            }
+        }
+
+        /// <summary>A unit that already moved is locked out of a second move, but it still has to be clickable.</summary>
+        public static void IsSelectablePostfix(WarToken __instance, ref bool __result)
+        {
+            if (__result || __instance == null || !ZilleWarTable.ScenarioStarted) return;
+            try
+            {
+                if (__instance.GetTokenAllegiance() != WarToken.WarAllegiance.Player) return;
+                if (__instance.IsDead() || !__instance.IsMovementLocked()) return;
+                var tile = __instance.GetCurrentWarTile();
+                if (tile != null && (tile.IsLocked() || tile.IsActionLocked())) return;
+                var battle = __instance.GetCurrentBattle();
+                if (battle != null && !battle.isBattleOver) return;
+                __result = true;
+            }
+            catch { }
+        }
+
+        /// <summary>An enemy move has to pan the camera. The arriving unit is the only one the province keeps.</summary>
+        public static void MovePostfix(WarToken __instance, WarTile targetTile)
+        {
+            if (__instance == null || targetTile == null) return;
+            try
+            {
+                if (__instance.IsDead()) return;
+                if (__instance.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
+                    ZilleWarTable.ShowEnemyMove(targetTile);
+                var occ = targetTile.GetCurrentToken();
+                if (occ == null || occ == __instance || occ.IsDead())
+                    targetTile.SetCurrentWarToken(__instance);
+            }
+            catch { }
+        }
+
+        /// <summary>The Wehlen behaviour executes the action list. Rebuild it from the Zille neighbours first, or every planned move is skipped.</summary>
+        public static void EnemyBehaviourPrefix(WarTokenManager __instance)
+        {
+            try { if (__instance != null) __instance.SetAllTokenActions(); }
+            catch (Exception ex) { MelonLogger.Warning("[ZTABLE] enemy actions: " + ex.GetBaseException().Message); }
         }
 
         /// <summary>
@@ -368,6 +458,24 @@ namespace GreatZilleSolution
                     var begunPost = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnInitialDeploymentFinishedPostfix));
                     harmony.Patch(begun, postfix: new HarmonyMethod(begunPost));
                 }
+                var supplySetup = AccessTools.Method(typeof(WarSupplyLineManager), "SetupSupplyLines");
+                if (supplySetup != null)
+                    harmony.Patch(supplySetup, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SetupSupplyLinesPrefix))));
+                var endBattle = AccessTools.Method(typeof(WarBattleManager), "EndBattle");
+                if (endBattle != null)
+                    harmony.Patch(endBattle, finalizer: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EndBattleFinalizer))));
+                var playerTurn = AccessTools.Method(typeof(WarFlowManager), "PlayerTurn");
+                if (playerTurn != null)
+                    harmony.Patch(playerTurn, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerTurnPostfix))));
+                var enemyBehaviour = AccessTools.Method(typeof(WarTokenManager), "EnemyTokenBehaviourCoroutine");
+                if (enemyBehaviour != null)
+                    harmony.Patch(enemyBehaviour, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EnemyBehaviourPrefix))));
+                var selectable = AccessTools.Method(typeof(WarToken), "IsSelectable");
+                if (selectable != null)
+                    harmony.Patch(selectable, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsSelectablePostfix))));
+                var move = AccessTools.Method(typeof(WarToken), "Move");
+                if (move != null)
+                    harmony.Patch(move, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MovePostfix))));
 
                 var tutorialMethod = AccessTools.Method(typeof(WarOperationManager), nameof(WarOperationManager.IsCurrentOperationTutorial));
                 if (tutorialMethod != null)

@@ -456,7 +456,7 @@ namespace GreatZilleSolution
                         }
                         if (m != null && m.HasProperty("_Opacity"))
                         {
-                            float opacity = LayoutLocked ? 0.25f : 1f;
+                            float opacity = LayoutLocked ? 0.25f : EnemyLandOpacity(td);
                             if (Mathf.Abs(m.GetFloat("_Opacity") - opacity) > 0.02f)
                                 m.SetFloat("_Opacity", opacity);
                         }
@@ -497,7 +497,7 @@ namespace GreatZilleSolution
                 int tokenId = 0;
                 var living = wt.GetCurrentToken();
                 if (living != null) tokenId = living.GetInstanceID();
-                string paint = tokenId + "|" + (deploying ? "D:" + DeployPaintKey() : "B");
+                string paint = tokenId + "|" + (IsMainFight(wt) ? "F" : "") + "|" + (deploying ? "D:" + DeployPaintKey() : "B");
                 if (tb.PaintSig != paint)
                 {
                     TintTile(wt, td);
@@ -687,7 +687,16 @@ namespace GreatZilleSolution
         public static bool ScenarioStarted { get; private set; }
 
         /// <summary>The Pales Start button calls OnInitialDeploymentFinished. After that, deployment rules stop.</summary>
-        public static void MarkOperationBegun() => ScenarioStarted = true;
+        public static void MarkOperationBegun()
+        {
+            ScenarioStarted = true;
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
+            }
+            catch { }
+        }
 
         public static void InvalidateLiveTiles()
         {
@@ -876,14 +885,15 @@ namespace GreatZilleSolution
             PalesWash wash;
             PalesEdge edge = _edgePlain;
             edge.On = false;
-            if (td.IsSea && !fighting)
+            // Deployment colours are chosen below. This branch used to paint every naval-start sea
+            // orange and return, so a ship never turned illegal water the refund red and a land unit
+            // never left the sea the sea colour.
+            if (td.IsSea && !fighting && !deploying)
             {
-                if (!deploying && occupied && token.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
+                if (occupied && token.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
                     wash = _washFriendly;
-                else if (!deploying && occupied && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
+                else if (occupied && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
                     wash = _washEnemy;
-                else if (deploying && td.IsNavalStart)
-                    wash = _washDeploy;
                 else
                     wash = _washSea;
                 if (CanMoveOnto(wt) && _edgeMove.Ok)
@@ -913,14 +923,14 @@ namespace GreatZilleSolution
                 var pick = DeploymentPick();
                 bool landDrop = !td.IsSea && !td.IsCity && td.Allegiance == "Rizia";
                 bool shipDrop = td.IsSea && td.IsNavalStart;
-                if (occupied)
+                // Enemy land stays the default grey. Sea stays sea-coloured. Only a picked-up
+                // player unit is the refund red, and only a legal drop is orange.
+                if (occupied && token.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
                     wash = _washRefund;
                 else if (pick == DeployKind.Land && landDrop)
                     wash = _washDeploy;
                 else if (pick == DeployKind.Naval && shipDrop)
                     wash = _washDeploy;
-                else if (pick == DeployKind.Naval && !landDrop)
-                    wash = _washRefund;
                 else if (td.IsSea)
                     wash = _washSea;
                 else
@@ -1107,15 +1117,57 @@ namespace GreatZilleSolution
             catch { }
         }
 
-        /// <summary>Supporters sit next to a fight. Only the attacker and the defender turn the province red.</summary>
+        /// <summary>Supporters sit next to a fight. Only the attacker and the defender turn the province red, and only while both are still in it.</summary>
         private static bool IsMainFight(WarTile wt)
         {
             try
             {
-                var battle = wt.GetCurrentBattle();
-                return battle != null && !battle.isBattleOver && battle.IsTileMainBelligerentTile(wt);
+                var battle = wt != null ? wt.GetCurrentBattle() : null;
+                if (!BattleLive(battle)) return false;
+                return battle.IsTileMainBelligerentTile(wt);
             }
             catch { return false; }
+        }
+
+        /// <summary>A fight is over once the battle says so, or once either side has died or left the province that was holding it.</summary>
+        private static bool BattleLive(WarBattleManager.WarBattle battle)
+        {
+            if (battle == null || battle.isBattleOver) return false;
+            return SideStillInBattle(battle.attacker, battle) && SideStillInBattle(battle.defender, battle);
+        }
+
+        private static bool SideStillInBattle(WarToken token, WarBattleManager.WarBattle battle)
+        {
+            if (token == null || battle == null) return false;
+            try
+            {
+                if (token.IsDead()) return false;
+                var tile = token.GetCurrentWarTile();
+                return tile != null && tile.GetCurrentBattle() == battle;
+            }
+            catch { return false; }
+        }
+
+        /// <summary>Hovering a friendly unit is Support only while that unit is still in a fight. A finished battle must not keep the prompt.</summary>
+        public static bool LiveSupport(WarTile tile)
+        {
+            if (BattleLive(BattleOn(tile))) return true;
+            var sel = SelectedUnit();
+            WarTile selTile = null;
+            try { selTile = sel != null ? sel.GetCurrentWarTile() : null; } catch { }
+            if (BattleLive(BattleOn(selTile))) return true;
+            WarToken token = null;
+            try { token = tile != null ? tile.GetCurrentToken() : null; } catch { }
+            WarTile tokenTile = null;
+            try { tokenTile = token != null ? token.GetCurrentWarTile() : null; } catch { }
+            return BattleLive(BattleOn(tokenTile));
+        }
+
+        private static WarBattleManager.WarBattle BattleOn(WarTile tile)
+        {
+            if (tile == null) return null;
+            try { return tile.GetCurrentBattle(); }
+            catch { return null; }
         }
 
         public static bool FortifyArmed { get; private set; }
@@ -1127,16 +1179,97 @@ namespace GreatZilleSolution
         public static bool CanMoveOnto(WarTile wt)
         {
             var sel = SelectedUnit();
-            if (sel == null || wt == null || wt.GetCurrentToken() != null) return false;
+            if (sel == null || wt == null) return false;
             try
             {
+                var occ = Occupant(wt);
+                if (occ != null && occ != sel && !CanOverrun(sel, occ)) return false;
                 if (wt.IsTileSelectedTokensTile()) return false;
-                if (!wt.IsTileAdjacentToSelectedToken()) return false;
                 var ut = sel.GetWarUnitTypeData();
                 if (ut == null) return false;
+                // Stock builds a ship's available moves at range 2 and a land unit's at range 1.
+                int range = ut.unitType == WarUnitTypeData.UnitType.NavalUnit ? 2 : 1;
+                if (!wt.IsTileAdjacentToSelectedToken(range)) return false;
                 return ut.CanMoveToTileType(wt.GetTileType());
             }
             catch { return false; }
+        }
+
+        /// <summary>A bombed or overrun enemy is not holding the province. Entering it plays their fall.</summary>
+        public static bool CanOverrun(WarToken mover, WarToken occupier)
+        {
+            if (mover == null || occupier == null || occupier == mover) return false;
+            try
+            {
+                if (occupier.GetTokenAllegiance() == mover.GetTokenAllegiance()) return false;
+                if (occupier.IsDead() || occupier.IsBombed() || occupier.IsOrganizationDepleted()) return true;
+                var effects = occupier.currentTokenStatusEffects;
+                if (effects == null) return false;
+                for (int i = 0; i < effects.Count; i++)
+                {
+                    var effect = effects[i];
+                    if (effect == WarToken.WarTokenStatusEffectType.Bombed
+                        || effect == WarToken.WarTokenStatusEffectType.DepletedOrganization)
+                        return true;
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        /// <summary>The figure the province is actually holding, including one the tile pointer lost after a fight.</summary>
+        private static WarToken Occupant(WarTile tile)
+        {
+            if (tile == null) return null;
+            WarToken occ = null;
+            try { occ = tile.GetCurrentToken(); } catch { }
+            try { if (occ != null && occ.IsDead()) occ = null; } catch { }
+            if (occ != null) return occ;
+            return Claimant(tile, null);
+        }
+
+        /// <summary>A living unit whose own tile is this province, even when the province no longer points back at them.</summary>
+        private static WarToken Claimant(WarTile tile, WarToken ignore)
+        {
+            if (tile == null) return null;
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = _tokenMgr != null ? _tokenMgr.GetWarTokens() : null;
+                if (tokens == null) return null;
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    var token = tokens[i];
+                    if (token == null || token == ignore) continue;
+                    try
+                    {
+                        if (token.IsDead()) continue;
+                        if (token.GetCurrentWarTile() == tile) return token;
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>Deployment does not spend action points. A move, attack or strike does, and zero means the turn is over.</summary>
+        public static bool TurnHasPoints()
+        {
+            if (!ScenarioStarted || DeploymentPanelOpen()) return true;
+            try
+            {
+                var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                return flow == null || flow.GetCurrentActionPoints() > 0;
+            }
+            catch { return true; }
+        }
+
+        /// <summary>Wehlen land is a touch more transparent than Rizian land, so the two washes do not read as the same solid.</summary>
+        private static float EnemyLandOpacity(ZilleTileData td)
+        {
+            if (td != null && !td.IsSea && td.Allegiance == "Wehlen") return 0.82f;
+            return 1f;
         }
 
         private static void WriteWash(Material m, PalesWash wash)
@@ -1952,9 +2085,10 @@ namespace GreatZilleSolution
             try
             {
                 var cam = UnityEngine.Object.FindObjectOfType<MapCamera>();
-                if (cam != null) cam.SetFollowTarget(tile.transform);
                 var mgr = UnityEngine.Object.FindObjectOfType<WarTileManager>();
                 if (mgr != null) mgr.LookAtTile(tile);
+                // A follow target glued to the opening province hides every later enemy move.
+                if (cam != null) cam.SetFollowTarget(null);
                 _framed = true;
                 MelonLogger.Msg("[ZTABLE] Camera framed on Zille.");
             }
@@ -2481,10 +2615,25 @@ namespace GreatZilleSolution
                     var unit = panel.GetSelectedUnitTypeData();
                     if (unit != null) panel.DeployToken(unit, tile);
                 }
+                else if (!TurnHasPoints())
+                {
+                    MelonLogger.Msg("[ZTABLE] Hold finished on " + tile.gameObject.name + " with no action points left.");
+                }
                 else
                 {
-                    tile.OnTileEnter();
-                    tile.OnTileCommitAction();
+                    // The action list is built from whatever neighbours the tile had at the time.
+                    // Rebuild it from the Zille graph before the hold asks the tile to move, attack, bomb, or drop.
+                    try
+                    {
+                        if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                        if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
+                    }
+                    catch { }
+                    if (!OverrunFallen(tile))
+                    {
+                        tile.OnTileEnter();
+                        tile.OnTileCommitAction();
+                    }
                 }
                 var now = tile.GetCurrentToken();
                 MelonLogger.Msg("[ZTABLE] Hold finished on " + tile.gameObject.name + ". Token now: " + (now != null ? now.name : "none") + ".");
@@ -2589,6 +2738,8 @@ namespace GreatZilleSolution
             if (!_pressSeen || _committed || _heldFor <= 0f) ClearHoldFill();
             ApplyCityLabels();
             RepaintDeployment();
+            SweepFinishedBattles();
+            RepairOccupants();
             WatchEnemyTurn();
         }
 
@@ -2617,7 +2768,15 @@ namespace GreatZilleSolution
 
         private static float _enemySince;
         private static bool _enemyUnstuck;
+        private static int _enemyDrive;
+        private static float _enemyQuiet;
 
+        /// <summary>
+        /// The stock enemy phase plans on the Zille neighbours and then plays those actions.
+        /// Handing the turn back without that leaves the phase flag set, and every later hold
+        /// reaches the game method and returns before the unit moves. This only steps in when
+        /// that phase has stopped producing moves, and it runs the same behaviour the phase uses.
+        /// </summary>
         private static void WatchEnemyTurn()
         {
             WarFlowManager flow = null;
@@ -2626,20 +2785,92 @@ namespace GreatZilleSolution
             {
                 _enemySince = 0f;
                 _enemyUnstuck = false;
+                _enemyDrive = 0;
+                _enemyQuiet = 0f;
                 return;
             }
             if (_enemySince <= 0f) _enemySince = Time.unscaledTime;
-            if (_enemyUnstuck || Time.unscaledTime - _enemySince < 45f) return;
+            if (_enemyDrive == 2) return;
+            bool moving = false;
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                moving = _tokenMgr != null && _tokenMgr.IsAnyTokenMoving();
+            }
+            catch { }
+            if (moving) _enemyQuiet = Time.unscaledTime;
+            else if (_enemyQuiet <= 0f) _enemyQuiet = Time.unscaledTime;
+
+            if (_enemyDrive == 1)
+            {
+                if (moving || Time.unscaledTime - _enemyQuiet < 3f) return;
+                _enemyDrive = 2;
+                HandTurnBack(flow);
+                return;
+            }
+            if (Time.unscaledTime - _enemySince < 40f) return;
+            if (moving || Time.unscaledTime - _enemyQuiet < 8f) return;
+            if (AnyLiveBattle()) return;
+            _enemyDrive = 1;
+            _enemyQuiet = Time.unscaledTime;
             _enemyUnstuck = true;
-            MelonLogger.Warning("[ZTABLE] Enemy turn was still running after 45s. Handing the turn back to the player.");
-            try { flow.PlayerTurn(); }
-            catch (Exception ex) { MelonLogger.Warning("[ZTABLE] Could not resume the player turn: " + ex.GetBaseException().Message); }
+            MelonLogger.Warning("[ZTABLE] Enemy phase never played its moves. Running the Wehlen behaviour.");
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (_tokenMgr == null) throw new InvalidOperationException("WarTokenManager is missing.");
+                var battles = UnityEngine.Object.FindObjectOfType<WarBattleManager>();
+                var busy = battles != null ? battles.GetAllTokensIncludedInCurrentBattles() : null;
+                if (busy == null) busy = new Il2CppSystem.Collections.Generic.List<WarToken>();
+                _tokenMgr.SetAllTokenActions();
+                _tokenMgr.StartCoroutine(_tokenMgr.EnemyTokenBehaviourCoroutine(busy));
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] Wehlen behaviour: " + ex.GetBaseException().Message);
+                _enemyDrive = 2;
+                HandTurnBack(flow);
+            }
         }
 
-        /// <summary>Hovering another Rizian unit is support, never an attack on your own side.</summary>
+        private static bool AnyLiveBattle()
+        {
+            foreach (var tb in _tiles.Values)
+            {
+                var wt = tb != null ? tb.Tile : null;
+                if (wt == null) continue;
+                try
+                {
+                    if (BattleLive(wt.GetCurrentBattle())) return true;
+                }
+                catch { }
+            }
+            return false;
+        }
+
+        private static void HandTurnBack(WarFlowManager flow)
+        {
+            if (flow == null) return;
+            try
+            {
+                flow.isDisplayingEnemyMoves = false;
+                if (flow.GetCurrentActionPoints() <= 0)
+                    flow.currentActionPoints = Math.Max(1, flow.ActionPointsPerTurn);
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
+                flow.PlayerTurn();
+                MelonLogger.Msg("[ZTABLE] Player turn resumed after the Wehlen actions.");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] Could not resume the player turn: " + ex.GetBaseException().Message);
+            }
+        }
+
+        /// <summary>Hovering another Rizian unit is support only while a fight is still going.</summary>
         public static bool AllySupportTarget(WarTile tile)
         {
-            if (tile == null || DeploymentPanelOpen()) return false;
+            if (tile == null || DeploymentPanelOpen() || !LiveSupport(tile)) return false;
             WarToken token = null;
             try { token = tile.GetCurrentToken(); } catch { return false; }
             var sel = SelectedUnit();
@@ -2652,38 +2883,179 @@ namespace GreatZilleSolution
             catch { return false; }
         }
 
-        /// <summary>Puts the unit back in the side list and takes the figure off the province.</summary>
+        /// <summary>
+        /// The allegiance change walks each supply line's tile list and throws when that list was never built.
+        /// A thrown change aborts the battle before it can end, so the enemy phase never reaches its moves.
+        /// </summary>
+        public static Il2CppSystem.Collections.Generic.List<WarSupplyLine> SanitizeSupplyLines(Il2CppSystem.Collections.Generic.List<WarSupplyLine> lines)
+        {
+            if (lines == null) lines = new Il2CppSystem.Collections.Generic.List<WarSupplyLine>();
+            for (int i = lines.Count - 1; i >= 0; i--)
+            {
+                WarSupplyLine line = null;
+                try { line = lines[i]; } catch { lines.RemoveAt(i); continue; }
+                if (line == null) { lines.RemoveAt(i); continue; }
+                bool ready = false;
+                try { ready = line.Tiles != null && line.Tiles.Count >= 2; } catch { }
+                if (!ready)
+                {
+                    try { line.SetupTiles(); } catch { }
+                    try { ready = line.Tiles != null && line.Tiles.Count >= 2; } catch { }
+                }
+                if (!ready) lines.RemoveAt(i);
+            }
+            return lines;
+        }
+
+        private static void SweepFinishedBattles()
+        {
+            if (_tiles.Count == 0) return;
+            var doomed = new List<WarBattleManager.WarBattle>();
+            foreach (var tb in _tiles.Values)
+            {
+                var wt = tb != null ? tb.Tile : null;
+                if (wt == null) continue;
+                WarBattleManager.WarBattle battle = null;
+                try { battle = wt.GetCurrentBattle(); } catch { continue; }
+                if (battle == null || BattleLive(battle)) continue;
+                if (!doomed.Contains(battle)) doomed.Add(battle);
+            }
+            for (int i = 0; i < doomed.Count; i++) FinishBattle(doomed[i]);
+        }
+
+        /// <summary>The fight is over. The winner steps onto an empty province, and the combat prompt comes down.</summary>
+        public static void FinishBattle(WarBattleManager.WarBattle battle)
+        {
+            if (battle == null) return;
+            try { AdvanceAttacker(battle); }
+            catch (Exception ex) { MelonLogger.Warning("[ZTABLE] battle advance: " + ex.GetBaseException().Message); }
+            ClearBattle(battle);
+        }
+
+        private static void AdvanceAttacker(WarBattleManager.WarBattle battle)
+        {
+            var atk = battle.attacker;
+            if (atk == null) return;
+            try { if (atk.IsDead()) return; } catch { return; }
+            if (!AttackerWon(battle)) return;
+            WarTile empty = null;
+            foreach (var tb in _tiles.Values)
+            {
+                var wt = tb != null ? tb.Tile : null;
+                if (wt == null) continue;
+                WarBattleManager.WarBattle here = null;
+                try { here = wt.GetCurrentBattle(); } catch { }
+                if (here != battle) continue;
+                WarToken occ = null;
+                try { occ = wt.GetCurrentToken(); } catch { }
+                if (occ != null && occ != atk)
+                {
+                    if (!CanOverrun(atk, occ)) return;
+                    try { if (!occ.IsDead()) occ.Kill(true); } catch { }
+                    try { if (wt.GetCurrentToken() == occ) wt.SetCurrentWarToken(null); } catch { }
+                }
+                try
+                {
+                    var now = wt.GetCurrentToken();
+                    if (now == null || now == atk) empty = wt;
+                }
+                catch { }
+            }
+            if (empty == null) return;
+            try
+            {
+                var ut = atk.GetWarUnitTypeData();
+                if (ut != null && !ut.CanMoveToTileType(empty.GetTileType())) return;
+                if (atk.GetCurrentWarTile() != empty) atk.Move(empty, true);
+            }
+            catch { }
+            try { empty.SetCurrentWarToken(atk); } catch { }
+            UnlockTile(empty);
+            MelonLogger.Msg("[ZTABLE] Attacker took " + empty.gameObject.name + ".");
+        }
+
+        private static bool AttackerWon(WarBattleManager.WarBattle battle)
+        {
+            var def = battle.defender;
+            if (def == null) return true;
+            try { if (def.IsDead() || def.IsOrganizationDepleted()) return true; } catch { }
+            try
+            {
+                var tile = def.GetCurrentWarTile();
+                return tile == null || tile.GetCurrentBattle() != battle;
+            }
+            catch { return false; }
+        }
+
+        private static void ClearBattle(WarBattleManager.WarBattle battle)
+        {
+            try { battle.isBattleOver = true; } catch { }
+            ClearTokenBattle(battle.attacker, battle);
+            ClearTokenBattle(battle.defender, battle);
+            ClearSupportBattles(battle.attackersSupporters, battle);
+            ClearSupportBattles(battle.defendersSupporters, battle);
+            foreach (var tb in _tiles.Values)
+            {
+                var wt = tb != null ? tb.Tile : null;
+                if (wt == null) continue;
+                try
+                {
+                    if (wt.GetCurrentBattle() == battle)
+                    {
+                        wt.SetCurrentBattle(null);
+                        UnlockTile(wt);
+                    }
+                }
+                catch { }
+            }
+            try
+            {
+                var panel = Panels.Instance != null ? Panels.Instance.WarBattlePanel : null;
+                if (panel != null) panel.RemoveBattle(battle);
+            }
+            catch { }
+        }
+
+        private static void ClearTokenBattle(WarToken token, WarBattleManager.WarBattle battle)
+        {
+            if (token == null) return;
+            try
+            {
+                if (token.GetCurrentBattle() == battle) token.SetCurrentBattle(null);
+            }
+            catch { }
+        }
+
+        private static void ClearSupportBattles(Il2CppSystem.Collections.Generic.List<WarToken> tokens, WarBattleManager.WarBattle battle)
+        {
+            if (tokens == null) return;
+            try
+            {
+                for (int i = 0; i < tokens.Count; i++) ClearTokenBattle(tokens[i], battle);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// One pickup returns one unit. The stock refund both adds a unit to the pool and
+        /// removes one from the deployed count, so the list was gaining two.
+        /// </summary>
         private static void RefundDeployedUnit(WarTile tile, WarDeploymentPanel panel)
         {
             var token = tile.GetCurrentToken();
             if (token == null) return;
             WarUnitTypeData ut = null;
             try { ut = token.GetWarUnitTypeData(); } catch { }
+            int beforeDeployed = 0;
+            int beforeTotal = 0;
+            if (ut != null)
+            {
+                beforeDeployed = ut.UnitDeployedCount;
+                beforeTotal = ut.UnitTotalCount;
+            }
             if (panel != null && ut != null)
             {
                 var list = panel.deployedTokensToTile;
-                if (list != null)
-                {
-                    int idx = -1;
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        var entry = list[i];
-                        if (entry != null && entry.tile == tile) { idx = i; break; }
-                    }
-                    if (idx > 0)
-                    {
-                        var entry = list[idx];
-                        list.RemoveAt(idx);
-                        list.Insert(0, entry);
-                    }
-                }
-                int before = ut.UnitDeployedCount;
-                try { panel.RefundToken(ut); } catch (Exception ex) { MelonLogger.Warning("[ZTABLE] refund: " + ex.GetBaseException().Message); }
-                if (tile.GetCurrentToken() == null)
-                {
-                    MelonLogger.Msg("[ZTABLE] Refunded " + (ut.UnitName ?? ut.name) + " from " + tile.gameObject.name + ".");
-                    return;
-                }
                 if (list != null)
                 {
                     for (int i = list.Count - 1; i >= 0; i--)
@@ -2692,17 +3064,136 @@ namespace GreatZilleSolution
                         if (entry != null && entry.tile == tile) list.RemoveAt(i);
                     }
                 }
-                if (ut.UnitDeployedCount >= before && before > 0)
-                    ut.UnitDeployedCount = before - 1;
+                try { panel.RefundToken(ut); }
+                catch (Exception ex) { MelonLogger.Warning("[ZTABLE] refund: " + ex.GetBaseException().Message); }
+                ut.UnitDeployedCount = Math.Max(0, beforeDeployed - 1);
+                ut.UnitTotalCount = beforeTotal;
                 try { panel.UpdateDeployingUnitCount(); } catch { }
             }
-            try { token.RefundToken(); } catch { }
             if (tile.GetCurrentToken() != null)
             {
                 try { tile.SetCurrentWarToken(null); } catch { }
                 UnityEngine.Object.Destroy(token.gameObject);
             }
             MelonLogger.Msg("[ZTABLE] Refunded " + (ut != null ? (ut.UnitName ?? ut.name) : "unit") + " from " + tile.gameObject.name + ".");
+        }
+
+        /// <summary>A bombed or overrun enemy falls, then the selected unit takes the province. One figure stays.</summary>
+        private static bool OverrunFallen(WarTile tile)
+        {
+            var sel = SelectedUnit();
+            if (sel == null || tile == null) return false;
+            var occ = Occupant(tile);
+            if (occ == null || occ == sel || !CanOverrun(sel, occ)) return false;
+            try { if (!occ.IsDead()) occ.Kill(true); } catch { }
+            try { if (tile.GetCurrentToken() != null && tile.GetCurrentToken() != sel) tile.SetCurrentWarToken(null); } catch { }
+            try { if (sel.GetCurrentWarTile() != tile) sel.Move(tile, true); } catch { }
+            try { tile.SetCurrentWarToken(sel); } catch { }
+            UnlockTile(tile);
+            try
+            {
+                var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                if (flow != null && flow.GetCurrentActionPoints() > 0) flow.SpendActionPoints(1);
+            }
+            catch { }
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
+            }
+            catch { }
+            MelonLogger.Msg("[ZTABLE] Overran " + tile.gameObject.name + ".");
+            return true;
+        }
+
+        private static void UnlockTile(WarTile tile)
+        {
+            if (tile == null) return;
+            try { if (tile.IsLocked()) tile.SetLockState(false); } catch { }
+            try { if (tile.IsActionLocked()) tile.SetActionLockState(false); } catch { }
+        }
+
+        /// <summary>After a fight the winner can be standing on the province without being its token, so clicks miss and other units walk in.</summary>
+        private static void RepairOccupants()
+        {
+            if (!ScenarioStarted || _tiles.Count == 0) return;
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = _tokenMgr != null ? _tokenMgr.GetWarTokens() : null;
+                if (tokens == null) return;
+                foreach (var tb in _tiles.Values)
+                {
+                    var tile = tb != null ? tb.Tile : null;
+                    if (tile == null) continue;
+                    WarBattleManager.WarBattle battle = null;
+                    try { battle = tile.GetCurrentBattle(); } catch { }
+                    if (BattleLive(battle)) continue;
+                    var here = new List<WarToken>();
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                        var token = tokens[i];
+                        if (token == null) continue;
+                        try
+                        {
+                            if (token.IsDead()) continue;
+                            if (token.GetCurrentWarTile() == tile) here.Add(token);
+                        }
+                        catch { }
+                    }
+                    if (here.Count == 0) continue;
+                    WarToken keep = null;
+                    try { keep = tile.GetCurrentToken(); } catch { }
+                    bool keepFallen = false;
+                    try { keepFallen = keep != null && (keep.IsDead() || keep.IsBombed() || keep.IsOrganizationDepleted()); } catch { }
+                    if (keep == null || !here.Contains(keep) || keepFallen)
+                    {
+                        keep = here[0];
+                        for (int i = 0; i < here.Count; i++)
+                        {
+                            var token = here[i];
+                            bool fallen = false;
+                            try { fallen = token.IsBombed() || token.IsOrganizationDepleted(); } catch { }
+                            if (!fallen) { keep = token; break; }
+                        }
+                    }
+                    try { if (tile.GetCurrentToken() != keep) tile.SetCurrentWarToken(keep); } catch { }
+                    UnlockTile(tile);
+                    for (int i = 0; i < here.Count; i++)
+                    {
+                        var extra = here[i];
+                        if (extra == keep) continue;
+                        if (!CanOverrun(keep, extra) && extra.GetTokenAllegiance() == keep.GetTokenAllegiance())
+                        {
+                            try { extra.Kill(true); } catch { }
+                            MelonLogger.Msg("[ZTABLE] Removed a stacked unit from " + tile.gameObject.name + ".");
+                        }
+                        else
+                        {
+                            try { if (!extra.IsDead()) extra.Kill(true); } catch { }
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>The opening frame must not keep the camera glued to one province while Wehlen moves.</summary>
+        public static void ShowEnemyMove(WarTile tile)
+        {
+            if (tile == null || !EnemyMayAct()) return;
+            try
+            {
+                var cam = UnityEngine.Object.FindObjectOfType<MapCamera>();
+                if (cam != null) cam.SetFollowTarget(null);
+            }
+            catch { }
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                if (_tokenMgr != null) _tokenMgr.MoveCameraToTile(tile);
+            }
+            catch { }
         }
 
         private static void DeselectCurrentUnit()
