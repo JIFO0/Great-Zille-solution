@@ -70,6 +70,11 @@ namespace GreatZilleSolution
             catch { }
         }
 
+        public override void OnLateUpdate()
+        {
+            try { ZilleWarTable.LatePass(); } catch { }
+        }
+
         public override void OnGUI()
         {
             try

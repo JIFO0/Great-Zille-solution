@@ -50,6 +50,11 @@ namespace GreatZilleSolution
         /// <summary>Reinforcement uses the same deploy colours and rules, without the opening frontline requirement.</summary>
         public static void TileActionPostfix(WarTile __instance, ref WarTile.TileActionType __result)
         {
+            if (ZilleWarTable.IsDeploymentRefund(__instance))
+            {
+                __result = WarTile.TileActionType.Refund;
+                return;
+            }
             if ((__result == WarTile.TileActionType.None || __result == WarTile.TileActionType.Select)
                 && ZilleWarTable.IsDeploymentTarget(__instance))
             {
@@ -58,6 +63,8 @@ namespace GreatZilleSolution
             }
             if (__result == WarTile.TileActionType.Fortify && !ZilleWarTable.FortifyArmed)
                 __result = WarTile.TileActionType.Select;
+            if (__result == WarTile.TileActionType.Attack && ZilleWarTable.AllySupportTarget(__instance))
+                __result = WarTile.TileActionType.Support;
             if (__result == WarTile.TileActionType.Move && !ZilleWarTable.CanMoveOnto(__instance))
                 __result = WarTile.TileActionType.None;
         }
@@ -68,8 +75,51 @@ namespace GreatZilleSolution
 
         public static bool SelectionShowPrefix() => ZilleWarTable.FortifyArmed;
 
+        /// <summary>Deployment picks units from the side list. An enemy figure is never selectable: selecting the defender cancels the attack.</summary>
+        public static bool BlockTokenSelectPrefix(WarToken __instance, bool state)
+        {
+            if (!state) return true;
+            if (DeploymentPanelShowing()) return false;
+            try
+            {
+                if (__instance != null && __instance.GetTokenAllegiance() != WarToken.WarAllegiance.Player)
+                    return false;
+            }
+            catch { }
+            return true;
+        }
+
+        public static bool BlockManagerSelectPrefix() => !DeploymentPanelShowing();
+
+        public static void IsRefundablePostfix(WarToken __instance, ref bool __result)
+        {
+            if (__result || __instance == null) return;
+            WarTile tile = null;
+            try { tile = __instance.GetCurrentWarTile(); } catch { return; }
+            if (ZilleWarTable.IsDeploymentRefund(tile)) __result = true;
+        }
+
+        private static bool DeploymentPanelShowing()
+        {
+            var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
+            return panel != null && panel.IsShowing();
+        }
+
         /// <summary>A raw click must not deploy or move. Those run only after the hold opens the gate.</summary>
-        public static bool BlockUntilHoldPrefix() => ZilleWarTable.CommitAllowed;
+        public static bool BlockUntilHoldPrefix(object __instance)
+        {
+            if (ZilleWarTable.CommitAllowed) return true;
+            if (ZilleWarTable.EnemyMayAct()) return true;
+            return __instance is WarTile tile && ZilleWarTable.BattleMayResolve(tile);
+        }
+
+        /// <summary>The raycaster clears its tile at the end of Update. Remember the province it actually hit.</summary>
+        public static void RememberHoverPostfix(WarTileRaycaster __instance)
+        {
+            WarTile tile = null;
+            try { tile = __instance != null ? __instance.raycastedWarTile : null; } catch { }
+            ZilleWarTable.NoteGameHover(tile);
+        }
 
         public static bool IsBorderTilePrefix(ref bool __result)
         {
@@ -90,7 +140,7 @@ namespace GreatZilleSolution
         private static bool IsRiziaLand(WarTile tile)
         {
             var t = TileData(tile);
-            return t != null && t.Allegiance == "Rizia" && !t.IsSea;
+            return t != null && t.Allegiance == "Rizia" && !t.IsSea && !t.IsCity;
         }
 
         private static bool IsNavalStart(WarTile tile)
@@ -259,6 +309,9 @@ namespace GreatZilleSolution
                     if (other != null)
                         harmony.Patch(other, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ClearFortifyPostfix))));
                 }
+                var hover = AccessTools.Method(typeof(WarTileRaycaster), "HoverRaycast");
+                if (hover != null)
+                    harmony.Patch(hover, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(RememberHoverPostfix))));
                 var block = new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BlockUntilHoldPrefix)));
                 foreach (var gate in new[]
                 {
@@ -276,6 +329,15 @@ namespace GreatZilleSolution
                 var selectionShow = AccessTools.Method(typeof(WarTokenSelectionPanel), nameof(WarTokenSelectionPanel.Show));
                 if (selectionShow != null)
                     harmony.Patch(selectionShow, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SelectionShowPrefix))));
+                var tokenSelect = AccessTools.Method(typeof(WarToken), nameof(WarToken.Select));
+                if (tokenSelect != null)
+                    harmony.Patch(tokenSelect, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BlockTokenSelectPrefix))));
+                var managerSelect = AccessTools.Method(typeof(WarTokenManager), nameof(WarTokenManager.SelectToken));
+                if (managerSelect != null)
+                    harmony.Patch(managerSelect, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BlockManagerSelectPrefix))));
+                var refundable = AccessTools.Method(typeof(WarToken), nameof(WarToken.IsRefundable));
+                if (refundable != null)
+                    harmony.Patch(refundable, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsRefundablePostfix))));
 
                 var border = AccessTools.Method(typeof(WarTile), nameof(WarTile.IsBorderTile));
                 if (border != null)
@@ -660,25 +722,10 @@ namespace GreatZilleSolution
                         __instance.subtitleText.text = "Military Operation";
                     }
 
-                    WarFragmentData wfd = null;
-                    var frags = EntityDataManager.AllWarFragmentsData;
-                    if (frags != null)
-                    {
-                        for (int i = 0; i < frags.Count; i++)
-                        {
-                            if (frags[i] != null && frags[i].NameInDatabase == "WarFragment_Zille_1_1")
-                            {
-                                wfd = frags[i];
-                                break;
-                            }
-                        }
-                    }
-
-                    WarOperationZilleManager.ArmNativeZilleDeployment();
-                    EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", wfd, () => {
-                        MelonLogger.Msg("[TOKEN PANEL] Native Zille operation click — skin the table when the war map arrives.");
-                        ZilleWarTable.SkinEnabled = true;
-                    }, keepNativeClick: true);
+                    EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", null, () => {
+                        MelonLogger.Msg("[TOKEN PANEL] Operation: Righteous Sword opens the Zille war table.");
+                        WarOperationZilleManager.EnterZilleWarTheatre();
+                    });
                 }
             }
             catch (Exception ex)

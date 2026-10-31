@@ -16,6 +16,10 @@ namespace GreatZilleSolution
         public static string Preset { get; private set; } = "suspicious";
         public static string PresetSource { get; private set; } = "";
         public static readonly List<ZilleDeploymentUnit> Units = new List<ZilleDeploymentUnit>();
+        private static string _assetsDir = "";
+        private static string _regionsDir = "";
+        private static bool _campaignOverride;
+        private static string _campaignPreset = "";
 
         private static readonly HashSet<string> CityNumbers = new HashSet<string>
         {
@@ -37,13 +41,46 @@ namespace GreatZilleSolution
             return !string.IsNullOrEmpty(tileNumber) && CityNumbers.Contains(tileNumber);
         }
 
+        /// <summary>Wehlen's opening army follows the campaign when no scenario file pins a preset.</summary>
+        public static void RefreshFromCampaign()
+        {
+            string next = PresetFromCampaign();
+            if (next == Preset && Units.Count > 0 && PresetSource == "campaign") return;
+            _campaignOverride = true;
+            _campaignPreset = next;
+            try { Load(_assetsDir, _regionsDir); }
+            finally { _campaignOverride = false; }
+            MelonLogger.Msg("[ZilleMap] Wehlen deployment '" + Preset + "' follows the campaign.");
+        }
+
+        private static string PresetFromCampaign()
+        {
+            try
+            {
+                if (ZilleCampaignState.IsTwoFrontWarThreat()) return "minimal";
+                int tanks = DialogueHelper.GetIntVariable("Military_Expanded_Tanks");
+                int infantry = DialogueHelper.GetIntVariable("Military_Expanded_Infantry");
+                if (ZilleCampaignState.IsLespiaPactAccepted || ZilleCampaignState.IsDerdiaHybridSupportActive || tanks + infantry >= 2)
+                    return "prepared";
+            }
+            catch { }
+            return "suspicious";
+        }
+
         public static void Load(string primaryAssetsDir, string regionsDir)
         {
             Units.Clear();
             Preset = "suspicious";
             PresetSource = "";
-            string scenario = FindScenario(primaryAssetsDir, regionsDir);
-            if (scenario != null)
+            _assetsDir = primaryAssetsDir ?? "";
+            _regionsDir = regionsDir ?? "";
+            string scenario = _campaignOverride ? null : FindScenario(primaryAssetsDir, regionsDir);
+            if (_campaignOverride && (_campaignPreset == "minimal" || _campaignPreset == "suspicious" || _campaignPreset == "prepared"))
+            {
+                Preset = _campaignPreset;
+                PresetSource = "campaign";
+            }
+            else if (scenario != null)
             {
                 string chosen = ReadPreset(scenario);
                 if (chosen == "minimal" || chosen == "suspicious" || chosen == "prepared")

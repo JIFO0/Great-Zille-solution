@@ -92,7 +92,8 @@ namespace GreatZilleSolution
             }
 
             bool fresh = CurrentConfig == null || CurrentConfig.Tiles == null || CurrentConfig.Tiles.Count < 40
-                || string.IsNullOrEmpty(CurrentConfig.Version) || !CurrentConfig.Version.StartsWith("v13");
+                || string.IsNullOrEmpty(CurrentConfig.Version) || !CurrentConfig.Version.StartsWith("v13")
+                || !CitiesNamed(CurrentConfig);
             if (fresh)
                 TryUpgradeToV13();
             else
@@ -223,6 +224,21 @@ namespace GreatZilleSolution
             return false;
         }
 
+        /// <summary>A v13 save from before city labels stored the province name only. Those layouts rebuild once.</summary>
+        private static bool CitiesNamed(ZilleMapConfig cfg)
+        {
+            if (cfg?.Tiles == null) return false;
+            int cities = 0;
+            for (int i = 0; i < cfg.Tiles.Count; i++)
+            {
+                var t = cfg.Tiles[i];
+                if (t == null || !t.IsCity) continue;
+                cities++;
+                if (string.IsNullOrEmpty(t.CityName)) return false;
+            }
+            return cities > 0;
+        }
+
         public static void ApplyPoliticalControl(ZilleMapConfig cfg)
         {
             if (cfg?.Tiles == null) return;
@@ -262,7 +278,8 @@ namespace GreatZilleSolution
         private static void TryUpgradeToV13()
         {
             if (CurrentConfig != null && CurrentConfig.Tiles != null && CurrentConfig.Tiles.Count > 40
-                && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v13"))
+                && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v13")
+                && CitiesNamed(CurrentConfig))
                 return;
             MelonLogger.Msg("[ZilleMap] Saved layout is " + (CurrentConfig?.Version ?? "empty")
                 + " (" + (CurrentConfig?.Tiles?.Count ?? 0) + " tiles). Building v13.");
@@ -379,6 +396,7 @@ namespace GreatZilleSolution
                         IsReinforcementTile = display == "Kratsna" || display == "Grodzizg",
                         IsSea = sea,
                         IsCity = city,
+                        CityName = city ? Str(p, "city_name") : "",
                         IsCoastal = Bool(p, "is_coastal"),
                         IsNavalStart = Bool(p, "rizia_ship_placement"),
                         Region = region,

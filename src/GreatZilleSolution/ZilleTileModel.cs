@@ -37,6 +37,8 @@ namespace GreatZilleSolution
         // From the v13 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
         public bool IsSea { get; set; } = false;
         public bool IsCity { get; set; } = false;
+        // The name printed above the star. The province can be "Zille City" while the label is "Zille".
+        public string CityName { get; set; } = "";
         public bool IsCoastal { get; set; } = false;
         // Placed from the right-hand authoring menu. The game already understands these tile roles.
         public bool HasCoastalArtillery { get; set; } = false;
