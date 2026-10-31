@@ -266,7 +266,7 @@ Built on top of v12. 175 provinces: 118 land (60 Zille, 29 Brenas, 29 Wehlen) an
 
 Zille was re-partitioned. Ids 1, 4–8, 10, 12–22, 24–27, 29–34 and 36–38 are reused for new shapes, 39 is reshaped, and the new land ids are `ZilleTile_97`–`118`. Brenas 40–50 and 52–67 were re-partitioned. Dapalle (`ZilleTile_51`) is enlarged and is no longer a size exception. Mave Nortus (`ZilleTile_23`) is rebuilt fully inside Rizia, so its region is now Brenas. New seas are `ZilleTile_S53`–`S57`. Wehlen `ZilleTile_68`–`96`, cities 2, 3, 9, 11, 28 and 35, and seas `S1`–`S52` are byte-identical to v12. The full id map is `regions/id_mapping_v12_v13.json`.
 
-The base map changed: the Isor–Zille main road is re-routed, Quella Highlands and Ondaro Hills are new relief, the Mave Nortus urban area is clipped to the Rizian side, and the outer frame is black. Forts are data only and are not drawn on the map. This archive does not include `map/`. The re-cut `T_Map_Zille_01`–`06` grid and `T_Map_Zille_Full_Composite` follow in a separate drop.
+The base map changed: the Isor–Zille main road is re-routed, Quella Highlands and Ondaro Hills are new relief, the Mave Nortus urban area is clipped to the Rizian side, and the outer frame is black. Forts are data only and are not drawn on the map. `map/` holds the re-cut grid: `T_Map_Zille_01`–`06` are 4096×4096, and `T_Map_Zille_Full_Composite` is 12288×8192, each as PNG and SVG. The frame stroke is black (`#000000`); in v12 it was `#bf3636`. Every page differs from v12.
 
 Starting owners are in `regions/starting_provinces.json`: Rizia 29 (Brenas, including Mave Nortus), Wehlen 89 (Zille and Wehlen), seas neutral. Rizia may place ships only in `S56` and `S57` (west) and `S37`, `S30`, `S32`, `S31` and `S26` (east).
 
@@ -280,4 +280,4 @@ Forts (`regions/forts.json`): heavy on the west border (36, 37, 39, 117, 118), l
 
 Each province is a 512×512 PNG and SVG. The only size exception left is Rotsla.
 
-Files: `v13/regions/` (175 tiles, manifest, adjacency, starting owners, forts, id map, deployments, overlay, validation), `v13/previews/`, and `v13/scripts/` (including `validate_pack.py`). `v13/map/` is not in this drop.
+Files: `v13/map/` (six pages and the composite, PNG and SVG), `v13/regions/` (175 tiles, manifest, adjacency, starting owners, forts, id map, deployments, overlay, validation), `v13/previews/`, and `v13/scripts/` (including `validate_pack.py`).

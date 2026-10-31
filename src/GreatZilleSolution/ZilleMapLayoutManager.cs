@@ -311,10 +311,11 @@ namespace GreatZilleSolution
 
         private static string ResolveMapDir()
         {
-            string local = Path.Combine(_primaryAssetsDir ?? "", "map");
-            if (File.Exists(Path.Combine(local, "T_Map_Zille_01.png"))) return local;
+            // The v13 pages replace every older grid, including assets/map and a copied v12 pack.
             string repo = @"c:\Projects\Great Zille solution\maps\zille\v13\map";
             if (File.Exists(Path.Combine(repo, "T_Map_Zille_01.png"))) return repo;
+            string local = Path.Combine(_primaryAssetsDir ?? "", "map");
+            if (File.Exists(Path.Combine(local, "T_Map_Zille_01.png"))) return local;
             return null;
         }
 
@@ -845,7 +846,10 @@ namespace GreatZilleSolution
                 var tex = LoadTextureFromFile(tFull);
                 if (tex != null) GridMapTiles[t] = tex;
             }
-            MelonLogger.Msg($"[ZilleMap] Loaded {GridMapTiles.Count}/6 individual map grid tiles.");
+            if (mapDir == null)
+                MelonLogger.Msg("[ZilleMap] Loaded 0/6 individual map grid tiles.");
+            else
+                MelonLogger.Msg($"[ZilleMap] Map textures from {mapDir}. Loaded {GridMapTiles.Count}/6 individual map grid tiles.");
 
             // Fallback: If map background still null, create fallback tactical grid
             if (MapBackgroundTexture == null)
