@@ -474,16 +474,26 @@ namespace GreatZilleSolution
                 {
                     try
                     {
-                        var data = new WarTileData();
-                        FillWarTileData(td, data);
-                        wt.Setup(data, data.startingAllegiance);
-                        if (td.FortLevel > 0) wt.ChangeWarTileFortLevelStat(td.FortLevel);
-                        wt.ChangeWarTileEnemyAirfieldStat(td.IsAirfield && td.Allegiance != "Rizia");
-                        wt.ChangeWarTileCoastalArtilleryStat(td.HasCoastalArtillery);
-                        wt.ChangeWarTileAntiAirStat(td.HasNoAirZone);
-                        wt.SetTileNavalBlockedBy(NavalBlock(td));
-                        wt.SetIsReinforcementTile(td.IsReinforcementTile);
-                        tb.GameplayPushed = true;
+                        if (!ScenarioStarted || !tb.GameplayPushed)
+                        {
+                            var curTok = wt.GetCurrentToken();
+                            var data = new WarTileData();
+                            FillWarTileData(td, data);
+                            wt.Setup(data, data.startingAllegiance);
+                            if (curTok != null) wt.SetCurrentWarToken(curTok);
+                            if (td.FortLevel > 0) wt.ChangeWarTileFortLevelStat(td.FortLevel);
+                            wt.ChangeWarTileEnemyAirfieldStat(td.IsAirfield && td.Allegiance != "Rizia");
+                            wt.ChangeWarTileCoastalArtilleryStat(td.HasCoastalArtillery);
+                            wt.ChangeWarTileAntiAirStat(td.HasNoAirZone);
+                            wt.SetTileNavalBlockedBy(NavalBlock(td));
+                            wt.SetIsReinforcementTile(td.IsReinforcementTile);
+                            tb.GameplayPushed = true;
+                        }
+                        else
+                        {
+                            var alleg = ToAllegiance(td.Allegiance);
+                            wt.SetTileAllegiance(alleg, false);
+                        }
                         tb.PushedAllegiance = td.Allegiance;
                         tb.PushedSig = sig;
                     }
@@ -957,6 +967,24 @@ namespace GreatZilleSolution
                     else if (token != null && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy) wash = _washEnemy;
                     else wash = _washSea;
                 }
+                else if (token != null && token.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
+                {
+                    wash = _washFriendly;
+                    if (td.Allegiance != "Rizia")
+                    {
+                        td.Allegiance = "Rizia";
+                        wt.SetTileAllegiance(WarToken.WarAllegiance.Player, false);
+                    }
+                }
+                else if (token != null && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
+                {
+                    wash = _washEnemy;
+                    if (td.Allegiance != "Wehlen")
+                    {
+                        td.Allegiance = "Wehlen";
+                        wt.SetTileAllegiance(WarToken.WarAllegiance.Enemy, false);
+                    }
+                }
                 else if (td.Allegiance == "Rizia") wash = _washFriendly;
                 else if (td.Allegiance == "Wehlen") wash = _washEnemy;
                 else wash = _washBlocked;
@@ -1129,21 +1157,15 @@ namespace GreatZilleSolution
             catch { return false; }
         }
 
-        /// <summary>A fight is over once the battle says so, or once either side has died or left the province that was holding it.</summary>
+        /// <summary>A fight is live until vanilla marks isBattleOver true.</summary>
         private static bool BattleLive(WarBattleManager.WarBattle battle)
         {
-            if (battle == null || battle.isBattleOver) return false;
-            return SideStillInBattle(battle.attacker, battle) && SideStillInBattle(battle.defender, battle);
-        }
-
-        private static bool SideStillInBattle(WarToken token, WarBattleManager.WarBattle battle)
-        {
-            if (token == null || battle == null) return false;
+            if (battle == null) return false;
             try
             {
-                if (token.IsDead()) return false;
-                var tile = token.GetCurrentWarTile();
-                return tile != null && tile.GetCurrentBattle() == battle;
+                if (battle.isBattleOver) return false;
+                if (battle.attacker == null || battle.defender == null) return false;
+                return true;
             }
             catch { return false; }
         }
@@ -2329,7 +2351,7 @@ namespace GreatZilleSolution
             }
         }
 
-        private static ZilleTileData TileDataOf(WarTile wt)
+        public static ZilleTileData TileDataOf(WarTile wt)
         {
             if (wt == null || wt.gameObject == null) return null;
             string name = wt.gameObject.name ?? "";
@@ -2917,13 +2939,13 @@ namespace GreatZilleSolution
                 if (wt == null) continue;
                 WarBattleManager.WarBattle battle = null;
                 try { battle = wt.GetCurrentBattle(); } catch { continue; }
-                if (battle == null || BattleLive(battle)) continue;
+                if (battle == null || !battle.isBattleOver) continue;
                 if (!doomed.Contains(battle)) doomed.Add(battle);
             }
             for (int i = 0; i < doomed.Count; i++) FinishBattle(doomed[i]);
         }
 
-        /// <summary>The fight is over. The winner steps onto an empty province, and the combat prompt comes down.</summary>
+        /// <summary>The fight is over. Vanilla has animated the retreat and advance; synchronize the conquered province.</summary>
         public static void FinishBattle(WarBattleManager.WarBattle battle)
         {
             if (battle == null) return;
@@ -2938,40 +2960,74 @@ namespace GreatZilleSolution
             if (atk == null) return;
             try { if (atk.IsDead()) return; } catch { return; }
             if (!AttackerWon(battle)) return;
-            WarTile empty = null;
-            foreach (var tb in _tiles.Values)
+
+            var def = battle.defender;
+            var sourceTile = atk.GetCurrentWarTile();
+            WarTile targetTile = def != null ? def.GetCurrentWarTile() : null;
+
+            if (targetTile == null || targetTile == sourceTile)
             {
-                var wt = tb != null ? tb.Tile : null;
-                if (wt == null) continue;
-                WarBattleManager.WarBattle here = null;
-                try { here = wt.GetCurrentBattle(); } catch { }
-                if (here != battle) continue;
-                WarToken occ = null;
-                try { occ = wt.GetCurrentToken(); } catch { }
-                if (occ != null && occ != atk)
+                foreach (var tb in _tiles.Values)
                 {
-                    if (!CanOverrun(atk, occ)) return;
-                    try { if (!occ.IsDead()) occ.Kill(true); } catch { }
-                    try { if (wt.GetCurrentToken() == occ) wt.SetCurrentWarToken(null); } catch { }
+                    var wt = tb != null ? tb.Tile : null;
+                    if (wt == null || wt == sourceTile) continue;
+                    if (wt.GetCurrentBattle() == battle)
+                    {
+                        targetTile = wt;
+                        break;
+                    }
                 }
-                try
-                {
-                    var now = wt.GetCurrentToken();
-                    if (now == null || now == atk) empty = wt;
-                }
-                catch { }
             }
-            if (empty == null) return;
+            if (targetTile == null) return;
+
+            var ut = atk.GetWarUnitTypeData();
+            if (ut != null && !ut.CanMoveToTileType(targetTile.GetTileType())) return;
+
+            // If vanilla has not yet animated the attacker into the defeated province, move it now smoothly.
+            if (atk.GetCurrentWarTile() != targetTile)
+            {
+                try { atk.Move(targetTile, true); } catch { }
+            }
+            try { targetTile.SetCurrentWarToken(atk); } catch { }
+
+            var td = TileDataOf(targetTile);
+            if (td != null)
+            {
+                var alleg = atk.GetTokenAllegiance();
+                td.Allegiance = alleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+                targetTile.SetTileAllegiance(alleg, false);
+                SyncOwnership(targetTile, td);
+                TintTile(targetTile, td);
+            }
+
+            UnlockTile(targetTile);
+            if (sourceTile != null) UnlockTile(sourceTile);
+
+            MelonLogger.Msg("[ZTABLE] Attacker took " + targetTile.gameObject.name + ".");
+        }
+
+        public static void OnUnitMovedToTile(WarToken token, WarTile targetTile)
+        {
+            if (token == null || targetTile == null) return;
             try
             {
-                var ut = atk.GetWarUnitTypeData();
-                if (ut != null && !ut.CanMoveToTileType(empty.GetTileType())) return;
-                if (atk.GetCurrentWarTile() != empty) atk.Move(empty, true);
+                var td = TileDataOf(targetTile);
+                if (td == null || td.IsSea) return;
+                var alleg = token.GetTokenAllegiance();
+                if (alleg == WarToken.WarAllegiance.Player)
+                {
+                    td.Allegiance = "Rizia";
+                    targetTile.SetTileAllegiance(WarToken.WarAllegiance.Player, false);
+                }
+                else if (alleg == WarToken.WarAllegiance.Enemy)
+                {
+                    td.Allegiance = "Wehlen";
+                    targetTile.SetTileAllegiance(WarToken.WarAllegiance.Enemy, false);
+                }
+                UnlockTile(targetTile);
+                TintTile(targetTile, td);
             }
             catch { }
-            try { empty.SetCurrentWarToken(atk); } catch { }
-            UnlockTile(empty);
-            MelonLogger.Msg("[ZTABLE] Attacker took " + empty.gameObject.name + ".");
         }
 
         private static bool AttackerWon(WarBattleManager.WarBattle battle)
@@ -3116,7 +3172,8 @@ namespace GreatZilleSolution
         /// <summary>After a fight the winner can be standing on the province without being its token, so clicks miss and other units walk in.</summary>
         private static void RepairOccupants()
         {
-            if (!ScenarioStarted || _tiles.Count == 0) return;
+            if (DeploymentPanelOpen() || !ScenarioStarted || _tiles.Count == 0) return;
+            if (AnyLiveBattle()) return;
             try
             {
                 if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
@@ -3141,38 +3198,28 @@ namespace GreatZilleSolution
                         }
                         catch { }
                     }
-                    if (here.Count == 0) continue;
+                    if (here.Count == 0)
+                    {
+                        try
+                        {
+                            var cur = tile.GetCurrentToken();
+                            if (cur != null && cur.IsDead()) tile.SetCurrentWarToken(null);
+                        }
+                        catch { }
+                        continue;
+                    }
                     WarToken keep = null;
                     try { keep = tile.GetCurrentToken(); } catch { }
-                    bool keepFallen = false;
-                    try { keepFallen = keep != null && (keep.IsDead() || keep.IsBombed() || keep.IsOrganizationDepleted()); } catch { }
-                    if (keep == null || !here.Contains(keep) || keepFallen)
+                    if (keep == null || !here.Contains(keep) || keep.IsDead())
                     {
                         keep = here[0];
                         for (int i = 0; i < here.Count; i++)
                         {
-                            var token = here[i];
-                            bool fallen = false;
-                            try { fallen = token.IsBombed() || token.IsOrganizationDepleted(); } catch { }
-                            if (!fallen) { keep = token; break; }
+                            if (!here[i].IsDead()) { keep = here[i]; break; }
                         }
                     }
                     try { if (tile.GetCurrentToken() != keep) tile.SetCurrentWarToken(keep); } catch { }
                     UnlockTile(tile);
-                    for (int i = 0; i < here.Count; i++)
-                    {
-                        var extra = here[i];
-                        if (extra == keep) continue;
-                        if (!CanOverrun(keep, extra) && extra.GetTokenAllegiance() == keep.GetTokenAllegiance())
-                        {
-                            try { extra.Kill(true); } catch { }
-                            MelonLogger.Msg("[ZTABLE] Removed a stacked unit from " + tile.gameObject.name + ".");
-                        }
-                        else
-                        {
-                            try { if (!extra.IsDead()) extra.Kill(true); } catch { }
-                        }
-                    }
                 }
             }
             catch { }

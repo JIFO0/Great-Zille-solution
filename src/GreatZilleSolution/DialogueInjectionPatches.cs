@@ -256,6 +256,68 @@ namespace GreatZilleSolution
                 var occ = targetTile.GetCurrentToken();
                 if (occ == null || occ == __instance || occ.IsDead())
                     targetTile.SetCurrentWarToken(__instance);
+                ZilleWarTable.OnUnitMovedToTile(__instance, targetTile);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// A defeated unit retreats to an empty friendly tile. It must never retreat onto an occupied tile,
+        /// onto the attacker's starting tile, or across into hostile player territory.
+        /// </summary>
+        public static void GetBattleLossTilePostfix(WarToken __instance, ref WarTile __result)
+        {
+            if (__instance == null || !ZilleWarTable.ScenarioStarted) return;
+            try
+            {
+                var battle = __instance.GetCurrentBattle();
+                WarTile atkTile = null;
+                if (battle != null && battle.attacker != null)
+                {
+                    try { atkTile = battle.attacker.GetCurrentWarTile(); } catch { }
+                }
+
+                // If candidate is attacker's tile, occupied, or across allegiance border, reject it
+                if (__result != null)
+                {
+                    bool invalid = false;
+                    if (__result == atkTile) invalid = true;
+                    var occ = __result.GetCurrentToken();
+                    if (occ != null && occ != __instance) invalid = true;
+
+                    var td = ZilleWarTable.TileDataOf(__result);
+                    var alleg = __instance.GetTokenAllegiance();
+                    if (alleg == WarToken.WarAllegiance.Enemy && td != null && td.Allegiance == "Rizia")
+                        invalid = true;
+                    else if (alleg == WarToken.WarAllegiance.Player && td != null && td.Allegiance == "Wehlen")
+                        invalid = true;
+
+                    if (!invalid) return;
+                    __result = null;
+                }
+
+                // If invalid or null, try to find an adjacent empty tile of the same allegiance
+                var curTile = __instance.GetCurrentWarTile();
+                if (curTile == null) return;
+                var adj = curTile.adjacentWarTiles;
+                if (adj == null) return;
+
+                var unitAlleg = __instance.GetTokenAllegiance();
+                string wantAlleg = unitAlleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+
+                for (int i = 0; i < adj.Count; i++)
+                {
+                    var t = adj[i];
+                    if (t == null || t == curTile || t == atkTile) continue;
+                    if (t.GetCurrentToken() != null && t.GetCurrentToken() != __instance) continue;
+                    var td = ZilleWarTable.TileDataOf(t);
+                    if (td == null || td.IsSea) continue;
+                    if (td.Allegiance == wantAlleg)
+                    {
+                        __result = t;
+                        return;
+                    }
+                }
             }
             catch { }
         }
@@ -476,6 +538,9 @@ namespace GreatZilleSolution
                 var move = AccessTools.Method(typeof(WarToken), "Move");
                 if (move != null)
                     harmony.Patch(move, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MovePostfix))));
+                var getBattleLossTile = AccessTools.Method(typeof(WarToken), nameof(WarToken.GetBattleLossTile));
+                if (getBattleLossTile != null)
+                    harmony.Patch(getBattleLossTile, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(GetBattleLossTilePostfix))));
 
                 var tutorialMethod = AccessTools.Method(typeof(WarOperationManager), nameof(WarOperationManager.IsCurrentOperationTutorial));
                 if (tutorialMethod != null)

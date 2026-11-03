@@ -1,0 +1,1976 @@
+# Sordland/Turn01/A_PoliticalOverview
+
+- **ID konwersacji:** `4`
+- **StoryPack:** `Sordland`
+- **Tura:** `Tura 01`
+- **Lokalizacja pliku:** `Sordland/Turn_01/004_A_PoliticalOverview.md`
+- **Liczba węzłów dialogowych:** 294
+- **Liczba wyborów gracza:** 85
+
+---
+
+## 1. Uczestnicy Sceny
+
+- **[4]** Petr Vectern
+- **[5]** Player *(Gracz)*
+- **[10]** Narrator
+- **[38]** Lucian Galade
+
+---
+
+## 2. Zmienne Gry (Stan Narracyjny)
+
+### Czytane zmienne warunkowe (`conditionsString`):
+- `BaseGame.Prologue_Party_Takeover_Backstab`
+- `BaseGame.Prologue_Party_Takeover_PublicBlame`
+- `BaseGame.Prologue_Speech_Democracy_Liberal`
+- `BaseGame.Promise_TermFocus_Military`
+- `BaseGame.Reform_Dictator_Intention`
+
+### Modyfikowane zmienne stanu (`userScript`):
+- `BaseGame.Democratic`
+- `BaseGame.Policy_Law_ReformCommittee`
+- `BaseGame.Reform_Autocrat_Intention`
+- `BaseGame.Reform_Dictator_Intention`
+- `BaseGame.Reform_Reformist_Intention`
+- `BaseGameSupport.Journal_Turn01_Reform_DestroyJudiciary`
+- `BaseGameSupport.Journal_Turn01_Reform_MoreExecutivePower`
+- `BaseGameSupport.Journal_Turn01_Reform_StrengthenYourPosition`
+- `BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards`
+- `BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists`
+- `BaseGameSupport.News_Turn01_E_AlphonsoLeavesLotherberg`
+- `BaseGameSupport.News_Turn01_G_RiziaGas`
+- `BaseGameSupport.News_Turn01_HP_Committee`
+- `BaseGameSupport.News_Turn01_HP_FireStrikesHSU`
+- `BaseGameSupport.News_Turn01_LT_CampaignBill`
+- `BaseGameSupport.News_Turn01_LT_NationalLeagueSeason`
+- `BaseGameSupport.News_Turn01_R_RediscoveringIzzam`
+- `BaseGameSupport.Report_Turn01_Deyr_IncreasingHomeless`
+- `BaseGameSupport.Report_Turn01_Holsord_GNATourismBill`
+- `BaseGameSupport.Report_Turn01_Holsord_PoliceFireReport`
+- `BaseGameSupport.Report_Turn01_Holsord_PublicOpinion`
+- `BaseGameSupport.Report_Turn01_Leiren_ProtectNatureMarch`
+- `BaseGameSupport.Report_Turn01_Narbel_GasomDiscoveries`
+- `GameCondition.Turn01_A_PoliticalOverview`
+
+### Skoki między-konwersacyjne:
+- Węzeł `[293]` -> **[5] Sordland/Turn01/Petr Opens Whisky** (../Turn_01/005_Petr_Opens_Whisky.md), Węzeł `[1]`
+
+---
+
+## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+
+- **Węzły kończące (Terminal Nodes):** 2
+- **Węzły modyfikujące stan gry:** 22
+
+**Węzły wykonujące kluczowe operacje skryptowe:**
+- Węzeł `[38]` (Lucian Galade): `Variable["GameCondition.Turn01_A_PoliticalOverview"] = true;`
+- Węzeł `[189]` (Lucian Galade): `Variable["BaseGame.Reform_Autocrat_Intention"] = true;`
+- Węzeł `[190]` (Lucian Galade): `Variable["BaseGame.Reform_Dictator_Intention"] = true;`
+- Węzeł `[191]` (Lucian Galade): `Variable["BaseGame.Reform_Reformist_Intention"] = true;`
+- Węzeł `[229]` (Lucian Galade): `EnableNews("G_Rumburg");`
+- Węzeł `[230]` (Lucian Galade): `Variable["BaseGameSupport.News_Turn01_LT_CampaignBill"] = true;`
+- Węzeł `[231]` (Lucian Galade): `Variable["BaseGameSupport.Report_Turn01_Holsord_PublicOpinion"] = true;`
+- Węzeł `[232]` (Lucian Galade): `Variable["BaseGameSupport.Report_Turn01_Deyr_IncreasingHomeless"] = true; Variable["BaseGameSuppo...`
+- *...oraz 14 innych węzłów ze skryptami.*
+
+---
+
+## 4. Pełna Struktura Grafu Dialogowego
+
+Punkt wejścia: `Entry 0 [START]`
+
+### Węzeł `[0]`
+**[START / ROOT]** (Player)
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[1]`
+
+### Węzeł `[1]`
+**[INPUT / WEJŚCIE SCENY]** (Lucian Galade)
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[4]`
+
+### Węzeł `[2]`
+**[OUTPUT / WYJŚCIE ZE SCENY]** (Lucian Galade)
+- **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
+
+### Węzeł `[3]`
+Mówca: **Narrator**
+> "The door swung open and Lucian Galade, my chief strategist, walked in. He was a compact man with sharp, birdlike features. After briefly surveying the room from wall to wall, he sat down, poured a glass of water and opened his briefcase in a series of quick, graceful movements."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[16]`
+
+### Węzeł `[4]`
+Mówca: **Narrator**
+> "Petr Vectern arrived a couple of minutes early and sat across from me. He was struggling to hold back his smile."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[231]`
+
+### Węzeł `[5]`
+Mówca: **Petr Vectern**
+> "“But, hey, back in university, did you ever imagine we would be sitting here in the Maroon Palace? We have to celebrate this great victory.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[8]`
+  - -> `[7]`
+  - -> `[6]`
+
+### Węzeł `[6]`
+**[WYBÓR GRACZA: "“This is not the time to celebrate, Petr. We have work to do.”"]** — Mówca: **Player**
+> "“This is not the time to celebrate, Petr. We have work to do.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[15]`
+
+### Węzeł `[7]`
+**[WYBÓR GRACZA: "“We will celebrate at the inaugural ball. Just hang in there until the evening.”"]** — Mówca: **Player**
+> "“We will celebrate at the inaugural ball. Just hang in there until the evening.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[9]`
+
+### Węzeł `[8]`
+**[WYBÓR GRACZA: "“Let's celebrate then. I got my hands on something special for us. An Erlory Maroon 30-year-old.”"]** — Mówca: **Player**
+> "“Let's celebrate then. I got my hands on something special for us. An Erlory Maroon 30-year-old.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[293]`
+
+### Węzeł `[9]`
+Mówca: **Petr Vectern**
+> "“Looking forward to it. Evelyn hopes to congratulate you in person there.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[10]`
+  - -> `[11]`
+  - -> `[32]`
+
+### Węzeł `[10]`
+**[WYBÓR GRACZA: "“Good to know. It's been some time since the last time I saw her.""]** — Mówca: **Player**
+> "“Good to know. It's been some time since the last time I saw her.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[12]`
+
+### Węzeł `[11]`
+**[WYBÓR GRACZA: "“I'm sure the kids would love to see their Uncle Petr for the first time as the Vice President.”"]** — Mówca: **Player**
+> "“I'm sure the kids would love to see their Uncle Petr for the first time as the Vice President.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[13]`
+
+### Węzeł `[12]`
+Mówca: **Petr Vectern**
+> "“I think it was Franc's birthday. We've barely had enough time for our families over these past months, haven't we?”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[14]`
+
+### Węzeł `[13]`
+Mówca: **Petr Vectern**
+> "“That is great to hear! It's crazy how fast the two have grown up. You are a good father.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[14]`
+
+### Węzeł `[14]`
+Mówca: **Narrator**
+> "Petr had a wistful look in his eyes. He and Evelyn had never been able to have kids of their own. During our campaign, the opposition had floated the rumor that he'd fathered illegitimate children during his wilder years, but it had never been substantiated."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[225]`
+
+### Węzeł `[15]`
+Mówca: **Petr Vectern**
+> "“Yes... I agree. We've got things to do today. We can let loose at the ball.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[34]`
+
+### Węzeł `[16]`
+Mówca: **Lucian Galade**
+> "“Gentlemen.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[21]`
+
+### Węzeł `[17]`
+Mówca: **Petr Vectern**
+> "“We'll be talking about our political strategy for this term. Lucian and I had a meeting with the party and the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[18]`
+
+### Węzeł `[18]`
+Mówca: **Petr Vectern**
+> "“We mostly see eye to eye, but I would want to know what you think.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[35]`
+  - -> `[20]`
+  - -> `[19]`
+
+### Węzeł `[19]`
+**[WYBÓR GRACZA: "“Let's see if I see eye to eye.”"]** — Mówca: **Player**
+> "“Let's see if I see eye to eye.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[224]`
+
+### Węzeł `[20]`
+**[WYBÓR GRACZA: "“Great. Let's go over this when Lucian arrives.”"]** — Mówca: **Player**
+> "“Great. Let's go over this when Lucian arrives.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[224]`
+
+### Węzeł `[21]`
+Mówca: **Narrator**
+> "The tall-case clock in the room struck three o'clock."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[23]`
+
+### Węzeł `[22]`
+Mówca: **Lucian Galade**
+> "“Hello, Petr.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[24]`
+
+### Węzeł `[23]`
+Mówca: **Petr Vectern**
+> "“Damn. You are exactly on time.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[22]`
+
+### Węzeł `[24]`
+Mówca: **Narrator**
+> "Lucian then turned towards me. He very slightly bowed his head."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[59]`
+  - -> `[58]`
+  - -> `[60]`
+
+### Węzeł `[25]`
+Mówca: **Lucian Galade**
+> "“Another important point. We must be aware of the Lotherberg Group. The Oligarchs convene under this organization to influence economic policies. Konrath Koronti led it for a long time before falling ill. The new leader is Mr. Walter Tusk.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[36]`
+
+### Węzeł `[26]`
+Mówca: **Petr Vectern**
+> "“As far as I know, Konrath's son Marcel has strong ties to this group. His influence could definitely be an asset for us. But I'm sure he'll want something in return.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[27]`
+  - -> `[28]`
+  - -> `[29]`
+  - -> `[289]`
+
+### Węzeł `[27]`
+**[WYBÓR GRACZA: "“I am aware of Mr. Koronti's wide network. That could come in handy.”"]** — Mówca: **Player**
+> "“I am aware of Mr. Koronti's wide network. That could come in handy.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[40]`
+
+### Węzeł `[28]`
+**[WYBÓR GRACZA: "“The Group's influence is an important force. One that we should use to our administration's advantage.”"]** — Mówca: **Player**
+> "“The Group's influence is an important force. One that we should use to our administration's advantage.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[39]`
+
+### Węzeł `[29]`
+**[WYBÓR GRACZA: "“That group is dependent on our economic policies. They can't move a finger without us.”"]** — Mówca: **Player**
+> "“That group is dependent on our economic policies. They can't move a finger without us.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[30]`
+
+### Węzeł `[30]`
+Mówca: **Petr Vectern**
+> "“I wouldn't be so optimistic. The capital they represent could do a lot of damage if it was diverted.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[41]`
+
+### Węzeł `[31]`
+Mówca: **Narrator**
+> "Lucian took notes."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[25]`
+
+### Węzeł `[32]`
+**[WYBÓR GRACZA: "“We'll see each other at the ball, then.""]** — Mówca: **Player**
+> "“We'll see each other at the ball, then.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[33]`
+
+### Węzeł `[33]`
+Mówca: **Petr Vectern**
+> "“Definitely!""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[34]`
+
+### Węzeł `[34]`
+Mówca: **Petr Vectern**
+> ""Let's move on with the meeting .""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[17]`
+
+### Węzeł `[35]`
+**[WYBÓR GRACZA: "“I hope things are looking good.”"]** — Mówca: **Player**
+> "“I hope things are looking good.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[224]`
+
+### Węzeł `[36]`
+Mówca: **Lucian Galade**
+> "“According to reports, some members of the National Business Council are in their pockets. Tusk and the Group will surely try to bribe us in exchange for special economic protections.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[263]`
+  - -> `[210]`
+  - -> `[211]`
+  - -> `[283]`
+
+### Węzeł `[37]`
+Mówca: **Narrator**
+> "Lucian looked at Petr."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[26]`
+
+### Węzeł `[38]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: GameCondition.Turn01_A_PoliticalOverview = true)*
+- **Efekt (`userScript`):** `Variable["GameCondition.Turn01_A_PoliticalOverview"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[292]`
+
+### Węzeł `[39]`
+Mówca: **Petr Vectern**
+> "“If we can get them to side with us. It all depends on what benefits we can offer and what the leader wants.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[41]`
+
+### Węzeł `[40]`
+Mówca: **Petr Vectern**
+> "“We just need to be careful with him. He looks like the lesser evil, but it could very quickly turn out to be the other way around.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[41]`
+
+### Węzeł `[41]`
+Mówca: **Lucian Galade**
+> "“We need to tread carefully on all sides with all power players to survive our term. I need to underline the seriousness of the situation.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[258]`
+
+### Węzeł `[42]`
+Mówca: **Lucian Galade**
+> "“This concludes our political briefing for today. Our next meeting will be about our media strategy.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[217]`
+
+### Węzeł `[43]`
+Mówca: **Narrator**
+> "Lucian and Petr bid their farewells and left. A mysterious amount of smoke was rising far away on the horizon."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[232]`
+
+### Węzeł `[44]`
+Mówca: **Lucian Galade**
+> "“Let's start by evaluating our current situation.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[47]`
+
+### Węzeł `[45]`
+Mówca: **Lucian Galade**
+> "“It may create issues for us, yes.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[46]`
+
+### Węzeł `[46]`
+Mówca: **Lucian Galade**
+> "“However, with the reformists gaining more popularity, we may not be in a position to stand against them.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[70]`
+
+### Węzeł `[47]`
+Mówca: **Lucian Galade**
+> "“The majority of the Sordish people demand change. They are more concerned about the economy than the Constitution, but they blame the system for their problems.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[49]`
+
+### Węzeł `[48]`
+Mówca: **Lucian Galade**
+> "“It will not be easy.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[52]`
+
+### Węzeł `[49]`
+Mówca: **Petr Vectern**
+> ""People are losing their trust in our democracy. Why do you think radicals like Bernard Circas are becoming more popular? Everyone's expecting us to bring the change the last government did not.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[227]`
+
+### Węzeł `[50]`
+**[WYBÓR GRACZA: "“I agree with the reformists. Our responsibility is to democratize our broken system.""]** — Mówca: **Player**
+> "“I agree with the reformists. Our responsibility is to democratize our broken system.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[233]`
+
+### Węzeł `[51]`
+**[WYBÓR GRACZA: "“We need to listen to the people if we want to serve this country.""]** — Mówca: **Player**
+> "“We need to listen to the people if we want to serve this country.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[54]`
+
+### Węzeł `[52]`
+Mówca: **Lucian Galade**
+> "“We will need many allies against the Old Guard in the government.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[70]`
+
+### Węzeł `[53]`
+**[WYBÓR GRACZA: "“If we lose power, we won't be able to execute the changes we need to make for the good of the country.""]** — Mówca: **Player**
+> "“If we lose power, we won't be able to execute the changes we need to make for the good of the country.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[45]`
+
+### Węzeł `[54]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[55]`
+  - -> `[56]`
+
+### Węzeł `[55]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[57]`
+
+### Węzeł `[56]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Speech_Democracy_Liberal == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[48]`
+
+### Węzeł `[57]`
+Mówca: **Petr Vectern**
+> ""That's exactly what we campaigned for. A true change that will move the country forward.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[52]`
+
+### Węzeł `[58]`
+**[WYBÓR GRACZA: "“Lucian. How are you?”"]** — Mówca: **Player**
+> "“Lucian. How are you?”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[62]`
+
+### Węzeł `[59]`
+**[WYBÓR GRACZA: "“Glad to see you, Lucian.”"]** — Mówca: **Player**
+> "“Glad to see you, Lucian.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[61]`
+
+### Węzeł `[60]`
+**[WYBÓR GRACZA: "“Let's not waste any time. Lucian, proceed with the overview.”"]** — Mówca: **Player**
+> "“Let's not waste any time. Lucian, go ahead with the overview.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[63]`
+
+### Węzeł `[61]`
+Mówca: **Lucian Galade**
+> "“It is a privilege to be here, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[249]`
+
+### Węzeł `[62]`
+Mówca: **Lucian Galade**
+> "“I am ready and able, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[249]`
+
+### Węzeł `[63]`
+Mówca: **Lucian Galade**
+> "“As you wish, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[249]`
+
+### Węzeł `[64]`
+Mówca: **Lucian Galade**
+> "“A comprehensive reform that would make the reformists happy would mean maintaining a balance between all branches of government.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[67]`
+
+### Węzeł `[65]`
+Mówca: **Petr Vectern**
+> ""I agree. The Old Guard won't like this, though.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[64]`
+
+### Węzeł `[66]`
+Mówca: **Petr Vectern**
+> ""We need to work with the Supreme Court one way or the other.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[219]`
+
+### Węzeł `[67]`
+Mówca: **Lucian Galade**
+> "“Which means removing your absolute veto as well. The reformists demand that all loopholes in the Constitution are closed.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[86]`
+  - -> `[85]`
+  - -> `[87]`
+
+### Węzeł `[68]`
+**[WYBÓR GRACZA: "“We'll need a comprehensive bill to balance the power structure more fairly.""]** — Mówca: **Player**
+> "“We'll need a comprehensive bill to balance the power structure more fairly.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[65]`
+
+### Węzeł `[69]`
+Mówca: **Lucian Galade**
+> "“The Old Guard will do its best to preserve the Constitution. Chief Justice Hawker and his allied judges have a great influence over the Supreme Court, which will be tough to break.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[71]`
+
+### Węzeł `[70]`
+Mówca: **Lucian Galade**
+> "“Mr. Ricter managed to persuade many members of Assembly to give their support for drafting a new Constitution. Reformist politicians are quickly increasing in number.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[72]`
+
+### Węzeł `[71]`
+Mówca: **Petr Vectern**
+> ""The Court also has the final say over constitutional legislation. Without their approval, we cannot even change it.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[68]`
+  - -> `[74]`
+  - -> `[77]`
+
+### Węzeł `[72]`
+Mówca: **Lucian Galade**
+> "“While the reformist wing inside our party is still a minority, they could have a tri-partisan majority in the assembly, especially if they unite under Frens Ricter.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[199]`
+  - -> `[202]`
+  - -> `[198]`
+
+### Węzeł `[73]`
+Mówca: **Lucian Galade**
+> "“I agree. They have too much power over Sordish politics.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[82]`
+
+### Węzeł `[74]`
+**[WYBÓR GRACZA: "“We must break the power of the Supreme Court one way or another.""]** — Mówca: **Player**
+> "“We must break the power of the Supreme Court one way or another.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[73]`
+
+### Węzeł `[75]`
+Mówca: **Petr Vectern**
+> ""The reformists' demands are clear. They want to limit the President's veto powers, ensure that the Supreme Court is independent and take away the Court's right to vote on constitutional amendments.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[76]`
+  - -> `[80]`
+  - -> `[81]`
+
+### Węzeł `[76]`
+**[WYBÓR GRACZA: "“I support the reformists. We need a proper balance of power in this country.""]** — Mówca: **Player**
+> "“I support the reformists. We need a proper balance of power in this country.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[83]`
+
+### Węzeł `[77]`
+**[WYBÓR GRACZA: "“I'd rather not go against them. The risks are too high.""]** — Mówca: **Player**
+> "“I'd rather not go against them. The risks are too high.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[66]`
+
+### Węzeł `[78]`
+Mówca: **Lucian Galade**
+> "“I agree, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[69]`
+
+### Węzeł `[79]`
+Mówca: **Lucian Galade**
+> "“True. But we can't let the Old Guard manipulate us and then backstab us, like they did with Alphonso.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[86]`
+  - -> `[85]`
+  - -> `[87]`
+
+### Węzeł `[80]`
+**[WYBÓR GRACZA: "“We must listen to their demands. Otherwise we are no different than the previous administrations.""]** — Mówca: **Player**
+> "“We must listen to their demands. Otherwise we are no different than the previous administrations.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[83]`
+
+### Węzeł `[81]`
+**[WYBÓR GRACZA: ""I won't allow them to influence me. We will shape our own future.""]** — Mówca: **Player**
+> ""I won't allow them to influence me. We will shape our own future.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[78]`
+
+### Węzeł `[82]`
+Mówca: **Petr Vectern**
+> ""We need to take away their vote in constitutional legislation. It is absurd that they get to vote for bills when they aren't even elected.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[86]`
+  - -> `[85]`
+  - -> `[87]`
+
+### Węzeł `[83]`
+Mówca: **Petr Vectern**
+> ""I agree. We can't ignore the winds of change, after all.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[69]`
+
+### Węzeł `[84]`
+Mówca: **Petr Vectern**
+> "“We can figure it out. Our party still holds 130 out of 250 seats in the Assembly. We've got the power.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[212]`
+
+### Węzeł `[85]`
+**[WYBÓR GRACZA: "“We cannot allow obstructionists to exist.”"]** — Mówca: **Player**
+> "“We cannot allow obstructionists to exist.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[84]`
+
+### Węzeł `[86]`
+**[WYBÓR GRACZA: "“Looks like we have many challenges ahead.”"]** — Mówca: **Player**
+> "“Looks like we have many challenges ahead.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[84]`
+
+### Węzeł `[87]`
+**[WYBÓR GRACZA: "“We can't underestimate this situation.""]** — Mówca: **Player**
+> "“We can't underestimate this situation.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[84]`
+
+### Węzeł `[88]`
+**[WYBÓR GRACZA: "“We will write a more democratic Constitution with the reformists.""]** — Mówca: **Player**
+> "“We will write a more democratic Constitution with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[234]`
+
+### Węzeł `[89]`
+**[WYBÓR GRACZA: "“The new Constitution should give the President wide-ranging powers to lead Sordland into the future.""]** — Mówca: **Player**
+> "“The new Constitution should give the President wide-ranging powers to lead Sordland into the future.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[235]`
+
+### Węzeł `[90]`
+**[WYBÓR GRACZA: "“We could work with the Old Guard to protect our existing extensive powers.""]** — Mówca: **Player**
+> "“We could work with the Old Guard to protect our existing extensive powers.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[104]`
+
+### Węzeł `[91]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[92]`
+  - -> `[93]`
+
+### Węzeł `[92]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[95]`
+
+### Węzeł `[93]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Speech_Democracy_Liberal == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[98]`
+
+### Węzeł `[94]`
+**[WYBÓR GRACZA: "“How can we come out of this in the best shape?""]** — Mówca: **Player**
+> "“How can we come out of this in the best shape?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[95]`
+Mówca: **Petr Vectern**
+> ""That's what we've been preparing for internally. Don't forget that promise is what got us elected.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[96]`
+
+### Węzeł `[96]`
+Mówca: **Lucian Galade**
+> ""The key thing here will be strengthening the power of the Assembly, which we already lead with a majority.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[207]`
+
+### Węzeł `[97]`
+**[WYBÓR GRACZA: "“What do you suggest we do, then?""]** — Mówca: **Player**
+> "“What do you suggest we do, then?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[98]`
+Mówca: **Petr Vectern**
+> ""It will be tough to persuade our base if we work with Ricter and his band of reformists. But everyone agrees we need a new Constitution.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[96]`
+
+### Węzeł `[99]`
+**[WYBÓR GRACZA: "“Cut it out, you two. Are you with me or not?""]** — Mówca: **Player**
+> "“Cut it out, you two. Are you with me or not?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[156]`
+
+### Węzeł `[100]`
+Mówca: **Lucian Galade**
+> "“That will not be accepted by the reformists. This draft has been created with the advice of both our party and PFJP members.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[138]`
+
+### Węzeł `[101]`
+Mówca: **Lucian Galade**
+> ""That's very bold. Then we must start with eliminating the Supreme Court's authority over constitutional legislation and perhaps take their immunity away.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[103]`
+
+### Węzeł `[102]`
+Mówca: **Lucian Galade**
+> "“You would also be burning bridges with the Reformists and the Old Guard.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[291]`
+  - -> `[140]`
+  - -> `[146]`
+
+### Węzeł `[103]`
+Mówca: **Petr Vectern**
+> ""Don't forget the reformists want us to address the loopholes in the presidential veto system.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[115]`
+  - -> `[117]`
+  - -> `[119]`
+
+### Węzeł `[104]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[105]`
+  - -> `[106]`
+
+### Węzeł `[105]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[107]`
+
+### Węzeł `[106]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Speech_Democracy_Liberal == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[108]`
+
+### Węzeł `[107]`
+Mówca: **Petr Vectern**
+> ""You must remember that we promised people a democratic Constitution during the elections.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[205]`
+
+### Węzeł `[108]`
+Mówca: **Petr Vectern**
+> ""How? You know the public wants us to enact extensive reforms. And how do we know if the Old Guard would support you?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[205]`
+
+### Węzeł `[109]`
+Mówca: **Narrator**
+> "Lucian opened his dossier."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[187]`
+
+### Węzeł `[110]`
+Mówca: **Lucian Galade**
+> ""If we go against the demands of the people, the reformists will be furious. It could backfire.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[129]`
+  - -> `[128]`
+
+### Węzeł `[111]`
+**[WYBÓR GRACZA: "“What do you suggest we do?""]** — Mówca: **Player**
+> "“What do you suggest we do?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[112]`
+Mówca: **Lucian Galade**
+> ""I don't think you should take the risk, Mr. President.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[111]`
+  - -> `[94]`
+
+### Węzeł `[113]`
+**[WYBÓR GRACZA: "“You might be right.""]** — Mówca: **Player**
+> "“You might be right.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[112]`
+
+### Węzeł `[114]`
+**[WYBÓR GRACZA: "“Only a strong administration can make Sordland great.""]** — Mówca: **Player**
+> "“Only a strong administration can make Sordland great.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[120]`
+
+### Węzeł `[115]`
+**[WYBÓR GRACZA: "“I will not limit my veto powers. We need them.""]** — Mówca: **Player**
+> "“I will not limit my veto powers. We need them.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[204]`
+
+### Węzeł `[116]`
+Mówca: **Lucian Galade**
+> ""Very well. We will begin to explore how to realistically pass such a constitutional change.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[190]`
+
+### Węzeł `[117]`
+**[WYBÓR GRACZA: "“They can remain. Some reform is better than none.""]** — Mówca: **Player**
+> "“They can remain. Some reform is better than none.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[204]`
+
+### Węzeł `[118]`
+Mówca: **Lucian Galade**
+> "“As you wish. We will move forward on that.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[206]`
+
+### Węzeł `[119]`
+**[WYBÓR GRACZA: "“Of course, it will be looked at in detail.""]** — Mówca: **Player**
+> "“Of course, it will be looked at in detail.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[179]`
+
+### Węzeł `[120]`
+Mówca: **Lucian Galade**
+> ""That is true, but if we don't evolve we might become part of the problem.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[142]`
+
+### Węzeł `[121]`
+Mówca: **Lucian Galade**
+> ""However, I must stress that I am not for this.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[185]`
+  - -> `[162]`
+
+### Węzeł `[122]`
+Mówca: **Lucian Galade**
+> "“Yes, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[206]`
+
+### Węzeł `[123]`
+Mówca: **Lucian Galade**
+> "“Second, the President's absolute veto will be taken away. This can be replaced with a limited veto system by fixing the current loopholes.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[149]`
+  - -> `[147]`
+
+### Węzeł `[124]`
+**[WYBÓR GRACZA: "“We must draft a bill to destroy the power of the judiciary.""]** — Mówca: **Player**
+> "“We must draft a bill to destroy the power of the judiciary.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[237]`
+
+### Węzeł `[125]`
+Mówca: **Lucian Galade**
+> "“Taking away the legislative power of the Supreme Court while holding your own absolute authority over legislation would look like an attempt to consolidate your own power.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[164]`
+
+### Węzeł `[126]`
+Mówca: **Petr Vectern**
+> ""Yes. The divisions of power need to be rebalanced for a better Sordland.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[127]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> ""Fair enough. Let's work with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[239]`
+
+### Węzeł `[128]`
+**[WYBÓR GRACZA: "“We can handle it, just like the previous governments did.""]** — Mówca: **Player**
+> "“We can handle it, just like the previous governments did.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[134]`
+
+### Węzeł `[129]`
+**[WYBÓR GRACZA: "“True, we can't do it. It is too dangerous.""]** — Mówca: **Player**
+> "“True, we can't do it. It is too dangerous.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[131]`
+
+### Węzeł `[130]`
+**[WYBÓR GRACZA: ""We must draft a bill with more executive powers.""]** — Mówca: **Player**
+> ""We must draft a bill with more executive powers.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[236]`
+
+### Węzeł `[131]`
+Mówca: **Lucian Galade**
+> ""It is not a risk worth taking, Mr. President.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[160]`
+  - -> `[155]`
+
+### Węzeł `[132]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> ""No, I will only support a new constitution that strengthens my position. Forget the reformists and reach out to the NFP instead.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[238]`
+
+### Węzeł `[133]`
+**[WYBÓR GRACZA: ""Then I don't intend to pursue constitutional change. We will reach out to the Old Guard.""]** — Mówca: **Player**
+> ""Then I don't intend to pursue constitutional change. We will reach out to the Old Guard.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[240]`
+
+### Węzeł `[134]`
+Mówca: **Lucian Galade**
+> ""It will be a dangerous path to follow.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[208]`
+
+### Węzeł `[135]`
+**[WYBÓR GRACZA: "“I can handle them. It will be done under the Rayne administration.""]** — Mówca: **Player**
+> "“I can handle them. It will be done under the Rayne administration.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[168]`
+
+### Węzeł `[136]`
+Mówca: **Petr Vectern**
+> ""Why would you want to work with the Old Guard?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[137]`
+  - -> `[139]`
+  - -> `[114]`
+
+### Węzeł `[137]`
+**[WYBÓR GRACZA: "“Without the Sollists' support, we have no power.""]** — Mówca: **Player**
+> "“Without the Sollists' support, we have no power.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[142]`
+
+### Węzeł `[138]`
+Mówca: **Petr Vectern**
+> ""Keeping your absolute veto over legislation but taking away the Supreme Court's influence over the Assembly would make it look like a power grab.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[182]`
+
+### Węzeł `[139]`
+**[WYBÓR GRACZA: "“I need to maintain my powers.""]** — Mówca: **Player**
+> "“I need to maintain my powers.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[145]`
+
+### Węzeł `[140]`
+**[WYBÓR GRACZA: "“We can do it, Lucian! Look at what we accomplished so far.""]** — Mówca: **Player**
+> "“We can do it, Lucian! Look at what we accomplished so far.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[214]`
+
+### Węzeł `[141]`
+Mówca: **Lucian Galade**
+> ""The state is powerful as is. The question is how to approach these constitutional amendments and if it's realistic to pull off.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[130]`
+  - -> `[124]`
+
+### Węzeł `[142]`
+Mówca: **Petr Vectern**
+> ""You're talking about going against the reformists and public opinion all at once.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[143]`
+
+### Węzeł `[143]`
+Mówca: **Lucian Galade**
+> ""Mr. Vice President has a point.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[113]`
+  - -> `[99]`
+
+### Węzeł `[144]`
+Mówca: **Lucian Galade**
+> ""I understand. We do not have to remove your veto. Instead, we can discuss limiting it with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[132]`
+  - -> `[127]`
+  - -> `[133]`
+
+### Węzeł `[145]`
+Mówca: **Petr Vectern**
+> ""I don't know if we can survive that politically.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[142]`
+
+### Węzeł `[146]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> "“What do you suggest we do then? Maybe I can reconsider working with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[147]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> ""No. This is not happening. I'd rather not include either of these points.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[100]`
+
+### Węzeł `[148]`
+**[WYBÓR GRACZA: ""I want to minimize the damage to my seat.""]** — Mówca: **Player**
+> ""I want to minimize the damage to my seat.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[144]`
+
+### Węzeł `[149]`
+**[WYBÓR GRACZA: "“I have no problems with these clauses. Let's work with the reformists.""]** — Mówca: **Player**
+> "“I have no problems with these clauses. Let's work with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[241]`
+
+### Węzeł `[150]`
+**[WYBÓR GRACZA: ""The President needs to be able to exercise his powers with ease to maintain stability.""]** — Mówca: **Player**
+> ""The President needs to be able to exercise his powers with ease to maintain stability.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[144]`
+
+### Węzeł `[151]`
+**[WYBÓR GRACZA: ""We must strengthen the state by removing the power of the Old Guard.""]** — Mówca: **Player**
+> ""We must strengthen the state by removing the power of the Old Guard.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[141]`
+
+### Węzeł `[152]`
+**[WYBÓR GRACZA: "“The real problem is the judiciary's power, not the president's.""]** — Mówca: **Player**
+> "“The real problem is the judiciary's power, not the president's.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[178]`
+
+### Węzeł `[153]`
+Mówca: **Petr Vectern**
+> ""Yes. Of course I'm with you.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[177]`
+
+### Węzeł `[154]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> "“We need to address other more important problems, too.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[180]`
+
+### Węzeł `[155]`
+**[WYBÓR GRACZA: "“What is the best outcome for us then?""]** — Mówca: **Player**
+> "“What is the best outcome for us then?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[156]`
+Mówca: **Lucian Galade**
+> ""If you are serious about this, I will explore the options for you, Mr. President.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[121]`
+
+### Węzeł `[157]`
+Mówca: **Lucian Galade**
+> "“To clarify before we head in any particular direction, what are your intentions, sir?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[151]`
+  - -> `[150]`
+  - -> `[148]`
+
+### Węzeł `[158]`
+Mówca: **Lucian Galade**
+> "“The public might be persuaded, but the reformists in the Assembly are not going to fall for that.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[159]`
+
+### Węzeł `[159]`
+Mówca: **Lucian Galade**
+> "“They would try to paint you as yet another strongman trying to grab more power for himself.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[97]`
+  - -> `[152]`
+  - -> `[135]`
+
+### Węzeł `[160]`
+**[WYBÓR GRACZA: "“What do you suggest, Lucian?""]** — Mówca: **Player**
+> "“What do you suggest, Lucian?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[161]`
+Mówca: **Lucian Galade**
+> ""It would be quite difficult to secure the 166 votes needed to propose such a bill.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[102]`
+
+### Węzeł `[162]`
+**[WYBÓR GRACZA: "“What about you, Petr?""]** — Mówca: **Player**
+> "“What about you, Petr?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[244]`
+
+### Węzeł `[163]`
+Mówca: **Petr Vectern**
+> ""It will be very difficult to plead that case to the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[125]`
+
+### Węzeł `[164]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[165]`
+  - -> `[166]`
+
+### Węzeł `[165]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Speech_Democracy_Liberal == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[167]`
+
+### Węzeł `[166]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Speech_Democracy_Liberal == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Speech_Democracy_Liberal"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[169]`
+
+### Węzeł `[167]`
+Mówca: **Petr Vectern**
+> ""Anton, we got elected by promising democratic reforms.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[173]`
+  - -> `[176]`
+  - -> `[171]`
+
+### Węzeł `[168]`
+Mówca: **Lucian Galade**
+> "“That would be tough, sir. But I trust your judgement.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[161]`
+
+### Węzeł `[169]`
+Mówca: **Petr Vectern**
+> ""We would lose all reformist support.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[173]`
+  - -> `[176]`
+  - -> `[171]`
+
+### Węzeł `[170]`
+Mówca: **Petr Vectern**
+> ""That does include strengthening the Assembly by giving them a chance to override vetoes, as well as ensuring that the judiciary is independent.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[183]`
+  - -> `[181]`
+
+### Węzeł `[171]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> ""We don't need the reformists. We can always work with the NFP.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[290]`
+
+### Węzeł `[172]`
+Mówca: **Lucian Galade**
+> "“As you wish. We will move forward on that.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[206]`
+
+### Węzeł `[173]`
+**[WYBÓR GRACZA: "“We can package it as a *democratic* reform.”"]** — Mówca: **Player**
+> "“We can package it as a *democratic* reform.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[158]`
+
+### Węzeł `[174]`
+Mówca: **Lucian Galade**
+> "“However, most people will not be persuaded by that. It would be tough to reach the 166 votes needed to propose such a bill.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[102]`
+
+### Węzeł `[175]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> "“You're right. Let's work with the reformists.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[242]`
+
+### Węzeł `[176]`
+**[WYBÓR GRACZA: "“No matter what you say, I intend to come out of this stronger as the President.”"]** — Mówca: **Player**
+> "“No matter what you say, I intend to come out of this stronger as the President.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[158]`
+
+### Węzeł `[177]`
+Mówca: **Lucian Galade**
+> ""Well... Let's see what we can do about it.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[209]`
+
+### Węzeł `[178]`
+Mówca: **Lucian Galade**
+> "“I somewhat agree with you, sir.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[174]`
+
+### Węzeł `[179]`
+Mówca: **Petr Vectern**
+> ""What everyone's expecting is a rebalance of power between the executive, legislative and judiciary branches.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[170]`
+
+### Węzeł `[180]`
+Mówca: **Petr Vectern**
+> ""Of course. We'll have time to discuss everything you want.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[157]`
+
+### Węzeł `[181]`
+**[WYBÓR GRACZA: "“If it must be done, I will do it.""]** — Mówca: **Player**
+> "“If it must be done, I will do it.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[184]`
+
+### Węzeł `[182]`
+Mówca: **Petr Vectern**
+> ""The reformists are pretty loud about their thoughts on the presidential powers, Anton. You know they think this position breeds dictators.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[186]`
+  - -> `[175]`
+  - -> `[154]`
+
+### Węzeł `[183]`
+**[WYBÓR GRACZA: "“Can't we avoid strengthening the Assembly?""]** — Mówca: **Player**
+> "“Can't we avoid strengthening the Assembly?""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[204]`
+
+### Węzeł `[184]`
+Mówca: **Lucian Galade**
+> "“According to the initial draft we made with the reformists, there are two changes to the Constitution that are not open for their discussion.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[109]`
+
+### Węzeł `[185]`
+**[WYBÓR GRACZA: "“I see that. But we will move towards this direction for now.""]** — Mówca: **Player**
+> "“I see that. But we will move towards this direction for now.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[243]`
+
+### Węzeł `[186]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> "“I don't care what they think. We can handle them.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[157]`
+
+### Węzeł `[187]`
+Mówca: **Lucian Galade**
+> "“First, the Supreme Court will no longer vote on constitutional amendments.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[123]`
+
+### Węzeł `[188]`
+Mówca: **Lucian Galade**
+> "“The entire process will take a long time. But we must start working with a reform committee to evaluate all possibilities for a new Constitution as soon as possible.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[88]`
+  - -> `[89]`
+  - -> `[90]`
+
+### Węzeł `[189]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Intention = true)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Autocrat_Intention"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[194]`
+
+### Węzeł `[190]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Intention = true)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Dictator_Intention"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[193]`
+
+### Węzeł `[191]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Intention = true)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Reformist_Intention"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[192]`
+
+### Węzeł `[192]`
+Mówca: **Lucian Galade**
+> "“We will form a reform committee together with all parties and start reaching out to all the stakeholders in the Assembly and the Court for a new Constitution.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[195]`
+
+### Węzeł `[193]`
+Mówca: **Lucian Galade**
+> "“We will form a reform committee and start talking with all stakeholders in the Assembly and the Court to see if such changes to the Constitution would be possible.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[196]`
+
+### Węzeł `[194]`
+Mówca: **Lucian Galade**
+> "“Let us at least work with a reform committee to start talking with all stakeholders in the Assembly and the Court just to query opinions. I'll try to reach out to the Old Guard, in the meantime.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[197]`
+
+### Węzeł `[195]`
+Mówca: **Petr Vectern**
+> ""By later in the year, we should have an idea of the reform contents and what the other parties want.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[31]`
+
+### Węzeł `[196]`
+Mówca: **Petr Vectern**
+> ""By later in the year, we should know more about the reform contents and how to balance the clauses of the new Constitution.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[31]`
+
+### Węzeł `[197]`
+Mówca: **Petr Vectern**
+> ""By later in the year, we should have an idea about the reform contents and what the other parties want. Then we can decide whether to pull the trigger.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[31]`
+
+### Węzeł `[198]`
+**[WYBÓR GRACZA: "“Our party must fall in line with our position. We can't have a strong divide.""]** — Mówca: **Player**
+> "“Our party must fall in line with our position. We can't have a strong divide.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[201]`
+
+### Węzeł `[199]`
+**[WYBÓR GRACZA: "“The USP reformists aren't wrong to agree that we need change, but we should be in charge.""]** — Mówca: **Player**
+> "“The USP reformists aren't wrong to agree that we need change, but we should be in charge.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[200]`
+
+### Węzeł `[200]`
+Mówca: **Petr Vectern**
+> ""We can't let the PFJP leadership take the spotlight on this.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[75]`
+
+### Węzeł `[201]`
+Mówca: **Petr Vectern**
+> ""True. If our party fractures, it's the opposition that will benefit.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[75]`
+
+### Węzeł `[202]`
+**[WYBÓR GRACZA: "“Mr. Ricter could be a potential ally in our goal to maintain a majority in the Assembly.""]** — Mówca: **Player**
+> "“Mr. Ricter could be a potential ally in our goal to maintain a majority in the Assembly.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[203]`
+
+### Węzeł `[203]`
+Mówca: **Lucian Galade**
+> "“He's definitely key in this.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[75]`
+
+### Węzeł `[204]`
+Mówca: **Narrator**
+> "Petr looked troubled."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[163]`
+
+### Węzeł `[205]`
+Mówca: **Narrator**
+> "Lucian raised an eyebrow."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[110]`
+
+### Węzeł `[206]`
+Mówca: **Narrator**
+> "Lucian nodded."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[191]`
+
+### Węzeł `[207]`
+Mówca: **Narrator**
+> "Petr nodded in agreement."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[126]`
+
+### Węzeł `[208]`
+Mówca: **Narrator**
+> "Petr shook his head."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[136]`
+
+### Węzeł `[209]`
+Mówca: **Narrator**
+> "Lucian scratched his head."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[189]`
+
+### Węzeł `[210]`
+**[WYBÓR GRACZA: "“I won't be bought, it won't happen.”"]** — Mówca: **Player**
+> "“I won't be bought, it won't happen.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[285]`
+
+### Węzeł `[211]`
+**[WYBÓR GRACZA: "“I will enter a dialogue with them eventually. We need to be diplomatic.”"]** — Mówca: **Player**
+> "“I will enter a dialogue with them eventually. We need to be diplomatic.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[286]`
+
+### Węzeł `[212]`
+Mówca: **Lucian Galade**
+> "“However, to reform the constitution we must receive a two-thirds majority in the Grand National Assembly, which is 166 votes. *And* a simple majority in the Supreme Court that equates to 6 votes.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[213]`
+
+### Węzeł `[213]`
+Mówca: **Lucian Galade**
+> "“After we have settled on how to proceed, we will need to talk with our party figures. Our first goal must be to get the 150 signatures needed to start the process.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[245]`
+
+### Węzeł `[214]`
+Mówca: **Lucian Galade**
+> "“Of course.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[157]`
+
+### Węzeł `[215]`
+Mówca: **Narrator**
+> "Lucian looked at his watch."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[216]`
+
+### Węzeł `[216]`
+Mówca: **Lucian Galade**
+> "“Well then, gentlemen. Precisely 30 minutes.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[42]`
+
+### Węzeł `[217]`
+Mówca: **Lucian Galade**
+> "“Talk to you soon, sir. I will keep in touch.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[218]`
+
+### Węzeł `[218]`
+Mówca: **Petr Vectern**
+> "“See you both at the next meeting.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[43]`
+
+### Węzeł `[219]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_Backstab == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[220]`
+  - -> `[221]`
+
+### Węzeł `[220]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_Backstab == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Party_Takeover_Backstab"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[222]`
+
+### Węzeł `[221]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Party_Takeover_Backstab == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Party_Takeover_Backstab"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[79]`
+
+### Węzeł `[222]`
+Mówca: **Lucian Galade**
+> "“True. But we can't let the Old Guard manipulate us and then backstab us, like we did with Alphonso.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[86]`
+  - -> `[85]`
+  - -> `[87]`
+
+### Węzeł `[223]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: Lucian Arrives For Political Overview)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[3]`
+
+### Węzeł `[224]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: Jump to: [Lucian Arrives For Political Overview])*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[223]`
+
+### Węzeł `[225]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: Jump to: [Lucian Arrives For Political Overview])*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[223]`
+
+### Węzeł `[226]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: Jump to: [Lucian Arrives For Political Overview])*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[223]`
+
+### Węzeł `[227]`
+Mówca: **Lucian Galade**
+> "“Frens Ricter, leader of the reformists, believes that true change can only be accomplished by transferring some of our powers to the Assembly. I will move into the details of their demands shortly.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[50]`
+  - -> `[51]`
+  - -> `[53]`
+
+### Węzeł `[228]`
+Mówca: **Petr Vectern**
+> "“We did it Anton, we won! Finally! All those years with our noses to the grindstone paid off.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[246]`
+
+### Węzeł `[229]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: EnableNews("G_Rumburg");)*
+- **Efekt (`userScript`):** `EnableNews("G_Rumburg");`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[247]`
+
+### Węzeł `[230]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn01_LT_CampaignBill = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn01_LT_CampaignBill"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[255]`
+
+### Węzeł `[231]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn01_Holsord_PublicOpinion = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn01_Holsord_PublicOpinion"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[230]`
+
+### Węzeł `[232]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn01_Deyr_IncreasingHomeless = true;
+BaseGameSupport.Report_Turn01_Holsord_PoliceFireReport = true;
+BaseGameSupport.News_Turn01_HP_FireStrikesHSU = true;
+BaseGameSupport.News_Turn01_HP_Committee = true;
+BaseGameSupport.News_Turn01_LT_NationalLeagueSeason = true;
+BaseGameSupport.News_Turn01_G_RiziaGas = true;
+BaseGame.Policy_Law_ReformCommittee = true;
+BaseGameSupport.News_Turn01_E_AlphonsoLeavesLotherberg = true;
+BaseGameSupport.News_Turn01_R_RediscoveringIzzam = true;
+BaseGameSupport.Report_Turn01_Holsord_GNATourismBill = true;
+BaseGameSupport.Report_Turn01_Leiren_ProtectNatureMarch = true;
+BaseGameSupport.Report_Turn01_Narbel_GasomDiscoveries = true;)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn01_Deyr_IncreasingHomeless"] = true;
+Variable["BaseGameSupport.Report_Turn01_Holsord_PoliceFireReport"] = true;
+Variable["BaseGameSupport.News_Turn01_HP_FireStrikesHSU"] = true;
+Variable["BaseGameSupport.News_Turn01_HP_Committee"] = true;
+Variable["BaseGameSupport.News_Turn01_LT_NationalLeagueSeason"] = true;
+Variable["BaseGameSupport.News_Turn01_G_RiziaGas"] = true;
+Variable["BaseGame.Policy_Law_ReformCommittee"] = true;
+Variable["BaseGameSupport.News_Turn01_E_AlphonsoLeavesLotherberg"] = true;
+Variable["BaseGameSupport.News_Turn01_R_RediscoveringIzzam"] = true;
+Variable["BaseGameSupport.Report_Turn01_Holsord_GNATourismBill"] = true;
+Variable["BaseGameSupport.Report_Turn01_Leiren_ProtectNatureMarch"] = true;
+Variable["BaseGameSupport.Report_Turn01_Narbel_GasomDiscoveries"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[38]`
+
+### Węzeł `[233]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Democratic += 1)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Democratic"] = Variable["BaseGame.Democratic"] + 1;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[54]`
+
+### Węzeł `[234]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Democratic += 1)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Democratic"] = Variable["BaseGame.Democratic"] + 1;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[91]`
+
+### Węzeł `[235]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Democratic -= 1)*
+- **Efekt (`userScript`):** `Variable["BaseGame.Democratic"] = Variable["BaseGame.Democratic"] - 1;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[101]`
+
+### Węzeł `[236]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_MoreExecutivePower = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_MoreExecutivePower"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[116]`
+
+### Węzeł `[237]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_DestroyJudiciary = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_DestroyJudiciary"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[116]`
+
+### Węzeł `[238]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_StrengthenYourPosition = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_StrengthenYourPosition"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[116]`
+
+### Węzeł `[239]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[118]`
+
+### Węzeł `[240]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[209]`
+
+### Węzeł `[241]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[122]`
+
+### Węzeł `[242]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithReformists"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[172]`
+
+### Węzeł `[243]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[209]`
+
+### Węzeł `[244]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards = true)*
+- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn01_Reform_WorkWithOldGuards"] = true;`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[153]`
+
+### Węzeł `[245]`
+Mówca: **Lucian Galade**
+> "“Following the greenlight from the USP, we will reach out to the other party leaders to see if they would back our draft. The last step is to convince the justices of the Court.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[188]`
+
+### Węzeł `[246]`
+Mówca: **Narrator**
+> "Petr's eyes sparkled. The strain of the past months had put a damper on his usual rakish charm, but today he was looking and acting more like his old self. He loosened his tie and undid the top two buttons of his shirt."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[229]`
+
+### Węzeł `[247]`
+Mówca: **Petr Vectern**
+> ""Enjoying the new secretary I picked out for you? Thought you'd appreciate her gorgeous set of... talents. It's a shame the rest of your staff aren't as easy on the eyes.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[248]`
+
+### Węzeł `[248]`
+Mówca: **Narrator**
+> "He gestured to the slight paunch that protruded over his waistband."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[5]`
+
+### Węzeł `[249]`
+Mówca: **Narrator**
+> "Lucian spoke in soft, clipped tones that immediately drew your attention towards what he had to say. Petr and I waited for him to proceed."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[44]`
+
+### Węzeł `[250]`
+Mówca: **Petr Vectern**
+> "“We did it Anton, we won! Finally! The bribery, the backstabbing -- it's all paid off.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[246]`
+
+### Węzeł `[251]`
+Mówca: **Petr Vectern**
+> "“We did it Anton, we won! Finally! All those games we played with the media paid off.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[246]`
+
+### Węzeł `[252]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_Backstab == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[253]`
+  - -> `[254]`
+
+### Węzeł `[253]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_Backstab == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Party_Takeover_Backstab"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[250]`
+
+### Węzeł `[254]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Party_Takeover_Backstab == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Party_Takeover_Backstab"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[228]`
+
+### Węzeł `[255]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_PublicBlame == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[256]`
+  - -> `[257]`
+
+### Węzeł `[256]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_Takeover_PublicBlame == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Party_Takeover_PublicBlame"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[251]`
+
+### Węzeł `[257]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Party_Takeover_PublicBlame == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Party_Takeover_PublicBlame"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[252]`
+
+### Węzeł `[258]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[259]`
+  - -> `[260]`
+
+### Węzeł `[259]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[261]`
+
+### Węzeł `[260]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Military == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[262]`
+
+### Węzeł `[261]`
+Mówca: **Lucian Galade**
+> "“Our election campaign promised to focus on the military. This was a safe choice. The military and the general staff are a powerful element in the state, and as history tells us, a dangerous one too.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[264]`
+  - -> `[265]`
+  - -> `[277]`
+  - -> `[280]`
+
+### Węzeł `[262]`
+Mówca: **Lucian Galade**
+> "“The military and the general staff are a powerful element in the state, and as history tells us, a dangerous one too. We do have some room to make structural changes -- by reducing their budget, for example. But it is quite limited.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[279]`
+  - -> `[277]`
+  - -> `[280]`
+  - -> `[266]`
+  - -> `[267]`
+
+### Węzeł `[263]`
+**[WYBÓR GRACZA: "“I want to work with them anyway. The new administration will be open to talk to businessmen.”"]** — Mówca: **Player**
+> "“I want to work with them anyway. The new administration will be open to talk to businessmen.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[284]`
+
+### Węzeł `[264]`
+**[WYBÓR GRACZA: "“The military can be close allies. And with the Rumburg threat on the horizon, we need them.”"]** — Mówca: **Player**
+> "“The military can be close allies. And with the Rumburg threat on the horizon, we need them.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[269]`
+
+### Węzeł `[265]`
+**[WYBÓR GRACZA: "“The Sordish Armed Forces represent our pride as a nation and will be funded as promised.”"]** — Mówca: **Player**
+> "“The Sordish Armed Forces represent our pride as a nation and will be funded as promised.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[270]`
+
+### Węzeł `[266]`
+**[WYBÓR GRACZA: "“With the Rumburg threat on the horizon, we can't reduce our defense capability and anger our General Staff.”"]** — Mówca: **Player**
+> "“With the Rumburg threat on the horizon, we can't reduce our defense capability and anger our General Staff.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[271]`
+
+### Węzeł `[267]`
+**[WYBÓR GRACZA: "“The military has been nothing but a burden on our society. We should do something drastic -- like cutting their funding.”"]** — Mówca: **Player**
+> "“The military has been nothing but a burden on our society. We should do something drastic -- like cutting their funding.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[272]`
+
+### Węzeł `[268]`
+**[WYBÓR GRACZA: "“If they prove to be a political threat in the future, we can get rid of them.”"]** — Mówca: **Player**
+> "“If they prove to be a political threat in the future, we can get rid of them.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[273]`
+
+### Węzeł `[269]`
+Mówca: **Lucian Galade**
+> "“Rumburg is a massive threat. One that also requires us to ally with other, stronger nations.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[270]`
+Mówca: **Lucian Galade**
+> "“That will ensure they will be on our side unless we do something drastic in the course of our term.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[271]`
+Mówca: **Lucian Galade**
+> "“I would advise the same. The budget should be maintained and we should refrain from confronting the military too directly.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[272]`
+Mówca: **Lucian Galade**
+> "“That is possible, but we can be sure that there will be a strong negative reaction. If we push the military too far, it could cause real trouble.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[273]`
+Mówca: **Lucian Galade**
+> "“Bold strategy Mr. President. One that could work, but we would need to amend the constitution first. Let's not get ahead of ourselves.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[274]`
+Mówca: **Petr Vectern**
+> "“If we act strongly against the military, both of those guys will unite against us. I agree with Lucian. We need to tread carefully here.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[215]`
+
+### Węzeł `[275]`
+Mówca: **Lucian Galade**
+> "“Defense Minister Iosef Lancea is more loyal to us compared to General Kruger. A fact that obviously can change with our actions. Either way, I see a potential rift between the two since they are clearly of different minds.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[274]`
+
+### Węzeł `[276]`
+Mówca: **Lucian Galade**
+> "“None of us want to live through the 1927 scenario again.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[277]`
+**[WYBÓR GRACZA: "“I don't want to die in prison just like Artor S. Wisci did.”"]** — Mówca: **Player**
+> "“I don't want to die in prison just like Artor S. Wisci did.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[276]`
+
+### Węzeł `[278]`
+Mówca: **Lucian Galade**
+> "“It is sound to listen to them but they have very biased and narrow opinions. Nationalism clouds their minds. General Kruger is a specter of the past.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[275]`
+
+### Węzeł `[279]`
+**[WYBÓR GRACZA: "“I want to receive the advice of the military before making up my mind.”"]** — Mówca: **Player**
+> "“I want to receive the advice of the military before making up my mind.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[278]`
+
+### Węzeł `[280]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Intention == true)*
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[281]`
+  - -> `[282]`
+
+### Węzeł `[281]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Intention == true)*
+- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Dictator_Intention"] == true`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[268]`
+
+### Węzeł `[282]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Dictator_Intention == true))*
+- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Dictator_Intention"] == true) == false`
+- **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
+
+### Węzeł `[283]`
+**[WYBÓR GRACZA: "“We won't let these privileged, greedy, and snobby capitalists run the country.”"]** — Mówca: **Player**
+> "“We won't let these privileged, greedy, and snobby capitalists run the country.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[287]`
+
+### Węzeł `[284]`
+Mówca: **Lucian Galade**
+> "“It's always easier for the administration to have businesses' support.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[37]`
+
+### Węzeł `[285]`
+Mówca: **Lucian Galade**
+> "“Alphonso said the same thing. I doubt there was anybody else to turn to in his case.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[37]`
+
+### Węzeł `[286]`
+Mówca: **Lucian Galade**
+> "“Wise approach. It's good to understand and see if we can reach a middle ground.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[37]`
+
+### Węzeł `[287]`
+Mówca: **Lucian Galade**
+> "“Let's not underestimate their influence. These are not harmless people either.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[37]`
+
+### Węzeł `[288]`
+Mówca: **Petr Vectern**
+> "“He'd be a useful ally as well. Tusk has an incredible network and owns a good amount of Bergia Steel.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[41]`
+
+### Węzeł `[289]`
+**[WYBÓR GRACZA: "“Tusk is heading the group. We should make sure he is on our side.”"]** — Mówca: **Player**
+> "“Tusk is heading the group. We should make sure he is on our side.”"
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[288]`
+
+### Węzeł `[290]`
+Mówca: **Narrator**
+> "Petr looked troubled."
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[168]`
+
+### Węzeł `[291]`
+**[WYBÓR GRACZA]** — Mówca: **Player**
+> ""That's exactly what I'm aiming to do.""
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[214]`
+
+### Węzeł `[292]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: End();)*
+- **Efekt (`userScript`):** `End();`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> `[2]`
+
+### Węzeł `[293]`
+Mówca: **Lucian Galade**
+*(Węzeł logiki narracyjnej: EnableCollectionItem("CollectionItem_WhiskeyBottle");)*
+- **Efekt (`userScript`):** `EnableCollectionItem("CollectionItem_WhiskeyBottle");`
+- **Połączenia wychodzące (`outgoingLinks`):**
+  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `5` (*Sordland/Turn01/Petr Opens Whisky*), Węzeł `[1]`
