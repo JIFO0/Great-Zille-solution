@@ -52,7 +52,7 @@ namespace GreatZilleSolution
         {
             if (!IsOpen) return;
             Initialize();
-            _windowRect = GUI.Window(9902, _windowRect, (GUI.WindowFunction)DrawWindowContent, "[Zille War Engine] Full Map & Region Layout Editor");
+            _windowRect = GUI.Window(9902, _windowRect, (GUI.WindowFunction)DrawWindowContent, "[Zille War Engine] Full Map & Region Layout Editor | JIFO (jifo.dev)");
         }
 
         private void DrawWindowContent(int id)

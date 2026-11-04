@@ -31,7 +31,7 @@ namespace GreatZilleSolution
         public void DrawGUI()
         {
             if (!IsOpen) return;
-            _window = GUI.Window(9903, _window, (GUI.WindowFunction)DrawWindow, "[Zille Theatre] Provinces, scale, units, reinforcements");
+            _window = GUI.Window(9903, _window, (GUI.WindowFunction)DrawWindow, "[Zille Theatre] Live Authoring | JIFO (jifo.dev)");
         }
 
         private static float _nextOrderTick;

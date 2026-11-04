@@ -3,7 +3,7 @@ using UnityEngine;
 using Il2Cpp;
 using System.Reflection;
 
-[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.9", "RIOT")]
+[assembly: MelonInfo(typeof(GreatZilleSolution.GreatZilleMod), "Great Zille Solution", "0.4.9", "JIFO", "https://jifo.dev")]
 [assembly: MelonGame("Torpor Games", "Suzerain")]
 
 namespace GreatZilleSolution
@@ -24,6 +24,7 @@ namespace GreatZilleSolution
             Log = LoggerInstance;
             Log.Msg("=================================================");
             Log.Msg(" [Great Zille Solution] Military & Narrative Mod ");
+            Log.Msg(" Author: JIFO | Website: https://jifo.dev         ");
             Log.Msg(" Version: 0.4.9 (Theatre menu: scale, provinces, units) ");
             Log.Msg(" Initializing Dialogue & War Hooks manually...   ");
             Log.Msg("=================================================");
@@ -123,15 +124,15 @@ namespace GreatZilleSolution
                 if (!nativeDeployment)
                 {
                     GUI.color = Color.white;
-                    string statusText = "[ Great Zille v0.4.9 | F9 Wojna | F10 Mapa | F11 Teatr ]";
-                    GUI.Box(new Rect(Screen.width - 470, 10, 460, 28), statusText);
+                    string statusText = "[ Great Zille v0.4.9 by JIFO (jifo.dev) | F9 Wojna | F10 Mapa | F11 Teatr ]";
+                    GUI.Box(new Rect(Screen.width - 550, 10, 540, 28), statusText);
                     DrawBottomLeftToolbar();
                 }
 
                 // Draw Debug War Menu
                 if (_showDebugMenu)
                 {
-                    _debugWindowRect = GUI.Window(9901, _debugWindowRect, (GUI.WindowFunction)DrawDebugWindow, "[Great Zille Solution] Tactical & Story War Debugger");
+                    _debugWindowRect = GUI.Window(9901, _debugWindowRect, (GUI.WindowFunction)DrawDebugWindow, "[Great Zille Solution] War Debugger | JIFO (jifo.dev)");
                 }
 
                 // Draw Interactive Tile & Map Editor Window
@@ -168,7 +169,7 @@ namespace GreatZilleSolution
 
             // Expanded Bottom-Left Panel
             float panelWidth = 205f;
-            float panelHeight = 428f;
+            float panelHeight = 448f;
             float panelX = padding;
             float panelY = Screen.height - panelHeight - padding;
             Rect panelRect = new Rect(panelX, panelY, panelWidth, panelHeight);
@@ -263,6 +264,8 @@ namespace GreatZilleSolution
             {
                 _dockExpanded = false;
             }
+            curY += 22f;
+            GUI.Label(new Rect(btnX, curY, btnW, 18f), "<size=10><color=#90cdf4>by JIFO • jifo.dev</color></size>");
         }
 
         private void DrawDebugWindow(int windowId)
@@ -271,6 +274,7 @@ namespace GreatZilleSolution
             float w = 418f;
             float y = 26f;
 
+            GUI.Label(new Rect(x, y, w, 20f), "<b>Mod Author:</b> JIFO (<color=#63b3ed>https://jifo.dev</color>)"); y += 20f;
             GUI.Label(new Rect(x, y, w, 20f), $"<b>Campaign Phase:</b> {ZilleCampaignState.CurrentPhase}"); y += 20f;
             GUI.Label(new Rect(x, y, w, 20f), $"<b>Sentiment Level:</b> {ZilleCampaignState.MilitarySentimentLevel}"); y += 20f;
             GUI.Label(new Rect(x, y, w, 20f), $"<b>Chosen Doctrine:</b> {ZilleCampaignState.ChosenPath}"); y += 20f;

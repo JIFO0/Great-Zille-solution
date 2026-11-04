@@ -1,6 +1,7 @@
 # Project: Great Zille Solution — Development Log
 
 ## Overview
+- **Author:** JIFO ([jifo.dev](https://jifo.dev))
 - **Game:** Suzerain (Torpor Games)
 - **Engine:** Unity 6 (`6000.3.9f1 x64`, IL2CPP)
 - **Goal:** Modular injection of a tactical war campaign and narrative arc against Wehlen for the recovery of Zille.

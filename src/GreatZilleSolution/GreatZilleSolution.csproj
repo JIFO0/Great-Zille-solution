@@ -9,6 +9,14 @@
     <LangVersion>latest</LangVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Version>0.4.9</Version>
+    <Authors>JIFO</Authors>
+    <Company>jifo.dev</Company>
+    <Product>Great Zille Solution</Product>
+    <Description>Military and Narrative Expansion Mod for Suzerain: Rizia by JIFO (https://jifo.dev)</Description>
+    <Copyright>Copyright © 2026 JIFO (jifo.dev)</Copyright>
+    <PackageProjectUrl>https://jifo.dev</PackageProjectUrl>
+    <RepositoryUrl>https://jifo.dev</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
