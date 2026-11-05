@@ -1,0 +1,77 @@
+{
+    "items": [
+        {
+            "Id": "0x0100006C00000D12",
+            "Path": "Rizia/Country Details",
+            "IsWIP": false,
+            "Notes": "",
+            "NameInDatabase": "CountryDetails_Rizia",
+            "AppBundleProperties": {
+                "StoryPacks": [
+                    "StoryPack_Rizia"
+                ]
+            },
+            "CountryDetailsPanelProperties": {
+                "Title": "Kingdom of Rizia",
+                "Leader": "Romus Toras",
+                "Capital": "Porte Drazon",
+                "Subtitle": "Anchored in Gold",
+                "ImagePath": "Codex Entries/c_rizia",
+                "CodexEntry": "Locations_Countries_Rizia",
+                "Government": "Constitutional Monarchy",
+                "Demographics": [
+                    "Rizia_Ethnicity",
+                    "Rizia_Religion",
+                    "Rizia_LastHouseElection",
+                    "Rizia_Age",
+                    "Rizia_PopPerRegion",
+                    "Rizia_GDPPerRegion"
+                ],
+                "GdpWorldRank": "14th",
+                "StatusEffects": [
+                    "Country_AN",
+                    "Country_GRACE",
+                    "Country_OMEC"
+                ],
+                "OfficialLanguage": "Rizian",
+                "ConditionalStatusEffectGroups": []
+            }
+        },
+        {
+            "Id": "0x0100006C00000940",
+            "Path": "Sordland/Country Details",
+            "IsWIP": false,
+            "Notes": "",
+            "NameInDatabase": "CountryDetails_Sordland",
+            "AppBundleProperties": {
+                "StoryPacks": [
+                    "StoryPack_Main"
+                ]
+            },
+            "CountryDetailsPanelProperties": {
+                "Title": "Republic of Sordland",
+                "Leader": "Anton Rayne",
+                "Capital": "Holsord",
+                "Subtitle": "A Morgna wes core",
+                "ImagePath": "Codex Entries/c_sordland",
+                "CodexEntry": "History_Timeline_RepublicOfSordland",
+                "Government": "Presidential Republic",
+                "Demographics": [
+                    "Sordland_Ethnicity",
+                    "Sordland_Religion",
+                    "Sordland_LastElection",
+                    "Sordland_Age",
+                    "Sordland_PopPerRegion",
+                    "Sordland_GDPPerRegion"
+                ],
+                "GdpWorldRank": "16th",
+                "StatusEffects": [
+                    "Country_AN",
+                    "Country_OMEC"
+                ],
+                "OfficialLanguage": "Sordish",
+                "ConditionalStatusEffectGroups": []
+            }
+        }
+    ]
+}
