@@ -62,21 +62,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 32
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Paskal Beniwoll): `--;`
-- Węzeł `[10]` (Paskal Beniwoll): `-- HUGO WANTS VINA TO SUCCEED;`
-- Węzeł `[11]` (Paskal Beniwoll): `-- HUGO WANTS YOUR SON TO SUCCEED;`
-- Węzeł `[15]` (Paskal Beniwoll): `-- HUGO DOESNT CARE ABOUT SUCCESSION;`
-- Węzeł `[22]` (Paskal Beniwoll): `-- HUGO AGAINST;`
-- Węzeł `[32]` (Paskal Beniwoll): `-- HUGO AGAINST;`
-- Węzeł `[36]` (Paskal Beniwoll): `-- AZAROS SUPPORT;`
-- Węzeł `[40]` (Paskal Beniwoll): `-- NEEDS PROMISE OF YOUR SON'S SUCCESSION;`
-- *...oraz 24 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -85,912 +75,912 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC...."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `551` (*Rizia/Turn 10/REFORM TALKS/REFORM TALKS Conversation*), Węzeł `[1774]`
+  - -> `[1774]`
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Refor..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true  or  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true  or  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true  or  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true  or  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.B..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.B..."*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Vina"] == true  and  Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Vina"] == true  and  Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "// HUGO WANTS VINA TO SUCCEED"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Vina"] == true  and  Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.BirthdayGathering_Invited_Vina == true && RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Vina"] == true  and  Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_Marriage..."*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO WANTS VINA TO SUCCEED)*
-- **Efekt (`userScript`):** `-- HUGO WANTS VINA TO SUCCEED;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO WANTS VINA TO SUCCEED`
+- **Efekt skryptowy (`userScript`):** `-- HUGO WANTS VINA TO SUCCEED;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccess..."*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO WANTS YOUR SON TO SUCCEED)*
-- **Efekt (`userScript`):** `-- HUGO WANTS YOUR SON TO SUCCEED;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO WANTS YOUR SON TO SUCCEED`
+- **Efekt skryptowy (`userScript`):** `-- HUGO WANTS YOUR SON TO SUCCEED;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccess..."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_Marriage..."*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_Marria..."*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "// HUGO WANTS YOUR SON TO SUCCEED"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Vina_MarriageDecision_Rico == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "// HUGO DOESNT CARE ABOUT SUCCESSION"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO DOESNT CARE ABOUT SUCCESSION)*
-- **Efekt (`userScript`):** `-- HUGO DOESNT CARE ABOUT SUCCESSION;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO DOESNT CARE ABOUT SUCCESSION`
+- **Efekt skryptowy (`userScript`):** `-- HUGO DOESNT CARE ABOUT SUCCESSION;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Toras_Supports = true"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
-  - -> `[18]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Legislative_HouseOfLords == true && Riz..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 10"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Limited == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == true"*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Rico_Arrested == true )"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "// HUGO AGAINST"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Rico_Arrested == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Rico_Arrested == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true || (RiziaDLC.Reform_..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO AGAINST)*
-- **Efekt (`userScript`):** `-- HUGO AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- HUGO AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 10)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
-  - -> `[25]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 10"*)
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseToras >= 10)"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 10)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 10`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 10`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseToras >= 10))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 10) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseToras >= 10)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 10) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "// HUGO AGAINST"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
-  - -> `[28]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC...."*)
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Regions_Centralized == false && RiziaDL..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 10"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_ValenqirisLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Valenqiris"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "// HUGO AGAINST"*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[31]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaD..."*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 10"*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC...."*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO AGAINST)*
-- **Efekt (`userScript`):** `-- HUGO AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- HUGO AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_Ma..."*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true  and  (Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true  and  (Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "// NEEDS PROMISE OF YOUR SON'S SUCCESSION"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true  and  (Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_MarriageDecision_Rico == true || RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true  and  (Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AZAROS SUPPORT)*
-- **Efekt (`userScript`):** `-- AZAROS SUPPORT;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AZAROS SUPPORT`
+- **Efekt skryptowy (`userScript`):** `-- AZAROS SUPPORT;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true"*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
-  - -> `[39]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && (Rizi..."*)
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Legislative_HouseOfLords == true && (Ri..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  (Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true  or  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  (Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true  or  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "// AZAROS SUPPORT"*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  (Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true  or  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Legislative_HouseOfLords == true && (RiziaDLC.Reform_UpperHouse_Equal == true || RiziaDLC.Reform_UpperHouse_Limited == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  (Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true  or  Variable["RiziaDLC.Reform_UpperHouse_Limited"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true && (RiziaDLC.Vina_Ma..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // NEEDS PROMISE OF YOUR SON'S SUCCESSION)*
-- **Efekt (`userScript`):** `-- NEEDS PROMISE OF YOUR SON'S SUCCESSION;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// NEEDS PROMISE OF YOUR SON'S SUCCESSION`
+- **Efekt skryptowy (`userScript`):** `-- NEEDS PROMISE OF YOUR SON'S SUCCESSION;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Azaro_DemandsSuccess..."*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[43]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Legislative_HouseOfLords == true && Riz..."*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // TADDEUS AGAINST)*
-- **Efekt (`userScript`):** `-- TADDEUS AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// TADDEUS AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- TADDEUS AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO AGAINST)*
-- **Efekt (`userScript`):** `-- HUGO AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- HUGO AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
-  - -> `[48]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && (Rizi..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == fals..."*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro >= 10"*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaD..."*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AGAINST)*
-- **Efekt (`userScript`):** `-- AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro >= 10)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro >= 10"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseAzaro >= 10)"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro >= 10)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro"] >= 10`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro >= 10`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro"] >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "// AZAROS SUPPORT"*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseAzaro >= 10))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro"] >= 10) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseAzaro >= 10)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro"] >= 10) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
-  - -> `[62]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regio..."*)
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Reg..."*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Arrested"] == true  or  Variable["RiziaDLC.Reform_Regions_Centralized"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Arrested"] == true  or  Variable["RiziaDLC.Reform_Regions_Centralized"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "// TADDEUS AGAINST"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Arrested"] == true  or  Variable["RiziaDLC.Reform_Regions_Centralized"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regions_Centralized == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Arrested"] == true  or  Variable["RiziaDLC.Reform_Regions_Centralized"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Adarfo == true && Rizi..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AZAROS SUPPORT)*
-- **Efekt (`userScript`):** `-- AZAROS SUPPORT;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AZAROS SUPPORT`
+- **Efekt skryptowy (`userScript`):** `-- AZAROS SUPPORT;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
-  - -> `[66]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false"*)
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false)"*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "// MANUS SUPPORTS"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // SUPPORT)*
-- **Efekt (`userScript`):** `-- SUPPORT;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// SUPPORT`
+- **Efekt skryptowy (`userScript`):** `-- SUPPORT;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true"*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // MANUS SUPPORTS)*
-- **Efekt (`userScript`):** `-- MANUS SUPPORTS;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// MANUS SUPPORTS`
+- **Efekt skryptowy (`userScript`):** `-- MANUS SUPPORTS;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AGAINST)*
-- **Efekt (`userScript`):** `-- AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
-  - -> `[72]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon >= 5"*)
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseSazon >= 5)"*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon >= 5)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "// SUPPORT"*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseSazon >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseSazon >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
-  - -> `[75]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true)"*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform..."*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // NEED PROMISE OF VINA SUCCESSION)*
-- **Efekt (`userScript`):** `-- NEED PROMISE OF VINA SUCCESSION;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// NEED PROMISE OF VINA SUCCESSION`
+- **Efekt skryptowy (`userScript`):** `-- NEED PROMISE OF VINA SUCCESSION;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Sazon_DemandsSuccess..."*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == fals..."*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  or  Variable["RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  or  Variable["RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon >= 5"*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  or  Variable["RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false || RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  or  Variable["RiziaDLC.Situation_Law_ProvincialTax_BrenasLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_Brenas"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Legislative_HouseOfLords == true && Riz..."*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Legislative_HouseOfLords == true && RiziaDLC.Reform_UpperHouse_Equal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  and  Variable["RiziaDLC.Reform_UpperHouse_Equal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Monarch_Veto == true"*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Monarch_Veto == true)"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Monarch_Veto == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Monarch_Veto == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Monarch_Veto"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "// AZAROS SUPPORT"*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Monarch_Veto == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Monarch_Veto == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Monarch_Veto"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == fals..."*)
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "// AZAROS SUPPORT"*)
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false && (RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered == true || RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false  and  (Variable["RiziaDLC.Situation_Law_ProvincialTax_CardesseMontaklarLowered"] == true  or  Variable["RiziaDLC.Decision_Turn03_TaxSubsidyOne_CardesseMontaklar"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AGAINST)*
-- **Efekt (`userScript`):** `-- AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
-  - -> `[92]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false"*)
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "// AZAROS SUPPORT"*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
-  - -> `[95]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Adarfo == true && Rizi..."*)
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Adarfo == true && Ri..."*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true  and  Variable["RiziaDLC.Azaro_HasPowerToCoup"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true  and  Variable["RiziaDLC.Azaro_HasPowerToCoup"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "// TADDEUS AGAINST"*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true  and  Variable["RiziaDLC.Azaro_HasPowerToCoup"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Adarfo == true && RiziaDLC.Azaro_HasPowerToCoup == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true  and  Variable["RiziaDLC.Azaro_HasPowerToCoup"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Vina = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Vina"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Vina = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Vina"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Son = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Son"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Son = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_DemandsSuccessionPromise_Son"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Toras_Supports = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_Supports"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Toras_Supports = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Toras_Supports"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Azaro_DemandsSuccessionPromise_Son = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_DemandsSuccessionPromise_Son"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Azaro_DemandsSuccessionPromise_Son = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_DemandsSuccessionPromise_Son"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Azaro_Supports"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Sazon_DemandsSuccessionPromise_Vina = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Sazon_DemandsSuccessionPromise_Vina"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Sazon_DemandsSuccessionPromise_Vina = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Sazon_DemandsSuccessionPromise_Vina"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
-  - -> `[105]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC...."*)
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Regions_Centralized == false && RiziaDL..."*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.BirthdayGathering_ReformMovement_Present"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.BirthdayGathering_ReformMovement_Present"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "// HUGO DESPERATE AND WILLING TO BE OK WITH ADARFO"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.BirthdayGathering_ReformMovement_Present"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Regions_Centralized == false && RiziaDLC.BirthdayGathering_ReformMovement_Present == true && RiziaDLC.BirthdayGathering_Invited_Adarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false  and  Variable["RiziaDLC.BirthdayGathering_ReformMovement_Present"] == true  and  Variable["RiziaDLC.BirthdayGathering_Invited_Adarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == true"*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
-  - -> `[108]`
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC..."*)
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaD..."*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false ..."*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_UpperHouse_Advisory == false && (RiziaDLC.Reform_Legislative_HouseOfLords == true || RiziaDLC.Reform_Legislative_RegionalSenate == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_UpperHouse_Advisory"] == false  and  (Variable["RiziaDLC.Reform_Legislative_HouseOfLords"] == true  or  Variable["RiziaDLC.Reform_Legislative_RegionalSenate"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
-  - -> `[112]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "// NEED PROMISE OF VINA SUCCESSION"*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon >= 5"*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // OPEN)*
-- **Efekt (`userScript`):** `-- OPEN;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// OPEN`
+- **Efekt skryptowy (`userScript`):** `-- OPEN;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true"*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
-  - -> `[116]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform..."*)
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Refo..."*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "// SUPPORTS"*)
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_Regions_Centralized == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false"*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false"*)
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Regions_Centralized == false )"*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "// SUPPORTS"*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Regions_Centralized == false ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Regions_Centralized == false )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[120]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // SUPPORTS)*
-- **Efekt (`userScript`):** `-- SUPPORTS;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// SUPPORTS`
+- **Efekt skryptowy (`userScript`):** `-- SUPPORTS;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_ReformTalk_Sazon_Supports = true"*)
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // HUGO DESPERATE AND WILLING TO BE OK WITH ADARFO)*
-- **Efekt (`userScript`):** `-- HUGO DESPERATE AND WILLING TO BE OK WITH ADARFO;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// HUGO DESPERATE AND WILLING TO BE OK WITH ADARFO`
+- **Efekt skryptowy (`userScript`):** `-- HUGO DESPERATE AND WILLING TO BE OK WITH ADARFO;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true && RiziaDLC.B..."*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
-  - -> `[124]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Regions_Centralized == false"*)
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Regions_Centralized == false)"*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Regions_Centralized == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Regions_Centralized == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Regions_Centralized"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Legislative_HouseOfLords == true && Rizia..."*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Regions_Centralized == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Regions_Centralized == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Regions_Centralized"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: // AGAINST)*
-- **Efekt (`userScript`):** `-- AGAINST;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// AGAINST`
+- **Efekt skryptowy (`userScript`):** `-- AGAINST;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon >= 5"*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseSazon >= 5)"*)
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon >= 5)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "// OPEN"*)
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseSazon >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseSazon >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[125]`
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "// AGAINST"*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Arrested == true || RiziaDLC.Reform_Regio..."*)
 
 ### Węzeł `[130]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)

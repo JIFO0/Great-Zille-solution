@@ -50,18 +50,34 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 7
-- **Węzły modyfikujące stan gry:** 6
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[38]` (Paskal Beniwoll): `--;`
-- Węzeł `[140]` (Paskal Beniwoll): `--;`
-- Węzeł `[252]` (Paskal Beniwoll): `--;`
-- Węzeł `[307]` (Paskal Beniwoll): `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
-- Węzeł `[308]` (Paskal Beniwoll): `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
-- Węzeł `[309]` (Paskal Beniwoll): `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[20]` | **""I hope this has taught you all a valuable lesson.""** | `[52]` **Lucita Azaro**: ""From this point on, we will liv..."<br>`[53]` **Taddeus Azaro**: ""We are to live as commoners.""<br>*(oraz 1 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[66]` **Hugo Toras**: ""Without question.""<br>`[70]` **Lucita Azaro**: ""Yes. It has.""<br>*(oraz 1 innych odgałęzień)* |
+| `[39]` | **""Your province's armed forces answer directly to me now as well. Don't forget that.""** | `[52]` **Lucita Azaro**: ""From this point on, we will liv..."<br>`[53]` **Taddeus Azaro**: ""We are to live as commoners."" | `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false` | *Brak zmian stanu* | `[78]` **Hugo Toras**: ""They are yours to command.""<br>`[82]` **Lucita Azaro**: ""Their allegiance is strictly to..."<br>*(oraz 1 innych odgałęzień)* |
+| `[43]` | **""I am sorry. I truly didn't mean for all this to happen.""** | `[52]` **Lucita Azaro**: ""From this point on, we will liv..."<br>`[53]` **Taddeus Azaro**: ""We are to live as commoners.""<br>*(oraz 1 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[104]` **Hugo Toras**: ""I should have done more to secu..."<br>`[108]` **Lucita Azaro**: ""What happened at the birthday g..."<br>*(oraz 1 innych odgałęzień)* |
+| `[44]` | **""Power corrupts. You will thank me for this in the end.""** | `[52]` **Lucita Azaro**: ""From this point on, we will liv..."<br>`[53]` **Taddeus Azaro**: ""We are to live as commoners.""<br>*(oraz 1 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[90]` **Hugo Toras**: ""I am not complaining, Your Maje..."<br>`[94]` **Lucita Azaro**: ""You expect me to *thank* you?! ..."<br>*(oraz 1 innych odgałęzień)* |
+| `[45]` | **""Great. So what are you still doing here?""** | `[52]` **Lucita Azaro**: ""From this point on, we will liv..."<br>`[53]` **Taddeus Azaro**: ""We are to live as commoners.""<br>*(oraz 1 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[116]` **Narrator**: "Hugo placed both of his hands on..."<br>`[120]` **Narrator**: "Lucita's face filled with resolve."<br>*(oraz 1 innych odgałęzień)* |
+| `[141]` | **""Go, then. But I will never forget your act of cowardice.""** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..."<br>*(oraz 5 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[142]` | **""I expect nothing less than a complete and total victory.""** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[143]` | **""You have failed me as you have failed Rizia. Your name shall be written out of th..."** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..."<br>*(oraz 5 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[144]` | **""Despite the circumstances, I thank you both for your years of service.""** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..."<br>*(oraz 3 innych węzłów)* | `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)` | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[148]` | **""Despite the circumstances, I thank you for your years of service.""** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..."<br>*(oraz 3 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false` | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[150]` | **""You can't quit. Because you're fired.""** | `[122]` **Lucita Azaro**: ""Carlos, my father and I will co..."<br>`[129]` **Lucita Azaro**: ""Carlos and I will continue to s..."<br>*(oraz 3 innych węzłów)* | `Variable["RiziaDLC.Trait_FunnyKing"] == true` | *Brak zmian stanu* | `[149]` **Narrator**: "My security councilor numbly han..."<br>`[160]` **Narrator**: "Hugo numbly handed me a large fo..." |
+| `[253]` | **""Amazing work. Thank you.""** | `[216]` **Hugo Toras**: ""The bureaucratic fallout from t..."<br>`[220]` **Hugo Toras**: ""The bureaucratic fallout from t..."<br>*(oraz 10 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[263]` **Narrator**: "My advisors stood and bowed."<br>`[264]` **Narrator**: "My advisor stood and bowed." |
+| `[254]` | **""Good. Now please get out of my sights.""** | `[216]` **Hugo Toras**: ""The bureaucratic fallout from t..."<br>`[220]` **Hugo Toras**: ""The bureaucratic fallout from t..."<br>*(oraz 10 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[261]` **Narrator**: "My advisors hurriedly stood, bow..."<br>`[262]` **Narrator**: "My advisor stood, bowed and back..." |
+| `[265]` | **""Goodbye, Mr. Toras and Mr. Azaro.""** | `[261]` **Narrator**: "My advisors hurriedly stood, bow..."<br>`[263]` **Narrator**: "My advisors stood and bowed." | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[286]` **Narrator**: "Hugo didn't react. Taddeus merel..." |
+| `[275]` | **""Goodbye, Mr. Toras and Ms. Azaro.""** | `[261]` **Narrator**: "My advisors hurriedly stood, bow..."<br>`[263]` **Narrator**: "My advisors stood and bowed." | `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true` | *Brak zmian stanu* | `[285]` **Narrator**: "Hugo didn't react. I saw venom i..." |
+| `[276]` | **""Goodbye, Mr. Toras.""** | `[262]` **Narrator**: "My advisor stood, bowed and back..."<br>`[264]` **Narrator**: "My advisor stood and bowed." | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[289]` **Hugo Toras**: ""Goodbye, Romus."" |
+| `[277]` | **""Goodbye, Mr. Azaro.""** | `[262]` **Narrator**: "My advisor stood, bowed and back..."<br>`[264]` **Narrator**: "My advisor stood and bowed." | `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[288]` **Narrator**: "Taddeus cast his eyes downward." |
+| `[278]` | **""Goodbye, Ms. Azaro.""** | `[262]` **Narrator**: "My advisor stood, bowed and back..."<br>`[264]` **Narrator**: "My advisor stood and bowed." | `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true` | *Brak zmian stanu* | `[287]` **Narrator**: "I saw venom in Lucita's eyes." |
+| `[279]` | **""Meeting adjourned.""** | `[262]` **Narrator**: "My advisor stood, bowed and back..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[283]` **Narrator**: "Titus opened the door and ushere..."<br>`[305]` **Narrator**: "Titus opened the door and ushere..."<br>*(oraz 3 innych odgałęzień)* |
+| `[280]` | **""Until we meet again.""** | `[261]` **Narrator**: "My advisors hurriedly stood, bow..."<br>`[262]` **Narrator**: "My advisor stood, bowed and back..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[283]` **Narrator**: "Titus opened the door and ushere..."<br>`[305]` **Narrator**: "Titus opened the door and ushere..."<br>*(oraz 3 innych odgałęzień)* |
+| `[281]` | **""You're still my uncle, Hugo. I love and respect you greatly.""** | `[261]` **Narrator**: "My advisors hurriedly stood, bow..."<br>`[263]` **Narrator**: "My advisors stood and bowed."<br>*(oraz 2 innych węzłów)* | `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`<br>`(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false` | *Brak zmian stanu* | `[284]` **Narrator**: "Hugo didn't respond." |
+| `[282]` | **""A pox on your entire family.""** | `[262]` **Narrator**: "My advisor stood, bowed and back..."<br>`[264]` **Narrator**: "My advisor stood and bowed." | `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true` | *Brak zmian stanu* | `[290]` **Narrator**: "I saw venom in my ex-councilor's..." |
 
 ---
 
@@ -70,2067 +86,2111 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "I sat at the head of the long table in my council chambers."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `338` (*Rizia/Turn 10/CouncilMeeting*), Węzeł `[524]`
+  - -> `[524]`
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "I sat at the head of the long table in my council chambers."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[6]`
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Narrator: "Hugo sat across from me, a hollow look in his eyes."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Narrator: "Hugo and my security councilor sat across from me."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Narrator: "My security councilor sat across from me, looking despond..."*)
 
 ### Węzeł `[10]`
 Mówca: **Narrator**
 > "Hugo and my security councilor sat across from me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Narrator: "My uncle had a hollow look in his eyes."*)
 
 ### Węzeł `[11]`
 Mówca: **Narrator**
 > "My security councilor sat across from me, looking despondent."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[12]`
 Mówca: **Narrator**
 > "Hugo sat across from me, a hollow look in his eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Hugo Toras: ""Your Majesty... it is done.""*)
 
 ### Węzeł `[13]`
 Mówca: **Hugo Toras**
 > ""Your Majesty... it is done.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Hugo Toras: ""All members of House Toras have relinquished their title..."*)
 
 ### Węzeł `[14]`
 Mówca: **Hugo Toras**
 > ""All members of House Toras have relinquished their titles and estates.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_DuchessOfValenqiris == true"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_DuchessOfValenqiris == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_DuchessOfValenqiris == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_DuchessOfValenqiris == true"*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_DuchessOfValenqiris == true)"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_DuchessOfValenqiris == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_DuchessOfValenqiris"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_DuchessOfValenqiris == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_DuchessOfValenqiris"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Hugo Toras: ""With the exception of the Crown Princess, who shall rema..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_DuchessOfValenqiris == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_DuchessOfValenqiris"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_DuchessOfValenqiris == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_DuchessOfValenqiris"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Hugo Toras: ""Our cousin Hubertus no longer reigns over the province. ..."*)
 
 ### Węzeł `[18]`
 Mówca: **Hugo Toras**
 > ""With the exception of the Crown Princess, who shall remain in Monqiz but will no longer reign over the province.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Hugo Toras: ""Valenqiris is entirely yours.""*)
 
 ### Węzeł `[19]`
 Mówca: **Hugo Toras**
 > ""Valenqiris is entirely yours.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[20]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I hope this has taught you all a valuable lesson.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[52]` (Lucita Azaro), `[53]` (Taddeus Azaro), `[19]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Narrator: "Lucita nodded despondently."*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[24]`
 Mówca: **Narrator**
 > "Lucita nodded despondently."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Lucita Azaro: ""The same goes for my home province, Your Majesty.""*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
-  - -> `[27]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "Taddeus nodded despondently."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[28]`
 Mówca: **Narrator**
 > "Taddeus nodded despondently."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Taddeus Azaro: ""As is my home province, Your Majesty.""*)
 
 ### Węzeł `[29]`
 Mówca: **Lucita Azaro**
 > ""The same goes for my home province, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Lucita Azaro: ""The Azaros have ceded control of Cardesse-Montaklar. Our..."*)
 
 ### Węzeł `[30]`
 Mówca: **Taddeus Azaro**
 > ""As is my home province, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Taddeus Azaro: ""The Azaros have ceded control of Cardesse-Montaklar. Our..."*)
 
 ### Węzeł `[31]`
 Mówca: **Lucita Azaro**
 > ""The Azaros have ceded control of Cardesse-Montaklar. Our lands are officially the property of the Crown.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Lucita Azaro: ""From this point on, we will live as commoners.""*)
 
 ### Węzeł `[32]`
 Mówca: **Taddeus Azaro**
 > ""The Azaros have ceded control of Cardesse-Montaklar. Our lands are officially the property of the Crown.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Taddeus Azaro: ""We are to live as commoners.""*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Lucita Azaro: ""It is done, Your Majesty.""*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Taddeus Azaro: ""It is done, Your Majesty.""*)
 
 ### Węzeł `[36]`
 Mówca: **Lucita Azaro**
 > ""It is done, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Lucita Azaro: ""The Azaros have ceded control of Cardesse-Montaklar. Our..."*)
 
 ### Węzeł `[37]`
 Mówca: **Taddeus Azaro**
 > ""It is done, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Taddeus Azaro: ""The Azaros have ceded control of Cardesse-Montaklar. Our..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[40]`
-  - -> `[43]`
-  - -> `[44]`
-  - -> `[45]`
+  - -> `[20]` (*Player_Romus: ""I hope this has taught you all a valuable lesson.""*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false"*)
+  - -> `[43]` (*Player_Romus: ""I am sorry. I truly didn't mean for all this to happen.""*)
+  - -> `[44]` (*Player_Romus: ""Power corrupts. You will thank me for this in the end.""*)
+  - -> `[45]` (*Player_Romus: ""Great. So what are you still doing here?""*)
 
 ### Węzeł `[39]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Your province's armed forces answer directly to me now as well. Don't forget that.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false`
+- **Kontekst wejściowy (poprzednik):** `[52]` (Lucita Azaro), `[53]` (Taddeus Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
-  - -> `[42]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false"*)
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)"*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Player_Romus: ""Your province's armed forces answer directly to me now a..."*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_RemoveProvincialLevies == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_RemoveProvincialLevies"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[43]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I am sorry. I truly didn't mean for all this to happen.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[52]` (Lucita Azaro), `[53]` (Taddeus Azaro), `[19]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[44]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Power corrupts. You will thank me for this in the end.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[52]` (Lucita Azaro), `[53]` (Taddeus Azaro), `[19]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[45]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Great. So what are you still doing here?""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[52]` (Lucita Azaro), `[53]` (Taddeus Azaro), `[19]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
-  - -> `[48]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Hugo Toras: ""I have come to hand in my official resignation. I can no..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[49]`
 Mówca: **Hugo Toras**
 > ""I have come to hand in my official resignation. I can no longer serve as your Grand Vizier after my family's disgrace.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed ..."*)
 
 ### Węzeł `[50]`
 Mówca: **Hugo Toras**
 > ""Our cousin Hubertus no longer reigns over the province. He's scraped together what funds he can and intends to continue his world travels.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Hugo Toras: ""Valenqiris is entirely yours.""*)
 
 ### Węzeł `[51]`
 Mówca: **Narrator**
 > "My uncle had a hollow look in his eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Hugo Toras: ""Your Majesty... it is done.""*)
 
 ### Węzeł `[52]`
 Mówca: **Lucita Azaro**
 > ""From this point on, we will live as commoners.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[53]`
 Mówca: **Taddeus Azaro**
 > ""We are to live as commoners.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
-  - -> `[56]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Hugo Toras: ""Without question.""*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Lucita Azaro: ""I hate to entrust anyone else with our kingdom's nationa..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[60]`
 Mówca: **Lucita Azaro**
 > ""I hate to entrust anyone else with our kingdom's national security. But you'll understand why I cannot remain on the Royal Council.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == true"*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
-  - -> `[63]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed ..."*)
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Execute..."*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == true  or  Variable["RiziaDLC.Rico_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == true  or  Variable["RiziaDLC.Rico_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Hugo Toras: ""And every moment I spend in Porte Drazon is a crushing r..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == true  or  Variable["RiziaDLC.Rico_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Rico_Arrested == true || RiziaDLC.Rico_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == true  or  Variable["RiziaDLC.Rico_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Hugo Toras: ""And every moment I spend in Porte Drazon is a crushing r..."*)
 
 ### Węzeł `[64]`
 Mówca: **Hugo Toras**
 > ""And every moment I spend in Porte Drazon is a crushing reminder of my son's fate...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[65]`
 Mówca: **Hugo Toras**
 > ""And every moment I spend in Porte Drazon is a crushing reminder of the shame I endured...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[66]`
 Mówca: **Hugo Toras**
 > ""Without question.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
-  - -> `[69]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Lucita Azaro: ""Yes. It has.""*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[70]`
 Mówca: **Lucita Azaro**
 > ""Yes. It has.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[73]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Taddeus Azaro: ""Indeed. Neither I nor any other Azaro will ever challeng..."*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[74]`
 Mówca: **Taddeus Azaro**
 > ""Indeed. Neither I nor any other Azaro will ever challenge your power.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
-  - -> `[77]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Hugo Toras: ""They are yours to command.""*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[78]`
 Mówca: **Hugo Toras**
 > ""They are yours to command.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
-  - -> `[81]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Lucita Azaro: ""Their allegiance is strictly to the Crown now.""*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[82]`
 Mówca: **Lucita Azaro**
 > ""Their allegiance is strictly to the Crown now.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Taddeus Azaro: ""Their allegiance is to the Crown, as it always was.""*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[86]`
 Mówca: **Taddeus Azaro**
 > ""Their allegiance is to the Crown, as it always was.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
-  - -> `[89]`
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Hugo Toras: ""I am not complaining, Your Majesty.""*)
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[90]`
 Mówca: **Hugo Toras**
 > ""I am not complaining, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
+  - -> `[94]` (*Lucita Azaro: ""You expect me to *thank* you?! I--""*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[94]`
 Mówca: **Lucita Azaro**
 > ""You expect me to *thank* you?! I--""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Narrator: "She caught herself."*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
-  - -> `[97]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Taddeus Azaro: ""Yours is the judgement around which this kingdom revolve..."*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[98]`
 Mówca: **Taddeus Azaro**
 > ""Yours is the judgement around which this kingdom revolves. I will not question it.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[99]`
 Mówca: **Lucita Azaro**
 > ""Yes, Your Majesty. Perhaps I will.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[100]`
 Mówca: **Narrator**
 > "She caught herself."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Lucita Azaro: ""Yes, Your Majesty. Perhaps I will.""*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Hugo Toras: ""I should have done more to secure the rest of House Tora..."*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[104]`
 Mówca: **Hugo Toras**
 > ""I should have done more to secure the rest of House Toras' allegiance. The fault is mine.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
-  - -> `[107]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Lucita Azaro: ""What happened at the birthday gathering felt quite delib..."*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[108]`
 Mówca: **Lucita Azaro**
 > ""What happened at the birthday gathering felt quite deliberate to me, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
-  - -> `[111]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Taddeus Azaro: ""My daughter started all this when she betrayed our kingd..."*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[112]`
 Mówca: **Taddeus Azaro**
 > ""My daughter started all this when she betrayed our kingdom. We deserve our punishment.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
-  - -> `[115]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Narrator: "Hugo placed both of his hands on the table, palms up in a..."*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[116]`
 Mówca: **Narrator**
 > "Hugo placed both of his hands on the table, palms up in a sign of supplication."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Narrator: "Lucita's face filled with resolve."*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Narrator: "Regret was etched into Taddeus' features."*)
 
 ### Węzeł `[120]`
 Mówca: **Narrator**
 > "Lucita's face filled with resolve."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[121]`
 Mówca: **Narrator**
 > "Regret was etched into Taddeus' features."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[122]`
 Mówca: **Lucita Azaro**
 > ""Carlos, my father and I will continue to see the Pales war through. But my service to the Kingdom will end there.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
-  - -> `[142]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
+  - -> `[142]` (*Player_Romus: ""I expect nothing less than a complete and total victory.""*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_..."*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Lucita Azaro: ""Carlos, my father and I will continue to see the Pales w..."*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Lucita Azaro: ""Carlos and I will continue to see the Pales war through...."*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == true"*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pales_War == true)"*)
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pales_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pales_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
 
 ### Węzeł `[129]`
 Mówca: **Lucita Azaro**
 > ""Carlos and I will continue to see the Pales war through. But my service to the Kingdom will end there.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
-  - -> `[142]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
+  - -> `[142]` (*Player_Romus: ""I expect nothing less than a complete and total victory.""*)
 
 ### Węzeł `[130]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[131]`
-  - -> `[132]`
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_..."*)
 
 ### Węzeł `[131]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Lucita Azaro: ""My father may not have many years left in him. I'll retu..."*)
 
 ### Węzeł `[132]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Lucita Azaro: ""I know I risk receiving the same fate as my father. But ..."*)
 
 ### Węzeł `[133]`
 Mówca: **Lucita Azaro**
 > ""My father may not have many years left in him. I'll return to Cardesse-Montaklar and to my family.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[134]`
 Mówca: **Lucita Azaro**
 > ""I know I risk receiving the same fate as my father. But I hope you will let me go in peace.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[135]`
 Mówca: **Taddeus Azaro**
 > ""All my life, I believed I was destined for greatness. But here I am, Your Majesty. A broken man.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Taddeus Azaro: ""I deserve neither my noble title, my rank nor my positio..."*)
 
 ### Węzeł `[136]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
-  - -> `[138]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[137]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Taddeus Azaro: ""All my life, I believed I was destined for greatness. Bu..."*)
 
 ### Węzeł `[138]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[139]`
 Mówca: **Taddeus Azaro**
 > ""I deserve neither my noble title, my rank nor my position on this council. I am nothing.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[140]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
-  - -> `[143]`
-  - -> `[145]`
-  - -> `[151]`
+  - -> `[141]` (*Player_Romus: ""Go, then. But I will never forget your act of cowardice.""*)
+  - -> `[143]` (*Player_Romus: ""You have failed me as you have failed Rizia. Your name s..."*)
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_FunnyKing == true"*)
 
 ### Węzeł `[141]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Go, then. But I will never forget your act of cowardice.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro), `[133]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[142]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I expect nothing less than a complete and total victory.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[143]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You have failed me as you have failed Rizia. Your name shall be written out of the history books.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro), `[133]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[144]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Despite the circumstances, I thank you both for your years of service.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro), `[133]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[145]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
-  - -> `[147]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[146]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
+  - -> `[144]` (*Player_Romus: ""Despite the circumstances, I thank you both for your yea..."*)
 
 ### Węzeł `[147]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
+  - -> `[148]` (*Player_Romus: ""Despite the circumstances, I thank you for your years of..."*)
 
 ### Węzeł `[148]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Despite the circumstances, I thank you for your years of service.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro), `[133]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[149]`
 Mówca: **Narrator**
 > "My security councilor numbly handed me a large folder."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
+  - -> `[157]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[150]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You can't quit. Because you're fired.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
+- **Kontekst wejściowy (poprzednik):** `[122]` (Lucita Azaro), `[129]` (Lucita Azaro), `[133]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
 
 ### Węzeł `[151]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_FunnyKing == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_FunnyKing == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
-  - -> `[153]`
+  - -> `[152]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_FunnyKing == true"*)
+  - -> `[153]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Trait_FunnyKing == true)"*)
 
 ### Węzeł `[152]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_FunnyKing == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_FunnyKing == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Player_Romus: ""You can't quit. Because you're fired.""*)
 
 ### Węzeł `[153]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Trait_FunnyKing == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Trait_FunnyKing == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[154]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
-  - -> `[156]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == t..."*)
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[155]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[149]`
+  - -> `[149]` (*Narrator: "My security councilor numbly handed me a large folder."*)
 
 ### Węzeł `[156]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Narrator: "Hugo numbly handed me a large folder."*)
 
 ### Węzeł `[157]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[158]`
-  - -> `[159]`
+  - -> `[158]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[159]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[158]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[161]`
+  - -> `[161]` (*Lucita Azaro: ""This should be all the information my replacement needs.""*)
 
 ### Węzeł `[159]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Taddeus Azaro: ""This should be all the information my replacement needs.""*)
 
 ### Węzeł `[160]`
 Mówca: **Narrator**
 > "Hugo numbly handed me a large folder."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
+  - -> `[189]` (*Hugo Toras: ""This should be all the information my replacement needs.""*)
 
 ### Węzeł `[161]`
 Mówca: **Lucita Azaro**
 > ""This should be all the information my replacement needs.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[162]`
 Mówca: **Lucita Azaro**
 > ""Including an update on the recent unrest. As you can see, the protests have died down.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
 
 ### Węzeł `[163]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
-  - -> `[165]`
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
+  - -> `[165]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Unrest_NatDes_Happened == true)"*)
 
 ### Węzeł `[164]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Lucita Azaro: ""Including an update on the recent unrest. As you can see..."*)
 
 ### Węzeł `[165]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Unrest_NatDes_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Unrest_NatDes_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[166]`
 Mówca: **Taddeus Azaro**
 > ""This should be all the information my replacement needs.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[167]`
 Mówca: **Taddeus Azaro**
 > ""Including an update on the recent unrest. As you can see, the protests have died down.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
 
 ### Węzeł `[168]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
-  - -> `[170]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Unrest_NatDes_Happened == true)"*)
 
 ### Węzeł `[169]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Taddeus Azaro: ""Including an update on the recent unrest. As you can see..."*)
 
 ### Węzeł `[170]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Unrest_NatDes_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Unrest_NatDes_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[171]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
-  - -> `[173]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_As..."*)
 
 ### Węzeł `[172]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Lucita Azaro: ""The ringleader, Adarfo Sotelato, has been arrested. I ho..."*)
 
 ### Węzeł `[173]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[178]`
+  - -> `[178]` (*Lucita Azaro: ""The ringleaders have all been arrested. I trust they'll ..."*)
 
 ### Węzeł `[174]`
 Mówca: **Lucita Azaro**
 > ""The ringleader, Adarfo Sotelato, has been arrested. I hope you make an example out of him.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[307]`
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested = true"*)
 
 ### Węzeł `[175]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
-  - -> `[177]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NatDes_Oppress == true)"*)
 
 ### Węzeł `[176]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
 
 ### Węzeł `[177]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NatDes_Oppress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NatDes_Oppress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
+  - -> `[179]` (*Lucita Azaro: ""I admit I didn't think we'd be able to subdue the moveme..."*)
 
 ### Węzeł `[178]`
 Mówca: **Lucita Azaro**
 > ""The ringleaders have all been arrested. I trust they'll receive the Sotelato treatment.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[179]`
 Mówca: **Lucita Azaro**
 > ""I admit I didn't think we'd be able to subdue the movement without resorting to harsh measures. But it seems the revolutionaries won't trouble us any longer.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[180]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[181]`
-  - -> `[182]`
+  - -> `[181]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
+  - -> `[182]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_As..."*)
 
 ### Węzeł `[181]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Taddeus Azaro: ""The ringleader, Adarfo Sotelato, has been arrested. I ho..."*)
 
 ### Węzeł `[182]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Taddeus Azaro: ""The ringleaders have all been arrested. I trust you'll m..."*)
 
 ### Węzeł `[183]`
 Mówca: **Taddeus Azaro**
 > ""The ringleader, Adarfo Sotelato, has been arrested. I hope you make an example out of him.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[308]`
+  - -> `[308]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested = true"*)
 
 ### Węzeł `[184]`
 Mówca: **Taddeus Azaro**
 > ""The ringleaders have all been arrested. I trust you'll make an example of them.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[185]`
 Mówca: **Taddeus Azaro**
 > ""I admit I didn't think we'd be able to subdue the movement without resorting to harsh measures. But it seems the revolutionaries won't trouble us any longer.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[186]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
-  - -> `[188]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NatDes_Oppress == true)"*)
 
 ### Węzeł `[187]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
 
 ### Węzeł `[188]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NatDes_Oppress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NatDes_Oppress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
+  - -> `[185]` (*Taddeus Azaro: ""I admit I didn't think we'd be able to subdue the moveme..."*)
 
 ### Węzeł `[189]`
 Mówca: **Hugo Toras**
 > ""This should be all the information my replacement needs.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorG..."*)
 
 ### Węzeł `[190]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
-  - -> `[192]`
+  - -> `[191]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorG..."*)
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilo..."*)
 
 ### Węzeł `[191]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Hugo Toras: ""As well as a dossier I've compiled for your new security..."*)
 
 ### Węzeł `[192]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_SecurityCouncilorGone"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[193]`
 Mówca: **Hugo Toras**
 > ""As well as a dossier I've compiled for your new security councilor, whoever they may be...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[194]`
 Mówca: **Hugo Toras**
 > ""It includes an update on the recent unrest. As you can see, the protests have died down.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
 
 ### Węzeł `[195]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
-  - -> `[197]`
+  - -> `[196]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Unrest_NatDes_Happened == true)"*)
 
 ### Węzeł `[196]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[194]`
+  - -> `[194]` (*Hugo Toras: ""It includes an update on the recent unrest. As you can s..."*)
 
 ### Węzeł `[197]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Unrest_NatDes_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Unrest_NatDes_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[198]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
-  - -> `[200]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_As..."*)
 
 ### Węzeł `[199]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[201]`
+  - -> `[201]` (*Hugo Toras: ""The ringleader, Adarfo Sotelato, has been arrested. I'd ..."*)
 
 ### Węzeł `[200]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_AssassinationOrdered == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Adarfo_Arrested"] == false  and  Variable["RiziaDLC.Adarfo_AssassinationOrdered"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Hugo Toras: ""The ringleaders have all been arrested. I advise you to ..."*)
 
 ### Węzeł `[201]`
 Mówca: **Hugo Toras**
 > ""The ringleader, Adarfo Sotelato, has been arrested. I'd advise you to make an example out of him.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested = true"*)
 
 ### Węzeł `[202]`
 Mówca: **Hugo Toras**
 > ""The ringleaders have all been arrested. I advise you to make an example of them.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[203]`
 Mówca: **Hugo Toras**
 > ""I admit I didn't think we'd be able to subdue the movement without resorting to harsh measures. But it seems the revolutionaries won't trouble us any longer.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[204]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[205]`
-  - -> `[206]`
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NatDes_Oppress == true"*)
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NatDes_Oppress == true)"*)
 
 ### Węzeł `[205]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NatDes_Oppress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NatDes_Oppress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NatDes_Oppress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[198]`
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Adarfo_Arrested == false && RiziaDLC.Adarfo_Assa..."*)
 
 ### Węzeł `[206]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NatDes_Oppress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NatDes_Oppress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NatDes_Oppress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Hugo Toras: ""I admit I didn't think we'd be able to subdue the moveme..."*)
 
 ### Węzeł `[207]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[208]`
-  - -> `[209]`
+  - -> `[208]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == f..."*)
 
 ### Węzeł `[208]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[222]`
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[209]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[210]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[211]`
-  - -> `[212]`
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
+  - -> `[212]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == f..."*)
 
 ### Węzeł `[211]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[212]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
 
 ### Węzeł `[213]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
-  - -> `[215]`
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.House..."*)
 
 ### Węzeł `[214]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[216]`
+  - -> `[216]` (*Hugo Toras: ""The bureaucratic fallout from transferring all three pro..."*)
 
 ### Węzeł `[215]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[216]`
 Mówca: **Hugo Toras**
 > ""The bureaucratic fallout from transferring all three provinces to Crown control will be a hefty task, but I'm sure you'll be able to manage without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[217]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
-  - -> `[219]`
+  - -> `[218]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
+  - -> `[219]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseAzaro_Conquered == true )"*)
 
 ### Węzeł `[218]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[220]`
+  - -> `[220]` (*Hugo Toras: ""The bureaucratic fallout from transferring both Valenqir..."*)
 
 ### Węzeł `[219]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseAzaro_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseAzaro_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[231]`
+  - -> `[231]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
 
 ### Węzeł `[220]`
 Mówca: **Hugo Toras**
 > ""The bureaucratic fallout from transferring both Valenqiris and Cardesse-Montaklar to Crown control will be a hefty task, but I'm sure you'll be able to manage without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[221]`
 Mówca: **Hugo Toras**
 > ""The bureaucratic fallout from transferring both Valenqiris and Brenas to Crown control will be a hefty task, but I'm sure you'll be able to manage without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[222]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
-  - -> `[224]`
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSa..."*)
+  - -> `[224]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.House..."*)
 
 ### Węzeł `[223]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[225]`
+  - -> `[225]` (*Taddeus Azaro: ""Overseeing the transfer of all three provinces to Crown ..."*)
 
 ### Węzeł `[224]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
 
 ### Węzeł `[225]`
 Mówca: **Taddeus Azaro**
 > ""Overseeing the transfer of all three provinces to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[226]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
-  - -> `[228]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true )"*)
 
 ### Węzeł `[227]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[229]`
+  - -> `[229]` (*Taddeus Azaro: ""Overseeing the transfer of both Cardesse-Montaklar and V..."*)
 
 ### Węzeł `[228]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
 
 ### Węzeł `[229]`
 Mówca: **Taddeus Azaro**
 > ""Overseeing the transfer of both Cardesse-Montaklar and Valenqiris to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[230]`
 Mówca: **Taddeus Azaro**
 > ""Overseeing the transfer of both Cardesse-Montaklar and Brenas to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[231]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
-  - -> `[233]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseSazon_Conquered == true )"*)
 
 ### Węzeł `[232]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
+  - -> `[221]` (*Hugo Toras: ""The bureaucratic fallout from transferring both Valenqir..."*)
 
 ### Węzeł `[233]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseSazon_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseSazon_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Hugo Toras: ""The bureaucratic fallout from transferring Valenqiris to..."*)
 
 ### Węzeł `[234]`
 Mówca: **Hugo Toras**
 > ""The bureaucratic fallout from transferring Valenqiris to Crown control will be a hefty task, but I'm sure you'll be able to manage without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[235]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
-  - -> `[237]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true )"*)
 
 ### Węzeł `[236]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Taddeus Azaro: ""Overseeing the transfer of both Cardesse-Montaklar and B..."*)
 
 ### Węzeł `[237]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[238]`
+  - -> `[238]` (*Taddeus Azaro: ""Overseeing the complete transfer of Cardesse-Montaklar t..."*)
 
 ### Węzeł `[238]`
 Mówca: **Taddeus Azaro**
 > ""Overseeing the complete transfer of Cardesse-Montaklar to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[239]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
-  - -> `[241]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSa..."*)
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.House..."*)
 
 ### Węzeł `[240]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
+  - -> `[242]` (*Lucita Azaro: ""Overseeing the transfer of all three provinces to Crown ..."*)
 
 ### Węzeł `[241]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true && RiziaDLC.HouseSazon_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true  and  Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[243]`
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
 
 ### Węzeł `[242]`
 Mówca: **Lucita Azaro**
 > ""Overseeing the transfer of all three provinces to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[243]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[244]`
-  - -> `[245]`
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
+  - -> `[245]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true )"*)
 
 ### Węzeł `[244]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Lucita Azaro: ""Overseeing the transfer of both Cardesse-Montaklar and V..."*)
 
 ### Węzeł `[245]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
 
 ### Węzeł `[246]`
 Mówca: **Lucita Azaro**
 > ""Overseeing the transfer of both Cardesse-Montaklar and Valenqiris to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[247]`
 Mówca: **Lucita Azaro**
 > ""Overseeing the transfer of both Cardesse-Montaklar and Brenas to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[248]`
 Mówca: **Lucita Azaro**
 > ""Overseeing the complete transfer of Cardesse-Montaklar to Crown control will be a delicate security matter. But I'm sure you can handle it without me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[249]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
-  - -> `[251]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true )"*)
 
 ### Węzeł `[250]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Lucita Azaro: ""Overseeing the transfer of both Cardesse-Montaklar and B..."*)
 
 ### Węzeł `[251]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
+  - -> `[248]` (*Lucita Azaro: ""Overseeing the complete transfer of Cardesse-Montaklar t..."*)
 
 ### Węzeł `[252]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
-  - -> `[254]`
+  - -> `[253]` (*Player_Romus: ""Amazing work. Thank you.""*)
+  - -> `[254]` (*Player_Romus: ""Good. Now please get out of my sights.""*)
 
 ### Węzeł `[253]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Amazing work. Thank you.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[216]` (Hugo Toras), `[220]` (Hugo Toras), `[221]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
 
 ### Węzeł `[254]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Good. Now please get out of my sights.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[216]` (Hugo Toras), `[220]` (Hugo Toras), `[221]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[258]`
+  - -> `[258]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
 
 ### Węzeł `[255]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
-  - -> `[257]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
+  - -> `[257]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[256]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
+  - -> `[263]` (*Narrator: "My advisors stood and bowed."*)
 
 ### Węzeł `[257]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[264]`
+  - -> `[264]` (*Narrator: "My advisor stood and bowed."*)
 
 ### Węzeł `[258]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
-  - -> `[260]`
+  - -> `[259]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == tru..."*)
+  - -> `[260]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[259]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[261]`
+  - -> `[261]` (*Narrator: "My advisors hurriedly stood, bowed and backed towards the..."*)
 
 ### Węzeł `[260]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true && (RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true || RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true  and  (Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true  or  Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
+  - -> `[262]` (*Narrator: "My advisor stood, bowed and backed towards the door."*)
 
 ### Węzeł `[261]`
 Mówca: **Narrator**
 > "My advisors hurriedly stood, bowed and backed towards the door."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[272]`
-  - -> `[280]`
+  - -> `[281]` (*Player_Romus: ""You're still my uncle, Hugo. I love and respect you grea..."*)
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[280]` (*Player_Romus: ""Until we meet again.""*)
 
 ### Węzeł `[262]`
 Mówca: **Narrator**
 > "My advisor stood, bowed and backed towards the door."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
-  - -> `[280]`
-  - -> `[279]`
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[280]` (*Player_Romus: ""Until we meet again.""*)
+  - -> `[279]` (*Player_Romus: ""Meeting adjourned.""*)
 
 ### Węzeł `[263]`
 Mówca: **Narrator**
 > "My advisors stood and bowed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[272]`
+  - -> `[281]` (*Player_Romus: ""You're still my uncle, Hugo. I love and respect you grea..."*)
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[264]`
 Mówca: **Narrator**
 > "My advisor stood and bowed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
-  - -> `[280]`
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[280]` (*Player_Romus: ""Until we meet again.""*)
 
 ### Węzeł `[265]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Goodbye, Mr. Toras and Mr. Azaro.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[261]` (Narrator), `[263]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
+  - -> `[286]` (*Narrator: "Hugo didn't react. Taddeus merely cast his eyes downward."*)
 
 ### Węzeł `[266]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
-  - -> `[268]`
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[267]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
-  - -> `[282]`
+  - -> `[278]` (*Player_Romus: ""Goodbye, Ms. Azaro.""*)
+  - -> `[282]` (*Player_Romus: ""A pox on your entire family.""*)
 
 ### Węzeł `[268]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[269]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[270]`
-  - -> `[271]`
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[271]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[270]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
-  - -> `[282]`
+  - -> `[277]` (*Player_Romus: ""Goodbye, Mr. Azaro.""*)
+  - -> `[282]` (*Player_Romus: ""A pox on your entire family.""*)
 
 ### Węzeł `[271]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[276]`
+  - -> `[281]` (*Player_Romus: ""You're still my uncle, Hugo. I love and respect you grea..."*)
+  - -> `[276]` (*Player_Romus: ""Goodbye, Mr. Toras.""*)
 
 ### Węzeł `[272]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
-  - -> `[274]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[273]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
+  - -> `[275]` (*Player_Romus: ""Goodbye, Mr. Toras and Ms. Azaro.""*)
 
 ### Węzeł `[274]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[265]`
+  - -> `[265]` (*Player_Romus: ""Goodbye, Mr. Toras and Mr. Azaro.""*)
 
 ### Węzeł `[275]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Goodbye, Mr. Toras and Ms. Azaro.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+- **Kontekst wejściowy (poprzednik):** `[261]` (Narrator), `[263]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Narrator: "Hugo didn't react. I saw venom in Lucita's eyes."*)
 
 ### Węzeł `[276]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Goodbye, Mr. Toras.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[262]` (Narrator), `[264]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Hugo Toras: ""Goodbye, Romus.""*)
 
 ### Węzeł `[277]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Goodbye, Mr. Azaro.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[262]` (Narrator), `[264]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[288]`
+  - -> `[288]` (*Narrator: "Taddeus cast his eyes downward."*)
 
 ### Węzeł `[278]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Goodbye, Ms. Azaro.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+- **Kontekst wejściowy (poprzednik):** `[262]` (Narrator), `[264]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[287]`
+  - -> `[287]` (*Narrator: "I saw venom in Lucita's eyes."*)
 
 ### Węzeł `[279]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Meeting adjourned.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[262]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[280]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Until we meet again.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[261]` (Narrator), `[262]` (Narrator), `[264]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[281]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You're still my uncle, Hugo. I love and respect you greatly.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false` AND `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[261]` (Narrator), `[263]` (Narrator), `[262]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[284]`
+  - -> `[284]` (*Narrator: "Hugo didn't respond."*)
 
 ### Węzeł `[282]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""A pox on your entire family.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+- **Kontekst wejściowy (poprzednik):** `[262]` (Narrator), `[264]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[290]`
+  - -> `[290]` (*Narrator: "I saw venom in my ex-councilor's eyes."*)
 
 ### Węzeł `[283]`
 Mówca: **Narrator**
 > "Titus opened the door and ushered Hugo and Lucita out, a small smile of triumph on his face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[284]`
 Mówca: **Narrator**
 > "Hugo didn't respond."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[285]`
 Mówca: **Narrator**
 > "Hugo didn't react. I saw venom in Lucita's eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[286]`
 Mówca: **Narrator**
 > "Hugo didn't react. Taddeus merely cast his eyes downward."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[287]`
 Mówca: **Narrator**
 > "I saw venom in Lucita's eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[288]`
 Mówca: **Narrator**
 > "Taddeus cast his eyes downward."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[289]`
 Mówca: **Hugo Toras**
 > ""Goodbye, Romus.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[290]`
 Mówca: **Narrator**
 > "I saw venom in my ex-councilor's eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
 
 ### Węzeł `[291]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[292]`
-  - -> `[293]`
+  - -> `[292]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true"*)
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == t..."*)
 
 ### Węzeł `[292]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[294]`
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[293]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[302]`
+  - -> `[302]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
 
 ### Węzeł `[294]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[295]`
-  - -> `[296]`
+  - -> `[295]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[295]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
+  - -> `[283]` (*Narrator: "Titus opened the door and ushered Hugo and Lucita out, a ..."*)
 
 ### Węzeł `[296]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[297]`
+  - -> `[297]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
 
 ### Węzeł `[297]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[298]`
-  - -> `[299]`
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == ..."*)
+  - -> `[299]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns =..."*)
 
 ### Węzeł `[298]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Narrator: "Titus opened the door and ushered Hugo and Taddeus out, a..."*)
 
 ### Węzeł `[299]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_TaddeusResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[301]`
+  - -> `[301]` (*Narrator: "Titus opened the door and ushered Hugo out, a frown of re..."*)
 
 ### Węzeł `[300]`
 Mówca: **Narrator**
 > "Titus opened the door and ushered Hugo and Taddeus out, a small smile of triumph on his face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[301]`
 Mówca: **Narrator**
 > "Titus opened the door and ushered Hugo out, a frown of regret on his face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[302]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[303]`
-  - -> `[304]`
+  - -> `[303]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true"*)
+  - -> `[304]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns ==..."*)
 
 ### Węzeł `[303]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[305]`
+  - -> `[305]` (*Narrator: "Titus opened the door and ushered Lucita out, a small smi..."*)
 
 ### Węzeł `[304]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn10_CouncilMeeting_LucitaResigns"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
+  - -> `[306]` (*Narrator: "Titus opened the door and ushered Taddeus out, a small sm..."*)
 
 ### Węzeł `[305]`
 Mówca: **Narrator**
 > "Titus opened the door and ushered Lucita out, a small smile of triumph on his face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[306]`
 Mówca: **Narrator**
 > "Titus opened the door and ushered Taddeus out, a small smile of triumph on his face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[307]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[308]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn10_CouncilMeeting_HugoResigns == false"*)
 
 ### Węzeł `[309]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Adarfo_Arrested = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Adarfo_Arrested = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Adarfo_Arrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true && RiziaDLC.HouseSa..."*)

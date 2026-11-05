@@ -29,15 +29,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 5
-- **Węzły modyfikujące stan gry:** 3
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Ovid"] = true;`
-- Węzeł `[7]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Heron"] = true  and  (Variable["BaseGame.Faction...`
-- Węzeł `[8]` (Paskal Beniwoll): `Variable["BaseGame.Prologue_Party_CampaignedForAlphonso"] = true;`
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -46,47 +42,47 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Security_Unrest_Military == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Security_Unrest_Military == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Security_Unrest_Military == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Security_Unrest_Military == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Security_Unrest_Military == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Security_Unrest_Military"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Security_Unrest_Military == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Security_Unrest_Military"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Security_Unrest_Military == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Security_Unrest_Military"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Security_Unrest_Military == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Security_Unrest_Military"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn09_A_ChiefJustice_Ovid = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Ovid"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn09_A_ChiefJustice_Ovid = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Ovid"] = true;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn09_A_ChiefJustice_Heron = true && (BaseGame.Faction_OldGuard_Content == true || BaseGame.Reform_Reform_Heron_Convinced == true))*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Heron"] = true  and  (Variable["BaseGame.Faction_OldGuard_Content"] == true  or  Variable["BaseGame.Reform_Reform_Heron_Convinced"] == true);`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn09_A_ChiefJustice_Heron = true && (BaseGame.Faction_OldGuard_Content == true || BaseGame.Reform_Reform_Heron_Convinced == true)`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn09_A_ChiefJustice_Heron"] = true  and  (Variable["BaseGame.Faction_OldGuard_Content"] == true  or  Variable["BaseGame.Reform_Reform_Heron_Convinced"] == true);`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Party_CampaignedForAlphonso = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Prologue_Party_CampaignedForAlphonso"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Party_CampaignedForAlphonso = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Prologue_Party_CampaignedForAlphonso"] = true;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*

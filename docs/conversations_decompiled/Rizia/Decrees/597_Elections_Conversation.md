@@ -61,21 +61,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 29
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[27]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
-- Węzeł `[34]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
-- Węzeł `[35]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] - 1;`
-- Węzeł `[36]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
-- Węzeł `[37]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
-- Węzeł `[41]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
-- Węzeł `[45]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
-- Węzeł `[46]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
-- *...oraz 21 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -84,800 +74,800 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `425` (*Rizia/Epilogue*), Węzeł `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true"*)
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote >= 7)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote >= 7"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Ending_RPP_Vote >= 7)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote >= 7)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 7`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote >= 7`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Adarfo == true"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Ending_RPP_Vote >= 7))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 7) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Ending_RPP_Vote >= 7)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 7) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Daria = true; RiziaDLCTex..."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Bad == true ||..."*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_LivingStandards_Bad == true ..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_LivingStandards_Horrible"] == true  or Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_LivingStandards_Horrible"] == true  or Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.T..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_LivingStandards_Horrible"] == true  or Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_LivingStandards_Bad == true || RiziaDLC.Situation_Welfare_LivingStandards_Horrible == true ||RiziaDLC.Situation_Welfare_WorkersRights_Bad == true || RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_LivingStandards_Horrible"] == true  or Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true  or  Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.T..."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
-  - -> `[11]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaD..."*)
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Order_SuOmina_Destabilizing || (Rizi..."*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Order_SuOmina_Destabilizing"]  or  (Variable["RiziaDLC.Situation_Order_SuOmina_AlliedToCrown"] == true  and  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Order_SuOmina_Destabilizing"]  or  (Variable["RiziaDLC.Situation_Order_SuOmina_AlliedToCrown"] == true  and  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote -= 1"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Order_SuOmina_Destabilizing"]  or  (Variable["RiziaDLC.Situation_Order_SuOmina_AlliedToCrown"] == true  and  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaDLC.Situation_Order_SuOmina_AlliedToCrown == true && RiziaDLC.TalkWithPM_Endorse_Daria == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Order_SuOmina_Destabilizing"]  or  (Variable["RiziaDLC.Situation_Order_SuOmina_AlliedToCrown"] == true  and  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength >= 7)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Movement_Strength >= 7)"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength >= 7)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] >= 7`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength >= 7`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 3"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Movement_Strength >= 7))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] >= 7) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Movement_Strength >= 7)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] >= 7) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 4"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Radicalism >= 7)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Radicalism >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Radicalism >= 7"*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Movement_Radicalism >= 7)"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Radicalism >= 7)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Radicalism"] >= 7`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Radicalism >= 7`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Radicalism"] >= 7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Movement_Radicalism >= 7))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Radicalism"] >= 7) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Movement_Radicalism >= 7)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Radicalism"] >= 7) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 1"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform..."*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Refo..."*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 1"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_Rizia_Unification == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_Rizia_Unification == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_Rizia_Unification == true"*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pales_Rizia_Unification == true)"*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_Rizia_Unification == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pales_Rizia_Unification"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_Rizia_Unification == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pales_Rizia_Unification"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pales_Rizia_Unification == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pales_Rizia_Unification"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pales_Rizia_Unification == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pales_Rizia_Unification"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_BorderOutcome_Peace_Annexation == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_BorderOutcome_Peace_Annexation == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true"*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_BorderOutcome_Peace_Annexation == true)"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_BorderOutcome_Peace_Annexation == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_BorderOutcome_Peace_Annexation == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_BorderOutcome_Peace_Annexation == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_BorderOutcome_Peace_Annexation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_Rizia_Unification == true"*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.RNCElection_Supported == true"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
-  - -> `[30]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_ElectoralReform == true"*)
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)"*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 1"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.RNCElection_Supported == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.RNCElection_Supported == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.RNCElection_Supported == true"*)
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.RNCElection_Supported == true)"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.RNCElection_Supported == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.RNCElection_Supported"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.RNCElection_Supported == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.RNCElection_Supported"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.RNCElection_Supported == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.RNCElection_Supported == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.S..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Bad == true ||..."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote -= 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true && RiziaDLC.Reform..."*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Cou..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC..."*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaD..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_RiziaImperii"] == true  and  (Variable["RiziaDLC.RNCElection_Supported"] == true  or  Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_RiziaImperii"] == true  and  (Variable["RiziaDLC.RNCElection_Supported"] == true  or  Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_RiziaImperii"] == true  and  (Variable["RiziaDLC.RNCElection_Supported"] == true  or  Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleOwnership_RiziaImperii == true && (RiziaDLC.RNCElection_Supported == true || RiziaDLC.Reform_PrimeMinister_Daria == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_RiziaImperii"] == true  and  (Variable["RiziaDLC.RNCElection_Supported"] == true  or  Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Cou..."*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Cou..."*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[44]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.S..."*)
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC..."*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  and  Variable["RiziaDLC.Situation_Law_Media_Censored"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  and  Variable["RiziaDLC.Situation_Law_Media_Censored"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  and  Variable["RiziaDLC.Situation_Law_Media_Censored"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true && RiziaDLC.Situation_Law_Media_Censored == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  and  Variable["RiziaDLC.Situation_Law_Media_Censored"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength < 6"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.RNCElection_Supported == true"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Bad == true ||..."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength < 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength < 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength < 6"*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Movement_Strength < 6)"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength < 6)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] < 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength < 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] < 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Movement_Strength < 6))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] < 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Movement_Strength < 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] < 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 1"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.T..."*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC..."*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 3"*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.Tal..."*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
-  - -> `[56]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.Tal..."*)
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.T..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_ManusPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_ManusPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 2; RiziaDLCIsolated.E..."*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_ManusPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_Endorse_ManusPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_ManusPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_EndorseAdarfo == true"*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 2;
-RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 2;
+RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;
 Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_EndorseAdarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_EndorseAdarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
-  - -> `[60]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_EndorseAdarfo == true"*)
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_EndorseAdarfo == true)"*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_EndorseAdarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_EndorseAdarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 2; RiziaDLCIsolated.E..."*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_EndorseAdarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_EndorseAdarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1; RiziaDLCIsolated.E..."*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1;
-RiziaDLCIsolated.Ending_RPP_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1;
+RiziaDLCIsolated.Ending_RPP_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;
 Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.T..."*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 3"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true || RiziaDLC.TalkWithPM_Endorse_Daria == true || RiziaDLC.TalkWithPM_Endorse_DariaPlan == true || RiziaDLC.RNCElection_Supported == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  or  Variable["RiziaDLC.TalkWithPM_Endorse_DariaPlan"] == true  or  Variable["RiziaDLC.RNCElection_Supported"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 3"*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 7"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaD..."*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength >= 4)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
-  - -> `[70]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Strength >= 4"*)
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Movement_Strength >= 4)"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Movement_Strength >= 4)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] >= 4`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Movement_Strength >= 4`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Movement_Strength"] >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 2; RiziaDLCIsolated.E..."*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Movement_Strength >= 4))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] >= 4) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Movement_Strength >= 4)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Movement_Strength"] >= 4) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 2"*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 2;
-RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 2;
+RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;
 Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaD..."*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Movement_Radicalism >= 7"*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaD..."*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[76]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Re..."*)
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC...."*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Diplomatic_Success"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Manus"] == true  and  Variable["RiziaDLC.Policy_RD_Economy_LandOwnersTax"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Diplomatic_Success"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Manus"] == true  and  Variable["RiziaDLC.Policy_RD_Economy_LandOwnersTax"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 2; RiziaDLCIsolated.E..."*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Diplomatic_Success"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Manus"] == true  and  Variable["RiziaDLC.Policy_RD_Economy_LandOwnersTax"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Reform_PrimeMinister_Manus == true && RiziaDLC.Policy_RD_Economy_LandOwnersTax == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Diplomatic_Success"] == true  and  Variable["RiziaDLC.Reform_PrimeMinister_Manus"] == true  and  Variable["RiziaDLC.Policy_RD_Economy_LandOwnersTax"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 3;"*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 2;
-RiziaDLCIsolated.Ending_RNC_Vote += 1;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 2;
+RiziaDLCIsolated.Ending_RNC_Vote += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;
 Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_ElectoralReform == true"*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 3;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 3;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_ElectoralReform == true"*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_SuOmina_Destabilizing || (RiziaD..."*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || R..."*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLC.War_BorderOutcome_Peace_Annexation == true ||..."*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  or  Variable["RiziaDLC.Pales_Rizia_Unification"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  or  Variable["RiziaDLC.Pales_Rizia_Unification"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote >= 7"*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  or  Variable["RiziaDLC.Pales_Rizia_Unification"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLC.War_BorderOutcome_Peace_Annexation == true || RiziaDLC.Pales_Rizia_Unification == true) && RiziaDLC.ZilleReturn_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  or  Variable["RiziaDLC.Pales_Rizia_Unification"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote >= 6"*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote >= 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote >= 6"*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Ending_RPP_Vote >= 6)"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote >= 6)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote >= 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Adarfo == true"*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Ending_RPP_Vote >= 6))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Ending_RPP_Vote >= 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Ending_RPP_Vote"] >= 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Daria = true; RiziaDLCTex..."*)
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Daria = true;
-RiziaDLCText.EpiloguePM = "Daria";)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Daria = true;
+RiziaDLCText.EpiloguePM = "Daria";`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] = true;
 Variable["RiziaDLCText.EpiloguePM"] ="Daria";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Adarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Adarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
-  - -> `[89]`
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Adarfo == true"*)
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Adarfo == true)"*)
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Adarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Adarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo = true; RiziaDLCTe..."*)
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Adarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Adarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Adarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus = true; RiziaDLCTex..."*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo = true;
-RiziaDLCText.EpiloguePM = "Adarfo";)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo = true;
+RiziaDLCText.EpiloguePM = "Adarfo";`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] = true;
 Variable["RiziaDLCText.EpiloguePM"] ="Adarfo";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus = true;
-RiziaDLCText.EpiloguePM = "Manus";)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus = true;
+RiziaDLCText.EpiloguePM = "Manus";`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] = true;
 Variable["RiziaDLCText.EpiloguePM"] ="Manus";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true"*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
-  - -> `[96]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true"*)
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == ..."*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true"*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Order_LaunchCrownSupremeCampaign"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Re..."*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Daria == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Daria == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
-  - -> `[99]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true"*)
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_Endorse_Daria == true)"*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Daria == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Daria == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 1"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_Endorse_Daria == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_Endorse_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.Tal..."*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Re..."*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.Tal..."*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.T..."*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 1"*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_Endorse_Manus == true || RiziaDLC.TalkWithPM_EndorseAdarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  or  Variable["RiziaDLC.TalkWithPM_EndorseAdarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Re..."*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Diplomatic_Success == true && RiziaDLC.Re..."*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
-  - -> `[107]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Cou..."*)
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.C..."*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RNC_Vote += 2"*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_Endorse_Daria == true && RiziaDLC.Country_PublicOpinion >= 16)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Daria"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Cou..."*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
-  - -> `[110]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Cou..."*)
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.C..."*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Ending_RPP_Vote += 2"*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.TalkWithPM_Endorse_Manus == true && RiziaDLC.Country_PublicOpinion >= 16)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.TalkWithPM_Endorse_Manus"] == true  and  Variable["RiziaDLC.Country_PublicOpinion"] >= 16) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || R..."*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RNC_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RNC_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RNC_Vote"] = Variable["RiziaDLCIsolated.Ending_RNC_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || R..."*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Ending_RPP_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Ending_RPP_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Ending_RPP_Vote"] = Variable["RiziaDLCIsolated.Ending_RPP_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.War_BorderOutcome_Peace_Annexation == true || R..."*)

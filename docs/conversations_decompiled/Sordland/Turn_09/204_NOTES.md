@@ -27,10 +27,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 8
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -39,12 +40,12 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
@@ -55,85 +56,83 @@ Election winner: TBD"
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[6]`
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true)"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_OldGuard_Content == true)"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_OldGuard_Content"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_OldGuard_Content"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_OldGuard_Content == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_OldGuard_Content"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_OldGuard_Content == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_OldGuard_Content"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "Lileas announces nomination. Congress happens. Lileas bec..."*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej*)
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "!()"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !())*
-- **Warunek (`conditionsString`):** `false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!()`
+- **Warunek bezpośredni (`conditionsString`):** `false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Enable_LeakedScandals == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Enable_LeakedScandals == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Enable_LeakedScandals == true"*)
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Enable_LeakedScandals == true)"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Enable_LeakedScandals == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Enable_LeakedScandals"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Enable_LeakedScandals == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Enable_LeakedScandals"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Impeached for constitutional violation. Extra topics in t..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Enable_LeakedScandals == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Enable_LeakedScandals"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Enable_LeakedScandals == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Enable_LeakedScandals"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Narrator: "Impeached for constitutional violation  Election winner: TBD"*)
 
 ### Węzeł `[16]`
 Mówca: **Narrator**
@@ -157,44 +156,40 @@ Election winner: You"
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!()"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Narrator: "Effects of the scandal remains.   Election winner: You"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !())*
-- **Warunek (`conditionsString`):** `false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!()`
+- **Warunek bezpośredni (`conditionsString`):** `false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Narrator: "Effects of the scandal remains.   Election winner: Anothe..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[24]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej*)
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "!()"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Narrator: "You win the elections by ridiculous margin  Election winn..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !())*
-- **Warunek (`conditionsString`):** `false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!()`
+- **Warunek bezpośredni (`conditionsString`):** `false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Narrator: "You win the elections  Election winner: You"*)
 
 ### Węzeł `[25]`
 Mówca: **Narrator**
@@ -214,10 +209,10 @@ Election winner: You"
 Mówca: **Narrator**
 > "Lileas doesn't announce nomination. Congress doesn't happen. You are the party leader."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej*)
 
 ### Węzeł `[28]`
 Mówca: **Narrator**
 > "Lileas announces nomination. Congress happens. Lileas becomes party leader."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Enable_LeakedScandals == true"*)

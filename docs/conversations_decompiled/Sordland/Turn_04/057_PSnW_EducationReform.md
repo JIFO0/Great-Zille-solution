@@ -109,30 +109,32 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 2
-- **Węzły modyfikujące stan gry:** 56
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.GovernmentBudget`
-- `BaseGame.Situation_Economy_Tourism_Average`
-- `BaseGame.Situation_Economy_Tourism_Booming`
-- `BaseGame.Situation_Economy_Tourism_Declining`
-- `BaseGame.Situation_Welfare_SollistTeachings`
-- `BaseGame.Sollist`
-- `BaseGame.SuperpowerTradeWarHappened`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[51]` (Ciara Walda): `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = false;`
-- Węzeł `[52]` (Ciara Walda): `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = true;`
-- Węzeł `[53]` (Ciara Walda): `Variable["BaseGame.Policy_Welfare_EducationReform"] = true; Variable["BaseGame.Situation_Welfare_...`
-- Węzeł `[54]` (Ciara Walda): `Variable["BaseGame.Policy_Welfare_TraditionalEducation"] = true; Variable["BaseGame.Situation_Wel...`
-- Węzeł `[101]` (Ciara Walda): `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGame.GovernmentBudget"] + 1;`
-- Węzeł `[102]` (Ciara Walda): `Variable["BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellite"] = true;`
-- Węzeł `[104]` (Ciara Walda): `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] - 2; Variable["BaseGame.Malenye...`
-- Węzeł `[105]` (Ciara Walda): `Variable["BaseGame.Situation_Welfare_EducationGap"] = true;`
-- *...oraz 48 innych węzłów ze skryptami.*
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[8]` | **"“I agree. An educational reform is necessary.”"** | `[7]` **Narrator**: "Lucian took off his reading glas..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[15]` **Ciara Walda**: "“Exactly.”" |
+| `[9]` | **"“I don't see what's wrong with our education system.”"** | `[7]` **Narrator**: "Lucian took off his reading glas..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[10]` **Ciara Walda**: "“You don't?”" |
+| `[20]` | **"“Very well. What do we need to do for an education reform?”"** | `[19]` **Ciara Walda**: "“Mr. President. We need to bring..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[38]` **Ciara Walda**: "“We need to keep politics out of..." |
+| `[21]` | **"“Everything is fine as it is. Why change it?”"** | `[19]` **Ciara Walda**: "“Mr. President. We need to bring..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[22]` **Ciara Walda**: "“I don't think my words are gett..." |
+| `[27]` | **"“We have more important matters to think about than education for a bunch of kids.”"** | `[26]` **Ciara Walda**: "“We need to reform our education..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[32]` **Ciara Walda**: "“I can't believe it. This will b..." |
+| `[28]` | **"“We will not stray away from Soll's path.”"** | `[26]` **Ciara Walda**: "“We need to reform our education..." | `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true) == false` | *Brak zmian stanu* | `[32]` **Ciara Walda**: "“I can't believe it. This will b..." |
+| `[33]` | **"“You have a point. Alright. So what's your plan?”"** | `[26]` **Ciara Walda**: "“We need to reform our education..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[35]` **Ciara Walda**: "“I'm glad you have seen reason.”" |
+| `[42]` | **"“Lucian, what do you think?”"** | `[40]` **Ciara Walda**: "“Either we raise a generation re..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[41]` **Lucian Galade**: "“As much as I respect Colonel So..." |
+| `[43]` | **"“Maintain the traditional education system.”"** | `[40]` **Ciara Walda**: "“Either we raise a generation re..."<br>`[41]` **Lucian Galade**: "“As much as I respect Colonel So..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGameSupport.Journal_Turn04_EducationReform_...`<br>`Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = ...`<br>*(+1 skryptów)* | `[208]` **Narrator**: "Ciara looked furious. She shook ..." |
+| `[44]` | **"“Reform the education system.”"** | `[40]` **Ciara Walda**: "“Either we raise a generation re..."<br>`[41]` **Lucian Galade**: "“As much as I respect Colonel So..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGameSupport.Journal_Turn04_EducationReform_...`<br>`Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = ...`<br>*(+1 skryptów)* | `[45]` **Ciara Walda**: "“You will not regret it. I will ..." |
+| `[69]` | **"“Education should remain as a state service only. Certainly this is the most ideal..."** | `[68]` **Ciara Walda**: "“But before moving forward, the ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[83]` **Ciara Walda**: "“I agree. The government should ..." |
+| `[70]` | **"“There is a possibility of privatization having negative side effects.”"** | `[77]` **Ciara Walda**: "“This has led us to think about ..."<br>`[78]` **Ciara Walda**: "“Therefore we are investigating ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[74]` **Ciara Walda**: "“Trust me, I know that. It could..." |
+| `[75]` | **"“Tell us about the benefits of allowing private schools.”"** | `[68]` **Ciara Walda**: "“But before moving forward, the ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[82]` **Ciara Walda**: "“I've made my opinion clear: I'm..." |
+| `[93]` | **"“What are the advantages of privatization?""** | `[77]` **Ciara Walda**: "“This has led us to think about ..."<br>`[78]` **Ciara Walda**: "“Therefore we are investigating ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[92]` **Ciara Walda**: "“There aren't many. But it would..." |
+| `[100]` | **"“Initiate privatization to draw more funds. This should allow for more competition..."** | `[64]` **Ciara Walda**: "“So, what is your decision?”" | `Variable["BaseGame.Economy"] >= 4` | `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGam...`<br>`Variable["BaseGame.Policy_Welfare_EducationPrivatization"...`<br>*(+4 skryptów)* | `[108]` **Ciara Walda**: "“Will do. That should be it for ..." |
+| `[107]` | **"“Thank you for your time.”"** | `[103]` **Lucian Galade**: "“This has been a very productive..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[114]` **Narrator**: "We dispersed after spending near..." |
+| `[113]` | **"“Keep education solely a matter of the state. We need to prevent interference from..."** | `[64]` **Ciara Walda**: "“So, what is your decision?”" | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capi...`<br>`Variable["BaseGameSupport.Journal_Turn04_EducationReform_...` | `[117]` **Ciara Walda**: "“Great. That should be it for no..."<br>`[108]` **Ciara Walda**: "“Will do. That should be it for ..." |
+| `[115]` | **"“Have a good day.”"** | `[103]` **Lucian Galade**: "“This has been a very productive..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[114]` **Narrator**: "We dispersed after spending near..." |
+| `[116]` | **"“See you later.”"** | `[103]` **Lucian Galade**: "“This has been a very productive..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[114]` **Narrator**: "We dispersed after spending near..." |
+| `[271]` | **"“Initiate privatization to draw more funds. This should allow for more competition..."** | `[64]` **Ciara Walda**: "“So, what is your decision?”" | `(Variable["BaseGame.Economy"] >= 4) == false` | `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGam...`<br>`Variable["BaseGame.Policy_Welfare_EducationPrivatization"...`<br>*(+4 skryptów)* | `[108]` **Ciara Walda**: "“Will do. That should be it for ..." |
 
 ---
 
@@ -141,2004 +143,2044 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Ciara Walda)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Narrator: "We were still in Leiren, staying at a modest guesthouse f..."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Ciara Walda)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "Lucian was seated across from me at the table, going through documents. Ciara entered the room."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
+  - -> `[5]` (*Ciara Walda: "“After the visit yesterday, I couldn't even sleep thinkin..."*)
 
 ### Węzeł `[4]`
 Mówca: **Narrator**
 > "We were still in Leiren, staying at a modest guesthouse for state employees. Ciara set up a meeting with me and Lucian to go over her plans for education reform after our school visit."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Lucian was seated across from me at the table, going thro..."*)
 
 ### Węzeł `[5]`
 Mówca: **Ciara Walda**
 > "“After the visit yesterday, I couldn't even sleep thinking about that little boy and girl.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Ciara Walda: "“I have never been more sure of my intentions to reform o..."*)
 
 ### Węzeł `[6]`
 Mówca: **Ciara Walda**
 > "“I have never been more sure of my intentions to reform our education system.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "Lucian took off his reading glasses and put it on the table."*)
 
 ### Węzeł `[7]`
 Mówca: **Narrator**
 > "Lucian took off his reading glasses and put it on the table."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Player: "“I agree. An educational reform is necessary.”"*)
+  - -> `[9]` (*Player: "“I don't see what's wrong with our education system.”"*)
 
 ### Węzeł `[8]`
 **[WYBÓR GRACZA: "“I agree. An educational reform is necessary.”"]** — Mówca: **Player**
 > "“I agree. An educational reform is necessary.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Ciara Walda: "“Exactly.”"*)
 
 ### Węzeł `[9]`
 **[WYBÓR GRACZA: "“I don't see what's wrong with our education system.”"]** — Mówca: **Player**
 > "“I don't see what's wrong with our education system.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Ciara Walda: "“You don't?”"*)
 
 ### Węzeł `[10]`
 Mówca: **Ciara Walda**
 > "“You don't?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Ciara Walda: "“Can't you look at it objectively and see what's wrong wi..."*)
 
 ### Węzeł `[11]`
 Mówca: **Ciara Walda**
 > "“Can't you look at it objectively and see what's wrong with it? You can't be serious.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Lucian Galade: "“Ciara. Check your tone.”"*)
 
 ### Węzeł `[12]`
 Mówca: **Lucian Galade**
 > "“Ciara. Check your tone.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Ciara Walda: ""Would you say that to a man, Lucian?”"*)
 
 ### Węzeł `[13]`
 Mówca: **Ciara Walda**
 > ""Would you say that to a man, Lucian?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Ciara Walda: "“Those students have to repeat that same Sollist propagan..."*)
 
 ### Węzeł `[14]`
 Mówca: **Ciara Walda**
 > "“Those students have to repeat that same Sollist propaganda every single day. They are being brainwashed at an age when their minds need to be free.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Ciara Walda: "“On top of that, young girls are denied the same opportun..."*)
 
 ### Węzeł `[15]`
 Mówca: **Ciara Walda**
 > "“Exactly.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Ciara Walda: "“Those students have to repeat that same Sollist propagan..."*)
 
 ### Węzeł `[16]`
 Mówca: **Ciara Walda**
 > "“Those students have to repeat that same Sollist propaganda every single day. They are being brainwashed at an age when their minds need to be free.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Ciara Walda: "“On top of that, young girls are denied the same opportun..."*)
 
 ### Węzeł `[17]`
 Mówca: **Ciara Walda**
 > "“On top of that, young girls are denied the same opportunity as boys. They're forced into the role of housewife before they even reach puberty!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Ciara Walda: "“The only way people like me, Nia, Lileas, Gloria, even y..."*)
 
 ### Węzeł `[18]`
 Mówca: **Ciara Walda**
 > "“On top of that, young girls are denied the same opportunity as boys. They're forced into the role of housewife before they even reach puberty! Nothing's changed since I went to school.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Ciara Walda: "“Women like me, Lileas, Nia, even your wife -- we had to ..."*)
 
 ### Węzeł `[19]`
 Mówca: **Ciara Walda**
 > "“Mr. President. We need to bring change. We need to free the minds of these young people. They are our future.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Player: "“Very well. What do we need to do for an education reform?”"*)
+  - -> `[21]` (*Player: "“Everything is fine as it is. Why change it?”"*)
 
 ### Węzeł `[20]`
 **[WYBÓR GRACZA: "“Very well. What do we need to do for an education reform?”"]** — Mówca: **Player**
 > "“Very well. What do we need to do for an education reform?”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[19]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Ciara Walda: "“We need to keep politics out of the curriculum. Soll sho..."*)
 
 ### Węzeł `[21]`
 **[WYBÓR GRACZA: "“Everything is fine as it is. Why change it?”"]** — Mówca: **Player**
 > "“Everything is fine as it is. Why change it?”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[19]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Ciara Walda: "“I don't think my words are getting through to you.”"*)
 
 ### Węzeł `[22]`
 Mówca: **Ciara Walda**
 > "“I don't think my words are getting through to you.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Ciara Walda: "“Are you really fine with filling the heads of our childr..."*)
 
 ### Węzeł `[23]`
 Mówca: **Ciara Walda**
 > "“Are you really fine with filling the heads of our children with Sollist propaganda? With teaching girls like Deana that their only value to this country is as vessels for childbearing?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Ciara Walda: "“You know the words of Artor S. Wisci. You know them bett..."*)
 
 ### Węzeł `[24]`
 Mówca: **Ciara Walda**
 > "“You know the words of Artor S. Wisci. You know them better than I do.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Ciara Walda: "“Education is the premise of progress, in all societies, ..."*)
 
 ### Węzeł `[25]`
 Mówca: **Ciara Walda**
 > "“Education is the premise of progress, in all societies, in all families.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Ciara Walda: "“We need to reform our education system. Otherwise, Sordl..."*)
 
 ### Węzeł `[26]`
 Mówca: **Ciara Walda**
 > "“We need to reform our education system. Otherwise, Sordland's future is bleak.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
-  - -> `[27]`
-  - -> `[29]`
+  - -> `[33]` (*Player: "“You have a point. Alright. So what's your plan?”"*)
+  - -> `[27]` (*Player: "“We have more important matters to think about than educa..."*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == ..."*)
 
 ### Węzeł `[27]`
 **[WYBÓR GRACZA: "“We have more important matters to think about than education for a bunch of kids.”"]** — Mówca: **Player**
 > "“We have more important matters to think about than education for a bunch of kids.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[26]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Ciara Walda: "“I can't believe it. This will be seen as a huge mistake ..."*)
 
 ### Węzeł `[28]`
 **[WYBÓR GRACZA: "“We will not stray away from Soll's path.”"]** — Mówca: **Player**
 > "“We will not stray away from Soll's path.”"
+- **Wymagania odblokowania (kod gry):** `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[26]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Ciara Walda: "“I can't believe it. This will be seen as a huge mistake ..."*)
 
 ### Węzeł `[29]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[31]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == ..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait =..."*)
 
 ### Węzeł `[30]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[31]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Player: "“We will not stray away from Soll's path.”"*)
 
 ### Węzeł `[32]`
 Mówca: **Ciara Walda**
 > "“I can't believe it. This will be seen as a huge mistake when people look back.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Narrator: "Ciara slumped in defeat."*)
 
 ### Węzeł `[33]`
 **[WYBÓR GRACZA: "“You have a point. Alright. So what's your plan?”"]** — Mówca: **Player**
 > "“You have a point. Alright. So what's your plan?”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[26]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Ciara Walda: "“I'm glad you have seen reason.”"*)
 
 ### Węzeł `[34]`
 Mówca: **Narrator**
 > "Ciara slumped in defeat."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn04_EducationReform_Maintain =..."*)
 
 ### Węzeł `[35]`
 Mówca: **Ciara Walda**
 > "“I'm glad you have seen reason.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Ciara Walda: "“We need to keep politics out of the curriculum. Soll sho..."*)
 
 ### Węzeł `[36]`
 Mówca: **Ciara Walda**
 > "“This is actively poisoning young bright minds. Instead of thinking for themselves, they're learning to take things at face value.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Ciara Walda: "“We also need to ensure boys and girls receive the same i..."*)
 
 ### Węzeł `[37]`
 Mówca: **Ciara Walda**
 > "“We also need to ensure boys and girls receive the same instruction. Handcrafts like knitting and sewing should be taught to both sexes, or not at all.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Ciara Walda: "“Sordland's youth must be technically skilled and capable..."*)
 
 ### Węzeł `[38]`
 Mówca: **Ciara Walda**
 > "“We need to keep politics out of the curriculum. Soll should only be viewed as a historical figure. Children shouldn't have to repeat his name everyday.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Ciara Walda: "“This is actively poisoning young bright minds. Instead o..."*)
 
 ### Węzeł `[39]`
 Mówca: **Ciara Walda**
 > "“Sordland's youth must be technically skilled and capable for the next decade. That won't be possible with the amount of nationalistic indoctrination and narrow-minded thinking found in schools today.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Ciara Walda: "“Either we raise a generation ready for the challenges of..."*)
 
 ### Węzeł `[40]`
 Mówca: **Ciara Walda**
 > "“Either we raise a generation ready for the challenges of the future or not. What will it be, Mr. President?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[44]`
-  - -> `[43]`
+  - -> `[42]` (*Player: "“Lucian, what do you think?”"*)
+  - -> `[44]` (*Player: "“Reform the education system.”"*)
+  - -> `[43]` (*Player: "“Maintain the traditional education system.”"*)
 
 ### Węzeł `[41]`
 Mówca: **Lucian Galade**
 > "“As much as I respect Colonel Soll, his time has passed. Now is our time. I do think this might be the first step of a larger plan.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
-  - -> `[43]`
+  - -> `[44]` (*Player: "“Reform the education system.”"*)
+  - -> `[43]` (*Player: "“Maintain the traditional education system.”"*)
 
 ### Węzeł `[42]`
 **[WYBÓR GRACZA: "“Lucian, what do you think?”"]** — Mówca: **Player**
 > "“Lucian, what do you think?”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[40]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Lucian Galade: "“As much as I respect Colonel Soll, his time has passed. ..."*)
 
 ### Węzeł `[43]`
 **[WYBÓR GRACZA: "“Maintain the traditional education system.”"]** — Mówca: **Player**
 > "“Maintain the traditional education system.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[40]` (Ciara Walda), `[41]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn04_EducationReform_Maintain =..."*)
 
 ### Węzeł `[44]`
 **[WYBÓR GRACZA: "“Reform the education system.”"]** — Mówca: **Player**
 > "“Reform the education system.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[40]` (Ciara Walda), `[41]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn04_EducationReform_Reform = t..."*)
 
 ### Węzeł `[45]`
 Mówca: **Ciara Walda**
 > "“You will not regret it. I will get to work immediately.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
 
 ### Węzeł `[46]`
 Mówca: **Ciara Walda**
 > "“I am utterly disappointed. Especially after yesterday's school visit. I thought it would awaken something in you.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Narrator: "She let out a deep sigh."*)
 
 ### Węzeł `[47]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)"*)
 
 ### Węzeł `[48]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Ciara Walda: "“It will be an uphill battle, considering that the educat..."*)
 
 ### Węzeł `[49]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Lucian Galade: "“Now that the decision was made, let's move on.”"*)
 
 ### Węzeł `[50]`
 Mówca: **Ciara Walda**
 > "“It will be an uphill battle, considering that the education budget was lowered against my recommendations. But I will give it my best.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Lucian Galade: "“Now that the decision was made, let's move on.”"*)
 
 ### Węzeł `[51]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Progressive = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Progressive = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_TraditionalEducation = true; Base..."*)
 
 ### Węzeł `[52]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Progressive = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Progressive = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_EducationReform = true; BaseGame...."*)
 
 ### Węzeł `[53]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_EducationReform = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_EducationReform = true;
 BaseGame.Situation_Welfare_ModernEducationTechniques = true;
 BaseGame.Policy_Welfare_TraditionalEducation = false;
-BaseGame.Situation_Welfare_SollistTeachings = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_EducationReform"] = true;
+BaseGame.Situation_Welfare_SollistTeachings = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_EducationReform"] = true;
 Variable["BaseGame.Situation_Welfare_ModernEducationTechniques"] = true;
 Variable["BaseGame.Policy_Welfare_TraditionalEducation"] = false;
 Variable["BaseGame.Situation_Welfare_SollistTeachings"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Ciara Walda: "“You will not regret it. I will get to work immediately.”"*)
 
 ### Węzeł `[54]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_TraditionalEducation = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_TraditionalEducation = true;
 BaseGame.Situation_Welfare_SollistTeachings = true;
 BaseGame.Policy_Welfare_EducationReform = false;
-BaseGame.Situation_Welfare_ModernEducationTechniques = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_TraditionalEducation"] = true;
+BaseGame.Situation_Welfare_ModernEducationTechniques = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_TraditionalEducation"] = true;
 Variable["BaseGame.Situation_Welfare_SollistTeachings"] = true;
 Variable["BaseGame.Policy_Welfare_EducationReform"] = false;
 Variable["BaseGame.Situation_Welfare_ModernEducationTechniques"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[208]`
+  - -> `[208]` (*Narrator: "Ciara looked furious. She shook her head slowly."*)
 
 ### Węzeł `[55]`
 Mówca: **Lucian Galade**
 > "“Now that the decision was made, let's move on.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Ciara Walda: "“Very well.”"*)
 
 ### Węzeł `[56]`
 Mówca: **Ciara Walda**
 > "“After the budget increase, the ministry quickly began formulating plans on how to effectively use the money.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Ciara Walda: "“But before moving forward, the question of keeping educa..."*)
 
 ### Węzeł `[57]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[58]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Ciara Walda: "“After the budget increase, the ministry quickly began fo..."*)
 
 ### Węzeł `[59]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
 
 ### Węzeł `[60]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
-  - -> `[62]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)"*)
 
 ### Węzeł `[61]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Ciara Walda: "“With no change in budget, the ministry was left to its o..."*)
 
 ### Węzeł `[62]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Ciara Walda: "“The reduction of the education budget left our hands com..."*)
 
 ### Węzeł `[63]`
 Mówca: **Ciara Walda**
 > "“With no change in budget, the ministry was left to its own devices. We made some tough choices but still lack additional funds.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Ciara Walda: "“Therefore we are investigating if privatizing education ..."*)
 
 ### Węzeł `[64]`
 Mówca: **Ciara Walda**
 > "“So, what is your decision?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
-  - -> `[113]`
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 4"*)
+  - -> `[113]` (*Player: "“Keep education solely a matter of the state. We need to ..."*)
 
 ### Węzeł `[65]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
-  - -> `[67]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn01_EnT_Economy_Planned == true)"*)
 
 ### Węzeł `[66]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Lucian Galade: "“It would go against our overall economic strategy of a p..."*)
 
 ### Węzeł `[67]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn01_EnT_Economy_Planned == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn01_EnT_Economy_Planned == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Lucian Galade: "“It would support our overall economic strategy of promot..."*)
 
 ### Węzeł `[68]`
 Mówca: **Ciara Walda**
 > "“But before moving forward, the question of keeping education fully state-funded or allowing for new private schools remains open.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[69]`
+  - -> `[75]` (*Player: "“Tell us about the benefits of allowing private schools.”"*)
+  - -> `[69]` (*Player: "“Education should remain as a state service only. Certain..."*)
 
 ### Węzeł `[69]`
 **[WYBÓR GRACZA: "“Education should remain as a state service only. Certainly this is the most ideal situation.”"]** — Mówca: **Player**
 > "“Education should remain as a state service only. Certainly this is the most ideal situation.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[68]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Ciara Walda: "“I agree. The government should be responsible of managin..."*)
 
 ### Węzeł `[70]`
 **[WYBÓR GRACZA: "“There is a possibility of privatization having negative side effects.”"]** — Mówca: **Player**
 > "“There is a possibility of privatization having negative side effects.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[77]` (Ciara Walda), `[78]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Ciara Walda: "“Trust me, I know that. It could increase the cost of a q..."*)
 
 ### Węzeł `[71]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[73]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)"*)
 
 ### Węzeł `[72]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Ciara Walda: "“We can manage without additional funds. The only reason ..."*)
 
 ### Węzeł `[73]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Ciara Walda: "“It would be a lie to say that a decrease in the budget d..."*)
 
 ### Węzeł `[74]`
 Mówca: **Ciara Walda**
 > "“Trust me, I know that. It could increase the cost of a quality education, but that is hardly avoidable now anyway.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
 
 ### Węzeł `[75]`
 **[WYBÓR GRACZA: "“Tell us about the benefits of allowing private schools.”"]** — Mówca: **Player**
 > "“Tell us about the benefits of allowing private schools.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[68]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Ciara Walda: "“I've made my opinion clear: I'm against it. But it would..."*)
 
 ### Węzeł `[76]`
 Mówca: **Narrator**
 > "Ciara skimmed over her documents before continuing."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
 
 ### Węzeł `[77]`
 Mówca: **Ciara Walda**
 > "“This has led us to think about allowing privatization to at least keep vital education services unaffected.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[70]`
+  - -> `[93]` (*Player: "“What are the advantages of privatization?""*)
+  - -> `[70]` (*Player: "“There is a possibility of privatization having negative ..."*)
 
 ### Węzeł `[78]`
 Mówca: **Ciara Walda**
 > "“Therefore we are investigating if privatizing education would draw enough funds to conduct investments.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[70]`
+  - -> `[93]` (*Player: "“What are the advantages of privatization?""*)
+  - -> `[70]` (*Player: "“There is a possibility of privatization having negative ..."*)
 
 ### Węzeł `[79]`
 Mówca: **Ciara Walda**
 > "“It would be a lie to say that a decrease in the budget didn't force us to consider this. We just need the funds even though we don't like privatization.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Ciara Walda: "“So, what is your decision?”"*)
 
 ### Węzeł `[80]`
 Mówca: **Ciara Walda**
 > "“We can manage without additional funds. The only reason I wanted to consider it is to have more money to improve education.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Ciara Walda: "“So, what is your decision?”"*)
 
 ### Węzeł `[81]`
 Mówca: **Ciara Walda**
 > "“We have enough money to improve education in Sordland. We do not need to complicate things further with a privatization incentive.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Ciara Walda: "“So, what is your decision?”"*)
 
 ### Węzeł `[82]`
 Mówca: **Ciara Walda**
 > "“I've made my opinion clear: I'm against it. But it would give us additional funds for education while increasing competition.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
 
 ### Węzeł `[83]`
 Mówca: **Ciara Walda**
 > "“I agree. The government should be responsible of managing education completely.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
 
 ### Węzeł `[84]`
 Mówca: **Lucian Galade**
 > "“State education is contrary to our overall economic strategy of promoting a market economy.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Narrator: "A few minutes of deliberation passed."*)
 
 ### Węzeł `[85]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
-  - -> `[87]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn01_EnT_Economy_Planned == true)"*)
 
 ### Węzeł `[86]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
+  - -> `[94]` (*Lucian Galade: "“Private education is inconsistent with our overall econo..."*)
 
 ### Węzeł `[87]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn01_EnT_Economy_Planned == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn01_EnT_Economy_Planned == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Lucian Galade: "“State education is contrary to our overall economic stra..."*)
 
 ### Węzeł `[88]`
 Mówca: **Narrator**
 > "A few minutes of deliberation passed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
 
 ### Węzeł `[89]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
-  - -> `[91]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[90]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Ciara Walda: "“We have enough money to improve education in Sordland. W..."*)
 
 ### Węzeł `[91]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
 
 ### Węzeł `[92]`
 Mówca: **Ciara Walda**
 > "“There aren't many. But it would give us sorely needed funds and increase competition among schools.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true"*)
 
 ### Węzeł `[93]`
 **[WYBÓR GRACZA: "“What are the advantages of privatization?""]** — Mówca: **Player**
 > "“What are the advantages of privatization?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[77]` (Ciara Walda), `[78]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Ciara Walda: "“There aren't many. But it would give us sorely needed fu..."*)
 
 ### Węzeł `[94]`
 Mówca: **Lucian Galade**
 > "“Private education is inconsistent with our overall economic strategy of a planned economy.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Narrator: "A few minutes of deliberation passed."*)
 
 ### Węzeł `[95]`
 Mówca: **Lucian Galade**
 > "“It would go against our overall economic strategy of a planned economy.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Narrator: "A few minutes of deliberation passed."*)
 
 ### Węzeł `[96]`
 Mówca: **Ciara Walda**
 > "“The reduction of the education budget left our hands completely tied. We are in a budget crisis management situation.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Ciara Walda: "“This has led us to think about allowing privatization to..."*)
 
 ### Węzeł `[97]`
 Mówca: **Lucian Galade**
 > "“It would support our overall economic strategy of promoting a market economy.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Narrator: "A few minutes of deliberation passed."*)
 
 ### Węzeł `[98]`
 Mówca: **Narrator**
 > "She let out a deep sigh."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Lucian Galade: "“Now that the decision was made, let's move on.”"*)
 
 ### Węzeł `[99]`
 Mówca: **Ciara Walda**
 > "“Very well.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Narrator: "Ciara skimmed over her documents before continuing."*)
 
 ### Węzeł `[100]`
 **[WYBÓR GRACZA: "“Initiate privatization to draw more funds. This should allow for more competition and quality.” [+2 Government Budget]"]** — Mówca: **Player**
 > "“Initiate privatization to draw more funds. This should allow for more competition and quality.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Economy"] >= 4`
+- **Kontekst wejściowy (poprzednik):** `[64]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget += 2;"*)
 
 ### Węzeł `[101]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGame.GovernmentBudget"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGame.GovernmentBudget"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_EducationPrivatization = true"*)
 
 ### Węzeł `[102]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellite = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellite"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellite = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellite"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[156]`
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[103]`
 Mówca: **Lucian Galade**
 > "“This has been a very productive day. I will be returning to Holsord.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
-  - -> `[116]`
-  - -> `[115]`
+  - -> `[107]` (*Player: "“Thank you for your time.”"*)
+  - -> `[116]` (*Player: "“See you later.”"*)
+  - -> `[115]` (*Player: "“Have a good day.”"*)
 
 ### Węzeł `[104]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Capitalist -= 2;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Capitalist -= 2;
 BaseGame.Malenyevist += 2;
-BaseGame.Sollist += 2;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] - 2;
+BaseGame.Sollist += 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] - 2;
 Variable["BaseGame.Malenyevist"] = Variable["BaseGame.Malenyevist"] + 2;
 Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn04_EducationReform_StateEduca..."*)
 
 ### Węzeł `[105]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_EducationGap = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Welfare_EducationGap"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_EducationGap = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Welfare_EducationGap"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGame.Education += 1"*)
 
 ### Węzeł `[106]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_EducationPrivatization = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_EducationPrivatization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_EducationPrivatization = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_EducationPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EducationGap = true"*)
 
 ### Węzeł `[107]`
 **[WYBÓR GRACZA: "“Thank you for your time.”"]** — Mówca: **Player**
 > "“Thank you for your time everybody.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[103]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Narrator: "We dispersed after spending nearly the entire day togethe..."*)
 
 ### Węzeł `[108]`
 Mówca: **Ciara Walda**
 > "“Will do. That should be it for now. I will get to work and report back later.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Lucian Galade: "“This has been a very productive day. I will be returning..."*)
 
 ### Węzeł `[109]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Education += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Education += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn04_EducationReform_Privatised..."*)
 
 ### Węzeł `[110]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
-  - -> `[112]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[111]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Ciara Walda: "“Great. That should be it for now. I will get to work and..."*)
 
 ### Węzeł `[112]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Progressive == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Ciara Walda: "“Will do. That should be it for now. I will get to work a..."*)
 
 ### Węzeł `[113]`
 **[WYBÓR GRACZA: "“Keep education solely a matter of the state. We need to prevent interference from private interests.""]** — Mówca: **Player**
 > "“Keep education solely a matter of the state. We need to prevent interference from private interests.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[64]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGame.Capitalist -= 2; BaseGame.Malenyevist += 2; Base..."*)
 
 ### Węzeł `[114]`
 Mówca: **Narrator**
 > "We dispersed after spending nearly the entire day together. I took a moment simply to breathe the fresh evening air of Leiren."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
+  - -> `[118]` (*Narrator: "I felt calmer here, somehow. But I would have to return t..."*)
 
 ### Węzeł `[115]`
 **[WYBÓR GRACZA: "“Have a good day.”"]** — Mówca: **Player**
 > "“Have a good day and safe travels.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[103]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Narrator: "We dispersed after spending nearly the entire day togethe..."*)
 
 ### Węzeł `[116]`
 **[WYBÓR GRACZA: "“See you later.”"]** — Mówca: **Player**
 > "“See you both later.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[103]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Narrator: "We dispersed after spending nearly the entire day togethe..."*)
 
 ### Węzeł `[117]`
 Mówca: **Ciara Walda**
 > "“Great. That should be it for now. I will get to work and report back later.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Lucian Galade: "“This has been a very productive day. I will be returning..."*)
 
 ### Węzeł `[118]`
 Mówca: **Narrator**
 > "I felt calmer here, somehow. But I would have to return to the chaos of Holsord soon enough."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest <= 0"*)
 
 ### Węzeł `[119]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn04_EducationReform_Maintain = true;
-BaseGame.Sollist += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_Maintain"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn04_EducationReform_Maintain = true;
+BaseGame.Sollist += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_Maintain"] = true;
 Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Progressive = false"*)
 
 ### Węzeł `[120]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn04_EducationReform_Reform = true;
-BaseGame.Sollist -= 2;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_Reform"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn04_EducationReform_Reform = true;
+BaseGame.Sollist -= 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_Reform"] = true;
 Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] - 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Progressive = true"*)
 
 ### Węzeł `[121]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn04_EducationReform_PrivatisedEducation = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_PrivatisedEducation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn04_EducationReform_PrivatisedEducation = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_PrivatisedEducation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[272]`
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Privatization = true; Base..."*)
 
 ### Węzeł `[122]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn04_EducationReform_StateEducation = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_StateEducation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn04_EducationReform_StateEducation = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn04_EducationReform_StateEducation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[123]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Dictator_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Dictator_Path == true"*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Dictator_Path == true)"*)
 
 ### Węzeł `[124]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Dictator_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Dictator_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Dictator_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_LT_Ricter_D = true"*)
 
 ### Węzeł `[125]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Dictator_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Dictator_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Dictator_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Dictator_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
 
 ### Węzeł `[126]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Reformist_Path == true)"*)
 
 ### Węzeł `[127]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_LT_Kibener_R = true"*)
 
 ### Węzeł `[128]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Reformist_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Reformist_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Dictator_Path == true"*)
 
 ### Węzeł `[129]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_LT_Kibener_R = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_Kibener_R"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_LT_Kibener_R = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_Kibener_R"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Economy_FreeMarket == true"*)
 
 ### Węzeł `[130]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_LT_Ricter_D = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_Ricter_D"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_LT_Ricter_D = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_Ricter_D"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Economy_FreeMarket == true"*)
 
 ### Węzeł `[131]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_ST_TerroristsDealtWith_Deal = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_ST_TerroristsDealtWith_Deal"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_ST_TerroristsDealtWith_Deal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_ST_TerroristsDealtWith_Deal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Economy_FreeMarket == true"*)
 
 ### Węzeł `[132]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
-  - -> `[134]`
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Media_SordlandToday_Bias == true)"*)
 
 ### Węzeł `[133]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[131]`
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_ST_TerroristsDealtWith_Deal =..."*)
 
 ### Węzeł `[134]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Media_SordlandToday_Bias == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Media_SordlandToday_Bias == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_ST_ThousandsofArrests_NoDeal ..."*)
 
 ### Węzeł `[135]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_ST_ThousandsofArrests_NoDeal = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_ST_ThousandsofArrests_NoDeal"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_ST_ThousandsofArrests_NoDeal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_ST_ThousandsofArrests_NoDeal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Economy_FreeMarket == true"*)
 
 ### Węzeł `[136]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Country_Unrest <= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Country_Unrest <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
-  - -> `[138]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest <= 0"*)
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Country_Unrest <= 0)"*)
 
 ### Węzeł `[137]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Country_Unrest <= 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Country_Unrest"] <= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Country_Unrest <= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Country_Unrest"] <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_HP_FreeOfProtests = true"*)
 
 ### Węzeł `[138]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Country_Unrest <= 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Country_Unrest"] <= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Country_Unrest <= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Country_Unrest"] <= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == false"*)
 
 ### Węzeł `[139]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_HP_FreeOfProtests = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_HP_FreeOfProtests"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_HP_FreeOfProtests = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_HP_FreeOfProtests"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[229]`
+  - -> `[229]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Lachaven", "City_Widespr..."*)
 
 ### Węzeł `[140]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
-  - -> `[142]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == false"*)
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_DecreasedInteriorFunding == false)"*)
 
 ### Węzeł `[141]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_HP_FreeOfProtests = true"*)
 
 ### Węzeł `[142]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_DecreasedInteriorFunding == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_DecreasedInteriorFunding == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Ban_RedYouth == true"*)
 
 ### Węzeł `[143]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
-  - -> `[145]`
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true"*)
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn02_StatusReaction_BoostPolice == ..."*)
 
 ### Węzeł `[144]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn02_StatusReaction_BoostPolice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn02_StatusReaction_BoostPolice"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_R_ProtestersArrested = true"*)
 
 ### Węzeł `[145]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn02_StatusReaction_BoostPolice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn02_StatusReaction_BoostPolice"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == false"*)
 
 ### Węzeł `[146]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_R_ProtestersArrested = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_R_ProtestersArrested"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_R_ProtestersArrested = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_R_ProtestersArrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Ban_RedYouth == true"*)
 
 ### Węzeł `[147]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
-  - -> `[149]`
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Tu..."*)
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn01_EnT_Economy_Market == true && BaseGame...."*)
 
 ### Węzeł `[148]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Market"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Market"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_LT_EducationPrivatization_Kep..."*)
 
 ### Węzeł `[149]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Market"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Turn04_PSnW_Education_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Market"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellit..."*)
 
 ### Węzeł `[150]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Economy_FreeMarket == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Economy_FreeMarket == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[151]`
-  - -> `[152]`
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Economy_FreeMarket == true"*)
+  - -> `[152]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Economy_FreeMarket == true)"*)
 
 ### Węzeł `[151]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Economy_FreeMarket == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Economy_FreeMarket"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Economy_FreeMarket == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Economy_FreeMarket"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[147]`
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Market == true && BaseGame.Tu..."*)
 
 ### Węzeł `[152]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Economy_FreeMarket == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_FreeMarket"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Economy_FreeMarket == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_FreeMarket"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[211]`
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.T..."*)
 
 ### Węzeł `[153]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_R_EducationPrivatization_BrokenPromise = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_R_EducationPrivatization_BrokenPromise"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_R_EducationPrivatization_BrokenPromise = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_R_EducationPrivatization_BrokenPromise"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellit..."*)
 
 ### Węzeł `[154]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_LT_EducationPrivatization_KeptPromise = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_EducationPrivatization_KeptPromise"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_LT_EducationPrivatization_KeptPromise = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_LT_EducationPrivatization_KeptPromise"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellit..."*)
 
 ### Węzeł `[155]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: GameCondition.Turn04_PSnW_EducationReform = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn04_PSnW_EducationReform"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn04_PSnW_EducationReform = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn04_PSnW_EducationReform"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
+  - -> `[286]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && Ba..."*)
 
 ### Węzeł `[156]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
-  - -> `[158]`
+  - -> `[157]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
+  - -> `[158]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true)"*)
 
 ### Węzeł `[157]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_LabourViolatesCurf..."*)
 
 ### Węzeł `[158]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Progressive == true"*)
 
 ### Węzeł `[159]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_LabourViolatesCurfew = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_LabourViolatesCurfew"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_LabourViolatesCurfew = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_LabourViolatesCurfew"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Progressive == true"*)
 
 ### Węzeł `[160]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Progressive == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Progressive == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[161]`
-  - -> `[162]`
+  - -> `[161]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Progressive == true"*)
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn04_PSnW_Education_Progressive == true)"*)
 
 ### Węzeł `[161]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Progressive == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Progressive == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Holsord_EducationReformStar..."*)
 
 ### Węzeł `[162]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn04_PSnW_Education_Progressive == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn04_PSnW_Education_Progressive == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_Education_Progressive"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[163]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Holsord_EducationReformStart = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Holsord_EducationReformStart"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Holsord_EducationReformStart = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Holsord_EducationReformStart"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[164]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
-  - -> `[166]`
+  - -> `[165]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
+  - -> `[166]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true)"*)
 
 ### Węzeł `[165]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Holsord_DismissedForLinks =..."*)
 
 ### Węzeł `[166]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
 
 ### Węzeł `[167]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Holsord_DismissedForLinks = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Holsord_DismissedForLinks"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Holsord_DismissedForLinks = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Holsord_DismissedForLinks"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
 
 ### Węzeł `[168]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
-  - -> `[170]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)"*)
 
 ### Węzeł `[169]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_TeachersStrike = true"*)
 
 ### Węzeł `[170]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[171]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
-  - -> `[173]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)"*)
 
 ### Węzeł `[172]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Benfi_DoctorsStrike = true"*)
 
 ### Węzeł `[173]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
 
 ### Węzeł `[174]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Benfi_DoctorsStrike = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Benfi_DoctorsStrike"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Benfi_DoctorsStrike = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Benfi_DoctorsStrike"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
 
 ### Węzeł `[175]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_TeachersStrike = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_TeachersStrike"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_TeachersStrike = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_TeachersStrike"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[176]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
-  - -> `[178]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[178]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[177]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
+  - -> `[179]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_CrackdownTeachersS..."*)
 
 ### Węzeł `[178]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn04_PSnW_EducationReform = true"*)
 
 ### Węzeł `[179]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_CrackdownTeachersStrike = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_CrackdownTeachersStrike"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_CrackdownTeachersStrike = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_CrackdownTeachersStrike"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn04_PSnW_EducationReform = true"*)
 
 ### Węzeł `[180]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -8)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -8`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[181]`
-  - -> `[182]`
+  - -> `[181]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -8"*)
+  - -> `[182]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget <= -8)"*)
 
 ### Węzeł `[181]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -8)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -8`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -8`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -8`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGame.SuperpowerTradeWarHappened = true;"*)
 
 ### Węzeł `[182]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget <= -8))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -8) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget <= -8)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -8) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
 
 ### Węzeł `[183]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
-  - -> `[185]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 6"*)
+  - -> `[185]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= 6)"*)
 
 ### Węzeł `[184]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 6)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.BlackTuesdayHappened = true;"*)
 
 ### Węzeł `[185]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= 6))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_Penalty = true"*)
 
 ### Węzeł `[186]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: GameCondition.Turn05_Decision_Penalty = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn05_Decision_Penalty"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn05_Decision_Penalty = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn05_Decision_Penalty"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_East == true && BaseGame.Refor..."*)
 
 ### Węzeł `[187]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.SuperpowerTradeWarHappened = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.SuperpowerTradeWarHappened"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SuperpowerTradeWarHappened = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.SuperpowerTradeWarHappened"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_East == true && BaseGame.Refor..."*)
 
 ### Węzeł `[188]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.BlackTuesdayHappened = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.BlackTuesdayHappened"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BlackTuesdayHappened = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.BlackTuesdayHappened"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_East == true && BaseGame.Refor..."*)
 
 ### Węzeł `[189]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
-  - -> `[191]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_East == true && BaseGame.Refor..."*)
+  - -> `[191]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Diplomacy_East == true && BaseGame.Ref..."*)
 
 ### Węzeł `[190]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.FinancialAid_UC = true"*)
 
 ### Węzeł `[191]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Diplomacy_East == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[192]`
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true && BaseGame.Refor..."*)
 
 ### Węzeł `[192]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
 BaseGame.Reform_EmergencyDecree_Banned_RY == false &&
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true)*
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
-  - -> `[194]`
+  - -> `[193]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true && BaseGame.Refor..."*)
+  - -> `[194]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Diplomacy_None == true && BaseGame.Ref..."*)
 
 ### Węzeł `[193]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
 BaseGame.Reform_EmergencyDecree_Banned_RY == false &&
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
 Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and 
 Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.FinancialAid_UC = true"*)
 
 ### Węzeł `[194]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
 BaseGame.Reform_EmergencyDecree_Banned_RY == false &&
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
 Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and 
 Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
+  - -> `[196]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_West == true && BaseGame.Refor..."*)
 
 ### Węzeł `[195]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.FinancialAid_UC = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.FinancialAid_UC"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.FinancialAid_UC = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.FinancialAid_UC"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Emerg..."*)
 
 ### Węzeł `[196]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
-  - -> `[198]`
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_West == true && BaseGame.Refor..."*)
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Diplomacy_West == true && BaseGame.Ref..."*)
 
 ### Węzeł `[197]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_West"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_West"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "BaseGame.FinancialAid_Arcasia = true"*)
 
 ### Węzeł `[198]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_West"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Diplomacy_West == true && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_West"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true && BaseGame.Refor..."*)
 
 ### Węzeł `[199]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.FinancialAid_Arcasia = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.FinancialAid_Arcasia"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.FinancialAid_Arcasia = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.FinancialAid_Arcasia"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Emerg..."*)
 
 ### Węzeł `[200]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[201]`
-  - -> `[202]`
+  - -> `[201]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true && BaseGame.Refor..."*)
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Diplomacy_None == true && BaseGame.Ref..."*)
 
 ### Węzeł `[201]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == true  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == true  and  
 Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "BaseGame.FinancialAid_Arcasia = true"*)
 
 ### Węzeł `[202]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
-BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == true  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Diplomacy_None == true && BaseGame.Reform_EmergencyDecree_Embargo_UC == true && 
+BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == true  and  
 Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Refo..."*)
 
 ### Węzeł `[203]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
-BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
-  - -> `[205]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Refo..."*)
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Re..."*)
 
 ### Węzeł `[204]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
-BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and   Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_Diplomacy_None"] == true  and   Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
 Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[206]`
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "BaseGame.FinancialAid_Both = true"*)
 
 ### Węzeł `[205]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
-BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and   Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_Diplomacy_None == true &&  BaseGame.Reform_EmergencyDecree_Embargo_UC == false && 
+BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Reform_EmergencyDecree_Embargo_Arcasia == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Diplomacy_None"] == true  and   Variable["BaseGame.Reform_EmergencyDecree_Embargo_UC"] == false  and  
 Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Embargo_Arcasia"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_FinancialAid = true"*)
 
 ### Węzeł `[206]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.FinancialAid_Both = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.FinancialAid_Both"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.FinancialAid_Both = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.FinancialAid_Both"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Emerg..."*)
 
 ### Węzeł `[207]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: GameCondition.Turn05_Decision_FinancialAid = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn05_Decision_FinancialAid"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn05_Decision_FinancialAid = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn05_Decision_FinancialAid"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Emerg..."*)
 
 ### Węzeł `[208]`
 Mówca: **Narrator**
 > "Ciara looked furious. She shook her head slowly."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Ciara Walda: "“I am utterly disappointed. Especially after yesterday's ..."*)
 
 ### Węzeł `[209]`
 Mówca: **Ciara Walda**
 > "“The only way people like me, Nia, Lileas, Gloria, even your wife were able to escape that is because our families were fortunate and well-connected enough to be able to educate us outside of the public school system. Is that the kind of country you want your daughter to grow up in?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Ciara Walda: "“Mr. President. We need to bring change. We need to free ..."*)
 
 ### Węzeł `[210]`
 Mówca: **Ciara Walda**
 > "“Women like me, Lileas, Nia, even your wife -- we had to study twice as hard to receive the same university education that you and Lucian took for granted. Is that the kind of country you want your daughter to grow up in?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Ciara Walda: "“Mr. President. We need to bring change. We need to free ..."*)
 
 ### Węzeł `[211]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[212]`
-  - -> `[213]`
+  - -> `[212]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.T..."*)
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame..."*)
 
 ### Węzeł `[212]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_R_EducationPrivatization_Brok..."*)
 
 ### Węzeł `[213]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn01_EnT_Economy_Planned == true && BaseGame.Turn04_PSnW_Education_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Planned"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn04_CSP_UCLaunchSatellit..."*)
 
 ### Węzeł `[214]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: (BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[215]`
-  - -> `[216]`
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
+  - -> `[216]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Promise_Economy_Planned == true && BaseGame.P..."*)
 
 ### Węzeł `[215]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: (BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[274]`
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 5"*)
 
 ### Węzeł `[216]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !((BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
+  - -> `[280]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 5"*)
 
 ### Węzeł `[217]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: (BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
-  - -> `[219]`
+  - -> `[218]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
+  - -> `[219]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Promise_Economy_Planned == true && BaseGame.P..."*)
 
 ### Węzeł `[218]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: (BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 6"*)
 
 ### Węzeł `[219]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !((BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Promise_Economy_Planned == true && BaseGame.Policy_Economy_PromotePlanned == true) || (BaseGame.Promise_Economy_FreeMarket == true && BaseGame.Policy_Economy_PromoteMarket == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Promise_Economy_Planned"] == true  and  Variable["BaseGame.Policy_Economy_PromotePlanned"] == true)  or  (Variable["BaseGame.Promise_Economy_FreeMarket"] == true  and  Variable["BaseGame.Policy_Economy_PromoteMarket"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 5"*)
 
 ### Węzeł `[220]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -7)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
-  - -> `[222]`
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -7"*)
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget <= -7)"*)
 
 ### Węzeł `[221]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -7)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -7`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -7`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -7`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGame.SuperpowerTradeWarHappened = true;"*)
 
 ### Węzeł `[222]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget <= -7))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -7) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget <= -7)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -7) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
 
 ### Węzeł `[223]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[224]`
-  - -> `[225]`
+  - -> `[224]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 5"*)
+  - -> `[225]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= 5)"*)
 
 ### Węzeł `[224]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 5)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.BlackTuesdayHappened = true;"*)
 
 ### Węzeł `[225]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_Penalty = true"*)
 
 ### Węzeł `[226]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
-  - -> `[228]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == false"*)
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_DecreasedInteriorFunding == false)"*)
 
 ### Węzeł `[227]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_R_ProtestersArrested = true"*)
 
 ### Węzeł `[228]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_DecreasedInteriorFunding == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_DecreasedInteriorFunding == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Ban_RedYouth == true"*)
 
 ### Węzeł `[229]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Lachaven", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Lachaven","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Lachaven", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Lachaven","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Erlory", "City_Widesprea..."*)
 
 ### Węzeł `[230]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Erlory", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Erlory","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Erlory", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Erlory","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[231]`
+  - -> `[231]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Laren", "City_Widespread..."*)
 
 ### Węzeł `[231]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Laren", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Laren","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Laren", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Laren","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_StatusReaction_BoostPolice == true"*)
 
 ### Węzeł `[232]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Ban_RedYouth == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Ban_RedYouth == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
-  - -> `[234]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Ban_RedYouth == true"*)
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Ban_RedYouth == true)"*)
 
 ### Węzeł `[233]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Ban_RedYouth == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Ban_RedYouth == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Benfi", "City_Widespread..."*)
 
 ### Węzeł `[234]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Ban_RedYouth == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Ban_RedYouth == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[235]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Benfi", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Benfi","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Benfi", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Benfi","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[236]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[237]`
-  - -> `[238]`
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true)"*)
 
 ### Węzeł `[237]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Anrica", "City_Widesprea..."*)
 
 ### Węzeł `[238]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
 
 ### Węzeł `[239]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Anrica", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Anrica","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Anrica", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Anrica","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Arvory", "City_Widesprea..."*)
 
 ### Węzeł `[240]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Arvory", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Arvory","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Arvory", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Arvory","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[241]`
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Morna", "City_Widespread..."*)
 
 ### Węzeł `[241]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Morna", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Morna","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Morna", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Morna","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Erzaren", "City_Widespre..."*)
 
 ### Węzeł `[242]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Erzaren", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Erzaren","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Erzaren", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Erzaren","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[243]`
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Benfi", "City_Widespread..."*)
 
 ### Węzeł `[243]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Benfi", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Benfi","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Benfi", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Benfi","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[244]`
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Holsord", "City_Widespre..."*)
 
 ### Węzeł `[244]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Holsord", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Holsord","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Holsord", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Holsord","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
+  - -> `[245]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_City_Valgen", "City_Widesprea..."*)
 
 ### Węzeł `[245]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_City_Valgen", "City_WidespreadProtests");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_City_Valgen","City_WidespreadProtests");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_City_Valgen", "City_WidespreadProtests");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_City_Valgen","City_WidespreadProtests");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
 
 ### Węzeł `[246]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[247]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
-  - -> `[249]`
+  - -> `[248]` (*Węzeł Logiki Narracyjnej: "BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Emerg..."*)
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_Eme..."*)
 
 ### Węzeł `[248]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Country_Unrest"] >= 4  or  Variable["BaseGame.Policy_Law_EmergencyDecree"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Country_Unrest"] >= 4  or  Variable["BaseGame.Policy_Law_EmergencyDecree"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_Tourism_Booming = false; BaseG..."*)
 
 ### Węzeł `[249]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Country_Unrest"] >= 4  or  Variable["BaseGame.Policy_Law_EmergencyDecree"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Country_Unrest >= 4 || BaseGame.Policy_Law_EmergencyDecree == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Country_Unrest"] >= 4  or  Variable["BaseGame.Policy_Law_EmergencyDecree"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[251]`
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed =..."*)
 
 ### Węzeł `[250]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_Tourism_Booming = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_Tourism_Booming = false;
 BaseGame.Situation_Economy_Tourism_Average = false;
-BaseGame.Situation_Economy_Tourism_Declining = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = false;
+BaseGame.Situation_Economy_Tourism_Declining = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = false;
 Variable["BaseGame.Situation_Economy_Tourism_Average"] = false;
 Variable["BaseGame.Situation_Economy_Tourism_Declining"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Default == true"*)
 
 ### Węzeł `[251]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
-  - -> `[253]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed =..."*)
+  - -> `[253]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed..."*)
 
 ### Węzeł `[252]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_Tourism_Booming = true; BaseGa..."*)
 
 ### Węzeł `[253]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn02_TourismCulturalPreservation_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_Tourism_Booming = false; BaseG..."*)
 
 ### Węzeł `[254]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_Tourism_Booming = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_Tourism_Booming = true;
 BaseGame.Situation_Economy_Tourism_Average = false;
-BaseGame.Situation_Economy_Tourism_Declining = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = true;
+BaseGame.Situation_Economy_Tourism_Declining = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = true;
 Variable["BaseGame.Situation_Economy_Tourism_Average"] = false;
 Variable["BaseGame.Situation_Economy_Tourism_Declining"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Default == true"*)
 
 ### Węzeł `[255]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_Tourism_Booming = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_Tourism_Booming = false;
 BaseGame.Situation_Economy_Tourism_Average = true;
-BaseGame.Situation_Economy_Tourism_Declining = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = false;
+BaseGame.Situation_Economy_Tourism_Declining = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Economy_Tourism_Booming"] = false;
 Variable["BaseGame.Situation_Economy_Tourism_Average"] = true;
 Variable["BaseGame.Situation_Economy_Tourism_Declining"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Default == true"*)
 
 ### Węzeł `[256]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Default == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Default == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[257]`
-  - -> `[258]`
+  - -> `[257]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Default == true"*)
+  - -> `[258]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Gasom_Default == true)"*)
 
 ### Węzeł `[257]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Default == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Gasom_Default"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Default == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Gasom_Default"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_E_Gasom_Stagnates = true;"*)
 
 ### Węzeł `[258]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Gasom_Default == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Gasom_Default"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Gasom_Default == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Gasom_Default"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[260]`
+  - -> `[260]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Bankrupt == true"*)
 
 ### Węzeł `[259]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_E_Gasom_Stagnates = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_Stagnates"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_E_Gasom_Stagnates = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_Stagnates"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[260]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Bankrupt == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Bankrupt == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[261]`
-  - -> `[262]`
+  - -> `[261]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Bankrupt == true"*)
+  - -> `[262]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Gasom_Bankrupt == true)"*)
 
 ### Węzeł `[261]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Bankrupt == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Gasom_Bankrupt"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Bankrupt == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Gasom_Bankrupt"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
+  - -> `[263]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_E_Gasom_BankruptcyLooms = true;"*)
 
 ### Węzeł `[262]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Gasom_Bankrupt == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Gasom_Bankrupt"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Gasom_Bankrupt == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Gasom_Bankrupt"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[264]`
+  - -> `[264]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Downsized == true"*)
 
 ### Węzeł `[263]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_E_Gasom_BankruptcyLooms = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_BankruptcyLooms"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_E_Gasom_BankruptcyLooms = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_BankruptcyLooms"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[264]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Downsized == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Downsized == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[265]`
-  - -> `[266]`
+  - -> `[265]` (*Węzeł Logiki Narracyjnej: "BaseGame.Gasom_Downsized == true"*)
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Gasom_Downsized == true)"*)
 
 ### Węzeł `[265]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Gasom_Downsized == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Gasom_Downsized"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Gasom_Downsized == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Gasom_Downsized"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn04_E_Gasom_Downsizes = true;"*)
 
 ### Węzeł `[266]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Gasom_Downsized == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Gasom_Downsized"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Gasom_Downsized == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Gasom_Downsized"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[267]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn04_E_Gasom_Downsizes = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_Downsizes"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn04_E_Gasom_Downsizes = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn04_E_Gasom_Downsizes"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[268]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 4)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
-  - -> `[270]`
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 4"*)
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Economy >= 4)"*)
 
 ### Węzeł `[269]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 4)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Economy"] >= 4`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 4`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Economy"] >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Player: "“Initiate privatization to draw more funds. This should a..."*)
 
 ### Węzeł `[270]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Economy >= 4))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 4) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Economy >= 4)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 4) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
+  - -> `[271]` (*Player: "“Initiate privatization to draw more funds. This should a..."*)
 
 ### Węzeł `[271]`
 **[WYBÓR GRACZA: "“Initiate privatization to draw more funds. This should allow for more competition and quality.” [+1 Government Budget]"]** — Mówca: **Player**
 > "“Initiate privatization to draw more funds. This should allow for more competition and quality.”"
+- **Wymagania odblokowania (kod gry):** `(Variable["BaseGame.Economy"] >= 4) == false`
+- **Kontekst wejściowy (poprzednik):** `[64]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget += 1;"*)
 
 ### Węzeł `[272]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Privatization = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Privatization = true;
 BaseGame.Capitalist += 5;
 BaseGame.Malenyevist -= 4;
-BaseGame.Sollist -= 2;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Privatization"] = true;
+BaseGame.Sollist -= 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn04_PSnW_Education_Privatization"] = true;
 Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] + 5;
 Variable["BaseGame.Malenyevist"] = Variable["BaseGame.Malenyevist"] - 4;
 Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] - 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Ciara Walda: "“Will do. That should be it for now. I will get to work a..."*)
 
 ### Węzeł `[273]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget += 2;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGame.GovernmentBudget"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget += 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.GovernmentBudget"] = Variable["BaseGame.GovernmentBudget"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_EducationPrivatization = true"*)
 
 ### Węzeł `[274]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
-  - -> `[276]`
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 5"*)
+  - -> `[276]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Economy >= 5)"*)
 
 ### Węzeł `[275]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 5)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Economy"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Economy"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -9"*)
 
 ### Węzeł `[276]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Economy >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Economy >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -8"*)
 
 ### Węzeł `[277]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -9)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -9`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
-  - -> `[279]`
+  - -> `[278]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -9"*)
+  - -> `[279]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget <= -9)"*)
 
 ### Węzeł `[278]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -9)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -9`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -9`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -9`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGame.SuperpowerTradeWarHappened = true;"*)
 
 ### Węzeł `[279]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget <= -9))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -9) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget <= -9)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -9) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
 
 ### Węzeł `[280]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[282]`
+  - -> `[281]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy >= 5"*)
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Economy >= 5)"*)
 
 ### Węzeł `[281]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Economy >= 5)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Economy"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Economy"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[220]`
+  - -> `[220]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -7"*)
 
 ### Węzeł `[282]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Economy >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Economy >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Economy"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
+  - -> `[283]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -6"*)
 
 ### Węzeł `[283]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[284]`
-  - -> `[285]`
+  - -> `[284]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget <= -6"*)
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget <= -6)"*)
 
 ### Węzeł `[284]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget <= -6)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget <= -6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] <= -6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGame.SuperpowerTradeWarHappened = true;"*)
 
 ### Węzeł `[285]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget <= -6))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget <= -6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] <= -6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)
 
 ### Węzeł `[286]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[287]`
-  - -> `[288]`
+  - -> `[287]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && Ba..."*)
+  - -> `[288]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && ..."*)
 
 ### Węzeł `[287]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_EmbargoingArcasia"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingUnitedContana"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_EmbargoingArcasia"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingUnitedContana"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_Penalty = true"*)
 
 ### Węzeł `[288]`
-Mówca: **Ciara Walda**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_EmbargoingArcasia"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingUnitedContana"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_EmbargoingArcasia == true && BaseGame.Policy_Diplomacy_EmbargoingRumburg == true && BaseGame.Policy_Diplomacy_EmbargoingUnitedContana == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_EmbargoingArcasia"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true  and  Variable["BaseGame.Policy_Diplomacy_EmbargoingUnitedContana"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Promise_Economy_Planned == true && BaseGame.Pol..."*)

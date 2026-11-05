@@ -43,10 +43,13 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 12
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[36]` | **""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
 
 ---
 
@@ -55,59 +58,59 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true &&..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true ..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true  and  Variable["BaseGame.Leaker_LucianGalade"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true  and  Variable["BaseGame.Leaker_LucianGalade"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGame.Petr_isVP == true"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true  and  Variable["BaseGame.Leaker_LucianGalade"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true && BaseGame.Leaker_LucianGalade == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true  and  Variable["BaseGame.Leaker_LucianGalade"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
-|| BaseGame.Petr_Dead == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
+|| BaseGame.Petr_Dead == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn08_SecondScandal_Detained_Petr == true || Ba..."*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn08_SecondScandal_Detained_Petr == true || ..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
-|| BaseGame.Petr_Dead == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn08_SecondScandal_Detained_Petr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_PetrTrialled"] == true
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
+|| BaseGame.Petr_Dead == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn08_SecondScandal_Detained_Petr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_PetrTrialled"] == true
  or  Variable["BaseGame.Petr_Dead"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_MilitaryParade_SergeDead == false && Base..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
-|| BaseGame.Petr_Dead == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn08_SecondScandal_Detained_Petr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_PetrTrialled"] == true
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn08_SecondScandal_Detained_Petr == true || BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr == true || BaseGame.Turn08_SecondScandal_PetrTrialled == true
+|| BaseGame.Petr_Dead == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn08_SecondScandal_Detained_Petr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_SecretState_ArrestPetr"] == true  or  Variable["BaseGame.Turn08_SecondScandal_PetrTrialled"] == true
  or  Variable["BaseGame.Petr_Dead"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true &&..."*)
 
 ### Węzeł `[9]`
 Mówca: **Narrator**
@@ -115,50 +118,50 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Petr_isVP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Petr_isVP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.Petr_isVP == true"*)
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Petr_isVP == true)"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Petr_isVP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Petr_isVP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Petr_isVP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Petr_isVP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Narrator: "Petr entered the room with the gesture of the guards."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Petr_isVP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Petr_isVP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Petr_isVP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Petr_isVP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Narrator: "Petr entered the room with the gesture of the guards."*)
 
 ### Węzeł `[13]`
 Mówca: **Narrator**
 > "Petr entered the room with the gesture of the guards."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_MilitaryParade_SergeDead == false && Base..."*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_MilitaryParade_SergeDead == false && Ba..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false  and  Variable["BaseGame.Relations_Serge_TalkSoured"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false  and  Variable["BaseGame.Relations_Serge_TalkSoured"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Narrator: "Serge entered the room with the gesture of the guards."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false  and  Variable["BaseGame.Relations_Serge_TalkSoured"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_MilitaryParade_SergeDead == false && BaseGame.Relations_Serge_TalkSoured == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false  and  Variable["BaseGame.Relations_Serge_TalkSoured"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[17]`
@@ -167,88 +170,88 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_Franc_StateUniversity == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_Franc_StateUniversity == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_Franc_StateUniversity == true"*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_Franc_StateUniversity == true)"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_Franc_StateUniversity == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_Franc_StateUniversity"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_Franc_StateUniversity == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_Franc_StateUniversity"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_Franc_StateUniversity == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_Franc_StateUniversity"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_Franc_StateUniversity == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_Franc_StateUniversity"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_SecretState_KillFrensRicter == tru..."*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_SecretState_KillFrensRicter == t..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_SecretState_KillFrensRicter"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillKesaroKibener"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillLiviaSuno"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillOrsoHawker"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillPetrVectern"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_SecretState_KillFrensRicter"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillKesaroKibener"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillLiviaSuno"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillOrsoHawker"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillPetrVectern"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_SecretState_KillFrensRicter"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillKesaroKibener"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillLiviaSuno"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillOrsoHawker"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillPetrVectern"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_SecretState_KillFrensRicter == true || BaseGame.LeakedScandal_SecretState_KillKesaroKibener == true || BaseGame.LeakedScandal_SecretState_KillLiviaSuno == true || BaseGame.LeakedScandal_SecretState_KillOrsoHawker == true || BaseGame.LeakedScandal_SecretState_KillPetrVectern == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_SecretState_KillFrensRicter"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillKesaroKibener"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillLiviaSuno"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillOrsoHawker"] == true  or  Variable["BaseGame.LeakedScandal_SecretState_KillPetrVectern"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_Testify_ACP == true"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_Testify_ACP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_Testify_ACP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_Testify_ACP == true"*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_Testify_ACP == true)"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_Testify_ACP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_Testify_ACP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_Testify_ACP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_Testify_ACP"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_Testify_ACP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_Testify_ACP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_Testify_ACP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_Testify_ACP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn08_SecondScandal_Detained_Petr == true || Ba..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_HeronGaraci == true)"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Heron Garaci: """*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_HeronGaraci == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_HeronGaraci == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
 
 ### Węzeł `[30]`
-Mówca: **Ovid Grecer**
-*(Węzeł logiki narracyjnej: Ovid Grecer: "...")*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Ovid Grecer: "..."`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[31]`
@@ -257,32 +260,32 @@ Mówca: **Heron Garaci**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
-  - -> `[34]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_OvidGrecer == true)"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "Ovid Grecer: "...""*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_OvidGrecer == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_OvidGrecer == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "Orso Hawker: "...""*)
 
 ### Węzeł `[35]`
-Mówca: **Orso Hawker**
-*(Węzeł logiki narracyjnej: Orso Hawker: "...")*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Orso Hawker: "..."`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[36]`
-**[WYBÓR GRACZA]** — Mówca: **Player**
-*(Węzeł logiki narracyjnej: Player: "...")*
+**[WYBÓR GRACZA]** — Mówca: **Węzeł Logiki Narracyjnej**
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*

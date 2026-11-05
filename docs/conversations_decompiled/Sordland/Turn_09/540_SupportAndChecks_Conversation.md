@@ -49,21 +49,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 17
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Monica): `Variable["BaseGame.Situation_Law_SomeHumanRights"] = true; Variable["BaseGame.Situation_Law_Limit...`
-- Węzeł `[7]` (Monica): `Variable["BaseGame.Situation_Order_CrimeWave"] = true;`
-- Węzeł `[8]` (Monica): `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false; Variable["BaseGame.Situation_O...`
-- Węzeł `[9]` (Monica): `--;`
-- Węzeł `[16]` (Monica): `-- continue;`
-- Węzeł `[17]` (Monica): `Variable["BaseGame.Situation_Order_OrganisedCrime"] = true; Variable["BaseGame.Situation_Order_Re...`
-- Węzeł `[24]` (Monica): `-- continue;`
-- Węzeł `[31]` (Monica): `Variable["BaseGame.Situation_Law_SomeHumanRights"] = false; Variable["BaseGame.Situation_Law_Limi...`
-- *...oraz 9 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -72,422 +62,422 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Monica)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Monica)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `183` (*Sordland/Turn09/Personal_MonicaFinalTalk*), Węzeł `[650]`
+  - -> `[650]`
 
 ### Węzeł `[3]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_FreedomAct == true &&
-BaseGame.Policy_Law_MinorityRights == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_FreedomAct == true &&
+BaseGame.Policy_Law_MinorityRights == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_FreedomAct == true && BaseGame.Poli..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_FreedomAct == true && BaseGame.Po..."*)
 
 ### Węzeł `[4]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_FreedomAct == true &&
-BaseGame.Policy_Law_MinorityRights == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_FreedomAct == true &&
+BaseGame.Policy_Law_MinorityRights == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
 Variable["BaseGame.Policy_Law_MinorityRights"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_LittleSecurityPowers = true; Bas..."*)
 
 ### Węzeł `[5]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_FreedomAct == true &&
-BaseGame.Policy_Law_MinorityRights == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_FreedomAct == true &&
+BaseGame.Policy_Law_MinorityRights == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
 Variable["BaseGame.Policy_Law_MinorityRights"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecurityAct == true && (BaseGame.Po..."*)
 
 ### Węzeł `[6]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_SomeHumanRights = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_SomeHumanRights = true;
 BaseGame.Situation_Law_LimitedHumanRights = false;
-BaseGame.Situation_Law_ExpandedHumanRights = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Law_SomeHumanRights"] = true;
+BaseGame.Situation_Law_ExpandedHumanRights = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Law_SomeHumanRights"] = true;
 Variable["BaseGame.Situation_Law_LimitedHumanRights"] = false;
 Variable["BaseGame.Situation_Law_ExpandedHumanRights"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[7]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_CrimeWave = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_CrimeWave"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_CrimeWave = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_CrimeWave"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrime = true; BaseGame...."*)
 
 ### Węzeł `[8]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_LittleSecurityPowers = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_LittleSecurityPowers = false;
 BaseGame.Situation_Order_SomeSecurityPowers = false;
-BaseGame.Situation_Order_WideRangingSecurityPowers = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
+BaseGame.Situation_Order_WideRangingSecurityPowers = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
 Variable["BaseGame.Situation_Order_SomeSecurityPowers"] = false;
 Variable["BaseGame.Situation_Order_WideRangingSecurityPowers"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[9]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_EmergencyDecree == true"*)
 
 ### Węzeł `[10]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_SecurityAct == true &&
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecurityAct == true && (BaseGame.Po..."*)
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_SecurityAct == true && (BaseGame...."*)
 
 ### Węzeł `[11]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_SecurityAct == true &&
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
 (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or  Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_LittleSecurityPowers = false; Ba..."*)
 
 ### Węzeł `[12]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_SecurityAct == true &&
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
 (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or  Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_LittleSecurityPowers = false; Ba..."*)
 
 ### Węzeł `[13]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_EmergencyDecree == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_EmergencyDecree == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_EmergencyDecree == true"*)
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_EmergencyDecree == true)"*)
 
 ### Węzeł `[14]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_EmergencyDecree == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_EmergencyDecree"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_EmergencyDecree == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_EmergencyDecree"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[15]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_EmergencyDecree == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_EmergencyDecree"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_EmergencyDecree == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_EmergencyDecree"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == true  || ..."*)
 
 ### Węzeł `[16]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // continue)*
-- **Efekt (`userScript`):** `-- continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// continue`
+- **Efekt skryptowy (`userScript`):** `-- continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[17]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_OrganisedCrime = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_OrganisedCrime = true;
 BaseGame.Situation_Order_ReductionOfCrimeCommunities = false;
-BaseGame.Situation_Order_OrganisedCrimeContained = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_OrganisedCrime"] = true;
+BaseGame.Situation_Order_OrganisedCrimeContained = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_OrganisedCrime"] = true;
 Variable["BaseGame.Situation_Order_ReductionOfCrimeCommunities"] = false;
 Variable["BaseGame.Situation_Order_OrganisedCrimeContained"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[18]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))*
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false || ..."*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false |..."*)
 
 ### Węzeł `[19]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == false  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == false  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == false))
  and  
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_SomeHumanRights = false; BaseGame...."*)
 
 ### Węzeł `[20]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == false  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == false  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == false))
  and  
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false || ..."*)
 
 ### Węzeł `[21]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
 || (BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true ||BaseGame.Policy_Law_Ban_YoungSords == true))
 &&
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))*
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == true  || ..."*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == true  |..."*)
 
 ### Węzeł `[22]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
 || (BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true ||BaseGame.Policy_Law_Ban_YoungSords == true))
 &&
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == true 
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == true 
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true))
  and 
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_SomeHumanRights = true; BaseGame.S..."*)
 
 ### Węzeł `[23]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !((BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == true 
 || (BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true ||BaseGame.Policy_Law_Ban_YoungSords == true))
 &&
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == true 
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == true 
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true))
  and 
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false || ..."*)
 
 ### Węzeł `[24]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // continue)*
-- **Efekt (`userScript`):** `-- continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// continue`
+- **Efekt skryptowy (`userScript`):** `-- continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[25]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
-  - -> `[27]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == true"*)
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_DecreasedInteriorFunding == true)"*)
 
 ### Węzeł `[26]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_DecreasedInteriorFunding == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_DecreasedInteriorFunding == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_CrimeWave = true;"*)
 
 ### Węzeł `[27]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_DecreasedInteriorFunding == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_DecreasedInteriorFunding == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_DecreasedInteriorFunding"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrime = true; BaseGame...."*)
 
 ### Węzeł `[28]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_FreedomAct == true &&
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_FreedomAct == true &&
 BaseGame.Policy_Law_MinorityRights == true &&
 BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))*
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
-  - -> `[30]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_FreedomAct == true && BaseGame.Poli..."*)
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_FreedomAct == true && BaseGame.Po..."*)
 
 ### Węzeł `[29]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_FreedomAct == true &&
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_FreedomAct == true &&
 BaseGame.Policy_Law_MinorityRights == true &&
 BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
 Variable["BaseGame.Policy_Law_MinorityRights"] == true  and 
 Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
 (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or  Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_LittleSecurityPowers = false; Ba..."*)
 
 ### Węzeł `[30]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_FreedomAct == true &&
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_FreedomAct == true &&
 BaseGame.Policy_Law_MinorityRights == true &&
 BaseGame.Policy_Order_SecurityAct == true &&
-(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true)))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
+(BaseGame.Policy_Law_Ban_WPB == true || BaseGame.Policy_Law_Ban_RedYouth == true || BaseGame.Policy_Law_Ban_YoungSords == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_FreedomAct"] == true  and 
 Variable["BaseGame.Policy_Law_MinorityRights"] == true  and 
 Variable["BaseGame.Policy_Order_SecurityAct"] == true  and 
 (Variable["BaseGame.Policy_Law_Ban_WPB"] == true  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == true  or  Variable["BaseGame.Policy_Law_Ban_YoungSords"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_FreedomAct == true && BaseGame.Poli..."*)
 
 ### Węzeł `[31]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_SomeHumanRights = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_SomeHumanRights = false;
 BaseGame.Situation_Law_LimitedHumanRights = false;
-BaseGame.Situation_Law_ExpandedHumanRights = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Law_SomeHumanRights"] = false;
+BaseGame.Situation_Law_ExpandedHumanRights = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Law_SomeHumanRights"] = false;
 Variable["BaseGame.Situation_Law_LimitedHumanRights"] = false;
 Variable["BaseGame.Situation_Law_ExpandedHumanRights"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[32]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // continue)*
-- **Efekt (`userScript`):** `-- continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// continue`
+- **Efekt skryptowy (`userScript`):** `-- continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[33]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_LittleSecurityPowers = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_LittleSecurityPowers = false;
 BaseGame.Situation_Order_SomeSecurityPowers = true;
-BaseGame.Situation_Order_WideRangingSecurityPowers = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
+BaseGame.Situation_Order_WideRangingSecurityPowers = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
 Variable["BaseGame.Situation_Order_SomeSecurityPowers"] = true;
 Variable["BaseGame.Situation_Order_WideRangingSecurityPowers"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[34]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // end)*
-- **Efekt (`userScript`):** `-- end;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// end`
+- **Efekt skryptowy (`userScript`):** `-- end;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_FreedomAct == true && BaseGame.Poli..."*)
 
 ### Węzeł `[35]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // end)*
-- **Efekt (`userScript`):** `-- end;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// end`
+- **Efekt skryptowy (`userScript`):** `-- end;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[36]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_IncreasedInteriorFunding == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_IncreasedInteriorFunding == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
-  - -> `[38]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_IncreasedInteriorFunding == true"*)
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_IncreasedInteriorFunding == true)"*)
 
 ### Węzeł `[37]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_IncreasedInteriorFunding == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_IncreasedInteriorFunding"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_IncreasedInteriorFunding == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_IncreasedInteriorFunding"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[38]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_IncreasedInteriorFunding == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_IncreasedInteriorFunding"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_IncreasedInteriorFunding == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_IncreasedInteriorFunding"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_DecreasedInteriorFunding == true"*)
 
 ### Węzeł `[39]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // end)*
-- **Efekt (`userScript`):** `-- end;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// end`
+- **Efekt skryptowy (`userScript`):** `-- end;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "// end"*)
 
 ### Węzeł `[40]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // continue)*
-- **Efekt (`userScript`):** `-- continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// continue`
+- **Efekt skryptowy (`userScript`):** `-- continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[41]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: // end)*
-- **Efekt (`userScript`):** `-- end;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// end`
+- **Efekt skryptowy (`userScript`):** `-- end;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_IncreasedInteriorFunding == true"*)
 
 ### Węzeł `[42]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_LittleSecurityPowers = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_LittleSecurityPowers = false;
 BaseGame.Situation_Order_SomeSecurityPowers = true;
-BaseGame.Situation_Order_WideRangingSecurityPowers = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
+BaseGame.Situation_Order_WideRangingSecurityPowers = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = false;
 Variable["BaseGame.Situation_Order_SomeSecurityPowers"] = true;
 Variable["BaseGame.Situation_Order_WideRangingSecurityPowers"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[43]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_LittleSecurityPowers = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_LittleSecurityPowers = true;
 BaseGame.Situation_Order_SomeSecurityPowers = false;
-BaseGame.Situation_Order_WideRangingSecurityPowers = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = true;
+BaseGame.Situation_Order_WideRangingSecurityPowers = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Order_LittleSecurityPowers"] = true;
 Variable["BaseGame.Situation_Order_SomeSecurityPowers"] = false;
 Variable["BaseGame.Situation_Order_WideRangingSecurityPowers"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[44]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true))*
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false || ..."*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false |..."*)
 
 ### Węzeł `[45]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: (BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == false  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == false  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == false))
  and  
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)  and  (Variable["BaseGame.Policy_Law_SpecialZoneOfBergia"] == false  and  Variable["BaseGame.Policy_Law_WomenLiberation"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_SomeHumanRights = false; BaseGame...."*)
 
 ### Węzeł `[46]`
-Mówca: **Monica**
-*(Węzeł logiki narracyjnej: !((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Bill_Turn08_HarsherSecurity_Signed == false
 || (BaseGame.Policy_Law_Ban_WPB == false || BaseGame.Policy_Law_Ban_RedYouth == false ||BaseGame.Policy_Law_Ban_YoungSords == false))
 && 
-(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
+(BaseGame.Bill_Turn09_LighterSecurity_Signed == true || BaseGame.Policy_Law_MinorityRights == true) && (BaseGame.Policy_Law_SpecialZoneOfBergia == false && BaseGame.Policy_Law_WomenLiberation == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Bill_Turn08_HarsherSecurity_Signed"] == false
  or  (Variable["BaseGame.Policy_Law_Ban_WPB"] == false  or  Variable["BaseGame.Policy_Law_Ban_RedYouth"] == false  or Variable["BaseGame.Policy_Law_Ban_YoungSords"] == false))
  and  
 (Variable["BaseGame.Bill_Turn09_LighterSecurity_Signed"] == true  or  Variable["BaseGame.Policy_Law_MinorityRights"] == true)  and  (Variable["BaseGame.Policy_Law_SpecialZoneOfBergia"] == false  and  Variable["BaseGame.Policy_Law_WomenLiberation"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "// end"*)

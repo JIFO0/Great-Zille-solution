@@ -34,15 +34,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 3
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[9]` (Paskal Beniwoll): `End();`
-- Węzeł `[11]` (Paskal Beniwoll): `PlayLoopedMusic("R_Coalition","R_Coalition_Loop");`
-- Węzeł `[12]` (Paskal Beniwoll): `SetRichPresence("Mediating a regional conflict","Diplomatic Suite","Palace Rezna"); ;`
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -51,85 +47,85 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "SetRichPresence("Mediating a regional conflict", "Diploma..."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffo..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEf..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `436` (*Rizia/Turn 9/Morella Derdia Mediation*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MinimalEffort"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffo..."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffo..."*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEf..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `437` (*Rizia/Turn 9/Wehlen Derdia Meditation*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort == true || RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort == true) && RiziaDLC.ZilleReturn_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MassiveEffort"] == true  or  Variable["RiziaDLC.Decision_Turn08_MediateDerdiaWehlen_MinimalEffort"] == true)  and  Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `438` (*Rizia/Turn 9/Pabel Extradition*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[10]`
 Mówca: **Narrator**
 > "Laurento and I sat in Palas Rezna's diplomatic suite, awaiting our foreign guests."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn08_MediateDerdiaMorella_MassiveEffo..."*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayLoopedMusic("R_Coalition", "R_Coalition_Loop");)*
-- **Efekt (`userScript`):** `PlayLoopedMusic("R_Coalition","R_Coalition_Loop");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayLoopedMusic("R_Coalition", "R_Coalition_Loop");`
+- **Efekt skryptowy (`userScript`):** `PlayLoopedMusic("R_Coalition","R_Coalition_Loop");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Narrator: "Laurento and I sat in Palas Rezna's diplomatic suite, awa..."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: SetRichPresence("Mediating a regional conflict", "Diplomatic Suite", "Palace Rezna");)*
-- **Efekt (`userScript`):** `SetRichPresence("Mediating a regional conflict","Diplomatic Suite","Palace Rezna");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `SetRichPresence("Mediating a regional conflict", "Diplomatic Suite", "Palace Rezna");`
+- **Efekt skryptowy (`userScript`):** `SetRichPresence("Mediating a regional conflict","Diplomatic Suite","Palace Rezna");
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "PlayLoopedMusic("R_Coalition", "R_Coalition_Loop");"*)

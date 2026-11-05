@@ -44,25 +44,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 2
-- **Węzły modyfikujące stan gry:** 17
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners`
-- `BaseGameUI.PresidentialPower_Condition_DeSollinisation`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_AddCapitalPunishment"] = true;`
-- Węzeł `[10]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_AllowPrivatePrisons"] = true;`
-- Węzeł `[17]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone"] = true;`
-- Węzeł `[18]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners"] = true;`
-- Węzeł `[19]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_GenderEqualityInEducation"] = true;`
-- Węzeł `[23]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_FreePrescriptionMedicine"] = true;`
-- Węzeł `[27]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_DeSollinisation"] = true;`
-- Węzeł `[31]` (Paskal Beniwoll): `Variable["BaseGameUI.PresidentialPower_Condition_FairTradeAndCompetititonCommission"] = true;`
-- *...oraz 9 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -71,491 +57,491 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_AddCapitalPunishme..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_AddCapitalPunishment = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AddCapitalPunishment"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_AddCapitalPunishment = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AddCapitalPunishment"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_AllowPrivatePrison..."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_AllowPrivatePrisons = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AllowPrivatePrisons"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_AllowPrivatePrisons = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AllowPrivatePrisons"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true)"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone ..."*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Policy_Law_Decree_Default == true || BaseGame..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollE..."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_BergiaSpecialZone"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_AmnestyForAllSollEraPoliticalPrisoners"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_GenderEqualityInEducation = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_GenderEqualityInEducation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_GenderEqualityInEducation = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_GenderEqualityInEducation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
-  - -> `[22]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Policy_Law_Decree_Default == true || BaseGame..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_GenderEqualityInEd..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_FreePrescriptionMedicine = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_FreePrescriptionMedicine"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_FreePrescriptionMedicine = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_FreePrescriptionMedicine"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Policy_Law_Decree_Default == true || BaseGame..."*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_DeSollinisation = ..."*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true) && BaseGame.Reform_Autocrat_CourtVote_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true)  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_DeSollinisation = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_DeSollinisation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_DeSollinisation = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_DeSollinisation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
-  - -> `[30]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_FreePrescriptionMe..."*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Policy_Law_Decree_Default == true || BaseGame.P..."*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_FairTradeAndCompetititonCommission = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_FairTradeAndCompetititonCommission"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_FairTradeAndCompetititonCommission = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_FairTradeAndCompetititonCommission"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
-  - -> `[34]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_FairTradeAndCompet..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_SordishRadioAndTelevisionSupremeCouncil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_SordishRadioAndTelevisionSupremeCouncil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_SordishRadioAndTelevisionSupremeCouncil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_SordishRadioAndTelevisionSupremeCouncil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
-  - -> `[38]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_SordishRadioAndTel..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_RemovePublicReligiousSymbols = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RemovePublicReligiousSymbols"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_RemovePublicReligiousSymbols = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RemovePublicReligiousSymbols"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
-  - -> `[42]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame..."*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_RemovePublicReligi..."*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_RuralEducationInstitutes = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RuralEducationInstitutes"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_RuralEducationInstitutes = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RuralEducationInstitutes"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true)"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_RemoveIndependence..."*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true)"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_GunOwnershipRights..."*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_PurgeGeneralStaff = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_PurgeGeneralStaff"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_PurgeGeneralStaff = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_PurgeGeneralStaff"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_GunOwnershipRights = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_GunOwnershipRights"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_GunOwnershipRights = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_GunOwnershipRights"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_RemoveIndependenceOfTheCentralBank = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RemoveIndependenceOfTheCentralBank"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_RemoveIndependenceOfTheCentralBank = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RemoveIndependenceOfTheCentralBank"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true)"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_RelocationOfTeache..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[58]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_LowerRetirementAge..."*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true || BaseGame.Policy_Law_Decree_Weaker == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  or  Variable["BaseGame.Policy_Law_Decree_Weaker"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
-  - -> `[61]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame..."*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_PurgeGeneralStaff ..."*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.Reform_Autocrat_CourtVote_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Stronger"] == true  and  Variable["BaseGame.Reform_Autocrat_CourtVote_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_RuralEducationInst..."*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_RelocationOfTeachersAndDoctorsToRuralAreas = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RelocationOfTeachersAndDoctorsToRuralAreas"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_RelocationOfTeachersAndDoctorsToRuralAreas = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_RelocationOfTeachersAndDoctorsToRuralAreas"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_LowerRetirementAge = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_LowerRetirementAge"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_LowerRetirementAge = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_LowerRetirementAge"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Stronger == true && BaseGame.R..."*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
-  - -> `[69]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Law_Decree_Default == true || BaseGame.Po..."*)
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Law_Decree_Default == true || BaseGame...."*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGameUI.PresidentialPower_Condition_EnactVAT = true"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Law_Decree_Default == true || BaseGame.Policy_Law_Decree_Stronger == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Law_Decree_Default"] == true  or  Variable["BaseGame.Policy_Law_Decree_Stronger"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameUI.PresidentialPower_Condition_EnactVAT = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_EnactVAT"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameUI.PresidentialPower_Condition_EnactVAT = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameUI.PresidentialPower_Condition_EnactVAT"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)

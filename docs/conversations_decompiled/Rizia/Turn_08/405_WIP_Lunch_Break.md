@@ -75,13 +75,30 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 123
-- **Węzły modyfikujące stan gry:** 1
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[16]` (Paskal Beniwoll): `End();`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[11]` | **""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[12]` | **""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[148]` | **""Minister Wisci, President Rayne, it's an honor.""** | `[150]` **Anton Rayne (R)**: ""Your Majesty, it's a pleasure. ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[153]` **Laurento Esquibel**: ""Very glad we ran into each othe..." |
+| `[149]` | **""Pleasure to meet you both.""** | `[150]` **Anton Rayne (R)**: ""Your Majesty, it's a pleasure. ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[153]` **Laurento Esquibel**: ""Very glad we ran into each othe..." |
+| `[151]` | **""President Rayne, Minister Wisci, welcome. Let's hope our chat is more satisfying ..."** | `[150]` **Anton Rayne (R)**: ""Your Majesty, it's a pleasure. ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[153]` **Laurento Esquibel**: ""Very glad we ran into each othe..." |
+| `[156]` | **""One can only hope, President Rayne. The stakes at the general assembly are certai..."** | `[155]` **Anton Rayne (R)**: ""It seems we're all victims of t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[163]` **Anton Rayne (R)**: ""Absolutely, King Romus. Yet, so..." |
+| `[157]` | **""Indeed, President Rayne. If the general assembly is as varied and unpredictable a..."** | `[155]` **Anton Rayne (R)**: ""It seems we're all victims of t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[164]` **Anton Rayne (R)**: ""An interesting analogy. Much li..." |
+| `[158]` | **""They might need some Rizian chefs here, or maybe Sordish ones. Our cuisines do ha..."** | `[155]` **Anton Rayne (R)**: ""It seems we're all victims of t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[162]` **Anton Rayne (R)**: ""Don't forget the delights of So..." |
+| `[159]` | **""We had much more important things than some food talk I think.""** | `[155]` **Anton Rayne (R)**: ""It seems we're all victims of t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[160]` **Anton Rayne (R)**: ""Direct and to the point, Your M..." |
+| `[165]` | **""Svabli, you say? I must admit, my experience with Sordish cuisine is limited, but..."** | `[162]` **Anton Rayne (R)**: ""Don't forget the delights of So..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[166]` | **""Svabli... I've heard of it but never had the pleasure. It seems our diplomatic me..."** | `[162]` **Anton Rayne (R)**: ""Don't forget the delights of So..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[167]` | **""I haven't tried Svabli yet, President Rayne. But it's always fascinating to talk ..."** | `[162]` **Anton Rayne (R)**: ""Don't forget the delights of So..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[168]` | **""Traditional Sordish stew? I like the blend of various elements, each adding its o..."** | `[164]` **Anton Rayne (R)**: ""An interesting analogy. Much li..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[169]` | **""Your stew analogy is quite fitting. It's about harmony among different ingredients.""** | `[164]` **Anton Rayne (R)**: ""An interesting analogy. Much li..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[170]` | **""I like the sound of that stew – it's a reminder that something greater than the s..."** | `[164]` **Anton Rayne (R)**: ""An interesting analogy. Much li..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[171]` | **""What is Zabla made of? I'm curious.""** | `[163]` **Anton Rayne (R)**: ""Absolutely, King Romus. Yet, so..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[172]` | **""Zabla's simplicity yet underlying complexity is intriguing. It's a bit like our R..."** | `[163]` **Anton Rayne (R)**: ""Absolutely, King Romus. Yet, so..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
+| `[173]` | **""The Zabla analogy is thought-provoking. Never knew you cared so much about dishes..."** | `[163]` **Anton Rayne (R)**: ""Absolutely, King Romus. Yet, so..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | *Koniec sceny / Terminal* |
 
 ---
 
@@ -90,1005 +107,1016 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "We made our way to the restaurant."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!()"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !())*
-- **Warunek (`conditionsString`):** `false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!()`
+- **Warunek bezpośredni (`conditionsString`):** `false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Węzeł pośredni / warunkowy)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[7]`
 Mówca: **Narrator**
 > "We made our way to the restaurant."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Narrator: "As Laurento and I were debating the merits of the pasta s..."*)
 
 ### Węzeł `[8]`
-Mówca: **Anton Rayne (R)**
-*(Węzeł logiki narracyjnej: Anton Rayne (R): "...")*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Anton Rayne (R): "..."`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[9]`
 Mówca: **Deivid Wisci (R)**
 > ""King Romus, what an honor to meet you. I'm Deivid Wisci, Foreign Minister of Sordland. Allow me to introduce President Anton Rayne.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Anton Rayne (R): ""Your Majesty, it's a pleasure. And Minister Wisci is too..."*)
 
 ### Węzeł `[10]`
-Mówca: **Laurento Esquibel**
-*(Węzeł logiki narracyjnej: Laurento Esquibel: "...")*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Laurento Esquibel: "..."`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[11]`
-**[WYBÓR GRACZA]** — Mówca: **Player_Romus**
-*(Węzeł logiki narracyjnej: Player_Romus: "...")*
+**[WYBÓR GRACZA]** — Mówca: **Węzeł Logiki Narracyjnej**
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[12]`
-**[WYBÓR GRACZA]** — Mówca: **Player_Romus_Italic**
-*(Węzeł logiki narracyjnej: Player_Romus_Italic: "...")*
+**[WYBÓR GRACZA]** — Mówca: **Węzeł Logiki Narracyjnej**
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks ==..."*)
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks ..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks"] == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn09_RumburgPeaceSummit_StartTalks"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
-  - -> `[19]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaD..."*)
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Rumburg_Allied == true || Rizi..."*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Rumburg_Allied"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Rumburg_Allied"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Rumburg_Allied"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Rumburg_Allied == true || RiziaDLC.Policy_Diplomacy_GRACEMember == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Rumburg_Allied"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Rumburg_Unfriendly == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Rumburg_Unfriendly == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
-  - -> `[22]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Rumburg_Unfriendly == true"*)
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Rumburg_Unfriendly == true)"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Rumburg_Unfriendly == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Rumburg_Unfriendly"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Rumburg_Unfriendly == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Rumburg_Unfriendly"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Rumburg_Unfriendly == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Rumburg_Unfriendly"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Rumburg_Unfriendly == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Rumburg_Unfriendly"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
-  - -> `[25]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true"*)
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true)"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Rumburg_SellPortOfMonqiz"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
-  - -> `[28]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == ..."*)
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal =..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_Sordland_ResortDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_Sordland_ResortDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[31]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_Sordland_ResortDeal == true"*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_Sordland_ResortDeal == true)"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_Sordland_ResortDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_Sordland_ResortDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_Sordland_ResortDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_Sordland_ResortDeal"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_Sordland_ResortDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_Sordland_ResortDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_Sordland_ResortDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_Sordland_ResortDeal"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn04_SordlandBond_LargeInvestment == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn04_SordlandBond_LargeInvestment == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
-  - -> `[34]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn04_SordlandBond_LargeInvestment == true"*)
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn04_SordlandBond_LargeInvestment == true)"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn04_SordlandBond_LargeInvestment == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn04_SordlandBond_LargeInvestment"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn04_SordlandBond_LargeInvestment == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn04_SordlandBond_LargeInvestment"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn04_SordlandBond_LargeInvestment == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn04_SordlandBond_LargeInvestment"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn04_SordlandBond_LargeInvestment == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn04_SordlandBond_LargeInvestment"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn04_SordlandBond_SmallInvestment == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn04_SordlandBond_SmallInvestment == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
-  - -> `[37]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn04_SordlandBond_SmallInvestment == true"*)
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn04_SordlandBond_SmallInvestment == true)"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn04_SordlandBond_SmallInvestment == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn04_SordlandBond_SmallInvestment"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn04_SordlandBond_SmallInvestment == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn04_SordlandBond_SmallInvestment"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn04_SordlandBond_SmallInvestment == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn04_SordlandBond_SmallInvestment"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn04_SordlandBond_SmallInvestment == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn04_SordlandBond_SmallInvestment"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBou..."*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeB..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_GasomOffer_LargeMinorityStakeBought"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[43]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBou..."*)
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeB..."*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_GasomOffer_SmallMinorityStakeBought"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice..."*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJusti..."*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_BringJustice"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite ==..."*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite ..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_Extradite"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent =..."*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent..."*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_SordishTouristIssue_StaySilent"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Path == true"*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Path == true)"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Path"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Path"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Religious_WruhecsGuardians_Sal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Religious_WruhecsGuardians_Sal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[58]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Religious_WruhecsGuardians_Sal == true"*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Religious_WruhecsGuardians_Sal == true)"*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Religious_WruhecsGuardians_Sal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Religious_WruhecsGuardians_Sal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Religious_WruhecsGuardians_Sal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Religious_WruhecsGuardians_Sal"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Religious_WruhecsGuardians_Sal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Religious_WruhecsGuardians_Sal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Religious_WruhecsGuardians_Sal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Religious_WruhecsGuardians_Sal"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_CapitalistRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_CapitalistRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
-  - -> `[61]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Archetype_CapitalistRayne == true"*)
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Archetype_CapitalistRayne == true)"*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_CapitalistRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Archetype_CapitalistRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_CapitalistRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Archetype_CapitalistRayne"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Archetype_CapitalistRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Archetype_CapitalistRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Archetype_CapitalistRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Archetype_CapitalistRayne"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_ComradeRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_ComradeRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Archetype_ComradeRayne == true"*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Archetype_ComradeRayne == true)"*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_ComradeRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Archetype_ComradeRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_ComradeRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Archetype_ComradeRayne"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Archetype_ComradeRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Archetype_ComradeRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Archetype_ComradeRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Archetype_ComradeRayne"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_DemocraticRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_DemocraticRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
-  - -> `[67]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Archetype_DemocraticRayne == true"*)
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Archetype_DemocraticRayne == true)"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_DemocraticRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Archetype_DemocraticRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_DemocraticRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Archetype_DemocraticRayne"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Archetype_DemocraticRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Archetype_DemocraticRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Archetype_DemocraticRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Archetype_DemocraticRayne"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_SollistRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_SollistRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
-  - -> `[70]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Archetype_SollistRayne == true"*)
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Archetype_SollistRayne == true)"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_SollistRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Archetype_SollistRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_SollistRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Archetype_SollistRayne"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Archetype_SollistRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Archetype_SollistRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Archetype_SollistRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Archetype_SollistRayne"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[73]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn08_ExtendEmergency_Extend == true"*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)"*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn08_ExtendEmergency_Extend == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[76]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true"*)
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == ..."*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn08_ExtendEmergency_DontExtend"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn08_ExtendEmergency_DontExtend"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn08_ExtendEmergency_DontExtend"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn08_ExtendEmergency_DontExtend == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn08_ExtendEmergency_DontExtend"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Reformist_Path == true)"*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Reformist_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Reformist_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_EmbargoingRumburg == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_EmbargoingRumburg == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_EmbargoingRumburg == true"*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_EmbargoingRumburg == true)"*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_EmbargoingRumburg == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_EmbargoingRumburg == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_EmbargoingRumburg == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_EmbargoingRumburg == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_EmbargoingRumburg"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true"*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_SordishDepression == true)"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_SordishDepression == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_SordishDepression == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishRecovery == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishRecovery == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishRecovery == true"*)
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_SordishRecovery == true)"*)
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishRecovery == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishRecovery == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_SordishRecovery == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_SordishRecovery == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_GDPMaintained == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_GDPMaintained == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
-  - -> `[91]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_GDPMaintained == true"*)
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_GDPMaintained == true)"*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_GDPMaintained == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_GDPMaintained"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_GDPMaintained == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_GDPMaintained"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_GDPMaintained == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_GDPMaintained"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_GDPMaintained == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_GDPMaintained"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Intermerkopum_Efforts == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Intermerkopum_Efforts == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[94]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Intermerkopum_Efforts == true"*)
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Intermerkopum_Efforts == true)"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Intermerkopum_Efforts == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Intermerkopum_Efforts == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Intermerkopum_Efforts == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Intermerkopum_Efforts"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Intermerkopum_Efforts == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Intermerkopum_Efforts"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_ATO == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_ATO == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
-  - -> `[97]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_ATO == true"*)
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_ATO == true)"*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_ATO == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_ATO"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_ATO == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_ATO"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_ATO == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_ATO"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_ATO == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_ATO"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_CSP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_CSP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
-  - -> `[100]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_CSP == true"*)
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_CSP == true)"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_CSP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_CSP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_CSP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_CSP"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_CSP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_CSP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_CSP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_CSP"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == true"*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pales_War == true)"*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pales_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pales_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
-  - -> `[106]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true"*)
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true)"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
-  - -> `[109]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true"*)
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true)"*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
-  - -> `[112]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol ..."*)
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtoco..."*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_AN_ThreatMitigationProtocol"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
-  - -> `[115]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true"*)
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == t..."*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_Valgsland_Alliance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_Valgsland_Alliance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[118]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_Valgsland_Alliance == true"*)
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_Valgsland_Alliance == true)"*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_Valgsland_Alliance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_Valgsland_Alliance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_Valgsland_Alliance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_Valgsland_Alliance"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_Valgsland_Alliance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_Valgsland_Alliance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_Valgsland_Alliance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_Valgsland_Alliance"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_CSP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_CSP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
-  - -> `[121]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_CSP == true"*)
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_CSP == true)"*)
 
 ### Węzeł `[120]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_CSP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_CSP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_CSP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_CSP"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_CSP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_CSP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_CSP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_CSP"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Friendly == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Friendly == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
-  - -> `[124]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Sordland_Friendly == true"*)
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Sordland_Friendly == true)"*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Friendly == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Friendly"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Friendly == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Friendly"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Sordland_Friendly == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Friendly"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Sordland_Friendly == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Friendly"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Allied == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Allied == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
-  - -> `[127]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Sordland_Allied == true"*)
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Sordland_Allied == true)"*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Allied == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Allied"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Allied == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Allied"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Sordland_Allied == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Allied"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Sordland_Allied == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Allied"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Neutral == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Neutral == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
-  - -> `[130]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Sordland_Neutral == true"*)
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Sordland_Neutral == true)"*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Neutral == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Neutral"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Neutral == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Neutral"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[130]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Sordland_Neutral == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Neutral"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Sordland_Neutral == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Neutral"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[131]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Unfriendly == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Unfriendly == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[133]`
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Sordland_Unfriendly == true"*)
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Sordland_Unfriendly == true)"*)
 
 ### Węzeł `[132]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Unfriendly == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Unfriendly"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Unfriendly == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Unfriendly"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[133]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Sordland_Unfriendly == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Unfriendly"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Sordland_Unfriendly == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Unfriendly"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[134]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Hostile == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Hostile == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
-  - -> `[136]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.CountryRelation_Sordland_Hostile == true"*)
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.CountryRelation_Sordland_Hostile == true)"*)
 
 ### Węzeł `[135]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.CountryRelation_Sordland_Hostile == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Hostile"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.CountryRelation_Sordland_Hostile == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.CountryRelation_Sordland_Hostile"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[136]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.CountryRelation_Sordland_Hostile == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Hostile"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.CountryRelation_Sordland_Hostile == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Sordland_Hostile"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[137]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Sordland_RiziaSanction_Aye == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Sordland_RiziaSanction_Aye == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[138]`
-  - -> `[139]`
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Sordland_RiziaSanction_Aye == true"*)
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Sordland_RiziaSanction_Aye == true)"*)
 
 ### Węzeł `[138]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Sordland_RiziaSanction_Aye == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Sordland_RiziaSanction_Aye"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Sordland_RiziaSanction_Aye == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Sordland_RiziaSanction_Aye"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[139]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Sordland_RiziaSanction_Aye == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Sordland_RiziaSanction_Aye"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Sordland_RiziaSanction_Aye == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Sordland_RiziaSanction_Aye"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[140]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Sordland_ZilleReferendum_Aye == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Sordland_ZilleReferendum_Aye == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
-  - -> `[142]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Sordland_ZilleReferendum_Aye == true"*)
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Sordland_ZilleReferendum_Aye == true)"*)
 
 ### Węzeł `[141]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Sordland_ZilleReferendum_Aye == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Sordland_ZilleReferendum_Aye"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Sordland_ZilleReferendum_Aye == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Sordland_ZilleReferendum_Aye"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[142]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Sordland_ZilleReferendum_Aye == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Sordland_ZilleReferendum_Aye"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Sordland_ZilleReferendum_Aye == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Sordland_ZilleReferendum_Aye"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[143]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_StoppedByAN == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_StoppedByAN == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
-  - -> `[145]`
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_StoppedByAN == true"*)
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReferendum_StoppedByAN == true)"*)
 
 ### Węzeł `[144]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_StoppedByAN == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_StoppedByAN"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_StoppedByAN == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_StoppedByAN"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[145]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReferendum_StoppedByAN == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_StoppedByAN"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReferendum_StoppedByAN == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_StoppedByAN"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[146]`
 Mówca: **Narrator**
 > "As Laurento and I were debating the merits of the pasta selection, a gentleman with a kindly demeanor approached us."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Deivid Wisci (R): ""King Romus, what an honor to meet you. I'm Deivid Wisci,..."*)
 
 ### Węzeł `[147]`
 Mówca: **Deivid Wisci (R)**
 > ""A splendid idea, Laurento. Let's find a spot where we can talk more comfortably.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Narrator: "We moved towards a quieter section of the room, finding a..."*)
 
 ### Węzeł `[148]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Minister Wisci, President Rayne, it's an honor.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[150]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Laurento Esquibel: ""Very glad we ran into each other. Always good to see you..."*)
 
 ### Węzeł `[149]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Pleasure to meet you both.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[150]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Laurento Esquibel: ""Very glad we ran into each other. Always good to see you..."*)
 
 ### Węzeł `[150]`
 Mówca: **Anton Rayne (R)**
 > ""Your Majesty, it's a pleasure. And Minister Wisci is too kind – the honor is mine. It's good to meet new faces.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
-  - -> `[149]`
-  - -> `[151]`
+  - -> `[148]` (*Player_Romus: ""Minister Wisci, President Rayne, it's an honor.""*)
+  - -> `[149]` (*Player_Romus: ""Pleasure to meet you both.""*)
+  - -> `[151]` (*Player_Romus: ""President Rayne, Minister Wisci, welcome. Let's hope our..."*)
 
 ### Węzeł `[151]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""President Rayne, Minister Wisci, welcome. Let's hope our chat is more satisfying than the lunch selection.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[150]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Laurento Esquibel: ""Very glad we ran into each other. Always good to see you..."*)
 
 ### Węzeł `[152]`
 Mówca: **Laurento Esquibel**
 > ""Minister Wisci, President Rayne, shall we take a seat? It might be more conducive for our discussion.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[147]`
+  - -> `[147]` (*Deivid Wisci (R): ""A splendid idea, Laurento. Let's find a spot where we ca..."*)
 
 ### Węzeł `[153]`
 Mówca: **Laurento Esquibel**
 > ""Very glad we ran into each other. Always good to see you Deivid and Mr. Rayne.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Laurento Esquibel: ""Minister Wisci, President Rayne, shall we take a seat? I..."*)
 
 ### Węzeł `[154]`
 Mówca: **Narrator**
 > "We moved towards a quieter section of the room, finding a round table that seemed perfect for a more intimate dialogue. We sat down and arranged our plates."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Anton Rayne (R): ""It seems we're all victims of the culinary experiments a..."*)
 
 ### Węzeł `[155]`
 Mówca: **Anton Rayne (R)**
 > ""It seems we're all victims of the culinary experiments at this year's conference. I hope the AN general assembly coming up soon will have a better offering.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[156]`
-  - -> `[157]`
-  - -> `[158]`
-  - -> `[159]`
+  - -> `[156]` (*Player_Romus: ""One can only hope, President Rayne. The stakes at the ge..."*)
+  - -> `[157]` (*Player_Romus: ""Indeed, President Rayne. If the general assembly is as v..."*)
+  - -> `[158]` (*Player_Romus: ""They might need some Rizian chefs here, or maybe Sordish..."*)
+  - -> `[159]` (*Player_Romus: ""We had much more important things than some food talk I ..."*)
 
 ### Węzeł `[156]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""One can only hope, President Rayne. The stakes at the general assembly are certainly higher than our lunch choices here.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Anton Rayne (R): ""Absolutely, King Romus. Yet, sometimes, these small talk..."*)
 
 ### Węzeł `[157]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Indeed, President Rayne. If the general assembly is as varied and unpredictable as this buffet, we're in for an interesting time.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Anton Rayne (R): ""An interesting analogy. Much like our traditional Sordis..."*)
 
 ### Węzeł `[158]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""They might need some Rizian chefs here, or maybe Sordish ones. Our cuisines do have a reputation for excellence.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Anton Rayne (R): ""Don't forget the delights of Sordish cuisine, Your Majes..."*)
 
 ### Węzeł `[159]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""We had much more important things than some food talk I think.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Anton Rayne (R))
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Anton Rayne (R): ""Direct and to the point, Your Majesty. I appreciate that.""*)
 
 ### Węzeł `[160]`
 Mówca: **Anton Rayne (R)**
@@ -1104,69 +1132,87 @@ Mówca: **Narrator**
 Mówca: **Anton Rayne (R)**
 > ""Don't forget the delights of Sordish cuisine, Your Majesty. Have you ever tried Svabli? It's a Holsord specialty - sheep cheese like you've never tasted it before.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
-  - -> `[166]`
-  - -> `[167]`
+  - -> `[165]` (*Player_Romus: ""Svabli, you say? I must admit, my experience with Sordis..."*)
+  - -> `[166]` (*Player_Romus: ""Svabli... I've heard of it but never had the pleasure. I..."*)
+  - -> `[167]` (*Player_Romus: ""I haven't tried Svabli yet, President Rayne. But it's al..."*)
 
 ### Węzeł `[163]`
 Mówca: **Anton Rayne (R)**
 > ""Absolutely, King Romus. Yet, sometimes, these small talks can be a prelude to greater discussions. Like our Zabla back in Bergia, simple on the surface but complex beneath.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
-  - -> `[172]`
-  - -> `[173]`
+  - -> `[171]` (*Player_Romus: ""What is Zabla made of? I'm curious.""*)
+  - -> `[172]` (*Player_Romus: ""Zabla's simplicity yet underlying complexity is intrigui..."*)
+  - -> `[173]` (*Player_Romus: ""The Zabla analogy is thought-provoking. Never knew you c..."*)
 
 ### Węzeł `[164]`
 Mówca: **Anton Rayne (R)**
 > ""An interesting analogy. Much like our traditional Sordish stew, I suppose. Simple ingredients coming together to create something substantial.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
-  - -> `[169]`
-  - -> `[170]`
+  - -> `[168]` (*Player_Romus: ""Traditional Sordish stew? I like the blend of various el..."*)
+  - -> `[169]` (*Player_Romus: ""Your stew analogy is quite fitting. It's about harmony a..."*)
+  - -> `[170]` (*Player_Romus: ""I like the sound of that stew – it's a reminder that som..."*)
 
 ### Węzeł `[165]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Svabli, you say? I must admit, my experience with Sordish cuisine is limited, but I'm always open to new culinary adventures.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[162]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[166]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Svabli... I've heard of it but never had the pleasure. It seems our diplomatic meetings could benefit from a taste of Sordland's finest.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[162]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[167]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I haven't tried Svabli yet, President Rayne. But it's always fascinating to talk to a food afficionado.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[162]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[168]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Traditional Sordish stew? I like the blend of various elements, each adding its own unique flavor.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[164]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[169]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Your stew analogy is quite fitting. It's about harmony among different ingredients.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[164]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[170]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I like the sound of that stew – it's a reminder that something greater than the sum of its parts can emerge from simple beginnings.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[164]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[171]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""What is Zabla made of? I'm curious.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[163]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[172]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Zabla's simplicity yet underlying complexity is intriguing. It's a bit like our Rizetta, a breakfast dish that seems simple but offers a depth of flavors.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[163]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[173]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""The Zabla analogy is thought-provoking. Never knew you cared so much about dishes, isn't Lespia the big culinary nation in East Merkopa?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[163]` (Anton Rayne (R))
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[174]`
@@ -1220,58 +1266,58 @@ Mówca: **Laurento Esquibel**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[184]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Lachaven_Rich == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Lachaven_Rich == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
-  - -> `[186]`
+  - -> `[185]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Birthplace_Lachaven_Rich == true"*)
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Prologue_Birthplace_Lachaven_Rich == true)"*)
 
 ### Węzeł `[185]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Lachaven_Rich == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Lachaven_Rich"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Lachaven_Rich == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Lachaven_Rich"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[186]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Birthplace_Lachaven_Rich == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Lachaven_Rich"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Prologue_Birthplace_Lachaven_Rich == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Lachaven_Rich"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[187]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Holsord_Middle == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Holsord_Middle == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
-  - -> `[189]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Birthplace_Holsord_Middle == true"*)
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Prologue_Birthplace_Holsord_Middle == true)"*)
 
 ### Węzeł `[188]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Holsord_Middle == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Holsord_Middle"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Holsord_Middle == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Holsord_Middle"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[189]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Birthplace_Holsord_Middle == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Holsord_Middle"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Prologue_Birthplace_Holsord_Middle == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Holsord_Middle"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[190]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Deyr_Poor == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Deyr_Poor == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
-  - -> `[192]`
+  - -> `[191]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Birthplace_Deyr_Poor == true"*)
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Prologue_Birthplace_Deyr_Poor == true)"*)
 
 ### Węzeł `[191]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Birthplace_Deyr_Poor == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Deyr_Poor"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Birthplace_Deyr_Poor == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Prologue_Birthplace_Deyr_Poor"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[192]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Birthplace_Deyr_Poor == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Deyr_Poor"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Prologue_Birthplace_Deyr_Poor == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Prologue_Birthplace_Deyr_Poor"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*

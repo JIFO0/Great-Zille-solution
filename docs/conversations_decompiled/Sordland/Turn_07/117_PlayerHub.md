@@ -44,15 +44,25 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 8
-- **Węzły modyfikujące stan gry:** 3
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[21]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] = true;`
-- Węzeł `[43]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] = true;`
-- Węzeł `[45]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] = true;`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[4]` | **""Mr. Vice President. Thank you for the opening.""** | `[3]` **Narrator**: "Petr smiled."<br>`[5]` **Narrator**: "He sat down." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[9]` **Narrator**: "Everyone's eyes were focused on me." |
+| `[6]` | **"Clap."** | `[5]` **Narrator**: "He sat down." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[3]` **Narrator**: "Petr smiled." |
+| `[7]` | **""Thank you Petr.""** | `[3]` **Narrator**: "Petr smiled."<br>`[5]` **Narrator**: "He sat down." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[9]` **Narrator**: "Everyone's eyes were focused on me." |
+| `[8]` | **""Alright. Let's start the meeting.""** | `[3]` **Narrator**: "Petr smiled."<br>`[5]` **Narrator**: "He sat down." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[9]` **Narrator**: "Everyone's eyes were focused on me." |
+| `[10]` | **""First, I'll make an important announcement. I have decided to form an alliance wi..."** | `[9]` **Narrator**: "Everyone's eyes were focused on me." | `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false` | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[11]` | **""First, I want to hear brief reports from each ministry.""** | `[9]` **Narrator**: "Everyone's eyes were focused on me." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[12]` | **""First, I want to talk about our new focus and some of my plans going forward.""** | `[9]` **Narrator**: "Everyone's eyes were focused on me." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[19]` | **""First, I'll make an important announcement. I have decided to form an alliance wi..."** | `[9]` **Narrator**: "Everyone's eyes were focused on me." | `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false` | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[25]` | **""Next, I'll make an important announcement. I have decided to form an alliance wit..."** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[29]` | **""Next, I'll make an important announcement. I have decided to form an alliance wit..."** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[34]` | **""Next, I want to hear brief reports from each ministry.""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
+| `[38]` | **""Hmm, I believe that is everything.""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[42]` | **""Next, I want to talk about our new focus and some of my plans going forward.""** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[5]` **Narrator**: "He sat down." |
 
 ---
 
@@ -61,311 +71,332 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
+  - -> `[5]` (*Narrator: "He sat down."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `115` (*Sordland/Turn07/A_ResultsMeeting*), Węzeł `[5]`
+  - -> `[5]` (*Narrator: "He sat down."*)
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "Petr smiled."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[4]` (*Player: ""Mr. Vice President. Thank you for the opening.""*)
+  - -> `[7]` (*Player: ""Thank you Petr.""*)
+  - -> `[8]` (*Player: ""Alright. Let's start the meeting.""*)
 
 ### Węzeł `[4]`
 **[WYBÓR GRACZA: ""Mr. Vice President. Thank you for the opening.""]** — Mówca: **Player**
 > ""Mr. Vice President. Thank you for the opening.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[3]` (Narrator), `[5]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Narrator: "Everyone's eyes were focused on me."*)
 
 ### Węzeł `[5]`
 Mówca: **Narrator**
 > "He sat down."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[7]`
-  - -> `[8]`
-  - -> `[6]`
+  - -> `[4]` (*Player: ""Mr. Vice President. Thank you for the opening.""*)
+  - -> `[7]` (*Player: ""Thank you Petr.""*)
+  - -> `[8]` (*Player: ""Alright. Let's start the meeting.""*)
+  - -> `[6]` (*Player_Italic: "Clap."*)
 
 ### Węzeł `[6]`
 **[WYBÓR GRACZA: "Clap."]** — Mówca: **Player_Italic**
 > "I clapped after Petr's speech, which made everyone join in."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[5]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Petr smiled."*)
 
 ### Węzeł `[7]`
 **[WYBÓR GRACZA: ""Thank you Petr.""]** — Mówca: **Player**
 > ""Thank you, Petr.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[3]` (Narrator), `[5]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Narrator: "Everyone's eyes were focused on me."*)
 
 ### Węzeł `[8]`
 **[WYBÓR GRACZA: ""Alright. Let's start the meeting.""]** — Mówca: **Player**
 > ""Alright. Let's start the meeting.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[3]` (Narrator), `[5]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Narrator: "Everyone's eyes were focused on me."*)
 
 ### Węzeł `[9]`
 Mówca: **Narrator**
 > "Everyone's eyes were focused on me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[16]`
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Alliance == true && Base..."*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Kesaro_Promise_Alliance == true && Bas..."*)
+  - -> `[11]` (*Player: ""First, I want to hear brief reports from each ministry.""*)
+  - -> `[12]` (*Player: ""First, I want to talk about our new focus and some of my..."*)
 
 ### Węzeł `[10]`
 **[WYBÓR GRACZA: ""First, I'll make an important announcement. I have decided to form an alliance with the PFJP.""]** — Mówca: **Player**
 > ""First, I'll make an important announcement. I have decided to form an alliance with the PFJP.""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+- **Kontekst wejściowy (poprzednik):** `[9]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `118` (*Sordland/Turn07/AnnounceAlliance*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[11]`
 **[WYBÓR GRACZA: ""First, I want to hear brief reports from each ministry.""]** — Mówca: **Player**
 > ""First, I want to hear brief reports from each ministry.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[9]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `119` (*Sordland/Turn07/MinistryReports*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[12]`
 **[WYBÓR GRACZA]** — Mówca: **Player**
 > ""First, I want to talk about our new focus and some of my plans going forward.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[9]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `121` (*Sordland/Turn07/PlansHub*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Alliance == true && Base..."*)
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Frens_Promise_Alliance == true && Ba..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Player: ""First, I'll make an important announcement. I have decid..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
-  - -> `[18]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Kesaro_Promise_Alliance == true && Bas..."*)
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Kesaro_Promise_Alliance == true && B..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Player: ""First, I'll make an important announcement. I have decid..."*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false
-))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false
+)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[19]`
 **[WYBÓR GRACZA: ""First, I'll make an important announcement. I have decided to form an alliance with the NFP.""]** — Mówca: **Player**
 > ""First, I'll make an important announcement. I have decided to form an alliance with the NFP.""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+- **Kontekst wejściowy (poprzednik):** `[9]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `118` (*Sordland/Turn07/AnnounceAlliance*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [PlayerAnnounceHub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [PlayerAnnounceHub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "PlayerAnnounceHub"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_AllianceHub = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_AllianceHub = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "Jump to: [PlayerAnnounceHub]"*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[24]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Kesaro_Promise_Alliance == true && Bas..."*)
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Kesaro_Promise_Alliance == true && B..."*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Player: ""Next, I'll make an important announcement. I have decide..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false
-))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Kesaro_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false
+)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Kesaro_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[25]`
 **[WYBÓR GRACZA: ""Next, I'll make an important announcement. I have decided to form an alliance with the PFJP.""]** — Mówca: **Player**
 > ""Next, I'll make an important announcement. I have decided to form an alliance with the PFJP.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `118` (*Sordland/Turn07/AnnounceAlliance*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
-  - -> `[28]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Alliance == true && Base..."*)
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Frens_Promise_Alliance == true && Ba..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Player: ""Next, I'll make an important announcement. I have decide..."*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Frens_Promise_Alliance == true && BaseGameIsolated.Turn07_CourtResults_AllianceHub == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Alliance"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_AllianceHub"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[29]`
 **[WYBÓR GRACZA: ""Next, I'll make an important announcement. I have decided to form an alliance with the NFP.""]** — Mówca: **Player**
 > ""Next, I'll make an important announcement. I have decided to form an alliance with the NFP.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `118` (*Sordland/Turn07/AnnounceAlliance*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayerAnnounceHub)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayerAnnounceHub`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
-  - -> `[22]`
-  - -> `[31]`
-  - -> `[35]`
-  - -> `[39]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Alliance == true && Base..."*)
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Kesaro_Promise_Alliance == true && Bas..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_ReportsHub == true"*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_PlansHub == true"*)
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_ReportsHub == true &..."*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_ReportsHub == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_ReportsHub == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_ReportsHub == true"*)
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true)"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_ReportsHub == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_ReportsHub == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Player: ""Next, I want to hear brief reports from each ministry.""*)
 
 ### Węzeł `[34]`
 **[WYBÓR GRACZA: ""Next, I want to hear brief reports from each ministry.""]** — Mówca: **Player**
 > ""Next, I want to hear brief reports from each ministry.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `119` (*Sordland/Turn07/MinistryReports*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_PlansHub == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_PlansHub == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
-  - -> `[37]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_PlansHub == true"*)
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Turn07_CourtResults_PlansHub == true)"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_PlansHub == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_PlansHub == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Turn07_CourtResults_PlansHub == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Turn07_CourtResults_PlansHub == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Player: ""Next, I want to talk about our new focus and some of my ..."*)
 
 ### Węzeł `[38]`
 **[WYBÓR GRACZA: ""Hmm, I believe that is everything.""]** — Mówca: **Player**
 > ""Hmm, I believe that is everything.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
-  - -> `[41]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn07_CourtResults_ReportsHub == true &..."*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Player: ""Hmm, I believe that is everything.""*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Turn07_CourtResults_ReportsHub == true && BaseGameIsolated.Turn07_CourtResults_PlansHub == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] == true  and  Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[42]`
 **[WYBÓR GRACZA]** — Mówca: **Player**
 > ""Next, I want to talk about our new focus and some of my plans going forward.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `121` (*Sordland/Turn07/PlansHub*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_ReportsHub = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_ReportsHub = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_ReportsHub"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "Jump to: [PlayerAnnounceHub]"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [PlayerAnnounceHub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [PlayerAnnounceHub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "PlayerAnnounceHub"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn07_CourtResults_PlansHub = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn07_CourtResults_PlansHub = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn07_CourtResults_PlansHub"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "Jump to: [PlayerAnnounceHub]"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [PlayerAnnounceHub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [PlayerAnnounceHub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "PlayerAnnounceHub"*)

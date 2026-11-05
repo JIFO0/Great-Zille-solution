@@ -135,36 +135,36 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 13
-- **Węzły modyfikujące stan gry:** 95
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.EconomyDirection_Scale`
-- `BaseGame.Economy_Consistent`
-- `BaseGame.Relations_Iosef_Enemy`
-- `BaseGame.Situation_Economy_Consistent`
-- `BaseGame.Situation_Economy_Inconsistent`
-- `BaseGame.Sollist`
-- `BaseGameSupport.Journal_Turn03_Budget_Education_Decrease`
-- `BaseGameSupport.Journal_Turn03_Budget_Education_Increase`
-- `BaseGameSupport.Journal_Turn03_Budget_Education_Maintain`
-- `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease`
-- `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase`
-- `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain`
-- *...oraz 38 innych wskaźników.*
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[48]` (Symon Holl): `Variable["GameCondition.Turn03_EnT_BudgetTwo"] = true;`
-- Węzeł `[59]` (Symon Holl): `Variable["BaseGame.Situation_Military_DecayingCombatReadiness"] = true;`
-- Węzeł `[60]` (Symon Holl): `Variable["BaseGame.Situation_Military_UnhappyMilitaryPersonnel"] = true;`
-- Węzeł `[61]` (Symon Holl): `Variable["BaseGame.Situation_Military_HappyMilitaryPersonnel"] = true;`
-- Węzeł `[62]` (Symon Holl): `Variable["BaseGame.Policy_Military_IncreasedFunding"] = true;`
-- Węzeł `[63]` (Symon Holl): `Variable["BaseGame.Policy_Military_DecreasedFunding"] = true;`
-- Węzeł `[64]` (Symon Holl): `Variable["BaseGame.Policy_Welfare_DecreasedEducationFunding"] = true;`
-- Węzeł `[65]` (Symon Holl): `Variable["BaseGame.Situation_Welfare_BrainDrain"] = true;`
-- *...oraz 87 innych węzłów ze skryptami.*
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[4]` | **"“Thank you everyone. I appreciate your time and effort.”"** | `[46]` **Lucian Galade**: "“Thank you for your time and par..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[47]` **Narrator**: "The ministers bid their farewell..." |
+| `[5]` | **"“Regardless of what happened, I wouldn't be here without you. Don't forget that we..."** | `[46]` **Lucian Galade**: "“Thank you for your time and par..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[47]` **Narrator**: "The ministers bid their farewell..." |
+| `[6]` | **"“For those who didn't like the decisions, don't take it personally.”"** | `[46]` **Lucian Galade**: "“Thank you for your time and par..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[47]` **Narrator**: "The ministers bid their farewell..." |
+| `[13]` | **"“The continuation of the existing set of budgetary conditions is in order.”"** | `[152]` **Lucian Galade**: "“Any statements on the matter, s..." | `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true` | *Brak zmian stanu* | `[165]` **Lileas Graf**: "“Our expectations were much high..." |
+| `[20]` | **"“Our new priorities called for a reduction of law enforcement.”"** | `[152]` **Lucian Galade**: "“Any statements on the matter, s..." | `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true` | *Brak zmian stanu* | `[163]` **Lileas Graf**: "“These are disheartening changes..." |
+| `[25]` | **"“Maintaining the funding was the correct call especially in light of the threats.”"** | `[7]` **Narrator**: "Lucian seemed as if he was about..." | `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true` | *Brak zmian stanu* | `[121]` **Iosef Lancea**: "“The threats called for an incre..." |
+| `[26]` | **"“Concessions had to be made with the military budget. The priorities have changed.”"** | `[7]` **Narrator**: "Lucian seemed as if he was about..." | `Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true` | *Brak zmian stanu* | `[120]` **Iosef Lancea**: "“Is there a higher priority than..." |
+| `[42]` | **"“Education is our future and it will not be sidelined. Our focus on it is clear.”"** | `[183]` **Ciara Walda**: "“Our future depends on our child..." | `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true` | *Brak zmian stanu* | `[43]` **Ciara Walda**: "“Thank you, it is great to see a..." |
+| `[108]` | **"“The military is on the top of my priority list and always will be. Rest assured.”"** | `[7]` **Narrator**: "Lucian seemed as if he was about..." | `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true` | *Brak zmian stanu* | `[122]` **Iosef Lancea**: "“I knew I could count on your de..." |
+| `[132]` | **"“With your talent and experience you will overcome the issues our military faces.”"** | `[7]` **Narrator**: "Lucian seemed as if he was about..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[136]` **Iosef Lancea**: "“With the support you have provi..."<br>`[119]` **Iosef Lancea**: "“It will be harder to do so but ..." |
+| `[150]` | **"“Law enforcement is a key branch that needs a greater budget due to the increased ..."** | `[152]` **Lucian Galade**: "“Any statements on the matter, s..." | `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true` | *Brak zmian stanu* | `[161]` **Lileas Graf**: "“We will make a good use of thes..." |
+| `[151]` | **"“No, that should be all.”"** | `[152]` **Lucian Galade**: "“Any statements on the matter, s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[166]` **Lileas Graf**: "“Very well.”" |
+| `[153]` | **"“Next up is health. Let's continue.”"** | `[7]` **Narrator**: "Lucian seemed as if he was about..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[137]` **Narrator**: "Iosef leaned back in his chair." |
+| `[154]` | **"“I trust you to push the Ministry of Interior and Justice forward.”"** | `[152]` **Lucian Galade**: "“Any statements on the matter, s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[139]` **Lileas Graf**: "“We will be able to achieve posi..."<br>`[408]` **Lileas Graf**: "“Our efforts will be on maintain..."<br>*(oraz 1 innych odgałęzień)* |
+| `[170]` | **"“Your expertise and passion should enable you to make the necessary changes for im..."** | `[183]` **Ciara Walda**: "“Our future depends on our child..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[184]` **Ciara Walda**: "“We will be able to achieve my g..."<br>`[191]` **Ciara Walda**: "“Thank you for your confidence i..." |
+| `[171]` | **"“My expectation is that you maintain education services with the same budget.”"** | `[183]` **Ciara Walda**: "“Our future depends on our child..." | `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true` | *Brak zmian stanu* | `[185]` **Ciara Walda**: "“It seems we have no other choic..." |
+| `[181]` | **"“We can move on.”"** | `[183]` **Ciara Walda**: "“Our future depends on our child..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[187]` **Ciara Walda**: "“Sure... Let's move on.”" |
+| `[182]` | **"“This government has defined its priorities, and education is not on the top of th..."** | `[183]` **Ciara Walda**: "“Our future depends on our child..." | `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true` | *Brak zmian stanu* | `[186]` **Ciara Walda**: "“It's not even on the list. Cutt..." |
+| `[194]` | **"“Healthcare is very important for us and as we move forward, it will improve drast..."** | `[193]` **Ciara Walda**: "“Welfare must remain a priority ..." | `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true` | *Brak zmian stanu* | `[208]` **Paskal Beniwoll**: "“It feels invigorating to have t..." |
+| `[195]` | **"“Your opinions were noted, Paskal. Your task is to improve the care in the country.”"** | `[193]` **Ciara Walda**: "“Welfare must remain a priority ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[209]` **Paskal Beniwoll**: "“With the new budget we have man..."<br>`[216]` **Paskal Beniwoll**: "“Which will be very difficult to..." |
+| `[196]` | **"“It is best we continue our funding as it is. You will have to find new resources.”"** | `[193]` **Ciara Walda**: "“Welfare must remain a priority ..." | `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true` | *Brak zmian stanu* | `[210]` **Paskal Beniwoll**: "“The Ministry of Health will res..." |
+| `[197]` | **"“Sadly, health ended up in the list of budget cuts. Not much can be done about it.”"** | `[193]` **Ciara Walda**: "“Welfare must remain a priority ..." | `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true` | *Brak zmian stanu* | `[211]` **Paskal Beniwoll**: "“It is very unfortunate. I will ..." |
+| `[201]` | **"“Let's wrap it up.”"** | `[193]` **Ciara Walda**: "“Welfare must remain a priority ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[212]` **Paskal Beniwoll**: "“Let's.”" |
+| `[219]` | **"“Dismissed.”"** | `[46]` **Lucian Galade**: "“Thank you for your time and par..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[47]` **Narrator**: "The ministers bid their farewell..." |
 
 ---
 
@@ -173,3008 +173,3056 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Symon Holl)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Narrator: "I had finished allocating the government budget, to the s..."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Symon Holl)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `26` (*Sordland/Turn03/EnT_Budget*), Węzeł `[210]`
+  - -> `[210]` (*Paskal Beniwoll: "“The Ministry of Health will resort to a privatization ef..."*)
 
 ### Węzeł `[3]`
 Mówca: **Iosef Lancea**
 > "“This is a disgrace. Rumburg is at our doorstep and the Armed Forces already have a laundry list of problems. This was a grave mistake that we will surely pay for in time.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[228]`
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Military_Decrease =..."*)
 
 ### Węzeł `[4]`
 **[WYBÓR GRACZA: "“Thank you everyone. I appreciate your time and effort.”"]** — Mówca: **Player**
 > "“Thank you everyone. I appreciate your time and effort.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[46]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Narrator: "The ministers bid their farewells -- some excitedly, othe..."*)
 
 ### Węzeł `[5]`
 **[WYBÓR GRACZA: "“Regardless of what happened, I wouldn't be here without you. Don't forget that we are a team.”"]** — Mówca: **Player**
 > "“Regardless of what happened, I wouldn't be here without you. Don't forget that we are a team.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[46]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Narrator: "The ministers bid their farewells -- some excitedly, othe..."*)
 
 ### Węzeł `[6]`
 **[WYBÓR GRACZA: "“For those who didn't like the decisions, don't take it personally.”"]** — Mówca: **Player**
 > "“For those who didn't like the decisions, don't take it personally.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[46]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Narrator: "The ministers bid their farewells -- some excitedly, othe..."*)
 
 ### Węzeł `[7]`
 Mówca: **Narrator**
 > "Lucian seemed as if he was about to say something, but looked down at his notepad when Iosef eyed him."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
-  - -> `[132]`
-  - -> `[126]`
-  - -> `[129]`
-  - -> `[153]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[132]` (*Player: "“With your talent and experience you will overcome the is..."*)
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Maintain == true"*)
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Decrease == true"*)
+  - -> `[153]` (*Player: "“Next up is health. Let's continue.”"*)
 
 ### Węzeł `[8]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
-  - -> `[10]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Military == true)"*)
 
 ### Węzeł `[9]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises = true"*)
 
 ### Węzeł `[10]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Military == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Military == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "Lucian seemed as if he was about to say something, but lo..."*)
 
 ### Węzeł `[11]`
 Mówca: **Iosef Lancea**
 > "“It is an honor to serve with a President that respects the military. Trust me, with these funds our armed forces will be better than ever before.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Military_Increase =..."*)
 
 ### Węzeł `[12]`
 Mówca: **Iosef Lancea**
 > "“It is a shame that the military won't be getting an increase. I will have to make sacrifices to maintain our defense.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Military_Maintain =..."*)
 
 ### Węzeł `[13]`
 **[WYBÓR GRACZA: "“The continuation of the existing set of budgetary conditions is in order.”"]** — Mówca: **Player**
 > "“The continuation of the existing set of budgetary conditions is in order.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
+- **Kontekst wejściowy (poprzednik):** `[152]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
+  - -> `[165]` (*Lileas Graf: "“Our expectations were much higher than this.”"*)
 
 ### Węzeł `[14]`
 Mówca: **Lileas Graf**
 > "“Thank you for this decision, Mr. President. I knew you would see reason on this, considering our internal security threats are at an all time high.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Nia Morgna: "“I still disagree with Ms. Graf on how the money ought to..."*)
 
 ### Węzeł `[15]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Security == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Security == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Security == true"*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Security == true)"*)
 
 ### Węzeł `[16]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Security == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Security"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Security == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Security"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises = true"*)
 
 ### Węzeł `[17]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Security == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Security"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Security == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Security"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Lucian Galade: "“Any statements on the matter, sir?”"*)
 
 ### Węzeł `[18]`
 Mówca: **Nia Morgna**
 > "“I'm not sure what we'll be able to do if the budget doesn't change.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Law_Maintain = true"*)
 
 ### Węzeł `[19]`
 Mówca: **Lileas Graf**
 > "“I heavily disapprove. We are barely making ends meet on the security side. I will be forced to reduce our force size and salary.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Nia Morgna: "“The reduction of the budget might also put as in a tight..."*)
 
 ### Węzeł `[20]`
 **[WYBÓR GRACZA: "“Our new priorities called for a reduction of law enforcement.”"]** — Mówca: **Player**
 > "“Our new priorities called for a reduction of law enforcement.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+- **Kontekst wejściowy (poprzednik):** `[152]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Lileas Graf: "“These are disheartening changes. We will try to mitigate.”"*)
 
 ### Węzeł `[21]`
 Mówca: **Nia Morgna**
 > "“The reduction of the budget might also put as in a tight spot regarding our ability to handle the amount of court cases.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[222]`
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Law_Decrease = true"*)
 
 ### Węzeł `[22]`
 Mówca: **Lileas Graf**
 > "“I suppose we'll have to make do with what we have. This is not the best situation for us.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Nia Morgna: "“I'm not sure what we'll be able to do if the budget does..."*)
 
 ### Węzeł `[23]`
 Mówca: **Nia Morgna**
 > "“I still disagree with Ms. Graf on how the money ought to be spent, but the increased funding is certainly a step in the right direction.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[220]`
+  - -> `[220]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Law_Increase = true"*)
 
 ### Węzeł `[24]`
 Mówca: **Symon Holl**
 > "“Let's hear from Mr. Beniwoll.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
 
 ### Węzeł `[25]`
 **[WYBÓR GRACZA: "“Maintaining the funding was the correct call especially in light of the threats.”"]** — Mówca: **Player**
 > "“Maintaining the funding was the correct call especially in light of the threats.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true`
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Iosef Lancea: "“The threats called for an increase. Not just a continuat..."*)
 
 ### Węzeł `[26]`
 **[WYBÓR GRACZA: "“Concessions had to be made with the military budget. The priorities have changed.”"]** — Mówca: **Player**
 > "“Concessions had to be made with the military budget. The priorities have changed.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Iosef Lancea: "“Is there a higher priority than our national security? I..."*)
 
 ### Węzeł `[27]`
 Mówca: **Symon Holl**
 > "“That covers all branches. Each minister will approach you with their respective policy requests and expectations over the next year.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Lucian Galade: "“Thank you for your time and participation in this signif..."*)
 
 ### Węzeł `[28]`
 Mówca: **Paskal Beniwoll**
 > "“I'm honestly rather disappointed. The reduction will force us to shut down many hospitals and reduce service quality. It will also reflect badly on us as a government.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[231]`
+  - -> `[231]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease..."*)
 
 ### Węzeł `[29]`
 Mówca: **Paskal Beniwoll**
 > "“Thank you, sir. This health budget increase will help me to focus on improvements. Our people will now be safer than ever.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[229]`
+  - -> `[229]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase..."*)
 
 ### Węzeł `[30]`
 Mówca: **Paskal Beniwoll**
 > "“I can't say that maintaining the funding is negative but I don't think our services will perform any better.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain..."*)
 
 ### Węzeł `[31]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true"*)
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Health == true)"*)
 
 ### Węzeł `[32]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[192]`
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises = true"*)
 
 ### Węzeł `[33]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Health == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Health == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Ciara Walda: "“Welfare must remain a priority for our term. There is no..."*)
 
 ### Węzeł `[34]`
 Mówca: **Narrator**
 > "Ciara was eager to comment."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
 
 ### Węzeł `[35]`
 Mówca: **Lucian Galade**
 > "“The military is next.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Narrator: "Ciara clearly wasn't finished, but didn't interject. Iose..."*)
 
 ### Węzeł `[36]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Education == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Education == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
-  - -> `[38]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Education == true"*)
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Education == true)"*)
 
 ### Węzeł `[37]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Education == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Education"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Education == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Education"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises = true"*)
 
 ### Węzeł `[38]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Education == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Education == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Ciara Walda: "“Our future depends on our children. Education is the fir..."*)
 
 ### Węzeł `[39]`
 Mówca: **Nia Morgna**
 > "“Exactly. This was a big mistake. I'm so sorry, Ciara.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Education == true"*)
 
 ### Węzeł `[40]`
 Mówca: **Ciara Walda**
 > "“Keeping the same budget will just result in the same problems. However, I prefer this over a decrease. I'll try to reform the system with my own resources.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[224]`
+  - -> `[224]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Education_Maintain ..."*)
 
 ### Węzeł `[41]`
 Mówca: **Ciara Walda**
 > "“A reduction!? This is the opposite of what we need. Such a shame that this money will go where it's less needed.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[225]`
+  - -> `[225]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Education_Decrease ..."*)
 
 ### Węzeł `[42]`
 **[WYBÓR GRACZA: "“Education is our future and it will not be sidelined. Our focus on it is clear.”"]** — Mówca: **Player**
 > "“Education is our future and it will not be sidelined. Our focus on it is clear, Ms. Walda.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+- **Kontekst wejściowy (poprzednik):** `[183]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Ciara Walda: "“Thank you, it is great to see a positive change in the a..."*)
 
 ### Węzeł `[43]`
 Mówca: **Ciara Walda**
 > "“Thank you, it is great to see a positive change in the attitude of the administration for the first time in a decade.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[44]`
 Mówca: **Nia Morgna**
 > "“Surely a well-funded and larger Ministry of Education would benefit everyone.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Ciara Walda: "“Our future depends on our children. Education is the fir..."*)
 
 ### Węzeł `[45]`
 Mówca: **Ciara Walda**
 > "“The increase of funding is very welcome. We can finally go after some comprehensive improvements by building new schools and improving the education system.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn03_Budget_Education_Increase ..."*)
 
 ### Węzeł `[46]`
 Mówca: **Lucian Galade**
 > "“Thank you for your time and participation in this significant moment. The meeting is concluded.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
-  - -> `[6]`
-  - -> `[219]`
+  - -> `[4]` (*Player: "“Thank you everyone. I appreciate your time and effort.”"*)
+  - -> `[5]` (*Player: "“Regardless of what happened, I wouldn't be here without ..."*)
+  - -> `[6]` (*Player: "“For those who didn't like the decisions, don't take it p..."*)
+  - -> `[219]` (*Player: "“Dismissed.”"*)
 
 ### Węzeł `[47]`
 Mówca: **Narrator**
 > "The ministers bid their farewells -- some excitedly, others dejectedly."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Narrator: "The cabinet slowly dispersed out of the White Room. The b..."*)
 
 ### Węzeł `[48]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn03_EnT_BudgetTwo = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn03_EnT_BudgetTwo"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn03_EnT_BudgetTwo = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn03_EnT_BudgetTwo"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[432]`
+  - -> `[432]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == false"*)
 
 ### Węzeł `[49]`
 Mówca: **Narrator**
 > "The cabinet slowly dispersed out of the White Room. The budget for our term was concluded."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[50]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Military == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Iosef Lancea: "“You have kept your promise to focus on the military. An ..."*)
 
 ### Węzeł `[52]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Military == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Military == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_IncreasedFunding = true"*)
 
 ### Węzeł `[53]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Military == true)"*)
 
 ### Węzeł `[54]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Iosef Lancea: "“On top of it, you did not keep your promise to focus on ..."*)
 
 ### Węzeł `[55]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Military == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Military == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_DecreasedFunding = true"*)
 
 ### Węzeł `[56]`
 Mówca: **Iosef Lancea**
 > "“You have kept your promise to focus on the military. An honorable and fitting decision.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_IncreasedFunding = true"*)
 
 ### Węzeł `[57]`
 Mówca: **Iosef Lancea**
 > "“On top of it, you did not keep your promise to focus on the military. I will remember this.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Narrator: "Iosef squeezed his fists."*)
 
 ### Węzeł `[58]`
 Mówca: **Narrator**
 > "Iosef squeezed his fists."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_DecreasedFunding = true"*)
 
 ### Węzeł `[59]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Military_DecayingCombatReadiness = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Military_DecayingCombatReadiness"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Military_DecayingCombatReadiness = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Military_DecayingCombatReadiness"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Military_UnhappyMilitaryPersonnel = true"*)
 
 ### Węzeł `[60]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Military_UnhappyMilitaryPersonnel = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Military_UnhappyMilitaryPersonnel"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Military_UnhappyMilitaryPersonnel = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Military_UnhappyMilitaryPersonnel"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
 
 ### Węzeł `[61]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Military_HappyMilitaryPersonnel = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Military_HappyMilitaryPersonnel"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Military_HappyMilitaryPersonnel = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Military_HappyMilitaryPersonnel"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "Lucian seemed as if he was about to say something, but lo..."*)
 
 ### Węzeł `[62]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Military_IncreasedFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Military_IncreasedFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Military_IncreasedFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Military_IncreasedFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Military_HappyMilitaryPersonnel = true"*)
 
 ### Węzeł `[63]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Military_DecreasedFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Military_DecreasedFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Military_DecreasedFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Military_DecreasedFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Military_DecayingCombatReadiness = true"*)
 
 ### Węzeł `[64]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_DecreasedEducationFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_DecreasedEducationFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_DecreasedEducationFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_DecreasedEducationFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_BrainDrain = true"*)
 
 ### Węzeł `[65]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_BrainDrain = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Welfare_BrainDrain"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_BrainDrain = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Welfare_BrainDrain"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.Education -= 1"*)
 
 ### Węzeł `[66]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_HealthCrisis = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Welfare_HealthCrisis"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_HealthCrisis = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Welfare_HealthCrisis"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "BaseGame.Healthcare -= 1"*)
 
 ### Węzeł `[67]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_DecreasedHealthFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_DecreasedHealthFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_DecreasedHealthFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_DecreasedHealthFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_HealthCrisis = true"*)
 
 ### Węzeł `[68]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_IncreasedHealthFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_IncreasedHealthFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_IncreasedHealthFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_IncreasedHealthFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Healthcare += 1"*)
 
 ### Węzeł `[69]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Welfare_IncreasedEducationFunding = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Welfare_IncreasedEducationFunding"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Welfare_IncreasedEducationFunding = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Welfare_IncreasedEducationFunding"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "BaseGame.Education += 1;"*)
 
 ### Węzeł `[70]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
-  - -> `[72]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)"*)
 
 ### Węzeł `[71]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Iosef Lancea: "“It is an honor to serve with a President that respects t..."*)
 
 ### Węzeł `[72]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Maintain == true"*)
 
 ### Węzeł `[73]`
 Mówca: **Symon Holl**
 > "“We have a very healthy budget surplus left for investments and other expenditures. Splendid!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Lucian Galade: "“Agreed.”"*)
 
 ### Węzeł `[74]`
 Mówca: **Symon Holl**
 > "“It looks like we have a balanced budget with no deficit or surplus. Not bad. Not bad at all.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Lucian Galade: "“Agreed.”"*)
 
 ### Węzeł `[75]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
-  - -> `[77]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 3"*)
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= 3)"*)
 
 ### Węzeł `[76]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Symon Holl: "“We have a very healthy budget surplus left for investmen..."*)
 
 ### Węzeł `[77]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[437]`
+  - -> `[437]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 1"*)
 
 ### Węzeł `[78]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
-  - -> `[80]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget == 0"*)
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget == 0)"*)
 
 ### Węzeł `[79]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Symon Holl: "“It looks like we have a balanced budget with no deficit ..."*)
 
 ### Węzeł `[80]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Symon Holl: "“We have a deficit on our hands. We will need to resort t..."*)
 
 ### Węzeł `[81]`
 Mówca: **Narrator**
 > "I had finished allocating the government budget, to the satisfaction of some cabinet members and the dismay of others. They and I knew this would define a significant part of our term."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 3"*)
 
 ### Węzeł `[82]`
 Mówca: **Symon Holl**
 > "“We have a deficit on our hands. We will need to resort to debt to finance future investments. This situation can have adverse effects if we don't strike a balance.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Lucian Galade: "“Agreed.”"*)
 
 ### Węzeł `[83]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Maintain == true"*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Maintain == true)"*)
 
 ### Węzeł `[84]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Iosef Lancea: "“It is a shame that the military won't be getting an incr..."*)
 
 ### Węzeł `[85]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Iosef Lancea: "“This is a disgrace. Rumburg is at our doorstep and the A..."*)
 
 ### Węzeł `[86]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[87]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Narrator: "Nia and Lileas were both smiling."*)
 
 ### Węzeł `[88]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
 
 ### Węzeł `[89]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
-  - -> `[91]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == t..."*)
 
 ### Węzeł `[90]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Narrator: "Lileas leaned forward and put her hand on her chin. Nia w..."*)
 
 ### Węzeł `[91]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Narrator: "Nia and Lileas were frowning. When I looked at her, Lilea..."*)
 
 ### Węzeł `[92]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[94]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)"*)
 
 ### Węzeł `[93]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Paskal Beniwoll: "“Thank you, sir. This health budget increase will help me..."*)
 
 ### Węzeł `[94]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true"*)
 
 ### Węzeł `[95]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
-  - -> `[97]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true"*)
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)"*)
 
 ### Węzeł `[96]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Paskal Beniwoll: "“I can't say that maintaining the funding is negative but..."*)
 
 ### Węzeł `[97]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Paskal Beniwoll: "“I'm honestly rather disappointed. The reduction will for..."*)
 
 ### Węzeł `[98]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
-  - -> `[100]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)"*)
 
 ### Węzeł `[99]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Ciara Walda: "“Keeping the same budget will just result in the same pro..."*)
 
 ### Węzeł `[100]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Ciara Walda: "“A reduction!? This is the opposite of what we need. Such..."*)
 
 ### Węzeł `[101]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[102]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Ciara Walda: "“The increase of funding is very welcome. We can finally ..."*)
 
 ### Węzeł `[103]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
 
 ### Węzeł `[104]`
 Mówca: **Narrator**
 > "Ciara clearly wasn't finished, but didn't interject. Iosef chimed in."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[105]`
 Mówca: **Narrator**
 > "Nia and Lileas were both smiling."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Lileas Graf: "“Thank you for this decision, Mr. President. I knew you w..."*)
 
 ### Węzeł `[106]`
 Mówca: **Narrator**
 > "Lileas leaned forward and put her hand on her chin. Nia was looking down at the floor."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Lileas Graf: "“I suppose we'll have to make do with what we have. This ..."*)
 
 ### Węzeł `[107]`
 Mówca: **Narrator**
 > "Nia and Lileas were frowning. When I looked at her, Lileas shook her head."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Lileas Graf: "“I heavily disapprove. We are barely making ends meet on ..."*)
 
 ### Węzeł `[108]`
 **[WYBÓR GRACZA: "“The military is on the top of my priority list and always will be. Rest assured.”"]** — Mówca: **Player**
 > "“The military is on the top of my priority list and always will be. Rest assured.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Iosef Lancea: "“I knew I could count on your decision-making, Mr. Presid..."*)
 
 ### Węzeł `[109]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_RelievedWelfareSystem = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Welfare_RelievedWelfareSystem"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_RelievedWelfareSystem = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Welfare_RelievedWelfareSystem"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Nia Morgna: "“Surely a well-funded and larger Ministry of Education wo..."*)
 
 ### Węzeł `[110]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_OverburdenedWelfareSystem = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Welfare_OverburdenedWelfareSystem"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_OverburdenedWelfareSystem = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Welfare_OverburdenedWelfareSystem"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_RelievedWelfareSystem = true"*)
 
 ### Węzeł `[111]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
-  - -> `[113]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)"*)
 
 ### Węzeł `[112]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_OverburdenedWelfareSystem = false"*)
 
 ### Węzeł `[113]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Nia Morgna: "“Surely a well-funded and larger Ministry of Education wo..."*)
 
 ### Węzeł `[114]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Healthcare += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Healthcare"] = Variable["BaseGame.Healthcare"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Healthcare += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Healthcare"] = Variable["BaseGame.Healthcare"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Ciara Walda: "“Welfare must remain a priority for our term. There is no..."*)
 
 ### Węzeł `[115]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Healthcare -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Healthcare"] = Variable["BaseGame.Healthcare"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Healthcare -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Healthcare"] = Variable["BaseGame.Healthcare"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true"*)
 
 ### Węzeł `[116]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Education += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Education += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[345]`
+  - -> `[345]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn07_Decision_VillageSchools = true"*)
 
 ### Węzeł `[117]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Education -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Education -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Education"] = Variable["BaseGame.Education"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Nia Morgna: "“Exactly. This was a big mistake. I'm so sorry, Ciara.”"*)
 
 ### Węzeł `[118]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "Lucian seemed as if he was about to say something, but lo..."*)
 
 ### Węzeł `[119]`
 Mówca: **Iosef Lancea**
 > "“It will be harder to do so but I shall find ways, it is my duty.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[120]`
 Mówca: **Iosef Lancea**
 > "“Is there a higher priority than our national security? I doubt it.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[375]`
+  - -> `[375]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Iosef_Enemy = true"*)
 
 ### Węzeł `[121]`
 Mówca: **Iosef Lancea**
 > "“The threats called for an increase. Not just a continuation of the same budget.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[122]`
 Mówca: **Iosef Lancea**
 > "“I knew I could count on your decision-making, Mr. President.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[123]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)"*)
 
 ### Węzeł `[124]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Player: "“The military is on the top of my priority list and alway..."*)
 
 ### Węzeł `[125]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[126]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Maintain == true"*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Maintain == true)"*)
 
 ### Węzeł `[127]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Player: "“Maintaining the funding was the correct call especially ..."*)
 
 ### Węzeł `[128]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[129]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
-  - -> `[131]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Decrease == true"*)
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Decrease == true)"*)
 
 ### Węzeł `[130]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Player: "“Concessions had to be made with the military budget. The..."*)
 
 ### Węzeł `[131]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[132]`
 **[WYBÓR GRACZA: "“With your talent and experience you will overcome the issues our military faces.”"]** — Mówca: **Player**
 > "“With your talent and experience you will overcome the issues our military faces.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[133]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
-  - -> `[135]`
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)"*)
 
 ### Węzeł `[134]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Iosef Lancea: "“With the support you have provided, I will protect this ..."*)
 
 ### Węzeł `[135]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
+  - -> `[119]` (*Iosef Lancea: "“It will be harder to do so but I shall find ways, it is ..."*)
 
 ### Węzeł `[136]`
 Mówca: **Iosef Lancea**
 > "“With the support you have provided, I will protect this country from any threat.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[137]`
 Mówca: **Narrator**
 > "Iosef leaned back in his chair."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Symon Holl: "“Let's hear from Mr. Beniwoll.”"*)
 
 ### Węzeł `[138]`
 Mówca: **Nia Morgna**
 > "“We will tackle corruption and the backlog of cases head-on.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[139]`
 Mówca: **Lileas Graf**
 > "“We will be able to achieve positive results in the coming year. I can assure you.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[138]`
+  - -> `[138]` (*Nia Morgna: "“We will tackle corruption and the backlog of cases head-..."*)
 
 ### Węzeł `[140]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Lucian Galade: "“Any statements on the matter, sir?”"*)
 
 ### Węzeł `[141]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
-  - -> `[143]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[142]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Player: "“Law enforcement is a key branch that needs a greater bud..."*)
 
 ### Węzeł `[143]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[144]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
-  - -> `[146]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == t..."*)
 
 ### Węzeł `[145]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Player: "“Our new priorities called for a reduction of law enforce..."*)
 
 ### Węzeł `[146]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[147]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
-  - -> `[149]`
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == t..."*)
 
 ### Węzeł `[148]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Player: "“The continuation of the existing set of budgetary condit..."*)
 
 ### Węzeł `[149]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[150]`
 **[WYBÓR GRACZA: "“Law enforcement is a key branch that needs a greater budget due to the increased threats and need for security.”"]** — Mówca: **Player**
 > ""Law enforcement is a key branch that needs a greater budget due to the increased threats and need for security.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+- **Kontekst wejściowy (poprzednik):** `[152]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[161]`
+  - -> `[161]` (*Lileas Graf: "“We will make a good use of these new resources and fight..."*)
 
 ### Węzeł `[151]`
 **[WYBÓR GRACZA: "“No, that should be all.”"]** — Mówca: **Player**
 > "“No, that should be all.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[152]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Lileas Graf: "“Very well.”"*)
 
 ### Węzeł `[152]`
 Mówca: **Lucian Galade**
 > "“Any statements on the matter, sir?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
-  - -> `[154]`
-  - -> `[147]`
-  - -> `[144]`
-  - -> `[151]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[154]` (*Player: "“I trust you to push the Ministry of Interior and Justice..."*)
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[151]` (*Player: "“No, that should be all.”"*)
 
 ### Węzeł `[153]`
 **[WYBÓR GRACZA: "“Next up is health. Let's continue.”"]** — Mówca: **Player**
 > "“Next up is health. Let's continue.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[154]`
 **[WYBÓR GRACZA: "“I trust you to push the Ministry of Interior and Justice forward.”"]** — Mówca: **Player**
 > "“I trust you to push the Ministry of Interior and Justice forward.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[152]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[155]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[156]`
-  - -> `[157]`
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[157]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[156]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Lileas Graf: "“We will be able to achieve positive results in the comin..."*)
 
 ### Węzeł `[157]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[409]`
+  - -> `[409]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
 
 ### Węzeł `[158]`
 Mówca: **Nia Morgna**
 > "“Disappointing for the people who want a sense of justice returned. The backlogs won't get solved. The administration will hurt.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[159]`
 Mówca: **Lileas Graf**
 > "“With the reduction, our work will be hampered and made more difficult.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[158]`
+  - -> `[158]` (*Nia Morgna: "“Disappointing for the people who want a sense of justice..."*)
 
 ### Węzeł `[160]`
 Mówca: **Nia Morgna**
 > "“Justice will be served in this nation and having more support is a step in the right direction.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[161]`
 Mówca: **Lileas Graf**
 > "“We will make a good use of these new resources and fight crime, terrorism and subversives.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Nia Morgna: "“Justice will be served in this nation and having more su..."*)
 
 ### Węzeł `[162]`
 Mówca: **Nia Morgna**
 > "“Troubled times are ahead for our ministries.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[163]`
 Mówca: **Lileas Graf**
 > "“These are disheartening changes. We will try to mitigate.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Nia Morgna: "“Troubled times are ahead for our ministries.”"*)
 
 ### Węzeł `[164]`
 Mówca: **Nia Morgna**
 > "“We may not have the resources to meet new challenges, but I will find ways to help this nation.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[165]`
 Mówca: **Lileas Graf**
 > "“Our expectations were much higher than this.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Nia Morgna: "“We may not have the resources to meet new challenges, bu..."*)
 
 ### Węzeł `[166]`
 Mówca: **Lileas Graf**
 > "“Very well.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[167]`
 Mówca: **Lucian Galade**
 > "“Well then. Let's start with law enforcement.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[168]`
 Mówca: **Lucian Galade**
 > "“Let's hear the Minister of Education.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Narrator: "Ciara was eager to comment."*)
 
 ### Węzeł `[169]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Ciara Walda: "“Our future depends on our children. Education is the fir..."*)
 
 ### Węzeł `[170]`
 **[WYBÓR GRACZA: "“Your expertise and passion should enable you to make the necessary changes for improvement.”"]** — Mówca: **Player**
 > "“Your expertise and passion should enable you to make the necessary changes for improvement.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[183]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
 
 ### Węzeł `[171]`
 **[WYBÓR GRACZA: "“My expectation is that you maintain education services with the same budget.”"]** — Mówca: **Player**
 > "“My expectation is that you maintain education services with the same budget.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
+- **Kontekst wejściowy (poprzednik):** `[183]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
+  - -> `[185]` (*Ciara Walda: "“It seems we have no other choice but to depend on what l..."*)
 
 ### Węzeł `[172]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
-  - -> `[174]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[173]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Player: "“Education is our future and it will not be sidelined. Ou..."*)
 
 ### Węzeł `[174]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[175]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
-  - -> `[177]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)"*)
 
 ### Węzeł `[176]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Player: "“My expectation is that you maintain education services w..."*)
 
 ### Węzeł `[177]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[178]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
-  - -> `[180]`
+  - -> `[179]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)"*)
 
 ### Węzeł `[179]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[182]`
+  - -> `[182]` (*Player: "“This government has defined its priorities, and educatio..."*)
 
 ### Węzeł `[180]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[181]`
 **[WYBÓR GRACZA: "“We can move on.”"]** — Mówca: **Player**
 > "“We can move on.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[183]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Ciara Walda: "“Sure... Let's move on.”"*)
 
 ### Węzeł `[182]`
 **[WYBÓR GRACZA: "“This government has defined its priorities, and education is not on the top of the list.”"]** — Mówca: **Player**
 > "“This government has defined its priorities, and education is not on the top of the list.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+- **Kontekst wejściowy (poprzednik):** `[183]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Ciara Walda: "“It's not even on the list. Cutting our funding will resu..."*)
 
 ### Węzeł `[183]`
 Mówca: **Ciara Walda**
 > "“Our future depends on our children. Education is the first step in the fight against ignorance.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
-  - -> `[170]`
-  - -> `[175]`
-  - -> `[178]`
-  - -> `[181]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[170]` (*Player: "“Your expertise and passion should enable you to make the..."*)
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Maintain == true"*)
+  - -> `[178]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[181]` (*Player: "“We can move on.”"*)
 
 ### Węzeł `[184]`
 Mówca: **Ciara Walda**
 > "“We will be able to achieve my grand goals with these new budgetary resources.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[185]`
 Mówca: **Ciara Walda**
 > "“It seems we have no other choice but to depend on what little we have. What will our children think of us?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[186]`
 Mówca: **Ciara Walda**
 > "“It's not even on the list. Cutting our funding will result in disaster.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[187]`
 Mówca: **Ciara Walda**
 > "“Sure... Let's move on.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[188]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
-  - -> `[190]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[189]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Ciara Walda: "“We will be able to achieve my grand goals with these new..."*)
 
 ### Węzeł `[190]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
+  - -> `[191]` (*Ciara Walda: "“Thank you for your confidence in me, but without extra f..."*)
 
 ### Węzeł `[191]`
 Mówca: **Ciara Walda**
 > "“Thank you for your confidence in me, but without extra funding we'll have to make sacrifices. And our system will see the consequences.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Lucian Galade: "“The military is next.”"*)
 
 ### Węzeł `[192]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Ciara Walda: "“Welfare must remain a priority for our term. There is no..."*)
 
 ### Węzeł `[193]`
 Mówca: **Ciara Walda**
 > "“Welfare must remain a priority for our term. There is no other way around it.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[198]`
-  - -> `[195]`
-  - -> `[205]`
-  - -> `[202]`
-  - -> `[201]`
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[195]` (*Player: "“Your opinions were noted, Paskal. Your task is to improv..."*)
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true"*)
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
+  - -> `[201]` (*Player: "“Let's wrap it up.”"*)
 
 ### Węzeł `[194]`
 **[WYBÓR GRACZA: "“Healthcare is very important for us and as we move forward, it will improve drastically.”"]** — Mówca: **Player**
 > "“Healthcare is very important for us and as we move forward, it will improve drastically.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+- **Kontekst wejściowy (poprzednik):** `[193]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[208]`
+  - -> `[208]` (*Paskal Beniwoll: "“It feels invigorating to have the weight of the governme..."*)
 
 ### Węzeł `[195]`
 **[WYBÓR GRACZA: "“Your opinions were noted, Paskal. Your task is to improve the care in the country.”"]** — Mówca: **Player**
 > "“Your opinions were noted, Paskal. Your task is to improve the care in the country.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[193]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
 
 ### Węzeł `[196]`
 **[WYBÓR GRACZA: "“It is best we continue our funding as it is. You will have to find new resources.”"]** — Mówca: **Player**
 > "“It is best we continue our funding as it is. You will have to find new resources.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true`
+- **Kontekst wejściowy (poprzednik):** `[193]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Paskal Beniwoll: "“The Ministry of Health will resort to a privatization ef..."*)
 
 ### Węzeł `[197]`
 **[WYBÓR GRACZA: "“Sadly, health ended up in the list of budget cuts. Not much can be done about it.”"]** — Mówca: **Player**
 > "“Sadly, health ended up in the list of budget cuts. Not much can be done about it.”"
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+- **Kontekst wejściowy (poprzednik):** `[193]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[211]`
+  - -> `[211]` (*Paskal Beniwoll: "“It is very unfortunate. I will have to look into privati..."*)
 
 ### Węzeł `[198]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
-  - -> `[200]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)"*)
 
 ### Węzeł `[199]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[194]`
+  - -> `[194]` (*Player: "“Healthcare is very important for us and as we move forwa..."*)
 
 ### Węzeł `[200]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[201]`
 **[WYBÓR GRACZA: "“Let's wrap it up.”"]** — Mówca: **Player**
 > "“Let's wrap it up.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[193]` (Ciara Walda)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[212]`
+  - -> `[212]` (*Paskal Beniwoll: "“Let's.”"*)
 
 ### Węzeł `[202]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
-  - -> `[204]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)"*)
 
 ### Węzeł `[203]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Player: "“Sadly, health ended up in the list of budget cuts. Not m..."*)
 
 ### Węzeł `[204]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[205]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[206]`
-  - -> `[207]`
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true"*)
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)"*)
 
 ### Węzeł `[206]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
+  - -> `[196]` (*Player: "“It is best we continue our funding as it is. You will ha..."*)
 
 ### Węzeł `[207]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[208]`
 Mówca: **Paskal Beniwoll**
 > "“It feels invigorating to have the weight of the government behind my cause.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[209]`
 Mówca: **Paskal Beniwoll**
 > "“With the new budget we have many options to improve our healthcare program and provide for the people.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[210]`
 Mówca: **Paskal Beniwoll**
 > "“The Ministry of Health will resort to a privatization effort to create funds to improve services.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[211]`
 Mówca: **Paskal Beniwoll**
 > "“It is very unfortunate. I will have to look into privatising parts of our system to create funds in order to maintain operations.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[212]`
 Mówca: **Paskal Beniwoll**
 > "“Let's.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[213]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
-  - -> `[215]`
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)"*)
 
 ### Węzeł `[214]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Paskal Beniwoll: "“With the new budget we have many options to improve our ..."*)
 
 ### Węzeł `[215]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[216]`
+  - -> `[216]` (*Paskal Beniwoll: "“Which will be very difficult to accomplish without an in..."*)
 
 ### Węzeł `[216]`
 Mówca: **Paskal Beniwoll**
 > "“Which will be very difficult to accomplish without an increase in funds.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Symon Holl: "“That covers all branches. Each minister will approach yo..."*)
 
 ### Węzeł `[217]`
 Mówca: **Lucian Galade**
 > "“Agreed.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Lucian Galade: "“Well then. Let's start with law enforcement.”"*)
 
 ### Węzeł `[218]`
 Mówca: **Paskal Beniwoll**
 > "“I am also planning to tackle issues like the lack of rural hospitals and the recently worrying numbers of maternal deaths.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_IncreasedHealthFunding = true"*)
 
 ### Węzeł `[219]`
 **[WYBÓR GRACZA: "“Dismissed.”"]** — Mówca: **Player**
 > "“Dismissed.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[46]` (Lucian Galade)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Narrator: "The ministers bid their farewells -- some excitedly, othe..."*)
 
 ### Węzeł `[220]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Law_Increase = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Increase"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Law_Increase = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Increase"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
+  - -> `[340]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn04_Decision_RiotGear = true;"*)
 
 ### Węzeł `[221]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Law_Maintain = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Maintain"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Law_Maintain = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Maintain"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[341]`
+  - -> `[341]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn04_Decision_RiotGear = true"*)
 
 ### Węzeł `[222]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Law_Decrease = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Decrease"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Law_Decrease = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Law_Decrease"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Security == true"*)
 
 ### Węzeł `[223]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Education_Increase = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Increase"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Education_Increase = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Increase"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_IncreasedEducationFunding = true"*)
 
 ### Węzeł `[224]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Education_Maintain = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Maintain"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Education_Maintain = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Maintain"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[344]`
+  - -> `[344]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn07_Decision_VillageSchools = true"*)
 
 ### Węzeł `[225]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Education_Decrease = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Decrease"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Education_Decrease = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Education_Decrease"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_DecreasedEducationFunding = true"*)
 
 ### Węzeł `[226]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Military_Increase = true;
-BaseGame.Enable_Industrial_CheaperMilitary = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Increase"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Military_Increase = true;
+BaseGame.Enable_Industrial_CheaperMilitary = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Increase"] = true;
 Variable["BaseGame.Enable_Industrial_CheaperMilitary"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[343]`
+  - -> `[343]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_RumburgBorderReinforcement ..."*)
 
 ### Węzeł `[227]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Military_Maintain = true; BaseGame.Enable_Industrial_NormalMilitary = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Maintain"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Military_Maintain = true; BaseGame.Enable_Industrial_NormalMilitary = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Maintain"] = true;
 Variable["BaseGame.Enable_Industrial_NormalMilitary"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
+  - -> `[342]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn05_Decision_RumburgBorderReinforcement ..."*)
 
 ### Węzeł `[228]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Military_Decrease = true;
-BaseGame.Enable_Industrial_NormalMilitary = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Decrease"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Military_Decrease = true;
+BaseGame.Enable_Industrial_NormalMilitary = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Military_Decrease"] = true;
 Variable["BaseGame.Enable_Industrial_NormalMilitary"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
 
 ### Węzeł `[229]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Increase"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Paskal Beniwoll: "“I am also planning to tackle issues like the lack of rur..."*)
 
 ### Węzeł `[230]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Maintain"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true"*)
 
 ### Węzeł `[231]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn03_Budget_Healthcare_Decrease"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Welfare_DecreasedHealthFunding = true"*)
 
 ### Węzeł `[232]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
-  - -> `[234]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true &..."*)
 
 ### Węzeł `[233]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[238]`
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_E_Budget_Increased_All = true..."*)
 
 ### Węzeł `[234]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[235]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
-  - -> `[237]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[236]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_E_Budget_Decreased_All = true"*)
 
 ### Węzeł `[237]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true && BaseGame.Turn03_EnT_Military_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[238]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_E_Budget_Increased_All = true; BaseGameSupport.News_Turn03_HP_Budget_Increased_All = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_E_Budget_Increased_All"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_E_Budget_Increased_All = true; BaseGameSupport.News_Turn03_HP_Budget_Increased_All = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_E_Budget_Increased_All"] = true;
 Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_All"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[239]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_E_Budget_Decreased_All = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_E_Budget_Decreased_All"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_E_Budget_Decreased_All = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_E_Budget_Decreased_All"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[240]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[241]`
-  - -> `[242]`
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true &..."*)
 
 ### Węzeł `[241]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[243]`
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp_Mil..."*)
 
 ### Węzeł `[242]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[244]`
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
 
 ### Węzeł `[243]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[244]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
-  - -> `[246]`
+  - -> `[245]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[245]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
+  - -> `[283]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp_Mil..."*)
 
 ### Węzeł `[246]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[247]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
-  - -> `[249]`
+  - -> `[248]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true &..."*)
 
 ### Węzeł `[248]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[284]`
+  - -> `[284]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Mil..."*)
 
 ### Węzeł `[249]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[250]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[251]`
-  - -> `[252]`
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true &..."*)
 
 ### Węzeł `[251]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Hp ..."*)
 
 ### Węzeł `[252]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
+  - -> `[253]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true && B..."*)
 
 ### Węzeł `[253]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
-  - -> `[255]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true && B..."*)
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true &&..."*)
 
 ### Węzeł `[254]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
+  - -> `[286]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp_Mil = ..."*)
 
 ### Węzeł `[255]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true && B..."*)
 
 ### Węzeł `[256]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[257]`
-  - -> `[258]`
+  - -> `[257]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true && B..."*)
+  - -> `[258]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true &&..."*)
 
 ### Węzeł `[257]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[287]`
+  - -> `[287]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Mil = ..."*)
 
 ### Węzeł `[258]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true &&..."*)
 
 ### Węzeł `[259]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[260]`
-  - -> `[261]`
+  - -> `[260]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true &&..."*)
+  - -> `[261]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true ..."*)
 
 ### Węzeł `[260]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[288]`
+  - -> `[288]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp = true"*)
 
 ### Węzeł `[261]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
+  - -> `[262]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
 
 ### Węzeł `[262]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
-  - -> `[264]`
+  - -> `[263]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
+  - -> `[264]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[263]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Mil = ..."*)
 
 ### Węzeł `[264]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[265]`
+  - -> `[265]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
 
 ### Węzeł `[265]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
-  - -> `[267]`
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[266]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[290]`
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp = true"*)
 
 ### Węzeł `[267]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
 
 ### Węzeł `[268]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
-  - -> `[270]`
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == tru..."*)
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[269]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed = true"*)
 
 ### Węzeł `[270]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true && BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
+  - -> `[271]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[271]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[272]`
-  - -> `[273]`
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[272]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[292]`
+  - -> `[292]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_LE = true"*)
 
 ### Węzeł `[273]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[274]`
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[274]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
-  - -> `[276]`
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[276]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)"*)
 
 ### Węzeł `[275]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[293]`
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Mil = true"*)
 
 ### Węzeł `[276]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
 
 ### Węzeł `[277]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
-  - -> `[279]`
+  - -> `[278]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true"*)
+  - -> `[279]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)"*)
 
 ### Węzeł `[278]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[294]`
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed = true"*)
 
 ### Węzeł `[279]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
+  - -> `[280]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
 
 ### Węzeł `[280]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[282]`
+  - -> `[281]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)"*)
 
 ### Węzeł `[281]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[295]`
+  - -> `[295]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp = true"*)
 
 ### Węzeł `[282]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[283]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[284]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[285]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[286]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[287]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[288]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[289]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[290]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[291]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE_Ed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[292]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_LE = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_LE = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_LE"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[293]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Mil = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Mil"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Mil = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Mil"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[294]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Ed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[295]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_HP_Budget_Increased_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
 
 ### Węzeł `[296]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[297]`
-  - -> `[298]`
+  - -> `[297]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true || ..."*)
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true |..."*)
 
 ### Węzeł `[297]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[299]`
+  - -> `[299]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[298]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true || BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true || BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true || BaseGame.Turn03_EnT_Military_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true  or  Variable["BaseGame.Turn03_EnT_Military_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[299]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
-  - -> `[301]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[301]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[300]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[312]`
+  - -> `[312]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true && BaseGame.Pro..."*)
 
 ### Węzeł `[301]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[302]`
+  - -> `[302]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
 
 ### Węzeł `[302]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[303]`
-  - -> `[304]`
+  - -> `[303]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[304]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)"*)
 
 ### Węzeł `[303]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[316]`
+  - -> `[316]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Education == true"*)
 
 ### Węzeł `[304]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[305]`
+  - -> `[305]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
 
 ### Węzeł `[305]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
-  - -> `[307]`
+  - -> `[306]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)"*)
 
 ### Węzeł `[306]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
+  - -> `[319]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true"*)
 
 ### Węzeł `[307]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[308]`
+  - -> `[308]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
 
 ### Węzeł `[308]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
-  - -> `[310]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[310]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == t..."*)
 
 ### Węzeł `[309]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Security == true"*)
 
 ### Węzeł `[310]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[334]`
+  - -> `[334]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
 
 ### Węzeł `[311]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[312]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[313]`
-  - -> `[314]`
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true && BaseGame.Pro..."*)
+  - -> `[314]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Health == true && BaseGame.P..."*)
 
 ### Węzeł `[313]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true  and  Variable["BaseGame.Promise_TermFocus_Education"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true  and  Variable["BaseGame.Promise_TermFocus_Education"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[311]`
+  - -> `[311]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed_..."*)
 
 ### Węzeł `[314]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true  and  Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Health == true && BaseGame.Promise_TermFocus_Education == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true  and  Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[315]`
+  - -> `[315]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_E..."*)
 
 ### Węzeł `[315]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[316]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Education == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Education == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
-  - -> `[318]`
+  - -> `[317]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Education == true"*)
+  - -> `[318]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Education == true )"*)
 
 ### Węzeł `[317]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Education == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Education"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Education == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Education"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[328]`
+  - -> `[328]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed ..."*)
 
 ### Węzeł `[318]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Education == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Education == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Education"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[329]`
+  - -> `[329]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_E..."*)
 
 ### Węzeł `[319]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[320]`
-  - -> `[321]`
+  - -> `[320]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Health == true"*)
+  - -> `[321]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Health == true )"*)
 
 ### Węzeł `[320]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Health == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Health == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Health"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[331]`
+  - -> `[331]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Hp ..."*)
 
 ### Węzeł `[321]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Health == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Health == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Health"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[330]`
+  - -> `[330]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_H..."*)
 
 ### Węzeł `[322]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Security == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Security == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
-  - -> `[324]`
+  - -> `[323]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Security == true"*)
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Security == true )"*)
 
 ### Węzeł `[323]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Security == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Security"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Security == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Security"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[333]`
+  - -> `[333]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_LT_BudgetPromise_Decreased_LE..."*)
 
 ### Węzeł `[324]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Security == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Security"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Security == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Security"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
+  - -> `[332]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_LT_BudgetNoPromise_Decreased_..."*)
 
 ### Węzeł `[325]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[326]`
-  - -> `[327]`
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
+  - -> `[327]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Promise_TermFocus_Military == true )"*)
 
 ### Węzeł `[326]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Promise_TermFocus_Military == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Promise_TermFocus_Military == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Promise_TermFocus_Military"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[338]`
+  - -> `[338]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_ST_BudgetPromise_Decreased_Mi..."*)
 
 ### Węzeł `[327]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Promise_TermFocus_Military == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Promise_TermFocus_Military == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Promise_TermFocus_Military"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[339]`
+  - -> `[339]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_ST_BudgetNoPromise_Decreased_..."*)
 
 ### Węzeł `[328]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Ed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[329]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Ed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[330]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetNoPromise_Decreased_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[331]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Hp = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Hp"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Hp = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_R_BudgetPromise_Decreased_Hp"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[332]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_LT_BudgetNoPromise_Decreased_LE = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_LT_BudgetNoPromise_Decreased_LE"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_LT_BudgetNoPromise_Decreased_LE = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_LT_BudgetNoPromise_Decreased_LE"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[333]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_LT_BudgetPromise_Decreased_LE = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_LT_BudgetPromise_Decreased_LE"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_LT_BudgetPromise_Decreased_LE = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_LT_BudgetPromise_Decreased_LE"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[334]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[335]`
-  - -> `[336]`
+  - -> `[335]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Media_SordlandToday_Bias == true)"*)
 
 ### Węzeł `[335]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[337]`
+  - -> `[337]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn03_ST_Budget_Decreased_Mil_Deal ..."*)
 
 ### Węzeł `[336]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Media_SordlandToday_Bias == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Media_SordlandToday_Bias == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
 
 ### Węzeł `[337]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_ST_Budget_Decreased_Mil_Deal = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_Budget_Decreased_Mil_Deal"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_ST_Budget_Decreased_Mil_Deal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_Budget_Decreased_Mil_Deal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[338]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_ST_BudgetPromise_Decreased_Mil_NoDeal = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_BudgetPromise_Decreased_Mil_NoDeal"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_ST_BudgetPromise_Decreased_Mil_NoDeal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_BudgetPromise_Decreased_Mil_NoDeal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[339]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn03_ST_BudgetNoPromise_Decreased_Mil_NoDeal = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_BudgetNoPromise_Decreased_Mil_NoDeal"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn03_ST_BudgetNoPromise_Decreased_Mil_NoDeal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn03_ST_BudgetNoPromise_Decreased_Mil_NoDeal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn03_EnT_BudgetTwo = true"*)
 
 ### Węzeł `[340]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn04_Decision_RiotGear = true;)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn04_Decision_RiotGear = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Lucian Galade: "“Any statements on the matter, sir?”"*)
 
 ### Węzeł `[341]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn04_Decision_RiotGear = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn04_Decision_RiotGear = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Security == true"*)
 
 ### Węzeł `[342]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn05_Decision_RumburgBorderReinforcement = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn05_Decision_RumburgBorderReinforcement"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn05_Decision_RumburgBorderReinforcement = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn05_Decision_RumburgBorderReinforcement"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
 
 ### Węzeł `[343]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn05_Decision_RumburgBorderReinforcement = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn05_Decision_RumburgBorderReinforcement"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn05_Decision_RumburgBorderReinforcement = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn05_Decision_RumburgBorderReinforcement"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Military == true"*)
 
 ### Węzeł `[344]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn07_Decision_VillageSchools = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn07_Decision_VillageSchools"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn07_Decision_VillageSchools = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn07_Decision_VillageSchools"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Promise_TermFocus_Education == true"*)
 
 ### Węzeł `[345]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn07_Decision_VillageSchools = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn07_Decision_VillageSchools"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn07_Decision_VillageSchools = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn07_Decision_VillageSchools"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true"*)
 
 ### Węzeł `[346]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
-  - -> `[348]`
+  - -> `[347]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[348]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == t..."*)
 
 ### Węzeł `[347]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[349]`
+  - -> `[349]` (*Węzeł Logiki Narracyjnej: "BaseGame.Enable_RiotGear = true"*)
 
 ### Węzeł `[348]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[350]`
+  - -> `[350]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn04_Decision_RiotGear = true"*)
 
 ### Węzeł `[349]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Enable_RiotGear = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Enable_RiotGear"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Enable_RiotGear = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Enable_RiotGear"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[351]`
+  - -> `[351]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises == true"*)
 
 ### Węzeł `[350]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn04_Decision_RiotGear = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn04_Decision_RiotGear = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn04_Decision_RiotGear"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[351]`
+  - -> `[351]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises == true"*)
 
 ### Węzeł `[351]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[352]`
-  - -> `[353]`
+  - -> `[352]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_BrokenFocusPromises == true"*)
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_BrokenFocusPromises == true)"*)
 
 ### Węzeł `[352]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_BrokenFocusPromises == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_BrokenFocusPromises == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[354]`
+  - -> `[354]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion -= 4"*)
 
 ### Węzeł `[353]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_BrokenFocusPromises == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_BrokenFocusPromises == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_BrokenFocusPromises"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[354]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion -= 4)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion -= 4`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
 
 ### Węzeł `[355]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[356]`
-  - -> `[357]`
+  - -> `[356]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Increase == true && ..."*)
+  - -> `[357]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Increase == true &..."*)
 
 ### Węzeł `[356]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion += 5"*)
 
 ### Węzeł `[357]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Increase == true && BaseGame.Turn03_EnT_Healthcare_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Increase"] == true  and  Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[359]`
+  - -> `[359]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
 
 ### Węzeł `[358]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion += 5)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] + 5;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion += 5`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] + 5;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[367]`
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[359]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[360]`
-  - -> `[361]`
+  - -> `[360]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true"*)
+  - -> `[361]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true )"*)
 
 ### Węzeł `[360]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[362]`
+  - -> `[362]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion -= 4"*)
 
 ### Węzeł `[361]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[364]`
+  - -> `[364]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
 
 ### Węzeł `[362]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion -= 4)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion -= 4`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[364]`
+  - -> `[364]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
 
 ### Węzeł `[363]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion -= 4)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion -= 4`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 4;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[367]`
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[364]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[365]`
-  - -> `[366]`
+  - -> `[365]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true"*)
+  - -> `[366]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true )"*)
 
 ### Węzeł `[365]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[363]`
+  - -> `[363]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion -= 4"*)
 
 ### Węzeł `[366]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Healthcare_Budget_Decrease == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Healthcare_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[367]`
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[367]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[368]`
-  - -> `[369]`
+  - -> `[368]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[369]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[368]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[370]`
+  - -> `[370]` (*Węzeł Logiki Narracyjnej: "BaseGame.Sollist += 2;"*)
 
 ### Węzeł `[369]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[412]`
+  - -> `[412]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
 
 ### Węzeł `[370]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Sollist += 2;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Sollist += 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[371]`
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[371]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[372]`
-  - -> `[373]`
+  - -> `[372]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
+  - -> `[373]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)"*)
 
 ### Węzeł `[372]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Military_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Military_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[374]`
+  - -> `[374]` (*Węzeł Logiki Narracyjnej: "BaseGame.Sollist += 3;"*)
 
 ### Węzeł `[373]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Military_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Military_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Military_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[416]`
+  - -> `[416]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
 
 ### Węzeł `[374]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Sollist += 3;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Sollist += 3;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[376]`
+  - -> `[376]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[375]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Iosef_Enemy = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Iosef_Enemy"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Iosef_Enemy = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Iosef_Enemy"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "Iosef leaned back in his chair."*)
 
 ### Węzeł `[376]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[378]`
+  - -> `[378]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn01_InfrastructureProject_Invest == ..."*)
 
 ### Węzeł `[377]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale -= 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale -= 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[402]`
+  - -> `[402]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses ..."*)
 
 ### Węzeł `[378]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn01_InfrastructureProject_Invest == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn01_InfrastructureProject_Invest == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[379]`
-  - -> `[380]`
+  - -> `[379]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn01_InfrastructureProject_Invest == ..."*)
+  - -> `[380]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn01_InfrastructureProject_Invest =..."*)
 
 ### Węzeł `[379]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn01_InfrastructureProject_Invest == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn01_InfrastructureProject_Invest"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn01_InfrastructureProject_Invest == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn01_InfrastructureProject_Invest"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[381]`
+  - -> `[381]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn02_InT_Corporation_TaurusHolding == true || ..."*)
 
 ### Węzeł `[380]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn01_InfrastructureProject_Invest == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn01_InfrastructureProject_Invest"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn01_InfrastructureProject_Invest == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn01_InfrastructureProject_Invest"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[402]`
+  - -> `[402]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses ..."*)
 
 ### Węzeł `[381]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[382]`
-  - -> `[383]`
+  - -> `[382]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn02_InT_Corporation_TaurusHolding == true || ..."*)
+  - -> `[383]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn02_InT_Corporation_TaurusHolding == true |..."*)
 
 ### Węzeł `[382]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn02_InT_Corporation_TaurusHolding"] == true  or  Variable["BaseGame.Turn02_InT_Corporation_UnderhallConstruction"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn02_InT_Corporation_TaurusHolding"] == true  or  Variable["BaseGame.Turn02_InT_Corporation_UnderhallConstruction"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[384]`
+  - -> `[384]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale += 1;"*)
 
 ### Węzeł `[383]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn02_InT_Corporation_TaurusHolding"] == true  or  Variable["BaseGame.Turn02_InT_Corporation_UnderhallConstruction"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn02_InT_Corporation_TaurusHolding == true || BaseGame.Turn02_InT_Corporation_UnderhallConstruction == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn02_InT_Corporation_TaurusHolding"] == true  or  Variable["BaseGame.Turn02_InT_Corporation_UnderhallConstruction"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[377]`
+  - -> `[377]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale -= 1;"*)
 
 ### Węzeł `[384]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[402]`
+  - -> `[402]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses ..."*)
 
 ### Węzeł `[385]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[388]`
+  - -> `[388]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Market == true"*)
 
 ### Węzeł `[386]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[420]`
+  - -> `[420]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudg..."*)
 
 ### Węzeł `[387]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[388]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Market == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Market == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[389]`
-  - -> `[390]`
+  - -> `[389]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn01_EnT_Economy_Market == true"*)
+  - -> `[390]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn01_EnT_Economy_Market == true)"*)
 
 ### Węzeł `[389]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn01_EnT_Economy_Market == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Market"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn01_EnT_Economy_Market == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn01_EnT_Economy_Market"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[398]`
+  - -> `[398]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale >= 0"*)
 
 ### Węzeł `[390]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn01_EnT_Economy_Market == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Market"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn01_EnT_Economy_Market == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn01_EnT_Economy_Market"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[393]`
+  - -> `[393]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale <= 0"*)
 
 ### Węzeł `[391]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Economy_Consistent = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy_Consistent = true;
 BaseGame.Situation_Economy_Consistent = true;
-BaseGame.Situation_Economy_Inconsistent = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = true;
+BaseGame.Situation_Economy_Inconsistent = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = true;
 Variable["BaseGame.Situation_Economy_Consistent"] = true;
 Variable["BaseGame.Situation_Economy_Inconsistent"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[386]`
+  - -> `[386]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[392]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[420]`
+  - -> `[420]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudg..."*)
 
 ### Węzeł `[393]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale <= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[394]`
-  - -> `[395]`
+  - -> `[394]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale <= 0"*)
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomyDirection_Scale <= 0)"*)
 
 ### Węzeł `[394]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale <= 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomyDirection_Scale"] <= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale <= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomyDirection_Scale"] <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[391]`
+  - -> `[391]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy_Consistent = true; BaseGame.Situation_Ec..."*)
 
 ### Węzeł `[395]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomyDirection_Scale <= 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomyDirection_Scale"] <= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomyDirection_Scale <= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomyDirection_Scale"] <= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[396]`
+  - -> `[396]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy_Consistent = false; BaseGame.Situation_E..."*)
 
 ### Węzeł `[396]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Economy_Consistent = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy_Consistent = false;
 BaseGame.Situation_Economy_Consistent = false;
-BaseGame.Situation_Economy_Inconsistent = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = false;
+BaseGame.Situation_Economy_Inconsistent = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = false;
 Variable["BaseGame.Situation_Economy_Consistent"] = false;
 Variable["BaseGame.Situation_Economy_Inconsistent"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[386]`
+  - -> `[386]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[397]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Economy_Consistent = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy_Consistent = true;
 BaseGame.Situation_Economy_Consistent = true;
-BaseGame.Situation_Economy_Inconsistent = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = true;
+BaseGame.Situation_Economy_Inconsistent = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = true;
 Variable["BaseGame.Situation_Economy_Consistent"] = true;
 Variable["BaseGame.Situation_Economy_Inconsistent"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[392]`
+  - -> `[392]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[398]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale >= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[399]`
-  - -> `[400]`
+  - -> `[399]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale >= 0"*)
+  - -> `[400]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomyDirection_Scale >= 0)"*)
 
 ### Węzeł `[399]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale >= 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomyDirection_Scale"] >= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale >= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomyDirection_Scale"] >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[397]`
+  - -> `[397]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy_Consistent = true; BaseGame.Situation_Ec..."*)
 
 ### Węzeł `[400]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomyDirection_Scale >= 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomyDirection_Scale"] >= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomyDirection_Scale >= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomyDirection_Scale"] >= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[401]`
+  - -> `[401]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy_Consistent = false; BaseGame.Situation_E..."*)
 
 ### Węzeł `[401]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Economy_Consistent = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy_Consistent = false;
 BaseGame.Situation_Economy_Consistent = false;
-BaseGame.Situation_Economy_Inconsistent = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = false;
+BaseGame.Situation_Economy_Inconsistent = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Economy_Consistent"] = false;
 Variable["BaseGame.Situation_Economy_Consistent"] = false;
 Variable["BaseGame.Situation_Economy_Inconsistent"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[392]`
+  - -> `[392]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[402]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[403]`
-  - -> `[404]`
+  - -> `[403]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses ..."*)
+  - -> `[404]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesse..."*)
 
 ### Węzeł `[403]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses"] == true  or  Variable["BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses"] == true  or  Variable["BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[405]`
+  - -> `[405]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale += 1;"*)
 
 ### Węzeł `[404]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses"] == true  or  Variable["BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses == true || BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedBusinesses"] == true  or  Variable["BaseGame.Decision_Turn02_EconomicRelief_DontEnactPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[406]`
+  - -> `[406]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyDirection_Scale -= 1;"*)
 
 ### Węzeł `[405]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[385]`
+  - -> `[385]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[406]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyDirection_Scale -= 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyDirection_Scale -= 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.EconomyDirection_Scale"] = Variable["BaseGame.EconomyDirection_Scale"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[385]`
+  - -> `[385]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[407]`
 Mówca: **Nia Morgna**
 > "“Here I was thinking the Rayne administration would be on the side of law and justice.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Lucian Galade: "“Let's hear the Minister of Education.”"*)
 
 ### Węzeł `[408]`
 Mówca: **Lileas Graf**
 > "“Our efforts will be on maintaining order with what we have.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[407]`
+  - -> `[407]` (*Nia Morgna: "“Here I was thinking the Rayne administration would be on..."*)
 
 ### Węzeł `[409]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[410]`
-  - -> `[411]`
+  - -> `[410]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true"*)
+  - -> `[411]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == t..."*)
 
 ### Węzeł `[410]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[408]`
+  - -> `[408]` (*Lileas Graf: "“Our efforts will be on maintaining order with what we ha..."*)
 
 ### Węzeł `[411]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Maintain"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Lileas Graf: "“With the reduction, our work will be hampered and made m..."*)
 
 ### Węzeł `[412]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[413]`
-  - -> `[414]`
+  - -> `[413]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[414]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == t..."*)
 
 ### Węzeł `[413]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[415]`
+  - -> `[415]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion -= 1"*)
 
 ### Węzeł `[414]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[371]`
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[415]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[371]`
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Military_Budget_Increase == true"*)
 
 ### Węzeł `[416]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[417]`
-  - -> `[418]`
+  - -> `[417]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
+  - -> `[418]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == t..."*)
 
 ### Węzeł `[417]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[419]`
+  - -> `[419]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion -= 1"*)
 
 ### Węzeł `[418]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[376]`
+  - -> `[376]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[419]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Public_Opinion"] = Variable["BaseGame.Public_Opinion"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[376]`
+  - -> `[376]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[420]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[421]`
-  - -> `[422]`
+  - -> `[421]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudg..."*)
+  - -> `[422]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBu..."*)
 
 ### Węzeł `[421]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] == 0  or  Variable["BaseGame.GovernmentBudget"] == 1  or  Variable["BaseGame.GovernmentBudget"] == 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] == 0  or  Variable["BaseGame.GovernmentBudget"] == 1  or  Variable["BaseGame.GovernmentBudget"] == 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
+  - -> `[387]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[422]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] == 0  or  Variable["BaseGame.GovernmentBudget"] == 1  or  Variable["BaseGame.GovernmentBudget"] == 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget == 0 || BaseGame.GovernmentBudget == 1 || BaseGame.GovernmentBudget == 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] == 0  or  Variable["BaseGame.GovernmentBudget"] == 1  or  Variable["BaseGame.GovernmentBudget"] == 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[423]`
+  - -> `[423]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 3"*)
 
 ### Węzeł `[423]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[424]`
-  - -> `[425]`
+  - -> `[424]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 3"*)
+  - -> `[425]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= 3)"*)
 
 ### Węzeł `[424]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[426]`
+  - -> `[426]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_HighBudget = true"*)
 
 ### Węzeł `[425]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[427]`
+  - -> `[427]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= -3"*)
 
 ### Węzeł `[426]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_HighBudget = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_HighBudget"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_HighBudget = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_HighBudget"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
+  - -> `[387]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[427]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= -3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= -3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[428]`
-  - -> `[429]`
+  - -> `[428]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= -3"*)
+  - -> `[429]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= -3)"*)
 
 ### Węzeł `[428]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= -3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= -3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= -3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= -3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[430]`
+  - -> `[430]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_NegativeBudget = true"*)
 
 ### Węzeł `[429]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= -3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= -3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= -3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= -3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[431]`
+  - -> `[431]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn04_Lachaven_VeryNegativeBudget..."*)
 
 ### Węzeł `[430]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_NegativeBudget = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_NegativeBudget"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_NegativeBudget = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_NegativeBudget"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
+  - -> `[387]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[431]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn04_Lachaven_VeryNegativeBudget = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_VeryNegativeBudget"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn04_Lachaven_VeryNegativeBudget = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn04_Lachaven_VeryNegativeBudget"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
+  - -> `[387]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[432]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[433]`
-  - -> `[434]`
+  - -> `[433]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == false"*)
+  - -> `[434]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == false)"*)
 
 ### Węzeł `[433]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[435]`
+  - -> `[435]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn03_Holsord_ReformStatus = true"*)
 
 ### Węzeł `[434]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[346]`
+  - -> `[346]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
 
 ### Węzeł `[435]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn03_Holsord_ReformStatus = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn03_Holsord_ReformStatus"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn03_Holsord_ReformStatus = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn03_Holsord_ReformStatus"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[346]`
+  - -> `[346]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Decrease == true"*)
 
 ### Węzeł `[436]`
 Mówca: **Symon Holl**
 > "“We have a good budget surplus left for investments and other needs. Very good.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Lucian Galade: "“Agreed.”"*)
 
 ### Węzeł `[437]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 1)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[438]`
-  - -> `[439]`
+  - -> `[438]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget >= 1"*)
+  - -> `[439]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.GovernmentBudget >= 1)"*)
 
 ### Węzeł `[438]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.GovernmentBudget >= 1)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 1`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.GovernmentBudget >= 1`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.GovernmentBudget"] >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[436]`
+  - -> `[436]` (*Symon Holl: "“We have a good budget surplus left for investments and o..."*)
 
 ### Węzeł `[439]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.GovernmentBudget >= 1))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 1) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.GovernmentBudget >= 1)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.GovernmentBudget"] >= 1) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "BaseGame.GovernmentBudget == 0"*)

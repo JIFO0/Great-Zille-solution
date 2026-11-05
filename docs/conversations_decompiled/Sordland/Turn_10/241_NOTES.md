@@ -25,16 +25,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 2
-- **Węzły modyfikujące stan gry:** 1
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.RumburgWar_Performance`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Paskal Beniwoll): `Variable["BaseGame.RumburgWar_Performance"] = Variable["BaseGame.RumburgWar_Performance"] + 1;`
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -43,36 +38,36 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_Military_WeakAgainstRumburg == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_Military_WeakAgainstRumburg == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_Military_WeakAgainstRumburg == false"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_Military_WeakAgainstRumburg == false)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_Military_WeakAgainstRumburg == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_Military_WeakAgainstRumburg"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_Military_WeakAgainstRumburg == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_Military_WeakAgainstRumburg"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.RumburgWar_Performance += 1;"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_Military_WeakAgainstRumburg == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_Military_WeakAgainstRumburg"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_Military_WeakAgainstRumburg == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_Military_WeakAgainstRumburg"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.RumburgWar_Performance += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.RumburgWar_Performance"] = Variable["BaseGame.RumburgWar_Performance"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.RumburgWar_Performance += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.RumburgWar_Performance"] = Variable["BaseGame.RumburgWar_Performance"] + 1;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*

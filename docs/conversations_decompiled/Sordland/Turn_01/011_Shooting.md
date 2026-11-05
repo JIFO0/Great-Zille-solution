@@ -37,20 +37,36 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 3
-- **Węzły modyfikujące stan gry:** 4
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.Relations_Franc_Opinion`
-- `BaseGame.Relations_Monica_Opinion`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[83]` (Paskal Beniwoll): `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1; ...`
-- Węzeł `[84]` (Paskal Beniwoll): `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1; ...`
-- Węzeł `[85]` (Paskal Beniwoll): `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1; ...`
-- Węzeł `[86]` (Paskal Beniwoll): `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1; ...`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[12]` | **"“GET DOWN!""** | `[7]` **Narrator**: "As soon as Monica heard the word..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[18]` **Monica**: "<shout>“ANTON, THE KIDS!”</shout>" |
+| `[16]` | **"Shield Monica and kids."** | `[7]` **Narrator**: "As soon as Monica heard the word..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["...` | `[29]` **Deana**: "“Papa! What's happening!?"" |
+| `[32]` | **"“YOU BETTER FOR YOUR SAKE. STATUS UPDATE!""** | `[8]` **Karl Greiser**: "“I am sorry, sir. I will persona..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["...` | `[26]` **Narrator**: "Deana started crying again becau..." |
+| `[33]` | **"“Good. So what is going on?""** | `[8]` **Karl Greiser**: "“I am sorry, sir. I will persona..."<br>`[47]` **Karl Greiser**: "I completely understand, sir. I ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[48]` **Narrator**: "Karl's radio suddenly crackled t..." |
+| `[43]` | **"“You can say that again.""** | `[10]` **Petr Vectern**: ""What a fucking night."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[41]` **Narrator**: "Karl turned to us with a serious..." |
+| `[44]` | **"“THEN TELL ME HOW THIS CIRCUS SHOW HAPPENED IN MY BALL.""** | `[37]` **Karl Greiser**: "“No, sir.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[14]` **Narrator**: "The room went quiet. Petr seemed..." |
+| `[46]` | **"“Sorry for yelling, Karl. I'm just a bit nervous right now.""** | `[37]` **Karl Greiser**: "“No, sir.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[47]` **Karl Greiser**: "I completely understand, sir. I ..." |
+| `[49]` | **"“Can't you shut your mouth for a bit?""** | `[10]` **Petr Vectern**: ""What a fucking night."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[41]` **Narrator**: "Karl turned to us with a serious..." |
+| `[51]` | **"“Sssshh. Not now Petr.""** | `[10]` **Petr Vectern**: ""What a fucking night."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[41]` **Narrator**: "Karl turned to us with a serious..." |
+| `[52]` | **"“It's not over yet.""** | `[10]` **Petr Vectern**: ""What a fucking night."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[41]` **Narrator**: "Karl turned to us with a serious..." |
+| `[54]` | **"“So, what's the status?""** | `[63]` **Narrator**: "Karl stepped away from us and ma..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[48]` **Narrator**: "Karl's radio suddenly crackled t..." |
+| `[57]` | **"“Check the perimeter.""** | `[58]` **Karl Greiser**: "“Thank God.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[59]` **Narrator**: "He turned around quickly to his ..." |
+| `[61]` | **"“Are we under attack? Who is attacking us? What is going on?!""** | `[37]` **Karl Greiser**: "“No, sir.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[50]` **Karl Greiser**: "“I should receive confirmation s..." |
+| `[64]` | **"“STATUS REPORT!""** | `[58]` **Karl Greiser**: "“Thank God.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[45]` **Karl Greiser**: "“One second, Mr. President.”" |
+| `[65]` | **"“Not the best inauguration ball I've been to.""** | `[63]` **Narrator**: "Karl stepped away from us and ma..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[53]` **Narrator**: "Petr let out a nervous laugh." |
+| `[66]` | **"“What the hell is going on?!""** | `[58]` **Karl Greiser**: "“Thank God.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[45]` **Karl Greiser**: "“One second, Mr. President.”" |
+| `[67]` | **"“Are we under attack? Who is attacking us? What is going on?!""** | `[63]` **Narrator**: "Karl stepped away from us and ma..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[56]` **Karl Greiser**: "“I should receive confirmation s..." |
+| `[69]` | **"“So tell me Karl. DO I HAVE CLOWNS FOR A SECURITY FORCE?""** | `[63]` **Narrator**: "Karl stepped away from us and ma..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[70]` **Narrator**: "As I raised my voice, he lowered..." |
+| `[72]` | **"Comfort Monica and the kids."** | `[6]` **Narrator**: "Monica was still trying to tend ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[75]` **Player**: ""Nothing like this will ever hap..."<br>`[82]` **Player**: ""We are safe. I'll make sure eve..." |
+| `[73]` | **"Smoke alone."** | `[6]` **Narrator**: "Monica was still trying to tend ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[76]` **Narrator**: "As I continued smoking, a peculi..." |
+| `[74]` | **""Petr, old friend, what the hell have we gotten ourselves into?""** | `[6]` **Narrator**: "Monica was still trying to tend ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[80]` **Petr Vectern**: ""Nothing you and I can't handle,..." |
+| `[75]` | **""Nothing like this will ever happen again. I'll make sure of it.""** | `[72]` **Player_Italic**: "I sat down beside my wife and ch..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[77]` **Monica**: ""We can't be sure of anything an..." |
+| `[77]` | **""We can't be sure of anything anymore, Anton.""** | `[75]` **Player**: ""Nothing like this will ever hap..."<br>`[82]` **Player**: ""We are safe. I'll make sure eve..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["...` | `[78]` **Narrator**: "I lit my cigarette and took a de..." |
+| `[82]` | **""We are safe. I'll make sure everything's going to be fine.""** | `[72]` **Player_Italic**: "I sat down beside my wife and ch..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[77]` **Monica**: ""We can't be sure of anything an..." |
 
 ---
 
@@ -59,547 +75,595 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Petr Vectern: "<shout>"NO! GUNSHOTS!!!"</shout>"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `9` (*Sordland/Turn01/Personal_Ball*), Węzeł `[95]`
+  - -> `[95]`
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "Karl Greiser, head of the Sordish Police Force, was running towards us with three more police officers in decorated uniforms. They all had their guns drawn."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
+  - -> `[5]` (*Narrator: "As soon as he made it to us and saw that we were unharmed..."*)
 
 ### Węzeł `[4]`
 Mówca: **Petr Vectern**
 > "<shout>"NO! GUNSHOTS!!!"</shout>"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "As soon as Monica heard the word, she lunged from her seat."*)
 
 ### Węzeł `[5]`
 Mówca: **Narrator**
 > "As soon as he made it to us and saw that we were unharmed, he let out a big sigh of relief."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Karl Greiser: "“Thank God.”"*)
 
 ### Węzeł `[6]`
 Mówca: **Narrator**
 > "Monica was still trying to tend to Deana as Franc paced the room, mumbling that he should have stayed home."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[74]`
-  - -> `[73]`
+  - -> `[72]` (*Player_Italic: "Comfort Monica and the kids."*)
+  - -> `[74]` (*Player: ""Petr, old friend, what the hell have we gotten ourselves..."*)
+  - -> `[73]` (*Player_Italic: "Smoke alone."*)
 
 ### Węzeł `[7]`
 Mówca: **Narrator**
 > "As soon as Monica heard the word, she lunged from her seat."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[16]`
+  - -> `[12]` (*Player: "“GET DOWN!""*)
+  - -> `[16]` (*Player_Italic: "Shield Monica and kids."*)
 
 ### Węzeł `[8]`
 Mówca: **Karl Greiser**
 > "“I am sorry, sir. I will personally conduct the investigation into our palace security force once we figure out what is going on. I can assure you I will be relentless in dealing with incompetence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Player: "“YOU BETTER FOR YOUR SAKE. STATUS UPDATE!""*)
+  - -> `[33]` (*Player: "“Good. So what is going on?""*)
 
 ### Węzeł `[9]`
 Mówca: **Karl Greiser**
 > "“He fired three shots at an MP -- one to the head, two to the body -- instantly killing him.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Karl Greiser: "“Presidential guards at the palace immediately shot and k..."*)
 
 ### Węzeł `[10]`
 Mówca: **Petr Vectern**
 > ""What a fucking night.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
-  - -> `[51]`
-  - -> `[49]`
-  - -> `[43]`
+  - -> `[52]` (*Player: "“It's not over yet.""*)
+  - -> `[51]` (*Player: "“Sssshh. Not now Petr.""*)
+  - -> `[49]` (*Player: "“Can't you shut your mouth for a bit?""*)
+  - -> `[43]` (*Player: "“You can say that again.""*)
 
 ### Węzeł `[11]`
 Mówca: **Karl Greiser**
 > "“Presidential guards at the palace immediately shot and killed the attacker. He has not been identified yet and will require an investigation.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Karl Greiser: "“The MP that was killed was identified as Bernard Circas.“"*)
 
 ### Węzeł `[12]`
 **[WYBÓR GRACZA: "“GET DOWN!""]** — Mówca: **Player**
 > "<shout>“GET DOWN!"</shout>"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Monica: "<shout>“ANTON, THE KIDS!”</shout>"*)
 
 ### Węzeł `[13]`
 Mówca: **Karl Greiser**
 > "“The MP that was killed was identified as Bernard Circas.“"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Petr Vectern: ""This is huge, Anton. This will cause a lot of problems.""*)
 
 ### Węzeł `[14]`
 Mówca: **Narrator**
 > "The room went quiet. Petr seemed like he was about to say something, but with one look from me, he stopped."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Karl Greiser: "“I am sorry, sir. I will personally conduct the investiga..."*)
 
 ### Węzeł `[15]`
 Mówca: **Petr Vectern**
 > ""This is huge, Anton. This will cause a lot of problems.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Petr Vectern: ""A lot of problems...""*)
 
 ### Węzeł `[16]`
 **[WYBÓR GRACZA: "Shield Monica and kids."]** — Mówca: **Player_Italic**
 > "I threw myself on Monica, Deana and Franc to shield them."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion += 1; BaseGame.Relations..."*)
 
 ### Węzeł `[17]`
 Mówca: **Petr Vectern**
 > ""A lot of problems...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "Petr pulled out two cigarettes and handed me one. He then..."*)
 
 ### Węzeł `[18]`
 Mówca: **Monica**
 > "<shout>“ANTON, THE KIDS!”</shout>"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Narrator: "Monica, Deana and Franc all looked at me beseechingly. I ..."*)
 
 ### Węzeł `[19]`
 Mówca: **Narrator**
 > "Petr pulled out two cigarettes and handed me one. He then turned to Evelyn. I could hear him trying to reassure her that everything was going to be all right."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Narrator: "Monica was still trying to tend to Deana as Franc paced t..."*)
 
 ### Węzeł `[20]`
 Mówca: **Narrator**
 > "We promptly followed Karl through the winding halls and corridors of the palace. His men still had their guns drawn, which did nothing to ease the tension. On the way, Petr made an attempt to break the silence."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Petr Vectern: ""What a fucking night.""*)
 
 ### Węzeł `[21]`
 Mówca: **Karl Greiser**
 > "“This is what we know so far. We have confirmed that two people were gunned down in front of the palace. The attacker is one of them and we have reasons to believe he was working alone.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Karl Greiser: "“He fired three shots at an MP -- one to the head, two to..."*)
 
 ### Węzeł `[22]`
 Mówca: **Narrator**
 > "Monica, Deana and Franc all looked at me beseechingly. I rushed to shield them."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Deana: "“Papa! What's happening!?""*)
 
 ### Węzeł `[23]`
 Mówca: **Karl Greiser**
 > "“As you command, sir.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[24]`
 Mówca: **Narrator**
 > "He gestured towards a more private corner of the room and starting speaking more quietly."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Karl Greiser: "“This is what we know so far. We have confirmed that two ..."*)
 
 ### Węzeł `[25]`
 Mówca: **Karl Greiser**
 > "“Do not worry. The situation is now under control. Please follow me.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Narrator: "We promptly followed Karl through the winding halls and c..."*)
 
 ### Węzeł `[26]`
 Mówca: **Narrator**
 > "Deana started crying again because of my yelling."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Karl Greiser: "“As you command, sir.”"*)
 
 ### Węzeł `[27]`
 Mówca: **Narrator**
 > "Karl flipped a switch on the wall and a panel opened, revealing a hidden staircase leading to a large reinforced door. Inside, a set of emergency lights flickered on. The safe room was comfortable and spacious, with expensive-looking leather sofas."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Narrator: "Small security monitors on the wall displayed grainy foot..."*)
 
 ### Węzeł `[28]`
 Mówca: **Karl Greiser**
 > "“If I may, sir.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Narrator: "He gestured towards a more private corner of the room and..."*)
 
 ### Węzeł `[29]`
 Mówca: **Deana**
 > "“Papa! What's happening!?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Franc: ""I knew it! We never should've come!""*)
 
 ### Węzeł `[30]`
 Mówca: **Karl Greiser**
 > "“Paul, Jansen, follow my lead. We will bring them to the safe room.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Narrator: "He now turned to Monica, Evelyn and the children and spok..."*)
 
 ### Węzeł `[31]`
 Mówca: **Franc**
 > ""I knew it! We never should've come!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Narrator: "Chaos broke out as some guests flung themselves under the..."*)
 
 ### Węzeł `[32]`
 **[WYBÓR GRACZA: "“YOU BETTER FOR YOUR SAKE. STATUS UPDATE!""]** — Mówca: **Player**
 > "<shout>“YOU'D BETTER FOR YOUR SAKE. STATUS UPDATE!"</shout>"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[8]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion -= 1; BaseGame.Relations..."*)
 
 ### Węzeł `[33]`
 **[WYBÓR GRACZA: "“Good. So what is going on?""]** — Mówca: **Player**
 > "“Good. So what is going on?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[8]` (Karl Greiser), `[47]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[34]`
 Mówca: **Narrator**
 > "He glanced towards Monica, Evelyn and the kids."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Karl Greiser: "“If I may, sir.”"*)
 
 ### Węzeł `[35]`
 Mówca: **Narrator**
 > "He now turned to Monica, Evelyn and the children and spoke in a softer voice."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Karl Greiser: "“Do not worry. The situation is now under control. Please..."*)
 
 ### Węzeł `[36]`
 Mówca: **Narrator**
 > "Chaos broke out as some guests flung themselves under their tables and others ran towards the doors, screaming. Deana burst into tears while Franc tried to comfort her, hiding the fear in his own eyes."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Narrator: "Three more gunshots rang out loudly."*)
 
 ### Węzeł `[37]`
 Mówca: **Karl Greiser**
 > "“No, sir.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
-  - -> `[44]`
-  - -> `[46]`
+  - -> `[61]` (*Player: "“Are we under attack? Who is attacking us? What is going ..."*)
+  - -> `[44]` (*Player: "“THEN TELL ME HOW THIS CIRCUS SHOW HAPPENED IN MY BALL.""*)
+  - -> `[46]` (*Player: "“Sorry for yelling, Karl. I'm just a bit nervous right now.""*)
 
 ### Węzeł `[38]`
 Mówca: **Karl Greiser**
 > "“Good news. We are not in any danger at the moment. The situation has been dealt with and the perimeter has been secured by the guards and the police.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Narrator: "He glanced towards Monica, Evelyn and the kids."*)
 
 ### Węzeł `[39]`
 Mówca: **Narrator**
 > "Three more gunshots rang out loudly."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Karl Greiser: "“Mr. President! Are you all right?”"*)
 
 ### Węzeł `[40]`
 Mówca: **Karl Greiser**
 > "“Certainly not, sir.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[41]`
 Mówca: **Narrator**
 > "Karl turned to us with a serious face as we were about to round a corner."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Karl Greiser: "“Quiet, please.”"*)
 
 ### Węzeł `[42]`
 Mówca: **Karl Greiser**
 > "“Mr. President! Are you all right?”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Karl Greiser, head of the Sordish Police Force, was runni..."*)
 
 ### Węzeł `[43]`
 **[WYBÓR GRACZA: "“You can say that again.""]** — Mówca: **Player**
 > "“You can say that again.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[10]` (Petr Vectern)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "Karl turned to us with a serious face as we were about to..."*)
 
 ### Węzeł `[44]`
 **[WYBÓR GRACZA: "“THEN TELL ME HOW THIS CIRCUS SHOW HAPPENED IN MY BALL.""]** — Mówca: **Player**
 > "<shout>“THEN TELL ME HOW THIS CIRCUS SHOW HAPPENED AT MY BALL."</shout>"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[37]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Narrator: "The room went quiet. Petr seemed like he was about to say..."*)
 
 ### Węzeł `[45]`
 Mówca: **Karl Greiser**
 > "“One second, Mr. President.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Narrator: "He turned around quickly to his men."*)
 
 ### Węzeł `[46]`
 **[WYBÓR GRACZA: "“Sorry for yelling, Karl. I'm just a bit nervous right now.""]** — Mówca: **Player**
 > "“Sorry for yelling, Karl. I'm just a bit nervous right now.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[37]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Karl Greiser: "I completely understand, sir. I will personally conduct t..."*)
 
 ### Węzeł `[47]`
 Mówca: **Karl Greiser**
 > "I completely understand, sir. I will personally conduct the investigation into our palace security force and I can assure you I will be relentless in dealing with incompetence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Player: "“Good. So what is going on?""*)
 
 ### Węzeł `[48]`
 Mówca: **Narrator**
 > "Karl's radio suddenly crackled to life. Every second felt like an eternity as he pressed his ear to the receiver. When it fell silent, he turned to us."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Karl Greiser: "“Good news. We are not in any danger at the moment. The s..."*)
 
 ### Węzeł `[49]`
 **[WYBÓR GRACZA: "“Can't you shut your mouth for a bit?""]** — Mówca: **Player**
 > "“Can't you shut your mouth for a bit?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[10]` (Petr Vectern)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "Karl turned to us with a serious face as we were about to..."*)
 
 ### Węzeł `[50]`
 Mówca: **Karl Greiser**
 > "“I should receive confirmation soon, Mr. President. Everything is under control.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[51]`
 **[WYBÓR GRACZA: "“Sssshh. Not now Petr.""]** — Mówca: **Player**
 > "“Sssshh. Not now, Petr.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[10]` (Petr Vectern)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "Karl turned to us with a serious face as we were about to..."*)
 
 ### Węzeł `[52]`
 **[WYBÓR GRACZA: "“It's not over yet.""]** — Mówca: **Player**
 > "“It's not over yet.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[10]` (Petr Vectern)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "Karl turned to us with a serious face as we were about to..."*)
 
 ### Węzeł `[53]`
 Mówca: **Narrator**
 > "Petr let out a nervous laugh."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Karl Greiser: "“Certainly not, sir.”"*)
 
 ### Węzeł `[54]`
 **[WYBÓR GRACZA: "“So, what's the status?""]** — Mówca: **Player**
 > "“So, what's the status?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[63]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[55]`
 Mówca: **Narrator**
 > "Small security monitors on the wall displayed grainy footage of each room in the palace. There was a boardroom and a pantry containing enough provisions to last us months. Monica and Evelyn sat the children down and started wiping their tears."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Narrator: "Karl stepped away from us and made a few radio calls. Whe..."*)
 
 ### Węzeł `[56]`
 Mówca: **Karl Greiser**
 > "“I should receive confirmation soon, Mr. President. Everything is under control.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Narrator: "Karl's radio suddenly crackled to life. Every second felt..."*)
 
 ### Węzeł `[57]`
 **[WYBÓR GRACZA: "“Check the perimeter.""]** — Mówca: **Player**
 > "“Check the perimeter.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[58]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Narrator: "He turned around quickly to his men."*)
 
 ### Węzeł `[58]`
 Mówca: **Karl Greiser**
 > "“Thank God.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
-  - -> `[64]`
-  - -> `[57]`
+  - -> `[66]` (*Player: "“What the hell is going on?!""*)
+  - -> `[64]` (*Player: "“STATUS REPORT!""*)
+  - -> `[57]` (*Player: "“Check the perimeter.""*)
 
 ### Węzeł `[59]`
 Mówca: **Narrator**
 > "He turned around quickly to his men."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Karl Greiser: "“CHECK THE PERIMETER! NOW!”"*)
 
 ### Węzeł `[60]`
 Mówca: **Karl Greiser**
 > "“Quiet, please.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Petr Vectern: ""Sorry, I talk when I get nervous.""*)
 
 ### Węzeł `[61]`
 **[WYBÓR GRACZA: "“Are we under attack? Who is attacking us? What is going on?!""]** — Mówca: **Player**
 > "“Are we under attack? Who is attacking us? What is going on?!""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[37]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Karl Greiser: "“I should receive confirmation soon, Mr. President. Every..."*)
 
 ### Węzeł `[62]`
 Mówca: **Karl Greiser**
 > "“CHECK THE PERIMETER! NOW!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Karl Greiser: "“Paul, Jansen, follow my lead. We will bring them to the ..."*)
 
 ### Węzeł `[63]`
 Mówca: **Narrator**
 > "Karl stepped away from us and made a few radio calls. When he was done, he returned to me and Petr."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[65]`
-  - -> `[67]`
-  - -> `[69]`
+  - -> `[54]` (*Player: "“So, what's the status?""*)
+  - -> `[65]` (*Player: "“Not the best inauguration ball I've been to.""*)
+  - -> `[67]` (*Player: "“Are we under attack? Who is attacking us? What is going ..."*)
+  - -> `[69]` (*Player: "“So tell me Karl. DO I HAVE CLOWNS FOR A SECURITY FORCE?""*)
 
 ### Węzeł `[64]`
 **[WYBÓR GRACZA: "“STATUS REPORT!""]** — Mówca: **Player**
 > "“STATUS REPORT!""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[58]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Karl Greiser: "“One second, Mr. President.”"*)
 
 ### Węzeł `[65]`
 **[WYBÓR GRACZA: "“Not the best inauguration ball I've been to.""]** — Mówca: **Player**
 > "“Not the best inauguration ball I've been to.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[63]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Narrator: "Petr let out a nervous laugh."*)
 
 ### Węzeł `[66]`
 **[WYBÓR GRACZA: "“What the hell is going on?!""]** — Mówca: **Player**
 > "“What the hell is going on?!""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[58]` (Karl Greiser)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Karl Greiser: "“One second, Mr. President.”"*)
 
 ### Węzeł `[67]`
 **[WYBÓR GRACZA: "“Are we under attack? Who is attacking us? What is going on?!""]** — Mówca: **Player**
 > "“Are we under attack? Who is attacking us? What is going on?!""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[63]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Karl Greiser: "“I should receive confirmation soon, Mr. President. Every..."*)
 
 ### Węzeł `[68]`
 Mówca: **Evelyn Vectern**
 > "“Petr, shut up.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Narrator: "Karl flipped a switch on the wall and a panel opened, rev..."*)
 
 ### Węzeł `[69]`
 **[WYBÓR GRACZA: "“So tell me Karl. DO I HAVE CLOWNS FOR A SECURITY FORCE?""]** — Mówca: **Player**
 > "<shout>“So tell me Karl. DO I HAVE CLOWNS FOR A SECURITY FORCE?"</shout>"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[63]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Narrator: "As I raised my voice, he lowered his head in respect."*)
 
 ### Węzeł `[70]`
 Mówca: **Narrator**
 > "As I raised my voice, he lowered his head in respect."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Karl Greiser: "“No, sir.”"*)
 
 ### Węzeł `[71]`
 Mówca: **Petr Vectern**
 > ""Sorry, I talk when I get nervous.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Evelyn Vectern: "“Petr, shut up.""*)
 
 ### Węzeł `[72]`
 **[WYBÓR GRACZA: "Comfort Monica and the kids."]** — Mówca: **Player_Italic**
 > "I sat down beside my wife and children."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[82]`
+  - -> `[75]` (*Player: ""Nothing like this will ever happen again. I'll make sure..."*)
+  - -> `[82]` (*Player: ""We are safe. I'll make sure everything's going to be fine.""*)
 
 ### Węzeł `[73]`
 **[WYBÓR GRACZA: "Smoke alone."]** — Mówca: **Player_Italic**
 > "I lit the cigarette and took a deep drag."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Narrator: "As I continued smoking, a peculiar calm washed over me."*)
 
 ### Węzeł `[74]`
 **[WYBÓR GRACZA: ""Petr, old friend, what the hell have we gotten ourselves into?""]** — Mówca: **Player**
 > ""Petr, old friend, what the hell have we gotten ourselves into?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Petr Vectern: ""Nothing you and I can't handle, Anton.""*)
 
 ### Węzeł `[75]`
 **[WYBÓR GRACZA: ""Nothing like this will ever happen again. I'll make sure of it.""]** — Mówca: **Player**
 > ""Nothing like this will ever happen again. I'll make sure of it.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[72]` (Player_Italic)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Monica: ""We can't be sure of anything anymore, Anton.""*)
 
 ### Węzeł `[76]`
 Mówca: **Narrator**
 > "As I continued smoking, a peculiar calm washed over me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Narrator: "I was going to see this through."*)
 
 ### Węzeł `[77]`
 **[WYBÓR GRACZA: ""We can't be sure of anything anymore, Anton.""]** — Mówca: **Monica**
 > ""We can't be sure of anything anymore, Anton.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[75]` (Player), `[82]` (Player)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion += 1; BaseGame.Relations..."*)
 
 ### Węzeł `[78]`
 Mówca: **Narrator**
 > "I lit my cigarette and took a deep drag. I was going to see this through and keep my family safe."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[79]`
 Mówca: **Narrator**
 > "I was going to see this through."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion -= 1; BaseGame.Relations..."*)
 
 ### Węzeł `[80]`
 Mówca: **Petr Vectern**
 > ""Nothing you and I can't handle, Anton.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Narrator: "I lit my cigarette and took a deep drag. We were going to..."*)
 
 ### Węzeł `[81]`
 Mówca: **Narrator**
 > "I lit my cigarette and took a deep drag. We were going to see this through."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[82]`
 **[WYBÓR GRACZA: ""We are safe. I'll make sure everything's going to be fine.""]** — Mówca: **Player**
 > ""We are safe. I'll make sure everything's going to be fine.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[72]` (Player_Italic)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Monica: ""We can't be sure of anything anymore, Anton.""*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion += 1;
-BaseGame.Relations_Monica_Opinion += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion += 1;
+BaseGame.Relations_Monica_Opinion += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1;
 Variable["BaseGame.Relations_Monica_Opinion"] = Variable["BaseGame.Relations_Monica_Opinion"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Deana: "“Papa! What's happening!?""*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion -= 1;
-BaseGame.Relations_Monica_Opinion -= 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion -= 1;
+BaseGame.Relations_Monica_Opinion -= 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1;
 Variable["BaseGame.Relations_Monica_Opinion"] = Variable["BaseGame.Relations_Monica_Opinion"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Narrator: "Deana started crying again because of my yelling."*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion += 1;
-BaseGame.Relations_Monica_Opinion += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion += 1;
+BaseGame.Relations_Monica_Opinion += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] + 1;
 Variable["BaseGame.Relations_Monica_Opinion"] = Variable["BaseGame.Relations_Monica_Opinion"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Narrator: "I lit my cigarette and took a deep drag. I was going to s..."*)
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion -= 1;
-BaseGame.Relations_Monica_Opinion -= 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion -= 1;
+BaseGame.Relations_Monica_Opinion -= 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Franc_Opinion"] = Variable["BaseGame.Relations_Franc_Opinion"] - 1;
 Variable["BaseGame.Relations_Monica_Opinion"] = Variable["BaseGame.Relations_Monica_Opinion"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)

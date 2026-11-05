@@ -54,15 +54,35 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 4
-- **Węzły modyfikujące stan gry:** 3
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[109]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Debate_SpacePromise"] = true;`
-- Węzeł `[110]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Debate_NuclearPromise"] = true;`
-- Węzeł `[111]` (Paskal Beniwoll): `Variable["BaseGameIsolated.Debate_BasicIncomePromise"] = true;`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[8]` | **""Just kidding. We have too many problems to solve here at home before we can think..."** | `[67]` **Narrator**: "The other candidates burst out l..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[17]` **Moderator**: ""Very well."" |
+| `[18]` | **""Absolutely.""** | `[9]` **Moderator**: ""Mr. President, just prior to to..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[88]` **Moderator**: ""Would you like to tell us what ..." |
+| `[25]` | **""We have an alliance. Aren't you supposed to be on my side?""** | `[54]` **Frens Ricter**: ""I agree, but you've already pro..."<br>`[55]` **Frens Ricter**: ""You're both mad. Disincentivizi..."<br>*(oraz 2 innych węzłów)* | `Variable["BaseGame.Reform_Alliance_PFJP"] == true` | *Brak zmian stanu* | `[26]` **Frens Ricter**: ""Well, you didn't run this by me."" |
+| `[30]` | **""Laugh all you want. I'm going to make it happen.""** | `[56]` **Manoly Suheil**: ""There are so many problems stil..."<br>`[82]` **Manoly Suheil**: ""Perhaps, but you've already pro..."<br>*(oraz 7 innych węzłów)* | `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false` | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[39]` | **""Citizens will still work. My plan will only ensure nobody has to go homeless.""** | `[7]` **Kesaro Kibener**: ""Each Sordish citizen wants to c..."<br>`[38]` **Manoly Suheil**: ""I've been pushing to include th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[41]` | **""Sordland must develop a nuclear arsenal.""** | `[88]` **Moderator**: ""Would you like to tell us what ..."<br>`[116]` **Moderator**: ""Please go on."" | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGameIsolated.Debate_NuclearPromise"] = true;` | `[80]` **Narrator**: "The candidates around me gasped ..."<br>`[79]` **Narrator**: "The candidates around me gasped ..." |
+| `[42]` | **""We will grant a basic living wage to every man and woman in Sordland. Unemployed ..."** | `[88]` **Moderator**: ""Would you like to tell us what ..."<br>`[116]` **Moderator**: ""Please go on."" | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGameIsolated.Debate_BasicIncomePromise"] = ...` | `[78]` **Narrator**: "The candidates around me gasped ..."<br>`[105]` **Narrator**: "The candidates around me gasped ..." |
+| `[43]` | **""I want Sordland to put a man on the moon.""** | `[88]` **Moderator**: ""Would you like to tell us what ..."<br>`[116]` **Moderator**: ""Please go on."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[67]` **Narrator**: "The other candidates burst out l..." |
+| `[74]` | **""I'm serious. Sordland is going into space.""** | `[67]` **Narrator**: "The other candidates burst out l..." | *Brak (Dostępna bezwarunkowo)* | `Variable["BaseGameIsolated.Debate_SpacePromise"] = true;` | `[86]` **Lileas Graf**: ""You couldn't even open a railwa..." |
+| `[87]` | **""No, that release was sent out in error. I'm keeping my plans modest.""** | `[9]` **Moderator**: ""Mr. President, just prior to to..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[17]` **Moderator**: ""Very well."" |
+| `[89]` | **""You'll find out once I get re-elected.""** | `[88]` **Moderator**: ""Would you like to tell us what ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[17]` **Moderator**: ""Very well."" |
+| `[91]` | **""With nuclear war an increasing possibility, survival on other planets is somethin..."** | `[54]` **Frens Ricter**: ""I agree, but you've already pro..."<br>`[56]` **Manoly Suheil**: ""There are so many problems stil..."<br>*(oraz 5 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[92]` | **""If we want to be taken seriously by the superpowers, this is the only way.""** | `[54]` **Frens Ricter**: ""I agree, but you've already pro..."<br>`[56]` **Manoly Suheil**: ""There are so many problems stil..."<br>*(oraz 8 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[93]` | **""A space program would create thousands of jobs while boosting our national morale.""** | `[56]` **Manoly Suheil**: ""There are so many problems stil..."<br>`[84]` **Lileas Graf**: ""You couldn't even open a highwa..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[100]` | **""Only via mutually assured destruction can we achieve peace with our enemies.""** | `[81]` **Frens Ricter**: ""You're insane. If we even attem..."<br>`[85]` **Manoly Suheil**: ""You're insane. If we even attem..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[101]` | **""A nuclear program would create thousands of jobs and boost national morale.""** | `[81]` **Frens Ricter**: ""You're insane. If we even attem..."<br>`[85]` **Manoly Suheil**: ""You're insane. If we even attem..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[107]` | **""With a guaranteed income, Sordish people will spend as never before. The economy ..."** | `[7]` **Kesaro Kibener**: ""Each Sordish citizen wants to c..."<br>`[38]` **Manoly Suheil**: ""I've been pushing to include th..."<br>*(oraz 3 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[108]` | **""By removing the bureaucracy associated with the welfare system, my plan will save..."** | `[7]` **Kesaro Kibener**: ""Each Sordish citizen wants to c..."<br>`[38]` **Manoly Suheil**: ""I've been pushing to include th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[115]` | **""Yes, and I can't wait to unveil them.""** | `[9]` **Moderator**: ""Mr. President, just prior to to..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[116]` **Moderator**: ""Please go on."" |
+| `[120]` | **""My administration is already providing assistance to unemployed citizens. This is..."** | `[55]` **Frens Ricter**: ""You're both mad. Disincentivizi..."<br>`[130]` **Denis Stahler**: ""I don't believe a word of it."" | `Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true` | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[121]` | **""My administration is already providing housing assistance to low-income citizens...."** | `[55]` **Frens Ricter**: ""You're both mad. Disincentivizi..."<br>`[130]` **Denis Stahler**: ""I don't believe a word of it."" | `Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true`<br>`(Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true) == false` | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
+| `[125]` | **""You're supposed to be my ally, Kesaro.""** | `[7]` **Kesaro Kibener**: ""Each Sordish citizen wants to c..." | `Variable["BaseGame.Reform_Alliance_NFP"] == true` | *Brak zmian stanu* | `[126]` **Kesaro Kibener**: ""Well, you didn't run this by me."" |
+| `[131]` | **""All I have in mind is Sordish people and Sordish people alone.""** | `[130]` **Denis Stahler**: ""I don't believe a word of it."" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[6]` **Moderator**: ""Very interesting."" |
 
 ---
 
@@ -71,906 +91,952 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Moderator: ""Mr. President, just prior to tonight's debate your press..."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `233` (*Sordland/Turn10/Economy*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Manoly Suheil: ""Perhaps, but you've already proven yourself incapable of..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_ManolySuheil == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Denis Stahler: ""There are so many problems still to be solved in Sordlan..."*)
 
 ### Węzeł `[6]`
 Mówca: **Moderator**
 > ""Very interesting.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[7]`
 Mówca: **Kesaro Kibener**
 > ""Each Sordish citizen wants to contribute and work for their country. There is no need for such programs, the only necessity is opportunity.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[107]`
-  - -> `[108]`
-  - -> `[122]`
+  - -> `[39]` (*Player: ""Citizens will still work. My plan will only ensure nobod..."*)
+  - -> `[107]` (*Player: ""With a guaranteed income, Sordish people will spend as n..."*)
+  - -> `[108]` (*Player: ""By removing the bureaucracy associated with the welfare ..."*)
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
 
 ### Węzeł `[8]`
 **[WYBÓR GRACZA: ""Just kidding. We have too many problems to solve here at home before we can think of entering the space race.""]** — Mówca: **Player**
 > ""Just kidding. We have too many problems to solve here at home before we can think of entering the space race.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[67]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Moderator: ""Very well.""*)
 
 ### Węzeł `[9]`
 Mówca: **Moderator**
 > ""Mr. President, just prior to tonight's debate your press office signaled there could be grander plans in store for your second term. Is that correct?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
-  - -> `[18]`
-  - -> `[87]`
+  - -> `[115]` (*Player: ""Yes, and I can't wait to unveil them.""*)
+  - -> `[18]` (*Player: ""Absolutely.""*)
+  - -> `[87]` (*Player: ""No, that release was sent out in error. I'm keeping my p..."*)
 
 ### Węzeł `[10]`
 Mówca: **Mansoun Leke**
 > ""I'm happy some of our parties' so-called radical ideas are beginning to filter into the political mainstream.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_FrensRicter == true)"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Frens Ricter: ""I agree with this plan in theory, but it would bankrupt ..."*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_FrensRicter == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_FrensRicter == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn04_InT_RailwayIssue_Solved == false && Base..."*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Turn04_InT_RailwayIssue_Solved == false && Ba..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_InT_RailwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Railway"] == true)  or  Variable["BaseGame.Enable_LateOpenRailway"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_InT_RailwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Railway"] == true)  or  Variable["BaseGame.Enable_LateOpenRailway"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Turn04_InT_RailwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Railway"] == true)  or  Variable["BaseGame.Enable_LateOpenRailway"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Turn04_InT_RailwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Railway == true) || BaseGame.Enable_LateOpenRailway == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Turn04_InT_RailwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Railway"] == true)  or  Variable["BaseGame.Enable_LateOpenRailway"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn04_InT_HighwayIssue_Solved == false && Base..."*)
 
 ### Węzeł `[17]`
 Mówca: **Moderator**
 > ""Very well.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[18]`
 **[WYBÓR GRACZA: ""Absolutely.""]** — Mówca: **Player**
 > ""Absolutely.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[9]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Moderator: ""Would you like to tell us what those are?""*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn04_InT_HighwayIssue_Solved == false && Base..."*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Turn04_InT_HighwayIssue_Solved == false && Ba..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_InT_HighwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Highway"] == true)  or  Variable["BaseGame.Enable_LateOpenHighway"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_InT_HighwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Highway"] == true)  or  Variable["BaseGame.Enable_LateOpenHighway"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Turn04_InT_HighwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Highway"] == true)  or  Variable["BaseGame.Enable_LateOpenHighway"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Turn04_InT_HighwayIssue_Solved == false && BaseGame.Turn01_InT_Investment_Highway == true) || BaseGame.Enable_LateOpenHighway == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Turn04_InT_HighwayIssue_Solved"] == false  and  Variable["BaseGame.Turn01_InT_Investment_Highway"] == true)  or  Variable["BaseGame.Enable_LateOpenHighway"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[24]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_NFP == true)"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Kesaro Kibener: ""As your alliance partner, I pledge the NFP will also str..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_NFP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_NFP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Kesaro Kibener: ""This has been a goal of the NFP for some time now. But A..."*)
 
 ### Węzeł `[25]`
 **[WYBÓR GRACZA: ""We have an alliance. Aren't you supposed to be on my side?""]** — Mówca: **Player**
 > ""We have an alliance. Aren't you supposed to be on my side?""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
+- **Kontekst wejściowy (poprzednik):** `[54]` (Frens Ricter), `[55]` (Frens Ricter), `[60]` (Frens Ricter)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Frens Ricter: ""Well, you didn't run this by me.""*)
 
 ### Węzeł `[26]`
 Mówca: **Frens Ricter**
 > ""Well, you didn't run this by me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_LileasGraf == true)"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Lileas Graf: ""You couldn't even open a railway on time, and now you're..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_LileasGraf == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_LileasGraf == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[30]`
 **[WYBÓR GRACZA: ""Laugh all you want. I'm going to make it happen.""]** — Mówca: **Player**
 > ""Laugh all you want. I'm going to make it happen.""
+- **Wymagania odblokowania (kod gry):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[56]` (Manoly Suheil), `[82]` (Manoly Suheil), `[84]` (Lileas Graf)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_PFJP == true)"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Player: ""We have an alliance. Aren't you supposed to be on my side?""*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_PFJP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_PFJP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_LileasGraf == true)"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Lileas Graf: ""You couldn't even open a highway on time, and now you're..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_LileasGraf == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_LileasGraf == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[37]`
 Mówca: **Kesaro Kibener**
 > ""This has been a goal of the NFP for some time now. But Anton Rayne cannot be trusted with his finger on the nuclear button.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[38]`
 Mówca: **Manoly Suheil**
 > ""I've been pushing to include this in the next PFJP platform as well, but it's a hard sell with voters.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[107]`
-  - -> `[108]`
+  - -> `[39]` (*Player: ""Citizens will still work. My plan will only ensure nobod..."*)
+  - -> `[107]` (*Player: ""With a guaranteed income, Sordish people will spend as n..."*)
+  - -> `[108]` (*Player: ""By removing the bureaucracy associated with the welfare ..."*)
 
 ### Węzeł `[39]`
 **[WYBÓR GRACZA: ""Citizens will still work. My plan will only ensure nobody has to go homeless.""]** — Mówca: **Player**
 > ""Citizens will still work. My plan will only ensure nobody has to go homeless.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Kesaro Kibener), `[38]` (Manoly Suheil), `[47]` (Remus Holstron)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[40]`
 Mówca: **Kesaro Kibener**
 > ""As your alliance partner, I pledge the NFP will also strive to enhance our nuclear capabilities.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[41]`
 **[WYBÓR GRACZA: ""Sordland must develop a nuclear arsenal.""]** — Mówca: **Player**
 > ""Sordland must develop a nuclear arsenal.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[88]` (Moderator), `[116]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_NuclearPromise = true"*)
 
 ### Węzeł `[42]`
 **[WYBÓR GRACZA: ""We will grant a basic living wage to every man and woman in Sordland. Unemployed or otherwise.""]** — Mówca: **Player**
 > ""We will grant a basic living wage to every man and woman in Sordland. Unemployed or otherwise.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[88]` (Moderator), `[116]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_BasicIncomePromise = true"*)
 
 ### Węzeł `[43]`
 **[WYBÓR GRACZA: ""I want Sordland to put a man on the moon.""]** — Mówca: **Player**
 > ""I want Sordland to put a man on the moon.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[88]` (Moderator), `[116]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Narrator: "The other candidates burst out laughing."*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Manoly Suheil: ""There are so many problems still to be solved in Sordlan..."*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_ManolySuheil == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Denis Stahler: ""There are so many problems still to be solved in Sordlan..."*)
 
 ### Węzeł `[47]`
 Mówca: **Remus Holstron**
 > ""You're mad. Sordish citizens want to work for their money. Handouts will only make them soft.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[107]`
-  - -> `[108]`
+  - -> `[39]` (*Player: ""Citizens will still work. My plan will only ensure nobod..."*)
+  - -> `[107]` (*Player: ""With a guaranteed income, Sordish people will spend as n..."*)
+  - -> `[108]` (*Player: ""By removing the bureaucracy associated with the welfare ..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
-  - -> `[50]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_FrensRicter == true)"*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Frens Ricter: ""You're both mad. Disincentivizing work will crater this ..."*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_FrensRicter == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_FrensRicter == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_KesaroKibener == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_KesaroKibener == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
-  - -> `[53]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_KesaroKibener == true"*)
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_KesaroKibener == true)"*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_KesaroKibener == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_KesaroKibener == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Kesaro Kibener: ""Each Sordish citizen wants to contribute and work for th..."*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_KesaroKibener == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_KesaroKibener == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_RemusHolstron == true"*)
 
 ### Węzeł `[54]`
 Mówca: **Frens Ricter**
 > ""I agree, but you've already proven yourself incapable of managing basic infrastructure projects.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[31]`
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
 
 ### Węzeł `[55]`
 Mówca: **Frens Ricter**
 > ""You're both mad. Disincentivizing work will crater this country's economy.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
-  - -> `[117]`
-  - -> `[39]`
-  - -> `[107]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_UnemploymentWage == true"*)
+  - -> `[39]` (*Player: ""Citizens will still work. My plan will only ensure nobod..."*)
+  - -> `[107]` (*Player: ""With a guaranteed income, Sordish people will spend as n..."*)
 
 ### Węzeł `[56]`
 Mówca: **Manoly Suheil**
 > ""There are so many problems still to be solved in Sordland. Space is just a flashy distraction.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[93]` (*Player: ""A space program would create thousands of jobs while boo..."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_FrensRicter == true)"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Frens Ricter: ""I agree, but you've already proven yourself incapable of..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_FrensRicter == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_FrensRicter == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
 
 ### Węzeł `[60]`
 Mówca: **Frens Ricter**
 > ""I agree with this plan in theory, but it would bankrupt our country in an instant.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[31]`
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_RemusHolstron == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_RemusHolstron == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
-  - -> `[63]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_RemusHolstron == true"*)
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_RemusHolstron == true)"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_RemusHolstron == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_RemusHolstron == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Narrator: "The candidates around me gasped -- except for Remus, who ..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_RemusHolstron == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_RemusHolstron == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_KesaroKibener == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_KesaroKibener == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
-  - -> `[66]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_KesaroKibener == true"*)
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_KesaroKibener == true)"*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_KesaroKibener == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_KesaroKibener == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Narrator: "The candidates around me gasped -- except for Kesaro, who..."*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_KesaroKibener == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_KesaroKibener == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_KesaroKibener"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_RemusHolstron == true"*)
 
 ### Węzeł `[67]`
 Mówca: **Narrator**
 > "The other candidates burst out laughing."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
-  - -> `[8]`
+  - -> `[74]` (*Player: ""I'm serious. Sordland is going into space.""*)
+  - -> `[8]` (*Player: ""Just kidding. We have too many problems to solve here at..."*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
-  - -> `[70]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Manoly Suheil: ""You're insane. If we even attempt this, it's only a matt..."*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_ManolySuheil == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
+  - -> `[94]` (*Denis Stahler: ""You're insane. If we even attempt this, it's only a matt..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[73]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_FrensRicter == true)"*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_FrensRicter == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_FrensRicter == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Frens Ricter: ""You're insane. If we even attempt this, it's only a matt..."*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_FrensRicter == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_FrensRicter == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_FrensRicter"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
 
 ### Węzeł `[74]`
 **[WYBÓR GRACZA: ""I'm serious. Sordland is going into space.""]** — Mówca: **Player**
 > ""I'm serious. Sordland is going into space.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[67]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_SpacePromise = true"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
-  - -> `[77]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_ManolySuheil == true"*)
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)"*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_ManolySuheil == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_ManolySuheil == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Manoly Suheil: ""I've been pushing to include this in the next PFJP platf..."*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_ManolySuheil == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_ManolySuheil == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_ManolySuheil"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_KesaroKibener == true"*)
 
 ### Węzeł `[78]`
 Mówca: **Narrator**
 > "The candidates around me gasped -- except Mansoun and Denis, who looked pleased."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Mansoun Leke: ""I'm happy some of our parties' so-called radical ideas a..."*)
 
 ### Węzeł `[79]`
 Mówca: **Narrator**
 > "The candidates around me gasped -- except for Remus, who looked intrigued."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Remus Holstron: ""I guess the USP has gotten it's hands on our new manifes..."*)
 
 ### Węzeł `[80]`
 Mówca: **Narrator**
 > "The candidates around me gasped -- except for Kesaro, who looked faintly intrigued."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
 
 ### Węzeł `[81]`
 Mówca: **Frens Ricter**
 > ""You're insane. If we even attempt this, it's only a matter of time before Sordland becomes a crater.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
-  - -> `[31]`
-  - -> `[100]`
-  - -> `[101]`
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
+  - -> `[100]` (*Player: ""Only via mutually assured destruction can we achieve pea..."*)
+  - -> `[101]` (*Player: ""A nuclear program would create thousands of jobs and boo..."*)
 
 ### Węzeł `[82]`
 Mówca: **Manoly Suheil**
 > ""Perhaps, but you've already proven yourself incapable of managing basic infrastructure projects.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[91]`
-  - -> `[92]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
 
 ### Węzeł `[83]`
 Mówca: **Remus Holstron**
 > ""I guess the USP has gotten it's hands on our new manifesto. In the new age nuclear power plays an important role. We need to position Sords as the dominant power in the region and our party is committed to such ends.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[84]`
 Mówca: **Lileas Graf**
 > ""You couldn't even open a highway on time, and now you're talking about building rockets?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[93]` (*Player: ""A space program would create thousands of jobs while boo..."*)
 
 ### Węzeł `[85]`
 Mówca: **Manoly Suheil**
 > ""You're insane. If we even attempt this, it's only a matter of time before Sordland becomes a crater.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
-  - -> `[100]`
-  - -> `[101]`
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[100]` (*Player: ""Only via mutually assured destruction can we achieve pea..."*)
+  - -> `[101]` (*Player: ""A nuclear program would create thousands of jobs and boo..."*)
 
 ### Węzeł `[86]`
 Mówca: **Lileas Graf**
 > ""You couldn't even open a railway on time, and now you're talking about building rockets?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[93]` (*Player: ""A space program would create thousands of jobs while boo..."*)
 
 ### Węzeł `[87]`
 **[WYBÓR GRACZA: ""No, that release was sent out in error. I'm keeping my plans modest.""]** — Mówca: **Player**
 > ""No, that release was sent out in error. I'm keeping my plans modest.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[9]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Moderator: ""Very well.""*)
 
 ### Węzeł `[88]`
 Mówca: **Moderator**
 > ""Would you like to tell us what those are?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[41]`
-  - -> `[42]`
-  - -> `[89]`
+  - -> `[43]` (*Player: ""I want Sordland to put a man on the moon.""*)
+  - -> `[41]` (*Player: ""Sordland must develop a nuclear arsenal.""*)
+  - -> `[42]` (*Player: ""We will grant a basic living wage to every man and woman..."*)
+  - -> `[89]` (*Player: ""You'll find out once I get re-elected.""*)
 
 ### Węzeł `[89]`
 **[WYBÓR GRACZA: ""You'll find out once I get re-elected.""]** — Mówca: **Player**
 > ""You'll find out once I get re-elected.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[88]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Moderator: ""Very well.""*)
 
 ### Węzeł `[90]`
 Mówca: **Denis Stahler**
 > ""There are so many problems still to be solved in Sordland. Space is just a flashy distraction.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[91]`
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[30]` (*Player: ""Laugh all you want. I'm going to make it happen.""*)
+  - -> `[91]` (*Player: ""With nuclear war an increasing possibility, survival on ..."*)
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[93]` (*Player: ""A space program would create thousands of jobs while boo..."*)
 
 ### Węzeł `[91]`
 **[WYBÓR GRACZA: ""With nuclear war an increasing possibility, survival on other planets is something we must consider.""]** — Mówca: **Player**
 > ""With nuclear war an increasing possibility, survival on other planets is something we must consider.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[54]` (Frens Ricter), `[56]` (Manoly Suheil), `[60]` (Frens Ricter)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[92]`
 **[WYBÓR GRACZA: ""If we want to be taken seriously by the superpowers, this is the only way.""]** — Mówca: **Player**
 > ""If we want to be taken seriously by the superpowers, this is the only way.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[54]` (Frens Ricter), `[56]` (Manoly Suheil), `[60]` (Frens Ricter)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[93]`
 **[WYBÓR GRACZA: ""A space program would create thousands of jobs while boosting our national morale.""]** — Mówca: **Player**
 > ""A space program would create thousands of jobs while boosting our national morale.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[56]` (Manoly Suheil), `[84]` (Lileas Graf), `[86]` (Lileas Graf)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[94]`
 Mówca: **Denis Stahler**
 > ""You're insane. If we even attempt this, it's only a matter of time before Sordland becomes a crater.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
-  - -> `[100]`
-  - -> `[101]`
+  - -> `[92]` (*Player: ""If we want to be taken seriously by the superpowers, thi..."*)
+  - -> `[100]` (*Player: ""Only via mutually assured destruction can we achieve pea..."*)
+  - -> `[101]` (*Player: ""A nuclear program would create thousands of jobs and boo..."*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
-  - -> `[97]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_LileasGraf == true"*)
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_LileasGraf == true)"*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_LileasGraf == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_LileasGraf == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Narrator: "The candidates around me gasped -- except for Lileas, who..."*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_LileasGraf == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_LileasGraf == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_LileasGraf"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[98]`
 Mówca: **Narrator**
 > "The candidates around me gasped -- except for Lileas, who smiled."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Lileas Graf: ""This was a longtime ambition of Tarquin Soll. However, A..."*)
 
 ### Węzeł `[99]`
 Mówca: **Lileas Graf**
 > ""This was a longtime ambition of Tarquin Soll. However, Anton Rayne cannot be trusted to fulfill it.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[100]`
 **[WYBÓR GRACZA: ""Only via mutually assured destruction can we achieve peace with our enemies.""]** — Mówca: **Player**
 > ""Only via mutually assured destruction can we achieve peace with our enemies.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[81]` (Frens Ricter), `[85]` (Manoly Suheil), `[94]` (Denis Stahler)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[101]`
 **[WYBÓR GRACZA: ""A nuclear program would create thousands of jobs and boost national morale.""]** — Mówca: **Player**
 > ""A nuclear program would create thousands of jobs and boost national morale.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[81]` (Frens Ricter), `[85]` (Manoly Suheil), `[94]` (Denis Stahler)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_MansounLeke == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_MansounLeke == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
-  - -> `[104]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_MansounLeke == true"*)
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_MansounLeke == true)"*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_MansounLeke == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_MansounLeke"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_MansounLeke == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_MansounLeke"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Narrator: "The candidates around me gasped -- except Mansoun and Den..."*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_MansounLeke == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_MansounLeke"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_MansounLeke == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_MansounLeke"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Narrator: "The candidates around me gasped -- except Denis, who rais..."*)
 
 ### Węzeł `[105]`
 Mówca: **Narrator**
 > "The candidates around me gasped -- except Denis, who raised an eyebrow."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Denis Stahler: ""If you think that kind of empty promise will win over my..."*)
 
 ### Węzeł `[106]`
 Mówca: **Denis Stahler**
 > ""If you think that kind of empty promise will win over my voters, you're dead wrong.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_FrensRicter == true"*)
 
 ### Węzeł `[107]`
 **[WYBÓR GRACZA: ""With a guaranteed income, Sordish people will spend as never before. The economy will thrive.""]** — Mówca: **Player**
 > ""With a guaranteed income, Sordish people will spend as never before. The economy will thrive.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Kesaro Kibener), `[38]` (Manoly Suheil), `[47]` (Remus Holstron)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[108]`
 **[WYBÓR GRACZA: ""By removing the bureaucracy associated with the welfare system, my plan will save us millions.""]** — Mówca: **Player**
 > ""By removing the bureaucracy associated with the welfare system, my plan will save us millions.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[7]` (Kesaro Kibener), `[38]` (Manoly Suheil), `[47]` (Remus Holstron)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_SpacePromise = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Debate_SpacePromise"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_SpacePromise = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Debate_SpacePromise"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn04_InT_RailwayIssue_Solved == false && Base..."*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_NuclearPromise = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Debate_NuclearPromise"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_NuclearPromise = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Debate_NuclearPromise"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_KesaroKibener == true"*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_BasicIncomePromise = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Debate_BasicIncomePromise"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_BasicIncomePromise = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Debate_BasicIncomePromise"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_MansounLeke == true"*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_HousingAssistance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_HousingAssistance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
-  - -> `[114]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_HousingAssistance == true"*)
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_HousingAssistance == true)"*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_HousingAssistance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_HousingAssistance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Player: ""My administration is already providing housing assistanc..."*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_HousingAssistance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_HousingAssistance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[115]`
 **[WYBÓR GRACZA: ""Yes, and I can't wait to unveil them.""]** — Mówca: **Player**
 > ""Yes, and I can't wait to unveil them.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[9]` (Moderator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Moderator: ""Please go on.""*)
 
 ### Węzeł `[116]`
 Mówca: **Moderator**
 > ""Please go on.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[41]`
-  - -> `[42]`
+  - -> `[43]` (*Player: ""I want Sordland to put a man on the moon.""*)
+  - -> `[41]` (*Player: ""Sordland must develop a nuclear arsenal.""*)
+  - -> `[42]` (*Player: ""We will grant a basic living wage to every man and woman..."*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_UnemploymentWage == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_UnemploymentWage == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_UnemploymentWage == true"*)
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_UnemploymentWage == true)"*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_UnemploymentWage == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_UnemploymentWage == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Player: ""My administration is already providing assistance to une..."*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_UnemploymentWage == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_UnemploymentWage == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_HousingAssistance == true"*)
 
 ### Węzeł `[120]`
 **[WYBÓR GRACZA: ""My administration is already providing assistance to unemployed citizens. This is just a logical extension of that policy.""]** — Mówca: **Player**
 > ""My administration is already providing assistance to unemployed citizens. This is just a logical extension of that policy.""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true`
+- **Kontekst wejściowy (poprzednik):** `[55]` (Frens Ricter), `[130]` (Denis Stahler)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[121]`
 **[WYBÓR GRACZA: ""My administration is already providing housing assistance to low-income citizens. This is just a logical extension of that policy"]** — Mówca: **Player**
 > ""My administration is already providing housing assistance to low-income citizens. This is just a logical extension of that policy.""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Situation_Welfare_HousingAssistance"] == true` AND `(Variable["BaseGame.Situation_Welfare_UnemploymentWage"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[55]` (Frens Ricter), `[130]` (Denis Stahler)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
-  - -> `[124]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_NFP == true)"*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[125]`
+  - -> `[125]` (*Player: ""You're supposed to be my ally, Kesaro.""*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_NFP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_NFP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[125]`
 **[WYBÓR GRACZA: ""You're supposed to be my ally, Kesaro.""]** — Mówca: **Player**
 > ""You're supposed to be my ally, Kesaro.""
+- **Wymagania odblokowania (kod gry):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
+- **Kontekst wejściowy (poprzednik):** `[7]` (Kesaro Kibener)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Kesaro Kibener: ""Well, you didn't run this by me.""*)
 
 ### Węzeł `[126]`
 Mówca: **Kesaro Kibener**
 > ""Well, you didn't run this by me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_RemusHolstron == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_RemusHolstron == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[128]`
-  - -> `[129]`
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Debate_Enable_RemusHolstron == true"*)
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Debate_Enable_RemusHolstron == true)"*)
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Debate_Enable_RemusHolstron == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Debate_Enable_RemusHolstron == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Remus Holstron: ""You're mad. Sordish citizens want to work for their mone..."*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Debate_Enable_RemusHolstron == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Debate_Enable_RemusHolstron == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Debate_Enable_RemusHolstron"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Denis Stahler: ""I don't believe a word of it.""*)
 
 ### Węzeł `[130]`
 Mówca: **Denis Stahler**
 > ""I don't believe a word of it.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[107]`
-  - -> `[108]`
-  - -> `[131]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_UnemploymentWage == true"*)
+  - -> `[107]` (*Player: ""With a guaranteed income, Sordish people will spend as n..."*)
+  - -> `[108]` (*Player: ""By removing the bureaucracy associated with the welfare ..."*)
+  - -> `[131]` (*Player: ""All I have in mind is Sordish people and Sordish people ..."*)
 
 ### Węzeł `[131]`
 **[WYBÓR GRACZA: ""All I have in mind is Sordish people and Sordish people alone.""]** — Mówca: **Player**
 > ""All I have in mind is Sordish people and Sordish people alone.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[130]` (Denis Stahler)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Moderator: ""Very interesting.""*)

@@ -100,10 +100,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 23
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -112,391 +113,391 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_UnemploymentCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_UnemploymentCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_UnemploymentCrisis == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_UnemploymentCrisis == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_UnemploymentCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_UnemploymentCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Narrator: "<b><size=26>1,6 million</size></b> people lost their jobs."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_UnemploymentCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_UnemploymentCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_HighEmployment == true"*)
 
 ### Węzeł `[6]`
 Mówca: **Narrator**
 > "<b><size=26>1,6 million</size></b> people lost their jobs."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_HighEmployment == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_HighEmployment == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_HighEmployment == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_HighEmployment == true)"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_HighEmployment == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_HighEmployment"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_HighEmployment == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_HighEmployment"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Narrator: "<b><size=26>2,2 million</size></b> people found a job."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_HighEmployment == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_HighEmployment"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_HighEmployment == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_HighEmployment"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true && (BaseGam..."*)
 
 ### Węzeł `[10]`
 Mówca: **Narrator**
 > "<b><size=26>2,2 million</size></b> people found a job."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[11]`
 Mówca: **Narrator**
 > "<b><size=26>42,316</size></b> teachers lost their jobs."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_EpidemicSpreads == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_EpidemicSpreads == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_EpidemicSpreads == true)"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_EpidemicSpreads == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_EpidemicSpreads"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_EpidemicSpreads == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_EpidemicSpreads"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Narrator: "<b><size=26>29,213</size></b> people died due to complica..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_EpidemicSpreads == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_EpidemicSpreads"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_EpidemicSpreads == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_EpidemicSpreads"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicControlled == true"*)
 
 ### Węzeł `[15]`
 Mówca: **Narrator**
 > "<b><size=26>29,213</size></b> people died due to complications related to Polio."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_EpidemicControlled == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_EpidemicControlled == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
-  - -> `[18]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicControlled == true"*)
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_EpidemicControlled == true)"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_EpidemicControlled == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_EpidemicControlled"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_EpidemicControlled == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_EpidemicControlled"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "<b><size=26>9,822</size></b> people died due to complicat..."*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_EpidemicControlled == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_EpidemicControlled"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_EpidemicControlled == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_EpidemicControlled"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[219]`
+  - -> `[219]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_QualityRuralHealthServices == ..."*)
 
 ### Węzeł `[19]`
 Mówca: **Narrator**
 > "<b><size=26>9,822</size></b> people died due to complications related to Polio."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[20]`
 Mówca: **Narrator**
 > "<b><size=26>81%</size></b> fewer maternal deaths were recorded."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Narrator: "<b><size=26>228</size></b> police officers and <b><size=2..."*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09..."*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Narrator: "<b><size=26>99</size></b> police officers and <b><size=26..."*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_UnrestStopped == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn..."*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_Violent_Happened == true && BaseGame.Tu..."*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Narrator: "During street clashes <b><size=26>52</size></b> police of..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn..."*)
 
 ### Węzeł `[30]`
 Mówca: **Narrator**
 > "<b><size=26>228</size></b> police officers and <b><size=26>819</size></b> Bludish militants were killed in firefights."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[31]`
 Mówca: **Narrator**
 > "<b><size=26>99</size></b> police officers and <b><size=26>640</size></b> Bludish militants were killed in firefights."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[32]`
 Mówca: **Narrator**
 > "During street clashes <b><size=26>39</size></b> police officers and <b><size=26>109</size></b> protesters were killed, <b><size=26>11,823</size></b> protesters were arrested."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarWin == true)"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Narrator: "<b><size=26>1,1 million</size></b> civilians have died in..."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarLost == true"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
-  - -> `[38]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarLost == true"*)
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarLost == true)"*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "<b><size=26>2,2 million</size></b> civilians have died in..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_Sordi..."*)
 
 ### Węzeł `[39]`
 Mówca: **Narrator**
 > "During street clashes <b><size=26>52</size></b> police officers and <b><size=26>228</size></b> protesters were killed, <b><size=26>8,821</size></b> protesters were arrested."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[40]`
 Mówca: **Narrator**
 > "<b><size=26>1,1 million</size></b> civilians have died in the war."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[41]`
 Mówca: **Narrator**
 > "<b><size=26>2,2 million</size></b> civilians have died in the war."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_WorldWar == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_WorldWar == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[44]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_WorldWar == true"*)
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_WorldWar == true)"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_WorldWar == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_WorldWar"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_WorldWar == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_WorldWar"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Narrator: "<b><size=26>63 million</size></b> people died during the ..."*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_WorldWar == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_WorldWar"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_WorldWar == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_WorldWar"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
 
 ### Węzeł `[45]`
 Mówca: **Narrator**
 > "<b><size=26>63 million</size></b> people died during the world war."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
-  - -> `[48]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_Sordi..."*)
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_Sor..."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Narrator: "During the coup <b><size=26>33</size></b> soldiers and <b..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true && BaseGame.Turn09_EnT_SordishRecovery == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_UnemploymentCrisis == true"*)
 
 ### Węzeł `[49]`
 Mówca: **Narrator**
 > "During the coup <b><size=26>33</size></b> soldiers and <b><size=26>1,430</size></b> protesters were killed, <b><size=26>146,399</size></b> protesters were detained."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Joined_ATO == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Joined_ATO == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.Joined_ATO == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Joined_ATO == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Joined_ATO == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Joined_ATO"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Joined_ATO == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Joined_ATO"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Narrator: "<b><size=26>633</size></b> ATO officers arrived in Sordland."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Joined_ATO == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Joined_ATO"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Joined_ATO == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Joined_ATO"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Joined_CSP == true"*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Joined_CSP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Joined_CSP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Joined_CSP == true"*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Joined_CSP == true)"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Joined_CSP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Joined_CSP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Joined_CSP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Joined_CSP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Narrator: "<b><size=26>998</size></b> CSP officers arrived in Sordland."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Joined_CSP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Joined_CSP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Joined_CSP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Joined_CSP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Si..."*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[58]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Si..."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Diplomacy_UCAid == true || BaseGame...."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Diplomacy_UCAid"] == true  or  Variable["BaseGame.Situation_Diplomacy_ArcasiaAid"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Diplomacy_UCAid"] == true  or  Variable["BaseGame.Situation_Diplomacy_ArcasiaAid"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Narrator: "<b><size=26>29,472</size></b> tonnes of material aid was ..."*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Diplomacy_UCAid"] == true  or  Variable["BaseGame.Situation_Diplomacy_ArcasiaAid"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Diplomacy_UCAid == true || BaseGame.Situation_Diplomacy_ArcasiaAid == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Diplomacy_UCAid"] == true  or  Variable["BaseGame.Situation_Diplomacy_ArcasiaAid"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_Neutrality == true"*)
 
 ### Węzeł `[59]`
 Mówca: **Narrator**
@@ -514,25 +515,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_Neutrality == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_Neutrality == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_Neutrality == true"*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_Neutrality == true)"*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_Neutrality == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_Neutrality"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_Neutrality == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_Neutrality"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Narrator: "<b><size=26>12</size></b> countries opened embassies in S..."*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_Neutrality == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_Neutrality"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_Neutrality == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_Neutrality"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_FundingDisruption == true"*)
 
 ### Węzeł `[65]`
 Mówca: **Narrator**
@@ -540,44 +541,44 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_FundingDisruption == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_FundingDisruption == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
-  - -> `[68]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_FundingDisruption == true"*)
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_FundingDisruption == true)"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_FundingDisruption == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_FundingDisruption"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_FundingDisruption == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_FundingDisruption"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Narrator: "<b><size=26>86,391</size></b> government welfare payments..."*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_FundingDisruption == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_FundingDisruption"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_FundingDisruption == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_FundingDisruption"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_IncreasedDepression == true"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_IncreasedDepression == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_IncreasedDepression == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
-  - -> `[71]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_IncreasedDepression == true"*)
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_IncreasedDepression == true)"*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_IncreasedDepression == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_IncreasedDepression"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_IncreasedDepression == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_IncreasedDepression"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Narrator: "<b><size=26>693</size></b> accounts of suicide were repor..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_IncreasedDepression == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_IncreasedDepression"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_IncreasedDepression == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_IncreasedDepression"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[72]`
@@ -591,859 +592,859 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[76]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_OldGuard == true && BaseGame...."*)
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Investigate_OldGuard == true && BaseGam..."*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_OldGuard"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_OldGuard"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Narrator: "Investigations were launched on <b><size=26>311</size></b..."*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_OldGuard"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Investigate_OldGuard == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_OldGuard"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_Opposition == true && BaseGam..."*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_Opposition == true && BaseGam..."*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Investigate_Opposition == true && BaseG..."*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_Opposition"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_Opposition"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Narrator: "Investigations were launched on <b><size=26>22</size></b>..."*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_Opposition"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Investigate_Opposition == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_Opposition"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame..."*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame..."*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Investigate_Oligarchs == true && BaseGa..."*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_Oligarchs"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Investigate_Oligarchs"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Narrator: "Investigations were launched on <b><size=26>48</size></b>..."*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_Oligarchs"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Investigate_Oligarchs == true && BaseGame.Policy_Order_AntiCorruptionPolice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Investigate_Oligarchs"] == true  and  Variable["BaseGame.Policy_Order_AntiCorruptionPolice"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_EfficientJusticeSystem == true"*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_EfficientJusticeSystem == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_EfficientJusticeSystem == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
-  - -> `[85]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_EfficientJusticeSystem == true"*)
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Law_EfficientJusticeSystem == true)"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_EfficientJusticeSystem == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Law_EfficientJusticeSystem"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_EfficientJusticeSystem == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Law_EfficientJusticeSystem"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Narrator: "<b><size=26>2,389</size></b> legal cases were closed."*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Law_EfficientJusticeSystem == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Law_EfficientJusticeSystem"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Law_EfficientJusticeSystem == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Law_EfficientJusticeSystem"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Narrator: "<b><size=26>3,899</size></b> legal cases were delayed."*)
 
 ### Węzeł `[86]`
 Mówca: **Narrator**
 > "<b><size=26>328</size></b> people disappeared without a trace."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[87]`
 Mówca: **Narrator**
 > "<b><size=26>4,109</size></b> state officials were arrested for corruption charges."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[88]`
 Mówca: **Narrator**
 > "Investigations were launched on <b><size=26>311</size></b> state officials."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[89]`
 Mówca: **Narrator**
 > "Investigations were launched on <b><size=26>22</size></b> opposition politicians."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[90]`
 Mówca: **Narrator**
 > "Investigations were launched on <b><size=26>48</size></b> businessmen."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[91]`
 Mówca: **Narrator**
 > "<b><size=26>2,389</size></b> legal cases were closed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[92]`
 Mówca: **Narrator**
 > "<b><size=26>3,899</size></b> legal cases were delayed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_StrongWomensRights_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_StrongWomensRights_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
-  - -> `[95]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_StrongWomensRights_Signed == true"*)
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn09_StrongWomensRights_Signed == true)"*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_StrongWomensRights_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_StrongWomensRights_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_StrongWomensRights_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_StrongWomensRights_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Narrator: "<b><size=26>614,470</size></b> women joined the workforce..."*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn09_StrongWomensRights_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_StrongWomensRights_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn09_StrongWomensRights_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_StrongWomensRights_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && B..."*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
-  - -> `[98]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && B..."*)
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true &&..."*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true  and  Variable["BaseGame.Situation_Welfare_GenderEqualityInEducation"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true  and  Variable["BaseGame.Situation_Welfare_GenderEqualityInEducation"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Narrator: "<b><size=26>1,340</size></b> women won a domestic violenc..."*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true  and  Variable["BaseGame.Situation_Welfare_GenderEqualityInEducation"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true && BaseGame.Situation_Welfare_GenderEqualityInEducation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true  and  Variable["BaseGame.Situation_Welfare_GenderEqualityInEducation"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_WeakWomensRights_Signed == true"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_WeakWomensRights_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_WeakWomensRights_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
-  - -> `[101]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_WeakWomensRights_Signed == true"*)
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true)"*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_WeakWomensRights_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_WeakWomensRights_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Narrator: "<b><size=26>1,340</size></b> women won a domestic violenc..."*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn09_WeakWomensRights_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_WeakWomensRights_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Narrator: "<b><size=26>11,340</size></b> domestic violence cases wer..."*)
 
 ### Węzeł `[102]`
 Mówca: **Narrator**
 > "<b><size=26>614,470</size></b> women joined the workforce and <b><size=26>805,380</size></b> girls were enrolled at secondary education for the first time."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Growth == true &..."*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
-  - -> `[105]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Growth == true &..."*)
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_SmallBusiness_Growth == true..."*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_SmallBusiness_Growth"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_SmallBusiness_Growth"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Narrator: "<b><size=26>13,142</size></b> businesses were founded."*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_SmallBusiness_Growth"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_SmallBusiness_Growth == true && BaseGame.Turn09_EnT_SordishRecovery == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_SmallBusiness_Growth"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_CreateJobs == tr..."*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
-  - -> `[108]`
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_CreateJobs == tr..."*)
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == ..."*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[279]`
+  - -> `[279]` (*Narrator: "<b><size=26>409,784</size></b> jobs were created by four ..."*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_CreateJobs == tr..."*)
 
 ### Węzeł `[109]`
 Mówca: **Narrator**
 > "<b><size=26>13,142</size></b> businesses were founded."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[110]`
 Mówca: **Narrator**
 > "<b><size=26>409,784</size></b> jobs were created by four largest companies of Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[111]`
 Mówca: **Narrator**
 > "<b><size=26>1,340</size></b> women won a domestic violence case at the courts and <b><size=26>403,380</size></b> girls were enrolled at secondary education for the first time."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Growth == true &..."*)
 
 ### Węzeł `[112]`
 Mówca: **Narrator**
 > "<b><size=26>1,340</size></b> women won a domestic violence case at the courts."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Growth == true &..."*)
 
 ### Węzeł `[113]`
 Mówca: **Narrator**
 > "<b><size=26>11,340</size></b> domestic violence cases were reported."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Growth == true &..."*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_PSnW_Healthcare_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_PSnW_Healthcare_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
-  - -> `[116]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn06_PSnW_Healthcare_Privatization == true)"*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_PSnW_Healthcare_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_PSnW_Healthcare_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
+  - -> `[132]` (*Narrator: "<b><size=26>5 million</size></b> people lost their state ..."*)
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn06_PSnW_Healthcare_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn06_PSnW_Healthcare_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Privatization == true && B..."*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_Education_Privatization == true && B..."*)
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn04_PSnW_Education_Privatization == true &&..."*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true  and  Variable["BaseGame.EconomyAction_PayBackStudentDebt"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true  and  Variable["BaseGame.EconomyAction_PayBackStudentDebt"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Narrator: "<b><size=26>259,498</size></b> students left secondary ed..."*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true  and  Variable["BaseGame.EconomyAction_PayBackStudentDebt"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn04_PSnW_Education_Privatization == true && BaseGame.EconomyAction_PayBackStudentDebt == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true  and  Variable["BaseGame.EconomyAction_PayBackStudentDebt"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true && ..."*)
 
 ### Węzeł `[120]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
-  - -> `[122]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true && ..."*)
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn06_PSnW_Healthcare_Privatization == true &..."*)
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Narrator: "<b><size=26>5 million</size></b> people lost their state ..."*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn06_PSnW_Healthcare_Privatization == true && BaseGame.Turn04_PSnW_Education_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn06_PSnW_Healthcare_Privatization"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization + BaseGa..."*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 1`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
+  - -> `[191]` (*Narrator: "<b><size=26>2,300</size></b> state employees lost their j..."*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 1) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 1)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 1) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization + BaseGa..."*)
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Narrator: "<b><size=26>5,200</size></b> state employees lost their j..."*)
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
-  - -> `[131]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization + BaseGa..."*)
 
 ### Węzeł `[130]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Narrator: "<b><size=26>10,400</size></b> state employees lost their ..."*)
 
 ### Węzeł `[131]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization + BaseGame.NedamMiningGroup_Privatization >= 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] + Variable["BaseGame.NedamMiningGroup_Privatization"] >= 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[132]`
 Mówca: **Narrator**
 > "<b><size=26>5 million</size></b> people lost their state healthcare coverage."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[133]`
 Mówca: **Narrator**
 > "<b><size=26>259,498</size></b> students left secondary education without graduating."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[134]`
 Mówca: **Narrator**
 > "<b><size=26>5 million</size></b> people lost their state healthcare coverage and <b><size=26>400,030</size></b> students left secondary education without graduating."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization + BaseGame..."*)
 
 ### Węzeł `[135]`
 Mówca: **Narrator**
 > "<b><size=26>10,400</size></b> state employees lost their jobs while 3 oligarchs obtained 40% of the Sordish economy."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[136]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
-  - -> `[138]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumburg..."*)
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[137]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Narrator: "<b><size=26>156,332</size></b> soldiers died during the R..."*)
 
 ### Węzeł `[138]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[139]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
-  - -> `[141]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumburg..."*)
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[140]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[158]`
+  - -> `[158]` (*Narrator: "<b><size=26>99,332</size></b> soldiers died during the Ru..."*)
 
 ### Węzeł `[141]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 1 && BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 1  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[142]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
-  - -> `[144]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumburg..."*)
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[143]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[161]`
+  - -> `[161]` (*Narrator: "<b><size=26>433,165</size></b> soldiers died during the R..."*)
 
 ### Węzeł `[144]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn05_SnO_Military_ReduceSize == true"*)
 
 ### Węzeł `[145]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
-  - -> `[147]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumburg..."*)
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[146]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Narrator: "<b><size=26>189,229</size></b> soldiers died during the R..."*)
 
 ### Węzeł `[147]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 2 && BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 2  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 2 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[148]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn05_SnO_Military_ReduceSize == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn05_SnO_Military_ReduceSize == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[149]`
-  - -> `[150]`
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn05_SnO_Military_ReduceSize == true"*)
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn05_SnO_Military_ReduceSize == true)"*)
 
 ### Węzeł `[149]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn05_SnO_Military_ReduceSize == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn05_SnO_Military_ReduceSize"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn05_SnO_Military_ReduceSize == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn05_SnO_Military_ReduceSize"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Narrator: "<b><size=26>86,450</size></b> soldiers became unemployed."*)
 
 ### Węzeł `[150]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn05_SnO_Military_ReduceSize == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn05_SnO_Military_ReduceSize"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn05_SnO_Military_ReduceSize == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn05_SnO_Military_ReduceSize"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[151]`
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Military_GreenGenerals == true"*)
 
 ### Węzeł `[151]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Military_GreenGenerals == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Military_GreenGenerals == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
-  - -> `[153]`
+  - -> `[152]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Military_GreenGenerals == true"*)
+  - -> `[153]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Military_GreenGenerals == true)"*)
 
 ### Węzeł `[152]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Military_GreenGenerals == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Military_GreenGenerals"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Military_GreenGenerals == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Military_GreenGenerals"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Narrator: "<b><size=26>6,894</size></b> military personnel were forc..."*)
 
 ### Węzeł `[153]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Military_GreenGenerals == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Military_GreenGenerals"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Military_GreenGenerals == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Military_GreenGenerals"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_SnO_Conscription_Removed == true"*)
 
 ### Węzeł `[154]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_SnO_Conscription_Removed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_SnO_Conscription_Removed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
-  - -> `[156]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_SnO_Conscription_Removed == true"*)
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn06_SnO_Conscription_Removed == true)"*)
 
 ### Węzeł `[155]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_SnO_Conscription_Removed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn06_SnO_Conscription_Removed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_SnO_Conscription_Removed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn06_SnO_Conscription_Removed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Narrator: "<b><size=26>102,345</size></b> conscripts joined the work..."*)
 
 ### Węzeł `[156]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn06_SnO_Conscription_Removed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn06_SnO_Conscription_Removed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn06_SnO_Conscription_Removed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn06_SnO_Conscription_Removed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
+  - -> `[165]` (*Narrator: "<b><size=26>1,314</size></b> conscripts died in training."*)
 
 ### Węzeł `[157]`
 Mówca: **Narrator**
 > "<b><size=26>589,112</size></b> Sordish lives were lost during the Rumburg invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[158]`
 Mówca: **Narrator**
 > "<b><size=26>99,332</size></b> soldiers died during the Rumburg Invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[159]`
 Mówca: **Narrator**
 > "<b><size=26>156,332</size></b> soldiers died during the Rumburg Invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[160]`
 Mówca: **Narrator**
 > "<b><size=26>189,229</size></b> soldiers died during the Rumburg Invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[161]`
 Mówca: **Narrator**
 > "<b><size=26>433,165</size></b> soldiers died during the Rumburg Invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[162]`
 Mówca: **Narrator**
 > "<b><size=26>86,450</size></b> soldiers became unemployed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[163]`
 Mówca: **Narrator**
 > "<b><size=26>6,894</size></b> military personnel were forcibly retired."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[164]`
 Mówca: **Narrator**
 > "<b><size=26>102,345</size></b> conscripts joined the work force."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[165]`
 Mówca: **Narrator**
 > "<b><size=26>1,314</size></b> conscripts died in training."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[166]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
-  - -> `[168]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_CreateJobs == tr..."*)
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == ..."*)
 
 ### Węzeł `[167]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true  and  Variable["BaseGame.Reform_PresiPower_Weak_FairTradeCommission"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true  and  Variable["BaseGame.Reform_PresiPower_Weak_FairTradeCommission"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Narrator: "<b><size=26>409,784</size></b> jobs were created by four ..."*)
 
 ### Węzeł `[168]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true  and  Variable["BaseGame.Reform_PresiPower_Weak_FairTradeCommission"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_LargeBusiness_CreateJobs == true && BaseGame.Turn09_EnT_SordishRecovery == true && BaseGame.Reform_PresiPower_Weak_FairTradeCommission == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_CreateJobs"] == true  and  Variable["BaseGame.Turn09_EnT_SordishRecovery"] == true  and  Variable["BaseGame.Reform_PresiPower_Weak_FairTradeCommission"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true"*)
 
 ### Węzeł `[169]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
-  - -> `[171]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true"*)
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_SordishDepression == true)"*)
 
 ### Węzeł `[170]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[178]`
+  - -> `[178]` (*Narrator: "<b><size=26>81,340</size></b> companies declared bankruptcy."*)
 
 ### Węzeł `[171]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_SordishDepression == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_SordishDepression == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Stagnate == true"*)
 
 ### Węzeł `[172]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_SmallBusiness_Stagnate == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_SmallBusiness_Stagnate == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
-  - -> `[174]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_SmallBusiness_Stagnate == true"*)
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_SmallBusiness_Stagnate == true)"*)
 
 ### Węzeł `[173]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_SmallBusiness_Stagnate == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_SmallBusiness_Stagnate"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_SmallBusiness_Stagnate == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_SmallBusiness_Stagnate"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
+  - -> `[179]` (*Narrator: "<b><size=26>9,340</size></b> small businesses declared ba..."*)
 
 ### Węzeł `[174]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_SmallBusiness_Stagnate == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_SmallBusiness_Stagnate"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_SmallBusiness_Stagnate == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_SmallBusiness_Stagnate"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_Downsize == true"*)
 
 ### Węzeł `[175]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_Downsize == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_Downsize == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
-  - -> `[177]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_LargeBusiness_Downsize == true"*)
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_LargeBusiness_Downsize == true)"*)
 
 ### Węzeł `[176]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_LargeBusiness_Downsize == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_Downsize"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_LargeBusiness_Downsize == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_LargeBusiness_Downsize"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Narrator: "Foreign investors have pulled out around <b><size=26>3 bi..."*)
 
 ### Węzeł `[177]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_LargeBusiness_Downsize == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_Downsize"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_LargeBusiness_Downsize == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_LargeBusiness_Downsize"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[178]`
 Mówca: **Narrator**
 > "<b><size=26>81,340</size></b> companies declared bankruptcy."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[179]`
 Mówca: **Narrator**
 > "<b><size=26>9,340</size></b> small businesses declared bankruptcy."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[180]`
 Mówca: **Narrator**
 > "Foreign investors have pulled out around <b><size=26>3 billion</size></b> SR from the Sordish market."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[181]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[182]`
-  - -> `[183]`
+  - -> `[182]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization + BaseGame.Ber..."*)
 
 ### Węzeł `[182]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 1`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 1`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[194]`
+  - -> `[194]` (*Narrator: "Private assets worth <b><size=26>1 billion</size></b> SR ..."*)
 
 ### Węzeł `[183]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 1) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 1)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 1) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[184]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
-  - -> `[186]`
+  - -> `[185]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization + BaseGame.Ber..."*)
 
 ### Węzeł `[185]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Narrator: "Private assets worth <b><size=26>5 billion</size></b> SR ..."*)
 
 ### Węzeł `[186]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[181]`
+  - -> `[181]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
 
 ### Węzeł `[187]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
-  - -> `[189]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization + BaseGame.Ber..."*)
 
 ### Węzeł `[188]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[192]`
+  - -> `[192]` (*Narrator: "Private assets worth <b><size=26>10 billion</size></b> SR..."*)
 
 ### Węzeł `[189]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization + BaseGame.BergiaSteel_Nationalization >= 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] + Variable["BaseGame.BergiaSteel_Nationalization"] >= 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization + BaseGame.Bergi..."*)
 
 ### Węzeł `[190]`
 Mówca: **Narrator**
 > "<b><size=26>5,200</size></b> state employees lost their jobs while 3 oligarchs obtained 20% of the Sordish economy."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[191]`
 Mówca: **Narrator**
 > "<b><size=26>2,300</size></b> state employees lost their jobs while 3 oligarchs obtained 10% of the Sordish economy."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[192]`
 Mówca: **Narrator**
 > "Private assets worth <b><size=26>10 billion</size></b> SR were seized by the state."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[193]`
 Mówca: **Narrator**
 > "Private assets worth <b><size=26>5 billion</size></b> SR were seized by the state."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[194]`
 Mówca: **Narrator**
 > "Private assets worth <b><size=26>1 billion</size></b> SR were seized by the state."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
 
 ### Węzeł `[195]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Media_Censored == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_Censored == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
-  - -> `[197]`
+  - -> `[196]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_Censored == true"*)
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Media_Censored == true)"*)
 
 ### Węzeł `[196]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Media_Censored == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Media_Censored"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_Censored == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Media_Censored"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[201]`
+  - -> `[201]` (*Narrator: "<b><size=26>5,143</size></b> news articles were censored."*)
 
 ### Węzeł `[197]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Media_Censored == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Media_Censored"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Media_Censored == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Media_Censored"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[198]`
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
 
 ### Węzeł `[198]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
-  - -> `[200]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Media_SordlandToday_Bias == true)"*)
 
 ### Węzeł `[199]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Narrator: "<b><size=26>1,143</size></b> news articles were altered."*)
 
 ### Węzeł `[200]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Media_SordlandToday_Bias == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Media_SordlandToday_Bias == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.Joined_ATO == true"*)
 
 ### Węzeł `[201]`
 Mówca: **Narrator**
@@ -1456,781 +1457,781 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[203]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
-  - -> `[205]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true && (BaseGam..."*)
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_SordishDepression == true && (BaseG..."*)
 
 ### Węzeł `[204]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
+  - -> `[214]` (*Narrator: "Price of bread increased from 0,5 SR to <b><size=26>4 SR...."*)
 
 ### Węzeł `[205]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[206]`
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyAction_HousingAssistance == true"*)
 
 ### Węzeł `[206]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyAction_HousingAssistance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyAction_HousingAssistance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
-  - -> `[208]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyAction_HousingAssistance == true"*)
+  - -> `[208]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomyAction_HousingAssistance == true)"*)
 
 ### Węzeł `[207]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyAction_HousingAssistance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomyAction_HousingAssistance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyAction_HousingAssistance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomyAction_HousingAssistance"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Narrator: "<b><size=26>110,467</size></b> people benefitted from sta..."*)
 
 ### Węzeł `[208]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomyAction_HousingAssistance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomyAction_HousingAssistance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomyAction_HousingAssistance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomyAction_HousingAssistance"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[215]`
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[209]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
-  - -> `[211]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)"*)
 
 ### Węzeł `[210]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[212]`
+  - -> `[212]` (*Narrator: "<b><size=26>2,5 million</size></b> workers benefitted fro..."*)
 
 ### Węzeł `[211]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn04_WorkersRights_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Narrator: "<b><size=26>304,754</size></b> people lost their jobs."*)
 
 ### Węzeł `[212]`
 Mówca: **Narrator**
 > "<b><size=26>2,5 million</size></b> workers benefitted from minimum wage."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[213]`
 Mówca: **Narrator**
 > "<b><size=26>110,467</size></b> people benefitted from state housing."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[214]`
 Mówca: **Narrator**
 > "Price of bread increased from 0,5 SR to <b><size=26>4 SR.</size></b>"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[215]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[216]`
-  - -> `[217]`
+  - -> `[216]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[216]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Narrator: "<b><size=26>42,316</size></b> teachers lost their jobs."*)
 
 ### Węzeł `[217]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
 
 ### Węzeł `[218]`
 Mówca: **Narrator**
 > "<b><size=26>304,754</size></b> people lost their jobs."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_EpidemicSpreads == true"*)
 
 ### Węzeł `[219]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_QualityRuralHealthServices == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_QualityRuralHealthServices == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[220]`
-  - -> `[221]`
+  - -> `[220]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_QualityRuralHealthServices == ..."*)
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_QualityRuralHealthServices =..."*)
 
 ### Węzeł `[220]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_QualityRuralHealthServices == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_QualityRuralHealthServices"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_QualityRuralHealthServices == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_QualityRuralHealthServices"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Narrator: "<b><size=26>81%</size></b> fewer maternal deaths were rec..."*)
 
 ### Węzeł `[221]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_QualityRuralHealthServices == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_QualityRuralHealthServices"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_QualityRuralHealthServices == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_QualityRuralHealthServices"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[222]`
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_NewHospitals == true"*)
 
 ### Węzeł `[222]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_NewHospitals == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_NewHospitals == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
-  - -> `[224]`
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Welfare_NewHospitals == true"*)
+  - -> `[224]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Welfare_NewHospitals == true)"*)
 
 ### Węzeł `[223]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Welfare_NewHospitals == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_NewHospitals"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Welfare_NewHospitals == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Welfare_NewHospitals"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Narrator: "More than <b><size=26>721,699</size></b> people gained ac..."*)
 
 ### Węzeł `[224]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Welfare_NewHospitals == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_NewHospitals"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Welfare_NewHospitals == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Welfare_NewHospitals"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[225]`
+  - -> `[225]` (*Narrator: "<b><size=26>57%</size></b> fewer maternal deaths were rec..."*)
 
 ### Węzeł `[225]`
 Mówca: **Narrator**
 > "<b><size=26>57%</size></b> fewer maternal deaths were recorded."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[226]`
 Mówca: **Narrator**
 > "More than <b><size=26>721,699</size></b> people gained access to healthcare."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Happened == true && BaseGame.Turn09_U..."*)
 
 ### Węzeł `[227]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[228]`
-  - -> `[229]`
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn..."*)
+  - -> `[229]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_Violent_Happened == true && BaseGame.Tu..."*)
 
 ### Węzeł `[228]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Narrator: "During street clashes <b><size=26>39</size></b> police of..."*)
 
 ### Węzeł `[229]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_Violent_Happened == true && BaseGame.Turn09_UnrestStopped == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_Violent_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Tur..."*)
 
 ### Węzeł `[230]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[231]`
-  - -> `[232]`
+  - -> `[231]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Tur..."*)
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.T..."*)
 
 ### Węzeł `[231]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
+  - -> `[245]` (*Narrator: "During protests, <b><size=26>3 billion SR</size></b> wort..."*)
 
 ### Węzeł `[232]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Tur..."*)
 
 ### Węzeł `[233]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
-  - -> `[235]`
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Tur..."*)
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.T..."*)
 
 ### Węzeł `[234]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
+  - -> `[281]` (*Narrator: "During protests, <b><size=26>2 billion SR</size></b> wort..."*)
 
 ### Węzeł `[235]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_Peaceful_Happened == true && BaseGame.Turn09_UnrestStopped == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_Peaceful_Happened"] == true  and  Variable["BaseGame.Turn09_UnrestStopped"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[264]`
+  - -> `[264]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true && BaseGame.Decisio..."*)
 
 ### Węzeł `[236]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[237]`
-  - -> `[238]`
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == ..."*)
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial =..."*)
 
 ### Węzeł `[237]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
+  - -> `[278]` (*Narrator: "<b><size=26>13,439</size></b> people were detained withou..."*)
 
 ### Węzeł `[238]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_SuspendedProtests == true"*)
 
 ### Węzeł `[239]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_SuspendedProtests == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_SuspendedProtests == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
-  - -> `[241]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_SuspendedProtests == true"*)
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_SuspendedProtests == true)"*)
 
 ### Węzeł `[240]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_SuspendedProtests == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_SuspendedProtests"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_SuspendedProtests == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_SuspendedProtests"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[284]`
+  - -> `[284]` (*Narrator: "<b><size=26>18,220</size></b> people were arrested for pr..."*)
 
 ### Węzeł `[241]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_SuspendedProtests == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_SuspendedProtests"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_SuspendedProtests == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_SuspendedProtests"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[261]`
+  - -> `[261]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_PoliceAuthority == true"*)
 
 ### Węzeł `[242]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_OrganisedCrimeContained == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_OrganisedCrimeContained == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[243]`
-  - -> `[244]`
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrimeContained == true"*)
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Order_OrganisedCrimeContained == true)"*)
 
 ### Węzeł `[243]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_OrganisedCrimeContained == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Order_OrganisedCrimeContained"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_OrganisedCrimeContained == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Order_OrganisedCrimeContained"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Narrator: "<b><size=26>1,278</size></b> people were arrested for the..."*)
 
 ### Węzeł `[244]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Order_OrganisedCrimeContained == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Order_OrganisedCrimeContained"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Order_OrganisedCrimeContained == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Order_OrganisedCrimeContained"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
+  - -> `[248]` (*Narrator: "<b><size=26>3,278</size></b> people were arrested for the..."*)
 
 ### Węzeł `[245]`
 Mówca: **Narrator**
 > "During protests, <b><size=26>3 billion SR</size></b> worth public property damage was done and <b><size=26>2,822</size></b> arrests were made."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[246]`
 Mówca: **Narrator**
 > "<b><size=26>311</size></b> people were reported to have been killed by the Sordish law enforcement."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[247]`
 Mówca: **Narrator**
 > "<b><size=26>1,278</size></b> people were arrested for their ties to organized crime."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[248]`
 Mówca: **Narrator**
 > "<b><size=26>3,278</size></b> people were arrested for their ties to organized crime."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[249]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
-  - -> `[251]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_RY == true && Ba..."*)
 
 ### Węzeł `[250]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[258]`
+  - -> `[258]` (*Narrator: "<b><size=26>33,760</size></b> people were arrested for th..."*)
 
 ### Węzeł `[251]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Reform_EmergencyDecree_Banned_YS == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[252]`
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true"*)
 
 ### Węzeł `[252]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
-  - -> `[254]`
+  - -> `[253]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true"*)
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_RY == true)"*)
 
 ### Węzeł `[253]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Narrator: "<b><size=26>18,320</size></b> people were arrested for th..."*)
 
 ### Węzeł `[254]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_RY == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_RY == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_YS == true"*)
 
 ### Węzeł `[255]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_YS == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_YS == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
-  - -> `[257]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_YS == true"*)
+  - -> `[257]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_YS == true)"*)
 
 ### Węzeł `[256]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_YS == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_YS == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
+  - -> `[280]` (*Narrator: "<b><size=26>15,440</size></b> people were arrested for th..."*)
 
 ### Węzeł `[257]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_YS == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_YS == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Narrator: "<b><size=26>779</size></b> people were killed during the ..."*)
 
 ### Węzeł `[258]`
 Mówca: **Narrator**
 > "<b><size=26>33,760</size></b> people were arrested for their suspected ties to Red Youth and Young Sords."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[259]`
 Mówca: **Narrator**
 > "<b><size=26>18,320</size></b> people were arrested for their suspected ties to Red Youth."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[260]`
 Mówca: **Narrator**
 > "<b><size=26>8,222</size></b> people died to criminal violence."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[261]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_PoliceAuthority == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_PoliceAuthority == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
-  - -> `[263]`
+  - -> `[262]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_PoliceAuthority == true"*)
+  - -> `[263]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_PoliceAuthority == true)"*)
 
 ### Węzeł `[262]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_PoliceAuthority == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_PoliceAuthority"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_PoliceAuthority == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_PoliceAuthority"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Narrator: "<b><size=26>311</size></b> people were reported to have b..."*)
 
 ### Węzeł `[263]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_PoliceAuthority == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_PoliceAuthority"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_PoliceAuthority == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_PoliceAuthority"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[270]`
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_CrimeWave == true"*)
 
 ### Węzeł `[264]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[265]`
-  - -> `[266]`
+  - -> `[265]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true && BaseGame.Decisio..."*)
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decis..."*)
 
 ### Węzeł `[265]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
+  - -> `[283]` (*Narrator: "<b><size=26>51,091</size></b> people were arrested in acc..."*)
 
 ### Węzeł `[266]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true && BaseGame.Decisio..."*)
 
 ### Węzeł `[267]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
-  - -> `[269]`
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true && BaseGame.Decisio..."*)
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decis..."*)
 
 ### Węzeł `[268]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn05_AutocratEmergency_Extend"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn05_AutocratEmergency_Extend"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Narrator: "<b><size=26>22,934</size></b> people were arrested in acc..."*)
 
 ### Węzeł `[269]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn05_AutocratEmergency_Extend"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true && BaseGame.Decision_Turn05_AutocratEmergency_Extend == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true  and  Variable["BaseGame.Decision_Turn05_AutocratEmergency_Extend"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_DetentionWithoutTrial == ..."*)
 
 ### Węzeł `[270]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_CrimeWave == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_CrimeWave == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
-  - -> `[272]`
+  - -> `[271]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_CrimeWave == true"*)
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Order_CrimeWave == true)"*)
 
 ### Węzeł `[271]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_CrimeWave == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Order_CrimeWave"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_CrimeWave == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Order_CrimeWave"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
+  - -> `[276]` (*Narrator: "<b><size=26>13,438</size></b> people died to criminal vio..."*)
 
 ### Węzeł `[272]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Order_CrimeWave == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Order_CrimeWave"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Order_CrimeWave == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Order_CrimeWave"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrime == true"*)
 
 ### Węzeł `[273]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_OrganisedCrime == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_OrganisedCrime == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[274]`
-  - -> `[275]`
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrime == true"*)
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Order_OrganisedCrime == true)"*)
 
 ### Węzeł `[274]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Order_OrganisedCrime == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Order_OrganisedCrime"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Order_OrganisedCrime == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Order_OrganisedCrime"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[260]`
+  - -> `[260]` (*Narrator: "<b><size=26>8,222</size></b> people died to criminal viol..."*)
 
 ### Węzeł `[275]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Order_OrganisedCrime == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Order_OrganisedCrime"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Order_OrganisedCrime == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Order_OrganisedCrime"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Order_OrganisedCrimeContained == true"*)
 
 ### Węzeł `[276]`
 Mówca: **Narrator**
 > "<b><size=26>13,438</size></b> people died to criminal violence."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[277]`
 Mówca: **Narrator**
 > "<b><size=26>779</size></b> people were killed during the clashes between Red Youth and Young Sords."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[278]`
 Mówca: **Narrator**
 > "<b><size=26>13,439</size></b> people were detained without trial."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[279]`
 Mówca: **Narrator**
 > "<b><size=26>409,784</size></b> jobs were created by four largest companies of Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_PSnW_Healthcare_Privatization == true"*)
 
 ### Węzeł `[280]`
 Mówca: **Narrator**
 > "<b><size=26>15,440</size></b> people were arrested for their suspected ties to Young Sords."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[281]`
 Mówca: **Narrator**
 > "During protests, <b><size=26>2 billion SR</size></b> worth public property damage was done and <b><size=26>821</size></b> arrests were made."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[282]`
 Mówca: **Narrator**
 > "<b><size=26>22,934</size></b> people were arrested in accordance to the state of emergency."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[283]`
 Mówca: **Narrator**
 > "<b><size=26>51,091</size></b> people were arrested in accordance to the state of emergency."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[284]`
 Mówca: **Narrator**
 > "<b><size=26>18,220</size></b> people were arrested for protesting the state of emergency."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true && Base..."*)
 
 ### Węzeł `[285]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
-  - -> `[287]`
+  - -> `[286]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
+  - -> `[287]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[286]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
+  - -> `[157]` (*Narrator: "<b><size=26>589,112</size></b> Sordish lives were lost du..."*)
 
 ### Węzeł `[287]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 1 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[288]`
 Mówca: **Narrator**
 > "<b><size=26>12,390</size></b> people were arrested for their ties to the Workers Party of Bludia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
 
 ### Węzeł `[289]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[290]`
-  - -> `[291]`
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumbu..."*)
 
 ### Węzeł `[290]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[292]`
+  - -> `[292]` (*Narrator: "<b><size=26>73,632</size></b> soldiers died during the Ru..."*)
 
 ### Węzeł `[291]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordlandArmySize == 0 && BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordlandArmySize"] == 0  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordlandArmySize == 0 && BaseGame.Ending_Rumburg..."*)
 
 ### Węzeł `[292]`
 Mówca: **Narrator**
 > "<b><size=26>73,632</size></b> soldiers died during the Rumburg Invasion."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
 
 ### Węzeł `[293]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_BludishOppression == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_BludishOppression == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[294]`
-  - -> `[295]`
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_BludishOppression == true"*)
+  - -> `[295]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Law_BludishOppression == true)"*)
 
 ### Węzeł `[294]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_BludishOppression == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Law_BludishOppression"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_BludishOppression == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Law_BludishOppression"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[308]`
+  - -> `[308]` (*Narrator: "<b><size=26>11,222</size></b> people with Bludish descent..."*)
 
 ### Węzeł `[295]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Law_BludishOppression == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Law_BludishOppression"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Law_BludishOppression == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Law_BludishOppression"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_BludishProblem == true"*)
 
 ### Węzeł `[296]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_BludishProblem == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_BludishProblem == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[297]`
-  - -> `[298]`
+  - -> `[297]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_BludishProblem == true"*)
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Law_BludishProblem == true)"*)
 
 ### Węzeł `[297]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Law_BludishProblem == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Law_BludishProblem"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Law_BludishProblem == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Law_BludishProblem"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[304]`
+  - -> `[304]` (*Narrator: "<b><size=26>3,390</size></b> people with Bludish descent ..."*)
 
 ### Węzeł `[298]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Law_BludishProblem == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Law_BludishProblem"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Law_BludishProblem == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Law_BludishProblem"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[305]`
+  - -> `[305]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_BludishCommission_Signed == true"*)
 
 ### Węzeł `[299]`
 Mówca: **Narrator**
 > "<b><size=26>108,863</size></b> new Bludish voters registered to vote."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
 
 ### Węzeł `[300]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_Bluds == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_Bluds == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[301]`
-  - -> `[302]`
+  - -> `[301]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_Bluds == true"*)
+  - -> `[302]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_Bluds == true)"*)
 
 ### Węzeł `[301]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_Bluds == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_Bluds"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_Bluds == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_Bluds"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[288]`
+  - -> `[288]` (*Narrator: "<b><size=26>12,390</size></b> people were arrested for th..."*)
 
 ### Węzeł `[302]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_Bluds == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_Bluds"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_Bluds == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_Bluds"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[293]`
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Law_BludishOppression == true"*)
 
 ### Węzeł `[303]`
 Mówca: **Narrator**
 > "More than <b><size=26>15,899</size></b> people with Bludish descent were released from prison."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
 
 ### Węzeł `[304]`
 Mówca: **Narrator**
 > "<b><size=26>3,390</size></b> people with Bludish descent were jailed and <b><size=26>239</size></b> were killed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
 
 ### Węzeł `[305]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_BludishCommission_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_BludishCommission_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
-  - -> `[307]`
+  - -> `[306]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn09_BludishCommission_Signed == true"*)
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn09_BludishCommission_Signed == true)"*)
 
 ### Węzeł `[306]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn09_BludishCommission_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_BludishCommission_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn09_BludishCommission_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn09_BludishCommission_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[303]`
+  - -> `[303]` (*Narrator: "More than <b><size=26>15,899</size></b> people with Bludi..."*)
 
 ### Węzeł `[307]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn09_BludishCommission_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_BludishCommission_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn09_BludishCommission_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn09_BludishCommission_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[299]`
+  - -> `[299]` (*Narrator: "<b><size=26>108,863</size></b> new Bludish voters registe..."*)
 
 ### Węzeł `[308]`
 Mówca: **Narrator**
 > "<b><size=26>11,222</size></b> people with Bludish descent were jailed and <b><size=26>663</size></b> were killed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
 
 ### Węzeł `[309]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_SecretStatePolice == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_SecretStatePolice == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
-  - -> `[311]`
+  - -> `[310]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Order_SecretStatePolice == true"*)
+  - -> `[311]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Order_SecretStatePolice == true)"*)
 
 ### Węzeł `[310]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Order_SecretStatePolice == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Order_SecretStatePolice"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Order_SecretStatePolice == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Order_SecretStatePolice"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Narrator: "<b><size=26>328</size></b> people disappeared without a t..."*)
 
 ### Węzeł `[311]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Order_SecretStatePolice == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Order_SecretStatePolice"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Order_SecretStatePolice == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Order_SecretStatePolice"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[312]`
+  - -> `[312]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOffici..."*)
 
 ### Węzeł `[312]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[313]`
-  - -> `[314]`
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOffici..."*)
+  - -> `[314]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOffi..."*)
 
 ### Węzeł `[313]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "<b><size=26>4,109</size></b> state officials were arreste..."*)
 
 ### Węzeł `[314]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_A_Investigation_OldGuard_GovernmentOfficialsPurge"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Investigate_OldGuard == true && BaseGame...."*)
 
 ### Węzeł `[315]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_UnemploymentCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_UnemploymentCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[316]`
-  - -> `[317]`
+  - -> `[316]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_UnemploymentCrisis == true"*)
+  - -> `[317]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_UnemploymentCrisis == true)"*)
 
 ### Węzeł `[316]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_UnemploymentCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_UnemploymentCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[318]`
+  - -> `[318]` (*Narrator: "<b><size=26>1,6 million</size></b> people lost their jobs."*)
 
 ### Węzeł `[317]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_UnemploymentCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_UnemploymentCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_UnemploymentCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
+  - -> `[319]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_HighEmployment == true"*)
 
 ### Węzeł `[318]`
 Mówca: **Narrator**
@@ -2238,25 +2239,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[319]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_HighEmployment == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_HighEmployment == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[320]`
-  - -> `[321]`
+  - -> `[320]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Economy_HighEmployment == true"*)
+  - -> `[321]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Situation_Economy_HighEmployment == true)"*)
 
 ### Węzeł `[320]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Economy_HighEmployment == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Situation_Economy_HighEmployment"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Economy_HighEmployment == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Situation_Economy_HighEmployment"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Narrator: "<b><size=26>2,2 million</size></b> people found a job."*)
 
 ### Węzeł `[321]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Situation_Economy_HighEmployment == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_HighEmployment"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Situation_Economy_HighEmployment == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Situation_Economy_HighEmployment"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true && (BaseGam..."*)
 
 ### Węzeł `[322]`
 Mówca: **Narrator**
@@ -2269,25 +2270,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[324]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
-  - -> `[326]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarLost == true"*)
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarLost == true)"*)
 
 ### Węzeł `[325]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Narrator: "3 million civilians have died in the Rummo-Sordish War. M..."*)
 
 ### Węzeł `[326]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
+  - -> `[332]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[327]`
 Mówca: **Narrator**
@@ -2295,25 +2296,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[328]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_WorldWar == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_WorldWar == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[329]`
-  - -> `[330]`
+  - -> `[329]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_WorldWar == true"*)
+  - -> `[330]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_WorldWar == true)"*)
 
 ### Węzeł `[329]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_WorldWar == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_WorldWar"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_WorldWar == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_WorldWar"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[331]`
+  - -> `[331]` (*Narrator: "63 million people died during the world war."*)
 
 ### Węzeł `[330]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_WorldWar == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_WorldWar"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_WorldWar == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_WorldWar"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "BaseGame.Wehlen_JointOperation == true && BaseGame.Rumbur..."*)
 
 ### Węzeł `[331]`
 Mówca: **Narrator**
@@ -2321,25 +2322,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[332]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[333]`
-  - -> `[334]`
+  - -> `[333]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
+  - -> `[334]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true)"*)
 
 ### Węzeł `[333]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[335]`
+  - -> `[335]` (*Narrator: "During the coup, 33 soldiers and 1,430 protesters were ki..."*)
 
 ### Węzeł `[334]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[364]`
+  - -> `[364]` (*Narrator: "During the sporadic border clashes with Rumburg, 2 milita..."*)
 
 ### Węzeł `[335]`
 Mówca: **Narrator**
@@ -2347,67 +2348,67 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[336]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[337]`
-  - -> `[338]`
+  - -> `[337]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_EnT_SordishDepression == true && (BaseGam..."*)
+  - -> `[338]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_EnT_SordishDepression == true && (BaseG..."*)
 
 ### Węzeł `[337]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
+  - -> `[347]` (*Narrator: "Price of bread increased from 0,5 SR to <b><size=26>4 SR...."*)
 
 ### Węzeł `[338]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true)))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_EnT_SordishDepression == true && (BaseGame.EconomyAction_PrintMoney == true || BaseGame.Turn09_EnT_HyperInflation == true || BaseGame.Situation_Economy_DebtCrisis == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_EnT_SordishDepression"] == true  and  (Variable["BaseGame.EconomyAction_PrintMoney"] == true  or  Variable["BaseGame.Turn09_EnT_HyperInflation"] == true  or  Variable["BaseGame.Situation_Economy_DebtCrisis"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[339]`
+  - -> `[339]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyAction_HousingAssistance == true"*)
 
 ### Węzeł `[339]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyAction_HousingAssistance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyAction_HousingAssistance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
-  - -> `[341]`
+  - -> `[340]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomyAction_HousingAssistance == true"*)
+  - -> `[341]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomyAction_HousingAssistance == true)"*)
 
 ### Węzeł `[340]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.EconomyAction_HousingAssistance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomyAction_HousingAssistance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomyAction_HousingAssistance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomyAction_HousingAssistance"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[346]`
+  - -> `[346]` (*Narrator: "<b><size=26>110,467</size></b> people benefitted from sta..."*)
 
 ### Węzeł `[341]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomyAction_HousingAssistance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomyAction_HousingAssistance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomyAction_HousingAssistance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomyAction_HousingAssistance"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[348]`
+  - -> `[348]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
 
 ### Węzeł `[342]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[343]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
+  - -> `[344]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)"*)
 
 ### Węzeł `[343]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[345]`
+  - -> `[345]` (*Narrator: "<b><size=26>2,5 million</size></b> workers benefitted fro..."*)
 
 ### Węzeł `[344]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn04_WorkersRights_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[351]`
+  - -> `[351]` (*Narrator: "<b><size=26>304,754</size></b> people lost their jobs."*)
 
 ### Węzeł `[345]`
 Mówca: **Narrator**
@@ -2425,25 +2426,25 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[348]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[349]`
-  - -> `[350]`
+  - -> `[349]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_Education_Budget_Decrease == true && ..."*)
+  - -> `[350]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true &..."*)
 
 ### Węzeł `[349]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Narrator: "<b><size=26>42,316</size></b> teachers lost their jobs."*)
 
 ### Węzeł `[350]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_Education_Budget_Decrease == true && BaseGame.Turn04_PSnW_Education_Privatization == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_Education_Budget_Decrease"] == true  and  Variable["BaseGame.Turn04_PSnW_Education_Privatization"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
+  - -> `[342]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
 
 ### Węzeł `[351]`
 Mówca: **Narrator**
@@ -2451,72 +2452,72 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[352]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Lespia_Alliance == true || 
-BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Lespia_Alliance == true || 
+BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[353]`
-  - -> `[354]`
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Lespia_Alliance == true ||  BaseGame.Valgsland_..."*)
+  - -> `[354]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Lespia_Alliance == true ||  BaseGame.Valgslan..."*)
 
 ### Węzeł `[353]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (BaseGame.Lespia_Alliance == true || 
-BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true  or  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Lespia_Alliance == true || 
+BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true  or  
 Variable["BaseGame.Valgsland_Alliance"] == true)  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[361]`
+  - -> `[361]` (*Narrator: "1,5 million civilians have died in the Rummo-Sordish War."*)
 
 ### Węzeł `[354]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((BaseGame.Lespia_Alliance == true || 
-BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Lespia_Alliance"] == true  or  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Lespia_Alliance == true || 
+BaseGame.Valgsland_Alliance == true) && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Lespia_Alliance"] == true  or  
 Variable["BaseGame.Valgsland_Alliance"] == true)  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
 
 ### Węzeł `[355]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[356]`
-  - -> `[357]`
+  - -> `[356]` (*Węzeł Logiki Narracyjnej: "BaseGame.Wehlen_JointOperation == true && BaseGame.Rumbur..."*)
+  - -> `[357]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Wehlen_JointOperation == true && BaseGame.Rumb..."*)
 
 ### Węzeł `[356]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[362]`
+  - -> `[362]` (*Narrator: "2,2 million civilians have died in the Rummo-Sordish War...."*)
 
 ### Węzeł `[357]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Wehlen_JointOperation == true && BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[352]`
+  - -> `[352]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Lespia_Alliance == true ||  BaseGame.Valgsland_..."*)
 
 ### Węzeł `[358]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[359]`
-  - -> `[360]`
+  - -> `[359]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
+  - -> `[360]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarWin == true)"*)
 
 ### Węzeł `[359]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[363]`
+  - -> `[363]` (*Narrator: "1,1 million civilians have died in the Rummo-Sordish War."*)
 
 ### Węzeł `[360]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarLost == true"*)
 
 ### Węzeł `[361]`
 Mówca: **Narrator**

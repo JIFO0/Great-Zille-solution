@@ -25,10 +25,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -37,25 +38,25 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "Today was a day more important than my coronation, my wedding, even my birth."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Narrator: "Today was the day I would make the Kingdom of Rizia ascen..."*)
 
 ### Węzeł `[4]`
 Mówca: **Narrator**
 > "Today was the day I would make the Kingdom of Rizia ascend closer to the heavens."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
+  - -> `[5]` (*Narrator: "I had to prepare my attire for the momentous balcony spee..."*)
 
 ### Węzeł `[5]`
 Mówca: **Narrator**

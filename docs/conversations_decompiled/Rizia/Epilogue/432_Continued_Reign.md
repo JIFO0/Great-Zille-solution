@@ -130,21 +130,217 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 14
-- **Węzły modyfikujące stan gry:** 52
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[17]` (Paskal Beniwoll): `--;`
-- Węzeł `[18]` (Paskal Beniwoll): `--;`
-- Węzeł `[54]` (Paskal Beniwoll): `--;`
-- Węzeł `[55]` (Paskal Beniwoll): `--;`
-- Węzeł `[71]` (Paskal Beniwoll): `--;`
-- Węzeł `[72]` (Paskal Beniwoll): `--;`
-- Węzeł `[98]` (Paskal Beniwoll): `--;`
-- Węzeł `[99]` (Paskal Beniwoll): `--;`
-- *...oraz 44 innych węzłów ze skryptami.*
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[7]` | **"At long last, Rizians went to the ballot boxes to cast their votes."** | `[253]` **Narrator**: "A few months after your speech, ..."<br>`[407]` **Narrator**: "A few months after your speech, ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[151]` **Narrator**: "As expected, Sotelato won by a l..."<br>`[179]` **Narrator**: "As expected, Sotelato won by a l..." |
+| `[8]` | **"...remembered why you fell in love with her."** | `[6]` **Narrator**: "On the throne next to yours, Que..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[9]` | **"...wondered how your child would grow up in this world."** | `[6]` **Narrator**: "On the throne next to yours, Que..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[10]` | **"...smiled back and proceeded with the celebrations."** | `[6]` **Narrator**: "On the throne next to yours, Que..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[11]` | **"...remembered why you fell in love with him."** | `[530]` **Narrator**: "Pabel was seated in a plain wood..."<br>`[537]` **Narrator**: "You saw Lord Pabel Adria minglin..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[12]` | **"...wondered if the public would ever truly accept you as a couple."** | `[530]` **Narrator**: "Pabel was seated in a plain wood..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[13]` | **"...smiled back and proceeded with the celebrations."** | `[530]` **Narrator**: "Pabel was seated in a plain wood..."<br>`[537]` **Narrator**: "You saw Lord Pabel Adria minglin..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[22]` | **"...played along with a fake smile."** | `[25]` **Narrator**: "With your one gesture, the orche..."<br>`[26]` **Narrator**: "With your one gesture, the orche..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[23]` | **"...welcomed him with open arms."** | `[25]` **Narrator**: "With your one gesture, the orche..."<br>`[26]` **Narrator**: "With your one gesture, the orche..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[24]` | **"...visibly showed your discontent with him."** | `[25]` **Narrator**: "With your one gesture, the orche..."<br>`[26]` **Narrator**: "With your one gesture, the orche..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[31]` | **"...thought nothing of it and shrugged it off."** | `[30]` **Narrator**: "You looked around the ballroom. ..."<br>`[266]` **Narrator**: "You looked around the ballroom. ..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[32]` | **"...demanded that the Azaros be reprimanded at once."** | `[30]` **Narrator**: "You looked around the ballroom. ..."<br>`[266]` **Narrator**: "You looked around the ballroom. ..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[33]` | **"...sent a strongly worded letter to condemn their act."** | `[30]` **Narrator**: "You looked around the ballroom. ..."<br>`[266]` **Narrator**: "You looked around the ballroom. ..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[44]` | **"...congratulated House Azaro once again for its efforts in the Pales campaign."** | `[37]` **Narrator**: "You looked around the ballroom. ..."<br>`[51]` **Narrator**: "You looked around in the ballroo..."<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLC.War_Pales_Won"] == true` | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[48]` | **"...said that the day for Pales would yet come."** | `[37]` **Narrator**: "You looked around the ballroom. ..."<br>`[51]` **Narrator**: "You looked around in the ballroo..."<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLC.War_Pales_Loss"] == true`<br>`(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false`<br>`(Variable["RiziaDLC.War_Pales_Won"] == true) == false` | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[49]` | **"...accepted the gesture impassively."** | `[37]` **Narrator**: "You looked around the ballroom. ..."<br>`[51]` **Narrator**: "You looked around in the ballroo..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[50]` | **"...thanked House Azaro for its service to the Crown."** | `[37]` **Narrator**: "You looked around the ballroom. ..."<br>`[51]` **Narrator**: "You looked around in the ballroo..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[56]` | **"...did not accept this apparent bribery."** | `[53]` **Narrator**: "Manus was in a heated discussion..."<br>`[279]` **Narrator**: "Representing her House, Angelica..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[57]` | **"...thanked him for his gift."** | `[53]` **Narrator**: "Manus was in a heated discussion..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[61]` | **"...demanded that House Sazon focus its efforts on restoring Zille to greatness."** | `[53]` **Narrator**: "Manus was in a heated discussion..."<br>`[279]` **Narrator**: "Representing her House, Angelica..."<br>*(oraz 1 innych węzłów)* | `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true` | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[62]` | **"...knew her family would never be a problem again."** | `[279]` **Narrator**: "Representing her House, Angelica..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[63]` | **"...thanked her for her gift."** | `[279]` **Narrator**: "Representing her House, Angelica..."<br>`[647]` **Narrator**: "Representing her House, Leona Sa..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[65]` | **"...wished them the 'best' in a letter."** | `[64]` **Narrator**: "There were no members of House S..."<br>`[286]` **Narrator**: "There were no members of House S..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[66]` | **"...hoped it would never come to that for House Toras."** | `[64]` **Narrator**: "There were no members of House S..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[67]` | **"...wanted nothing to do with the family or its inner workings."** | `[64]` **Narrator**: "There were no members of House S..."<br>`[286]` **Narrator**: "There were no members of House S..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[86]` | **"...told him to not make himself too comfortable."** | `[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>`[651]` **Narrator**: "Duke Axel Reinhart Toras entered..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[87]` | **"...told him to kiss your ring."** | `[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>`[651]` **Narrator**: "Duke Axel Reinhart Toras entered..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[88]` | **"...told your son-in-law that no such formalities were necessary."** | `[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>`[651]` **Narrator**: "Duke Axel Reinhart Toras entered..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[89]` | **"...bowed in response."** | `[84]` **Narrator**: "Duke Axel Reinhart entered the b..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[90]` | **"...thanked him for Pales' support."** | `[84]` **Narrator**: "Duke Axel Reinhart entered the b..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[91]` | **"...said you wanted to expand trade between your two countries."** | `[84]` **Narrator**: "Duke Axel Reinhart entered the b..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[92]` | **"...made him kiss your ring."** | `[83]` **Narrator**: "Among the whispers of the court,..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[93]` | **"...told him to get out of your palace."** | `[83]` **Narrator**: "Among the whispers of the court,..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[94]` | **"...asked security to apprehend him."** | `[83]` **Narrator**: "Among the whispers of the court,..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[95]` | **"...cursed yourself for starting this war."** | `[85]` **Narrator**: "One of your aides let you know t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[96]` | **"...praised Pales for their valiant defense."** | `[85]` **Narrator**: "One of your aides let you know t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[97]` | **"...swore that the international community would pay."** | `[85]` **Narrator**: "One of your aides let you know t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[126]` | **"...ordered the servants to deliver more wine to them."** | `[663]` **Narrator**: "Delegations from {RiziaDLCText.J..."<br>`[667]` **Narrator**: "Delegations from {RiziaDLCText.J..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..."<br>`[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 1 innych odgałęzień)* |
+| `[127]` | **"...assured them nothing had really changed."** | `[663]` **Narrator**: "Delegations from {RiziaDLCText.J..."<br>`[667]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..."<br>`[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 1 innych odgałęzień)* |
+| `[128]` | **"...asked your guards to watch their every step."** | `[663]` **Narrator**: "Delegations from {RiziaDLCText.J..."<br>`[667]` **Narrator**: "Delegations from {RiziaDLCText.J..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..."<br>`[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 1 innych odgałęzień)* |
+| `[130]` | **"...believed the person Vina had become could take on anything."** | `[296]` **Player_Romus**: "She looked just like her mother."<br>`[305]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[729]` **Narrator**: "As if she understood what you we..."<br>`[136]` **Narrator**: "As if she understood what you we..." |
+| `[131]` | **"...told her to look around and greet her people."** | `[296]` **Player_Romus**: "She looked just like her mother."<br>`[305]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[725]` **Narrator**: "She waved at the crowd that had ..."<br>`[135]` **Narrator**: "She waved at the crowd that had ..." |
+| `[132]` | **"...warned her to be ready for the den of wolves that was waiting for her."** | `[296]` **Player_Romus**: "She looked just like her mother."<br>`[305]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[719]` **Narrator**: "She told you that she was ready,..."<br>`[133]` **Narrator**: "She told you that she was ready,..." |
+| `[134]` | **"There began the days of Vina of House Toras, the Heir Apparent."** | `[133]` **Narrator**: "She told you that she was ready,..."<br>`[135]` **Narrator**: "She waved at the crowd that had ..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[138]` | **"...lifted your son up for everyone to see."** | `[137]` **Narrator**: "You stood up and gathered {Rizia..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[745]` **Narrator**: "Your subjects' applause resonate..."<br>`[141]` **Narrator**: "Your subjects' applause resonate..." |
+| `[139]` | **"...demanded that everyone applaud their future king."** | `[137]` **Narrator**: "You stood up and gathered {Rizia..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[745]` **Narrator**: "Your subjects' applause resonate..."<br>`[141]` **Narrator**: "Your subjects' applause resonate..." |
+| `[140]` | **"...told everyone to have fun and enjoy the celebrations."** | `[137]` **Narrator**: "You stood up and gathered {Rizia..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[745]` **Narrator**: "Your subjects' applause resonate..."<br>`[141]` **Narrator**: "Your subjects' applause resonate..." |
+| `[142]` | **"And so began the days of Prince Romus the Second of House Toras, the Heir Apparent."** | `[141]` **Narrator**: "Your subjects' applause resonate..."<br>`[747]` **Narrator**: "The music switched to a solemn h..." | `Variable["RiziaDLC.Son_Romus"] == true` | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[145]` | **"...vowed that the reign of House Toras would continue."** | `[144]` **Narrator**: "With no heir apparent on the hor..."<br>`[751]` **Narrator**: "With no heir apparent on the hor..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[149]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[150]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[150]` | **"At long last, Rizians went to the ballot boxes to cast their votes."** | `[149]` **Narrator**: "A few months after your speech, ..."<br>`[436]` **Narrator**: "A few months after your speech, ..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[175]` **Narrator**: "As expected, Daria won by a land..."<br>`[152]` **Narrator**: "As expected, Daria won by a land..." |
+| `[153]` | **"Times were changing. But you were still King."** | `[151]` **Narrator**: "As expected, Sotelato won by a l..."<br>`[179]` **Narrator**: "As expected, Sotelato won by a l..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign5");` | `[155]` **Narrator**: "On the eve of your eight-year ju..." |
+| `[154]` | **"Times were changing."** | `[152]` **Narrator**: "As expected, Daria won by a land..."<br>`[175]` **Narrator**: "As expected, Daria won by a land..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_newgovernment");` | `[160]` **Narrator**: "On the day of your eight-year ju..." |
+| `[156]` | **"...demanded an apology."** | `[155]` **Narrator**: "On the eve of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[159]` **Narrator**: "He apologized with a shrug, sayi..." |
+| `[157]` | **"...forgave the breach of protocol."** | `[155]` **Narrator**: "On the eve of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[411]` **Narrator**: "He pulled out a briefcase to inf..." |
+| `[158]` | **"...told him to not be late next time."** | `[155]` **Narrator**: "On the eve of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[159]` **Narrator**: "He apologized with a shrug, sayi..." |
+| `[161]` | **"...told her that she no longer had to kneel if she wished."** | `[160]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[165]` **Narrator**: "She refused respectfully.  After..." |
+| `[162]` | **"...waited for what Daria had to say."** | `[160]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[164]` **Narrator**: "She pulled out a briefcase to in..." |
+| `[163]` | **"...commended her for respecting her king."** | `[160]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[166]` **Narrator**: "She thanked you profusely.  Afte..." |
+| `[170]` | **"You listened."** | `[164]` **Narrator**: "She pulled out a briefcase to in..."<br>`[165]` **Narrator**: "She refused respectfully.  After..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." |
+| `[171]` | **"You listened."** | `[159]` **Narrator**: "He apologized with a shrug, sayi..."<br>`[411]` **Narrator**: "He pulled out a briefcase to inf..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." |
+| `[181]` | **"...said that without Pales conquered, you wouldn't be satisfied."** | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | *Koniec sceny / Terminal* |
+| `[182]` | **"...knew Rizia could hold out for however long it took."** | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | *Koniec sceny / Terminal* |
+| `[183]` | **"...praised the new government for acting quickly and decisively."** | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | *Koniec sceny / Terminal* |
+| `[196]` | **"...align with them, but not get too close."** | `[191]` **Narrator**: "The newly independent {RiziaDLCT..."<br>`[443]` **Narrator**: "The newly independent {RiziaDLCT..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[197]` | **"...fully ally with them for the sake of the unity of the region."** | `[191]` **Narrator**: "The newly independent {RiziaDLCT..."<br>`[443]` **Narrator**: "The newly independent {RiziaDLCT..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[198]` | **"...avoid contact as much as possible."** | `[191]` **Narrator**: "The newly independent {RiziaDLCT..."<br>`[443]` **Narrator**: "The newly independent {RiziaDLCT..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[199]` | **"...fight back and show them the might of Rizia."** | `[195]` **Narrator**: "Wruhecists were fleeing Rizia fo..."<br>`[444]` **Narrator**: "Golcondists were fleeing Rizia f..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[200]` | **"...keep calm and not repeat the mistakes of the past."** | `[195]` **Narrator**: "Wruhecists were fleeing Rizia fo..."<br>`[444]` **Narrator**: "Golcondists were fleeing Rizia f..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[201]` | **"...try to turn public sentiment around by using intelligence services."** | `[195]` **Narrator**: "Wruhecists were fleeing Rizia fo..."<br>`[444]` **Narrator**: "Golcondists were fleeing Rizia f..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[216]` **Narrator**: "Recovery from Rizia's recent des..."<br>`[457]` **Narrator**: "In the wake of the destabilizati..." |
+| `[220]` | **"...make an example out of the dissidents."** | `[216]` **Narrator**: "Recovery from Rizia's recent des..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[221]` | **"...put the people who opposed the Crown to work."** | `[216]` **Narrator**: "Recovery from Rizia's recent des..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[222]` | **"...wish good luck to the government."** | `[216]` **Narrator**: "Recovery from Rizia's recent des..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[223]` | **"...print more money to counterbalance."** | `[217]` **Narrator**: "Recovery from the current econom..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[224]` | **"...make better use of Rizia's immigrant workforce."** | `[217]` **Narrator**: "Recovery from the current econom..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[225]` | **"...wish good luck to the government."** | `[217]` **Narrator**: "Recovery from the current econom..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[226]` | **"...ask Rizia's international allies for aid."** | `[218]` **Narrator**: "Recovery from the energy crisis ..." | `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true` | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[227]` | **"...not do anything that would make Rizia reliant on others."** | `[218]` **Narrator**: "Recovery from the energy crisis ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[228]` | **"...wish good luck to the government."** | `[218]` **Narrator**: "Recovery from the energy crisis ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[229]` | **"...industrialize as quickly as possible."** | `[219]` **Narrator**: "Increasing Rizia's production ca..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[230]` | **"...build more local factories."** | `[219]` **Narrator**: "Increasing Rizia's production ca..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[231]` | **"...wish good luck to the government."** | `[219]` **Narrator**: "Increasing Rizia's production ca..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[244]` | **"And so began the days of Prince Taddeus the Second of House Toras, the Heir Apparent."** | `[141]` **Narrator**: "Your subjects' applause resonate..."<br>`[747]` **Narrator**: "The music switched to a solemn h..." | `Variable["RiziaDLC.Son_Taddeus"] == true`<br>`(Variable["RiziaDLC.Son_Romus"] == true) == false` | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[248]` | **"And so began the days of Prince Valero the Second of House Toras, the Heir Apparent."** | `[141]` **Narrator**: "Your subjects' applause resonate..."<br>`[747]` **Narrator**: "The music switched to a solemn h..." | `Variable["RiziaDLC.Son_Valero"] == true`<br>`(Variable["RiziaDLC.Son_Taddeus"] == true) == false`<br>`(Variable["RiziaDLC.Son_Romus"] == true) == false` | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[249]` | **"And so began the days of Prince Ardos of House Toras, the Heir Apparent."** | `[141]` **Narrator**: "Your subjects' applause resonate..."<br>`[747]` **Narrator**: "The music switched to a solemn h..." | `(Variable["RiziaDLC.Son_Valero"] == true) == false`<br>`(Variable["RiziaDLC.Son_Taddeus"] == true) == false`<br>`(Variable["RiziaDLC.Son_Romus"] == true) == false` | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[253]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[7]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[257]` | **"...wished more than ever that Vina could be here with you."** | `[6]` **Narrator**: "On the throne next to yours, Que..."<br>`[530]` **Narrator**: "Pabel was seated in a plain wood..."<br>*(oraz 1 innych węzłów)* | `Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true` | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[262]` | **"...felt a twinge of regret about what could have been."** | `[37]` **Narrator**: "You looked around the ballroom. ..." | `Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2` | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[280]` | **"...beckoned him to come forward and kiss your ring."** | `[278]` **Narrator**: "You spotted Manus Sazon at the e..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[281]` | **"...paid no attention to him."** | `[278]` **Narrator**: "You spotted Manus Sazon at the e..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[282]` | **"...knew he'd be useful in the battles to come."** | `[278]` **Narrator**: "You spotted Manus Sazon at the e..." | `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true` | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[287]` | **"...knew you would crush them if they dared to rise against you again."** | `[286]` **Narrator**: "There were no members of House S..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[291]` | **"...told your son-in-law that no such formalities were necessary."** | `[84]` **Narrator**: "Duke Axel Reinhart entered the b..." | `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true` | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[295]` | **"...vowed you would keep fighting until Vina was rescued."** | `[85]` **Narrator**: "One of your aides let you know t..." | `Variable["RiziaDLC.Vina_Hostage"] == true` | `--;`<br>`Variable["RiziaDLCText.JubileeDelegation"] ="the AN and I...`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[296]` | **"She looked just like her mother."** | `[122]` **Narrator**: "The grand doors to the hall open..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[132]` **Player_Romus**: "...warned her to be ready for th..."<br>`[131]` **Player_Romus**: "...told her to look around and g..."<br>*(oraz 6 innych odgałęzień)* |
+| `[310]` | **"...gave them your heartfelt congratulations."** | `[300]` **Narrator**: "As the orchestra struck up a fas..."<br>`[304]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[317]` **Narrator**: "Your daughter's husband disappea..." |
+| `[311]` | **"...feared for the new heir's future."** | `[300]` **Narrator**: "As the orchestra struck up a fas..."<br>`[304]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[317]` **Narrator**: "Your daughter's husband disappea..." |
+| `[312]` | **"...knew that the reign of House Toras would last forever."** | `[300]` **Narrator**: "As the orchestra struck up a fas..."<br>`[304]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 1 innych węzłów)* | `Variable["RiziaDLC.Vina_KeepsLastName"] == true` | *Brak zmian stanu* | `[317]` **Narrator**: "Your daughter's husband disappea..." |
+| `[316]` | **"...knew that the days of House Toras were definitively coming to an end."** | `[300]` **Narrator**: "As the orchestra struck up a fas..."<br>`[304]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 1 innych węzłów)* | `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false` | *Brak zmian stanu* | `[317]` **Narrator**: "Your daughter's husband disappea..." |
+| `[322]` | **"She looked just like her mother."** | `[323]` **Narrator**: "The grand doors to the ballroom ..." | `Variable["RiziaDLC.Relations_Vina_Estranged"] == false` | *Brak zmian stanu* | `[327]` **Narrator**: "As the orchestra struck up a fas..."<br>`[331]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 4 innych odgałęzień)* |
+| `[340]` | **"...felt relieved."** | `[332]` **Narrator**: "As the orchestra struck up a fas..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[341]` | **"...were outraged at the potential scandal."** | `[332]` **Narrator**: "As the orchestra struck up a fas..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[342]` | **"...assured her your daughter's family wouldn't pose a threat."** | `[327]` **Narrator**: "As the orchestra struck up a fas..."<br>`[331]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[343]` | **"...congratulated the couple profusely."** | `[327]` **Narrator**: "As the orchestra struck up a fas..."<br>`[331]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[344]` | **"...feared for the new heir's future."** | `[327]` **Narrator**: "As the orchestra struck up a fas..."<br>`[331]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[345]` | **"...tried to apologize for what you'd put them through."** | `[332]` **Narrator**: "As the orchestra struck up a fas..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[346]` | **"...knew that she'd forgiven you."** | `[339]` **Narrator**: "As the orchestra struck up a fas..." | `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false` | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[347]` | **"...hoped she wasn't plotting anything."** | `[339]` **Narrator**: "As the orchestra struck up a fas..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[348]` | **"...felt proud of the person she'd become."** | `[339]` **Narrator**: "As the orchestra struck up a fas..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[349]` | **"...knew you would have to watch your back for years to come."** | `[144]` **Narrator**: "With no heir apparent on the hor..."<br>`[751]` **Narrator**: "With no heir apparent on the hor..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[350]` | **"...ignored them. The throne was yours now, and nothing else mattered."** | `[144]` **Narrator**: "With no heir apparent on the hor..."<br>`[751]` **Narrator**: "With no heir apparent on the hor..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[354]` | **"...said that for what the Palesians had done to your daughter, they deserved to su..."** | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." | `Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true` | `--;`<br>`--;` | *Koniec sceny / Terminal* |
+| `[363]` | **"...to give Wehlen whatever diplomatic support it needed."** | `[356]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[364]` | **"...to stay far away from this conflict."** | `[356]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[365]` | **"...to kick Wehlen out of Intermerkopum for its act of aggression."** | `[356]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[373]` | **"...to let Rumburg fend for itself."** | `[372]` **Narrator**: "The final item on the agenda con..."<br>`[376]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[374]` | **"...to provide her with whatever diplomatic support she needed."** | `[372]` **Narrator**: "The final item on the agenda con..."<br>`[376]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[375]` | **"...to throw Rizia's support behind Sordland instead."** | `[372]` **Narrator**: "The final item on the agenda con..."<br>`[376]` **Narrator**: "The final item on the agenda con..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[381]` | **"...to stay far away from this conflict."** | `[380]` **Narrator**: "The final item on the agenda con..."<br>`[383]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[382]` | **"...to provide Rumburg with whatever backing it needed."** | `[380]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[384]` | **"...to provide Sordland with whatever diplomatic support it needed."** | `[383]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[385]` | **"...to throw Rizia's support behind Rumburg instead."** | `[383]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[399]` | **"...played along with a fake smile."** | `[398]` **Narrator**: "With your one gesture, the music..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[400]` | **"...welcomed them with open arms."** | `[398]` **Narrator**: "With your one gesture, the music..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[407]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[7]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[415]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[416]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[416]` | **"At long last, Rizians went to the ballot boxes to cast their votes."** | `[415]` **Narrator**: "A few months after your speech, ..."<br>`[431]` **Narrator**: "A few months after your speech, ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[417]` **Narrator**: "As expected, Manus won by a land..."<br>`[428]` **Narrator**: "As expected, Manus won by a land..." |
+| `[418]` | **"Times were changing. But you were still King."** | `[417]` **Narrator**: "As expected, Manus won by a land..."<br>`[428]` **Narrator**: "As expected, Manus won by a land..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign5");` | `[419]` **Narrator**: "On the day of your eight-year ju..." |
+| `[421]` | **"...warned him not to be late next time."** | `[419]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[420]` **Narrator**: "He pulled out a briefcase to inf..." |
+| `[422]` | **"...told him he didn't have to apologize."** | `[419]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[420]` **Narrator**: "He pulled out a briefcase to inf..." |
+| `[423]` | **"...congratulated him on his election victory."** | `[419]` **Narrator**: "On the day of your eight-year ju..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[420]` **Narrator**: "He pulled out a briefcase to inf..." |
+| `[424]` | **"You listened."** | `[420]` **Narrator**: "He pulled out a briefcase to inf..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[180]` **Narrator**: "{RiziaDLCText.EpiloguePM} said t..." |
+| `[431]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[416]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[436]` | **"1957\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[150]` **Player_Romus**: "At long last, Rizians went to th..." |
+| `[458]` | **"...thought it would harm the people more than it would help."** | `[457]` **Narrator**: "In the wake of the destabilizati..."<br>`[464]` **Narrator**: "The recent period of economic in..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[459]` | **"...warned him against further upsetting the nobility."** | `[457]` **Narrator**: "In the wake of the destabilizati..."<br>`[464]` **Narrator**: "The recent period of economic in..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[460]` | **"...told him it sounded like a good idea."** | `[457]` **Narrator**: "In the wake of the destabilizati..."<br>`[464]` **Narrator**: "The recent period of economic in..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[471]` | **"...focus all efforts on domestic energy extraction."** | `[218]` **Narrator**: "Recovery from the energy crisis ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | `[356]` **Narrator**: "The final item on the agenda con..." |
+| `[485]` | **"...to give GRACE whatever support it needed."** | `[480]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[486]` | **"...to consider Rizia's withdrawal."** | `[480]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[487]` | **"...not to promise her anything."** | `[480]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[488]` | **"You encouraged him to go along with Beatrice's plan."** | `[484]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[489]` | **"You approved his idea."** | `[484]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[490]` | **"You didn't advise him one way or the other."** | `[484]` **Narrator**: "The final item on the agenda con..." | *Brak (Dostępna bezwarunkowo)* | `--;` | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." |
+| `[493]` | **"1958\|Porte Drazon"** | *Brak bezpośredniego kontekstu* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[494]` **Player_Romus**: "The time had passed too quickly."<br>`[495]` **Player_Romus**: "It felt like eons since your cor..."<br>*(oraz 1 innych odgałęzień)* |
+| `[494]` | **"The time had passed too quickly."** | `[493]` **Narrator**: "A few months after your speech, ..."<br>`[497]` **Narrator**: "Later that evening, you strode i..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[504]` **Narrator**: "A cordon of soldiers in crisp un..."<br>`[508]` **Narrator**: "A cordon of Wruhec's Guardians k..."<br>*(oraz 1 innych odgałęzień)* |
+| `[495]` | **"It felt like eons since your coronation."** | `[493]` **Narrator**: "A few months after your speech, ..."<br>`[497]` **Narrator**: "Later that evening, you strode i..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[504]` **Narrator**: "A cordon of soldiers in crisp un..."<br>`[508]` **Narrator**: "A cordon of Wruhec's Guardians k..."<br>*(oraz 1 innych odgałęzień)* |
+| `[496]` | **"You had much to celebrate."** | `[493]` **Narrator**: "A few months after your speech, ..."<br>`[497]` **Narrator**: "Later that evening, you strode i..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[504]` **Narrator**: "A cordon of soldiers in crisp un..."<br>`[508]` **Narrator**: "A cordon of Wruhec's Guardians k..."<br>*(oraz 1 innych odgałęzień)* |
+| `[497]` | **"1958\|Porte Drazon"** | `[499]` **Player_Romus**: "It was time to get ready." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[494]` **Player_Romus**: "The time had passed too quickly."<br>`[495]` **Player_Romus**: "It felt like eons since your cor..."<br>*(oraz 1 innych odgałęzień)* |
+| `[499]` | **"It was time to get ready."** | `[492]` **Narrator**: "The bells of Zilba Archsanctuary..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[497]` **Narrator**: "Later that evening, you strode i..." |
+| `[510]` | **"You looked to your left."** | `[504]` **Narrator**: "A cordon of soldiers in crisp un..."<br>`[508]` **Narrator**: "A cordon of Wruhec's Guardians k..."<br>*(oraz 22 innych węzłów)* | `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false`<br>`(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false` | `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] = ...`<br>`PrologueImage("pe_princebirth");` | `[6]` **Narrator**: "On the throne next to yours, Que..."<br>`[530]` **Narrator**: "Pabel was seated in a plain wood..." |
+| `[511]` | **"You looked to your right."** | `[504]` **Narrator**: "A cordon of soldiers in crisp un..."<br>`[508]` **Narrator**: "A cordon of Wruhec's Guardians k..."<br>*(oraz 22 innych węzłów)* | `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false`<br>`(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false` | `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] =...` | `[546]` **Narrator**: "You saw Sal Ignacius, the Grand ..." |
+| `[538]` | **"...wondered if you'd have to live in secrecy forever."** | `[537]` **Narrator**: "You saw Lord Pabel Adria minglin..."<br>`[539]` **Narrator**: "You saw Pabel giving orders to t..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[541]` | **"...wondered if Lena would be proud of you today."** | `[540]` **Narrator**: "You saw your mother, as stylishl..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[542]` | **"...felt sorry for all the stress you'd put her through."** | `[540]` **Narrator**: "You saw your mother, as stylishl..." | `(Variable["RiziaDLC.Estela_PromisedToConvert"] == true) == false` | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[543]` | **"...smiled at her and proceeded with the celebrations."** | `[540]` **Narrator**: "You saw your mother, as stylishl..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[547]` | **"...told him to relax and enjoy himself."** | `[546]` **Narrator**: "You saw Sal Ignacius, the Grand ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[548]` | **"...thanked God for getting you this far."** | `[546]` **Narrator**: "You saw Sal Ignacius, the Grand ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[549]` | **"...knew you'd keep Sal around as long as he was of use to you, and no longer."** | `[546]` **Narrator**: "You saw Sal Ignacius, the Grand ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[562]` | **"...told him to relax and enjoy himself."** | `[557]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>`[561]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>*(oraz 5 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[563]` | **"...assured him you hadn't gone over budget."** | `[557]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>`[572]` **Narrator**: "You saw Axel Reinhart, your son-..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[564]` | **"...said that the whisperers should be found and imprisoned."** | `[557]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>`[572]` **Narrator**: "You saw Axel Reinhart, your son-..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[565]` | **"...assured her you hadn't gone over budget."** | `[581]` **Narrator**: "You saw Angelica Sazon, your Gra..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[582]` | **"...told her to relax and enjoy herself."** | `[580]` **Narrator**: "You saw Angelica Sazon, your Gra..."<br>`[581]` **Narrator**: "You saw Angelica Sazon, your Gra..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[583]` | **"...knew you'd keep him around as long as he was of use to you, and no longer."** | `[561]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>`[579]` **Narrator**: "You saw Axel Reinhart, your son-..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[584]` | **"...knew you'd keep her around as long as she was of use to you, and no longer."** | `[580]` **Narrator**: "You saw Angelica Sazon, your Gra..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[585]` | **"...thanked him for his years of loyalty."** | `[561]` **Narrator**: "You saw Hugo Toras, your uncle, ..."<br>`[605]` **Narrator**: "You saw Titus Gordion, Captain o..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[586]` | **"...thanked him for the loyalty he'd shown so far."** | `[579]` **Narrator**: "You saw Axel Reinhart, your son-..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[587]` | **"...thanked her for the loyalty she'd shown so far."** | `[580]` **Narrator**: "You saw Angelica Sazon, your Gra..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[600]` | **"...reminded him that this was what the people wanted."** | `[591]` **Narrator**: "Adarfo Sotelato looked bored alr..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[601]` | **"...told him he could leave if he wanted."** | `[591]` **Narrator**: "Adarfo Sotelato looked bored alr..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[602]` | **"...hoped he'd only say good things."** | `[592]` **Narrator**: "Manus Sazon was poring over his ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[603]` | **"...hoped she'd only say good things."** | `[599]` **Narrator**: "Daria de Rava was poring over he..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[604]` | **"...were glad to have such responsibilities off your chest."** | `[592]` **Narrator**: "Manus Sazon was poring over his ..."<br>`[599]` **Narrator**: "Daria de Rava was poring over he..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[610]` | **"...missed Hugo's advice."** | `[609]` **Narrator**: "The absence of a right-hand man ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[611]` | **"...knew that ultimately, every King rules alone."** | `[609]` **Narrator**: "The absence of a right-hand man ..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[612]` | **"...were glad you had a life partner to rely on."** | `[609]` **Narrator**: "The absence of a right-hand man ..." | `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true` | `--;`<br>`PrologueImage("pe_party");` | `[510]` **Player_Romus**: "You looked to your left."<br>`[511]` **Player_Romus**: "You looked to your right." |
+| `[621]` | **"You gave it."** | `[620]` **Narrator**: "The hall filled with silence as ..."<br>`[625]` **Narrator**: "The hall filled with silence as ..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `PlaySoundEffect("Jubilee"); ;` | `[398]` **Narrator**: "With your one gesture, the music..."<br>`[258]` **Narrator**: "With your one gesture, the orche..." |
+| `[628]` | **"...dismissed them as quickly as possible."** | `[398]` **Narrator**: "With your one gesture, the music..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[769]` **Narrator**: "You looked around in the ballroo..."<br>`[30]` **Narrator**: "You looked around the ballroom. ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[632]` | **"...said to pass your regards to the men and women on the front lines."** | `[37]` **Narrator**: "You looked around the ballroom. ..."<br>`[51]` **Narrator**: "You looked around in the ballroo..."<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true`<br>`(Variable["RiziaDLC.War_Pales_Won"] == true) == false` | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[636]` | **"...knew his family wouldn't be a problem again."** | `[278]` **Narrator**: "You spotted Manus Sazon at the e..." | `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false` | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[643]` | **"...didn't send invitations to traitors."** | `[64]` **Narrator**: "There were no members of House S..." | `Variable["RiziaDLC.HouseSazon_Conquered"] == true` | `--;` | `[651]` **Narrator**: "Duke Axel Reinhart Toras entered..."<br>`[73]` **Narrator**: "Duke Axel Reinhart entered the b..."<br>*(oraz 1 innych odgałęzień)* |
+| `[657]` | **"...felt a twinge of obsolescence."** | `[656]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[658]` | **"...paid them no heed."** | `[656]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[659]` | **"...told them the Prime Minister still answered to you, at least on paper."** | `[656]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[689]` | **"...paid them no heed."** | `[688]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..."<br>`[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 1 innych odgałęzień)* |
+| `[694]` | **"You were no longer in GRACE, but Beatrice was still family."** | `[693]` **Narrator**: "The war between Rumburg and Sord..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[695]` | **"You couldn't wait to see Thornbourgh burn."** | `[693]` **Narrator**: "The war between Rumburg and Sord..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[696]` | **"It was fun to keep them guessing."** | `[693]` **Narrator**: "The war between Rumburg and Sord..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[698]` | **"...reminded them that tonight was no time for politics."** | `[697]` **Narrator**: "Delegations from {RiziaDLCText.J..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`PrologueImage("pe_continuedreign1");`<br>*(+1 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..."<br>`[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 1 innych odgałęzień)* |
+| `[699]` | **"You couldn't wait to see Holsord burn."** | `[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>`[683]` **Narrator**: "Queen Beatrice was notably absen..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[700]` | **"You hoped it wouldn't reflect badly on Rizia's own reputation."** | `[676]` **Narrator**: "Queen Beatrice was notably absen..."<br>`[684]` **Narrator**: "Queen Beatrice was notably absen..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[701]` | **"You wished you hadn't gotten mixed up in this."** | `[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>`[676]` **Narrator**: "Queen Beatrice was notably absen..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[702]` | **"You were glad not to be mixed up in this."** | `[683]` **Narrator**: "Queen Beatrice was notably absen..."<br>`[684]` **Narrator**: "Queen Beatrice was notably absen..." | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[703]` | **"You knew Her Excellency would come out on top."** | `[672]` **Narrator**: "Queen Beatrice was notably absen..."<br>`[676]` **Narrator**: "Queen Beatrice was notably absen..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `PrologueImage("pe_continuedreign1");`<br>`PrologueImage("pe_continuedreign1");`<br>*(+2 skryptów)* | `[122]` **Narrator**: "The grand doors to the hall open..." |
+| `[715]` | **"...found it hard to gauge Lucita's reaction."** | `[300]` **Narrator**: "As the orchestra struck up a fas..."<br>`[304]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 1 innych węzłów)* | `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false` | *Brak zmian stanu* | `[317]` **Narrator**: "Your daughter's husband disappea..." |
+| `[720]` | **"The Grand Wiseman beckoned for her to approach."** | `[719]` **Narrator**: "She told you that she was ready,..."<br>`[725]` **Narrator**: "She waved at the crowd that had ..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[721]` **Narrator**: "The music switched to a solemn h..." |
+| `[733]` | **"You hadn't spoken with her in months."** | `[323]` **Narrator**: "The grand doors to the ballroom ..." | `(Variable["RiziaDLC.Relations_Vina_Estranged"] == false) == false` | *Brak zmian stanu* | `[327]` **Narrator**: "As the orchestra struck up a fas..."<br>`[331]` **Narrator**: "As the orchestra struck up a fas..."<br>*(oraz 4 innych odgałęzień)* |
+| `[737]` | **"...knew that she hadn't forgiven you."** | `[339]` **Narrator**: "As the orchestra struck up a fas..." | `Variable["RiziaDLC.Relations_Vina_Estranged"] == true` | `PrologueImage("pe_princebirth");` | `[137]` **Narrator**: "You stood up and gathered {Rizia..." |
+| `[746]` | **"The Grand Wiseman beckoned you to approach him."** | `[745]` **Narrator**: "Your subjects' applause resonate..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[747]` **Narrator**: "The music switched to a solemn h..." |
+| `[756]` | **"The Grand Wiseman beckoned you to  approach him."** | `[755]` **Narrator**: "With no heir apparent on the hor..."<br>`[763]` **Narrator**: "With no heir apparent on the hor..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[757]` **Narrator**: "The music switched to a solemn h..." |
+| `[758]` | **"...whispered "Halaita"."** | `[757]` **Narrator**: "The music switched to a solemn h..." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLC.Said_Halaita"] = Variable["RiziaDLC.Sa...`<br>`--;` | `[2]` **System**: "[KONIEC SCENY / WYJŚCIE]" |
+| `[767]` | **"...felt sorry for everything you'd put her through."** | `[540]` **Narrator**: "You saw your mother, as stylishl..." | `Variable["RiziaDLC.Estela_PromisedToConvert"] == true` | `--;`<br>`--;`<br>*(+1 skryptów)* | *Koniec sceny / Terminal* |
+| `[770]` | **"...were glad one Azaro was still of use to you."** | `[769]` **Narrator**: "You looked around in the ballroo..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
+| `[771]` | **"...reminded him to stay in line, lest he meet the same fate as the rest of his fam..."** | `[769]` **Narrator**: "You looked around in the ballroo..." | *Brak (Dostępna bezwarunkowo)* | `--;`<br>`--;` | `[64]` **Narrator**: "There were no members of House S..."<br>`[278]` **Narrator**: "You spotted Manus Sazon at the e..." |
 
 ---
 
@@ -153,40 +349,40 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[237]`
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "PlayLoopedMusic("R_Continuation", "R_Continuation_Loop");"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `425` (*Rizia/Epilogue*), Węzeł `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Success == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Success == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Success == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[493]`
+  - -> `[493]` (*Narrator: "1958|Porte Drazon"*)
 
 ### Węzeł `[6]`
 Mówca: **Narrator**
@@ -194,131 +390,151 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
-  - -> `[254]`
-  - -> `[10]`
+  - -> `[8]` (*Player_Romus: "...remembered why you fell in love with her."*)
+  - -> `[9]` (*Player_Romus: "...wondered how your child would grow up in this world."*)
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage ==..."*)
+  - -> `[10]` (*Player_Romus: "...smiled back and proceeded with the celebrations."*)
 
 ### Węzeł `[7]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "At long last, Rizians went to the ballot boxes to cast their votes."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[253]` (Narrator), `[407]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
 
 ### Węzeł `[8]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...remembered why you fell in love with her."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[9]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wondered how your child would grow up in this world."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[10]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...smiled back and proceeded with the celebrations."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[11]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...remembered why you fell in love with him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[530]` (Narrator), `[537]` (Narrator), `[539]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[12]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wondered if the public would ever truly accept you as a couple."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[530]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[13]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...smiled back and proceeded with the celebrations."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[530]` (Narrator), `[537]` (Narrator), `[539]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseToras_Conquered == true)"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseToras_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseToras_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseToras_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[398]`
+  - -> `[398]` (*Narrator: "With your one gesture, the music cued in and the festivit..."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseToras_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseToras_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseToras_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[395]`
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[544]`
+  - -> `[544]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[544]`
+  - -> `[544]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == false && 
-RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == false && 
+RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == false &&  RiziaDLC.Rico_Execute..."*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Rico_Arrested == false &&  RiziaDLC.Rico_Execu..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Rico_Arrested == false && 
-RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == false  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Rico_Arrested == false && 
+RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Rico_Arrested"] == false  and  
 Variable["RiziaDLC.Rico_Executed"] == false  and  Variable["RiziaDLC.Rico_Deposed"] == false  and  Variable["RiziaDLC.Rico_Extradited"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Narrator: "With your one gesture, the orchestra cued in and the fest..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Rico_Arrested == false && 
-RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == false  and  
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Rico_Arrested == false && 
+RiziaDLC.Rico_Executed == false && RiziaDLC.Rico_Deposed == false && RiziaDLC.Rico_Extradited == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Rico_Arrested"] == false  and  
 Variable["RiziaDLC.Rico_Executed"] == false  and  Variable["RiziaDLC.Rico_Deposed"] == false  and  Variable["RiziaDLC.Rico_Extradited"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Narrator: "With your one gesture, the orchestra cued in and the fest..."*)
 
 ### Węzeł `[22]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...played along with a fake smile."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[25]` (Narrator), `[26]` (Narrator), `[258]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[23]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...welcomed him with open arms."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[25]` (Narrator), `[26]` (Narrator), `[258]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[24]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...visibly showed your discontent with him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[25]` (Narrator), `[26]` (Narrator), `[258]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[25]`
 Mówca: **Narrator**
@@ -328,9 +544,9 @@ Rico was the first one to pay respects. He came before your throne and bowed. He
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[22]`
-  - -> `[24]`
+  - -> `[23]` (*Player_Romus: "...welcomed him with open arms."*)
+  - -> `[22]` (*Player_Romus: "...played along with a fake smile."*)
+  - -> `[24]` (*Player_Romus: "...visibly showed your discontent with him."*)
 
 ### Węzeł `[26]`
 Mówca: **Narrator**
@@ -340,30 +556,30 @@ Your cousin Hubertus was the first to pay respects. He came before your throne a
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[22]`
-  - -> `[24]`
+  - -> `[23]` (*Player_Romus: "...welcomed him with open arms."*)
+  - -> `[22]` (*Player_Romus: "...played along with a fake smile."*)
+  - -> `[24]` (*Player_Romus: "...visibly showed your discontent with him."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseAzaro_Conquered == true)"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseAzaro_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseAzaro_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseAzaro_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[769]`
+  - -> `[769]` (*Narrator: "You looked around in the ballroom. Your eyes met with Car..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseAzaro_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseAzaro_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseAzaro_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[401]`
+  - -> `[401]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC..."*)
 
 ### Węzeł `[30]`
 Mówca: **Narrator**
@@ -373,48 +589,54 @@ One of your advisors leaned into your ear to let you know that they had rejected
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[31]` (*Player_Romus: "...thought nothing of it and shrugged it off."*)
+  - -> `[32]` (*Player_Romus: "...demanded that the Azaros be reprimanded at once."*)
+  - -> `[33]` (*Player_Romus: "...sent a strongly worded letter to condemn their act."*)
 
 ### Węzeł `[31]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thought nothing of it and shrugged it off."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[30]` (Narrator), `[266]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[32]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...demanded that the Azaros be reprimanded at once."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[30]` (Narrator), `[266]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[33]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...sent a strongly worded letter to condemn their act."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[30]` (Narrator), `[266]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lu..."*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC...."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Faction_HouseAzaro_Lucita"] == true  and  Variable["RiziaDLC.Lucita_Married"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Faction_HouseAzaro_Lucita"] == true  and  Variable["RiziaDLC.Lucita_Married"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Narrator: "You looked around the ballroom. Your eyes met with Lucita..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Faction_HouseAzaro_Lucita"] == true  and  Variable["RiziaDLC.Lucita_Married"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lucita_Married == false && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Faction_HouseAzaro_Lucita"] == true  and  Variable["RiziaDLC.Lucita_Married"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
 
 ### Węzeł `[37]`
 Mówca: **Narrator**
@@ -424,96 +646,104 @@ She walked towards the throne, knelt and kissed your ring.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
-  - -> `[50]`
-  - -> `[49]`
-  - -> `[41]`
+  - -> `[259]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Lucita_Romance >= 2"*)
+  - -> `[50]` (*Player_Romus: "...thanked House Azaro for its service to the Crown."*)
+  - -> `[49]` (*Player_Romus: "...accepted the gesture impassively."*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Won == true"*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Ex..."*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Narrator: "You looked around in the ballroom. Your eyes met with Tad..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Taddeus_Arrested == false && RiziaDLC.Taddeus_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Taddeus_Arrested"] == false  and  Variable["RiziaDLC.Taddeus_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Narrator: "You looked around in the ballroom. Your eyes met with Car..."*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Pales_Won == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Pales_Won == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[43]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Won == true"*)
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_Pales_Won == true)"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Pales_Won == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_Pales_Won"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Pales_Won == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_Pales_Won"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Player_Romus: "...congratulated House Azaro once again for its efforts i..."*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_Pales_Won == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_Pales_Won"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_Pales_Won == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_Pales_Won"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[629]`
+  - -> `[629]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
 
 ### Węzeł `[44]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...congratulated House Azaro once again for its efforts in the Pales campaign."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.War_Pales_Won"] == true`
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator), `[51]` (Narrator), `[52]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Pales_Loss == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Pales_Loss == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
-  - -> `[47]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Loss == true"*)
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_Pales_Loss == true)"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Pales_Loss == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_Pales_Loss"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Pales_Loss == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_Pales_Loss"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Player_Romus: "...said that the day for Pales would yet come."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_Pales_Loss == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_Pales_Loss"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_Pales_Loss == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_Pales_Loss"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[48]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said that the day for Pales would yet come."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.War_Pales_Loss"] == true` AND `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false` AND `(Variable["RiziaDLC.War_Pales_Won"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator), `[51]` (Narrator), `[52]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[49]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...accepted the gesture impassively."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator), `[51]` (Narrator), `[52]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[50]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked House Azaro for its service to the Crown."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator), `[51]` (Narrator), `[52]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[51]`
 Mówca: **Narrator**
@@ -523,9 +753,9 @@ He approached the throne and bowed.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
-  - -> `[49]`
-  - -> `[41]`
+  - -> `[50]` (*Player_Romus: "...thanked House Azaro for its service to the Crown."*)
+  - -> `[49]` (*Player_Romus: "...accepted the gesture impassively."*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Won == true"*)
 
 ### Węzeł `[52]`
 Mówca: **Narrator**
@@ -535,9 +765,9 @@ He walked towards the throne, knelt and kissed your ring
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
-  - -> `[49]`
-  - -> `[41]`
+  - -> `[50]` (*Player_Romus: "...thanked House Azaro for its service to the Crown."*)
+  - -> `[49]` (*Player_Romus: "...accepted the gesture impassively."*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Won == true"*)
 
 ### Węzeł `[53]`
 Mówca: **Narrator**
@@ -547,73 +777,83 @@ He broke off the argument to come before you and present his family's gift. A 24
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[56]`
-  - -> `[58]`
+  - -> `[57]` (*Player_Romus: "...thanked him for his gift."*)
+  - -> `[56]` (*Player_Romus: "...did not accept this apparent bribery."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[404]`
+  - -> `[404]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[56]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...did not accept this apparent bribery."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[53]` (Narrator), `[279]` (Narrator), `[647]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[57]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked him for his gift."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[53]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
-  - -> `[60]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true"*)
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleOwnership_Brenas == true)"*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleOwnership_Brenas == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleOwnership_Brenas == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Player_Romus: "...demanded that House Sazon focus its efforts on restori..."*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleOwnership_Brenas == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleOwnership_Brenas == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleOwnership_Brenas"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[61]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...demanded that House Sazon focus its efforts on restoring Zille to greatness."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.ZilleOwnership_Brenas"] == true`
+- **Kontekst wejściowy (poprzednik):** `[53]` (Narrator), `[279]` (Narrator), `[647]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[62]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew her family would never be a problem again."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[279]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[63]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked her for her gift."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[279]` (Narrator), `[647]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[64]`
 Mówca: **Narrator**
@@ -623,63 +863,69 @@ You'd heard that Leona and her family were at constant odds with each other thes
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[640]`
-  - -> `[66]`
-  - -> `[65]`
-  - -> `[67]`
+  - -> `[640]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
+  - -> `[66]` (*Player_Romus: "...hoped it would never come to that for House Toras."*)
+  - -> `[65]` (*Player_Romus: "...wished them the 'best' in a letter."*)
+  - -> `[67]` (*Player_Romus: "...wanted nothing to do with the family or its inner work..."*)
 
 ### Węzeł `[65]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wished them the 'best' in a letter."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[64]` (Narrator), `[286]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[66]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...hoped it would never come to that for House Toras."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[64]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[67]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wanted nothing to do with the family or its inner workings."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[64]` (Narrator), `[286]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
-  - -> `[70]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Coun..."*)
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Co..."*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pales_Rizia_Unification"] == true  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pales_Rizia_Unification"] == true  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[648]`
+  - -> `[648]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pales_Rizia_Unification"] == true  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Council_GrandVizier_Axel == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pales_Rizia_Unification"] == true  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Pales_Friendly == true || Rizia..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Coun..."*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_Rizia_Unification == true && RiziaDLC.Coun..."*)
 
 ### Węzeł `[73]`
 Mówca: **Narrator**
@@ -689,72 +935,72 @@ Finally, he came to kneel before you with an exaggerated gesture.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[86]` (*Player_Romus: "...told him to not make himself too comfortable."*)
+  - -> `[87]` (*Player_Romus: "...told him to kiss your ring."*)
+  - -> `[88]` (*Player_Romus: "...told your son-in-law that no such formalities were nec..."*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[76]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Pales_Friendly == true || Rizia..."*)
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLC.CountryRelation_Pales_Friendly == true || Riz..."*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Narrator: "Duke Axel Reinhart entered the ballroom with purpose. He ..."*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true) && RiziaDLC.Council_GrandVizier_Axel == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)  and  Variable["RiziaDLC.Council_GrandVizier_Axel"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true && Ri..."*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && Rizi..."*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && Ri..."*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true  and  Variable["RiziaDLC.Reform_Success"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true  and  Variable["RiziaDLC.Reform_Success"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Narrator: "One of your aides let you know that the conflicts at the ..."*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true  and  Variable["RiziaDLC.Reform_Success"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && RiziaDLC.Reform_Success == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true  and  Variable["RiziaDLC.Reform_Success"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_BorderOutcome_Peace_Annexation == true && Ri..."*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_BorderOutcome_Peace_Annexation == true && ..."*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  and  Variable["RiziaDLC.Axel_Arrested"] == false  and  Variable["RiziaDLC.Axel_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  and  Variable["RiziaDLC.Axel_Arrested"] == false  and  Variable["RiziaDLC.Axel_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Narrator: "Among the whispers of the court, Axel Reinhart entered th..."*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  and  Variable["RiziaDLC.Axel_Arrested"] == false  and  Variable["RiziaDLC.Axel_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_BorderOutcome_Peace_Annexation == true && RiziaDLC.Axel_Arrested == false && RiziaDLC.Axel_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_BorderOutcome_Peace_Annexation"] == true  and  Variable["RiziaDLC.Axel_Arrested"] == false  and  Variable["RiziaDLC.Axel_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true && Rizi..."*)
 
 ### Węzeł `[83]`
 Mówca: **Narrator**
@@ -764,9 +1010,9 @@ With a straight face he simply came before you, knelt and turned around to leave
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[92]`
-  - -> `[94]`
+  - -> `[93]` (*Player_Romus: "...told him to get out of your palace."*)
+  - -> `[92]` (*Player_Romus: "...made him kiss your ring."*)
+  - -> `[94]` (*Player_Romus: "...asked security to apprehend him."*)
 
 ### Węzeł `[84]`
 Mówca: **Narrator**
@@ -776,10 +1022,10 @@ Finally, he came to kneel before you with an exaggerated gesture.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
-  - -> `[90]`
-  - -> `[91]`
-  - -> `[288]`
+  - -> `[89]` (*Player_Romus: "...bowed in response."*)
+  - -> `[90]` (*Player_Romus: "...thanked him for Pales' support."*)
+  - -> `[91]` (*Player_Romus: "...said you wanted to expand trade between your two count..."*)
+  - -> `[288]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Axel == true"*)
 
 ### Węzeł `[85]`
 Mówca: **Narrator**
@@ -789,250 +1035,274 @@ A decree for additional troops and more resources was presented to you.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
-  - -> `[96]`
-  - -> `[97]`
-  - -> `[292]`
+  - -> `[95]` (*Player_Romus: "...cursed yourself for starting this war."*)
+  - -> `[96]` (*Player_Romus: "...praised Pales for their valiant defense."*)
+  - -> `[97]` (*Player_Romus: "...swore that the international community would pay."*)
+  - -> `[292]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Hostage == true"*)
 
 ### Węzeł `[86]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to not make himself too comfortable."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[73]` (Narrator), `[651]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[87]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to kiss your ring."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[73]` (Narrator), `[651]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[88]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told your son-in-law that no such formalities were necessary."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[73]` (Narrator), `[651]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[89]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...bowed in response."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[84]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[90]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked him for Pales' support."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[84]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[91]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said you wanted to expand trade between your two countries."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[84]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[92]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...made him kiss your ring."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[83]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[93]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to get out of your palace."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[83]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[94]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...asked security to apprehend him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[83]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[95]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...cursed yourself for starting this war."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[85]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[96]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...praised Pales for their valiant defense."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[85]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[97]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...swore that the international community would pay."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[85]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
-  - -> `[104]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Si..."*)
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC...."*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_ANMember"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == false  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_ANMember"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == false  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_ANMember"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == false  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_ANMember == true && RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy == false && RiziaDLC.Situation_Diplomacy_ANSanctions_Weak == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_ANMember"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Heavy"] == false  and  Variable["RiziaDLC.Situation_Diplomacy_ANSanctions_Weak"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
-  - -> `[107]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)"*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "GRACE""*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
-  - -> `[110]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)"*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "Intermerkopum""*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_Intermerkopum == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[708]`
+  - -> `[708]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_ApplyATO == true"*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "GRACE")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="GRACE";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "GRACE"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="GRACE";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "Intermerkopum")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="Intermerkopum";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "Intermerkopum"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="Intermerkopum";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
-  - -> `[115]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)"*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "the AN and Intermerkopum""*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_Intermerkopum == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "the AN and Intermerkopum")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and Intermerkopum";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "the AN and Intermerkopum"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and Intermerkopum";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)"*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "the AN and GRACE""*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[704]`
+  - -> `[704]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_ApplyATO == true"*)
 
 ### Węzeł `[120]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "the AN and GRACE")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and GRACE";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "the AN and GRACE"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and GRACE";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "the AN")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "the AN"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[122]`
 Mówca: **Narrator**
@@ -1040,72 +1310,84 @@ Mówca: **Narrator**
 
 The entire hall fell silent, captivated by the beauty and elegance of the Crown Princess."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Player_Romus: "She looked just like her mother."*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escape..."*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Successor_Vina"] == true  and  Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Successor_Vina"] == true  and  Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[272]`
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_continuedreign1")"*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Successor_Vina"] == true  and  Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Successor_Vina"] == true  and  Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Son == true"*)
 
 ### Węzeł `[126]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...ordered the servants to deliver more wine to them."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[663]` (Narrator), `[667]` (Narrator), `[688]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[127]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...assured them nothing had really changed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[663]` (Narrator), `[667]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[128]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...asked your guards to watch their every step."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[663]` (Narrator), `[667]` (Narrator), `[688]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[669]`
-  - -> `[123]`
+  - -> `[669]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_AidRumburg == true"*)
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[130]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...believed the person Vina had become could take on anything."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[296]` (Player_Romus), `[305]` (Narrator), `[309]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[726]`
+  - -> `[726]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[131]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told her to look around and greet her people."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[296]` (Player_Romus), `[305]` (Narrator), `[309]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[722]`
+  - -> `[722]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[132]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...warned her to be ready for the den of wolves that was waiting for her."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[296]` (Player_Romus), `[305]` (Narrator), `[309]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[716]`
+  - -> `[716]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[133]`
 Mówca: **Narrator**
@@ -1113,13 +1395,15 @@ Mówca: **Narrator**
 
 You showed her the throne right beside yours."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Player_Romus: "There began the days of Vina of House Toras, the Heir App..."*)
 
 ### Węzeł `[134]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "There began the days of Vina of House Toras, the Heir Apparent."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[133]` (Narrator), `[135]` (Narrator), `[136]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[135]`
 Mówca: **Narrator**
@@ -1127,7 +1411,7 @@ Mówca: **Narrator**
 
 You showed her the throne right beside yours."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Player_Romus: "There began the days of Vina of House Toras, the Heir App..."*)
 
 ### Węzeł `[136]`
 Mówca: **Narrator**
@@ -1135,7 +1419,7 @@ Mówca: **Narrator**
 
 You showed her the throne right beside yours."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Player_Romus: "There began the days of Vina of House Toras, the Heir App..."*)
 
 ### Węzeł `[137]`
 Mówca: **Narrator**
@@ -1145,27 +1429,33 @@ The whole room's attention was directed at you.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
-  - -> `[138]`
-  - -> `[140]`
+  - -> `[139]` (*Player_Romus: "...demanded that everyone applaud their future king."*)
+  - -> `[138]` (*Player_Romus: "...lifted your son up for everyone to see."*)
+  - -> `[140]` (*Player_Romus: "...told everyone to have fun and enjoy the celebrations."*)
 
 ### Węzeł `[138]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...lifted your son up for everyone to see."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[137]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[742]`
+  - -> `[742]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[139]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...demanded that everyone applaud their future king."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[137]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[742]`
+  - -> `[742]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[140]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told everyone to have fun and enjoy the celebrations."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[137]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[742]`
+  - -> `[742]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[141]`
 Mówca: **Narrator**
@@ -1173,20 +1463,22 @@ Mówca: **Narrator**
 
 You put your child on your throne."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[238]`
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Romus == true"*)
 
 ### Węzeł `[142]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "And so began the days of Prince Romus the Second of House Toras, the Heir Apparent."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Son_Romus"] == true`
+- **Kontekst wejściowy (poprzednik):** `[141]` (Narrator), `[747]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[143]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[144]`
 Mówca: **Narrator**
@@ -1194,50 +1486,55 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
-  - -> `[349]`
-  - -> `[350]`
+  - -> `[145]` (*Player_Romus: "...vowed that the reign of House Toras would continue."*)
+  - -> `[349]` (*Player_Romus: "...knew you would have to watch your back for years to come."*)
+  - -> `[350]` (*Player_Romus: "...ignored them. The throne was yours now, and nothing el..."*)
 
 ### Węzeł `[145]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...vowed that the reign of House Toras would continue."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[144]` (Narrator), `[751]` (Narrator), `[757]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[146]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[147]`
-  - -> `[148]`
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)"*)
 
 ### Węzeł `[147]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[432]`
+  - -> `[432]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_newgovernment")"*)
 
 ### Węzeł `[148]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[408]`
+  - -> `[408]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == true"*)
 
 ### Węzeł `[149]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 Despite the RPP's initial popularity, Daria de Rava quickly rose in the polls. Her speeches resonated with those who rejected the interim leadership's vision of extreme change."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[150]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "At long last, Rizians went to the ballot boxes to cast their votes."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[149]` (Narrator), `[436]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[151]`
 Mówca: **Narrator**
@@ -1245,7 +1542,7 @@ Mówca: **Narrator**
 
 Just a day later, Lucita gave birth to your son {RiziaDLCText.KingsSon}, competing with the elections in the news cycle."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Player_Romus: "Times were changing. But you were still King."*)
 
 ### Węzeł `[152]`
 Mówca: **Narrator**
@@ -1253,19 +1550,23 @@ Mówca: **Narrator**
 
 Just a day later, Lucita gave birth to your son, competing with the elections in the news cycle."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Player_Romus: "Times were changing."*)
 
 ### Węzeł `[153]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "Times were changing. But you were still King."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[151]` (Narrator), `[179]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_continuedreign5")"*)
 
 ### Węzeł `[154]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "Times were changing."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[152]` (Narrator), `[175]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_newgovernment")"*)
 
 ### Węzeł `[155]`
 Mówca: **Narrator**
@@ -1275,27 +1576,33 @@ He arrived an hour late, explaining that he had gotten caught up in work. On top
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
-  - -> `[156]`
-  - -> `[158]`
+  - -> `[157]` (*Player_Romus: "...forgave the breach of protocol."*)
+  - -> `[156]` (*Player_Romus: "...demanded an apology."*)
+  - -> `[158]` (*Player_Romus: "...told him to not be late next time."*)
 
 ### Węzeł `[156]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...demanded an apology."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Narrator: "He apologized with a shrug, saying he would soon be worki..."*)
 
 ### Węzeł `[157]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...forgave the breach of protocol."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[411]`
+  - -> `[411]` (*Narrator: "He pulled out a briefcase to inform you of his plans for ..."*)
 
 ### Węzeł `[158]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to not be late next time."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[155]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Narrator: "He apologized with a shrug, saying he would soon be worki..."*)
 
 ### Węzeł `[159]`
 Mówca: **Narrator**
@@ -1303,7 +1610,7 @@ Mówca: **Narrator**
 
 He then pulled out a briefcase to inform you of his plans for Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[160]`
 Mówca: **Narrator**
@@ -1313,33 +1620,39 @@ Perfectly following royal protocol, she knelt before her monarch.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
-  - -> `[161]`
-  - -> `[163]`
+  - -> `[162]` (*Player_Romus: "...waited for what Daria had to say."*)
+  - -> `[161]` (*Player_Romus: "...told her that she no longer had to kneel if she wished."*)
+  - -> `[163]` (*Player_Romus: "...commended her for respecting her king."*)
 
 ### Węzeł `[161]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told her that she no longer had to kneel if she wished."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[160]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
+  - -> `[165]` (*Narrator: "She refused respectfully.  Afterwards, she pulled out a b..."*)
 
 ### Węzeł `[162]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...waited for what Daria had to say."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[160]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Narrator: "She pulled out a briefcase to inform you of the most rece..."*)
 
 ### Węzeł `[163]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...commended her for respecting her king."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[160]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Narrator: "She thanked you profusely.  Afterwards, she pulled out a ..."*)
 
 ### Węzeł `[164]`
 Mówca: **Narrator**
 > "She pulled out a briefcase to inform you of the most recent developments in Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[165]`
 Mówca: **Narrator**
@@ -1347,7 +1660,7 @@ Mówca: **Narrator**
 
 Afterwards, she pulled out a briefcase to inform you of the most recent developments in Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[166]`
 Mówca: **Narrator**
@@ -1355,94 +1668,98 @@ Mówca: **Narrator**
 
 Afterwards, she pulled out a briefcase to inform you of the recent developments in Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[167]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
-  - -> `[169]`
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)"*)
 
 ### Węzeł `[168]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Narrator: "{RiziaDLCText.EpiloguePM} said that the Pales war efforts..."*)
 
 ### Węzeł `[169]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[170]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You listened."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[164]` (Narrator), `[165]` (Narrator), `[166]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
 
 ### Węzeł `[171]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You listened."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[159]` (Narrator), `[411]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
 
 ### Węzeł `[172]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
-  - -> `[174]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[173]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[174]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Narrator: "As expected, Daria won by a landslide to become the first..."*)
 
 ### Węzeł `[175]`
 Mówca: **Narrator**
 > "As expected, Daria won by a landslide to become the first elected Prime Minister of Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Player_Romus: "Times were changing."*)
 
 ### Węzeł `[176]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
-  - -> `[178]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[178]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arre..."*)
 
 ### Węzeł `[177]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[151]`
+  - -> `[151]` (*Narrator: "As expected, Sotelato won by a landslide to become the fi..."*)
 
 ### Węzeł `[178]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
+  - -> `[179]` (*Narrator: "As expected, Sotelato won by a landslide to become the fi..."*)
 
 ### Węzeł `[179]`
 Mówca: **Narrator**
 > "As expected, Sotelato won by a landslide to become the first elected Prime Minister of Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Player_Romus: "Times were changing. But you were still King."*)
 
 ### Węzeł `[180]`
 Mówca: **Narrator**
@@ -1452,77 +1769,83 @@ In the following months you would see more bills put forward.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
-  - -> `[181]`
-  - -> `[182]`
-  - -> `[351]`
+  - -> `[183]` (*Player_Romus: "...praised the new government for acting quickly and deci..."*)
+  - -> `[181]` (*Player_Romus: "...said that without Pales conquered, you wouldn't be sat..."*)
+  - -> `[182]` (*Player_Romus: "...knew Rizia could hold out for however long it took."*)
+  - -> `[351]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHap..."*)
 
 ### Węzeł `[181]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said that without Pales conquered, you wouldn't be satisfied."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[180]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[182]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew Rizia could hold out for however long it took."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[180]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[183]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...praised the new government for acting quickly and decisively."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[180]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[184]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
+  - -> `[185]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true"*)
 
 ### Węzeł `[185]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
-  - -> `[187]`
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true"*)
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReturn_Success == true)"*)
 
 ### Węzeł `[186]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[187]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReturn_Success == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReturn_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Wruhecist == true"*)
 
 ### Węzeł `[188]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Wruhecist == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Wruhecist == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
-  - -> `[190]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Wruhecist == true"*)
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReferendum_Independence_Wruhecist == true)"*)
 
 ### Węzeł `[189]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Wruhecist == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Wruhecist"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Wruhecist == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Wruhecist"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[437]`
+  - -> `[437]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && Ri..."*)
 
 ### Węzeł `[190]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReferendum_Independence_Wruhecist == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Wruhecist"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReferendum_Independence_Wruhecist == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Wruhecist"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[192]`
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Bludish == true || ..."*)
 
 ### Węzeł `[191]`
 Mówca: **Narrator**
@@ -1530,30 +1853,30 @@ Mówca: **Narrator**
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
-  - -> `[196]`
-  - -> `[198]`
+  - -> `[197]` (*Player_Romus: "...fully ally with them for the sake of the unity of the ..."*)
+  - -> `[196]` (*Player_Romus: "...align with them, but not get too close."*)
+  - -> `[198]` (*Player_Romus: "...avoid contact as much as possible."*)
 
 ### Węzeł `[192]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
-  - -> `[194]`
+  - -> `[193]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Bludish == true || ..."*)
+  - -> `[194]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReferendum_Independence_Bludish == true |..."*)
 
 ### Węzeł `[193]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Bludish"] == true  or  Variable["RiziaDLC.ZilleReferendum_Independence_Golcondist"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Bludish"] == true  or  Variable["RiziaDLC.ZilleReferendum_Independence_Golcondist"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[440]`
+  - -> `[440]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true"*)
 
 ### Węzeł `[194]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Bludish"] == true  or  Variable["RiziaDLC.ZilleReferendum_Independence_Golcondist"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReferendum_Independence_Bludish == true || RiziaDLC.ZilleReferendum_Independence_Golcondist == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Bludish"] == true  or  Variable["RiziaDLC.ZilleReferendum_Independence_Golcondist"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[445]`
+  - -> `[445]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Liberation == true"*)
 
 ### Węzeł `[195]`
 Mówca: **Narrator**
@@ -1563,143 +1886,155 @@ A few clashes had already occurred.
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
-  - -> `[199]`
-  - -> `[201]`
+  - -> `[200]` (*Player_Romus: "...keep calm and not repeat the mistakes of the past."*)
+  - -> `[199]` (*Player_Romus: "...fight back and show them the might of Rizia."*)
+  - -> `[201]` (*Player_Romus: "...try to turn public sentiment around by using intellige..."*)
 
 ### Węzeł `[196]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...align with them, but not get too close."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[191]` (Narrator), `[443]` (Narrator), `[451]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[197]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...fully ally with them for the sake of the unity of the region."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[191]` (Narrator), `[443]` (Narrator), `[451]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[198]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...avoid contact as much as possible."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[191]` (Narrator), `[443]` (Narrator), `[451]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[199]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...fight back and show them the might of Rizia."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[195]` (Narrator), `[444]` (Narrator), `[452]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[200]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...keep calm and not repeat the mistakes of the past."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[195]` (Narrator), `[444]` (Narrator), `[452]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[201]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...try to turn public sentiment around by using intelligence services."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[195]` (Narrator), `[444]` (Narrator), `[452]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[202]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[203]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
 
 ### Węzeł `[204]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[205]`
-  - -> `[206]`
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Unrest_NatDes_Happened == true"*)
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Unrest_NatDes_Happened == true)"*)
 
 ### Węzeł `[205]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Unrest_NatDes_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Unrest_NatDes_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Unrest_NatDes_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[454]`
+  - -> `[454]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
 
 ### Węzeł `[206]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Unrest_NatDes_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Unrest_NatDes_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Unrest_NatDes_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true"*)
 
 ### Węzeł `[207]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_EnergyCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_EnergyCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[208]`
-  - -> `[209]`
+  - -> `[208]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_EnergyCrisis == true"*)
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_EnergyCrisis == true)"*)
 
 ### Węzeł `[208]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_EnergyCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_EnergyCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[465]`
+  - -> `[465]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
 
 ### Węzeł `[209]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_EnergyCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_EnergyCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_ProductionCapacity_Low == true"*)
 
 ### Węzeł `[210]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_ProductionCapacity_Low == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_ProductionCapacity_Low == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[211]`
-  - -> `[212]`
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_ProductionCapacity_Low == true"*)
+  - -> `[212]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_ProductionCapacity_Low == true)"*)
 
 ### Węzeł `[211]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_ProductionCapacity_Low == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_ProductionCapacity_Low"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_ProductionCapacity_Low == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_ProductionCapacity_Low"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[473]`
+  - -> `[473]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
 
 ### Węzeł `[212]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_ProductionCapacity_Low == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_ProductionCapacity_Low"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_ProductionCapacity_Low == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_ProductionCapacity_Low"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[213]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
-  - -> `[215]`
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true"*)
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true)"*)
 
 ### Węzeł `[214]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[461]`
+  - -> `[461]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
 
 ### Węzeł `[215]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_EnergyCrisis == true"*)
 
 ### Węzeł `[216]`
 Mówca: **Narrator**
@@ -1709,9 +2044,9 @@ Many facilities had been destroyed during the unrest. It would take a long time 
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
-  - -> `[220]`
-  - -> `[222]`
+  - -> `[221]` (*Player_Romus: "...put the people who opposed the Crown to work."*)
+  - -> `[220]` (*Player_Romus: "...make an example out of the dissidents."*)
+  - -> `[222]` (*Player_Romus: "...wish good luck to the government."*)
 
 ### Węzeł `[217]`
 Mówca: **Narrator**
@@ -1721,9 +2056,9 @@ Many people were out of jobs with not enough to fill factories, leading to a dec
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
-  - -> `[224]`
-  - -> `[225]`
+  - -> `[223]` (*Player_Romus: "...print more money to counterbalance."*)
+  - -> `[224]` (*Player_Romus: "...make better use of Rizia's immigrant workforce."*)
+  - -> `[225]` (*Player_Romus: "...wish good luck to the government."*)
 
 ### Węzeł `[218]`
 Mówca: **Narrator**
@@ -1733,10 +2068,10 @@ Unless new energy sources were found as soon as possible, Rizia was at the risk 
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[468]`
-  - -> `[227]`
-  - -> `[471]`
-  - -> `[228]`
+  - -> `[468]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC..."*)
+  - -> `[227]` (*Player_Romus: "...not do anything that would make Rizia reliant on others."*)
+  - -> `[471]` (*Player_Romus: "...focus all efforts on domestic energy extraction."*)
+  - -> `[228]` (*Player_Romus: "...wish good luck to the government."*)
 
 ### Węzeł `[219]`
 Mówca: **Narrator**
@@ -1746,259 +2081,292 @@ The economy had slowed down, and Rizia was at the risk of falling further into r
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[229]`
-  - -> `[230]`
-  - -> `[231]`
+  - -> `[229]` (*Player_Romus: "...industrialize as quickly as possible."*)
+  - -> `[230]` (*Player_Romus: "...build more local factories."*)
+  - -> `[231]` (*Player_Romus: "...wish good luck to the government."*)
 
 ### Węzeł `[220]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...make an example out of the dissidents."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[216]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[221]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...put the people who opposed the Crown to work."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[216]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[222]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wish good luck to the government."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[216]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[223]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...print more money to counterbalance."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[217]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[224]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...make better use of Rizia's immigrant workforce."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[217]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[225]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wish good luck to the government."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[217]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[226]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...ask Rizia's international allies for aid."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+- **Kontekst wejściowy (poprzednik):** `[218]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[227]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...not do anything that would make Rizia reliant on others."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[218]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[228]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wish good luck to the government."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[218]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[229]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...industrialize as quickly as possible."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[219]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[230]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...build more local factories."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[219]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[231]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wish good luck to the government."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[219]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[232]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[233]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[234]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[235]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[236]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[237]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayLoopedMusic("R_Continuation", "R_Continuation_Loop");)*
-- **Efekt (`userScript`):** `PlayLoopedMusic("R_Continuation","R_Continuation_Loop");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayLoopedMusic("R_Continuation", "R_Continuation_Loop");`
+- **Efekt skryptowy (`userScript`):** `PlayLoopedMusic("R_Continuation","R_Continuation_Loop");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[394]`
+  - -> `[394]` (*Węzeł Logiki Narracyjnej: "UnlockAchievement("Rizia_Epilogue_ContinuedReign");"*)
 
 ### Węzeł `[238]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Romus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Romus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
-  - -> `[240]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Romus == true"*)
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Son_Romus == true)"*)
 
 ### Węzeł `[239]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Romus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Son_Romus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Romus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Son_Romus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Player_Romus: "And so began the days of Prince Romus the Second of House..."*)
 
 ### Węzeł `[240]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Son_Romus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Son_Romus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Son_Romus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Son_Romus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[241]`
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Taddeus == true"*)
 
 ### Węzeł `[241]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Taddeus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Taddeus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
-  - -> `[243]`
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Taddeus == true"*)
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Son_Taddeus == true)"*)
 
 ### Węzeł `[242]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Taddeus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Son_Taddeus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Taddeus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Son_Taddeus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[244]`
+  - -> `[244]` (*Player_Romus: "And so began the days of Prince Taddeus the Second of Hou..."*)
 
 ### Węzeł `[243]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Son_Taddeus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Son_Taddeus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Son_Taddeus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Son_Taddeus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
+  - -> `[245]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Valero == true"*)
 
 ### Węzeł `[244]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "And so began the days of Prince Taddeus the Second of House Toras, the Heir Apparent."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Son_Taddeus"] == true` AND `(Variable["RiziaDLC.Son_Romus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[141]` (Narrator), `[747]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[245]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Valero == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Valero == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
-  - -> `[247]`
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Valero == true"*)
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Son_Valero == true)"*)
 
 ### Węzeł `[246]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Son_Valero == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Son_Valero"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Son_Valero == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Son_Valero"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
+  - -> `[248]` (*Player_Romus: "And so began the days of Prince Valero the Second of Hous..."*)
 
 ### Węzeł `[247]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Son_Valero == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Son_Valero"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Son_Valero == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Son_Valero"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Player_Romus: "And so began the days of Prince Ardos of House Toras, the..."*)
 
 ### Węzeł `[248]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "And so began the days of Prince Valero the Second of House Toras, the Heir Apparent."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Son_Valero"] == true` AND `(Variable["RiziaDLC.Son_Taddeus"] == true) == false` AND `(Variable["RiziaDLC.Son_Romus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[141]` (Narrator), `[747]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[249]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "And so began the days of Prince Ardos of House Toras, the Heir Apparent."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Son_Valero"] == true) == false` AND `(Variable["RiziaDLC.Son_Taddeus"] == true) == false` AND `(Variable["RiziaDLC.Son_Romus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[141]` (Narrator), `[747]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[250]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[251]`
-  - -> `[252]`
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true)"*)
 
 ### Węzeł `[251]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
+  - -> `[253]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[252]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[407]`
+  - -> `[407]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[253]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 Despite Daria de Rava's initial popularity as interim prime minister, she was quickly eclipsed by the RPP's candidate, Adarfo Sotelato, whose championing of socialist policies struck a chord with the people."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[254]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
-  - -> `[256]`
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage ==..."*)
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage ..."*)
 
 ### Węzeł `[255]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[257]`
+  - -> `[257]` (*Player_Romus: "...wished more than ever that Vina could be here with you."*)
 
 ### Węzeł `[256]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[257]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wished more than ever that Vina could be here with you."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_Escapes"] == true  or  Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
+- **Kontekst wejściowy (poprzednik):** `[6]` (Narrator), `[530]` (Narrator), `[540]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[258]`
 Mówca: **Narrator**
@@ -2008,56 +2376,58 @@ Hugo was the first one to pay respects. He came before your throne, bowed and wi
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[22]`
-  - -> `[24]`
+  - -> `[23]` (*Player_Romus: "...welcomed him with open arms."*)
+  - -> `[22]` (*Player_Romus: "...played along with a fake smile."*)
+  - -> `[24]` (*Player_Romus: "...visibly showed your discontent with him."*)
 
 ### Węzeł `[259]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Lucita_Romance >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Lucita_Romance >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[260]`
-  - -> `[261]`
+  - -> `[260]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Lucita_Romance >= 2"*)
+  - -> `[261]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_Lucita_Romance >= 2)"*)
 
 ### Węzeł `[260]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Lucita_Romance >= 2)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Lucita_Romance >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
+  - -> `[262]` (*Player_Romus: "...felt a twinge of regret about what could have been."*)
 
 ### Węzeł `[261]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_Lucita_Romance >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_Lucita_Romance >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[262]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt a twinge of regret about what could have been."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Relations_Lucita_Romance"] >= 2`
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[263]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[264]`
-  - -> `[265]`
+  - -> `[264]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Execut..."*)
+  - -> `[265]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Exec..."*)
 
 ### Węzeł `[264]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Narrator: "You looked around the ballroom. Aside from your wife, the..."*)
 
 ### Węzeł `[265]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
+  - -> `[266]` (*Narrator: "You looked around the ballroom. The members of House Azar..."*)
 
 ### Węzeł `[266]`
 Mówca: **Narrator**
@@ -2067,86 +2437,86 @@ One of your advisors leaned into your ear to let you know that they had rejected
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[31]` (*Player_Romus: "...thought nothing of it and shrugged it off."*)
+  - -> `[32]` (*Player_Romus: "...demanded that the Azaros be reprimanded at once."*)
+  - -> `[33]` (*Player_Romus: "...sent a strongly worded letter to condemn their act."*)
 
 ### Węzeł `[267]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_princebirth"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_princebirth");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_princebirth")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_princebirth");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Narrator: "As expected, Daria won by a landslide to become the first..."*)
 
 ### Węzeł `[268]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_continuedreign5"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_continuedreign5");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_continuedreign5")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_continuedreign5");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Narrator: "On the eve of your eight-year jubilee, the new Prime Mini..."*)
 
 ### Węzeł `[269]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_newgovernment"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_newgovernment");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_newgovernment")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_newgovernment");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Narrator: "On the day of your eight-year jubilee, the new Prime Mini..."*)
 
 ### Węzeł `[270]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_princebirth"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_princebirth");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_princebirth")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_princebirth");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Narrator: "On the throne next to yours, Queen Consort Lucita smiled ..."*)
 
 ### Węzeł `[271]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_party"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_party");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_party")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_party");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[617]`
+  - -> `[617]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[272]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_continuedreign1"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_continuedreign1");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_continuedreign1")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_continuedreign1");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Narrator: "The grand doors to the hall opened and Vina walked in.   ..."*)
 
 ### Węzeł `[273]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_princebirth"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_princebirth");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_princebirth")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_princebirth");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Narrator: "You stood up and gathered {RiziaDLCText.KingsSon} in your..."*)
 
 ### Węzeł `[274]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_continuedreign1"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_continuedreign1");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_continuedreign1")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_continuedreign1");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[748]`
+  - -> `[748]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BrunoDog_Adopted == true"*)
 
 ### Węzeł `[275]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
-  - -> `[277]`
+  - -> `[276]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesIn..."*)
+  - -> `[277]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_Dies..."*)
 
 ### Węzeł `[276]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Manus_SendToWar"] == true  and  Variable["RiziaDLC.Manus_DiesInWar"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Manus_SendToWar"] == true  and  Variable["RiziaDLC.Manus_DiesInWar"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
+  - -> `[278]` (*Narrator: "You spotted Manus Sazon at the edge of the crowd. His med..."*)
 
 ### Węzeł `[277]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Manus_SendToWar"] == true  and  Variable["RiziaDLC.Manus_DiesInWar"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesInWar == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Manus_SendToWar"] == true  and  Variable["RiziaDLC.Manus_DiesInWar"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[637]`
+  - -> `[637]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDL..."*)
 
 ### Węzeł `[278]`
 Mówca: **Narrator**
@@ -2154,9 +2524,9 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
-  - -> `[281]`
-  - -> `[633]`
+  - -> `[280]` (*Player_Romus: "...beckoned him to come forward and kiss your ring."*)
+  - -> `[281]` (*Player_Romus: "...paid no attention to him."*)
+  - -> `[633]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true"*)
 
 ### Węzeł `[279]`
 Mówca: **Narrator**
@@ -2164,50 +2534,56 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[58]`
-  - -> `[62]`
-  - -> `[63]`
+  - -> `[56]` (*Player_Romus: "...did not accept this apparent bribery."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true"*)
+  - -> `[62]` (*Player_Romus: "...knew her family would never be a problem again."*)
+  - -> `[63]` (*Player_Romus: "...thanked her for her gift."*)
 
 ### Węzeł `[280]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...beckoned him to come forward and kiss your ring."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[278]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[281]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...paid no attention to him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[278]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[282]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew he'd be useful in the battles to come."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true`
+- **Kontekst wejściowy (poprzednik):** `[278]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[283]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[284]`
-  - -> `[285]`
+  - -> `[284]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true &&..."*)
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true ..."*)
 
 ### Węzeł `[284]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == true  and  Variable["RiziaDLC.Angelica_Arrested"] == false  and  Variable["RiziaDLC.Angelica_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Angelica"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == true  and  Variable["RiziaDLC.Angelica_Arrested"] == false  and  Variable["RiziaDLC.Angelica_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Angelica"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[279]`
+  - -> `[279]` (*Narrator: "Representing her House, Angelica Sazon came forward with ..."*)
 
 ### Węzeł `[285]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == true  and  Variable["RiziaDLC.Angelica_Arrested"] == false  and  Variable["RiziaDLC.Angelica_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Angelica"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true && RiziaDLC.Angelica_Arrested == false && RiziaDLC.Angelica_Executed == false && RiziaDLC.Council_GrandVizier_Angelica == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_HouseSazon_AngelicaPardoned"] == true  and  Variable["RiziaDLC.Angelica_Arrested"] == false  and  Variable["RiziaDLC.Angelica_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Angelica"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[644]`
-  - -> `[286]`
+  - -> `[644]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC..."*)
+  - -> `[286]` (*Narrator: "There were no members of House Sazon among your well-wish..."*)
 
 ### Węzeł `[286]`
 Mówca: **Narrator**
@@ -2215,97 +2591,105 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
-  - -> `[67]`
-  - -> `[287]`
+  - -> `[65]` (*Player_Romus: "...wished them the 'best' in a letter."*)
+  - -> `[67]` (*Player_Romus: "...wanted nothing to do with the family or its inner work..."*)
+  - -> `[287]` (*Player_Romus: "...knew you would crush them if they dared to rise agains..."*)
 
 ### Węzeł `[287]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew you would crush them if they dared to rise against you again."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[286]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[288]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Axel == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Axel == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
-  - -> `[290]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Axel == true"*)
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Axel == true)"*)
 
 ### Węzeł `[289]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Axel == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Axel == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Player_Romus: "...told your son-in-law that no such formalities were nec..."*)
 
 ### Węzeł `[290]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Axel == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Axel == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[291]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told your son-in-law that no such formalities were necessary."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true`
+- **Kontekst wejściowy (poprzednik):** `[84]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[292]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Hostage == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Hostage == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[293]`
-  - -> `[294]`
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Hostage == true"*)
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Hostage == true)"*)
 
 ### Węzeł `[293]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Hostage == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Hostage"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Hostage == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Hostage"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[295]`
+  - -> `[295]` (*Player_Romus: "...vowed you would keep fighting until Vina was rescued."*)
 
 ### Węzeł `[294]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Hostage == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Hostage"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Hostage == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Hostage"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[295]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...vowed you would keep fighting until Vina was rescued."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_Hostage"] == true`
+- **Kontekst wejściowy (poprzednik):** `[85]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[296]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "She looked just like her mother."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[122]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[297]`
-  - -> `[131]`
-  - -> `[130]`
+  - -> `[132]` (*Player_Romus: "...warned her to be ready for the den of wolves that was ..."*)
+  - -> `[297]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[131]` (*Player_Romus: "...told her to look around and greet her people."*)
+  - -> `[130]` (*Player_Romus: "...believed the person Vina had become could take on anyt..."*)
 
 ### Węzeł `[297]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[298]`
-  - -> `[299]`
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[299]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true )"*)
 
 ### Węzeł `[298]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[386]`
+  - -> `[386]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Wedding_Happened == true"*)
 
 ### Węzeł `[299]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[301]`
+  - -> `[301]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true"*)
 
 ### Węzeł `[300]`
 Mówca: **Narrator**
@@ -2317,31 +2701,31 @@ As the song ended, they approached you with the news that they were expecting a 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
-  - -> `[311]`
-  - -> `[712]`
-  - -> `[313]`
+  - -> `[310]` (*Player_Romus: "...gave them your heartfelt congratulations."*)
+  - -> `[311]` (*Player_Romus: "...feared for the new heir's future."*)
+  - -> `[712]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
 
 ### Węzeł `[301]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[302]`
-  - -> `[303]`
+  - -> `[302]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true"*)
+  - -> `[303]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.AxelVina_Married_Official == true)"*)
 
 ### Węzeł `[302]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[304]`
+  - -> `[304]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[303]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.AxelVina_Married_Official == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.AxelVina_Married_Official == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
+  - -> `[306]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
 
 ### Węzeł `[304]`
 Mówca: **Narrator**
@@ -2353,10 +2737,10 @@ As the song ended, they approached you with the news that they were expecting a 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
-  - -> `[311]`
-  - -> `[712]`
-  - -> `[313]`
+  - -> `[310]` (*Player_Romus: "...gave them your heartfelt congratulations."*)
+  - -> `[311]` (*Player_Romus: "...feared for the new heir's future."*)
+  - -> `[712]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
 
 ### Węzeł `[305]`
 Mówca: **Narrator**
@@ -2364,30 +2748,30 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[131]`
-  - -> `[130]`
+  - -> `[132]` (*Player_Romus: "...warned her to be ready for the den of wolves that was ..."*)
+  - -> `[131]` (*Player_Romus: "...told her to look around and greet her people."*)
+  - -> `[130]` (*Player_Romus: "...believed the person Vina had become could take on anyt..."*)
 
 ### Węzeł `[306]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[307]`
-  - -> `[308]`
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
+  - -> `[308]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Rico == true)"*)
 
 ### Węzeł `[307]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[305]`
+  - -> `[305]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[308]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Rico == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Rico == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[309]`
 Mówca: **Narrator**
@@ -2395,54 +2779,62 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[131]`
-  - -> `[130]`
+  - -> `[132]` (*Player_Romus: "...warned her to be ready for the den of wolves that was ..."*)
+  - -> `[131]` (*Player_Romus: "...told her to look around and greet her people."*)
+  - -> `[130]` (*Player_Romus: "...believed the person Vina had become could take on anyt..."*)
 
 ### Węzeł `[310]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...gave them your heartfelt congratulations."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[300]` (Narrator), `[304]` (Narrator), `[389]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
+  - -> `[317]` (*Narrator: "Your daughter's husband disappeared into the crowd. She r..."*)
 
 ### Węzeł `[311]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...feared for the new heir's future."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[300]` (Narrator), `[304]` (Narrator), `[389]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
+  - -> `[317]` (*Narrator: "Your daughter's husband disappeared into the crowd. She r..."*)
 
 ### Węzeł `[312]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew that the reign of House Toras would last forever."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_KeepsLastName"] == true`
+- **Kontekst wejściowy (poprzednik):** `[300]` (Narrator), `[304]` (Narrator), `[389]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
+  - -> `[317]` (*Narrator: "Your daughter's husband disappeared into the crowd. She r..."*)
 
 ### Węzeł `[313]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_KeepsLastName == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_KeepsLastName == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[314]`
-  - -> `[315]`
+  - -> `[314]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
+  - -> `[315]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_KeepsLastName == true)"*)
 
 ### Węzeł `[314]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_KeepsLastName == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_KeepsLastName"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_KeepsLastName == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_KeepsLastName"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[312]`
+  - -> `[312]` (*Player_Romus: "...knew that the reign of House Toras would last forever."*)
 
 ### Węzeł `[315]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_KeepsLastName == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_KeepsLastName == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[316]`
+  - -> `[316]` (*Player_Romus: "...knew that the days of House Toras were definitively co..."*)
 
 ### Węzeł `[316]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew that the days of House Toras were definitively coming to an end."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[300]` (Narrator), `[304]` (Narrator), `[389]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
+  - -> `[317]` (*Narrator: "Your daughter's husband disappeared into the crowd. She r..."*)
 
 ### Węzeł `[317]`
 Mówca: **Narrator**
@@ -2450,43 +2842,45 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[131]`
-  - -> `[130]`
+  - -> `[132]` (*Player_Romus: "...warned her to be ready for the den of wolves that was ..."*)
+  - -> `[131]` (*Player_Romus: "...told her to look around and greet her people."*)
+  - -> `[130]` (*Player_Romus: "...believed the person Vina had become could take on anyt..."*)
 
 ### Węzeł `[318]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
-  - -> `[320]`
+  - -> `[319]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage =..."*)
+  - -> `[320]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage..."*)
 
 ### Węzeł `[319]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false  and  Variable["RiziaDLC.Vina_FuneralHappened"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false  and  Variable["RiziaDLC.Vina_FuneralHappened"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[321]`
+  - -> `[321]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_continuedreign1")"*)
 
 ### Węzeł `[320]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false  and  Variable["RiziaDLC.Vina_FuneralHappened"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage == false && RiziaDLC.Vina_FuneralHappened == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Escapes"] == false  and  Variable["RiziaDLC.Vina_Hostage"] == false  and  Variable["RiziaDLC.Vina_FuneralHappened"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[321]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_continuedreign1"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_continuedreign1");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_continuedreign1")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_continuedreign1");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Narrator: "The grand doors to the ballroom opened and Vina walked in..."*)
 
 ### Węzeł `[322]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "She looked just like her mother."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == false`
+- **Kontekst wejściowy (poprzednik):** `[323]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
 
 ### Węzeł `[323]`
 Mówca: **Narrator**
@@ -2494,28 +2888,28 @@ Mówca: **Narrator**
 
 The entire hall fell silent, captivated by the princess' beauty and elegance."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[730]`
+  - -> `[730]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == false"*)
 
 ### Węzeł `[324]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
-  - -> `[326]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true)"*)
 
 ### Węzeł `[325]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[390]`
+  - -> `[390]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Wedding_Happened == true"*)
 
 ### Węzeł `[326]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[328]`
+  - -> `[328]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true"*)
 
 ### Węzeł `[327]`
 Mówca: **Narrator**
@@ -2527,30 +2921,30 @@ When the song finished, Vina proudly announced that she was expecting a child.
 
 You could see the unease in your wife's eyes. You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[342]` (*Player_Romus: "...assured her your daughter's family wouldn't pose a thr..."*)
+  - -> `[343]` (*Player_Romus: "...congratulated the couple profusely."*)
+  - -> `[344]` (*Player_Romus: "...feared for the new heir's future."*)
 
 ### Węzeł `[328]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[329]`
-  - -> `[330]`
+  - -> `[329]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true"*)
+  - -> `[330]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.AxelVina_Married_Official == true)"*)
 
 ### Węzeł `[329]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[331]`
+  - -> `[331]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[330]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.AxelVina_Married_Official == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.AxelVina_Married_Official == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[333]`
+  - -> `[333]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
 
 ### Węzeł `[331]`
 Mówca: **Narrator**
@@ -2562,9 +2956,9 @@ When the song ended, Vina proudly announced that she was expecting a child.
 
 You could see the unease in your wife's eyes. You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[342]` (*Player_Romus: "...assured her your daughter's family wouldn't pose a thr..."*)
+  - -> `[343]` (*Player_Romus: "...congratulated the couple profusely."*)
+  - -> `[344]` (*Player_Romus: "...feared for the new heir's future."*)
 
 ### Węzeł `[332]`
 Mówca: **Narrator**
@@ -2574,51 +2968,51 @@ The couple announced to the room that since they were no longer responsible for 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
-  - -> `[341]`
-  - -> `[345]`
+  - -> `[340]` (*Player_Romus: "...felt relieved."*)
+  - -> `[341]` (*Player_Romus: "...were outraged at the potential scandal."*)
+  - -> `[345]` (*Player_Romus: "...tried to apologize for what you'd put them through."*)
 
 ### Węzeł `[333]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[334]`
-  - -> `[335]`
+  - -> `[334]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
+  - -> `[335]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Rico == true)"*)
 
 ### Węzeł `[334]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
+  - -> `[332]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[335]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Rico == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Rico == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[339]`
+  - -> `[339]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[336]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Successor_Son == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Successor_Son == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[337]`
-  - -> `[338]`
+  - -> `[337]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Son == true"*)
+  - -> `[338]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Successor_Son == true)"*)
 
 ### Węzeł `[337]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Successor_Son == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Successor_Son"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Successor_Son == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Successor_Son"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[318]`
+  - -> `[318]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == false && RiziaDLC.Vina_Hostage =..."*)
 
 ### Węzeł `[338]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Successor_Son == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Successor_Son"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Successor_Son == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Successor_Son"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[274]`
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_continuedreign1")"*)
 
 ### Węzeł `[339]`
 Mówca: **Narrator**
@@ -2626,108 +3020,132 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[734]`
-  - -> `[347]`
-  - -> `[348]`
+  - -> `[734]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == true"*)
+  - -> `[347]` (*Player_Romus: "...hoped she wasn't plotting anything."*)
+  - -> `[348]` (*Player_Romus: "...felt proud of the person she'd become."*)
 
 ### Węzeł `[340]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt relieved."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[332]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[341]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...were outraged at the potential scandal."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[332]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[342]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...assured her your daughter's family wouldn't pose a threat."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[327]` (Narrator), `[331]` (Narrator), `[393]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[343]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...congratulated the couple profusely."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[327]` (Narrator), `[331]` (Narrator), `[393]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[344]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...feared for the new heir's future."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[327]` (Narrator), `[331]` (Narrator), `[393]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[345]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...tried to apologize for what you'd put them through."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[332]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[346]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew that she'd forgiven you."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[339]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[347]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...hoped she wasn't plotting anything."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[339]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[348]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt proud of the person she'd become."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[339]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[349]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew you would have to watch your back for years to come."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[144]` (Narrator), `[751]` (Narrator), `[757]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[350]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...ignored them. The throne was yours now, and nothing else mattered."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[144]` (Narrator), `[751]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[351]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[352]`
-  - -> `[353]`
+  - -> `[352]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHap..."*)
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralH..."*)
 
 ### Węzeł `[352]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[354]`
+  - -> `[354]` (*Player_Romus: "...said that for what the Palesians had done to your daug..."*)
 
 ### Węzeł `[353]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Hostage == true || RiziaDLC.Vina_FuneralHappened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[354]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said that for what the Palesians had done to your daughter, they deserved to suffer for all eternity."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_Hostage"] == true  or  Variable["RiziaDLC.Vina_FuneralHappened"] == true`
+- **Kontekst wejściowy (poprzednik):** `[180]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[355]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[357]`
+  - -> `[357]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[356]`
 Mówca: **Narrator**
@@ -2739,111 +3157,117 @@ Wiktor Smolak had requested that the rest of Intermerkopum back him in this figh
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[363]`
-  - -> `[365]`
-  - -> `[364]`
+  - -> `[363]` (*Player_Romus: "...to give Wehlen whatever diplomatic support it needed."*)
+  - -> `[365]` (*Player_Romus: "...to kick Wehlen out of Intermerkopum for its act of agg..."*)
+  - -> `[364]` (*Player_Romus: "...to stay far away from this conflict."*)
 
 ### Węzeł `[357]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
-  - -> `[359]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
+  - -> `[359]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_War == true)"*)
 
 ### Węzeł `[358]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[360]`
+  - -> `[360]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.We..."*)
 
 ### Węzeł `[359]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[477]`
+  - -> `[477]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
 
 ### Węzeł `[360]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[361]`
-  - -> `[362]`
+  - -> `[361]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.We..."*)
+  - -> `[362]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame...."*)
 
 ### Węzeł `[361]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  and  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  and  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[356]`
+  - -> `[356]` (*Narrator: "The final item on the agenda concerned the impending war ..."*)
 
 ### Węzeł `[362]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  and  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_AlliesCalledToWar == true && BaseGame.Wehlen_JointOperation == true && RiziaDLC.CountryRelation_Wehlen_Allied == true && RiziaDLC.Policy_Diplomacy_Intermerkopum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_AlliesCalledToWar"] == true  and  Variable["BaseGame.Wehlen_JointOperation"] == true  and  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  and  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[366]`
+  - -> `[366]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
 
 ### Węzeł `[363]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to give Wehlen whatever diplomatic support it needed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[356]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[364]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to stay far away from this conflict."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[356]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[365]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to kick Wehlen out of Intermerkopum for its act of aggression."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[356]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[366]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[367]`
-  - -> `[368]`
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == true"*)
+  - -> `[368]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarWin == true)"*)
 
 ### Węzeł `[367]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[369]`
+  - -> `[369]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
 
 ### Węzeł `[368]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarWin == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarWin == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[377]`
+  - -> `[377]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
 
 ### Węzeł `[369]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[370]`
-  - -> `[371]`
+  - -> `[370]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_Intermerkopum == true"*)
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)"*)
 
 ### Węzeł `[370]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[372]`
+  - -> `[372]` (*Narrator: "The final item on the agenda concerned the impending war ..."*)
 
 ### Węzeł `[371]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_Intermerkopum == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_Intermerkopum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[376]`
+  - -> `[376]` (*Narrator: "The final item on the agenda concerned the impending war ..."*)
 
 ### Węzeł `[372]`
 Mówca: **Narrator**
@@ -2853,27 +3277,33 @@ Queen Beatrice, fearing defeat, had reached out in desperation, requesting Inter
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[373]`
-  - -> `[374]`
-  - -> `[375]`
+  - -> `[373]` (*Player_Romus: "...to let Rumburg fend for itself."*)
+  - -> `[374]` (*Player_Romus: "...to provide her with whatever diplomatic support she ne..."*)
+  - -> `[375]` (*Player_Romus: "...to throw Rizia's support behind Sordland instead."*)
 
 ### Węzeł `[373]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to let Rumburg fend for itself."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[372]` (Narrator), `[376]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[374]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to provide her with whatever diplomatic support she needed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[372]` (Narrator), `[376]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[375]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to throw Rizia's support behind Sordland instead."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[372]` (Narrator), `[376]` (Narrator), `[380]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[376]`
 Mówca: **Narrator**
@@ -2883,30 +3313,30 @@ Queen Beatrice, fearing defeat, had reached out in desperation, requesting your 
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[373]`
-  - -> `[374]`
-  - -> `[375]`
+  - -> `[373]` (*Player_Romus: "...to let Rumburg fend for itself."*)
+  - -> `[374]` (*Player_Romus: "...to provide her with whatever diplomatic support she ne..."*)
+  - -> `[375]` (*Player_Romus: "...to throw Rizia's support behind Sordland instead."*)
 
 ### Węzeł `[377]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[378]`
-  - -> `[379]`
+  - -> `[378]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
+  - -> `[379]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)"*)
 
 ### Węzeł `[378]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[380]`
+  - -> `[380]` (*Narrator: "The final item on the agenda concerned the impending war ..."*)
 
 ### Węzeł `[379]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[383]`
+  - -> `[383]` (*Narrator: "The final item on the agenda concerned the impending war ..."*)
 
 ### Węzeł `[380]`
 Mówca: **Narrator**
@@ -2916,21 +3346,25 @@ Queen Beatrice had asked all fellow members of GRACE to support the fight agains
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[375]`
-  - -> `[381]`
-  - -> `[382]`
+  - -> `[375]` (*Player_Romus: "...to throw Rizia's support behind Sordland instead."*)
+  - -> `[381]` (*Player_Romus: "...to stay far away from this conflict."*)
+  - -> `[382]` (*Player_Romus: "...to provide Rumburg with whatever backing it needed."*)
 
 ### Węzeł `[381]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to stay far away from this conflict."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[380]` (Narrator), `[383]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[382]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to provide Rumburg with whatever backing it needed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[380]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[383]`
 Mówca: **Narrator**
@@ -2940,42 +3374,46 @@ Anton Rayne had reached out in desperation, asking Rizia to consider supporting 
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[381]`
-  - -> `[384]`
-  - -> `[385]`
+  - -> `[381]` (*Player_Romus: "...to stay far away from this conflict."*)
+  - -> `[384]` (*Player_Romus: "...to provide Sordland with whatever diplomatic support i..."*)
+  - -> `[385]` (*Player_Romus: "...to throw Rizia's support behind Rumburg instead."*)
 
 ### Węzeł `[384]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to provide Sordland with whatever diplomatic support it needed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[383]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[385]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to throw Rizia's support behind Rumburg instead."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[383]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[386]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Wedding_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Wedding_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
-  - -> `[388]`
+  - -> `[387]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Wedding_Happened == true"*)
+  - -> `[388]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Wedding_Happened == true)"*)
 
 ### Węzeł `[387]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Wedding_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Wedding_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Wedding_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Wedding_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
+  - -> `[300]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[388]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Wedding_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Wedding_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Wedding_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Wedding_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[389]`
+  - -> `[389]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[389]`
 Mówca: **Narrator**
@@ -2987,31 +3425,31 @@ As the song ended, they approached you with the news that they were expecting a 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
-  - -> `[311]`
-  - -> `[712]`
-  - -> `[313]`
+  - -> `[310]` (*Player_Romus: "...gave them your heartfelt congratulations."*)
+  - -> `[311]` (*Player_Romus: "...feared for the new heir's future."*)
+  - -> `[712]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
 
 ### Węzeł `[390]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Wedding_Happened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Wedding_Happened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[391]`
-  - -> `[392]`
+  - -> `[391]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Wedding_Happened == true"*)
+  - -> `[392]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_Wedding_Happened == true)"*)
 
 ### Węzeł `[391]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_Wedding_Happened == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_Wedding_Happened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_Wedding_Happened == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_Wedding_Happened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[392]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_Wedding_Happened == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_Wedding_Happened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_Wedding_Happened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_Wedding_Happened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[738]`
+  - -> `[738]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == true"*)
 
 ### Węzeł `[393]`
 Mówca: **Narrator**
@@ -3023,37 +3461,37 @@ When the song ended, Vina proudly announced that she was expecting a child.
 
 You could see the unease in your wife's eyes. You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[342]` (*Player_Romus: "...assured her your daughter's family wouldn't pose a thr..."*)
+  - -> `[343]` (*Player_Romus: "...congratulated the couple profusely."*)
+  - -> `[344]` (*Player_Romus: "...feared for the new heir's future."*)
 
 ### Węzeł `[394]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: UnlockAchievement("Rizia_Epilogue_ContinuedReign");)*
-- **Efekt (`userScript`):** `UnlockAchievement("Rizia_Epilogue_ContinuedReign");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `UnlockAchievement("Rizia_Epilogue_ContinuedReign");`
+- **Efekt skryptowy (`userScript`):** `UnlockAchievement("Rizia_Epilogue_ContinuedReign");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[395]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[396]`
-  - -> `[397]`
+  - -> `[396]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed..."*)
+  - -> `[397]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Execut..."*)
 
 ### Węzeł `[396]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Hugo_Arrested"] == false  and  Variable["RiziaDLC.Hugo_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Hugo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Hugo_Arrested"] == false  and  Variable["RiziaDLC.Hugo_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Hugo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[258]`
+  - -> `[258]` (*Narrator: "With your one gesture, the orchestra cued in and the fest..."*)
 
 ### Węzeł `[397]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Hugo_Arrested"] == false  and  Variable["RiziaDLC.Hugo_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Hugo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Hugo_Arrested == false && RiziaDLC.Hugo_Executed == false && RiziaDLC.Council_GrandVizier_Hugo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Hugo_Arrested"] == false  and  Variable["RiziaDLC.Hugo_Executed"] == false  and  Variable["RiziaDLC.Council_GrandVizier_Hugo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Rico_Arrested == false &&  RiziaDLC.Rico_Execute..."*)
 
 ### Węzeł `[398]`
 Mówca: **Narrator**
@@ -3063,133 +3501,141 @@ Your relatives from the disgraced House of Toras had been permitted to come pay 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[400]`
-  - -> `[399]`
-  - -> `[628]`
+  - -> `[400]` (*Player_Romus: "...welcomed them with open arms."*)
+  - -> `[399]` (*Player_Romus: "...played along with a fake smile."*)
+  - -> `[628]` (*Player_Romus: "...dismissed them as quickly as possible."*)
 
 ### Węzeł `[399]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...played along with a fake smile."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[398]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[400]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...welcomed them with open arms."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[398]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[401]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[402]`
-  - -> `[403]`
+  - -> `[402]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC..."*)
+  - -> `[403]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaD..."*)
 
 ### Węzeł `[402]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro_Friendly"] == false  and  Variable["RiziaDLC.Country_HouseAzaro_Neutral"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro_Friendly"] == false  and  Variable["RiziaDLC.Country_HouseAzaro_Neutral"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
+  - -> `[263]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Execut..."*)
 
 ### Węzeł `[403]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro_Friendly"] == false  and  Variable["RiziaDLC.Country_HouseAzaro_Neutral"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseAzaro_Friendly == false && RiziaDLC.Country_HouseAzaro_Neutral == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro_Friendly"] == false  and  Variable["RiziaDLC.Country_HouseAzaro_Neutral"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Faction_HouseAzaro_Lucita == true && RiziaDLC.Lu..."*)
 
 ### Węzeł `[404]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[405]`
-  - -> `[406]`
+  - -> `[405]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
+  - -> `[406]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseSazon_Conquered == true)"*)
 
 ### Węzeł `[405]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Narrator: "There were no members of House Sazon among your well-wish..."*)
 
 ### Węzeł `[406]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseSazon_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseSazon_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Manus_SendToWar == true && RiziaDLC.Manus_DiesIn..."*)
 
 ### Węzeł `[407]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 Adarfo Sotelato's socialist policies and willingness to speak truth to power had struck a chord during his tenure as transitory prime minister. He had gained incredible popularity in a short amount of time."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[408]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[409]`
-  - -> `[410]`
+  - -> `[409]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == true"*)
+  - -> `[410]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Manus == true)"*)
 
 ### Węzeł `[409]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[429]`
+  - -> `[429]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_newgovernment")"*)
 
 ### Węzeł `[410]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[768]`
+  - -> `[768]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_newgovernment")"*)
 
 ### Węzeł `[411]`
 Mówca: **Narrator**
 > "He pulled out a briefcase to inform you of his plans for Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[412]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[413]`
-  - -> `[414]`
+  - -> `[413]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
+  - -> `[414]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true)"*)
 
 ### Węzeł `[413]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[415]`
+  - -> `[415]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[414]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[431]`
+  - -> `[431]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[415]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 Despite Daria de Rava's initial popularity as interim prime minister, she was quickly eclipsed by the RPP's candidate, Manus Sazon, whose heartfelt speeches and pledges to improve social welfare struck a chord with the people."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[416]`
+  - -> `[416]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[416]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "At long last, Rizians went to the ballot boxes to cast their votes."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[415]` (Narrator), `[431]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[425]`
+  - -> `[425]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
 
 ### Węzeł `[417]`
 Mówca: **Narrator**
@@ -3197,13 +3643,15 @@ Mówca: **Narrator**
 
 Just a day later, Lucita gave birth to your son {RiziaDLCText.KingsSon}, competing with the elections in the news cycle."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[418]`
+  - -> `[418]` (*Player_Romus: "Times were changing. But you were still King."*)
 
 ### Węzeł `[418]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "Times were changing. But you were still King."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[417]` (Narrator), `[428]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[430]`
+  - -> `[430]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_continuedreign5")"*)
 
 ### Węzeł `[419]`
 Mówca: **Narrator**
@@ -3213,166 +3661,176 @@ He profusely apologized for arriving a few minutes late, explaining he'd gotten 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[422]`
-  - -> `[421]`
-  - -> `[423]`
+  - -> `[422]` (*Player_Romus: "...told him he didn't have to apologize."*)
+  - -> `[421]` (*Player_Romus: "...warned him not to be late next time."*)
+  - -> `[423]` (*Player_Romus: "...congratulated him on his election victory."*)
 
 ### Węzeł `[420]`
 Mówca: **Narrator**
 > "He pulled out a briefcase to inform you of the latest developments in Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[424]`
+  - -> `[424]` (*Player_Romus: "You listened."*)
 
 ### Węzeł `[421]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...warned him not to be late next time."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[419]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[420]`
+  - -> `[420]` (*Narrator: "He pulled out a briefcase to inform you of the latest dev..."*)
 
 ### Węzeł `[422]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him he didn't have to apologize."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[419]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[420]`
+  - -> `[420]` (*Narrator: "He pulled out a briefcase to inform you of the latest dev..."*)
 
 ### Węzeł `[423]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...congratulated him on his election victory."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[419]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[420]`
+  - -> `[420]` (*Narrator: "He pulled out a briefcase to inform you of the latest dev..."*)
 
 ### Węzeł `[424]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You listened."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[420]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
 
 ### Węzeł `[425]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[426]`
-  - -> `[427]`
+  - -> `[426]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[427]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arre..."*)
 
 ### Węzeł `[426]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[417]`
+  - -> `[417]` (*Narrator: "As expected, Manus won by a landslide to become the first..."*)
 
 ### Węzeł `[427]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[428]`
+  - -> `[428]` (*Narrator: "As expected, Manus won by a landslide to become the first..."*)
 
 ### Węzeł `[428]`
 Mówca: **Narrator**
 > "As expected, Manus won by a landslide to become the first elected Prime Minister of Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[418]`
+  - -> `[418]` (*Player_Romus: "Times were changing. But you were still King."*)
 
 ### Węzeł `[429]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_newgovernment"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_newgovernment");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_newgovernment")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_newgovernment");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[412]`
+  - -> `[412]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
 
 ### Węzeł `[430]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_continuedreign5"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_continuedreign5");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_continuedreign5")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_continuedreign5");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[419]`
+  - -> `[419]` (*Narrator: "On the day of your eight-year jubilee, the new Prime Mini..."*)
 
 ### Węzeł `[431]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 As the face behind the reform movement, Manus Sazon had gained incredible popularity during his tenure as transitory prime minister."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[416]`
+  - -> `[416]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[432]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_newgovernment"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_newgovernment");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_newgovernment")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_newgovernment");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
 
 ### Węzeł `[433]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[434]`
-  - -> `[435]`
+  - -> `[434]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
+  - -> `[435]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_PrimeMinister_Daria == true)"*)
 
 ### Węzeł `[434]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_PrimeMinister_Daria == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_PrimeMinister_Daria == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[436]`
+  - -> `[436]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[435]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_PrimeMinister_Daria == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_PrimeMinister_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_PrimeMinister_Daria"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[149]`
+  - -> `[149]` (*Narrator: "1957|Porte Drazon"*)
 
 ### Węzeł `[436]`
 **[WYBÓR GRACZA: "1957|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, the elections were all people talked about.
 
 As interim Prime Minister, Daria de Rava ran an immensely successful campaign, enjoying incredible popularity among those who wanted life to stay as it was under your reign."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Player_Romus: "At long last, Rizians went to the ballot boxes to cast th..."*)
 
 ### Węzeł `[437]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[438]`
-  - -> `[439]`
+  - -> `[438]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && Ri..."*)
+  - -> `[439]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && ..."*)
 
 ### Węzeł `[438]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Law_StateReligion_Wruhecism"] == true  and  Variable["RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Law_StateReligion_Wruhecism"] == true  and  Variable["RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
+  - -> `[191]` (*Narrator: "The newly independent {RiziaDLCText.IndependentZille} had..."*)
 
 ### Węzeł `[439]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Law_StateReligion_Wruhecism"] == true  and  Variable["RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Law_StateReligion_Wruhecism == true && RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Law_StateReligion_Wruhecism"] == true  and  Variable["RiziaDLC.Situation_Order_WruhecistCommunity_Dissatisfied"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[195]`
+  - -> `[195]` (*Narrator: "Wruhecists were fleeing Rizia for the newly independent {..."*)
 
 ### Węzeł `[440]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[441]`
-  - -> `[442]`
+  - -> `[441]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true"*)
+  - -> `[442]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Order_GolcondistCommunity_Happy == t..."*)
 
 ### Węzeł `[441]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Order_GolcondistCommunity_Happy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Order_GolcondistCommunity_Happy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[443]`
+  - -> `[443]` (*Narrator: "The newly independent {RiziaDLCText.IndependentZille} had..."*)
 
 ### Węzeł `[442]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Order_GolcondistCommunity_Happy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Order_GolcondistCommunity_Happy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Order_GolcondistCommunity_Happy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[444]`
+  - -> `[444]` (*Narrator: "Golcondists were fleeing Rizia for the newly independent ..."*)
 
 ### Węzeł `[443]`
 Mówca: **Narrator**
@@ -3380,9 +3838,9 @@ Mówca: **Narrator**
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
-  - -> `[196]`
-  - -> `[198]`
+  - -> `[197]` (*Player_Romus: "...fully ally with them for the sake of the unity of the ..."*)
+  - -> `[196]` (*Player_Romus: "...align with them, but not get too close."*)
+  - -> `[198]` (*Player_Romus: "...avoid contact as much as possible."*)
 
 ### Węzeł `[444]`
 Mówca: **Narrator**
@@ -3392,51 +3850,51 @@ A few clashes had already occurred.
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
-  - -> `[199]`
-  - -> `[201]`
+  - -> `[200]` (*Player_Romus: "...keep calm and not repeat the mistakes of the past."*)
+  - -> `[199]` (*Player_Romus: "...fight back and show them the might of Rizia."*)
+  - -> `[201]` (*Player_Romus: "...try to turn public sentiment around by using intellige..."*)
 
 ### Węzeł `[445]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Liberation == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Liberation == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[446]`
-  - -> `[447]`
+  - -> `[446]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReferendum_Independence_Liberation == true"*)
+  - -> `[447]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReferendum_Independence_Liberation == true)"*)
 
 ### Węzeł `[446]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReferendum_Independence_Liberation == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Liberation"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReferendum_Independence_Liberation == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReferendum_Independence_Liberation"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[448]`
+  - -> `[448]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
 
 ### Węzeł `[447]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReferendum_Independence_Liberation == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Liberation"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReferendum_Independence_Liberation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReferendum_Independence_Liberation"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[453]`
+  - -> `[453]` (*Narrator: "With Zille still under Wehzek control, a few troublemaker..."*)
 
 ### Węzeł `[448]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[449]`
-  - -> `[450]`
+  - -> `[449]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
+  - -> `[450]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)"*)
 
 ### Węzeł `[449]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[451]`
+  - -> `[451]` (*Narrator: "The newly independent {RiziaDLCText.IndependentZille} had..."*)
 
 ### Węzeł `[450]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[452]`
+  - -> `[452]` (*Narrator: "The newly independent {RiziaDLCText.IndependentZille} had..."*)
 
 ### Węzeł `[451]`
 Mówca: **Narrator**
@@ -3444,9 +3902,9 @@ Mówca: **Narrator**
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
-  - -> `[196]`
-  - -> `[198]`
+  - -> `[197]` (*Player_Romus: "...fully ally with them for the sake of the unity of the ..."*)
+  - -> `[196]` (*Player_Romus: "...align with them, but not get too close."*)
+  - -> `[198]` (*Player_Romus: "...avoid contact as much as possible."*)
 
 ### Węzeł `[452]`
 Mówca: **Narrator**
@@ -3456,9 +3914,9 @@ A few clashes had already occurred.
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
-  - -> `[199]`
-  - -> `[201]`
+  - -> `[200]` (*Player_Romus: "...keep calm and not repeat the mistakes of the past."*)
+  - -> `[199]` (*Player_Romus: "...fight back and show them the might of Rizia."*)
+  - -> `[201]` (*Player_Romus: "...try to turn public sentiment around by using intellige..."*)
 
 ### Węzeł `[453]`
 Mówca: **Narrator**
@@ -3468,30 +3926,30 @@ Some clashes had already occurred.
 
 Your advice was to..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
-  - -> `[199]`
-  - -> `[201]`
+  - -> `[200]` (*Player_Romus: "...keep calm and not repeat the mistakes of the past."*)
+  - -> `[199]` (*Player_Romus: "...fight back and show them the might of Rizia."*)
+  - -> `[201]` (*Player_Romus: "...try to turn public sentiment around by using intellige..."*)
 
 ### Węzeł `[454]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[455]`
-  - -> `[456]`
+  - -> `[455]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
+  - -> `[456]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)"*)
 
 ### Węzeł `[455]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[216]`
+  - -> `[216]` (*Narrator: "Recovery from Rizia's recent destabilization was of utmos..."*)
 
 ### Węzeł `[456]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[457]`
+  - -> `[457]` (*Narrator: "In the wake of the destabilization the reformists had cau..."*)
 
 ### Węzeł `[457]`
 Mówca: **Narrator**
@@ -3501,48 +3959,54 @@ Prime Minister Sotelato was planning a "Rebuild and Recover" campaign, during wh
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[460]`
-  - -> `[459]`
-  - -> `[458]`
+  - -> `[460]` (*Player_Romus: "...told him it sounded like a good idea."*)
+  - -> `[459]` (*Player_Romus: "...warned him against further upsetting the nobility."*)
+  - -> `[458]` (*Player_Romus: "...thought it would harm the people more than it would help."*)
 
 ### Węzeł `[458]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thought it would harm the people more than it would help."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[457]` (Narrator), `[464]` (Narrator), `[472]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[459]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...warned him against further upsetting the nobility."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[457]` (Narrator), `[464]` (Narrator), `[472]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[460]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him it sounded like a good idea."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[457]` (Narrator), `[464]` (Narrator), `[472]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[461]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[462]`
-  - -> `[463]`
+  - -> `[462]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
+  - -> `[463]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)"*)
 
 ### Węzeł `[462]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Narrator: "Recovery from the current economic instability was of utm..."*)
 
 ### Węzeł `[463]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[464]`
+  - -> `[464]` (*Narrator: "The recent period of economic instability had put many Ri..."*)
 
 ### Węzeł `[464]`
 Mówca: **Narrator**
@@ -3552,56 +4016,58 @@ Prime Minister Sotelato was planning a "Rebuild and Recover" campaign, during wh
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[460]`
-  - -> `[459]`
-  - -> `[458]`
+  - -> `[460]` (*Player_Romus: "...told him it sounded like a good idea."*)
+  - -> `[459]` (*Player_Romus: "...warned him against further upsetting the nobility."*)
+  - -> `[458]` (*Player_Romus: "...thought it would harm the people more than it would help."*)
 
 ### Węzeł `[465]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[466]`
-  - -> `[467]`
+  - -> `[466]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
+  - -> `[467]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)"*)
 
 ### Węzeł `[466]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Narrator: "Recovery from the energy crisis was of the utmost importa..."*)
 
 ### Węzeł `[467]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[472]`
+  - -> `[472]` (*Narrator: "Finding new sources of energy was of the utmost importanc..."*)
 
 ### Węzeł `[468]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[469]`
-  - -> `[470]`
+  - -> `[469]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC..."*)
+  - -> `[470]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaD..."*)
 
 ### Węzeł `[469]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Player_Romus: "...ask Rizia's international allies for aid."*)
 
 ### Węzeł `[470]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true || RiziaDLC.Policy_Diplomacy_Intermerkopum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true  or  Variable["RiziaDLC.Policy_Diplomacy_Intermerkopum"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[471]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...focus all efforts on domestic energy extraction."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[218]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[472]`
 Mówca: **Narrator**
@@ -3611,30 +4077,30 @@ Rizia Prime Minister Sotelato was planning a "Refuel and Recover" campaign, duri
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[460]`
-  - -> `[459]`
-  - -> `[458]`
+  - -> `[460]` (*Player_Romus: "...told him it sounded like a good idea."*)
+  - -> `[459]` (*Player_Romus: "...warned him against further upsetting the nobility."*)
+  - -> `[458]` (*Player_Romus: "...thought it would harm the people more than it would help."*)
 
 ### Węzeł `[473]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[474]`
-  - -> `[475]`
+  - -> `[474]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
+  - -> `[475]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)"*)
 
 ### Węzeł `[474]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[219]`
+  - -> `[219]` (*Narrator: "Increasing Rizia's production capacity was of utmost impo..."*)
 
 ### Węzeł `[475]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[476]`
+  - -> `[476]` (*Narrator: "Increasing Rizia's production capacity was of utmost impo..."*)
 
 ### Węzeł `[476]`
 Mówca: **Narrator**
@@ -3644,30 +4110,30 @@ Prime Minister Sotelato was planning a "Rebuild and Recover" campaign, during wh
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[460]`
-  - -> `[459]`
-  - -> `[458]`
+  - -> `[460]` (*Player_Romus: "...told him it sounded like a good idea."*)
+  - -> `[459]` (*Player_Romus: "...warned him against further upsetting the nobility."*)
+  - -> `[458]` (*Player_Romus: "...thought it would harm the people more than it would help."*)
 
 ### Węzeł `[477]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[478]`
-  - -> `[479]`
+  - -> `[478]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
+  - -> `[479]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)"*)
 
 ### Węzeł `[478]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[481]`
+  - -> `[481]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
 
 ### Węzeł `[479]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[480]`
 Mówca: **Narrator**
@@ -3677,30 +4143,30 @@ In response to ongoing pressure from the superpowers, Queen Beatrice had propose
 
 Your advice was..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[485]`
-  - -> `[486]`
-  - -> `[487]`
+  - -> `[485]` (*Player_Romus: "...to give GRACE whatever support it needed."*)
+  - -> `[486]` (*Player_Romus: "...to consider Rizia's withdrawal."*)
+  - -> `[487]` (*Player_Romus: "...not to promise her anything."*)
 
 ### Węzeł `[481]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[482]`
-  - -> `[483]`
+  - -> `[482]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == false"*)
+  - -> `[483]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)"*)
 
 ### Węzeł `[482]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[480]`
+  - -> `[480]` (*Narrator: "The final item on the agenda concerned GRACE.  In respons..."*)
 
 ### Węzeł `[483]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[484]`
+  - -> `[484]` (*Narrator: "The final item on the agenda concerned GRACE.  In respons..."*)
 
 ### Węzeł `[484]`
 Mówca: **Narrator**
@@ -3710,131 +4176,154 @@ In response to ongoing pressure from the superpowers, Queen Beatrice had propose
 
 Adarfo, on the other hand, wanted to withdraw from GRACE completely."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[488]`
-  - -> `[489]`
-  - -> `[490]`
+  - -> `[488]` (*Player_Romus: "You encouraged him to go along with Beatrice's plan."*)
+  - -> `[489]` (*Player_Romus: "You approved his idea."*)
+  - -> `[490]` (*Player_Romus: "You didn't advise him one way or the other."*)
 
 ### Węzeł `[485]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to give GRACE whatever support it needed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[480]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[486]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...to consider Rizia's withdrawal."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[480]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[487]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...not to promise her anything."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[480]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[488]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You encouraged him to go along with Beatrice's plan."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[484]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[489]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You approved his idea."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[484]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[490]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You didn't advise him one way or the other."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[484]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[491]`
+  - -> `[491]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[491]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[492]`
+  - -> `[492]` (*Narrator: "The bells of Zilba Archsanctuary rang in the distance, ma..."*)
 
 ### Węzeł `[492]`
 Mówca: **Narrator**
 > "The bells of Zilba Archsanctuary rang in the distance, marking the end of your meeting."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[499]`
+  - -> `[499]` (*Player_Romus: "It was time to get ready."*)
 
 ### Węzeł `[493]`
 **[WYBÓR GRACZA: "1958|Porte Drazon"]** — Mówca: **Narrator**
 > "A few months after your speech, you strode into the Grand Hall for your jubilee celebrations, commemorating eight years of your reign."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[494]`
-  - -> `[495]`
-  - -> `[496]`
+  - -> `[494]` (*Player_Romus: "The time had passed too quickly."*)
+  - -> `[495]` (*Player_Romus: "It felt like eons since your coronation."*)
+  - -> `[496]` (*Player_Romus: "You had much to celebrate."*)
 
 ### Węzeł `[494]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "The time had passed too quickly."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[493]` (Narrator), `[497]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[501]`
+  - -> `[501]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
 
 ### Węzeł `[495]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "It felt like eons since your coronation."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[493]` (Narrator), `[497]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[501]`
+  - -> `[501]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
 
 ### Węzeł `[496]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You had much to celebrate."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[493]` (Narrator), `[497]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[501]`
+  - -> `[501]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
 
 ### Węzeł `[497]`
 **[WYBÓR GRACZA: "1958|Porte Drazon"]** — Mówca: **Narrator**
 > "Later that evening, you strode into the Grand Hall for your jubilee celebrations, commemorating eight years of your reign."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[499]` (Player_Romus)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[494]`
-  - -> `[495]`
-  - -> `[496]`
+  - -> `[494]` (*Player_Romus: "The time had passed too quickly."*)
+  - -> `[495]` (*Player_Romus: "It felt like eons since your coronation."*)
+  - -> `[496]` (*Player_Romus: "You had much to celebrate."*)
 
 ### Węzeł `[498]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump from PM Meeting)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump from PM Meeting`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[497]`
+  - -> `[497]` (*Narrator: "1958|Porte Drazon"*)
 
 ### Węzeł `[499]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "It was time to get ready."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[492]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[500]`
+  - -> `[500]` (*Węzeł Logiki Narracyjnej: "Jump to: [Jump from PM Meeting]"*)
 
 ### Węzeł `[500]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Jump from PM Meeting])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Jump from PM Meeting]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[498]`
+  - -> `[498]` (*Węzeł Logiki Narracyjnej: "Jump from PM Meeting"*)
 
 ### Węzeł `[501]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[502]`
-  - -> `[503]`
+  - -> `[502]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
+  - -> `[503]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Path_Stratocracy == true)"*)
 
 ### Węzeł `[502]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[504]`
+  - -> `[504]` (*Narrator: "A cordon of soldiers in crisp uniforms performed a perfec..."*)
 
 ### Węzeł `[503]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Path_Stratocracy == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Path_Stratocracy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[505]`
+  - -> `[505]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full"*)
 
 ### Węzeł `[504]`
 Mówca: **Narrator**
@@ -3842,28 +4331,28 @@ Mówca: **Narrator**
 
 You took your seat on the Sila Orica."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[512]`
+  - -> `[512]` (*Węzeł Logiki Narracyjnej: "Left Right Epilogue Hub"*)
 
 ### Węzeł `[505]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[506]`
-  - -> `[507]`
+  - -> `[506]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full"*)
+  - -> `[507]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full)"*)
 
 ### Węzeł `[506]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"]`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[508]`
+  - -> `[508]` (*Narrator: "A cordon of Wruhec's Guardians knelt and reverently murmu..."*)
 
 ### Węzeł `[507]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"]) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"]) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[509]`
+  - -> `[509]` (*Narrator: "The band played a series of ceremonial fanfares as you wa..."*)
 
 ### Węzeł `[508]`
 Mówca: **Narrator**
@@ -3871,7 +4360,7 @@ Mówca: **Narrator**
 
 You took your seat on the Sila Orica."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[512]`
+  - -> `[512]` (*Węzeł Logiki Narracyjnej: "Left Right Epilogue Hub"*)
 
 ### Węzeł `[509]`
 Mówca: **Narrator**
@@ -3879,143 +4368,147 @@ Mówca: **Narrator**
 
 You took your seat on the Sila Orica."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[512]`
+  - -> `[512]` (*Węzeł Logiki Narracyjnej: "Left Right Epilogue Hub"*)
 
 ### Węzeł `[510]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You looked to your left."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false` AND `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[504]` (Narrator), `[508]` (Narrator), `[509]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[519]`
+  - -> `[519]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Left = true"*)
 
 ### Węzeł `[511]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You looked to your right."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false` AND `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[504]` (Narrator), `[508]` (Narrator), `[509]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[520]`
+  - -> `[520]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Right = true"*)
 
 ### Węzeł `[512]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Left Right Epilogue Hub)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Left Right Epilogue Hub`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[521]`
+  - -> `[521]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && Ri..."*)
 
 ### Węzeł `[513]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Left == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Left == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[514]`
-  - -> `[515]`
+  - -> `[514]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Left == false"*)
+  - -> `[515]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.LeftRightEpilogueHub_Left == false)"*)
 
 ### Węzeł `[514]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Left == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Left == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[510]`
+  - -> `[510]` (*Player_Romus: "You looked to your left."*)
 
 ### Węzeł `[515]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.LeftRightEpilogueHub_Left == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.LeftRightEpilogueHub_Left == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[516]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Right == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Right == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[517]`
-  - -> `[518]`
+  - -> `[517]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Right == false"*)
+  - -> `[518]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.LeftRightEpilogueHub_Right == false)"*)
 
 ### Węzeł `[517]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Right == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Right == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[511]`
+  - -> `[511]` (*Player_Romus: "You looked to your right."*)
 
 ### Węzeł `[518]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.LeftRightEpilogueHub_Right == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.LeftRightEpilogueHub_Right == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[519]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Left = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Left = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[524]`
+  - -> `[524]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Execut..."*)
 
 ### Węzeł `[520]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Right = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Right = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[551]`
+  - -> `[551]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_Grand..."*)
 
 ### Węzeł `[521]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[522]`
-  - -> `[523]`
+  - -> `[522]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && Ri..."*)
+  - -> `[523]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && ..."*)
 
 ### Węzeł `[522]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[550]`
+  - -> `[550]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[523]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.LeftRightEpilogueHub_Right == true && RiziaDLCIsolated.LeftRightEpilogueHub_Left == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Right"] == true  and  Variable["RiziaDLCIsolated.LeftRightEpilogueHub_Left"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[513]`
-  - -> `[516]`
+  - -> `[513]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Left == false"*)
+  - -> `[516]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.LeftRightEpilogueHub_Right == false"*)
 
 ### Węzeł `[524]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[525]`
-  - -> `[526]`
+  - -> `[525]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Execut..."*)
+  - -> `[526]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Exec..."*)
 
 ### Węzeł `[525]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[270]`
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[526]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Executed == false && RiziaDLC.Lucita_Arrested == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Executed"] == false  and  Variable["RiziaDLC.Lucita_Arrested"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[527]`
+  - -> `[527]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pabel_RelationshipPublic == true"*)
 
 ### Węzeł `[527]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pabel_RelationshipPublic == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pabel_RelationshipPublic == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[528]`
-  - -> `[529]`
+  - -> `[528]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pabel_RelationshipPublic == true"*)
+  - -> `[529]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pabel_RelationshipPublic == true)"*)
 
 ### Węzeł `[528]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pabel_RelationshipPublic == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pabel_RelationshipPublic == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[530]`
+  - -> `[530]` (*Narrator: "Pabel was seated in a plain wooden chair, not a throne. B..."*)
 
 ### Węzeł `[529]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pabel_RelationshipPublic == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pabel_RelationshipPublic == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[531]`
+  - -> `[531]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Pabel_Together == true"*)
 
 ### Węzeł `[530]`
 Mówca: **Narrator**
@@ -4025,52 +4518,52 @@ He smiled.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
-  - -> `[11]`
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage ==..."*)
+  - -> `[11]` (*Player_Romus: "...remembered why you fell in love with him."*)
+  - -> `[12]` (*Player_Romus: "...wondered if the public would ever truly accept you as ..."*)
+  - -> `[13]` (*Player_Romus: "...smiled back and proceeded with the celebrations."*)
 
 ### Węzeł `[531]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Pabel_Together == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Pabel_Together == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[532]`
-  - -> `[533]`
+  - -> `[532]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Pabel_Together == true"*)
+  - -> `[533]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_Pabel_Together == true)"*)
 
 ### Węzeł `[532]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Pabel_Together == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_Pabel_Together"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Pabel_Together == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_Pabel_Together"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[534]`
+  - -> `[534]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pabel_Lord == true"*)
 
 ### Węzeł `[533]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_Pabel_Together == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_Pabel_Together"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_Pabel_Together == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_Pabel_Together"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[540]`
+  - -> `[540]` (*Narrator: "You saw your mother, as stylishly dressed as ever. You co..."*)
 
 ### Węzeł `[534]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pabel_Lord == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pabel_Lord == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[535]`
-  - -> `[536]`
+  - -> `[535]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pabel_Lord == true"*)
+  - -> `[536]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pabel_Lord == true)"*)
 
 ### Węzeł `[535]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pabel_Lord == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pabel_Lord"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pabel_Lord == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pabel_Lord"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[537]`
+  - -> `[537]` (*Narrator: "You saw Lord Pabel Adria mingling with the other guests w..."*)
 
 ### Węzeł `[536]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pabel_Lord == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pabel_Lord"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pabel_Lord == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pabel_Lord"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[539]`
+  - -> `[539]` (*Narrator: "You saw Pabel giving orders to the palace staff while thr..."*)
 
 ### Węzeł `[537]`
 Mówca: **Narrator**
@@ -4080,15 +4573,17 @@ He smiled.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[538]`
-  - -> `[13]`
+  - -> `[11]` (*Player_Romus: "...remembered why you fell in love with him."*)
+  - -> `[538]` (*Player_Romus: "...wondered if you'd have to live in secrecy forever."*)
+  - -> `[13]` (*Player_Romus: "...smiled back and proceeded with the celebrations."*)
 
 ### Węzeł `[538]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wondered if you'd have to live in secrecy forever."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[537]` (Narrator), `[539]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[539]`
 Mówca: **Narrator**
@@ -4098,9 +4593,9 @@ He smiled.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[538]`
-  - -> `[13]`
+  - -> `[11]` (*Player_Romus: "...remembered why you fell in love with him."*)
+  - -> `[538]` (*Player_Romus: "...wondered if you'd have to live in secrecy forever."*)
+  - -> `[13]` (*Player_Romus: "...smiled back and proceeded with the celebrations."*)
 
 ### Węzeł `[540]`
 Mówca: **Narrator**
@@ -4108,41 +4603,47 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
-  - -> `[541]`
-  - -> `[764]`
-  - -> `[543]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_Escapes == true || RiziaDLC.Vina_Hostage ==..."*)
+  - -> `[541]` (*Player_Romus: "...wondered if Lena would be proud of you today."*)
+  - -> `[764]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Estela_PromisedToConvert == true"*)
+  - -> `[543]` (*Player_Romus: "...smiled at her and proceeded with the celebrations."*)
 
 ### Węzeł `[541]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...wondered if Lena would be proud of you today."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[540]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[545]`
+  - -> `[545]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[542]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt sorry for all the stress you'd put her through."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Estela_PromisedToConvert"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[540]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[545]`
+  - -> `[545]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[543]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...smiled at her and proceeded with the celebrations."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[540]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[545]`
+  - -> `[545]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[544]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Left Right Epilogue Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Left Right Epilogue Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[512]`
+  - -> `[512]` (*Węzeł Logiki Narracyjnej: "Left Right Epilogue Hub"*)
 
 ### Węzeł `[545]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[544]`
+  - -> `[544]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[546]`
 Mówca: **Narrator**
@@ -4150,76 +4651,82 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[547]`
-  - -> `[548]`
-  - -> `[549]`
+  - -> `[547]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[548]` (*Player_Romus: "...thanked God for getting you this far."*)
+  - -> `[549]` (*Player_Romus: "...knew you'd keep Sal around as long as he was of use to..."*)
 
 ### Węzeł `[547]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to relax and enjoy himself."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[546]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[548]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked God for getting you this far."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[546]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[549]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew you'd keep Sal around as long as he was of use to you, and no longer."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[546]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[550]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
+  - -> `[271]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_party")"*)
 
 ### Węzeł `[551]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[552]`
-  - -> `[553]`
+  - -> `[552]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_Grand..."*)
+  - -> `[553]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_Gra..."*)
 
 ### Węzeł `[552]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true  or  Variable["RiziaDLC.Council_GrandVizier_Sal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true  or  Variable["RiziaDLC.Council_GrandVizier_Sal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[546]`
+  - -> `[546]` (*Narrator: "You saw Sal Ignacius, the Grand Wiseman of Rizia and your..."*)
 
 ### Węzeł `[553]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true  or  Variable["RiziaDLC.Council_GrandVizier_Sal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true || RiziaDLC.Council_GrandVizier_Sal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true  or  Variable["RiziaDLC.Council_GrandVizier_Sal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[554]`
+  - -> `[554]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Hugo == true"*)
 
 ### Węzeł `[554]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Hugo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Hugo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[555]`
-  - -> `[556]`
+  - -> `[555]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Hugo == true"*)
+  - -> `[556]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Council_GrandVizier_Hugo == true)"*)
 
 ### Węzeł `[555]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Hugo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Hugo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Hugo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Hugo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[558]`
+  - -> `[558]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
 
 ### Węzeł `[556]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Council_GrandVizier_Hugo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Hugo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Council_GrandVizier_Hugo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Hugo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[566]`
+  - -> `[566]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Axel == true"*)
 
 ### Węzeł `[557]`
 Mówca: **Narrator**
@@ -4229,30 +4736,30 @@ He leaned over and said he'd heard whispers that today's celebrations were in ba
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[563]`
-  - -> `[564]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[563]` (*Player_Romus: "...assured him you hadn't gone over budget."*)
+  - -> `[564]` (*Player_Romus: "...said that the whisperers should be found and imprisoned."*)
 
 ### Węzeł `[558]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[559]`
-  - -> `[560]`
+  - -> `[559]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
+  - -> `[560]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true..."*)
 
 ### Węzeł `[559]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[557]`
+  - -> `[557]` (*Narrator: "You saw Hugo Toras, your uncle, Grand Vizier and most ste..."*)
 
 ### Węzeł `[560]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[561]`
+  - -> `[561]` (*Narrator: "You saw Hugo Toras, your uncle, Grand Vizier and most ste..."*)
 
 ### Węzeł `[561]`
 Mówca: **Narrator**
@@ -4260,75 +4767,83 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[585]`
-  - -> `[583]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[585]` (*Player_Romus: "...thanked him for his years of loyalty."*)
+  - -> `[583]` (*Player_Romus: "...knew you'd keep him around as long as he was of use to..."*)
 
 ### Węzeł `[562]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him to relax and enjoy himself."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[557]` (Narrator), `[561]` (Narrator), `[572]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[563]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...assured him you hadn't gone over budget."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[557]` (Narrator), `[572]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[564]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said that the whisperers should be found and imprisoned."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[557]` (Narrator), `[572]` (Narrator), `[581]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[565]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...assured her you hadn't gone over budget."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[581]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[566]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Axel == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Axel == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[567]`
-  - -> `[568]`
+  - -> `[567]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Axel == true"*)
+  - -> `[568]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Council_GrandVizier_Axel == true)"*)
 
 ### Węzeł `[567]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Axel == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Axel"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Axel == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Axel"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[569]`
+  - -> `[569]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
 
 ### Węzeł `[568]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Council_GrandVizier_Axel == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Axel"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Council_GrandVizier_Axel == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Axel"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[573]`
+  - -> `[573]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Angelica == true"*)
 
 ### Węzeł `[569]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[570]`
-  - -> `[571]`
+  - -> `[570]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
+  - -> `[571]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true..."*)
 
 ### Węzeł `[570]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[572]`
+  - -> `[572]` (*Narrator: "You saw Axel Reinhart, your son-in-law and Grand Vizier, ..."*)
 
 ### Węzeł `[571]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[579]`
+  - -> `[579]` (*Narrator: "You saw Axel Reinhart, your son-in-law and Grand Vizier, ..."*)
 
 ### Węzeł `[572]`
 Mówca: **Narrator**
@@ -4338,51 +4853,51 @@ He leaned over and said he'd heard whispers that today's celebrations were in ba
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[563]`
-  - -> `[564]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[563]` (*Player_Romus: "...assured him you hadn't gone over budget."*)
+  - -> `[564]` (*Player_Romus: "...said that the whisperers should be found and imprisoned."*)
 
 ### Węzeł `[573]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[574]`
-  - -> `[575]`
+  - -> `[574]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Angelica == true"*)
+  - -> `[575]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Council_GrandVizier_Angelica == true)"*)
 
 ### Węzeł `[574]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[576]`
+  - -> `[576]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
 
 ### Węzeł `[575]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Council_GrandVizier_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Council_GrandVizier_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[588]`
+  - -> `[588]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
 
 ### Węzeł `[576]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[577]`
-  - -> `[578]`
+  - -> `[577]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Economy_NewBusiness_Collapse == true |..."*)
+  - -> `[578]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true..."*)
 
 ### Węzeł `[577]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[581]`
+  - -> `[581]` (*Narrator: "You saw Angelica Sazon, your Grand Vizier and one of your..."*)
 
 ### Węzeł `[578]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Economy_NewBusiness_Collapse == true || RiziaDLC.NewGov_PalesDebtPlan_MegaTax == true || RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure == true || RiziaDLC.Situation_Economy_EnergyCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Economy_NewBusiness_Collapse"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_MegaTax"] == true  or  Variable["RiziaDLC.NewGov_PalesDebtPlan_PatrioticSeizure"] == true  or  Variable["RiziaDLC.Situation_Economy_EnergyCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[580]`
+  - -> `[580]` (*Narrator: "You saw Angelica Sazon, your Grand Vizier and one of your..."*)
 
 ### Węzeł `[579]`
 Mówca: **Narrator**
@@ -4390,9 +4905,9 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[583]`
-  - -> `[586]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[583]` (*Player_Romus: "...knew you'd keep him around as long as he was of use to..."*)
+  - -> `[586]` (*Player_Romus: "...thanked him for the loyalty he'd shown so far."*)
 
 ### Węzeł `[580]`
 Mówca: **Narrator**
@@ -4400,9 +4915,9 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[582]`
-  - -> `[587]`
-  - -> `[584]`
+  - -> `[582]` (*Player_Romus: "...told her to relax and enjoy herself."*)
+  - -> `[587]` (*Player_Romus: "...thanked her for the loyalty she'd shown so far."*)
+  - -> `[584]` (*Player_Romus: "...knew you'd keep her around as long as she was of use t..."*)
 
 ### Węzeł `[581]`
 Mówca: **Narrator**
@@ -4412,66 +4927,78 @@ She leaned over and said she'd heard whispers that today's celebrations were in 
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[564]`
-  - -> `[565]`
-  - -> `[582]`
+  - -> `[564]` (*Player_Romus: "...said that the whisperers should be found and imprisoned."*)
+  - -> `[565]` (*Player_Romus: "...assured her you hadn't gone over budget."*)
+  - -> `[582]` (*Player_Romus: "...told her to relax and enjoy herself."*)
 
 ### Węzeł `[582]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told her to relax and enjoy herself."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[580]` (Narrator), `[581]` (Narrator), `[599]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[583]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew you'd keep him around as long as he was of use to you, and no longer."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[561]` (Narrator), `[579]` (Narrator), `[605]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[584]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew you'd keep her around as long as she was of use to you, and no longer."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[580]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[585]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked him for his years of loyalty."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[561]` (Narrator), `[605]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[586]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked him for the loyalty he'd shown so far."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[579]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[587]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...thanked her for the loyalty she'd shown so far."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[580]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[588]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[589]`
-  - -> `[590]`
+  - -> `[589]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Adarfo == true"*)
+  - -> `[590]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)"*)
 
 ### Węzeł `[589]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Adarfo == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[591]`
+  - -> `[591]` (*Narrator: "Adarfo Sotelato looked bored already.  You..."*)
 
 ### Węzeł `[590]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Adarfo == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Adarfo"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[593]`
+  - -> `[593]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == true"*)
 
 ### Węzeł `[591]`
 Mówca: **Narrator**
@@ -4479,9 +5006,9 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[600]`
-  - -> `[601]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[600]` (*Player_Romus: "...reminded him that this was what the people wanted."*)
+  - -> `[601]` (*Player_Romus: "...told him he could leave if he wanted."*)
 
 ### Węzeł `[592]`
 Mówca: **Narrator**
@@ -4489,51 +5016,51 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[602]`
-  - -> `[604]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[602]` (*Player_Romus: "...hoped he'd only say good things."*)
+  - -> `[604]` (*Player_Romus: "...were glad to have such responsibilities off your chest."*)
 
 ### Węzeł `[593]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[594]`
-  - -> `[595]`
+  - -> `[594]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == true"*)
+  - -> `[595]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Manus == true)"*)
 
 ### Węzeł `[594]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[592]`
+  - -> `[592]` (*Narrator: "Manus Sazon was poring over his notes for the address he'..."*)
 
 ### Węzeł `[595]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[596]`
+  - -> `[596]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Daria == true"*)
 
 ### Węzeł `[596]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Daria == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Daria == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[597]`
-  - -> `[598]`
+  - -> `[597]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Daria == true"*)
+  - -> `[598]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Daria == true)"*)
 
 ### Węzeł `[597]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Daria == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Daria == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[599]`
+  - -> `[599]` (*Narrator: "Daria de Rava was poring over her notes for the address s..."*)
 
 ### Węzeł `[598]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Daria == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Daria == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Daria"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[606]`
+  - -> `[606]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Titus_Arrested == false"*)
 
 ### Węzeł `[599]`
 Mówca: **Narrator**
@@ -4541,39 +5068,49 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[582]`
-  - -> `[604]`
-  - -> `[603]`
+  - -> `[582]` (*Player_Romus: "...told her to relax and enjoy herself."*)
+  - -> `[604]` (*Player_Romus: "...were glad to have such responsibilities off your chest."*)
+  - -> `[603]` (*Player_Romus: "...hoped she'd only say good things."*)
 
 ### Węzeł `[600]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...reminded him that this was what the people wanted."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[591]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[601]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told him he could leave if he wanted."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[591]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[602]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...hoped he'd only say good things."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[592]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[603]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...hoped she'd only say good things."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[599]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[604]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...were glad to have such responsibilities off your chest."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[592]` (Narrator), `[599]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[605]`
 Mówca: **Narrator**
@@ -4581,30 +5118,30 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[562]`
-  - -> `[585]`
-  - -> `[583]`
+  - -> `[562]` (*Player_Romus: "...told him to relax and enjoy himself."*)
+  - -> `[585]` (*Player_Romus: "...thanked him for his years of loyalty."*)
+  - -> `[583]` (*Player_Romus: "...knew you'd keep him around as long as he was of use to..."*)
 
 ### Węzeł `[606]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Titus_Arrested == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Titus_Arrested == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[607]`
-  - -> `[608]`
+  - -> `[607]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Titus_Arrested == false"*)
+  - -> `[608]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Titus_Arrested == false)"*)
 
 ### Węzeł `[607]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Titus_Arrested == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Titus_Arrested"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Titus_Arrested == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Titus_Arrested"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[605]`
+  - -> `[605]` (*Narrator: "You saw Titus Gordion, Captain of the Golden Guard, surve..."*)
 
 ### Węzeł `[608]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Titus_Arrested == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Titus_Arrested"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Titus_Arrested == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Titus_Arrested"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[609]`
+  - -> `[609]` (*Narrator: "The absence of a right-hand man or woman was palpable.  Y..."*)
 
 ### Węzeł `[609]`
 Mówca: **Narrator**
@@ -4612,74 +5149,80 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[610]`
-  - -> `[611]`
-  - -> `[613]`
+  - -> `[610]` (*Player_Romus: "...missed Hugo's advice."*)
+  - -> `[611]` (*Player_Romus: "...knew that ultimately, every King rules alone."*)
+  - -> `[613]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arres..."*)
 
 ### Węzeł `[610]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...missed Hugo's advice."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[609]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[611]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew that ultimately, every King rules alone."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[609]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[612]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...were glad you had a life partner to rely on."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true`
+- **Kontekst wejściowy (poprzednik):** `[609]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[616]`
+  - -> `[616]` (*Węzeł Logiki Narracyjnej: "Jump to: [Left Right Epilogue Hub]"*)
 
 ### Węzeł `[613]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[614]`
-  - -> `[615]`
+  - -> `[614]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arres..."*)
+  - -> `[615]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arr..."*)
 
 ### Węzeł `[614]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[612]`
+  - -> `[612]` (*Player_Romus: "...were glad you had a life partner to rely on."*)
 
 ### Węzeł `[615]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false) || RiziaDLC.Relations_Pabel_Together == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false)  or  Variable["RiziaDLC.Relations_Pabel_Together"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[616]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Left Right Epilogue Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Left Right Epilogue Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[512]`
+  - -> `[512]` (*Węzeł Logiki Narracyjnej: "Left Right Epilogue Hub"*)
 
 ### Węzeł `[617]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[618]`
-  - -> `[619]`
+  - -> `[618]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[619]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[618]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[620]`
+  - -> `[620]` (*Narrator: "The hall filled with silence as Sal stepped forward, open..."*)
 
 ### Węzeł `[619]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[622]`
+  - -> `[622]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
 
 ### Węzeł `[620]`
 Mówca: **Narrator**
@@ -4687,34 +5230,36 @@ Mówca: **Narrator**
 
 The orchestra conductor lifted his baton, awaiting your signal."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[621]`
+  - -> `[621]` (*Player_Romus: "You gave it."*)
 
 ### Węzeł `[621]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You gave it."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[620]` (Narrator), `[625]` (Narrator), `[626]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[627]`
+  - -> `[627]` (*Węzeł Logiki Narracyjnej: "PlaySoundEffect("Jubilee");"*)
 
 ### Węzeł `[622]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[623]`
-  - -> `[624]`
+  - -> `[623]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
+  - -> `[624]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Path_Stratocracy == true)"*)
 
 ### Węzeł `[623]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[625]`
+  - -> `[625]` (*Narrator: "The hall filled with silence as Lucita stepped forward an..."*)
 
 ### Węzeł `[624]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Path_Stratocracy == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Path_Stratocracy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[626]`
+  - -> `[626]` (*Narrator: "The hall filled with silence as the orchestra conductor l..."*)
 
 ### Węzeł `[625]`
 Mówca: **Narrator**
@@ -4722,149 +5267,157 @@ Mówca: **Narrator**
 
 The orchestra conductor lifted his baton, awaiting your signal."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[621]`
+  - -> `[621]` (*Player_Romus: "You gave it."*)
 
 ### Węzeł `[626]`
 Mówca: **Narrator**
 > "The hall filled with silence as the orchestra conductor lifted his baton, awaiting your signal."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[621]`
+  - -> `[621]` (*Player_Romus: "You gave it."*)
 
 ### Węzeł `[627]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlaySoundEffect("Jubilee");)*
-- **Efekt (`userScript`):** `PlaySoundEffect("Jubilee");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlaySoundEffect("Jubilee");`
+- **Efekt skryptowy (`userScript`):** `PlaySoundEffect("Jubilee");
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseToras_Conquered == true"*)
 
 ### Węzeł `[628]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...dismissed them as quickly as possible."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[398]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseAzaro_Conquered == true"*)
 
 ### Węzeł `[629]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[630]`
-  - -> `[631]`
+  - -> `[630]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Outcome_NoPeace_KeepFighting == true"*)
+  - -> `[631]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)"*)
 
 ### Węzeł `[630]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.War_Outcome_NoPeace_KeepFighting == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[632]`
+  - -> `[632]` (*Player_Romus: "...said to pass your regards to the men and women on the ..."*)
 
 ### Węzeł `[631]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.War_Outcome_NoPeace_KeepFighting == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Loss == true"*)
 
 ### Węzeł `[632]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...said to pass your regards to the men and women on the front lines."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.War_Outcome_NoPeace_KeepFighting"] == true` AND `(Variable["RiziaDLC.War_Pales_Won"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[37]` (Narrator), `[51]` (Narrator), `[52]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[633]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[634]`
-  - -> `[635]`
+  - -> `[634]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true"*)
+  - -> `[635]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)"*)
 
 ### Węzeł `[634]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Player_Romus: "...knew he'd be useful in the battles to come."*)
 
 ### Węzeł `[635]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[636]`
+  - -> `[636]` (*Player_Romus: "...knew his family wouldn't be a problem again."*)
 
 ### Węzeł `[636]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew his family wouldn't be a problem again."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[278]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[637]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[638]`
-  - -> `[639]`
+  - -> `[638]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDL..."*)
+  - -> `[639]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Epilogue_PrimeMinister_Manus == false && Rizia..."*)
 
 ### Węzeł `[638]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == false  and  Variable["RiziaDLC.Manus_Gone"] == false  and  Variable["RiziaDLC.Manus_Executed"] == false  and  Variable["RiziaDLC.Manus_Arrested"] == false  and  Variable["RiziaDLC.HouseOfDelegates_Abolished"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == false  and  Variable["RiziaDLC.Manus_Gone"] == false  and  Variable["RiziaDLC.Manus_Executed"] == false  and  Variable["RiziaDLC.Manus_Arrested"] == false  and  Variable["RiziaDLC.HouseOfDelegates_Abolished"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Narrator: "Manus was in a heated discussion with another member of H..."*)
 
 ### Węzeł `[639]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == false  and  Variable["RiziaDLC.Manus_Gone"] == false  and  Variable["RiziaDLC.Manus_Executed"] == false  and  Variable["RiziaDLC.Manus_Arrested"] == false  and  Variable["RiziaDLC.HouseOfDelegates_Abolished"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Epilogue_PrimeMinister_Manus == false && RiziaDLC.Manus_Gone == false && RiziaDLC.Manus_Executed == false && RiziaDLC.Manus_Arrested == false && RiziaDLC.HouseOfDelegates_Abolished == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Epilogue_PrimeMinister_Manus"] == false  and  Variable["RiziaDLC.Manus_Gone"] == false  and  Variable["RiziaDLC.Manus_Executed"] == false  and  Variable["RiziaDLC.Manus_Arrested"] == false  and  Variable["RiziaDLC.HouseOfDelegates_Abolished"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
+  - -> `[283]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_HouseSazon_AngelicaPardoned == true &&..."*)
 
 ### Węzeł `[640]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[641]`
-  - -> `[642]`
+  - -> `[641]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseSazon_Conquered == true"*)
+  - -> `[642]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.HouseSazon_Conquered == true)"*)
 
 ### Węzeł `[641]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseSazon_Conquered == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseSazon_Conquered == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[643]`
+  - -> `[643]` (*Player_Romus: "...didn't send invitations to traitors."*)
 
 ### Węzeł `[642]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.HouseSazon_Conquered == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.HouseSazon_Conquered == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.HouseSazon_Conquered"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[643]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...didn't send invitations to traitors."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.HouseSazon_Conquered"] == true`
+- **Kontekst wejściowy (poprzednik):** `[64]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[644]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[645]`
-  - -> `[646]`
+  - -> `[645]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC..."*)
+  - -> `[646]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Council_GrandVizier_Angelica == true || RiziaD..."*)
 
 ### Węzeł `[645]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true  or  Variable["RiziaDLC.Country_HouseSazon_Friendly"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true  or  Variable["RiziaDLC.Country_HouseSazon_Friendly"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[647]`
+  - -> `[647]` (*Narrator: "Representing her House, Leona Sazon came forward with a g..."*)
 
 ### Węzeł `[646]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true  or  Variable["RiziaDLC.Country_HouseSazon_Friendly"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Council_GrandVizier_Angelica == true || RiziaDLC.Country_HouseSazon_Friendly == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Council_GrandVizier_Angelica"] == true  or  Variable["RiziaDLC.Country_HouseSazon_Friendly"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
+  - -> `[64]` (*Narrator: "There were no members of House Sazon among your well-wish..."*)
 
 ### Węzeł `[647]`
 Mówca: **Narrator**
@@ -4872,30 +5425,30 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[58]`
-  - -> `[63]`
+  - -> `[56]` (*Player_Romus: "...did not accept this apparent bribery."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleOwnership_Brenas == true"*)
+  - -> `[63]` (*Player_Romus: "...thanked her for her gift."*)
 
 ### Węzeł `[648]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_KeepsLastName == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_KeepsLastName == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[649]`
-  - -> `[650]`
+  - -> `[649]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_KeepsLastName == true"*)
+  - -> `[650]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_KeepsLastName == true)"*)
 
 ### Węzeł `[649]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_KeepsLastName == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_KeepsLastName"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_KeepsLastName == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_KeepsLastName"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[651]`
+  - -> `[651]` (*Narrator: "Duke Axel Reinhart Toras entered the ballroom as if he ow..."*)
 
 ### Węzeł `[650]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_KeepsLastName == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_KeepsLastName == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_KeepsLastName"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Narrator: "Duke Axel Reinhart entered the ballroom as if he owned it..."*)
 
 ### Węzeł `[651]`
 Mówca: **Narrator**
@@ -4905,37 +5458,37 @@ Finally, he came to kneel before you with an exaggerated gesture.
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[86]` (*Player_Romus: "...told him to not make himself too comfortable."*)
+  - -> `[87]` (*Player_Romus: "...told him to kiss your ring."*)
+  - -> `[88]` (*Player_Romus: "...told your son-in-law that no such formalities were nec..."*)
 
 ### Węzeł `[652]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[653]`
-  - -> `[654]`
+  - -> `[653]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
+  - -> `[654]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Reform_Success == true)"*)
 
 ### Węzeł `[653]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Reform_Success == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Reform_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Reform_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Reform_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[656]`
+  - -> `[656]` (*Narrator: "Delegations from {RiziaDLCText.JubileeDelegation} greeted..."*)
 
 ### Węzeł `[654]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Reform_Success == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Reform_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Reform_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Reform_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[660]`
+  - -> `[660]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[655]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "various countries")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="various countries";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "various countries"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="various countries";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[656]`
 Mówca: **Narrator**
@@ -4943,48 +5496,54 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[657]`
-  - -> `[658]`
-  - -> `[659]`
+  - -> `[657]` (*Player_Romus: "...felt a twinge of obsolescence."*)
+  - -> `[658]` (*Player_Romus: "...paid them no heed."*)
+  - -> `[659]` (*Player_Romus: "...told them the Prime Minister still answered to you, at..."*)
 
 ### Węzeł `[657]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt a twinge of obsolescence."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[656]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[668]`
+  - -> `[668]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[658]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...paid them no heed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[656]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[668]`
+  - -> `[668]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[659]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...told them the Prime Minister still answered to you, at least on paper."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[656]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[668]`
+  - -> `[668]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[660]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[661]`
-  - -> `[662]`
+  - -> `[661]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[662]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[661]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[663]`
+  - -> `[663]` (*Narrator: "Delegations from {RiziaDLCText.JubileeDelegation} milled ..."*)
 
 ### Węzeł `[662]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[664]`
+  - -> `[664]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
 
 ### Węzeł `[663]`
 Mówca: **Narrator**
@@ -4992,30 +5551,30 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[126]`
-  - -> `[128]`
+  - -> `[127]` (*Player_Romus: "...assured them nothing had really changed."*)
+  - -> `[126]` (*Player_Romus: "...ordered the servants to deliver more wine to them."*)
+  - -> `[128]` (*Player_Romus: "...asked your guards to watch their every step."*)
 
 ### Węzeł `[664]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[665]`
-  - -> `[666]`
+  - -> `[665]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Path_Stratocracy == true"*)
+  - -> `[666]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Path_Stratocracy == true)"*)
 
 ### Węzeł `[665]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Path_Stratocracy == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Path_Stratocracy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Path_Stratocracy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[667]`
+  - -> `[667]` (*Narrator: "Delegations from {RiziaDLCText.JubileeDelegation} milled ..."*)
 
 ### Węzeł `[666]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Path_Stratocracy == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Path_Stratocracy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Path_Stratocracy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[685]`
+  - -> `[685]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true"*)
 
 ### Węzeł `[667]`
 Mówca: **Narrator**
@@ -5023,153 +5582,153 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[126]`
-  - -> `[128]`
+  - -> `[127]` (*Player_Romus: "...assured them nothing had really changed."*)
+  - -> `[126]` (*Player_Romus: "...ordered the servants to deliver more wine to them."*)
+  - -> `[128]` (*Player_Romus: "...asked your guards to watch their every step."*)
 
 ### Węzeł `[668]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[669]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_AidRumburg == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_AidRumburg == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[670]`
-  - -> `[671]`
+  - -> `[670]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_AidRumburg == true"*)
+  - -> `[671]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NewGov_Epic_AidRumburg == true)"*)
 
 ### Węzeł `[670]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_AidRumburg == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_AidRumburg"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_AidRumburg == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_AidRumburg"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[673]`
+  - -> `[673]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == false"*)
 
 ### Węzeł `[671]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NewGov_Epic_AidRumburg == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_AidRumburg"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NewGov_Epic_AidRumburg == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_AidRumburg"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[690]`
+  - -> `[690]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[672]`
 Mówca: **Narrator**
 > "Queen Beatrice was notably absent. Thanks to your aid, Rumburg was on the verge of a decisive victory over Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[701]`
-  - -> `[699]`
-  - -> `[703]`
+  - -> `[701]` (*Player_Romus: "You wished you hadn't gotten mixed up in this."*)
+  - -> `[699]` (*Player_Romus: "You couldn't wait to see Holsord burn."*)
+  - -> `[703]` (*Player_Romus: "You knew Her Excellency would come out on top."*)
 
 ### Węzeł `[673]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[674]`
-  - -> `[675]`
+  - -> `[674]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == false"*)
+  - -> `[675]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarWin == false)"*)
 
 ### Węzeł `[674]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[672]`
+  - -> `[672]` (*Narrator: "Queen Beatrice was notably absent. Thanks to your aid, Ru..."*)
 
 ### Węzeł `[675]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarWin == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarWin == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[676]`
+  - -> `[676]` (*Narrator: "Queen Beatrice was notably absent. In spite of your aid, ..."*)
 
 ### Węzeł `[676]`
 Mówca: **Narrator**
 > "Queen Beatrice was notably absent. In spite of your aid, Rumburg was losing badly in its war with Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[701]`
-  - -> `[700]`
-  - -> `[703]`
+  - -> `[701]` (*Player_Romus: "You wished you hadn't gotten mixed up in this."*)
+  - -> `[700]` (*Player_Romus: "You hoped it wouldn't reflect badly on Rizia's own reputa..."*)
+  - -> `[703]` (*Player_Romus: "You knew Her Excellency would come out on top."*)
 
 ### Węzeł `[677]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[678]`
-  - -> `[679]`
+  - -> `[678]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
+  - -> `[679]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)"*)
 
 ### Węzeł `[678]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_Diplomacy_GRACEMember == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_Diplomacy_GRACEMember == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[680]`
+  - -> `[680]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == false"*)
 
 ### Węzeł `[679]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_Diplomacy_GRACEMember == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_Diplomacy_GRACEMember == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_Diplomacy_GRACEMember"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[693]`
+  - -> `[693]` (*Narrator: "The war between Rumburg and Sordland was on everyone's li..."*)
 
 ### Węzeł `[680]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[681]`
-  - -> `[682]`
+  - -> `[681]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_RumburgWarWin == false"*)
+  - -> `[682]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_RumburgWarWin == false)"*)
 
 ### Węzeł `[681]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_RumburgWarWin == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_RumburgWarWin == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_RumburgWarWin"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[683]`
+  - -> `[683]` (*Narrator: "Queen Beatrice was notably absent. You heard that Rumburg..."*)
 
 ### Węzeł `[682]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_RumburgWarWin == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_RumburgWarWin == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_RumburgWarWin"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[684]`
+  - -> `[684]` (*Narrator: "Queen Beatrice was notably absent. You heard that Rumburg..."*)
 
 ### Węzeł `[683]`
 Mówca: **Narrator**
 > "Queen Beatrice was notably absent. You heard that Rumburg was on the verge of a decisive victory over Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[702]`
-  - -> `[699]`
-  - -> `[703]`
+  - -> `[702]` (*Player_Romus: "You were glad not to be mixed up in this."*)
+  - -> `[699]` (*Player_Romus: "You couldn't wait to see Holsord burn."*)
+  - -> `[703]` (*Player_Romus: "You knew Her Excellency would come out on top."*)
 
 ### Węzeł `[684]`
 Mówca: **Narrator**
 > "Queen Beatrice was notably absent. You heard that Rumburg was losing badly in its war with Sordland."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[700]`
-  - -> `[702]`
-  - -> `[703]`
+  - -> `[700]` (*Player_Romus: "You hoped it wouldn't reflect badly on Rizia's own reputa..."*)
+  - -> `[702]` (*Player_Romus: "You were glad not to be mixed up in this."*)
+  - -> `[703]` (*Player_Romus: "You knew Her Excellency would come out on top."*)
 
 ### Węzeł `[685]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[686]`
-  - -> `[687]`
+  - -> `[686]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true"*)
+  - -> `[687]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)"*)
 
 ### Węzeł `[686]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[688]`
+  - -> `[688]` (*Narrator: "Delegations from {RiziaDLCText.JubileeDelegation} eyed yo..."*)
 
 ### Węzeł `[687]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NewGov_Epic_RoyalReclamation_Force == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_RoyalReclamation_Force"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[697]`
+  - -> `[697]` (*Narrator: "Delegations from {RiziaDLCText.JubileeDelegation} greeted..."*)
 
 ### Węzeł `[688]`
 Mówca: **Narrator**
@@ -5177,62 +5736,70 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
-  - -> `[128]`
-  - -> `[689]`
+  - -> `[126]` (*Player_Romus: "...ordered the servants to deliver more wine to them."*)
+  - -> `[128]` (*Player_Romus: "...asked your guards to watch their every step."*)
+  - -> `[689]` (*Player_Romus: "...paid them no heed."*)
 
 ### Węzeł `[689]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...paid them no heed."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[688]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[690]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[691]`
-  - -> `[692]`
+  - -> `[691]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
+  - -> `[692]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_War == true)"*)
 
 ### Węzeł `[691]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[677]`
+  - -> `[677]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_Diplomacy_GRACEMember == true"*)
 
 ### Węzeł `[692]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[693]`
 Mówca: **Narrator**
 > "The war between Rumburg and Sordland was on everyone's lips. You could tell your international partners wanted to know whose side Rizia was on."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[694]`
-  - -> `[695]`
-  - -> `[696]`
+  - -> `[694]` (*Player_Romus: "You were no longer in GRACE, but Beatrice was still family."*)
+  - -> `[695]` (*Player_Romus: "You couldn't wait to see Thornbourgh burn."*)
+  - -> `[696]` (*Player_Romus: "It was fun to keep them guessing."*)
 
 ### Węzeł `[694]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You were no longer in GRACE, but Beatrice was still family."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[693]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[695]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You couldn't wait to see Thornbourgh burn."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[693]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[696]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "It was fun to keep them guessing."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[693]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[697]`
 Mówca: **Narrator**
@@ -5240,160 +5807,176 @@ Mówca: **Narrator**
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
-  - -> `[128]`
-  - -> `[698]`
+  - -> `[126]` (*Player_Romus: "...ordered the servants to deliver more wine to them."*)
+  - -> `[128]` (*Player_Romus: "...asked your guards to watch their every step."*)
+  - -> `[698]` (*Player_Romus: "...reminded them that tonight was no time for politics."*)
 
 ### Węzeł `[698]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...reminded them that tonight was no time for politics."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[697]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[699]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You couldn't wait to see Holsord burn."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[672]` (Narrator), `[683]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[700]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You hoped it wouldn't reflect badly on Rizia's own reputation."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[676]` (Narrator), `[684]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[701]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You wished you hadn't gotten mixed up in this."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[672]` (Narrator), `[676]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[702]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You were glad not to be mixed up in this."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[683]` (Narrator), `[684]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[703]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You knew Her Excellency would come out on top."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[672]` (Narrator), `[676]` (Narrator), `[683]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Successor_Vina == true && RiziaDLC.Vina_Escapes ..."*)
 
 ### Węzeł `[704]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_ApplyATO == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_ApplyATO == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[705]`
-  - -> `[706]`
+  - -> `[705]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_ApplyATO == true"*)
+  - -> `[706]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NewGov_Epic_ApplyATO == true)"*)
 
 ### Węzeł `[705]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_ApplyATO == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_ApplyATO == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[707]`
+  - -> `[707]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "the AN and ATO""*)
 
 ### Węzeł `[706]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NewGov_Epic_ApplyATO == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NewGov_Epic_ApplyATO == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "the AN""*)
 
 ### Węzeł `[707]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "the AN and ATO")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and ATO";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "the AN and ATO"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="the AN and ATO";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[708]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_ApplyATO == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_ApplyATO == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[709]`
-  - -> `[710]`
+  - -> `[709]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.NewGov_Epic_ApplyATO == true"*)
+  - -> `[710]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.NewGov_Epic_ApplyATO == true)"*)
 
 ### Węzeł `[709]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.NewGov_Epic_ApplyATO == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.NewGov_Epic_ApplyATO == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[711]`
+  - -> `[711]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "ATO""*)
 
 ### Węzeł `[710]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.NewGov_Epic_ApplyATO == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.NewGov_Epic_ApplyATO == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.NewGov_Epic_ApplyATO"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[655]`
+  - -> `[655]` (*Węzeł Logiki Narracyjnej: "RiziaDLCText.JubileeDelegation = "various countries""*)
 
 ### Węzeł `[711]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCText.JubileeDelegation = "ATO")*
-- **Efekt (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="ATO";`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCText.JubileeDelegation = "ATO"`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCText.JubileeDelegation"] ="ATO";`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[652]`
+  - -> `[652]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_Success == true"*)
 
 ### Węzeł `[712]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[713]`
-  - -> `[714]`
+  - -> `[713]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrest..."*)
+  - -> `[714]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arre..."*)
 
 ### Węzeł `[713]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[715]`
+  - -> `[715]` (*Player_Romus: "...found it hard to gauge Lucita's reaction."*)
 
 ### Węzeł `[714]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true && RiziaDLC.Lucita_Arrested == false && RiziaDLC.Lucita_Executed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[715]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...found it hard to gauge Lucita's reaction."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Lucita_Married"] == true  and  Variable["RiziaDLC.Lucita_Arrested"] == false  and  Variable["RiziaDLC.Lucita_Executed"] == false`
+- **Kontekst wejściowy (poprzednik):** `[300]` (Narrator), `[304]` (Narrator), `[389]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
+  - -> `[317]` (*Narrator: "Your daughter's husband disappeared into the crowd. She r..."*)
 
 ### Węzeł `[716]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[717]`
-  - -> `[718]`
+  - -> `[717]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[718]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[717]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[719]`
+  - -> `[719]` (*Narrator: "She told you that she was ready, that she had been waitin..."*)
 
 ### Węzeł `[718]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Narrator: "She told you that she was ready, that she had been waitin..."*)
 
 ### Węzeł `[719]`
 Mówca: **Narrator**
 > "She told you that she was ready, that she had been waiting for this for her entire life."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[720]`
+  - -> `[720]` (*Player_Romus: "The Grand Wiseman beckoned for her to approach."*)
 
 ### Węzeł `[720]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "The Grand Wiseman beckoned for her to approach."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[719]` (Narrator), `[725]` (Narrator), `[729]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[721]`
+  - -> `[721]` (*Narrator: "The music switched to a solemn hymn as Vina cautiously kn..."*)
 
 ### Węzeł `[721]`
 Mówca: **Narrator**
@@ -5401,136 +5984,140 @@ Mówca: **Narrator**
 
 He dabbed three drops of holy oil on her forehead: one for the path walked by her ancestors, one for her own journey, and one for those who would follow in her footsteps."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Player_Romus: "There began the days of Vina of House Toras, the Heir App..."*)
 
 ### Węzeł `[722]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[723]`
-  - -> `[724]`
+  - -> `[723]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[724]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[723]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[725]`
+  - -> `[725]` (*Narrator: "She waved at the crowd that had gathered around her. But ..."*)
 
 ### Węzeł `[724]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Narrator: "She waved at the crowd that had gathered around her. But ..."*)
 
 ### Węzeł `[725]`
 Mówca: **Narrator**
 > "She waved at the crowd that had gathered around her. But behind the smiling faces and handshakes, you both knew that they were hiding daggers."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[720]`
+  - -> `[720]` (*Player_Romus: "The Grand Wiseman beckoned for her to approach."*)
 
 ### Węzeł `[726]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[727]`
-  - -> `[728]`
+  - -> `[727]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[728]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[727]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[729]`
+  - -> `[729]` (*Narrator: "As if she understood what you were thinking, she smiled a..."*)
 
 ### Węzeł `[728]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Narrator: "As if she understood what you were thinking, she smiled a..."*)
 
 ### Węzeł `[729]`
 Mówca: **Narrator**
 > "As if she understood what you were thinking, she smiled and assured you that she would be fine."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[720]`
+  - -> `[720]` (*Player_Romus: "The Grand Wiseman beckoned for her to approach."*)
 
 ### Węzeł `[730]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[731]`
-  - -> `[732]`
+  - -> `[731]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == false"*)
+  - -> `[732]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_Vina_Estranged == false)"*)
 
 ### Węzeł `[731]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Player_Romus: "She looked just like her mother."*)
 
 ### Węzeł `[732]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_Vina_Estranged == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_Vina_Estranged == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[733]`
+  - -> `[733]` (*Player_Romus: "You hadn't spoken with her in months."*)
 
 ### Węzeł `[733]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "You hadn't spoken with her in months."
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == false) == false`
+- **Kontekst wejściowy (poprzednik):** `[323]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
 
 ### Węzeł `[734]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[735]`
-  - -> `[736]`
+  - -> `[735]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == true"*)
+  - -> `[736]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_Vina_Estranged == true)"*)
 
 ### Węzeł `[735]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[737]`
+  - -> `[737]` (*Player_Romus: "...knew that she hadn't forgiven you."*)
 
 ### Węzeł `[736]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_Vina_Estranged == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_Vina_Estranged == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[346]`
+  - -> `[346]` (*Player_Romus: "...knew that she'd forgiven you."*)
 
 ### Węzeł `[737]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...knew that she hadn't forgiven you."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == true`
+- **Kontekst wejściowy (poprzednik):** `[339]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "PrologueImage("pe_princebirth")"*)
 
 ### Węzeł `[738]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[739]`
-  - -> `[740]`
+  - -> `[739]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Relations_Vina_Estranged == true"*)
+  - -> `[740]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Relations_Vina_Estranged == true)"*)
 
 ### Węzeł `[739]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Relations_Vina_Estranged == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Relations_Vina_Estranged == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Relations_Vina_Estranged"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[741]`
+  - -> `[741]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[740]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Relations_Vina_Estranged == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Relations_Vina_Estranged == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Relations_Vina_Estranged"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[393]`
+  - -> `[393]` (*Narrator: "As the orchestra struck up a fast-paced tune, she walked ..."*)
 
 ### Węzeł `[741]`
 Mówca: **Narrator**
@@ -5542,42 +6129,44 @@ When the song ended, Vina proudly announced that she was expecting a child.
 
 You could see the unease in your wife's eyes. You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[342]` (*Player_Romus: "...assured her your daughter's family wouldn't pose a thr..."*)
+  - -> `[343]` (*Player_Romus: "...congratulated the couple profusely."*)
+  - -> `[344]` (*Player_Romus: "...feared for the new heir's future."*)
 
 ### Węzeł `[742]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[743]`
-  - -> `[744]`
+  - -> `[743]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[744]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[743]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[745]`
+  - -> `[745]` (*Narrator: "Your subjects' applause resonated loudly through the hall."*)
 
 ### Węzeł `[744]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Narrator: "Your subjects' applause resonated loudly through the hall..."*)
 
 ### Węzeł `[745]`
 Mówca: **Narrator**
 > "Your subjects' applause resonated loudly through the hall."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[746]`
+  - -> `[746]` (*Player_Romus: "The Grand Wiseman beckoned you to approach him."*)
 
 ### Węzeł `[746]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "The Grand Wiseman beckoned you to approach him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[745]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[747]`
+  - -> `[747]` (*Narrator: "The music switched to a solemn hymn as you and your child..."*)
 
 ### Węzeł `[747]`
 Mówca: **Narrator**
@@ -5585,28 +6174,28 @@ Mówca: **Narrator**
 
 He dabbed three drops of holy oil on the little prince's forehead: one for the path walked by his ancestors, one for his own journey, and one for those who would follow in his footsteps."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[238]`
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Son_Romus == true"*)
 
 ### Węzeł `[748]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BrunoDog_Adopted == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BrunoDog_Adopted == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[749]`
-  - -> `[750]`
+  - -> `[749]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BrunoDog_Adopted == true"*)
+  - -> `[750]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BrunoDog_Adopted == true)"*)
 
 ### Węzeł `[749]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BrunoDog_Adopted == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BrunoDog_Adopted"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BrunoDog_Adopted == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BrunoDog_Adopted"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[752]`
+  - -> `[752]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[750]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BrunoDog_Adopted == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BrunoDog_Adopted"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BrunoDog_Adopted == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BrunoDog_Adopted"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[760]`
+  - -> `[760]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
 
 ### Węzeł `[751]`
 Mówca: **Narrator**
@@ -5616,30 +6205,30 @@ Bruno was curled up at your feet -- the only being in your life whose loyalty wa
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
-  - -> `[349]`
-  - -> `[350]`
+  - -> `[145]` (*Player_Romus: "...vowed that the reign of House Toras would continue."*)
+  - -> `[349]` (*Player_Romus: "...knew you would have to watch your back for years to come."*)
+  - -> `[350]` (*Player_Romus: "...ignored them. The throne was yours now, and nothing el..."*)
 
 ### Węzeł `[752]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[753]`
-  - -> `[754]`
+  - -> `[753]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[754]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[753]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[755]`
+  - -> `[755]` (*Narrator: "With no heir apparent on the horizon, you could practical..."*)
 
 ### Węzeł `[754]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[751]`
+  - -> `[751]` (*Narrator: "With no heir apparent on the horizon, you could practical..."*)
 
 ### Węzeł `[755]`
 Mówca: **Narrator**
@@ -5647,13 +6236,15 @@ Mówca: **Narrator**
 
 Bruno was curled up at your feet -- the only being in your life whose loyalty was completely unconditional."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[756]`
+  - -> `[756]` (*Player_Romus: "The Grand Wiseman beckoned you to  approach him."*)
 
 ### Węzeł `[756]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "The Grand Wiseman beckoned you to  approach him."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[755]` (Narrator), `[763]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[757]`
+  - -> `[757]` (*Narrator: "The music switched to a solemn hymn as you and your child..."*)
 
 ### Węzeł `[757]`
 Mówca: **Narrator**
@@ -5663,83 +6254,87 @@ He dabbed three drops of holy oil on your forehead: one for the path walked by y
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[758]`
-  - -> `[145]`
-  - -> `[349]`
+  - -> `[758]` (*Player_Romus: "...whispered "Halaita"."*)
+  - -> `[145]` (*Player_Romus: "...vowed that the reign of House Toras would continue."*)
+  - -> `[349]` (*Player_Romus: "...knew you would have to watch your back for years to come."*)
 
 ### Węzeł `[758]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...whispered "Halaita"."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[757]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[759]`
+  - -> `[759]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Said_Halaita += 1"*)
 
 ### Węzeł `[759]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Said_Halaita += 1)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Said_Halaita"] = Variable["RiziaDLC.Said_Halaita"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Said_Halaita += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Said_Halaita"] = Variable["RiziaDLC.Said_Halaita"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[760]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[761]`
-  - -> `[762]`
+  - -> `[761]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Theocracy_Full == true"*)
+  - -> `[762]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Theocracy_Full == true)"*)
 
 ### Węzeł `[761]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Theocracy_Full == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Theocracy_Full == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Theocracy_Full"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[763]`
+  - -> `[763]` (*Narrator: "With no heir apparent on the horizon, you could practical..."*)
 
 ### Węzeł `[762]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Theocracy_Full == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Theocracy_Full == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Theocracy_Full"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
+  - -> `[144]` (*Narrator: "With no heir apparent on the horizon, you could practical..."*)
 
 ### Węzeł `[763]`
 Mówca: **Narrator**
 > "With no heir apparent on the horizon, you could practically hear the whispers of your fellow nobles and see their eyes darting towards your throne."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[756]`
+  - -> `[756]` (*Player_Romus: "The Grand Wiseman beckoned you to  approach him."*)
 
 ### Węzeł `[764]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Estela_PromisedToConvert == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Estela_PromisedToConvert == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[765]`
-  - -> `[766]`
+  - -> `[765]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Estela_PromisedToConvert == true"*)
+  - -> `[766]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Estela_PromisedToConvert == true)"*)
 
 ### Węzeł `[765]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Estela_PromisedToConvert == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Estela_PromisedToConvert"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Estela_PromisedToConvert == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Estela_PromisedToConvert"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[767]`
+  - -> `[767]` (*Player_Romus: "...felt sorry for everything you'd put her through."*)
 
 ### Węzeł `[766]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Estela_PromisedToConvert == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Estela_PromisedToConvert"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Estela_PromisedToConvert == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Estela_PromisedToConvert"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[542]`
+  - -> `[542]` (*Player_Romus: "...felt sorry for all the stress you'd put her through."*)
 
 ### Węzeł `[767]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...felt sorry for everything you'd put her through."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Estela_PromisedToConvert"] == true`
+- **Kontekst wejściowy (poprzednik):** `[540]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[545]`
+  - -> `[545]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[768]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PrologueImage("pe_newgovernment"))*
-- **Efekt (`userScript`):** `PrologueImage("pe_newgovernment");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PrologueImage("pe_newgovernment")`
+- **Efekt skryptowy (`userScript`):** `PrologueImage("pe_newgovernment");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[433]`
+  - -> `[433]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Reform_PrimeMinister_Daria == true"*)
 
 ### Węzeł `[769]`
 Mówca: **Narrator**
@@ -5749,19 +6344,23 @@ He walked towards the throne, knelt and kissed your ring
 
 You..."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
-  - -> `[41]`
-  - -> `[770]`
-  - -> `[771]`
+  - -> `[49]` (*Player_Romus: "...accepted the gesture impassively."*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.War_Pales_Won == true"*)
+  - -> `[770]` (*Player_Romus: "...were glad one Azaro was still of use to you."*)
+  - -> `[771]` (*Player_Romus: "...reminded him to stay in line, lest he meet the same fa..."*)
 
 ### Węzeł `[770]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...were glad one Azaro was still of use to you."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[769]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[771]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > "...reminded him to stay in line, lest he meet the same fate as the rest of his family."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[769]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "//"*)

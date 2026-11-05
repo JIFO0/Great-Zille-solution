@@ -43,21 +43,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 0
-- **Węzły modyfikujące stan gry:** 11
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[27]` (Paskal Beniwoll): `SetRichPresence("In the Epilogue","","");`
-- Węzeł `[28]` (Paskal Beniwoll): `PlayMusic("Onward");`
-- Węzeł `[29]` (Paskal Beniwoll): `PlayMusic("Persevere");`
-- Węzeł `[30]` (Paskal Beniwoll): `PlayMusic("Downfall");`
-- Węzeł `[31]` (Paskal Beniwoll): `PlayMusic("Downfall");`
-- Węzeł `[32]` (Paskal Beniwoll): `PlayMusic("Downfall");`
-- Węzeł `[33]` (Paskal Beniwoll): `PlayMusic("Onward");`
-- Węzeł `[34]` (Paskal Beniwoll): `PlayMusic("Downfall");`
-- *...oraz 3 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -66,256 +56,256 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "SetRichPresence("In the Epilogue", "", "");"*)
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Win == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Win == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Win == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Epilogue_Election_Win == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Win == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Win"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Win == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Win"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Onward");"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Epilogue_Election_Win == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Win"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Epilogue_Election_Win == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Win"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Lose == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Lose == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Lose == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Lose == true"*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Epilogue_Election_Lose == true)"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Lose == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Lose"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Lose == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Lose"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Persevere");"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Epilogue_Election_Lose == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Lose"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Epilogue_Election_Lose == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Lose"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Death == true"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Death == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Death == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
-  - -> `[11]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Death == true"*)
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Epilogue_Election_Death == true)"*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Epilogue_Election_Death == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Death"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Epilogue_Election_Death == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Epilogue_Election_Death"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Epilogue_Election_Death == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Death"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Epilogue_Election_Death == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Epilogue_Election_Death"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_A_ImpeachmentTrial == true"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_A_ImpeachmentTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_A_ImpeachmentTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_A_ImpeachmentTrial == true"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(GameCondition.Turn11_A_ImpeachmentTrial == true)"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_A_ImpeachmentTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["GameCondition.Turn11_A_ImpeachmentTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_A_ImpeachmentTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["GameCondition.Turn11_A_ImpeachmentTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(GameCondition.Turn11_A_ImpeachmentTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["GameCondition.Turn11_A_ImpeachmentTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(GameCondition.Turn11_A_ImpeachmentTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["GameCondition.Turn11_A_ImpeachmentTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_P_Exile == true"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_P_Exile == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_P_Exile == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_P_Exile == true"*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(GameCondition.Turn11_P_Exile == true)"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_P_Exile == true)*
-- **Warunek (`conditionsString`):** `Variable["GameCondition.Turn11_P_Exile"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_P_Exile == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["GameCondition.Turn11_P_Exile"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(GameCondition.Turn11_P_Exile == true))*
-- **Warunek (`conditionsString`):** `(Variable["GameCondition.Turn11_P_Exile"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(GameCondition.Turn11_P_Exile == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["GameCondition.Turn11_P_Exile"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_P_Retirement == true"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_P_Retirement == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_P_Retirement == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_P_Retirement == true"*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(GameCondition.Turn11_P_Retirement == true)"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_P_Retirement == true)*
-- **Warunek (`conditionsString`):** `Variable["GameCondition.Turn11_P_Retirement"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_P_Retirement == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["GameCondition.Turn11_P_Retirement"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Onward");"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(GameCondition.Turn11_P_Retirement == true))*
-- **Warunek (`conditionsString`):** `(Variable["GameCondition.Turn11_P_Retirement"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(GameCondition.Turn11_P_Retirement == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["GameCondition.Turn11_P_Retirement"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_SnO_CoupTrial == true"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_SnO_CoupTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_SnO_CoupTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_SnO_CoupTrial == true"*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(GameCondition.Turn11_SnO_CoupTrial == true)"*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_SnO_CoupTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["GameCondition.Turn11_SnO_CoupTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_SnO_CoupTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["GameCondition.Turn11_SnO_CoupTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(GameCondition.Turn11_SnO_CoupTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["GameCondition.Turn11_SnO_CoupTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(GameCondition.Turn11_SnO_CoupTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["GameCondition.Turn11_SnO_CoupTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_SnO_RumburgWarLost == true"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_SnO_RumburgWarLost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_SnO_RumburgWarLost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn11_SnO_RumburgWarLost == true"*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(GameCondition.Turn11_SnO_RumburgWarLost == true)"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: GameCondition.Turn11_SnO_RumburgWarLost == true)*
-- **Warunek (`conditionsString`):** `Variable["GameCondition.Turn11_SnO_RumburgWarLost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn11_SnO_RumburgWarLost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["GameCondition.Turn11_SnO_RumburgWarLost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(GameCondition.Turn11_SnO_RumburgWarLost == true))*
-- **Warunek (`conditionsString`):** `(Variable["GameCondition.Turn11_SnO_RumburgWarLost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(GameCondition.Turn11_SnO_RumburgWarLost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["GameCondition.Turn11_SnO_RumburgWarLost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "PlayMusic("Downfall");"*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: SetRichPresence("In the Epilogue", "", "");)*
-- **Efekt (`userScript`):** `SetRichPresence("In the Epilogue","","");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `SetRichPresence("In the Epilogue", "", "");`
+- **Efekt skryptowy (`userScript`):** `SetRichPresence("In the Epilogue","","");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "UnlockAchievement("Chapter4_Finish");"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Onward");)*
-- **Efekt (`userScript`):** `PlayMusic("Onward");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Onward");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Onward");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `259` (*Sordland/Epilogue_ElectionWin*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Persevere");)*
-- **Efekt (`userScript`):** `PlayMusic("Persevere");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Persevere");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Persevere");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `271` (*Sordland/Epilogue_ElectionLose*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `258` (*Sordland/Epilogue_ElectionDeath*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `262` (*Sordland/Epilogue_ImpeachmentTrial*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `260` (*Sordland/Epilogue_Exile*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Onward");)*
-- **Efekt (`userScript`):** `PlayMusic("Onward");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Onward");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Onward");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `264` (*Sordland/Epilogue_Retirement*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `263` (*Sordland/Epilogue_CoupTrial*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `270` (*Sordland/Epilogue_RumburgWarLost*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayMusic("Downfall");)*
-- **Efekt (`userScript`):** `PlayMusic("Downfall");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayMusic("Downfall");`
+- **Efekt skryptowy (`userScript`):** `PlayMusic("Downfall");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `261` (*Sordland/Epilogue_WorldWar*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: UnlockAchievement("Chapter4_Finish");)*
-- **Efekt (`userScript`):** `UnlockAchievement("Chapter4_Finish");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `UnlockAchievement("Chapter4_Finish");`
+- **Efekt skryptowy (`userScript`):** `UnlockAchievement("Chapter4_Finish");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Epilogue_Election_Win == true"*)

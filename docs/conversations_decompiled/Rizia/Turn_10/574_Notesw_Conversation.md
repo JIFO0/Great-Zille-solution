@@ -39,10 +39,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 5
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -51,12 +52,12 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
@@ -68,372 +69,372 @@ Mówca: **Estela Toras**
 Mówca: **Narrator**
 > ""...and Manus.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC...."*)
 
 ### Węzeł `[5]`
 Mówca: **Narrator**
 > ""...and Rico.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC...."*)
 
 ### Węzeł `[6]`
 Mówca: **Narrator**
 > ""...and Axel.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC...."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC...."*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDL..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true || RiziaDLC.Vina_MarriageDecision_Axel == true || RiziaDLC.Vina_MarriageDecision_Rico == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true  or  Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true )"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Vina Toras: "“I have to admit, the renovations turned out better than ..."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Axel == true"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Axel == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Axel == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Axel == true"*)
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Axel == true)"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Axel == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Axel == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Vina Toras: "“It’s quite something, isn’t it?""*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Axel == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Axel == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Axel"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
 
 ### Węzeł `[16]`
 Mówca: **Vina Toras**
 > "“I have to admit, the renovations turned out better than I expected.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
 
 ### Węzeł `[17]`
 Mówca: **Vina Toras**
 > "“It’s quite something, isn’t it?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Rico == true)"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Vina Toras: "“I love what they've done with the place. It looks absolu..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Rico == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Rico == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Vina Toras: "“I think the renovations breathe new life into the space.”"*)
 
 ### Węzeł `[21]`
 Mówca: **Vina Toras**
 > "“I love what they've done with the place. It looks absolutely beautiful.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
 
 ### Węzeł `[22]`
 Mówca: **Vina Toras**
 > "“I think the renovations breathe new life into the space.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
-  - -> `[25]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relat..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Manus Sazon: "“The attention to detail is impeccable.""*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Manus Sazon: "“The attention to detail is impeccable. It leaves quite t..."*)
 
 ### Węzeł `[26]`
 Mówca: **Manus Sazon**
 > "“The attention to detail is impeccable.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Lucita Azaro: ""It certainly makes quite an impression.""*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Pabel Adria: ""It does make quite the impression.""*)
 
 ### Węzeł `[30]`
 Mówca: **Lucita Azaro**
 > ""It certainly makes quite an impression.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[31]`
 Mówca: **Pabel Adria**
 > ""It does make quite the impression.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[32]`
 Mówca: **Manus Sazon**
 > "“The attention to detail is impeccable. It leaves quite the impression.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relat..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Axel Reinhart: "“Indeed, a fitting tribute to your mother’s legacy.""*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Axel Reinhart: "“Indeed, a fitting tribute to your mother’s legacy. It’s ..."*)
 
 ### Węzeł `[36]`
 Mówca: **Vina Toras**
 > ""Must you always find a way to ruin the mood?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[37]`
 Mówca: **Narrator**
 > "Rico glared at Pabel sharply."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[38]`
 Mówca: **Axel Reinhart**
 > "“Indeed, a fitting tribute to your mother’s legacy.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
-  - -> `[41]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Lucita Azaro: ""It’s truly something to behold.""*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Pabel Adria: ""It’s really quite a sight.""*)
 
 ### Węzeł `[42]`
 Mówca: **Lucita Azaro**
 > ""It’s truly something to behold.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[43]`
 Mówca: **Pabel Adria**
 > ""It’s really quite a sight.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[44]`
 Mówca: **Axel Reinhart**
 > "“Indeed, a fitting tribute to your mother’s legacy. It’s truly something to behold.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[45]`
 Mówca: **Rico Toras**
 > "“If you like wasting money on old books and dust. Sure, it’s fantastic.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Vina Toras: ""Must you always find a way to ruin the mood?""*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
-  - -> `[48]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relatio..."*)
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_Relat..."*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Rico Toras: "“If you like wasting money on old books and dust. Sure, i..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true || RiziaDLC.Pabel_RelationshipPublic == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true  or  Variable["RiziaDLC.Pabel_RelationshipPublic"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Rico Toras: "“If you enjoy wasting money on old books and dust, then s..."*)
 
 ### Węzeł `[49]`
 Mówca: **Rico Toras**
 > "“If you enjoy wasting money on old books and dust, then sure. It’s fantastic.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Lucita Azaro: ""Sometimes it's better to just keep those thoughts to you..."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Pabel Adria: ""I thought we were here to celebrate, not criticize.""*)
 
 ### Węzeł `[53]`
 Mówca: **Lucita Azaro**
 > ""Sometimes it's better to just keep those thoughts to yourself.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Estela Toras: ""I would've been just as happy doing something small.”"*)
 
 ### Węzeł `[54]`
 Mówca: **Pabel Adria**
 > ""I thought we were here to celebrate, not criticize.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Narrator: "Rico glared at Pabel sharply."*)
 
 ### Węzeł `[55]`
 Mówca: **Narrator**
 > "Elegantly dressed, they walked down the hall flanked by golden guardsmen."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[56]`
 Mówca: **Narrator**
 > "Hugo bowed first and the others followed suit."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Hugo Toras: ""Your Majesty. Queen Mother, happy birthday.""*)
 
 ### Węzeł `[57]`
 Mówca: **Hugo Toras**
 > ""Your Majesty. Queen Mother, happy birthday.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Rico Toras: ""Queen Mother, wishing you all the best.""*)
 
 ### Węzeł `[58]`
 Mówca: **Rico Toras**
 > ""Queen Mother, wishing you all the best.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Hubertus Toras: "“Many blessings on your birthday, Your Majesty.""*)
 
 ### Węzeł `[59]`
 Mówca: **Hubertus Toras**
 > "“Many blessings on your birthday, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Rico Toras: ""’Many blethingths on your birthday, Your Majesthty.’""*)
 
 ### Węzeł `[60]`
 Mówca: **Rico Toras**
 > ""’Many blethingths on your birthday, Your Majesthty.’""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Narrator: "Hugo rolled his eyes at Rico’s mockery of Hubertus’ lisp,..."*)
 
 ### Węzeł `[61]`
 Mówca: **Narrator**
@@ -446,72 +447,72 @@ Mówca: **Narrator**
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
-  - -> `[65]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Rico == true)"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Rico == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Rico == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Rico Toras: ""’Many heartfelt blethingths on your birthday, Your Majes..."*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Rico == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Rico == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Rico"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "Narrator: "...""*)
 
 ### Węzeł `[66]`
-Mówca: **Narrator**
-*(Węzeł logiki narracyjnej: Narrator: "...")*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Narrator: "..."`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[67]`
 Mówca: **Rico Toras**
 > ""’Many heartfelt blethingths on your birthday, Your Majesthty.’""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Narrator: "Estela's expression tightened, her patience wearing thin ..."*)
 
 ### Węzeł `[68]`
 Mówca: **Narrator**
 > "Elegantly dressed, they walked down the hall flanked by Wruhec's Guardians."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[69]`
 Mówca: **Hubertus Toras**
 > ""Many heartfelt blessings on your birthday, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Rico == true"*)
 
 ### Węzeł `[70]`
 Mówca: **Narrator**
 > "Hugo bowed slightly. As he straightened, he shot me a subtle glance, eyes reflecting quiet readiness for the evening ahead."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Hugo Toras: ""Your Majesty. Queen Mother, happy birthday.""*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
-  - -> `[73]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Narrator: "Hugo bowed slightly. As he straightened, he shot me a sub..."*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Narrator: "Hugo bowed first and the others followed suit."*)

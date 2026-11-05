@@ -163,25 +163,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 102
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.Relations_Marcel_Enemy`
-- `BaseGame.Relations_Walter_Enemy`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Walter Tusk): `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
-- Węzeł `[7]` (Walter Tusk): `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
-- Węzeł `[25]` (Walter Tusk): `Variable["GameCondition.Turn07_A_OligarchsFinalMeeting"] = true;`
-- Węzeł `[32]` (Walter Tusk): `Variable["BaseGame.Faction_Oligarchs_Content"] = false;`
-- Węzeł `[36]` (Walter Tusk): `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true; Variable["BaseGame.Faction_Oligarchs_Content...`
-- Węzeł `[40]` (Walter Tusk): `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true; Variable["BaseGame.Faction_Oligarchs_Content...`
-- Węzeł `[50]` (Walter Tusk): `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
-- Węzeł `[54]` (Walter Tusk): `Variable["BaseGame.Faction_Oligarchs_Content"] = true;`
-- *...oraz 94 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -190,1767 +176,1767 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Walter Tusk)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
+  - -> `[157]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Walter Tusk)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Refor..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Ref..."*)
 
 ### Węzeł `[4]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_Assembly"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_President"] == true  or  Variable["BaseGame.Reform_Law_Honorary_Abolished"] == true  or  Variable["BaseGame.Reform_Law_Honorary_NoImmunity"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_Assembly"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_President"] == true  or  Variable["BaseGame.Reform_Law_Honorary_Abolished"] == true  or  Variable["BaseGame.Reform_Law_Honorary_NoImmunity"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = false"*)
 
 ### Węzeł `[5]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Ally"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_Assembly"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_President"] == true  or  Variable["BaseGame.Reform_Law_Honorary_Abolished"] == true  or  Variable["BaseGame.Reform_Law_Honorary_NoImmunity"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Reform_Law_Judges_Impeachment_Assembly == true || BaseGame.Reform_Law_Judges_Impeachment_President == true || BaseGame.Reform_Law_Honorary_Abolished == true || BaseGame.Reform_Law_Honorary_NoImmunity == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Ally"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_Assembly"] == true  or  Variable["BaseGame.Reform_Law_Judges_Impeachment_President"] == true  or  Variable["BaseGame.Reform_Law_Honorary_Abolished"] == true  or  Variable["BaseGame.Reform_Law_Honorary_NoImmunity"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = true"*)
 
 ### Węzeł `[6]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[7]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[8]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Nationalization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Nationalization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
-  - -> `[10]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomicDirection_Nationalization == true)"*)
 
 ### Węzeł `[9]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Nationalization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Nationalization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Nationalization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Nationalization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[374]`
+  - -> `[374]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame..."*)
 
 ### Węzeł `[10]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomicDirection_Nationalization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomicDirection_Nationalization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Privatization == true"*)
 
 ### Węzeł `[11]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Privatization == true"*)
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomicDirection_Privatization == true)"*)
 
 ### Węzeł `[12]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[377]`
+  - -> `[377]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame...."*)
 
 ### Węzeł `[13]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomicDirection_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomicDirection_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `138` (*Sordland/Turn07/STATUS QUO*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[14]`
 Mówca: **Narrator**
 > "With the nationalization decisions made, all that was left was for Sordland's two most prominent oligarchs to sign the paperwork. And so I called them both to the Palace conference room."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Narrator: "Lucian showed Marcel Koronti and Walter Tusk in. They sat..."*)
 
 ### Węzeł `[15]`
 Mówca: **Narrator**
 > "Lucian showed Marcel Koronti and Walter Tusk in. They sat across the table from me, leaving one empty chair between them."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 0"*)
 
 ### Węzeł `[16]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
-  - -> `[18]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 0"*)
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 0)"*)
 
 ### Węzeł `[17]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `137` (*Sordland/Turn07/HOS NOT NATIONALISED AT ALL*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[18]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization == 0"*)
 
 ### Węzeł `[19]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization == 0"*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization == 0)"*)
 
 ### Węzeł `[20]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `136` (*Sordland/Turn07/BERGIA STEEL NOT NATIONALISED AT ALL*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[21]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame..."*)
 
 ### Węzeł `[22]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
-  - -> `[24]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame..."*)
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGa..."*)
 
 ### Węzeł `[23]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `135` (*Sordland/Turn07/HOS AND BERGIA STEEL FULLY NATIONALISED*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[24]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `134` (*Sordland/Turn07/HOS AND BERGIA STEEL MINORITY OR MAJORITY NATIONALISED*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[25]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: GameCondition.Turn07_A_OligarchsFinalMeeting = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn07_A_OligarchsFinalMeeting"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn07_A_OligarchsFinalMeeting = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn07_A_OligarchsFinalMeeting"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[371]`
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[26]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
-  - -> `[28]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true"*)
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Content == true)"*)
 
 ### Węzeł `[27]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[28]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Content == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Content == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[29]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
-  - -> `[31]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOf..."*)
 
 ### Węzeł `[30]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content = false"*)
 
 ### Węzeł `[31]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[32]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[33]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOf..."*)
 
 ### Węzeł `[34]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 4`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Enemy = true; BaseGame.Faction..."*)
 
 ### Węzeł `[35]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 4) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 4)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 4) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[36]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Enemy = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Enemy = true;
 BaseGame.Faction_Oligarchs_Content = false;
-BaseGame.Faction_Oligarchs_Ally = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true;
+BaseGame.Faction_Oligarchs_Ally = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true;
 Variable["BaseGame.Faction_Oligarchs_Content"] = false;
 Variable["BaseGame.Faction_Oligarchs_Ally"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGam..."*)
 
 ### Węzeł `[37]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
-  - -> `[39]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOf..."*)
 
 ### Węzeł `[38]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Enemy = true; BaseGame.Faction..."*)
 
 ### Węzeł `[39]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[40]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Enemy = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Enemy = true;
 BaseGame.Faction_Oligarchs_Content = false;
-BaseGame.Faction_Oligarchs_Ally = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true;
+BaseGame.Faction_Oligarchs_Ally = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] = true;
 Variable["BaseGame.Faction_Oligarchs_Content"] = false;
 Variable["BaseGame.Faction_Oligarchs_Ally"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[41]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Privatization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Privatization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[43]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Privatization == true"*)
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomicDirection_Privatization == true)"*)
 
 ### Węzeł `[42]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Privatization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Privatization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Privatization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Privatization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true"*)
 
 ### Węzeł `[43]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomicDirection_Privatization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Privatization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomicDirection_Privatization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Privatization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[44]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true"*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Content == true)"*)
 
 ### Węzeł `[45]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[46]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Content == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Content == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[47]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization + BaseGame.Sord..."*)
 
 ### Węzeł `[48]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally = true"*)
 
 ### Węzeł `[49]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[50]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[51]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
-  - -> `[53]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization + BaseGame.Sord..."*)
 
 ### Węzeł `[52]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 4`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 4`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content = true"*)
 
 ### Węzeł `[53]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 4) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 4)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 4) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[54]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[55]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[56]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[58]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization + BaseGame.Sord..."*)
 
 ### Węzeł `[57]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally = true"*)
 
 ### Węzeł `[58]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[59]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
-  - -> `[61]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSo..."*)
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOf..."*)
 
 ### Węzeł `[60]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] - Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] - Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader = true;"*)
 
 ### Węzeł `[61]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] - Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSordland_Nationalization >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] - Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[62]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_KorontiLeader = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_KorontiLeader = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[367]`
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "AssignConnection("Page_Factions", "Position_Oligarch", "F..."*)
 
 ### Węzeł `[63]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
-  - -> `[65]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame..."*)
 
 ### Węzeł `[64]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader = true;"*)
 
 ### Węzeł `[65]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[66]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
-  - -> `[68]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization + BaseGame.Sord..."*)
 
 ### Węzeł `[67]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2  and  Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2  and  Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader = true;"*)
 
 ### Węzeł `[68]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2  and  Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 2 && BaseGame.Turn07_GrantedShares_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 2  and  Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader = false"*)
 
 ### Węzeł `[69]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_KorontiLeader = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_KorontiLeader = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Faction_Oligarchs_KorontiLeader == false && Bas..."*)
 
 ### Węzeł `[70]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
-  - -> `[72]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Media_SordlandToday_Bias == true)"*)
 
 ### Węzeł `[71]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Media_SordlandToday_Bias"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content = true"*)
 
 ### Węzeł `[72]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Media_SordlandToday_Bias == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Media_SordlandToday_Bias == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Faction_Oligarchs_KorontiLeader == false && Bas..."*)
 
 ### Węzeł `[73]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Faction_Oligarchs_KorontiLeader == false && Bas..."*)
 
 ### Węzeł `[74]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
-  - -> `[76]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Path == true)"*)
 
 ### Węzeł `[75]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[212]`
+  - -> `[212]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Demanded_FullNationalization == ..."*)
 
 ### Węzeł `[76]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally == true || BaseGame.Refor..."*)
 
 ### Węzeł `[77]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization >= 2)"*)
 
 ### Węzeł `[78]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 2)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias = true; BaseGame.Situat..."*)
 
 ### Węzeł `[79]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame...."*)
 
 ### Węzeł `[80]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias = true;
-BaseGame.Situation_Law_MediaBias = true; BaseGame.Situation_Law_FreedomOfPress = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Media_SordlandToday_Bias"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias = true;
+BaseGame.Situation_Law_MediaBias = true; BaseGame.Situation_Law_FreedomOfPress = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Media_SordlandToday_Bias"] = true;
 Variable["BaseGame.Situation_Law_MediaBias"] = true;
 Variable["BaseGame.Situation_Law_FreedomOfPress"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.T..."*)
 
 ### Węzeł `[81]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: (BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
-  - -> `[83]`
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Faction_Oligarchs_KorontiLeader == false && Bas..."*)
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Faction_Oligarchs_KorontiLeader == false && B..."*)
 
 ### Węzeł `[82]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: (BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == false  and  Variable["BaseGame.HeartOfSordland_Nationalization"] > 0)  or  Variable["BaseGame.Turn07_A_Marcel_Threatened"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == false  and  Variable["BaseGame.HeartOfSordland_Nationalization"] > 0)  or  Variable["BaseGame.Turn07_A_Marcel_Threatened"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Marcel_Enemy = true"*)
 
 ### Węzeł `[83]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !((BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == false  and  Variable["BaseGame.HeartOfSordland_Nationalization"] > 0)  or  Variable["BaseGame.Turn07_A_Marcel_Threatened"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Faction_Oligarchs_KorontiLeader == false && BaseGame.HeartOfSordland_Nationalization > 0) || BaseGame.Turn07_A_Marcel_Threatened == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == false  and  Variable["BaseGame.HeartOfSordland_Nationalization"] > 0)  or  Variable["BaseGame.Turn07_A_Marcel_Threatened"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[353]`
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseG..."*)
 
 ### Węzeł `[84]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Marcel_Enemy = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Marcel_Enemy"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Marcel_Enemy = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Marcel_Enemy"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[353]`
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseG..."*)
 
 ### Węzeł `[85]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
-  - -> `[87]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame...."*)
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGam..."*)
 
 ### Węzeł `[86]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias = false; BaseGame.Situa..."*)
 
 ### Węzeł `[87]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.Turn07_Detained_MarcelKoronti == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.T..."*)
 
 ### Węzeł `[88]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Media_SordlandToday_Bias = false;
-BaseGame.Situation_Law_MediaBias = false; BaseGame.Situation_Law_FreedomOfPress = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Media_SordlandToday_Bias"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Media_SordlandToday_Bias = false;
+BaseGame.Situation_Law_MediaBias = false; BaseGame.Situation_Law_FreedomOfPress = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Media_SordlandToday_Bias"] = false;
 Variable["BaseGame.Situation_Law_MediaBias"] = false;
 Variable["BaseGame.Situation_Law_FreedomOfPress"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.T..."*)
 
 ### Węzeł `[89]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
-  - -> `[91]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGam..."*)
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseG..."*)
 
 ### Węzeł `[90]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Destroyed = true; BaseGame.Fac..."*)
 
 ### Węzeł `[91]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[92]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Walter_Enemy = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Relations_Walter_Enemy"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Walter_Enemy = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Relations_Walter_Enemy"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Media_SordlandToday_Bias == true"*)
 
 ### Węzeł `[93]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Wehlen_JointOperation == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Wehlen_JointOperation == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
-  - -> `[95]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "BaseGame.Wehlen_JointOperation == true"*)
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Wehlen_JointOperation == true)"*)
 
 ### Węzeł `[94]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Wehlen_JointOperation == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Wehlen_JointOperation"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Wehlen_JointOperation == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Wehlen_JointOperation"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.CountryReport_Turn07_Wehlen_BFFMilitantsN..."*)
 
 ### Węzeł `[95]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Wehlen_JointOperation == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Wehlen_JointOperation"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Wehlen_JointOperation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Wehlen_JointOperation"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[370]`
+  - -> `[370]` (*Węzeł Logiki Narracyjnej: "DisableToken("International_Event_OperationBearTrap");"*)
 
 ### Węzeł `[96]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.CountryReport_Turn07_Wehlen_BFFMilitantsNeutralized = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.CountryReport_Turn07_Wehlen_BFFMilitantsNeutralized"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.CountryReport_Turn07_Wehlen_BFFMilitantsNeutralized = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.CountryReport_Turn07_Wehlen_BFFMilitantsNeutralized"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[370]`
+  - -> `[370]` (*Węzeł Logiki Narracyjnej: "DisableToken("International_Event_OperationBearTrap");"*)
 
 ### Węzeł `[97]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
-  - -> `[99]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame..."*)
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGa..."*)
 
 ### Węzeł `[98]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BothFullNationalization = t..."*)
 
 ### Węzeł `[99]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame.BergiaSteel_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3"*)
 
 ### Węzeł `[100]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BothFullNationalization = true; BaseGameSupport.News_Turn07_HP_BothFullNationalization = true;
-BaseGameSupport.CountryReport_Turn07_Morella_HailsNationalizationPlan = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothFullNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BothFullNationalization = true; BaseGameSupport.News_Turn07_HP_BothFullNationalization = true;
+BaseGameSupport.CountryReport_Turn07_Morella_HailsNationalizationPlan = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothFullNationalization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BothFullNationalization"] = true;
 Variable["BaseGameSupport.CountryReport_Turn07_Morella_HailsNationalizationPlan"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[101]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3"*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization >= 3)"*)
 
 ### Węzeł `[102]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[361]`
+  - -> `[361]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Walter_Enemy == true"*)
 
 ### Węzeł `[103]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[104]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_HOSFullNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_HOSFullNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_HOSFullNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_HOSFullNationalization"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[105]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
-  - -> `[107]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization >= 3)"*)
 
 ### Węzeł `[106]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BergiaFullNationalization =..."*)
 
 ### Węzeł `[107]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame...."*)
 
 ### Węzeł `[108]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BergiaFullNationalization = true; BaseGameSupport.News_Turn07_HP_BergiaFullNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BergiaFullNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BergiaFullNationalization = true; BaseGameSupport.News_Turn07_HP_BergiaFullNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BergiaFullNationalization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BergiaFullNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[109]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
-  - -> `[111]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame...."*)
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGam..."*)
 
 ### Węzeł `[110]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BothNationalization = true;..."*)
 
 ### Węzeł `[111]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization > 0 && BaseGame.BergiaSteel_Nationalization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0"*)
 
 ### Węzeł `[112]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BothNationalization = true; BaseGameSupport.News_Turn07_HP_BothNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BothNationalization = true; BaseGameSupport.News_Turn07_HP_BothNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothNationalization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BothNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[113]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
-  - -> `[115]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0"*)
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization > 0)"*)
 
 ### Węzeł `[114]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_HOSNationalization = true; ..."*)
 
 ### Węzeł `[115]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization > 0"*)
 
 ### Węzeł `[116]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[118]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization > 0"*)
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization > 0)"*)
 
 ### Węzeł `[117]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BergiaNationalization = tru..."*)
 
 ### Węzeł `[118]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[119]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_HOSNationalization = true; BaseGameSupport.News_Turn07_HP_HOSNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_HOSNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_HOSNationalization = true; BaseGameSupport.News_Turn07_HP_HOSNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_HOSNationalization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_HOSNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[120]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BergiaNationalization = true; BaseGameSupport.News_Turn07_HP_BergiaNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BergiaNationalization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BergiaNationalization = true; BaseGameSupport.News_Turn07_HP_BergiaNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BergiaNationalization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BergiaNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[121]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
-  - -> `[123]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGam..."*)
 
 ### Węzeł `[122]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3  and  Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3  and  Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BothFullPrivatization = tru..."*)
 
 ### Węzeł `[123]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3  and  Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame.SordishStateCorporation_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3  and  Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
 
 ### Węzeł `[124]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[125]`
-  - -> `[126]`
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization > 0"*)
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization > 0)"*)
 
 ### Węzeł `[125]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_SSCPrivatization = true; Ba..."*)
 
 ### Węzeł `[126]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[127]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[128]`
-  - -> `[129]`
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization >= 3)"*)
 
 ### Węzeł `[128]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_NedamFullPrivatization = tr..."*)
 
 ### Węzeł `[129]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization >= 3"*)
 
 ### Węzeł `[130]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[131]`
-  - -> `[132]`
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0)"*)
 
 ### Węzeł `[131]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_NedamPrivatization = true; ..."*)
 
 ### Węzeł `[132]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization > 0"*)
 
 ### Węzeł `[133]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
-  - -> `[135]`
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame..."*)
 
 ### Węzeł `[134]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_BothPrivatization = true; B..."*)
 
 ### Węzeł `[135]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[136]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
-  - -> `[138]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization >= 3"*)
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization >= 3)"*)
 
 ### Węzeł `[137]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_SSCFullPrivatization = true..."*)
 
 ### Węzeł `[138]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
 
 ### Węzeł `[139]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BothFullPrivatization = true; BaseGameSupport.News_Turn07_HP_BothFullPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothFullPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BothFullPrivatization = true; BaseGameSupport.News_Turn07_HP_BothFullPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothFullPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BothFullPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[140]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_NedamFullPrivatization = true; BaseGameSupport.News_Turn07_HP_NedamFullPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_NedamFullPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_NedamFullPrivatization = true; BaseGameSupport.News_Turn07_HP_NedamFullPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_NedamFullPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_NedamFullPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[141]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_SSCFullPrivatization = true; BaseGameSupport.News_Turn07_HP_SSCFullPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_SSCFullPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_SSCFullPrivatization = true; BaseGameSupport.News_Turn07_HP_SSCFullPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_SSCFullPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_SSCFullPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[142]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_BothPrivatization = true; BaseGameSupport.News_Turn07_HP_BothPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_BothPrivatization = true; BaseGameSupport.News_Turn07_HP_BothPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_BothPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_BothPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[143]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_NedamPrivatization = true; BaseGameSupport.News_Turn07_HP_NedamPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_NedamPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_NedamPrivatization = true; BaseGameSupport.News_Turn07_HP_NedamPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_NedamPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_NedamPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[144]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_SSCPrivatization = true; BaseGameSupport.News_Turn07_HP_SSCPrivatization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_SSCPrivatization"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_SSCPrivatization = true; BaseGameSupport.News_Turn07_HP_SSCPrivatization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_SSCPrivatization"] = true;
 Variable["BaseGameSupport.News_Turn07_HP_SSCPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
 
 ### Węzeł `[145]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
-  - -> `[147]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.T..."*)
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame..."*)
 
 ### Węzeł `[146]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_KorontiTuskArrested = true;..."*)
 
 ### Węzeł `[147]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[148]`
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true"*)
 
 ### Węzeł `[148]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[149]`
-  - -> `[150]`
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true"*)
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_WalterTusk == true)"*)
 
 ### Węzeł `[149]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_TuskArrested = true; BaseGa..."*)
 
 ### Węzeł `[150]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[151]`
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true"*)
 
 ### Węzeł `[151]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
-  - -> `[153]`
+  - -> `[152]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true"*)
+  - -> `[153]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MarcelKoronti == true)"*)
 
 ### Węzeł `[152]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[156]`
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_KorontiArrested = true; Bas..."*)
 
 ### Węzeł `[153]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion >= 15"*)
 
 ### Węzeł `[154]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_KorontiTuskArrested = true; BaseGameSupport.News_Turn07_R_KorontiTuskArrested = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_KorontiTuskArrested"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_KorontiTuskArrested = true; BaseGameSupport.News_Turn07_R_KorontiTuskArrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_KorontiTuskArrested"] = true;
 Variable["BaseGameSupport.News_Turn07_R_KorontiTuskArrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion >= 15"*)
 
 ### Węzeł `[155]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_TuskArrested = true; BaseGameSupport.News_Turn07_R_TuskArrested = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_TuskArrested"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_TuskArrested = true; BaseGameSupport.News_Turn07_R_TuskArrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_TuskArrested"] = true;
 Variable["BaseGameSupport.News_Turn07_R_TuskArrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion >= 15"*)
 
 ### Węzeł `[156]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_E_KorontiArrested = true; BaseGameSupport.News_Turn07_R_KorontiArrested = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_KorontiArrested"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_E_KorontiArrested = true; BaseGameSupport.News_Turn07_R_KorontiArrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_E_KorontiArrested"] = true;
 Variable["BaseGameSupport.News_Turn07_R_KorontiArrested"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion >= 15"*)
 
 ### Węzeł `[157]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[158]`
-  - -> `[159]`
+  - -> `[158]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true"*)
+  - -> `[159]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == t..."*)
 
 ### Węzeł `[158]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[161]`
+  - -> `[161]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_HP_PoliceSuccessInArvory = true"*)
 
 ### Węzeł `[159]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn03_EnT_LawEnforcement_Budget_Increase"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
+  - -> `[160]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_HP_ShootingInArvory = true"*)
 
 ### Węzeł `[160]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_HP_ShootingInArvory = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_ShootingInArvory"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_HP_ShootingInArvory = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_ShootingInArvory"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Wehlen_JointOperation == true"*)
 
 ### Węzeł `[161]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_HP_PoliceSuccessInArvory = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_PoliceSuccessInArvory"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_HP_PoliceSuccessInArvory = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_PoliceSuccessInArvory"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Wehlen_JointOperation == true"*)
 
 ### Węzeł `[162]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion >= 15)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion >= 15`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
-  - -> `[164]`
+  - -> `[163]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion >= 15"*)
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Public_Opinion >= 15)"*)
 
 ### Węzeł `[163]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion >= 15)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Public_Opinion"] >= 15`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion >= 15`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Public_Opinion"] >= 15`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
+  - -> `[165]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_PositiveApproval = ..."*)
 
 ### Węzeł `[164]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Public_Opinion >= 15))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Public_Opinion"] >= 15) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Public_Opinion >= 15)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Public_Opinion"] >= 15) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion <= 0"*)
 
 ### Węzeł `[165]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_PositiveApproval = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_PositiveApproval"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_PositiveApproval = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_PositiveApproval"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[372]`
+  - -> `[372]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWh..."*)
 
 ### Węzeł `[166]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion <= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
-  - -> `[168]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "BaseGame.Public_Opinion <= 0"*)
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Public_Opinion <= 0)"*)
 
 ### Węzeł `[167]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Public_Opinion <= 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Public_Opinion"] <= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Public_Opinion <= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Public_Opinion"] <= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_NegativeApproval = ..."*)
 
 ### Węzeł `[168]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Public_Opinion <= 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Public_Opinion"] <= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Public_Opinion <= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Public_Opinion"] <= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[372]`
+  - -> `[372]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWh..."*)
 
 ### Węzeł `[169]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_NegativeApproval = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_NegativeApproval"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_NegativeApproval = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_NegativeApproval"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[372]`
+  - -> `[372]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWh..."*)
 
 ### Węzeł `[170]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MikailAven == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MikailAven == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
-  - -> `[172]`
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MikailAven == true"*)
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MikailAven == true)"*)
 
 ### Węzeł `[171]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MikailAven == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MikailAven"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MikailAven == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MikailAven"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[365]`
+  - -> `[365]` (*Węzeł Logiki Narracyjnej: "AssignConnection("Page_Factions", "Position_Oligarch", "F..."*)
 
 ### Węzeł `[172]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MikailAven == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MikailAven"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MikailAven == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MikailAven"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[366]`
+  - -> `[366]` (*Węzeł Logiki Narracyjnej: "AssignConnection("Page_Factions", "Position_Oligarch", "F..."*)
 
 ### Węzeł `[173]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Destroyed = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Destroyed = true;
 BaseGame.Faction_Oligarchs_Content = false;
-BaseGame.Faction_Oligarchs_Ally = false; BaseGame.Faction_Oligarchs_Enemy = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Destroyed"] = true;
+BaseGame.Faction_Oligarchs_Ally = false; BaseGame.Faction_Oligarchs_Enemy = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Destroyed"] = true;
 Variable["BaseGame.Faction_Oligarchs_Content"] = false;
 Variable["BaseGame.Faction_Oligarchs_Ally"] = false;
 Variable["BaseGame.Faction_Oligarchs_Enemy"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 2"*)
 
 ### Węzeł `[174]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Nationalization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Nationalization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
-  - -> `[176]`
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.EconomicDirection_Nationalization == true)"*)
 
 ### Węzeł `[175]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.EconomicDirection_Nationalization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Nationalization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.EconomicDirection_Nationalization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.EconomicDirection_Nationalization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true"*)
 
 ### Węzeł `[176]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.EconomicDirection_Nationalization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.EconomicDirection_Nationalization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Privatization == true"*)
 
 ### Węzeł `[177]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[178]`
-  - -> `[179]`
+  - -> `[178]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.T..."*)
+  - -> `[179]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame..."*)
 
 ### Węzeł `[178]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true)  or  (Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true)  or  (Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MikailAven == true"*)
 
 ### Węzeł `[179]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !((BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true)))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true)  or  (Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true) || (BaseGame.Turn07_Detained_WalterTusk == true && BaseGame.Turn07_Detained_MarcelKoronti == true))`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true)  or  (Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  and  Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization - BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[180]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[181]`
-  - -> `[182]`
+  - -> `[181]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
+  - -> `[182]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization >= 3)"*)
 
 ### Węzeł `[181]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Deyr_BergiaSteelFullNationa..."*)
 
 ### Węzeł `[182]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3"*)
 
 ### Węzeł `[183]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Deyr_BergiaSteelFullNationalization = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Deyr_BergiaSteelFullNationalization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Deyr_BergiaSteelFullNationalization = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Deyr_BergiaSteelFullNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3"*)
 
 ### Węzeł `[184]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
-  - -> `[186]`
+  - -> `[185]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3"*)
+  - -> `[186]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization >= 3)"*)
 
 ### Węzeł `[185]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Conriat_HOSFullNationalizat..."*)
 
 ### Węzeł `[186]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization >= 3"*)
 
 ### Węzeł `[187]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Conriat_HOSFullNationalization = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Conriat_HOSFullNationalization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Conriat_HOSFullNationalization = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Conriat_HOSFullNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization >= 3"*)
 
 ### Węzeł `[188]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[189]`
-  - -> `[190]`
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization >= 3"*)
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization >= 3)"*)
 
 ### Węzeł `[189]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
 
 ### Węzeł `[190]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
 
 ### Węzeł `[191]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_KorontiBuysSSC = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_KorontiBuysSSC"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_KorontiBuysSSC = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_KorontiBuysSSC"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
 
 ### Węzeł `[192]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_TuskBuysSSC = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_TuskBuysSSC"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_TuskBuysSSC = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_TuskBuysSSC"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
 
 ### Węzeł `[193]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[194]`
-  - -> `[195]`
+  - -> `[194]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)"*)
 
 ### Węzeł `[194]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
+  - -> `[191]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_KorontiBuysSSC = true"*)
 
 ### Węzeł `[195]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[200]`
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
 
 ### Węzeł `[196]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_SSCFullPrivatization = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_SSCFullPrivatization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_SSCFullPrivatization = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_SSCFullPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
 
 ### Węzeł `[197]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[198]`
-  - -> `[199]`
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3"*)
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization >= 3)"*)
 
 ### Węzeł `[198]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization >= 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization >= 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[203]`
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
 
 ### Węzeł `[199]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization >= 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization >= 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] >= 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame..."*)
 
 ### Węzeł `[200]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[201]`
-  - -> `[202]`
+  - -> `[201]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_WalterTusk == true)"*)
 
 ### Węzeł `[201]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[192]`
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_TuskBuysSSC = true"*)
 
 ### Węzeł `[202]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
+  - -> `[196]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_SSCFullPrivatizatio..."*)
 
 ### Węzeł `[203]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
-  - -> `[205]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)"*)
 
 ### Węzeł `[204]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_KorontiBuysNedam = ..."*)
 
 ### Węzeł `[205]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[206]`
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
 
 ### Węzeł `[206]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
-  - -> `[208]`
+  - -> `[207]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
+  - -> `[208]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_WalterTusk == true)"*)
 
 ### Węzeł `[207]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_TuskBuysNedam = true"*)
 
 ### Węzeł `[208]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[211]`
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn07_Holsord_NedamFullPrivatizat..."*)
 
 ### Węzeł `[209]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_KorontiBuysNedam = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_KorontiBuysNedam"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_KorontiBuysNedam = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_KorontiBuysNedam"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame..."*)
 
 ### Węzeł `[210]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_TuskBuysNedam = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_TuskBuysNedam"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_TuskBuysNedam = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_TuskBuysNedam"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame..."*)
 
 ### Węzeł `[211]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn07_Holsord_NedamFullPrivatization = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_NedamFullPrivatization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn07_Holsord_NedamFullPrivatization = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn07_Holsord_NedamFullPrivatization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization >= 3 && BaseGame..."*)
 
 ### Węzeł `[212]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Demanded_FullNationalization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Demanded_FullNationalization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[213]`
-  - -> `[214]`
+  - -> `[213]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Demanded_FullNationalization == ..."*)
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Demanded_FullNationalization =..."*)
 
 ### Węzeł `[213]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Demanded_FullNationalization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Demanded_FullNationalization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Demanded_FullNationalization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Demanded_FullNationalization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[222]`
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
 
 ### Węzeł `[214]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Demanded_FullNationalization == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Demanded_FullNationalization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Demanded_FullNationalization == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Demanded_FullNationalization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[215]`
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Demanded_TightenedImmigration ==..."*)
 
 ### Węzeł `[215]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[216]`
-  - -> `[217]`
+  - -> `[216]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Demanded_TightenedImmigration ==..."*)
+  - -> `[217]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Autocrat_Demanded_TightenedImmigration ..."*)
 
 ### Węzeł `[216]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Demanded_TightenedImmigration"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Autocrat_Demanded_TightenedImmigration"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_TightenedImmigration == true"*)
 
 ### Węzeł `[217]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Demanded_TightenedImmigration"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Autocrat_Demanded_TightenedImmigration == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Autocrat_Demanded_TightenedImmigration"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.turn06_AutocratDemands_Conscription == true"*)
 
 ### Węzeł `[218]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.turn06_AutocratDemands_Conscription == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.turn06_AutocratDemands_Conscription == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[219]`
-  - -> `[220]`
+  - -> `[219]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.turn06_AutocratDemands_Conscription == true"*)
+  - -> `[220]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.turn06_AutocratDemands_Conscription ==..."*)
 
 ### Węzeł `[219]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.turn06_AutocratDemands_Conscription == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.turn06_AutocratDemands_Conscription"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.turn06_AutocratDemands_Conscription == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.turn06_AutocratDemands_Conscription"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[232]`
+  - -> `[232]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_CompulsoryMilitaryService == true"*)
 
 ### Węzeł `[220]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.turn06_AutocratDemands_Conscription == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.turn06_AutocratDemands_Conscription"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.turn06_AutocratDemands_Conscription == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.turn06_AutocratDemands_Conscription"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[221]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[215]`
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Demanded_TightenedImmigration ==..."*)
 
 ### Węzeł `[222]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[223]`
-  - -> `[224]`
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSo..."*)
+  - -> `[224]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOf..."*)
 
 ### Węzeł `[223]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] == 6`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] == 6`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = true"*)
 
 ### Węzeł `[224]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] == 6) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization + BaseGame.HeartOfSordland_Nationalization == 6)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] + Variable["BaseGame.HeartOfSordland_Nationalization"] == 6) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[225]`
+  - -> `[225]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = false"*)
 
 ### Węzeł `[225]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[380]`
+  - -> `[380]` (*Węzeł Logiki Narracyjnej: "//Skip"*)
 
 ### Węzeł `[226]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_TightenedImmigration == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_TightenedImmigration == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
-  - -> `[228]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_TightenedImmigration == true"*)
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Diplomacy_TightenedImmigration == true)"*)
 
 ### Węzeł `[227]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_TightenedImmigration == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_TightenedImmigration"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_TightenedImmigration == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Diplomacy_TightenedImmigration"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = true"*)
 
 ### Węzeł `[228]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Diplomacy_TightenedImmigration == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_TightenedImmigration"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Diplomacy_TightenedImmigration == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Diplomacy_TightenedImmigration"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[229]`
+  - -> `[229]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = false"*)
 
 ### Węzeł `[229]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[380]`
+  - -> `[380]` (*Węzeł Logiki Narracyjnej: "//Skip"*)
 
 ### Węzeł `[230]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.turn06_AutocratDemands_Conscription == true"*)
 
 ### Węzeł `[231]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
+  - -> `[236]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
 
 ### Węzeł `[232]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Military_CompulsoryMilitaryService == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Military_CompulsoryMilitaryService == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
-  - -> `[234]`
+  - -> `[233]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Military_CompulsoryMilitaryService == true"*)
+  - -> `[234]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Policy_Military_CompulsoryMilitaryService == t..."*)
 
 ### Węzeł `[233]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Military_CompulsoryMilitaryService == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Policy_Military_CompulsoryMilitaryService"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Military_CompulsoryMilitaryService == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Policy_Military_CompulsoryMilitaryService"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[231]`
+  - -> `[231]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = true"*)
 
 ### Węzeł `[234]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Policy_Military_CompulsoryMilitaryService == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Policy_Military_CompulsoryMilitaryService"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Policy_Military_CompulsoryMilitaryService == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Policy_Military_CompulsoryMilitaryService"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = false"*)
 
 ### Węzeł `[235]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[380]`
+  - -> `[380]` (*Węzeł Logiki Narracyjnej: "//Skip"*)
 
 ### Węzeł `[236]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[237]`
-  - -> `[238]`
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization + BaseGame.Sordis..."*)
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization + BaseGame.Sord..."*)
 
 ### Węzeł `[237]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[239]`
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = false"*)
 
 ### Węzeł `[238]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization + BaseGame.SordishStateCorporation_Privatization >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] + Variable["BaseGame.SordishStateCorporation_Privatization"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[241]`
+  - -> `[241]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Fac..."*)
 
 ### Węzeł `[239]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[240]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_OldGuard_Content"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[241]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
-  - -> `[243]`
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Fac..."*)
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.F..."*)
 
 ### Węzeł `[242]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3  and  Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] >= 3  and  Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
+  - -> `[240]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content = true"*)
 
 ### Węzeł `[243]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3  and  Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization >= 3 && BaseGame.Faction_Oligarchs_KorontiLeader == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] >= 3  and  Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)
 
 ### Węzeł `[244]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
-  - -> `[246]`
+  - -> `[245]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame..."*)
+  - -> `[246]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 3 || BaseGa..."*)
 
 ### Węzeł `[245]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  or  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  or  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame..."*)
 
 ### Węzeł `[246]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  or  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame.BergiaSteel_Nationalization == 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  or  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
 
 ### Węzeł `[247]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -1962,12 +1948,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[248]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -1980,12 +1966,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[249]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -1998,75 +1984,75 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[250]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[251]`
-  - -> `[252]`
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_MarcelKoronti == true"*)
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)"*)
 
 ### Węzeł `[251]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[260]`
+  - -> `[260]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
 
 ### Węzeł `[252]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
+  - -> `[253]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true"*)
 
 ### Węzeł `[253]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
-  - -> `[255]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true"*)
+  - -> `[255]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually ==..."*)
 
 ### Węzeł `[254]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[270]`
+  - -> `[270]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
 
 ### Węzeł `[255]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterAndMarcelEqually"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
 
 ### Węzeł `[256]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[257]`
-  - -> `[258]`
+  - -> `[257]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
+  - -> `[258]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame..."*)
 
 ### Węzeł `[257]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
+  - -> `[266]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[258]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[259]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2078,54 +2064,54 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[260]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[261]`
-  - -> `[262]`
+  - -> `[261]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
+  - -> `[262]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame..."*)
 
 ### Węzeł `[261]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[279]`
+  - -> `[279]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[262]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
+  - -> `[263]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[263]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[264]`
-  - -> `[265]`
+  - -> `[264]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
+  - -> `[265]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0)"*)
 
 ### Węzeł `[264]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
+  - -> `[281]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[265]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[274]`
+  - -> `[274]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[266]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2138,54 +2124,54 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[267]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
-  - -> `[269]`
+  - -> `[268]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
+  - -> `[269]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0)"*)
 
 ### Węzeł `[268]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[269]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[270]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
-  - -> `[272]`
+  - -> `[271]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
+  - -> `[272]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame..."*)
 
 ### Węzeł `[271]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
+  - -> `[278]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[272]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
+  - -> `[267]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[273]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2197,12 +2183,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[274]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2215,12 +2201,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[275]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2232,12 +2218,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[276]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2250,12 +2236,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
+  - -> `[280]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[277]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2267,12 +2253,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[278]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2284,12 +2270,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[279]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2302,12 +2288,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[280]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2319,12 +2305,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[322]`
+  - -> `[322]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[281]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2337,96 +2323,96 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[324]`
+  - -> `[324]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[282]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
-  - -> `[284]`
+  - -> `[283]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
+  - -> `[284]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0)"*)
 
 ### Węzeł `[283]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[284]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
+  - -> `[276]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[285]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
-  - -> `[287]`
+  - -> `[286]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_GrantedShares_WalterTusk == true"*)
+  - -> `[287]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_GrantedShares_WalterTusk == true)"*)
 
 ### Węzeł `[286]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_GrantedShares_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_GrantedShares_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
+  - -> `[256]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0 && BaseGame.S..."*)
 
 ### Węzeł `[287]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_GrantedShares_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_GrantedShares_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_GrantedShares_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[288]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
-  - -> `[290]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3"*)
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 3)"*)
 
 ### Węzeł `[289]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
+  - -> `[248]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[290]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[247]`
+  - -> `[247]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[291]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[292]`
-  - -> `[293]`
+  - -> `[292]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame..."*)
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGa..."*)
 
 ### Węzeł `[292]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[294]`
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[293]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 3 && BaseGame.BergiaSteel_Nationalization == 3)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 3  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 3) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[288]`
+  - -> `[288]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3"*)
 
 ### Węzeł `[294]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2439,12 +2425,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[295]`
+  - -> `[295]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[295]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2456,75 +2442,75 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[325]`
+  - -> `[325]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[296]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[297]`
-  - -> `[298]`
+  - -> `[297]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Tu..."*)
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame...."*)
 
 ### Węzeł `[297]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[299]`
+  - -> `[299]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Tu..."*)
 
 ### Węzeł `[298]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Turn07_Fled_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[244]`
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 3 || BaseGame..."*)
 
 ### Węzeł `[299]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[300]`
-  - -> `[301]`
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Tu..."*)
+  - -> `[301]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame...."*)
 
 ### Węzeł `[300]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[305]`
+  - -> `[305]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[301]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Fled_MarcelKoronti == true && BaseGame.Turn07_Fled_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[302]`
+  - -> `[302]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true"*)
 
 ### Węzeł `[302]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[303]`
-  - -> `[304]`
+  - -> `[303]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true"*)
+  - -> `[304]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Fled_MarcelKoronti == true)"*)
 
 ### Węzeł `[303]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Fled_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Fled_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
+  - -> `[306]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[304]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Fled_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Fled_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Fled_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[307]`
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[305]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = true;
@@ -2537,12 +2523,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[308]`
+  - -> `[308]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[306]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = true;
@@ -2555,12 +2541,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[326]`
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[307]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = true;
@@ -2572,12 +2558,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[326]`
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[308]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = true;
@@ -2589,75 +2575,75 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[326]`
+  - -> `[326]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[309]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MikailAven == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MikailAven == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
-  - -> `[311]`
+  - -> `[310]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MikailAven == true"*)
+  - -> `[311]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MikailAven == true)"*)
 
 ### Węzeł `[310]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MikailAven == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MikailAven"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MikailAven == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MikailAven"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[331]`
+  - -> `[331]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MikailAven = fa..."*)
 
 ### Węzeł `[311]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MikailAven == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MikailAven"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MikailAven == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MikailAven"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[349]`
+  - -> `[349]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.T..."*)
 
 ### Węzeł `[312]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[313]`
-  - -> `[314]`
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGam..."*)
+  - -> `[314]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseG..."*)
 
 ### Węzeł `[313]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[318]`
+  - -> `[318]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[314]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGame.Turn07_Detained_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  and  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[315]`
+  - -> `[315]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true"*)
 
 ### Węzeł `[315]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[316]`
-  - -> `[317]`
+  - -> `[316]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true"*)
+  - -> `[317]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MarcelKoronti == true)"*)
 
 ### Węzeł `[316]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
+  - -> `[319]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_MarcelKoronti =..."*)
 
 ### Węzeł `[317]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[321]`
+  - -> `[321]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[318]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = true;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2670,12 +2656,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[320]`
+  - -> `[320]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Business_WalterTusk = fa..."*)
 
 ### Węzeł `[319]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MarcelKoronti = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained = true; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_KonrathDead = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_LostControlOfHOS = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_NedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Detained"] = true;
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_Fled"] = false;
@@ -2688,12 +2674,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCAndNedamSha
 Variable["BaseGameSupport.Codex_Characters_Business_MarcelKoronti_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[320]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = true;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2705,12 +2691,12 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[321]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_WalterTusk = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained = true; BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FledAndExtradited = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_FoundDeadInPrison = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_LostBergiaSteel = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_NedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares = false; BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_ArrestedLegally"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Detained"] = true;
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_Fled"] = false;
@@ -2722,436 +2708,436 @@ Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCAndNedamShares
 Variable["BaseGameSupport.Codex_Characters_Business_WalterTusk_SSCShares"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Węzeł Logiki Narracyjnej: "//Continue"*)
 
 ### Węzeł `[322]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[323]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[324]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[325]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[326]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[327]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Continue)*
-- **Efekt (`userScript`):** `--Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Continue`
+- **Efekt skryptowy (`userScript`):** `--Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[328]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[329]`
-  - -> `[330]`
+  - -> `[329]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGam..."*)
+  - -> `[330]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_MarcelKoronti == true || BaseG..."*)
 
 ### Węzeł `[329]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[312]`
+  - -> `[312]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true && BaseGam..."*)
 
 ### Węzeł `[330]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGame.Turn07_Detained_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_MarcelKoronti"] == true  or  Variable["BaseGame.Turn07_Detained_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[296]`
+  - -> `[296]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Fled_MarcelKoronti == true || BaseGame.Tu..."*)
 
 ### Węzeł `[331]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Business_MikailAven = false; BaseGameSupport.Codex_Characters_Business_MikailAven_Arrested = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MikailAven"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Business_MikailAven = false; BaseGameSupport.Codex_Characters_Business_MikailAven_Arrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Business_MikailAven"] = false;
 Variable["BaseGameSupport.Codex_Characters_Business_MikailAven_Arrested"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[348]`
+  - -> `[348]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Governmental_National..."*)
 
 ### Węzeł `[332]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[333]`
-  - -> `[334]`
+  - -> `[333]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization > 0"*)
+  - -> `[334]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.BergiaSteel_Nationalization > 0)"*)
 
 ### Węzeł `[333]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.BergiaSteel_Nationalization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.BergiaSteel_Nationalization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.BergiaSteel_Nationalization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[335]`
+  - -> `[335]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Corporations_BergiaSt..."*)
 
 ### Węzeł `[334]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.BergiaSteel_Nationalization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.BergiaSteel_Nationalization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.BergiaSteel_Nationalization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0"*)
 
 ### Węzeł `[335]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel = false; BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel_Nationalized = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel = false; BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel_Nationalized = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Corporations_BergiaSteel_Nationalized"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0"*)
 
 ### Węzeł `[336]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[337]`
-  - -> `[338]`
+  - -> `[337]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization > 0"*)
+  - -> `[338]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization > 0)"*)
 
 ### Węzeł `[337]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[339]`
+  - -> `[339]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Corporations_HOS = fa..."*)
 
 ### Węzeł `[338]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
+  - -> `[340]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[339]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Corporations_HOS = false; BaseGameSupport.Codex_Organisations_Corporations_HOS_KonrathDead = false; BaseGameSupport.Codex_Organisations_Corporations_HOS_Nationalized = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_HOS"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Corporations_HOS = false; BaseGameSupport.Codex_Organisations_Corporations_HOS_KonrathDead = false; BaseGameSupport.Codex_Organisations_Corporations_HOS_Nationalized = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_HOS"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Corporations_HOS_KonrathDead"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Corporations_HOS_Nationalized"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
+  - -> `[340]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
 
 ### Węzeł `[340]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[341]`
-  - -> `[342]`
+  - -> `[341]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization > 0"*)
+  - -> `[342]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization > 0)"*)
 
 ### Węzeł `[341]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[343]`
+  - -> `[343]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Corporations_NedamMin..."*)
 
 ### Węzeł `[342]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[344]`
+  - -> `[344]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization > 0"*)
 
 ### Węzeł `[343]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup = false; BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup_Privatized = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup = false; BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup_Privatized = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Corporations_NedamMiningGroup_Privatized"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[344]`
+  - -> `[344]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization > 0"*)
 
 ### Węzeł `[344]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[345]`
-  - -> `[346]`
+  - -> `[345]` (*Węzeł Logiki Narracyjnej: "BaseGame.SordishStateCorporation_Privatization > 0"*)
+  - -> `[346]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.SordishStateCorporation_Privatization > 0)"*)
 
 ### Węzeł `[345]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.SordishStateCorporation_Privatization > 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.SordishStateCorporation_Privatization > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.SordishStateCorporation_Privatization"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
+  - -> `[347]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Corporations_SordishS..."*)
 
 ### Węzeł `[346]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.SordishStateCorporation_Privatization > 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.SordishStateCorporation_Privatization > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.SordishStateCorporation_Privatization"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[328]`
+  - -> `[328]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGam..."*)
 
 ### Węzeł `[347]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation = false; BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation_Privatized = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation = false; BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation_Privatized = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Corporations_SordishStateCorporation_Privatized"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[328]`
+  - -> `[328]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_MarcelKoronti == true || BaseGam..."*)
 
 ### Węzeł `[348]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil = false; BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil_MikailArrested = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil = false; BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil_MikailArrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Governmental_NationalBusinessCouncil_MikailArrested"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[349]`
+  - -> `[349]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.T..."*)
 
 ### Węzeł `[349]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[350]`
-  - -> `[351]`
+  - -> `[350]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.T..."*)
+  - -> `[351]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_Detained_WalterTusk == true || BaseGame..."*)
 
 ### Węzeł `[350]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[352]`
+  - -> `[352]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup ..."*)
 
 ### Węzeł `[351]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_Detained_WalterTusk == true || BaseGame.Turn07_Fled_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_Detained_WalterTusk"] == true  or  Variable["BaseGame.Turn07_Fled_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
+  - -> `[332]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization > 0"*)
 
 ### Węzeł `[352]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup = false; BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup_TuskGone = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup = false; BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup_TuskGone = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup"] = false;
 Variable["BaseGameSupport.Codex_Organisations_Misc_LotherbergGroup_TuskGone"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
+  - -> `[332]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization > 0"*)
 
 ### Węzeł `[353]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[354]`
-  - -> `[355]`
+  - -> `[354]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseG..."*)
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_KorontiLeader == true && Bas..."*)
 
 ### Węzeł `[354]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true  and  Variable["BaseGame.HeartOfSordland_Nationalization"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true  and  Variable["BaseGame.HeartOfSordland_Nationalization"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[356]`
+  - -> `[356]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content = true; BaseGame.Facti..."*)
 
 ### Węzeł `[355]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true  and  Variable["BaseGame.HeartOfSordland_Nationalization"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_KorontiLeader == true && BaseGame.HeartOfSordland_Nationalization == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] == true  and  Variable["BaseGame.HeartOfSordland_Nationalization"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[356]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content = true; BaseGame.Faction_Oligarchs_Enemy = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content = true; BaseGame.Faction_Oligarchs_Enemy = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Content"] = true;
 Variable["BaseGame.Faction_Oligarchs_Enemy"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[357]`
+  - -> `[357]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || Ba..."*)
 
 ### Węzeł `[357]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
-  - -> `[359]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || Ba..."*)
+  - -> `[359]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || ..."*)
 
 ### Węzeł `[358]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn07_MarcelFavor_PrivateTakeover"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn07_MarcelFavor_PrivateTakeover"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[360]`
+  - -> `[360]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally = true;"*)
 
 ### Węzeł `[359]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn07_MarcelFavor_PrivateTakeover"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn07_MarcelFavor_PrivateTakeover == true || BaseGame.Accepted_MediaDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn07_MarcelFavor_PrivateTakeover"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[360]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Autocrat_Path == true"*)
 
 ### Węzeł `[361]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Walter_Enemy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Walter_Enemy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[362]`
-  - -> `[363]`
+  - -> `[362]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Walter_Enemy == true"*)
+  - -> `[363]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Walter_Enemy == true)"*)
 
 ### Węzeł `[362]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Walter_Enemy == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Walter_Enemy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Walter_Enemy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Walter_Enemy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_E_HOSFullNationalization = true;"*)
 
 ### Węzeł `[363]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Walter_Enemy == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Walter_Enemy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Walter_Enemy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Walter_Enemy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[364]`
+  - -> `[364]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn07_HP_HOSFullNationalization = t..."*)
 
 ### Węzeł `[364]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn07_HP_HOSFullNationalization = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_HOSFullNationalization"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn07_HP_HOSFullNationalization = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn07_HP_HOSFullNationalization"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization >= 3 && BaseGame...."*)
 
 ### Węzeł `[365]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_EdithAgnoc");)*
-- **Efekt (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_EdithAgnoc");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_EdithAgnoc");`
+- **Efekt skryptowy (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_EdithAgnoc");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[368]`
+  - -> `[368]` (*Węzeł Logiki Narracyjnej: "BaseGame.Leader_Oligarchs_WalterTusk = false"*)
 
 ### Węzeł `[366]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_MikailAven");)*
-- **Efekt (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_MikailAven");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_MikailAven");`
+- **Efekt skryptowy (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_MikailAven");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[368]`
+  - -> `[368]` (*Węzeł Logiki Narracyjnej: "BaseGame.Leader_Oligarchs_WalterTusk = false"*)
 
 ### Węzeł `[367]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_MarcelKoronti");)*
-- **Efekt (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_MarcelKoronti");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AssignConnection("Page_Factions", "Position_Oligarch", "Faction_Oligarchs_MarcelKoronti");`
+- **Efekt skryptowy (`userScript`):** `AssignConnection("Page_Factions","Position_Oligarch","Faction_Oligarchs_MarcelKoronti");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[369]`
+  - -> `[369]` (*Węzeł Logiki Narracyjnej: "BaseGame.Leader_Oligarchs_WalterTusk = false; BaseGame.Fa..."*)
 
 ### Węzeł `[368]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Leader_Oligarchs_WalterTusk = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Leader_Oligarchs_WalterTusk"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Leader_Oligarchs_WalterTusk = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Leader_Oligarchs_WalterTusk"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Faction_Oligarchs_KorontiLeader == false && Bas..."*)
 
 ### Węzeł `[369]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.Leader_Oligarchs_WalterTusk = false;
-BaseGame.Faction_Oligarchs_KorontiLeader = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Leader_Oligarchs_WalterTusk"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Leader_Oligarchs_WalterTusk = false;
+BaseGame.Faction_Oligarchs_KorontiLeader = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Leader_Oligarchs_WalterTusk"] = false;
 Variable["BaseGame.Faction_Oligarchs_KorontiLeader"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Walter_Enemy = true"*)
 
 ### Węzeł `[370]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: DisableToken("International_Event_OperationBearTrap");)*
-- **Efekt (`userScript`):** `DisableToken("International_Event_OperationBearTrap");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `DisableToken("International_Event_OperationBearTrap");`
+- **Efekt skryptowy (`userScript`):** `DisableToken("International_Event_OperationBearTrap");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.EconomicDirection_Nationalization == true"*)
 
 ### Węzeł `[371]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[372]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWhistleblower = true;
-BaseGameSupport.News_Turn07_G_CSPAntiRumburgStatement = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWhistleblower"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWhistleblower = true;
+BaseGameSupport.News_Turn07_G_CSPAntiRumburgStatement = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.CountryReport_Turn07_Rumburg_AsksReturnWhistleblower"] = true;
 Variable["BaseGameSupport.News_Turn07_G_CSPAntiRumburgStatement"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn07_A_OligarchsFinalMeeting = true"*)
 
 ### Węzeł `[373]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: SetRichPresence("Sold large state corporations away to the Oligarchs", "Maroon Palace", "Holsord");)*
-- **Efekt (`userScript`):** `SetRichPresence("Sold large state corporations away to the Oligarchs","Maroon Palace","Holsord");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `SetRichPresence("Sold large state corporations away to the Oligarchs", "Maroon Palace", "Holsord");`
+- **Efekt skryptowy (`userScript`):** `SetRichPresence("Sold large state corporations away to the Oligarchs","Maroon Palace","Holsord");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `133` (*Sordland/Turn07/NEDAM OR SSC PRIVATISED*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[374]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[375]`
-  - -> `[376]`
+  - -> `[375]` (*Węzeł Logiki Narracyjnej: "BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame..."*)
+  - -> `[376]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.HeartOfSordland_Nationalization == 0 && BaseGa..."*)
 
 ### Węzeł `[375]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.HeartOfSordland_Nationalization"] == 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `138` (*Sordland/Turn07/STATUS QUO*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[376]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.HeartOfSordland_Nationalization == 0 && BaseGame.BergiaSteel_Nationalization == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.HeartOfSordland_Nationalization"] == 0  and  Variable["BaseGame.BergiaSteel_Nationalization"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Narrator: "With the nationalization decisions made, all that was lef..."*)
 
 ### Węzeł `[377]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[378]`
-  - -> `[379]`
+  - -> `[378]` (*Węzeł Logiki Narracyjnej: "BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame...."*)
+  - -> `[379]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NedamMiningGroup_Privatization == 0 && BaseGam..."*)
 
 ### Węzeł `[378]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] == 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] == 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NedamMiningGroup_Privatization"] == 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] == 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `138` (*Sordland/Turn07/STATUS QUO*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[379]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: !(BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] == 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] == 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NedamMiningGroup_Privatization == 0 && BaseGame.SordishStateCorporation_Privatization == 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NedamMiningGroup_Privatization"] == 0  and  Variable["BaseGame.SordishStateCorporation_Privatization"] == 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[373]`
+  - -> `[373]` (*Węzeł Logiki Narracyjnej: "SetRichPresence("Sold large state corporations away to th..."*)
 
 ### Węzeł `[380]`
-Mówca: **Walter Tusk**
-*(Węzeł logiki narracyjnej: //Skip)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//Skip`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "BaseGame.BergiaSteel_Nationalization >= 3"*)

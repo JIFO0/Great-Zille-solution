@@ -31,21 +31,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 9
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[21]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_NoShare");`
-- Węzeł `[22]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Share");`
-- Węzeł `[23]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Nationalization_Concessions_SeizeLespiaShare");`
-- Węzeł `[24]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_BuyLespia");`
-- Węzeł `[25]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_CedeRiziaShare");`
-- Węzeł `[26]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_SameShares");`
-- Węzeł `[27]` (Paskal Beniwoll): `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_NoLespia");`
-- Węzeł `[29]` (Paskal Beniwoll): `End();`
-- *...oraz 1 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -54,273 +44,273 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "PlayLoopedMusic("R_ByThePeople", "R_ByThePeople_Loop");"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_NoShare == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_NoShare == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_NoShare == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Nationalization_NoShare == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_NoShare == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_NoShare"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_NoShare == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_NoShare"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Nationalization_Demands_No..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Nationalization_NoShare == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_NoShare"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Nationalization_NoShare == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_NoShare"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_SmallerShare == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_LargerShare == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_LargerShare == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_LargerShare == true"*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Nationalization_LargerShare == true)"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_LargerShare == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_LargerShare"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_LargerShare == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_LargerShare"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Nationalization_Concession..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Nationalization_LargerShare == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_LargerShare"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Nationalization_LargerShare == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_LargerShare"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_LargerShare == true"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_SmallerShare == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_SmallerShare == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
-  - -> `[11]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_SmallerShare == true"*)
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Nationalization_SmallerShare == true)"*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Nationalization_SmallerShare == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_SmallerShare"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Nationalization_SmallerShare == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Nationalization_SmallerShare"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Sh..."*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Nationalization_SmallerShare == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_SmallerShare"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Nationalization_SmallerShare == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Nationalization_SmallerShare"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_LargerShare == true"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_LargerShare == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_LargerShare == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_LargerShare == true"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Renegotiation_LargerShare == true)"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_LargerShare == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_LargerShare"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_LargerShare == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_LargerShare"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Renegotiation_LargerShare == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_LargerShare"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Renegotiation_LargerShare == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_LargerShare"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_SmallerShare == true"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_SmallerShare == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_SmallerShare == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_SmallerShare == true"*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Renegotiation_SmallerShare == true)"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_SmallerShare == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_SmallerShare"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_SmallerShare == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_SmallerShare"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_Cede..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Renegotiation_SmallerShare == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_SmallerShare"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Renegotiation_SmallerShare == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_SmallerShare"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true"*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true)"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_SameShareNoLespia"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.MITZ_Renegotiation_SameShareNoLespia"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_SameShareNoLespia"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.MITZ_Renegotiation_SameShareNoLespia == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.MITZ_Renegotiation_SameShareNoLespia"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Nationalization_Demands_NoShare"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_NoShare");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_NoShare")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_NoShare");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Share"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Share");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Share")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Demands_Share");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Nationalization_Concessions_SeizeLespiaShare"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Concessions_SeizeLespiaShare");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Nationalization_Concessions_SeizeLespiaShare")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Nationalization_Concessions_SeizeLespiaShare");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_BuyLespia"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_BuyLespia");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_BuyLespia")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_BuyLespia");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_CedeRiziaShare"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_CedeRiziaShare");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_CedeRiziaShare")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Demands_CedeRiziaShare");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_SameShares"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_SameShares");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_SameShares")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_SameShares");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_NoLespia"))*
-- **Efekt (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_NoLespia");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_NoLespia")`
+- **Efekt skryptowy (`userScript`):** `ShowPagedDecisionsPanel("Panel_Renegotiation_Concessions_NoLespia");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "I reviewed the agreement once more before signing it."*)
 
 ### Węzeł `[28]`
 Mówca: **Narrator**
 > "I reviewed the agreement once more before signing it."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Narrator: "The pilot announced that our descent into Porte Drazon ha..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[30]`
 Mówca: **Narrator**
 > "I took my first-class seat in the plane that had been chartered for my return flight from Morella."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands..."*)
 
 ### Węzeł `[31]`
 Mówca: **Narrator**
 > "Looking outside of the window, I could see Argno and the mountains."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Narrator: "The future of our relationship with Morella and the MITZ ..."*)
 
 ### Węzeł `[32]`
 Mówca: **Narrator**
 > "The future of our relationship with Morella and the MITZ was in my head."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Narrator: "I took a look at the papers in front of me."*)
 
 ### Węzeł `[33]`
 Mówca: **Narrator**
 > "I took a look at the papers in front of me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.MITZ_Nationalization_NoShare == true"*)
 
 ### Węzeł `[34]`
 Mówca: **Narrator**
 > "The pilot announced that our descent into Porte Drazon had begun."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Narrator: "I fastened my seatbelt."*)
 
 ### Węzeł `[35]`
 Mówca: **Narrator**
 > "I fastened my seatbelt."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[36]`
 Mówca: **Narrator**
 > "It struck me how much more comfortable this jet was than the ones we had in Rizia."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Narrator: "Looking outside of the window, I could see Argno and the ..."*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
-  - -> `[39]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands..."*)
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDeman..."*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Narrator: "It struck me how much more comfortable this jet was than ..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn05_MorellaITZ_NationalizationDemands_Airplanes"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Narrator: "Looking outside of the window, I could see Argno and the ..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlayLoopedMusic("R_ByThePeople", "R_ByThePeople_Loop");)*
-- **Efekt (`userScript`):** `PlayLoopedMusic("R_ByThePeople","R_ByThePeople_Loop");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlayLoopedMusic("R_ByThePeople", "R_ByThePeople_Loop");`
+- **Efekt skryptowy (`userScript`):** `PlayLoopedMusic("R_ByThePeople","R_ByThePeople_Loop");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Narrator: "I took my first-class seat in the plane that had been cha..."*)

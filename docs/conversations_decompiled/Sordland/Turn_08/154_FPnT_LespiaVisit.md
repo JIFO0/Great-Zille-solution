@@ -74,28 +74,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 31
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.Economy_Agnland`
-- `BaseGame.Economy_Bergia`
-- `BaseGame.Economy_Gruni`
-- `BaseGame.Economy_Lorren`
-- `BaseGame.Sollist`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[3]` (Symon Holl): `Variable["GameCondition.Turn08_FPnT_LespiaVisit"] = true;`
-- Węzeł `[10]` (Symon Holl): `Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] = true;`
-- Węzeł `[20]` (Symon Holl): `Variable["BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled"] = true;`
-- Węzeł `[24]` (Symon Holl): `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] + 2; Variable["BaseGame.Sollist...`
-- Węzeł `[25]` (Symon Holl): `-- continue;`
-- Węzeł `[29]` (Symon Holl): `Variable["BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAlliance"] = true;`
-- Węzeł `[30]` (Symon Holl): `Variable["BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade"] = true;`
-- Węzeł `[31]` (Symon Holl): `Variable["BaseGameSupport.News_Turn08_G_Lespia_Cancelled_Visit"] = true;`
-- *...oraz 23 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -104,175 +87,175 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Symon Holl)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_Country_Valgsland", "Progress..."*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Symon Holl)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: GameCondition.Turn08_FPnT_LespiaVisit = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn08_FPnT_LespiaVisit"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn08_FPnT_LespiaVisit = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn08_FPnT_LespiaVisit"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_Alliance == true"*)
 
 ### Węzeł `[4]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[6]`
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsla..."*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgs..."*)
 
 ### Węzeł `[5]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Valgsland_Alliance"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Valgsland_Alliance"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == tru..."*)
 
 ### Węzeł `[6]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Valgsland_Alliance"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsland_Alliance == false )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Valgsland_Alliance"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled = true"*)
 
 ### Węzeł `[7]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == tru..."*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == t..."*)
 
 ### Węzeł `[8]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true  or  Variable["BaseGame.EconomicDirection_Nationalization"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true  or  Variable["BaseGame.EconomicDirection_Nationalization"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne = true"*)
 
 ### Węzeł `[9]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true  or  Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true || BaseGame.EconomicDirection_Nationalization == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true  or  Variable["BaseGame.EconomicDirection_Nationalization"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `158` (*Sordland/Turn08/LespiaVisit_TalkWithSymon*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[10]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `158` (*Sordland/Turn08/LespiaVisit_TalkWithSymon*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[11]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_CapitalistRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_CapitalistRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Archetype_CapitalistRayne == true"*)
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Archetype_CapitalistRayne == true)"*)
 
 ### Węzeł `[12]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Archetype_CapitalistRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Archetype_CapitalistRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Archetype_CapitalistRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Archetype_CapitalistRayne"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `155` (*Sordland/Turn08/LespiaVisit_NeutralOrCapitalistRayne*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[13]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Archetype_CapitalistRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Archetype_CapitalistRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Archetype_CapitalistRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Archetype_CapitalistRayne"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true"*)
 
 ### Węzeł `[14]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true"*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true)"*)
 
 ### Węzeł `[15]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `156` (*Sordland/Turn08/LespiaVisit_AntiCapitalistRayne*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[16]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGameIsolated.Turn08_FPnT_AntiCapitalistRayne"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `155` (*Sordland/Turn08/LespiaVisit_NeutralOrCapitalistRayne*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[17]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.TradeDeal_Negotiation_Valgsland == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.TradeDeal_Negotiation_Valgsland == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
-  - -> `[19]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "BaseGame.TradeDeal_Negotiation_Valgsland == false"*)
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.TradeDeal_Negotiation_Valgsland == false)"*)
 
 ### Węzeł `[18]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.TradeDeal_Negotiation_Valgsland == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.TradeDeal_Negotiation_Valgsland"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.TradeDeal_Negotiation_Valgsland == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.TradeDeal_Negotiation_Valgsland"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == tru..."*)
 
 ### Węzeł `[19]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.TradeDeal_Negotiation_Valgsland == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.TradeDeal_Negotiation_Valgsland"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.TradeDeal_Negotiation_Valgsland == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.TradeDeal_Negotiation_Valgsland"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Valgsland_TradeDeal == false && BaseGame.Valgsla..."*)
 
 ### Węzeł `[20]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Journal_Turn08_LespiaVisit_Cancelled"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `157` (*Sordland/Turn08/LespiaVisit_TradeDealCancelled*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[21]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_Alliance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_Alliance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_Alliance == true"*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Lespia_Alliance == true)"*)
 
 ### Węzeł `[22]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_Alliance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Lespia_Alliance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_Alliance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Lespia_Alliance"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.Capitalist += 2; BaseGame.Sollist -= 2; BaseGame..."*)
 
 ### Węzeł `[23]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Lespia_Alliance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Lespia_Alliance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_TradeDeal == true"*)
 
 ### Węzeł `[24]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Capitalist += 2;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Capitalist += 2;
 BaseGame.Sollist -= 2;
 BaseGame.Policy_Military_JointMilitaryExercises = true;
 BaseGame.Situation_Diplomacy_DiplomaticPressure = false;
 BaseGame.Policy_Diplomacy_Lespia_Alliance = true;
-BaseGame.Policy_Diplomacy_Neutrality = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] + 2;
+BaseGame.Policy_Diplomacy_Neutrality = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Capitalist"] = Variable["BaseGame.Capitalist"] + 2;
 Variable["BaseGame.Sollist"] = Variable["BaseGame.Sollist"] - 2;
 Variable["BaseGame.Policy_Military_JointMilitaryExercises"] = true;
 Variable["BaseGame.Situation_Diplomacy_DiplomaticPressure"] = false;
@@ -280,404 +263,404 @@ Variable["BaseGame.Policy_Diplomacy_Lespia_Alliance"] = true;
 Variable["BaseGame.Policy_Diplomacy_Neutrality"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_LackOfAllies = false; BaseGa..."*)
 
 ### Węzeł `[25]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // continue)*
-- **Efekt (`userScript`):** `-- continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// continue`
+- **Efekt skryptowy (`userScript`):** `-- continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_TradeDeal == true"*)
 
 ### Węzeł `[26]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_TradeDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_TradeDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
-  - -> `[28]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_TradeDeal == true"*)
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Lespia_TradeDeal == true)"*)
 
 ### Węzeł `[27]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_TradeDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Lespia_TradeDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_TradeDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Lespia_TradeDeal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade ..."*)
 
 ### Węzeł `[28]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Lespia_TradeDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_TradeDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Lespia_TradeDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_TradeDeal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[29]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAlliance = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAlliance"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAlliance = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAlliance"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "EnableNews("G_Sordland_Lespia_Alliance");"*)
 
 ### Węzeł `[30]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn08_HP_Sordland_Lespia_New_Trade"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "// continue"*)
 
 ### Węzeł `[31]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn08_G_Lespia_Cancelled_Visit = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn08_G_Lespia_Cancelled_Visit"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn08_G_Lespia_Cancelled_Visit = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn08_G_Lespia_Cancelled_Visit"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn08_FPnT_LespiaVisit = true"*)
 
 ### Węzeł `[32]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_TradeZone_Lespia = true;
-BaseGame.Policy_Diplomacy_TradeInitiative = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Diplomacy_TradeZone_Lespia"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_TradeZone_Lespia = true;
+BaseGame.Policy_Diplomacy_TradeInitiative = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Diplomacy_TradeZone_Lespia"] = true;
 Variable["BaseGame.Policy_Diplomacy_TradeInitiative"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_FTZLespia = true; BaseGame.S..."*)
 
 ### Węzeł `[33]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_FTZLespia = true;
-BaseGame.Situation_Diplomacy_FailedTradeNegotiation = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_FTZLespia"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_FTZLespia = true;
+BaseGame.Situation_Diplomacy_FailedTradeNegotiation = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_FTZLespia"] = true;
 Variable["BaseGame.Situation_Diplomacy_FailedTradeNegotiation"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_SoldSordishPetroleum == true"*)
 
 ### Węzeł `[34]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true"*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn04_RegionalInvestment_Lorren == t..."*)
 
 ### Węzeł `[35]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Lorren"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Lorren"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_Lespia_Coal_Trade = true; Ba..."*)
 
 ### Węzeł `[36]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Lorren"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Lorren"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_Lespia_Tungsten_Trade = true"*)
 
 ### Węzeł `[37]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
-  - -> `[39]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true"*)
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn04_RegionalInvestment_Agnland == ..."*)
 
 ### Węzeł `[38]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Agnland"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Agnland"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_Lespia_Fish_Trade = true; Ba..."*)
 
 ### Węzeł `[39]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Agnland"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Agnland"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true"*)
 
 ### Węzeł `[40]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
-  - -> `[42]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true"*)
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn04_RegionalInvestment_Bergia == t..."*)
 
 ### Węzeł `[41]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Bergia"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_RegionalInvestment_Bergia"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_Lespia_Wheat_Trade = true; B..."*)
 
 ### Węzeł `[42]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Bergia"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn04_RegionalInvestment_Bergia == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_RegionalInvestment_Bergia"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Lorren == true"*)
 
 ### Węzeł `[43]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_Lespia_Tungsten_Trade = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Tungsten_Trade"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_Lespia_Tungsten_Trade = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Tungsten_Trade"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false..."*)
 
 ### Węzeł `[44]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_Lespia_Wheat_Trade = true;
-BaseGame.Economy_Bergia += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Wheat_Trade"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_Lespia_Wheat_Trade = true;
+BaseGame.Economy_Bergia += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Wheat_Trade"] = true;
 Variable["BaseGame.Economy_Bergia"] = Variable["BaseGame.Economy_Bergia"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false..."*)
 
 ### Węzeł `[45]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_Lespia_Fish_Trade = true;
-BaseGame.Economy_Agnland += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Fish_Trade"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_Lespia_Fish_Trade = true;
+BaseGame.Economy_Agnland += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Fish_Trade"] = true;
 Variable["BaseGame.Economy_Agnland"] = Variable["BaseGame.Economy_Agnland"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false..."*)
 
 ### Węzeł `[46]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_Lespia_Coal_Trade = true;
-BaseGame.Economy_Lorren += 1;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Coal_Trade"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_Lespia_Coal_Trade = true;
+BaseGame.Economy_Lorren += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_Coal_Trade"] = true;
 Variable["BaseGame.Economy_Lorren"] = Variable["BaseGame.Economy_Lorren"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false..."*)
 
 ### Węzeł `[47]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_TradeDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_TradeDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_TradeDeal == true"*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Lespia_TradeDeal == true)"*)
 
 ### Węzeł `[48]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_TradeDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Lespia_TradeDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_TradeDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Lespia_TradeDeal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_TradeZone_Lespia = true; BaseGa..."*)
 
 ### Węzeł `[49]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Lespia_TradeDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_TradeDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Lespia_TradeDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_TradeDeal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[50]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_SoldSordishPetroleum == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_SoldSordishPetroleum == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_SoldSordishPetroleum == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Lespia_SoldSordishPetroleum == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_SoldSordishPetroleum == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Lespia_SoldSordishPetroleum"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_SoldSordishPetroleum == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Lespia_SoldSordishPetroleum"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_Lespia_SordishPetroleum = tr..."*)
 
 ### Węzeł `[52]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Lespia_SoldSordishPetroleum == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_SoldSordishPetroleum"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Lespia_SoldSordishPetroleum == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_SoldSordishPetroleum"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true"*)
 
 ### Węzeł `[53]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_Lespia_SordishPetroleum = true;
-BaseGame.Situation_Diplomacy_Wehlen_FreeTariffs_Oil = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_SordishPetroleum"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_Lespia_SordishPetroleum = true;
+BaseGame.Situation_Diplomacy_Wehlen_FreeTariffs_Oil = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_Lespia_SordishPetroleum"] = true;
 Variable["BaseGame.Situation_Diplomacy_Wehlen_FreeTariffs_Oil"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_RegionalInvestment_Agnland == true"*)
 
 ### Węzeł `[54]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_Alliance == true"*)
 
 ### Węzeł `[55]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[56]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_Alliance == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_Alliance == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
-  - -> `[58]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.Lespia_Alliance == true"*)
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Lespia_Alliance == true)"*)
 
 ### Węzeł `[57]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Lespia_Alliance == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Lespia_Alliance"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Lespia_Alliance == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Lespia_Alliance"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Narrator: "I returned to Holsord with good news."*)
 
 ### Węzeł `[58]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Lespia_Alliance == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Lespia_Alliance == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Lespia_Alliance"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[59]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Policy_Diplomacy_Lespia_Alliance = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Policy_Diplomacy_Lespia_Alliance"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Policy_Diplomacy_Lespia_Alliance = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Policy_Diplomacy_Lespia_Alliance"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_ValgslandTradeTariffs = true..."*)
 
 ### Węzeł `[60]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_ValgslandTradeTariffs = true;
-BaseGame.Situation_Diplomacy_LackOfAllies = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_ValgslandTradeTariffs"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_ValgslandTradeTariffs = true;
+BaseGame.Situation_Diplomacy_LackOfAllies = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_ValgslandTradeTariffs"] = true;
 Variable["BaseGame.Situation_Diplomacy_LackOfAllies"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia..."*)
 
 ### Węzeł `[61]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[62]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: // Continue)*
-- **Efekt (`userScript`):** `-- Continue;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `// Continue`
+- **Efekt skryptowy (`userScript`):** `-- Continue;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_..."*)
 
 ### Węzeł `[63]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
-  - -> `[65]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_..."*)
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespi..."*)
 
 ### Węzeł `[64]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Lespia_TradeDeal"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Lespia_TradeDeal"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Situation_Diplomacy_FailedTradeNegotiation = true"*)
 
 ### Węzeł `[65]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Lespia_TradeDeal"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Valgsland_TradeDeal == false && BaseGame.Lespia_TradeDeal == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Valgsland_TradeDeal"] == false  and  Variable["BaseGame.Lespia_TradeDeal"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[66]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_FailedTradeNegotiation = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_FailedTradeNegotiation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_FailedTradeNegotiation = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_FailedTradeNegotiation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[67]`
 Mówca: **Narrator**
 > "I returned to Holsord with good news."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.Policy_Diplomacy_Lespia_Alliance = true;"*)
 
 ### Węzeł `[68]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Situation_Diplomacy_LackOfAllies = false;
-BaseGame.Situation_Diplomacy_ValgslandTradeTariffs = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_LackOfAllies"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Situation_Diplomacy_LackOfAllies = false;
+BaseGame.Situation_Diplomacy_ValgslandTradeTariffs = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Situation_Diplomacy_LackOfAllies"] = false;
 Variable["BaseGame.Situation_Diplomacy_ValgslandTradeTariffs"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn08_CSP_CondemnsLespiaAl..."*)
 
 ### Węzeł `[69]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
-  - -> `[71]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false..."*)
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == fal..."*)
 
 ### Węzeł `[70]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_GruniRuralDev_NoFunding"] == false  or  Variable["BaseGame.Decision_Turn06_Megaproject_Benfi"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn04_GruniRuralDev_NoFunding"] == false  or  Variable["BaseGame.Decision_Turn06_Megaproject_Benfi"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGame.Economy_Gruni += 1"*)
 
 ### Węzeł `[71]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_GruniRuralDev_NoFunding"] == false  or  Variable["BaseGame.Decision_Turn06_Megaproject_Benfi"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn04_GruniRuralDev_NoFunding == false || BaseGame.Decision_Turn06_Megaproject_Benfi == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn04_GruniRuralDev_NoFunding"] == false  or  Variable["BaseGame.Decision_Turn06_Megaproject_Benfi"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[72]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: BaseGame.Economy_Gruni += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Economy_Gruni"] = Variable["BaseGame.Economy_Gruni"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Economy_Gruni += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Economy_Gruni"] = Variable["BaseGame.Economy_Gruni"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[73]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[74]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia_Alliance");)*
-- **Efekt (`userScript`):** `AddTokenStatus("Sordland_Country_Lespia","Country_Lespia_Alliance");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia_Alliance");`
+- **Efekt skryptowy (`userScript`):** `AddTokenStatus("Sordland_Country_Lespia","Country_Lespia_Alliance");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia..."*)
 
 ### Węzeł `[75]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia_Trade");)*
-- **Efekt (`userScript`):** `AddTokenStatus("Sordland_Country_Lespia","Country_Lespia_Trade");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AddTokenStatus("Sordland_Country_Lespia", "Country_Lespia_Trade");`
+- **Efekt skryptowy (`userScript`):** `AddTokenStatus("Sordland_Country_Lespia","Country_Lespia_Trade");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "AddTokenStatus("Sordland_Country_Valgsland", "Country_Val..."*)
 
 ### Węzeł `[76]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_Country_Valgsland", "Progress_DiplomaticMission_Valgsland");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_Country_Valgsland","Progress_DiplomaticMission_Valgsland");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_Country_Valgsland", "Progress_DiplomaticMission_Valgsland");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_Country_Valgsland","Progress_DiplomaticMission_Valgsland");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatus("Sordland_Country_Lespia", "Progress_Di..."*)
 
 ### Węzeł `[77]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: RemoveTokenStatus("Sordland_Country_Lespia", "Progress_DiplomaticMission_Lespia");)*
-- **Efekt (`userScript`):** `RemoveTokenStatus("Sordland_Country_Lespia","Progress_DiplomaticMission_Lespia");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatus("Sordland_Country_Lespia", "Progress_DiplomaticMission_Lespia");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatus("Sordland_Country_Lespia","Progress_DiplomaticMission_Lespia");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.TradeDeal_Negotiation_Valgsland == false"*)
 
 ### Węzeł `[78]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: AddTokenStatus("Sordland_Country_Valgsland", "Country_Valgsland_TradeTariffs");)*
-- **Efekt (`userScript`):** `AddTokenStatus("Sordland_Country_Valgsland","Country_Valgsland_TradeTariffs");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AddTokenStatus("Sordland_Country_Valgsland", "Country_Valgsland_TradeTariffs");`
+- **Efekt skryptowy (`userScript`):** `AddTokenStatus("Sordland_Country_Valgsland","Country_Valgsland_TradeTariffs");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "// Continue"*)
 
 ### Węzeł `[79]`
-Mówca: **Symon Holl**
-*(Węzeł logiki narracyjnej: EnableNews("G_Sordland_Lespia_Alliance");)*
-- **Efekt (`userScript`):** `EnableNews("G_Sordland_Lespia_Alliance");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `EnableNews("G_Sordland_Lespia_Alliance");`
+- **Efekt skryptowy (`userScript`):** `EnableNews("G_Sordland_Lespia_Alliance");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "// continue"*)

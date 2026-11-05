@@ -29,10 +29,19 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 0
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
+
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[4]` | **""That I am. It symbolizes the timeless connection between our faith and the heavens.""** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `Variable["RiziaDLC.Trait_ReligiousKing"] == true` | *Brak zmian stanu* | `[19]` **Sal Ignacius**: ""Indeed it does."" |
+| `[5]` | **""I'm a Wruhecist. How the hell could you possibly think I'm not?""** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `Variable["RiziaDLC.Trait_TyrantKing"] == true` | *Brak zmian stanu* | `[21]` **Narrator**: "Sal respectfully bowed his head." |
+| `[15]` | **""It's unsettling that you'd doubt my familiarity.""** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `(Variable["RiziaDLC.Trait_TyrantKing"] == true) == false` | *Brak zmian stanu* | `[28]` **Narrator**: "Sal offered a respectful bow of ..." |
+| `[16]` | **""That I am. The celestial alignment holds great importance in our religious herita..."** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `(Variable["RiziaDLC.Trait_ReligiousKing"] == true) == false` | *Brak zmian stanu* | `[27]` **Sal Ignacius**: ""I'm glad you think so."" |
+| `[17]` | **""Indeed, I've been rehearsing my 'impressed by the universe' face for weeks now.""** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `Variable["RiziaDLC.Trait_FunnyKing"] == true` | *Brak zmian stanu* | `[26]` **Sal Ignacius**: ""It truly completes your counten..." |
+| `[18]` | **""Yes. I've been preparing for weeks to truly appreciate the awe-inspiring celestia..."** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false` | *Brak zmian stanu* | `[23]` **Sal Ignacius**: ""That pleases me to hear it."" |
+| `[22]` | **""Vaguely... I mean, I know about it as much as the next person.""** | `[3]` **Sal Ignacius**: ""It's remarkable that we're abou..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[24]` **Sal Ignacius**: ""I'm surprised to hear it. In th..." |
 
 ---
 
@@ -41,157 +50,171 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
 Mówca: **Sal Ignacius**
 > ""It's remarkable that we're about to witness the same celestial alignment St. Wruhec beheld so many years ago. You're acquainted with the story, aren't you?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[6]`
-  - -> `[9]`
-  - -> `[22]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_TyrantKing == true"*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_ReligiousKing == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_FunnyKing == true"*)
+  - -> `[22]` (*Player_Romus: ""Vaguely... I mean, I know about it as much as the next p..."*)
 
 ### Węzeł `[4]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""That I am. It symbolizes the timeless connection between our faith and the heavens.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Trait_ReligiousKing"] == true`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Sal Ignacius: ""Indeed it does.""*)
 
 ### Węzeł `[5]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I'm a Wruhecist. How the hell could you possibly think I'm not?""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Trait_TyrantKing"] == true`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Narrator: "Sal respectfully bowed his head."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_ReligiousKing == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_ReligiousKing == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_ReligiousKing == true"*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Trait_ReligiousKing == true)"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_ReligiousKing == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Trait_ReligiousKing"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_ReligiousKing == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Trait_ReligiousKing"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Player_Romus: ""That I am. It symbolizes the timeless connection between..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Trait_ReligiousKing == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Trait_ReligiousKing"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Trait_ReligiousKing == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Trait_ReligiousKing"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Player_Romus: ""That I am. The celestial alignment holds great importanc..."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_FunnyKing == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_FunnyKing == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
-  - -> `[11]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_FunnyKing == true"*)
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Trait_FunnyKing == true)"*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_FunnyKing == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_FunnyKing == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Player_Romus: ""Indeed, I've been rehearsing my 'impressed by the univer..."*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Trait_FunnyKing == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Trait_FunnyKing == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Player_Romus: ""Yes. I've been preparing for weeks to truly appreciate t..."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_TyrantKing == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_TyrantKing == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Trait_TyrantKing == true"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Trait_TyrantKing == true)"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Trait_TyrantKing == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Trait_TyrantKing"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Trait_TyrantKing == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Trait_TyrantKing"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
+  - -> `[5]` (*Player_Romus: ""I'm a Wruhecist. How the hell could you possibly think I..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Trait_TyrantKing == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Trait_TyrantKing"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Trait_TyrantKing == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Trait_TyrantKing"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Player_Romus: ""It's unsettling that you'd doubt my familiarity.""*)
 
 ### Węzeł `[15]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""It's unsettling that you'd doubt my familiarity.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Trait_TyrantKing"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Narrator: "Sal offered a respectful bow of his head."*)
 
 ### Węzeł `[16]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""That I am. The celestial alignment holds great importance in our religious heritage.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Trait_ReligiousKing"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Sal Ignacius: ""I'm glad you think so.""*)
 
 ### Węzeł `[17]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Indeed, I've been rehearsing my 'impressed by the universe' face for weeks now.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Trait_FunnyKing"] == true`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Sal Ignacius: ""It truly completes your countenance, Your Majesty.""*)
 
 ### Węzeł `[18]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Yes. I've been preparing for weeks to truly appreciate the awe-inspiring celestial alignment.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Trait_FunnyKing"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Sal Ignacius: ""That pleases me to hear it.""*)
 
 ### Węzeł `[19]`
 Mówca: **Sal Ignacius**
 > ""Indeed it does.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[20]`
 Mówca: **Sal Ignacius**
 > ""Forgive me. That was never my intention.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[21]`
 Mówca: **Narrator**
 > "Sal respectfully bowed his head."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Sal Ignacius: ""Forgive me. That was never my intention.""*)
 
 ### Węzeł `[22]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Vaguely... I mean, I know about it as much as the next person.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[3]` (Sal Ignacius)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Sal Ignacius: ""I'm surprised to hear it. In that case...""*)
 
 ### Węzeł `[23]`
 Mówca: **Sal Ignacius**
 > ""That pleases me to hear it.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[24]`
 Mówca: **Sal Ignacius**
 > ""I'm surprised to hear it. In that case...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[25]`
 Mówca: **Sal Ignacius**
@@ -202,22 +225,22 @@ Mówca: **Sal Ignacius**
 Mówca: **Sal Ignacius**
 > ""It truly completes your countenance, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[27]`
 Mówca: **Sal Ignacius**
 > ""I'm glad you think so.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)
 
 ### Węzeł `[28]`
 Mówca: **Narrator**
 > "Sal offered a respectful bow of his head."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Sal Ignacius: ""That was never my intention. Forgive me.""*)
 
 ### Węzeł `[29]`
 Mówca: **Sal Ignacius**
 > ""That was never my intention. Forgive me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Sal Ignacius: ""As we celebrate tonight's event, I'd be honored to retel..."*)

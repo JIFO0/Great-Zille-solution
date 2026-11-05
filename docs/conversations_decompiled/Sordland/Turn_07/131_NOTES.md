@@ -57,21 +57,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 2
-- **Węzły modyfikujące stan gry:** 27
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[9]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Reform_PFJP_Convinced"] = false;`
-- Węzeł `[13]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
-- Węzeł `[23]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
-- Węzeł `[27]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
-- Węzeł `[28]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
-- Węzeł `[29]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
-- Węzeł `[33]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
-- Węzeł `[37]` (Paskal Beniwoll): `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
-- *...oraz 19 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -80,638 +70,638 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Taurus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Taurus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Taurus == true"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Frens_Promise_Taurus == true)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Frens_Promise_Taurus == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Taurus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Frens_Promise_Taurus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Frens_Promise_Taurus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_InT_Taurus == true"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Frens_Promise_Taurus == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Taurus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Frens_Promise_Taurus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Frens_Promise_Taurus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 3"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_InT_Taurus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_InT_Taurus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn06_InT_Taurus == true"*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn06_InT_Taurus == true)"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn06_InT_Taurus == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn06_InT_Taurus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn06_InT_Taurus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn06_InT_Taurus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn06_InT_Taurus == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn06_InT_Taurus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn06_InT_Taurus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn06_InT_Taurus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_PFJP_Convinced = false"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reform_PFJP_Convinced = false)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Reform_PFJP_Convinced"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reform_PFJP_Convinced = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Reform_PFJP_Convinced"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Enemy == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Enemy == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
-  - -> `[12]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Enemy == true"*)
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Enemy == true)"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Enemy == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Enemy == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Enemy"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote -= 1"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Enemy == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Enemy"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Enemy == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Enemy"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content == false"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content == false"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reform_NFP_Convinced == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reform_NFP_Convinced == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Reform_NFP_Convinced == true)"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reform_NFP_Convinced == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Reform_NFP_Convinced"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reform_NFP_Convinced == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Reform_NFP_Convinced"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 2"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Reform_NFP_Convinced == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Reform_NFP_Convinced"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Reform_NFP_Convinced == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Reform_NFP_Convinced"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Dictator_Path == true"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reform_PFJP_Convinced == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reform_PFJP_Convinced == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
-  - -> `[19]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_PFJP_Convinced == true"*)
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Reform_PFJP_Convinced == true)"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reform_PFJP_Convinced == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Reform_PFJP_Convinced"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reform_PFJP_Convinced == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Reform_PFJP_Convinced"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Frens_Promise_Taurus == true"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Reform_PFJP_Convinced == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Reform_PFJP_Convinced"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Reform_PFJP_Convinced == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Reform_PFJP_Convinced"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn06_Lobbying_Bribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn06_Lobbying_Bribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
-  - -> `[22]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn06_Lobbying_Bribe == true"*)
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Decision_Turn06_Lobbying_Bribe == true)"*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Decision_Turn06_Lobbying_Bribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Decision_Turn06_Lobbying_Bribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Decision_Turn06_Lobbying_Bribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Decision_Turn06_Lobbying_Bribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Decision_Turn06_Lobbying_Bribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Decision_Turn06_Lobbying_Bribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Decision_Turn06_Lobbying_Bribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Decision_Turn06_Lobbying_Bribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true || BaseGame.Ac..."*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_USP_Vote_Reformers_MinorConvinced = true"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true || BaseGame.Ac..."*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Content == true || BaseGame...."*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Content"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Content == true || BaseGame.Accepted_MediaDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Content"] == true  or  Variable["BaseGame.Accepted_MediaDeal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote -= 1"*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Content == true || BaseGame.Ac..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn06_Lobbying_Bribe == true"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Albin_Convinced == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Albin_Convinced == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
-  - -> `[32]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Albin_Convinced == true"*)
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Albin_Convinced == true)"*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Albin_Convinced == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Albin_Convinced"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Albin_Convinced == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Albin_Convinced"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Albin_Convinced == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Albin_Convinced"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Albin_Convinced == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Albin_Convinced"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Gloria_Convinced == true && BaseGame.Refo..."*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 3)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 3`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 3;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Family_Important == false && BaseGame.B..."*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Gloria_Convinced == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Gloria_Convinced == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Gloria_Convinced == true"*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Gloria_Convinced == true)"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Gloria_Convinced == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Gloria_Convinced"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Gloria_Convinced == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Gloria_Convinced"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == ..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Gloria_Convinced == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Gloria_Convinced"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Gloria_Convinced == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Gloria_Convinced"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true"*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally == true"*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Family_Important == false && BaseGame.B..."*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Prologue_Family_Important == false && BaseGame..."*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Prologue_Family_Important"] == false  and  Variable["BaseGame.Bill_Turn01_CampaignFinance_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Prologue_Family_Important"] == false  and  Variable["BaseGame.Bill_Turn01_CampaignFinance_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Prologue_Family_Important"] == false  and  Variable["BaseGame.Bill_Turn01_CampaignFinance_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Prologue_Family_Important == false && BaseGame.Bill_Turn01_CampaignFinance_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Prologue_Family_Important"] == false  and  Variable["BaseGame.Bill_Turn01_CampaignFinance_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Albin_Convinced == true"*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_USP_Vote_StrongBase_Backing = true"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_PFJP_Vote_FullConvinced = true"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
-  - -> `[45]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally == true"*)
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_Oligarchs_Ally == true)"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_Oligarchs_Ally == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_Oligarchs_Ally == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_Oligarchs_Ally"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_Oligarchs_Ally == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Ally"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_Oligarchs_Ally == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_Oligarchs_Ally"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Enemy == true"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Enemy == true"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && B..."*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true &&..."*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false ))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn06_Lobbying_Bribe == true"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_NFP_Vote_MinorConvinced = true"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
-  - -> `[53]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && B..."*)
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true &&..."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && BaseGame.Reform_EmergencyDecree_Banned_YS == false && BaseGame.Reform_EmergencyDecree_Banned_RY == true && BaseGame.Promise_Diplomacy_East == true && BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Signed"] == true  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_YS"] == false  and  Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true  and  Variable["BaseGame.Promise_Diplomacy_East"] == true  and  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn06_Lobbying_Bribe == true"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_NFP_Vote_MinorConvinced = true"*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Dictator_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[57]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Dictator_Path == true"*)
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Dictator_Path == true)"*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Dictator_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Dictator_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Dictator_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Dictator_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && B..."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Dictator_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Dictator_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Dictator_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Dictator_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn05_ReligiousHarmony_Signed == true && B..."*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
-  - -> `[60]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Gloria_Convinced == true && BaseGame.Refo..."*)
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Gloria_Convinced == true && BaseGame.Re..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Gloria_Convinced"] == true  and  Variable["BaseGame.Reform_Albin_Convinced"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Gloria_Convinced"] == true  and  Variable["BaseGame.Reform_Albin_Convinced"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote -= 1"*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Gloria_Convinced"] == true  and  Variable["BaseGame.Reform_Albin_Convinced"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Gloria_Convinced == true && BaseGame.Reform_Albin_Convinced == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Gloria_Convinced"] == true  and  Variable["BaseGame.Reform_Albin_Convinced"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_PFJP_Convinced == true"*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_USP_Vote_PartyDisagreements = true"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == ..."*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait =..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true  or  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true  or  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 2"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true  or  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait == true || BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn04_PSnW_SchoolVisit_TookDownSollPortrait"] == true  or  Variable["BaseGame.Decision_Turn05_SPAid_AcceptUnitedContana"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 3"*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_USP_Vote_SecondUndecided_Convinced = true"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
-  - -> `[68]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "BaseGame.Bill_Turn04_WorkersRights_Signed == true"*)
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Bill_Turn04_WorkersRights_Signed == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Bill_Turn04_WorkersRights_Signed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 2"*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Bill_Turn04_WorkersRights_Signed == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Bill_Turn04_WorkersRights_Signed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 2)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 2`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Gloria_Convinced == true && BaseGame.Refo..."*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_USP_Vote_FirstUndecided_Convinced = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_FirstUndecided_Convinced"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_USP_Vote_FirstUndecided_Convinced = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_FirstUndecided_Convinced"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Family_Important == false && BaseGame.B..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_USP_Vote_StrongBase_Backing = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_StrongBase_Backing"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_USP_Vote_StrongBase_Backing = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_StrongBase_Backing"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Albin_Convinced == true"*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_USP_Vote_Reformers_MinorConvinced = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_Reformers_MinorConvinced"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_USP_Vote_Reformers_MinorConvinced = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_Reformers_MinorConvinced"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Gloria_Convinced == true && BaseGame.Refo..."*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_USP_Vote_PartyDisagreements = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_PartyDisagreements"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_USP_Vote_PartyDisagreements = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_PartyDisagreements"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_PFJP_Convinced == true"*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_PFJP_Vote_FullConvinced = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_PFJP_Vote_FullConvinced"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_PFJP_Vote_FullConvinced = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_PFJP_Vote_FullConvinced"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_NFP_Vote_MinorConvinced = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_NFP_Vote_MinorConvinced"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_NFP_Vote_MinorConvinced = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_NFP_Vote_MinorConvinced"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "BaseGame.Decision_Turn06_Lobbying_Bribe == true"*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
-  - -> `[78]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_OldGuard_Content == false"*)
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_OldGuard_Content == false)"*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_OldGuard_Content == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_OldGuard_Content"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_OldGuard_Content == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_OldGuard_Content"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote -= 2"*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_OldGuard_Content == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_OldGuard_Content"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_OldGuard_Content == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_OldGuard_Content"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote -= 2)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 2;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote -= 2`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 2;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_USP_Vote_SecondUndecided_Convinced = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_SecondUndecided_Convinced"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_USP_Vote_SecondUndecided_Convinced = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_USP_Vote_SecondUndecided_Convinced"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Family_Important == false && BaseGame.B..."*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote -= 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote -= 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] - 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_Oligarchs_Ally == true"*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
-  - -> `[84]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == true"*)
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_RY == true)"*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_RY == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_RY == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Prologue_Family_Important == false && BaseGame.B..."*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_USP_Vote_FirstUndecided_Convinced = true"*)
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
-  - -> `[88]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reformist_Path == true"*)
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Reformist_Path == true)"*)
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Reformist_Path == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Reformist_Path == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Reformist_Path"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false && Bas..."*)
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Reformist_Path == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Reformist_Path == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Reformist_Path"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
-  - -> `[91]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false && Bas..."*)
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_RY == false && B..."*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true  and  Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed"] == true  and  Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedPeople"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true  and  Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed"] == true  and  Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedPeople"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Assembly_Vote += 1"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true  and  Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed"] == true  and  Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedPeople"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_RY == false && BaseGame.Bill_Turn04_WorkersRights_Signed == true && BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed == true && BaseGame.Decision_Turn02_EconomicRelief_BailedPeople == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false  and  Variable["BaseGame.Bill_Turn04_WorkersRights_Signed"] == true  and  Variable["BaseGame.Bill_Turn05_ReligiousHarmony_Vetoed"] == true  and  Variable["BaseGame.Decision_Turn02_EconomicRelief_BailedPeople"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Reform_NFP_Convinced == true"*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Assembly_Vote += 1)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Assembly_Vote += 1`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Reform_Assembly_Vote"] = Variable["BaseGame.Reform_Assembly_Vote"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_PFJP_Vote_FullConvinced = true"*)

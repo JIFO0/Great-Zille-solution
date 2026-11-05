@@ -58,21 +58,82 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 4
-- **Węzły modyfikujące stan gry:** 25
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[84]` (Paskal Beniwoll): `Variable["RiziaDLC.Angelica_Executed"] = true; Variable["RiziaDLCSupport.Journal_Turn10_Birthday_...`
-- Węzeł `[85]` (Paskal Beniwoll): `Variable["RiziaDLC.Angelica_Arrested"] = true; Variable["RiziaDLCSupport.Journal_Turn10_Birthday_...`
-- Węzeł `[115]` (Paskal Beniwoll): `--;`
-- Węzeł `[134]` (Paskal Beniwoll): `--;`
-- Węzeł `[135]` (Paskal Beniwoll): `RemoveConversant("Angelica Sazon"); ;`
-- Węzeł `[136]` (Paskal Beniwoll): `RemoveConversant("Angelica Sazon"); ;`
-- Węzeł `[183]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
-- Węzeł `[184]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
-- *...oraz 17 innych węzłów ze skryptami.*
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[12]` | **""Don’t flatter yourself, Leona. You’re only a threat if you refuse to cooperate.""** | `[18]` **Leona Sazon**: ""It's not our signatures you wan..."<br>`[127]` **Leona Sazon**: ""Do you even hear yourself? It’s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[29]` **Leona Sazon**: ""And signing will make us your a..." |
+| `[13]` | **""Think carefully, Leona. Is this how you want your house to be remembered?""** | `[18]` **Leona Sazon**: ""It's not our signatures you wan..."<br>`[127]` **Leona Sazon**: ""Do you even hear yourself? It’s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[30]` **Leona Sazon**: ""What good is a legacy if it's b..." |
+| `[14]` | **""I only need your compliance, not your loyalty.""** | `[29]` **Leona Sazon**: ""And signing will make us your a..."<br>`[30]` **Leona Sazon**: ""What good is a legacy if it's b..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[19]` **Narrator**: "Leona stared doubtfully at the p..." |
+| `[15]` | **""Don’t make this harder than it needs to be.""** | `[29]` **Leona Sazon**: ""And signing will make us your a..."<br>`[30]` **Leona Sazon**: ""What good is a legacy if it's b..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[19]` **Narrator**: "Leona stared doubtfully at the p..." |
+| `[16]` | **""Stubbornness won’t bring honor to your name. It’ll bring only ashes.""** | `[29]` **Leona Sazon**: ""And signing will make us your a..."<br>`[30]` **Leona Sazon**: ""What good is a legacy if it's b..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[19]` **Narrator**: "Leona stared doubtfully at the p..." |
+| `[28]` | **""I admit nothing but the fact that you're stubbornly refusing to see what's best f..."** | `[18]` **Leona Sazon**: ""It's not our signatures you wan..."<br>`[127]` **Leona Sazon**: ""Do you even hear yourself? It’s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[31]` **Leona Sazon**: ""You call it stubborn, but I cal..." |
+| `[50]` | **""If your ‘autonomy’ was anything but treason, you wouldn't be here pleading your c..."** | `[25]` **Leona Sazon**: ""Not one that seeks to silence t..." | `Variable["RiziaDLC.Turn09_Coup_Warning"] == false` | *Brak zmian stanu* | `[53]` **Narrator**: "I held up the pen and motioned t..." |
+| `[54]` | **""Spare me. I didn't call you here to debate civics. Just sign your name and get th..."** | `[24]` **Angelica Sazon**: ""Not one that seeks to silence t..."<br>`[25]` **Leona Sazon**: ""Not one that seeks to silence t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[52]` **Narrator**: "Grasping the pen, I held it firm..." |
+| `[55]` | **""I will not tolerate rebellion in the guise of noble ideals. Now do the right thing.""** | `[24]` **Angelica Sazon**: ""Not one that seeks to silence t..."<br>`[25]` **Leona Sazon**: ""Not one that seeks to silence t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[51]` **Narrator**: "I held up the pen and motioned t..." |
+| `[56]` | **""Your demands are irrelevant here. I’ll decide what’s best for this realm.""** | `[24]` **Angelica Sazon**: ""Not one that seeks to silence t..."<br>`[25]` **Leona Sazon**: ""Not one that seeks to silence t..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[52]` **Narrator**: "Grasping the pen, I held it firm..." |
+| `[64]` | **""Now that I've gotten your attention... your signature please.""** | `[114]` **Narrator**: "Leona sat frozen, her mouth agap..."<br>`[302]` **Manus Sazon**: ""What have you done!?""<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`<br>`(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_S...`<br>`Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_S...`<br>*(+2 skryptów)* | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych odgałęzień)* |
+| `[66]` | **""There. That wasn't so difficult, was it?""** | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." |
+| `[69]` | **""You and Manus shall be spared. How kind of you to plead for his life as well, by ..."** | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." | `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true` | *Brak zmian stanu* | `[402]` **Narrator**: "Tears streamed down her face." |
+| `[70]` | **""If your House had just done what you were told from the start, we could have avoi..."** | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." |
+| `[71]` | **""Very well. But do so with some damn dignity. Groveling is beneath you.""** | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[155]` **Leona Sazon**: ""Yes, Your Majesty. Thank you."" |
+| `[72]` | **""Good. I knew you'd come to see reason.""** | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." |
+| `[82]` | **""Save your tears. We still have business to take care of.""** | `[114]` **Narrator**: "Leona sat frozen, her mouth agap..."<br>`[302]` **Manus Sazon**: ""What have you done!?""<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true`<br>`Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`<br>`(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_S...`<br>`Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_S...`<br>*(+2 skryptów)* | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych odgałęzień)* |
+| `[83]` | **""You leave me no choice. Under the authority vested in me as king, I place you und..."** | `[79]` **Narrator**: "She threw the pen to the ground." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[356]` **Narrator**: "Without a moment of hesitation, ..."<br>`[86]` **Narrator**: "Without a moment's hesitation, T..." |
+| `[88]` | **""Justice *has* prevailed. Your fate was sealed the moment you crossed me.""** | `[87]` **Angelica Sazon**: ""You won't get away with this! M..." | *Brak (Dostępna bezwarunkowo)* | `RemoveConversant("Angelica Sazon"); ;` | `[224]` **Hugo Toras**: ""A shame it had to come to this.""<br>`[225]` **Lucita Azaro**: ""It's a shame it had to come to ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[89]` | **""Justice is precisely what’s being served. You simply don’t like the outcome.""** | `[87]` **Angelica Sazon**: ""You won't get away with this! M..." | *Brak (Dostępna bezwarunkowo)* | `RemoveConversant("Angelica Sazon"); ;` | `[224]` **Hugo Toras**: ""A shame it had to come to this.""<br>`[225]` **Lucita Azaro**: ""It's a shame it had to come to ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[90]` | **""Justice lies in the hands of those who hold power, not in empty ideals.""** | `[87]` **Angelica Sazon**: ""You won't get away with this! M..." | *Brak (Dostępna bezwarunkowo)* | `RemoveConversant("Angelica Sazon"); ;` | `[224]` **Hugo Toras**: ""A shame it had to come to this.""<br>`[225]` **Lucita Azaro**: ""It's a shame it had to come to ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[91]` | **""Justice is mine to command. Your actions left me no choice.""** | `[87]` **Angelica Sazon**: ""You won't get away with this! M..." | *Brak (Dostępna bezwarunkowo)* | `RemoveConversant("Angelica Sazon"); ;` | `[224]` **Hugo Toras**: ""A shame it had to come to this.""<br>`[225]` **Lucita Azaro**: ""It's a shame it had to come to ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[92]` | **""You have until the count of three until the same fate falls upon you. One...'"** | `[114]` **Narrator**: "Leona sat frozen, her mouth agap..."<br>`[302]` **Manus Sazon**: ""What have you done!?""<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`<br>`(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_S...`<br>`Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_S...`<br>*(+2 skryptów)* | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych odgałęzień)* |
+| `[102]` | **""There's no need. Either way, the Sazon line will come to nothing.""** | `[107]` **Manus Sazon**: ""There. It's done. Now please......" | `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false` | *Brak zmian stanu* | `[387]` **Manus Sazon**: ""Maybe that's for the best."" |
+| `[103]` | **""Groveling doesn't suit you, Manus.""** | `[107]` **Manus Sazon**: ""There. It's done. Now please......" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[126]` **Manus Sazon**: ""This isn't groveling. I'm doing..." |
+| `[106]` | **""You have my word... no harm shall come to them.""** | `[107]` **Manus Sazon**: ""There. It's done. Now please......" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[277]` **Narrator**: "His tense shoulders relaxed." |
+| `[108]` | **""Gone? Don’t flatter yourselves. You’re only a threat if you refuse to cooperate.""** | `[68]` **Manus Sazon**: ""Father always knew when to make..."<br>`[77]` **Leona Sazon**: ""Agreed. Signing this only guara..." | `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false` | *Brak zmian stanu* | `[116]` **Angelica Sazon**: ""And just like that, a signature..." |
+| `[109]` | **""Think carefully, Angelica. Is this how you want your house to be remembered?""** | `[68]` **Manus Sazon**: ""Father always knew when to make..."<br>`[77]` **Leona Sazon**: ""Agreed. Signing this only guara..." | `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false` | *Brak zmian stanu* | `[121]` **Angelica Sazon**: "What kind of legacy is built on ..." |
+| `[110]` | **""You are needlessly refusing to see what's best for your family.""** | `[68]` **Manus Sazon**: ""Father always knew when to make..."<br>`[77]` **Leona Sazon**: ""Agreed. Signing this only guara..." | `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false` | *Brak zmian stanu* | `[120]` **Leona Sazon**: ""You call it needless, but I cal..." |
+| `[117]` | **""I only require your compliance, not your loyalty.""** | `[116]` **Angelica Sazon**: ""And just like that, a signature..."<br>`[120]` **Leona Sazon**: ""You call it needless, but I cal..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[3]` **Narrator**: "Angelica hesitated, letting out ..." |
+| `[118]` | **""Don't make this any more difficult than it has to be.""** | `[116]` **Angelica Sazon**: ""And just like that, a signature..."<br>`[120]` **Leona Sazon**: ""You call it needless, but I cal..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[3]` **Narrator**: "Angelica hesitated, letting out ..." |
+| `[119]` | **""Stubbornness won’t bring honor to your name, only ashes.""** | `[116]` **Angelica Sazon**: ""And just like that, a signature..."<br>`[120]` **Leona Sazon**: ""You call it needless, but I cal..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[3]` **Narrator**: "Angelica hesitated, letting out ..." |
+| `[145]` | **""I order your immediate execution for threatening the King. Titus, do it.""** | `[140]` **Angelica Sazon**: ""This signature means nothing. Y..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[80]` **Narrator**: "Without hesitation, Titus raised..." |
+| `[146]` | **""That's it. You are under arrest for openly threatening the King. We’ll see how lo..."** | `[140]` **Angelica Sazon**: ""This signature means nothing. Y..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[86]` **Narrator**: "Without a moment's hesitation, T..." |
+| `[147]` | **""Say what you will. The land is mine now, and that’s not about to change.""** | `[140]` **Angelica Sazon**: ""This signature means nothing. Y..." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_SazonDidntR...` | `[153]` **Narrator**: "I allowed a fleeting smirk to cu..." |
+| `[148]` | **""Believe what you will, but I have a kingdom to run and no time for your grievances.""** | `[140]` **Angelica Sazon**: ""This signature means nothing. Y..." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_SazonDidntR...` | `[153]` **Narrator**: "I allowed a fleeting smirk to cu..." |
+| `[152]` | **""Hey! Focus. We still have business to take care of.""** | `[114]` **Narrator**: "Leona sat frozen, her mouth agap..."<br>`[302]` **Manus Sazon**: ""What have you done!?""<br>*(oraz 2 innych węzłów)* | `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false`<br>`Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`<br>`(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_S...`<br>`Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_S...`<br>*(+2 skryptów)* | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych odgałęzień)* |
+| `[156]` | **""There. It's done.""** | `[265]` **Narrator**: "The men brought the signed paper..."<br>`[276]` **Narrator**: "The men brought the signed paper..."<br>*(oraz 3 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[162]` **Narrator**: "Angelica clenched her fist."<br>`[168]` **Narrator**: "Leona stood motionless, eyes wid..." |
+| `[157]` | **""What was once yours is now officially the Crown's.""** | `[265]` **Narrator**: "The men brought the signed paper..."<br>`[276]` **Narrator**: "The men brought the signed paper..."<br>*(oraz 3 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[162]` **Narrator**: "Angelica clenched her fist."<br>`[168]` **Narrator**: "Leona stood motionless, eyes wid..." |
+| `[158]` | **""You can keep the clothes on your back, but from this day forward, everything else..."** | `[265]` **Narrator**: "The men brought the signed paper..."<br>`[276]` **Narrator**: "The men brought the signed paper..."<br>*(oraz 3 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[162]` **Narrator**: "Angelica clenched her fist."<br>`[168]` **Narrator**: "Leona stood motionless, eyes wid..." |
+| `[213]` | **""That's the last straw. Titus, shoot her.""** | `[79]` **Narrator**: "She threw the pen to the ground." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[80]` **Narrator**: "Without hesitation, Titus raised..." |
+| `[231]` | **""Perhaps you underestimated my resolve, Uncle. A mistake, I trust, you won't make ..."** | `[226]` **Hugo Toras**: ""Your Majesty... I must admit, I..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[234]` **Hugo Toras**: ""No, Your Majesty. Your resolve ..." |
+| `[232]` | **""If you lack the stomach for hard decisions, perhaps it’s best you remain silent.""** | `[226]` **Hugo Toras**: ""Your Majesty... I must admit, I..."<br>`[240]` **Lucita Azaro**: ""Your Majesty... I never imagine..."<br>*(oraz 1 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[235]` **Narrator**: "Hugo lowered his gaze, offering ..."<br>`[249]` **Narrator**: "Her frustration was evident, but..." |
+| `[236]` | **""You may not see it now, but this will secure the future of the kingdom, Hugo.""** | `[226]` **Hugo Toras**: ""Your Majesty... I must admit, I..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[233]` **Hugo Toras**: ""For all our sakes, I hope you'r..." |
+| `[247]` | **""Perhaps you underestimated my resolve. A mistake, I trust, you won't make again.""** | `[240]` **Lucita Azaro**: ""Your Majesty... I never imagine..."<br>`[253]` **Lucita Azaro**: ""I never imagined you would push..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[246]` **Lucita Azaro**: ""Your resolve is clearer than ev..." |
+| `[248]` | **""You may not see it now, but this will secure the future of the kingdom.""** | `[240]` **Lucita Azaro**: ""Your Majesty... I never imagine..."<br>`[253]` **Lucita Azaro**: ""I never imagined you would push..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[245]` **Lucita Azaro**: ""I truly hope you're right, for ..." |
+| `[255]` | **""There is no way out now. Please cooperate.""** | `[18]` **Leona Sazon**: ""It's not our signatures you wan..."<br>`[127]` **Leona Sazon**: ""Do you even hear yourself? It’s..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[19]` **Narrator**: "Leona stared doubtfully at the p..." |
+| `[256]` | **""There is no way out now. Please cooperate.""** | `[68]` **Manus Sazon**: ""Father always knew when to make..."<br>`[77]` **Leona Sazon**: ""Agreed. Signing this only guara..." | `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false` | *Brak zmian stanu* | `[3]` **Narrator**: "Angelica hesitated, letting out ..." |
+| `[257]` | **""Titus. Her hands appear to be shaking, please help her with the signature.""** | `[79]` **Narrator**: "She threw the pen to the ground." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelic...` | `[348]` **Narrator**: "Titus gave the signal to Sevrio."<br>`[335]` **Narrator**: "Titus gave the signal to his men." |
+| `[260]` | **""You've got spirit. I'll give you that.""** | `[263]` **Narrator**: "Despite Angelica's attempt to re..."<br>`[341]` **Narrator**: "Despite Angelica's best efforts,..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[259]` **Angelica Sazon**: ""Let go of me!"" |
+| `[262]` | **""Now look what you made me do.""** | `[263]` **Narrator**: "Despite Angelica's attempt to re..."<br>`[341]` **Narrator**: "Despite Angelica's best efforts,..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[259]` **Angelica Sazon**: ""Let go of me!"" |
+| `[264]` | **""See? It wasn't that hard, was it?""** | `[263]` **Narrator**: "Despite Angelica's attempt to re..."<br>`[341]` **Narrator**: "Despite Angelica's best efforts,..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[259]` **Angelica Sazon**: ""Let go of me!"" |
+| `[266]` | **""Thank you for your cooperation.""** | `[265]` **Narrator**: "The men brought the signed paper..."<br>`[276]` **Narrator**: "The men brought the signed paper..."<br>*(oraz 3 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[162]` **Narrator**: "Angelica clenched her fist."<br>`[168]` **Narrator**: "Leona stood motionless, eyes wid..." |
+| `[268]` | **""Titus. Please help her with the signature.""** | `[175]` **Narrator**: "But just before signing the docu..." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLC.BirthdayGathering_ForcedSignature"] = ...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[369]` **Narrator**: "Titus gave the signal to Sevrio."<br>`[357]` **Narrator**: "Titus gave his men the signal." |
+| `[270]` | **""You've got spirit. I'll give you that.""** | `[273]` **Narrator**: "Despite Leona's attempt to resis..."<br>`[363]` **Narrator**: "Despite Leona's best efforts, sh..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[276]` **Narrator**: "The men brought the signed paper..." |
+| `[272]` | **""Now look what you made me do.""** | `[273]` **Narrator**: "Despite Leona's attempt to resis..."<br>`[363]` **Narrator**: "Despite Leona's best efforts, sh..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[276]` **Narrator**: "The men brought the signed paper..." |
+| `[274]` | **""See? It wasn't that hard, was it?""** | `[273]` **Narrator**: "Despite Leona's attempt to resis..."<br>`[363]` **Narrator**: "Despite Leona's best efforts, sh..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[276]` **Narrator**: "The men brought the signed paper..." |
+| `[278]` | **"Watch her in silence."** | `[87]` **Angelica Sazon**: ""You won't get away with this! M..." | *Brak (Dostępna bezwarunkowo)* | `RemoveConversant("Angelica Sazon"); ;` | `[224]` **Hugo Toras**: ""A shame it had to come to this.""<br>`[225]` **Lucita Azaro**: ""It's a shame it had to come to ..."<br>*(oraz 2 innych odgałęzień)* |
+| `[280]` | **"Gesture at the pen and the papers."** | `[114]` **Narrator**: "Leona sat frozen, her mouth agap..."<br>`[302]` **Manus Sazon**: ""What have you done!?""<br>*(oraz 2 innych węzłów)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`<br>`(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_S...`<br>`Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_S...`<br>*(+2 skryptów)* | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych odgałęzień)* |
+| `[281]` | **""Thank you for your cooperation.""** | `[65]` **Narrator**: "Manus hesitated at first, but th..."<br>`[96]` **Narrator**: "Leona hesitated at first, but th..."<br>*(oraz 2 innych węzłów)* | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSi...`<br>`RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_Ci...` | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." |
+| `[296]` | **""Calm down. My business with your family is done here.""** | `[67]` **Leona Sazon**: "“Please, I beg you, spare me! I ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[297]` **Narrator**: "She breathed a shaky sigh of rel..." |
+| `[322]` | **""Since when are you so fond of House Azaro?""** | `[320]` **Angelica Sazon**: ""Go ahead and order your men to ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[323]` **Narrator**: "I held up the pen and motioned t..." |
+| `[324]` | **""Please don't make this difficult. Just sign your name and get this over with.""** | `[320]` **Angelica Sazon**: ""Go ahead and order your men to ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[323]` **Narrator**: "I held up the pen and motioned t..." |
+| `[325]` | **""You can't come out of this looking like a martyr. We'll make you sign the papers,..."** | `[320]` **Angelica Sazon**: ""Go ahead and order your men to ..." | *Brak (Dostępna bezwarunkowo)* | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelic...` | `[348]` **Narrator**: "Titus gave the signal to Sevrio."<br>`[335]` **Narrator**: "Titus gave the signal to his men." |
+| `[326]` | **""Fine. Titus, you heard her. Arrest Angelica Sazon immediately.""** | `[320]` **Angelica Sazon**: ""Go ahead and order your men to ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[356]` **Narrator**: "Without a moment of hesitation, ..."<br>`[86]` **Narrator**: "Without a moment's hesitation, T..." |
+| `[329]` | **""I don't have time for this. Titus, shoot her.""** | `[320]` **Angelica Sazon**: ""Go ahead and order your men to ..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[80]` **Narrator**: "Without hesitation, Titus raised..." |
+| `[334]` | **""Titus. Give her the same treatment as the good General.""** | `[79]` **Narrator**: "She threw the pen to the ground." | `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true` | `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelic...` | `[348]` **Narrator**: "Titus gave the signal to Sevrio."<br>`[335]` **Narrator**: "Titus gave the signal to his men." |
+| `[386]` | **""Why would I? You're still the Prince Consort.""** | `[107]` **Manus Sazon**: ""There. It's done. Now please......" | `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true` | *Brak zmian stanu* | `[277]` **Narrator**: "His tense shoulders relaxed." |
+| `[390]` | **""I'll remind you that you're vastly outnumbered. Think very carefully about your n..."** | `[175]` **Narrator**: "But just before signing the docu..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[392]` **Narrator**: "With a long sigh of regret, she ..." |
+| `[391]` | **"Don't say anything."** | `[175]` **Narrator**: "But just before signing the docu..." | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[394]` **Narrator**: "With a long sigh of regret, she ..." |
 
 ---
 
@@ -81,2707 +142,2847 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `559` (*Rizia/Turn 10/STRIKE SCENE/ABSOLUTIST STRIKE SCENE/ABSOLUTIST STRIKE SCENE Conversation*), Węzeł `[478]`
+  - -> `[478]`
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "Angelica hesitated, letting out a slow, measured breath. After a moment, she approached the desk."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Narrator: "However, just as her fingers closed around the pen, she p..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[6]`
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == false)"*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Leona Sazon: ""What’s the point? Signing this would be a disgrace -- gu..."*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Manus Sazon: ""If it means sparing my family, then I'll sign.""*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Angelica Sazon: ""What’s the point? Our honor and dignity will be shattere..."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
 
 ### Węzeł `[10]`
 Mówca: **Manus Sazon**
 > ""If it means sparing my family, then I'll sign.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[128]`
+  - -> `[128]` (*Leona Sazon: ""What’s the point? Signing this would be a disgrace -- gu..."*)
 
 ### Węzeł `[11]`
 Mówca: **Narrator**
 > "Chin held high, Manus approached the desk, took the pen, and signed the paperwork with a steady hand."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Narrator: "The tension in his posture betrayed his struggle to remai..."*)
 
 ### Węzeł `[12]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Don’t flatter yourself, Leona. You’re only a threat if you refuse to cooperate.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[18]` (Leona Sazon), `[127]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Leona Sazon: ""And signing will make us your allies, just like that?""*)
 
 ### Węzeł `[13]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Think carefully, Leona. Is this how you want your house to be remembered?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[18]` (Leona Sazon), `[127]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Leona Sazon: ""What good is a legacy if it's built on submission?""*)
 
 ### Węzeł `[14]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I only need your compliance, not your loyalty.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[29]` (Leona Sazon), `[30]` (Leona Sazon), `[31]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "Leona stared doubtfully at the pen on the table."*)
 
 ### Węzeł `[15]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Don’t make this harder than it needs to be.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[29]` (Leona Sazon), `[30]` (Leona Sazon), `[31]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "Leona stared doubtfully at the pen on the table."*)
 
 ### Węzeł `[16]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Stubbornness won’t bring honor to your name. It’ll bring only ashes.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[29]` (Leona Sazon), `[30]` (Leona Sazon), `[31]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "Leona stared doubtfully at the pen on the table."*)
 
 ### Węzeł `[17]`
 Mówca: **Narrator**
 > "The tension in his posture betrayed his struggle to remain composed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[310]`
+  - -> `[310]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[18]`
 Mówca: **Leona Sazon**
 > ""It's not our signatures you want, you want us out of the picture entirely. Admit it.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
-  - -> `[12]`
-  - -> `[13]`
-  - -> `[28]`
+  - -> `[255]` (*Player_Romus: ""There is no way out now. Please cooperate.""*)
+  - -> `[12]` (*Player_Romus: ""Don’t flatter yourself, Leona. You’re only a threat if y..."*)
+  - -> `[13]` (*Player_Romus: ""Think carefully, Leona. Is this how you want your house ..."*)
+  - -> `[28]` (*Player_Romus: ""I admit nothing but the fact that you're stubbornly refu..."*)
 
 ### Węzeł `[19]`
 Mówca: **Narrator**
 > "Leona stared doubtfully at the pen on the table."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
 
 ### Węzeł `[20]`
 Mówca: **Angelica Sazon**
 > "“No, Manus, he needs to hear it.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Narrator: "She took a commanding step toward me."*)
 
 ### Węzeł `[21]`
 Mówca: **Narrator**
 > "She took a commanding step toward me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Angelica Sazon: "“It’s my duty to demand a government that upholds the rig..."*)
 
 ### Węzeł `[22]`
 Mówca: **Leona Sazon**
 > "“No, Manus, he needs to hear it.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Narrator: "She took a commanding step forward."*)
 
 ### Węzeł `[23]`
 Mówca: **Narrator**
 > "She took a commanding step forward."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Leona Sazon: "“It is my duty to demand a government that upholds the ri..."*)
 
 ### Węzeł `[24]`
 Mówca: **Angelica Sazon**
 > ""Not one that seeks to silence them.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[56]` (*Player_Romus: ""Your demands are irrelevant here. I’ll decide what’s bes..."*)
+  - -> `[54]` (*Player_Romus: ""Spare me. I didn't call you here to debate civics. Just ..."*)
+  - -> `[55]` (*Player_Romus: ""I will not tolerate rebellion in the guise of noble idea..."*)
 
 ### Węzeł `[25]`
 Mówca: **Leona Sazon**
 > ""Not one that seeks to silence them.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[54]`
-  - -> `[55]`
-  - -> `[57]`
+  - -> `[56]` (*Player_Romus: ""Your demands are irrelevant here. I’ll decide what’s bes..."*)
+  - -> `[54]` (*Player_Romus: ""Spare me. I didn't call you here to debate civics. Just ..."*)
+  - -> `[55]` (*Player_Romus: ""I will not tolerate rebellion in the guise of noble idea..."*)
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_Coup_Warning == false"*)
 
 ### Węzeł `[26]`
 Mówca: **Narrator**
 > "Letting out a slow, measured breath, she picked it up."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Narrator: "But just before signing the document, she retracted her h..."*)
 
 ### Węzeł `[27]`
 Mówca: **Leona Sazon**
 > "“It is my duty to demand a government that upholds the rights and freedoms of every individual.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Leona Sazon: ""Not one that seeks to silence them.”"*)
 
 ### Węzeł `[28]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I admit nothing but the fact that you're stubbornly refusing to see what's best for your family.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[18]` (Leona Sazon), `[127]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Leona Sazon: ""You call it stubborn, but I call it loyalty. Some of us ..."*)
 
 ### Węzeł `[29]`
 Mówca: **Leona Sazon**
 > ""And signing will make us your allies, just like that?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[14]` (*Player_Romus: ""I only need your compliance, not your loyalty.""*)
+  - -> `[15]` (*Player_Romus: ""Don’t make this harder than it needs to be.""*)
+  - -> `[16]` (*Player_Romus: ""Stubbornness won’t bring honor to your name. It’ll bring..."*)
 
 ### Węzeł `[30]`
 Mówca: **Leona Sazon**
 > ""What good is a legacy if it's built on submission?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[14]` (*Player_Romus: ""I only need your compliance, not your loyalty.""*)
+  - -> `[15]` (*Player_Romus: ""Don’t make this harder than it needs to be.""*)
+  - -> `[16]` (*Player_Romus: ""Stubbornness won’t bring honor to your name. It’ll bring..."*)
 
 ### Węzeł `[31]`
 Mówca: **Leona Sazon**
 > ""You call it stubborn, but I call it loyalty. Some of us still believe in that.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[14]` (*Player_Romus: ""I only need your compliance, not your loyalty.""*)
+  - -> `[15]` (*Player_Romus: ""Don’t make this harder than it needs to be.""*)
+  - -> `[16]` (*Player_Romus: ""Stubbornness won’t bring honor to your name. It’ll bring..."*)
 
 ### Węzeł `[32]`
 Mówca: **Angelica Sazon**
 > "“All right. I won’t deny taking the necessary steps to stand up against a monarch who’d rule this land without any respect to its fellow subjects.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_Coup_Warning == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_Coup_Warning == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_Coup_Warning == true"*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_Coup_Warning == true)"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_Coup_Warning == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_Coup_Warning"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_Coup_Warning == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_Coup_Warning"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Angelica Sazon: "“All right. I won’t deny taking the necessary steps to st..."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_Coup_Warning == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_Coup_Warning"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_Coup_Warning == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_Coup_Warning"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Angelica Sazon: "“Enough, Your Majesty. You had my gratitude when you free..."*)
 
 ### Węzeł `[36]`
 Mówca: **Leona Sazon**
 > "“I won’t deny that House Sazon sought a measure of autonomy -- to act for ourselves in the face of a rule that is becoming more iron-fisted by the day.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[37]`
 Mówca: **Narrator**
 > "Angelica scowled."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[311]`
+  - -> `[311]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
 
 ### Węzeł `[38]`
 Mówca: **Angelica Sazon**
 > "“Enough, Your Majesty. You had my gratitude when you freed me from exile. But that doesn't mean I will stand by and watch you humiliate my house.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[39]`
 Mówca: **Narrator**
 > "Leona scowled."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Leona Sazon: "“I won’t deny that House Sazon sought a measure of autono..."*)
 
 ### Węzeł `[40]`
 Mówca: **Manus Sazon**
 > "“Mother, please!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Angelica Sazon: "“No, Manus, he needs to hear it.”"*)
 
 ### Węzeł `[41]`
 Mówca: **Angelica Sazon**
 > "“It’s my duty to demand a government that upholds the rights of each noble House in accordance with royal tradition.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Angelica Sazon: ""Not one that seeks to silence them.”"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[44]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Manus Sazon: "“Mother, please!”"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Leona Sazon: ""You left us with no choice.""*)
 
 ### Węzeł `[45]`
 Mówca: **Leona Sazon**
 > ""You left us with no choice.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Narrator: "She took a commanding step toward me."*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
-  - -> `[48]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Manus Sazon: "“Leona, please!”"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Narrator: "She took a commanding step forward."*)
 
 ### Węzeł `[49]`
 Mówca: **Manus Sazon**
 > "“Leona, please!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Leona Sazon: "“No, Manus, he needs to hear it.”"*)
 
 ### Węzeł `[50]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""If your ‘autonomy’ was anything but treason, you wouldn't be here pleading your case to me. Now... your autograph, if you will.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Turn09_Coup_Warning"] == false`
+- **Kontekst wejściowy (poprzednik):** `[25]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Narrator: "I held up the pen and motioned to the document."*)
 
 ### Węzeł `[51]`
 Mówca: **Narrator**
 > "I held up the pen and motioned to the document for her to sign."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[52]`
 Mówca: **Narrator**
 > "Grasping the pen, I held it firmly before her."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[53]`
 Mówca: **Narrator**
 > "I held up the pen and motioned to the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[54]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Spare me. I didn't call you here to debate civics. Just sign your name and get this over with.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[24]` (Angelica Sazon), `[25]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Narrator: "Grasping the pen, I held it firmly before her."*)
 
 ### Węzeł `[55]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I will not tolerate rebellion in the guise of noble ideals. Now do the right thing.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[24]` (Angelica Sazon), `[25]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Narrator: "I held up the pen and motioned to the document for her to..."*)
 
 ### Węzeł `[56]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Your demands are irrelevant here. I’ll decide what’s best for this realm.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[24]` (Angelica Sazon), `[25]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Narrator: "Grasping the pen, I held it firmly before her."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_Coup_Warning == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_Coup_Warning == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_Coup_Warning == false"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_Coup_Warning == false)"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_Coup_Warning == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_Coup_Warning"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_Coup_Warning == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_Coup_Warning"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Player_Romus: ""If your ‘autonomy’ was anything but treason, you wouldn'..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_Coup_Warning == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_Coup_Warning"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_Coup_Warning == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_Coup_Warning"] == false) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[60]`
 Mówca: **Leona Sazon**
 > ""You have to see that.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Manus Sazon: ""Father always knew when to make the hard choices. He wou..."*)
 
 ### Węzeł `[61]`
 Mówca: **Narrator**
 > "However, just as her fingers closed around the pen, she paused."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[267]`
+  - -> `[267]` (*Angelica Sazon: ""Forget it!""*)
 
 ### Węzeł `[62]`
 Mówca: **Narrator**
 > "Manus screamed, his face pale with horror as he watched his mother fall. Leona sat frozen, her mouth agape in disbelief."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[302]`
+  - -> `[302]` (*Manus Sazon: ""What have you done!?""*)
 
 ### Węzeł `[63]`
 Mówca: **Angelica Sazon**
 > "“It’s not just about signatures, Manus. They want us out of the picture entirely.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Leona Sazon: ""You have to see that.”"*)
 
 ### Węzeł `[64]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Now that I've gotten your attention... your signature please.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false` AND `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[114]` (Narrator), `[302]` (Manus Sazon), `[97]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[65]`
 Mówca: **Narrator**
 > "Manus hesitated at first, but then picked up the pen, as if in a daze, signing the document with shaking hands."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[72]`
-  - -> `[66]`
-  - -> `[70]`
+  - -> `[281]` (*Player_Romus: ""Thank you for your cooperation.""*)
+  - -> `[72]` (*Player_Romus: ""Good. I knew you'd come to see reason.""*)
+  - -> `[66]` (*Player_Romus: ""There. That wasn't so difficult, was it?""*)
+  - -> `[70]` (*Player_Romus: ""If your House had just done what you were told from the ..."*)
 
 ### Węzeł `[66]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""There. That wasn't so difficult, was it?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[65]` (Narrator), `[96]` (Narrator), `[144]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[67]`
 Mówca: **Leona Sazon**
 > "“Please, I beg you, spare me! I wish to make amends!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
-  - -> `[73]`
-  - -> `[296]`
+  - -> `[71]` (*Player_Romus: ""Very well. But do so with some damn dignity. Groveling i..."*)
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[296]` (*Player_Romus: ""Calm down. My business with your family is done here.""*)
 
 ### Węzeł `[68]`
 Mówca: **Manus Sazon**
 > ""Father always knew when to make the hard choices. He wouldn't want us to face the consequences of defiance. No please, just sign.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[69]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You and Manus shall be spared. How kind of you to plead for his life as well, by the way.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+- **Kontekst wejściowy (poprzednik):** `[67]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[402]`
+  - -> `[402]` (*Narrator: "Tears streamed down her face."*)
 
 ### Węzeł `[70]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""If your House had just done what you were told from the start, we could have avoided this pointless delay.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[65]` (Narrator), `[96]` (Narrator), `[144]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[71]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Very well. But do so with some damn dignity. Groveling is beneath you.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[67]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Leona Sazon: ""Yes, Your Majesty. Thank you.""*)
 
 ### Węzeł `[72]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Good. I knew you'd come to see reason.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[65]` (Narrator), `[96]` (Narrator), `[144]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
-  - -> `[75]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Player_Romus: ""You and Manus shall be spared. How kind of you to plead ..."*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[76]`
 Mówca: **Angelica Sazon**
 > ""What’s the point? Our honor and dignity will be shattered before the ink even dries.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Leona Sazon: ""Agreed. Signing this only guarantees the end of everythi..."*)
 
 ### Węzeł `[77]`
 Mówca: **Leona Sazon**
 > ""Agreed. Signing this only guarantees the end of everything we stand for.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[131]`
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[78]`
 Mówca: **Manus Sazon**
 > "“Do you even hear yourselves? Pride will do nothing but ensure our family suffers.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Angelica Sazon: "“It’s not just about signatures, Manus. They want us out ..."*)
 
 ### Węzeł `[79]`
 Mówca: **Narrator**
 > "She threw the pen to the ground."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[331]`
-  - -> `[257]`
-  - -> `[83]`
-  - -> `[213]`
+  - -> `[331]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
+  - -> `[257]` (*Player_Romus: ""Titus. Her hands appear to be shaking, please help her w..."*)
+  - -> `[83]` (*Player_Romus: ""You leave me no choice. Under the authority vested in me..."*)
+  - -> `[213]` (*Player_Romus: ""That's the last straw. Titus, shoot her.""*)
 
 ### Węzeł `[80]`
 Mówca: **Narrator**
 > "Without hesitation, Titus raised his gun and fired, a single shot echoing through the room."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed = true; RiziaDLCSupport.Journa..."*)
 
 ### Węzeł `[81]`
 Mówca: **Narrator**
 > "Angelica’s body crumped lifelessly to the floor, blood pooling around her."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[373]`
+  - -> `[373]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
 
 ### Węzeł `[82]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Save your tears. We still have business to take care of.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true` AND `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false` AND `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[114]` (Narrator), `[302]` (Manus Sazon), `[97]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[83]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You leave me no choice. Under the authority vested in me as king, I place you under arrest.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[79]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "Arrest_Angelica_Hub"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed = true; RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Executed = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Angelica_Executed"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed = true; RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Executed = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Angelica_Executed"] = true;
 Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Executed"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[405]`
+  - -> `[405]` (*Węzeł Logiki Narracyjnej: "PlaySoundEffect("GunshotEnding");"*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Arrested = true; RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Arrested = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Angelica_Arrested"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Arrested = true; RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Arrested = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Angelica_Arrested"] = true;
 Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_Arrested"] = true;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Angelica Sazon: ""You won't get away with this! Mark my words... justice w..."*)
 
 ### Węzeł `[86]`
 Mówca: **Narrator**
 > "Without a moment's hesitation, Titus grabbed Angelica and guided her toward the back wall, where other uniformed men took her into custody."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Arrested = true; RiziaDLCSupport.Journa..."*)
 
 ### Węzeł `[87]`
 Mówca: **Angelica Sazon**
 > ""You won't get away with this! Mark my words... justice will prevail!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[278]`
-  - -> `[91]`
-  - -> `[90]`
-  - -> `[89]`
-  - -> `[88]`
+  - -> `[278]` (*Player_Romus_Italic: "Watch her in silence."*)
+  - -> `[91]` (*Player_Romus: ""Justice is mine to command. Your actions left me no choi..."*)
+  - -> `[90]` (*Player_Romus: ""Justice lies in the hands of those who hold power, not i..."*)
+  - -> `[89]` (*Player_Romus: ""Justice is precisely what’s being served. You simply don..."*)
+  - -> `[88]` (*Player_Romus: ""Justice *has* prevailed. Your fate was sealed the moment..."*)
 
 ### Węzeł `[88]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Justice *has* prevailed. Your fate was sealed the moment you crossed me.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[87]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[89]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Justice is precisely what’s being served. You simply don’t like the outcome.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[87]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[90]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Justice lies in the hands of those who hold power, not in empty ideals.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[87]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[91]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Justice is mine to command. Your actions left me no choice.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[87]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[92]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You have until the count of three until the same fate falls upon you. One...'"
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false` AND `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[114]` (Narrator), `[302]` (Manus Sazon), `[97]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
-  - -> `[95]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[378]`
+  - -> `[378]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;"*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[379]`
+  - -> `[379]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;"*)
 
 ### Węzeł `[96]`
 Mówca: **Narrator**
 > "Leona hesitated at first, but then picked up the pen, as if in a daze, signing the document with shaking hands."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[72]`
-  - -> `[66]`
-  - -> `[70]`
+  - -> `[281]` (*Player_Romus: ""Thank you for your cooperation.""*)
+  - -> `[72]` (*Player_Romus: ""Good. I knew you'd come to see reason.""*)
+  - -> `[66]` (*Player_Romus: ""There. That wasn't so difficult, was it?""*)
+  - -> `[70]` (*Player_Romus: ""If your House had just done what you were told from the ..."*)
 
 ### Węzeł `[97]`
 Mówca: **Narrator**
 > "As she was taken out, Leona sat frozen, stunned by what had transpired."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[290]`
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true"*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
-  - -> `[100]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Narrator: "As she was taken out, Manus sat frozen, stunned by what h..."*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Narrator: "As she was taken out, Leona sat frozen, stunned by what h..."*)
 
 ### Węzeł `[101]`
 Mówca: **Narrator**
 > "As she was taken out, Manus sat frozen, stunned by what had transpired."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[290]`
+  - -> `[290]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true"*)
 
 ### Węzeł `[102]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""There's no need. Either way, the Sazon line will come to nothing.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[107]` (Manus Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[387]`
+  - -> `[387]` (*Manus Sazon: ""Maybe that's for the best.""*)
 
 ### Węzeł `[103]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Groveling doesn't suit you, Manus.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[107]` (Manus Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Manus Sazon: ""This isn't groveling. I'm doing what's right.""*)
 
 ### Węzeł `[104]`
 Mówca: **Narrator**
 > "He bowed his head slightly before stepping back. Leona stared at him in disgust."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[388]`
+  - -> `[388]` (*Leona Sazon: ""Signing our family's fate away? You're no Sazon at all.""*)
 
 ### Węzeł `[105]`
 Mówca: **Manus Sazon**
 > ""Thank you, sir.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Narrator: "He bowed his head slightly before stepping back. Leona st..."*)
 
 ### Węzeł `[106]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You have my word... no harm shall come to them.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[107]` (Manus Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Narrator: "His tense shoulders relaxed."*)
 
 ### Węzeł `[107]`
 Mówca: **Manus Sazon**
 > ""There. It's done. Now please... don't hurt my family.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
-  - -> `[103]`
-  - -> `[383]`
+  - -> `[106]` (*Player_Romus: ""You have my word... no harm shall come to them.""*)
+  - -> `[103]` (*Player_Romus: ""Groveling doesn't suit you, Manus.""*)
+  - -> `[383]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
 
 ### Węzeł `[108]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Gone? Don’t flatter yourselves. You’re only a threat if you refuse to cooperate.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[68]` (Manus Sazon), `[77]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
+  - -> `[116]` (*Angelica Sazon: ""And just like that, a signature makes us your allies?""*)
 
 ### Węzeł `[109]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Think carefully, Angelica. Is this how you want your house to be remembered?""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[68]` (Manus Sazon), `[77]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Angelica Sazon: "What kind of legacy is built on submission?""*)
 
 ### Węzeł `[110]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You are needlessly refusing to see what's best for your family.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[68]` (Manus Sazon), `[77]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Leona Sazon: ""You call it needless, but I call it loyalty. Some of us ..."*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
-  - -> `[113]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus"*)
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus)"*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"]`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Narrator: "Manus screamed, his face pale with horror as he watched h..."*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"]) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"]) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Narrator: "Leona sat frozen, her mouth agape in disbelief."*)
 
 ### Węzeł `[114]`
 Mówca: **Narrator**
 > "Leona sat frozen, her mouth agape in disbelief."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false"*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[280]`
-  - -> `[149]`
-  - -> `[64]`
-  - -> `[92]`
+  - -> `[280]` (*Player_Romus_Italic: "Gesture at the pen and the papers."*)
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Exec..."*)
+  - -> `[64]` (*Player_Romus: ""Now that I've gotten your attention... your signature pl..."*)
+  - -> `[92]` (*Player_Romus: ""You have until the count of three until the same fate fa..."*)
 
 ### Węzeł `[116]`
 Mówca: **Angelica Sazon**
 > ""And just like that, a signature makes us your allies?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[117]` (*Player_Romus: ""I only require your compliance, not your loyalty.""*)
+  - -> `[118]` (*Player_Romus: ""Don't make this any more difficult than it has to be.""*)
+  - -> `[119]` (*Player_Romus: ""Stubbornness won’t bring honor to your name, only ashes.""*)
 
 ### Węzeł `[117]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I only require your compliance, not your loyalty.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[116]` (Angelica Sazon), `[120]` (Leona Sazon), `[121]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Angelica hesitated, letting out a slow, measured breath. ..."*)
 
 ### Węzeł `[118]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Don't make this any more difficult than it has to be.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[116]` (Angelica Sazon), `[120]` (Leona Sazon), `[121]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Angelica hesitated, letting out a slow, measured breath. ..."*)
 
 ### Węzeł `[119]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Stubbornness won’t bring honor to your name, only ashes.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[116]` (Angelica Sazon), `[120]` (Leona Sazon), `[121]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Angelica hesitated, letting out a slow, measured breath. ..."*)
 
 ### Węzeł `[120]`
 Mówca: **Leona Sazon**
 > ""You call it needless, but I call it loyalty. Some of us still believe in that.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[117]` (*Player_Romus: ""I only require your compliance, not your loyalty.""*)
+  - -> `[118]` (*Player_Romus: ""Don't make this any more difficult than it has to be.""*)
+  - -> `[119]` (*Player_Romus: ""Stubbornness won’t bring honor to your name, only ashes.""*)
 
 ### Węzeł `[121]`
 Mówca: **Angelica Sazon**
 > "What kind of legacy is built on submission?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
-  - -> `[118]`
-  - -> `[119]`
+  - -> `[117]` (*Player_Romus: ""I only require your compliance, not your loyalty.""*)
+  - -> `[118]` (*Player_Romus: ""Don't make this any more difficult than it has to be.""*)
+  - -> `[119]` (*Player_Romus: ""Stubbornness won’t bring honor to your name, only ashes.""*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
-  - -> `[124]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Narrator: "Angelica scowled."*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Narrator: "Leona scowled."*)
 
 ### Węzeł `[125]`
 Mówca: **Manus Sazon**
 > ""There's no time to let pride get in the way. It will do nothing but ensure our family suffers.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Leona Sazon: ""Do you even hear yourself? It’s not just about signature..."*)
 
 ### Węzeł `[126]`
 Mówca: **Manus Sazon**
 > ""This isn't groveling. I'm doing what's right.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Narrator: "He bowed his head slightly before stepping back. Leona st..."*)
 
 ### Węzeł `[127]`
 Mówca: **Leona Sazon**
 > ""Do you even hear yourself? It’s not just about signatures. He wants us out of the picture entirely. You must see that.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[255]`
-  - -> `[12]`
-  - -> `[13]`
-  - -> `[28]`
+  - -> `[255]` (*Player_Romus: ""There is no way out now. Please cooperate.""*)
+  - -> `[12]` (*Player_Romus: ""Don’t flatter yourself, Leona. You’re only a threat if y..."*)
+  - -> `[13]` (*Player_Romus: ""Think carefully, Leona. Is this how you want your house ..."*)
+  - -> `[28]` (*Player_Romus: ""I admit nothing but the fact that you're stubbornly refu..."*)
 
 ### Węzeł `[128]`
 Mówca: **Leona Sazon**
 > ""What’s the point? Signing this would be a disgrace -- guaranteeing the end of everything we stand for.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[125]`
+  - -> `[125]` (*Manus Sazon: ""There's no time to let pride get in the way. It will do ..."*)
 
 ### Węzeł `[129]`
 Mówca: **Manus Sazon**
 > ""What choice do we have, Leona? His Majesty isn't going to let us out of the room until these papers are signed.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[382]`
+  - -> `[382]` (*Manus Sazon: ""And in the end, these titles and land aren't really ours..."*)
 
 ### Węzeł `[130]`
 Mówca: **Manus Sazon**
 > ""Signing is our only option. And I will do what must be done.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Narrator: "Chin held high, Manus approached the desk, took the pen, ..."*)
 
 ### Węzeł `[131]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[133]`
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[132]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Manus Sazon: "“Do you even hear yourselves? Pride will do nothing but e..."*)
 
 ### Węzeł `[133]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[134]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[256]`
-  - -> `[108]`
-  - -> `[109]`
-  - -> `[110]`
+  - -> `[256]` (*Player_Romus: ""There is no way out now. Please cooperate.""*)
+  - -> `[108]` (*Player_Romus: ""Gone? Don’t flatter yourselves. You’re only a threat if ..."*)
+  - -> `[109]` (*Player_Romus: ""Think carefully, Angelica. Is this how you want your hou..."*)
+  - -> `[110]` (*Player_Romus: ""You are needlessly refusing to see what's best for your ..."*)
 
 ### Węzeł `[135]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveConversant("Angelica Sazon");)*
-- **Efekt (`userScript`):** `RemoveConversant("Angelica Sazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveConversant("Angelica Sazon");`
+- **Efekt skryptowy (`userScript`):** `RemoveConversant("Angelica Sazon");
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[136]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveConversant("Angelica Sazon");)*
-- **Efekt (`userScript`):** `RemoveConversant("Angelica Sazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveConversant("Angelica Sazon");`
+- **Efekt skryptowy (`userScript`):** `RemoveConversant("Angelica Sazon");
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus"*)
 
 ### Węzeł `[137]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[138]`
-  - -> `[139]`
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Angelica_Executed == true)"*)
 
 ### Węzeł `[138]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Leona Sazon: "“Please, I beg you, spare me! I wish to make amends!”"*)
 
 ### Węzeł `[139]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Angelica_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Angelica_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[295]`
+  - -> `[295]` (*Węzeł Logiki Narracyjnej: "Jump to: [Smirk_Hub]"*)
 
 ### Węzeł `[140]`
 Mówca: **Angelica Sazon**
 > ""This signature means nothing. You can't hold this stolen land forever. It's not going to last, if it happens at all.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[147]`
-  - -> `[148]`
-  - -> `[145]`
-  - -> `[146]`
+  - -> `[147]` (*Player_Romus: ""Say what you will. The land is mine now, and that’s not ..."*)
+  - -> `[148]` (*Player_Romus: ""Believe what you will, but I have a kingdom to run and n..."*)
+  - -> `[145]` (*Player_Romus: ""I order your immediate execution for threatening the Kin..."*)
+  - -> `[146]` (*Player_Romus: ""That's it. You are under arrest for openly threatening t..."*)
 
 ### Węzeł `[141]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
-  - -> `[143]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Angelica_Executed == true)"*)
 
 ### Węzeł `[142]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[143]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Angelica_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Angelica_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[179]`
+  - -> `[179]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[144]`
 Mówca: **Narrator**
 > "Leona hesitated at first, but then picked up the pen, signing the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[72]`
-  - -> `[66]`
-  - -> `[70]`
+  - -> `[281]` (*Player_Romus: ""Thank you for your cooperation.""*)
+  - -> `[72]` (*Player_Romus: ""Good. I knew you'd come to see reason.""*)
+  - -> `[66]` (*Player_Romus: ""There. That wasn't so difficult, was it?""*)
+  - -> `[70]` (*Player_Romus: ""If your House had just done what you were told from the ..."*)
 
 ### Węzeł `[145]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I order your immediate execution for threatening the King. Titus, do it.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[140]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[288]`
+  - -> `[288]` (*Węzeł Logiki Narracyjnej: "Jump to: [Narrator: "Without hesitation, Titus raised hi...."*)
 
 ### Węzeł `[146]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""That's it. You are under arrest for openly threatening the King. We’ll see how long your prideful defiance lasts behind bars.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[140]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[289]`
+  - -> `[289]` (*Węzeł Logiki Narracyjnej: "Jump to: [Narrator: "Without a moment's hesitation, Titu...."*)
 
 ### Węzeł `[147]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Say what you will. The land is mine now, and that’s not about to change.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[140]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[404]`
+  - -> `[404]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist = true"*)
 
 ### Węzeł `[148]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Believe what you will, but I have a kingdom to run and no time for your grievances.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[140]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[404]`
+  - -> `[404]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist = true"*)
 
 ### Węzeł `[149]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
-  - -> `[151]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Exec..."*)
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Ex..."*)
 
 ### Węzeł `[150]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Player_Romus: ""Save your tears. We still have business to take care of.""*)
 
 ### Węzeł `[151]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[152]`
+  - -> `[152]` (*Player_Romus: ""Hey! Focus. We still have business to take care of.""*)
 
 ### Węzeł `[152]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Hey! Focus. We still have business to take care of.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false` AND `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false` AND `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[114]` (Narrator), `[302]` (Manus Sazon), `[97]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[153]`
 Mówca: **Narrator**
 > "I allowed a fleeting smirk to curl at the edge of my lips before moving on."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[298]`
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[154]`
 Mówca: **Narrator**
 > "Leona bowed and stepped back."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "Jump to: [Smirk_Hub]"*)
 
 ### Węzeł `[155]`
 Mówca: **Leona Sazon**
 > ""Yes, Your Majesty. Thank you.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Narrator: "Leona bowed and stepped back."*)
 
 ### Węzeł `[156]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""There. It's done.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[265]` (Narrator), `[276]` (Narrator), `[389]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[157]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""What was once yours is now officially the Crown's.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[265]` (Narrator), `[276]` (Narrator), `[389]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[158]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You can keep the clothes on your back, but from this day forward, everything else is mine.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[265]` (Narrator), `[276]` (Narrator), `[389]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[159]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
-  - -> `[161]`
+  - -> `[160]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[161]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[160]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Narrator: "Angelica clenched her fist."*)
 
 ### Węzeł `[161]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[168]`
+  - -> `[168]` (*Narrator: "Leona stood motionless, eyes wide with shock."*)
 
 ### Węzeł `[162]`
 Mówca: **Narrator**
 > "Angelica clenched her fist."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[164]`
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[163]`
 Mówca: **Narrator**
 > "Manus and Leona looked on in stunned silence."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[164]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
-  - -> `[166]`
+  - -> `[165]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[166]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[165]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
+  - -> `[163]` (*Narrator: "Manus and Leona looked on in stunned silence."*)
 
 ### Węzeł `[166]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
+  - -> `[167]` (*Narrator: "Leona looked on in stunned silence."*)
 
 ### Węzeł `[167]`
 Mówca: **Narrator**
 > "Leona looked on in stunned silence."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[168]`
 Mówca: **Narrator**
 > "Leona stood motionless, eyes wide with shock."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
+  - -> `[169]` (*Leona Sazon: ""It's gone... It's all gone...""*)
 
 ### Węzeł `[169]`
 Mówca: **Leona Sazon**
 > ""It's gone... It's all gone...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[396]`
+  - -> `[396]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
 
 ### Węzeł `[170]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Smirk_Hub)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Smirk_Hub`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[303]`
+  - -> `[303]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[171]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Smirk_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Smirk_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "Smirk_Hub"*)
 
 ### Węzeł `[172]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Smirk_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Smirk_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "Smirk_Hub"*)
 
 ### Węzeł `[173]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Smirk_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Smirk_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "Smirk_Hub"*)
 
 ### Węzeł `[174]`
 Mówca: **Leona Sazon**
 > ""What’s the point? Signing this would be a disgrace -- guaranteeing the end of everything House Sazon stands for.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Leona Sazon: ""It's not our signatures you want, you want us out of the..."*)
 
 ### Węzeł `[175]`
 Mówca: **Narrator**
 > "But just before signing the document, she retracted her hand."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[268]`
-  - -> `[390]`
-  - -> `[391]`
+  - -> `[268]` (*Player_Romus: ""Titus. Please help her with the signature.""*)
+  - -> `[390]` (*Player_Romus: ""I'll remind you that you're vastly outnumbered. Think ve..."*)
+  - -> `[391]` (*Player_Romus_Italic: "Don't say anything."*)
 
 ### Węzeł `[176]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[177]`
-  - -> `[178]`
+  - -> `[177]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
+  - -> `[178]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == false)"*)
 
 ### Węzeł `[177]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Narrator: "Letting out a slow, measured breath, she picked it up."*)
 
 ### Węzeł `[178]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Manus Sazon: ""What choice do we have, Leona? His Majesty isn't going t..."*)
 
 ### Węzeł `[179]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[180]`
-  - -> `[181]`
+  - -> `[180]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[181]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[180]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[380]`
+  - -> `[380]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;"*)
 
 ### Węzeł `[181]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[381]`
+  - -> `[381]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;"*)
 
 ### Węzeł `[182]`
 Mówca: **Narrator**
 > "Manus hesitated at first, but then picked up the pen, signing the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[281]`
-  - -> `[72]`
-  - -> `[66]`
-  - -> `[70]`
+  - -> `[281]` (*Player_Romus: ""Thank you for your cooperation.""*)
+  - -> `[72]` (*Player_Romus: ""Good. I knew you'd come to see reason.""*)
+  - -> `[66]` (*Player_Romus: ""There. That wasn't so difficult, was it?""*)
+  - -> `[70]` (*Player_Romus: ""If your House had just done what you were told from the ..."*)
 
 ### Węzeł `[183]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[407]`
+  - -> `[407]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_C..."*)
 
 ### Węzeł `[184]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[408]`
+  - -> `[408]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_C..."*)
 
 ### Węzeł `[185]`
 Mówca: **Hugo Toras**
 > ""I strongly suggest you do what he says, Angelica.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[186]`
 Mówca: **Hugo Toras**
 > ""I strongly suggest you do what he says, Countess.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[187]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[188]`
-  - -> `[189]`
+  - -> `[188]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[189]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[188]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[193]`
+  - -> `[193]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[189]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[198]`
+  - -> `[198]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[190]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[191]`
-  - -> `[192]`
+  - -> `[191]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
+  - -> `[192]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == tru..."*)
 
 ### Węzeł `[191]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[187]`
+  - -> `[187]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[192]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[193]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[194]`
-  - -> `[195]`
+  - -> `[194]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[195]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[194]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[185]`
+  - -> `[185]` (*Hugo Toras: ""I strongly suggest you do what he says, Angelica.""*)
 
 ### Węzeł `[195]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[186]`
+  - -> `[186]` (*Hugo Toras: ""I strongly suggest you do what he says, Countess.""*)
 
 ### Węzeł `[196]`
 Mówca: **Lucita Azaro**
 > ""Take my advice, Angelica -- do what he says.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[197]`
 Mówca: **Lucita Azaro**
 > ""Take my advice, Countess -- do what he says.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[198]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[199]`
-  - -> `[200]`
+  - -> `[199]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[200]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[199]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[196]`
+  - -> `[196]` (*Lucita Azaro: ""Take my advice, Angelica -- do what he says.""*)
 
 ### Węzeł `[200]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[197]`
+  - -> `[197]` (*Lucita Azaro: ""Take my advice, Countess -- do what he says.""*)
 
 ### Węzeł `[201]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[202]`
-  - -> `[203]`
+  - -> `[202]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[203]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[202]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[207]`
+  - -> `[207]` (*Hugo Toras: ""I can't say you didn't have it coming.""*)
 
 ### Węzeł `[203]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[208]`
+  - -> `[208]` (*Lucita Azaro: ""Can't say you didn't have it coming.""*)
 
 ### Węzeł `[204]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[205]`
-  - -> `[206]`
+  - -> `[205]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
+  - -> `[206]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == tru..."*)
 
 ### Węzeł `[205]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[201]`
+  - -> `[201]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[206]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[207]`
 Mówca: **Hugo Toras**
 > ""I can't say you didn't have it coming.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[208]`
 Mówca: **Lucita Azaro**
 > ""Can't say you didn't have it coming.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[282]`
+  - -> `[282]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[209]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[210]`
-  - -> `[211]`
+  - -> `[210]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
+  - -> `[211]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ..."*)
 
 ### Węzeł `[210]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true  or Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true  or Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[214]`
+  - -> `[214]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[211]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true  or Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true ||RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true  or Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[212]`
 Mówca: **Hugo Toras**
 > ""Dear God...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[213]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""That's the last straw. Titus, shoot her.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[79]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Narrator: "Without hesitation, Titus raised his gun and fired, a sin..."*)
 
 ### Węzeł `[214]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[215]`
-  - -> `[216]`
+  - -> `[215]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
+  - -> `[216]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ..."*)
 
 ### Węzeł `[215]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[212]`
+  - -> `[212]` (*Hugo Toras: ""Dear God...""*)
 
 ### Węzeł `[216]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.BirthdayGathering_Target_StrikeHouseToras == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseToras"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[217]`
+  - -> `[217]` (*Lucita Azaro: ""Dear God...""*)
 
 ### Węzeł `[217]`
 Mówca: **Lucita Azaro**
 > ""Dear God...""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[218]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[219]`
-  - -> `[220]`
+  - -> `[219]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[220]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[219]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[224]`
+  - -> `[224]` (*Hugo Toras: ""A shame it had to come to this.""*)
 
 ### Węzeł `[220]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[225]`
+  - -> `[225]` (*Lucita Azaro: ""It's a shame it had to come to this.""*)
 
 ### Węzeł `[221]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[222]`
-  - -> `[223]`
+  - -> `[222]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
+  - -> `[223]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ..."*)
 
 ### Węzeł `[222]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[218]`
+  - -> `[218]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[223]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[224]`
 Mówca: **Hugo Toras**
 > ""A shame it had to come to this.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[225]`
 Mówca: **Lucita Azaro**
 > ""It's a shame it had to come to this.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[226]`
 Mówca: **Hugo Toras**
 > ""Your Majesty... I must admit, I never thought you'd take it this far.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[236]`
-  - -> `[231]`
-  - -> `[232]`
+  - -> `[236]` (*Player_Romus: ""You may not see it now, but this will secure the future ..."*)
+  - -> `[231]` (*Player_Romus: ""Perhaps you underestimated my resolve, Uncle. A mistake,..."*)
+  - -> `[232]` (*Player_Romus: ""If you lack the stomach for hard decisions, perhaps it’s..."*)
 
 ### Węzeł `[227]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[228]`
-  - -> `[229]`
+  - -> `[228]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[229]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[228]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[230]`
+  - -> `[230]` (*Narrator: "Hugo stepped near me, leaning in to whisper."*)
 
 ### Węzeł `[229]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[241]`
+  - -> `[241]` (*Narrator: "Lucita stepped near me, leaning in to whisper."*)
 
 ### Węzeł `[230]`
 Mówca: **Narrator**
 > "Hugo stepped near me, leaning in to whisper."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[226]`
+  - -> `[226]` (*Hugo Toras: ""Your Majesty... I must admit, I never thought you'd take..."*)
 
 ### Węzeł `[231]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Perhaps you underestimated my resolve, Uncle. A mistake, I trust, you won't make again.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[226]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[234]`
+  - -> `[234]` (*Hugo Toras: ""No, Your Majesty. Your resolve is clearer than ever.""*)
 
 ### Węzeł `[232]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""If you lack the stomach for hard decisions, perhaps it’s best you remain silent.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[226]` (Hugo Toras), `[240]` (Lucita Azaro), `[253]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[242]`
+  - -> `[242]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[233]`
 Mówca: **Hugo Toras**
 > ""For all our sakes, I hope you're right.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[234]`
 Mówca: **Hugo Toras**
 > ""No, Your Majesty. Your resolve is clearer than ever.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[235]`
 Mówca: **Narrator**
 > "Hugo lowered his gaze, offering no reply."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[236]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You may not see it now, but this will secure the future of the kingdom, Hugo.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[226]` (Hugo Toras)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[233]`
+  - -> `[233]` (*Hugo Toras: ""For all our sakes, I hope you're right.""*)
 
 ### Węzeł `[237]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[238]`
-  - -> `[239]`
+  - -> `[238]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Exec..."*)
+  - -> `[239]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Ex..."*)
 
 ### Węzeł `[238]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[227]`
+  - -> `[227]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
 
 ### Węzeł `[239]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true  or  Variable["RiziaDLC.Leona_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[240]`
 Mówca: **Lucita Azaro**
 > ""Your Majesty... I never imagined you would push it this far.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
-  - -> `[247]`
-  - -> `[232]`
+  - -> `[248]` (*Player_Romus: ""You may not see it now, but this will secure the future ..."*)
+  - -> `[247]` (*Player_Romus: ""Perhaps you underestimated my resolve. A mistake, I trus..."*)
+  - -> `[232]` (*Player_Romus: ""If you lack the stomach for hard decisions, perhaps it’s..."*)
 
 ### Węzeł `[241]`
 Mówca: **Narrator**
 > "Lucita stepped near me, leaning in to whisper."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[250]`
+  - -> `[250]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == false"*)
 
 ### Węzeł `[242]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[243]`
-  - -> `[244]`
+  - -> `[243]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true"*)
+  - -> `[244]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)"*)
 
 ### Węzeł `[243]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[235]`
+  - -> `[235]` (*Narrator: "Hugo lowered his gaze, offering no reply."*)
 
 ### Węzeł `[244]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[249]`
+  - -> `[249]` (*Narrator: "Her frustration was evident, but she said nothing further."*)
 
 ### Węzeł `[245]`
 Mówca: **Lucita Azaro**
 > ""I truly hope you're right, for all our sakes.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[246]`
 Mówca: **Lucita Azaro**
 > ""Your resolve is clearer than ever.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[247]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Perhaps you underestimated my resolve. A mistake, I trust, you won't make again.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[240]` (Lucita Azaro), `[253]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[246]`
+  - -> `[246]` (*Lucita Azaro: ""Your resolve is clearer than ever.""*)
 
 ### Węzeł `[248]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You may not see it now, but this will secure the future of the kingdom.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[240]` (Lucita Azaro), `[253]` (Lucita Azaro)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[245]`
+  - -> `[245]` (*Lucita Azaro: ""I truly hope you're right, for all our sakes.""*)
 
 ### Węzeł `[249]`
 Mówca: **Narrator**
 > "Her frustration was evident, but she said nothing further."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[250]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[251]`
-  - -> `[252]`
+  - -> `[251]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Lucita_Married == false"*)
+  - -> `[252]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Lucita_Married == false)"*)
 
 ### Węzeł `[251]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Lucita_Married == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Lucita_Married == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Lucita_Married"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[240]`
+  - -> `[240]` (*Lucita Azaro: ""Your Majesty... I never imagined you would push it this ..."*)
 
 ### Węzeł `[252]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Lucita_Married == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Lucita_Married == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Lucita_Married"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[253]`
+  - -> `[253]` (*Lucita Azaro: ""I never imagined you would push it this far, Romus.""*)
 
 ### Węzeł `[253]`
 Mówca: **Lucita Azaro**
 > ""I never imagined you would push it this far, Romus.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[248]`
-  - -> `[247]`
-  - -> `[232]`
+  - -> `[248]` (*Player_Romus: ""You may not see it now, but this will secure the future ..."*)
+  - -> `[247]` (*Player_Romus: ""Perhaps you underestimated my resolve. A mistake, I trus..."*)
+  - -> `[232]` (*Player_Romus: ""If you lack the stomach for hard decisions, perhaps it’s..."*)
 
 ### Węzeł `[254]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[255]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""There is no way out now. Please cooperate.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[18]` (Leona Sazon), `[127]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "Leona stared doubtfully at the pen on the table."*)
 
 ### Węzeł `[256]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""There is no way out now. Please cooperate.""
+- **Wymagania odblokowania (kod gry):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[68]` (Manus Sazon), `[77]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "Angelica hesitated, letting out a slow, measured breath. ..."*)
 
 ### Węzeł `[257]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Titus. Her hands appear to be shaking, please help her with the signature.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[79]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
+  - -> `[347]` (*Węzeł Logiki Narracyjnej: "Forced_Signature_Hub"*)
 
 ### Węzeł `[258]`
 Mówca: **Angelica Sazon**
 > ""What are you doing?! Let go of me!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[263]`
+  - -> `[263]` (*Narrator: "Despite Angelica's attempt to resist, the men wrenched he..."*)
 
 ### Węzeł `[259]`
 Mówca: **Angelica Sazon**
 > ""Let go of me!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[265]`
+  - -> `[265]` (*Narrator: "The men brought the signed papers back to me."*)
 
 ### Węzeł `[260]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You've got spirit. I'll give you that.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[263]` (Narrator), `[341]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Angelica Sazon: ""Let go of me!""*)
 
 ### Węzeł `[261]`
 Mówca: **Narrator**
 > "His men grabbed the pen, brought Angelica to the desk, and pressed it firmly into her grip."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[258]`
+  - -> `[258]` (*Angelica Sazon: ""What are you doing?! Let go of me!""*)
 
 ### Węzeł `[262]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Now look what you made me do.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[263]` (Narrator), `[341]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Angelica Sazon: ""Let go of me!""*)
 
 ### Węzeł `[263]`
 Mówca: **Narrator**
 > "Despite Angelica's attempt to resist, the men wrenched her hand to the signature line, forcing her to sign."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
-  - -> `[260]`
-  - -> `[264]`
+  - -> `[262]` (*Player_Romus: ""Now look what you made me do.""*)
+  - -> `[260]` (*Player_Romus: ""You've got spirit. I'll give you that.""*)
+  - -> `[264]` (*Player_Romus: ""See? It wasn't that hard, was it?""*)
 
 ### Węzeł `[264]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""See? It wasn't that hard, was it?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[263]` (Narrator), `[341]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[259]`
+  - -> `[259]` (*Angelica Sazon: ""Let go of me!""*)
 
 ### Węzeł `[265]`
 Mówca: **Narrator**
 > "The men brought the signed papers back to me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[393]`
+  - -> `[393]` (*Węzeł Logiki Narracyjnej: "Signed Peacefully"*)
 
 ### Węzeł `[266]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Thank you for your cooperation.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[265]` (Narrator), `[276]` (Narrator), `[389]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[183]`
+  - -> `[183]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[267]`
 Mówca: **Angelica Sazon**
 > ""Forget it!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Narrator: "She threw the pen to the ground."*)
 
 ### Węzeł `[268]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Titus. Please help her with the signature.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[175]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[275]`
+  - -> `[275]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ForcedSignature = true; RiziaD..."*)
 
 ### Węzeł `[269]`
 Mówca: **Leona Sazon**
 > ""What are you doing?! Let go of me!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[273]`
+  - -> `[273]` (*Narrator: "Despite Leona's attempt to resist, the men wrenched her h..."*)
 
 ### Węzeł `[270]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You've got spirit. I'll give you that.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[273]` (Narrator), `[363]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
+  - -> `[276]` (*Narrator: "The men brought the signed papers back to me."*)
 
 ### Węzeł `[271]`
 Mówca: **Narrator**
 > "Without missing a beat, two men grabbed the pen, pushed Leona to the desk and pressed the pen firmly into her grip."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
+  - -> `[269]` (*Leona Sazon: ""What are you doing?! Let go of me!""*)
 
 ### Węzeł `[272]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Now look what you made me do.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[273]` (Narrator), `[363]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
+  - -> `[276]` (*Narrator: "The men brought the signed papers back to me."*)
 
 ### Węzeł `[273]`
 Mówca: **Narrator**
 > "Despite Leona's attempt to resist, the men wrenched her hand to the signature line, forcing her to write her name, though it was barely legible."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[272]`
-  - -> `[270]`
-  - -> `[274]`
+  - -> `[272]` (*Player_Romus: ""Now look what you made me do.""*)
+  - -> `[270]` (*Player_Romus: ""You've got spirit. I'll give you that.""*)
+  - -> `[274]` (*Player_Romus: ""See? It wasn't that hard, was it?""*)
 
 ### Węzeł `[274]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""See? It wasn't that hard, was it?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[273]` (Narrator), `[363]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[276]`
+  - -> `[276]` (*Narrator: "The men brought the signed papers back to me."*)
 
 ### Węzeł `[275]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ForcedSignature = true; RiziaDLCSupport.Journal_Turn10_Birthday_Leona_ForcedSign = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.BirthdayGathering_ForcedSignature"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ForcedSignature = true; RiziaDLCSupport.Journal_Turn10_Birthday_Leona_ForcedSign = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.BirthdayGathering_ForcedSignature"] = true;
 Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_ForcedSign"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[410]`
+  - -> `[410]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_C..."*)
 
 ### Węzeł `[276]`
 Mówca: **Narrator**
 > "The men brought the signed papers back to me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[395]`
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "Jump to: [Signed Peacefully]"*)
 
 ### Węzeł `[277]`
 Mówca: **Narrator**
 > "His tense shoulders relaxed."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Manus Sazon: ""Thank you, sir.""*)
 
 ### Węzeł `[278]`
 **[WYBÓR GRACZA: "Watch her in silence."]** — Mówca: **Player_Romus_Italic**
 > "I watched as she was taken away."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[87]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "RemoveConversant("Angelica Sazon");"*)
 
 ### Węzeł `[279]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: AngelicaLeonaTakenAway)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `AngelicaLeonaTakenAway`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[221]`
+  - -> `[221]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[280]`
 **[WYBÓR GRACZA: "Gesture at the pen and the papers."]** — Mówca: **Player_Romus_Italic**
 > "I gestured at the pen and the papers."
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false` AND `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+- **Kontekst wejściowy (poprzednik):** `[114]` (Narrator), `[302]` (Manus Sazon), `[97]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[281]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Thank you for your cooperation.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[65]` (Narrator), `[96]` (Narrator), `[144]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[184]`
+  - -> `[184]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;"*)
 
 ### Węzeł `[282]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[283]`
-  - -> `[284]`
+  - -> `[283]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
+  - -> `[284]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)"*)
 
 ### Węzeł `[283]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Angelica == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Angelica == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
+  - -> `[140]` (*Angelica Sazon: ""This signature means nothing. You can't hold this stolen..."*)
 
 ### Węzeł `[284]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Angelica == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Angelica == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Angelica"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[404]`
+  - -> `[404]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist = true"*)
 
 ### Węzeł `[285]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[286]`
-  - -> `[287]`
+  - -> `[286]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false"*)
+  - -> `[287]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == ..."*)
 
 ### Węzeł `[286]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[287]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[293]`
+  - -> `[293]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[288]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Narrator: "Without hesitation, Titus raised hi..."])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Narrator: "Without hesitation, Titus raised hi..."]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Narrator: "Without hesitation, Titus raised his gun and fired, a sin..."*)
 
 ### Węzeł `[289]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Narrator: "Without a moment's hesitation, Titu..."])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Narrator: "Without a moment's hesitation, Titu..."]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Narrator: "Without a moment's hesitation, Titus grabbed Angelica and..."*)
 
 ### Węzeł `[290]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[291]`
-  - -> `[292]`
+  - -> `[291]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true"*)
+  - -> `[292]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == ..."*)
 
 ### Węzeł `[291]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[294]`
+  - -> `[294]` (*Węzeł Logiki Narracyjnej: "Jump to: [Smirk_Hub]"*)
 
 ### Węzeł `[292]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[293]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[294]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Smirk_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Smirk_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "Smirk_Hub"*)
 
 ### Węzeł `[295]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Smirk_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Smirk_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "Smirk_Hub"*)
 
 ### Węzeł `[296]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Calm down. My business with your family is done here.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[67]` (Leona Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[297]`
+  - -> `[297]` (*Narrator: "She breathed a shaky sigh of relief."*)
 
 ### Węzeł `[297]`
 Mówca: **Narrator**
 > "She breathed a shaky sigh of relief."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[401]`
+  - -> `[401]` (*Leona Sazon: ""Thank you, Your Majesty.""*)
 
 ### Węzeł `[298]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[299]`
-  - -> `[300]`
+  - -> `[299]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
+  - -> `[300]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ..."*)
 
 ### Węzeł `[299]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[237]`
+  - -> `[237]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true || RiziaDLC.Leona_Exec..."*)
 
 ### Węzeł `[300]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true || RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan"] == true  or  Variable["RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[301]`
+  - -> `[301]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[301]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[254]`
+  - -> `[254]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[302]`
 Mówca: **Manus Sazon**
 > ""What have you done!?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[285]`
+  - -> `[285]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned == false"*)
 
 ### Węzeł `[303]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[304]`
-  - -> `[305]`
+  - -> `[304]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[305]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[304]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[306]`
+  - -> `[306]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[305]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Narrator: "I allowed a fleeting smirk to curl at the edge of my lips..."*)
 
 ### Węzeł `[306]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[307]`
-  - -> `[308]`
+  - -> `[307]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
+  - -> `[308]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Angelica_Executed == true)"*)
 
 ### Węzeł `[307]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Angelica_Executed == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Angelica_Executed == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Angelica_Executed"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[309]`
+  - -> `[309]` (*Narrator: "As Manus let out a strangled sob, I averted my gaze from ..."*)
 
 ### Węzeł `[308]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Angelica_Executed == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Angelica_Executed == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Angelica_Executed"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Narrator: "I allowed a fleeting smirk to curl at the edge of my lips..."*)
 
 ### Węzeł `[309]`
 Mówca: **Narrator**
 > "As Manus let out a strangled sob, I averted my gaze from him."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[298]`
+  - -> `[298]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[310]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_Sazon_DocSigned"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[409]`
+  - -> `[409]` (*Węzeł Logiki Narracyjnej: "RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_C..."*)
 
 ### Węzeł `[311]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[312]`
-  - -> `[313]`
+  - -> `[312]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
+  - -> `[313]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == t..."*)
 
 ### Węzeł `[312]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[314]`
+  - -> `[314]` (*Angelica Sazon: ""I cannot stand here after the disrespect you've shown to..."*)
 
 ### Węzeł `[313]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_Coup_Warning == true"*)
 
 ### Węzeł `[314]`
 Mówca: **Angelica Sazon**
 > ""I cannot stand here after the disrespect you've shown to House Azaro.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[321]`
+  - -> `[321]` (*Angelica Sazon: ""The Crown has officially lost its legitimacy.""*)
 
 ### Węzeł `[315]`
 Mówca: **Manus Sazon**
 > "“Mother, please!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
+  - -> `[319]` (*Narrator: "She took a commanding step toward me."*)
 
 ### Węzeł `[316]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[317]`
-  - -> `[318]`
+  - -> `[317]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
+  - -> `[318]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == true)"*)
 
 ### Węzeł `[317]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[315]`
+  - -> `[315]` (*Manus Sazon: "“Mother, please!”"*)
 
 ### Węzeł `[318]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[319]`
+  - -> `[319]` (*Narrator: "She took a commanding step toward me."*)
 
 ### Węzeł `[319]`
 Mówca: **Narrator**
 > "She took a commanding step toward me."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[320]`
+  - -> `[320]` (*Angelica Sazon: ""Go ahead and order your men to apprehend me.""*)
 
 ### Węzeł `[320]`
 Mówca: **Angelica Sazon**
 > ""Go ahead and order your men to apprehend me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[326]`
-  - -> `[324]`
-  - -> `[329]`
-  - -> `[325]`
-  - -> `[322]`
+  - -> `[326]` (*Player_Romus: ""Fine. Titus, you heard her. Arrest Angelica Sazon immedi..."*)
+  - -> `[324]` (*Player_Romus: ""Please don't make this difficult. Just sign your name an..."*)
+  - -> `[329]` (*Player_Romus: ""I don't have time for this. Titus, shoot her.""*)
+  - -> `[325]` (*Player_Romus: ""You can't come out of this looking like a martyr. We'll ..."*)
+  - -> `[322]` (*Player_Romus: ""Since when are you so fond of House Azaro?""*)
 
 ### Węzeł `[321]`
 Mówca: **Angelica Sazon**
 > ""The Crown has officially lost its legitimacy.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[316]`
+  - -> `[316]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == true"*)
 
 ### Węzeł `[322]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Since when are you so fond of House Azaro?""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[320]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Narrator: "I held up the pen and motioned to the document."*)
 
 ### Węzeł `[323]`
 Mówca: **Narrator**
 > "I held up the pen and motioned to the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[190]`
+  - -> `[190]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[324]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Please don't make this difficult. Just sign your name and get this over with.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[320]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[323]`
+  - -> `[323]` (*Narrator: "I held up the pen and motioned to the document."*)
 
 ### Węzeł `[325]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""You can't come out of this looking like a martyr. We'll make you sign the papers, just as we did with the General.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[320]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[328]`
+  - -> `[328]` (*Węzeł Logiki Narracyjnej: "Jump to: [Forced_Signature_Hub]"*)
 
 ### Węzeł `[326]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Fine. Titus, you heard her. Arrest Angelica Sazon immediately.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[320]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[327]`
+  - -> `[327]` (*Węzeł Logiki Narracyjnej: "Jump to: [Arrest_Angelica_Hub]"*)
 
 ### Węzeł `[327]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Arrest_Angelica_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Arrest_Angelica_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[355]`
+  - -> `[355]` (*Węzeł Logiki Narracyjnej: "Arrest_Angelica_Hub"*)
 
 ### Węzeł `[328]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Forced_Signature_Hub])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Forced_Signature_Hub]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
+  - -> `[347]` (*Węzeł Logiki Narracyjnej: "Forced_Signature_Hub"*)
 
 ### Węzeł `[329]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I don't have time for this. Titus, shoot her.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[320]` (Angelica Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[330]`
+  - -> `[330]` (*Węzeł Logiki Narracyjnej: "Jump to: [Narrator: "Without hesitation, Titus raised hi...."*)
 
 ### Węzeł `[330]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Narrator: "Without hesitation, Titus raised hi..."])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Narrator: "Without hesitation, Titus raised hi..."]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Narrator: "Without hesitation, Titus raised his gun and fired, a sin..."*)
 
 ### Węzeł `[331]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[332]`
-  - -> `[333]`
+  - -> `[332]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
+  - -> `[333]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == t..."*)
 
 ### Węzeł `[332]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[334]`
+  - -> `[334]` (*Player_Romus: ""Titus. Give her the same treatment as the good General.""*)
 
 ### Węzeł `[333]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[334]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Titus. Give her the same treatment as the good General.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
+- **Kontekst wejściowy (poprzednik):** `[79]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[347]`
+  - -> `[347]` (*Węzeł Logiki Narracyjnej: "Forced_Signature_Hub"*)
 
 ### Węzeł `[335]`
 Mówca: **Narrator**
 > "Titus gave the signal to his men."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
 
 ### Węzeł `[336]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[337]`
-  - -> `[338]`
+  - -> `[337]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
+  - -> `[338]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == t..."*)
 
 ### Węzeł `[337]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[339]`
+  - -> `[339]` (*Narrator: "Just as with Taddeus, they brought Angelica to the desk a..."*)
 
 ### Węzeł `[338]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[349]`
+  - -> `[349]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
 
 ### Węzeł `[339]`
 Mówca: **Narrator**
 > "Just as with Taddeus, they brought Angelica to the desk and forced a pen into her hand."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[340]`
+  - -> `[340]` (*Angelica Sazon: ""Stop! Unhand me this instant!""*)
 
 ### Węzeł `[340]`
 Mówca: **Angelica Sazon**
 > ""Stop! Unhand me this instant!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[341]`
+  - -> `[341]` (*Narrator: "Despite Angelica's best efforts, she was forced to sign."*)
 
 ### Węzeł `[341]`
 Mówca: **Narrator**
 > "Despite Angelica's best efforts, she was forced to sign."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[262]`
-  - -> `[260]`
-  - -> `[264]`
+  - -> `[262]` (*Player_Romus: ""Now look what you made me do.""*)
+  - -> `[260]` (*Player_Romus: ""You've got spirit. I'll give you that.""*)
+  - -> `[264]` (*Player_Romus: ""See? It wasn't that hard, was it?""*)
 
 ### Węzeł `[342]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[343]`
-  - -> `[344]`
+  - -> `[343]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[344]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[343]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[348]`
+  - -> `[348]` (*Narrator: "Titus gave the signal to Sevrio."*)
 
 ### Węzeł `[344]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[335]`
+  - -> `[335]` (*Narrator: "Titus gave the signal to his men."*)
 
 ### Węzeł `[345]`
 Mówca: **Narrator**
 > "The Wruhec's Guardians brought Angelica to the desk and pressed the pen firmly into her grip."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[258]`
+  - -> `[258]` (*Angelica Sazon: ""What are you doing?! Let go of me!""*)
 
 ### Węzeł `[346]`
 Mówca: **Sevrio Castellanus**
 > ""Guardians, you know what to do. Move!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[336]`
+  - -> `[336]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
 
 ### Węzeł `[347]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Forced_Signature_Hub)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Forced_Signature_Hub`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[377]`
+  - -> `[377]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_ForcedSi..."*)
 
 ### Węzeł `[348]`
 Mówca: **Narrator**
 > "Titus gave the signal to Sevrio."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[346]`
+  - -> `[346]` (*Sevrio Castellanus: ""Guardians, you know what to do. Move!""*)
 
 ### Węzeł `[349]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[350]`
-  - -> `[351]`
+  - -> `[350]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[351]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[350]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[345]`
+  - -> `[345]` (*Narrator: "The Wruhec's Guardians brought Angelica to the desk and p..."*)
 
 ### Węzeł `[351]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[261]`
+  - -> `[261]` (*Narrator: "His men grabbed the pen, brought Angelica to the desk, an..."*)
 
 ### Węzeł `[352]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[353]`
-  - -> `[354]`
+  - -> `[353]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[354]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[353]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[356]`
+  - -> `[356]` (*Narrator: "Without a moment of hesitation, Titus signaled to Sevrio,..."*)
 
 ### Węzeł `[354]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Narrator: "Without a moment's hesitation, Titus grabbed Angelica and..."*)
 
 ### Węzeł `[355]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Arrest_Angelica_Hub)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Arrest_Angelica_Hub`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[352]`
+  - -> `[352]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
 
 ### Węzeł `[356]`
 Mówca: **Narrator**
 > "Without a moment of hesitation, Titus signaled to Sevrio, who grabbed Angelica and guided her toward the back wall, where his men took her into custody."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Arrested = true; RiziaDLCSupport.Journa..."*)
 
 ### Węzeł `[357]`
 Mówca: **Narrator**
 > "Titus gave his men the signal."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
 
 ### Węzeł `[358]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[359]`
-  - -> `[360]`
+  - -> `[359]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
+  - -> `[360]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == t..."*)
 
 ### Węzeł `[359]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[361]`
+  - -> `[361]` (*Narrator: "Just as with Taddeus, they brought Leona to the desk and ..."*)
 
 ### Węzeł `[360]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[370]`
+  - -> `[370]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
 
 ### Węzeł `[361]`
 Mówca: **Narrator**
 > "Just as with Taddeus, they brought Leona to the desk and forced a pen into her hand."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[362]`
+  - -> `[362]` (*Leona Sazon: ""Stop! Let go of me!""*)
 
 ### Węzeł `[362]`
 Mówca: **Leona Sazon**
 > ""Stop! Let go of me!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[363]`
+  - -> `[363]` (*Narrator: "Despite Leona's best efforts, she was forced to sign."*)
 
 ### Węzeł `[363]`
 Mówca: **Narrator**
 > "Despite Leona's best efforts, she was forced to sign."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[272]`
-  - -> `[270]`
-  - -> `[274]`
+  - -> `[272]` (*Player_Romus: ""Now look what you made me do.""*)
+  - -> `[270]` (*Player_Romus: ""You've got spirit. I'll give you that.""*)
+  - -> `[274]` (*Player_Romus: ""See? It wasn't that hard, was it?""*)
 
 ### Węzeł `[364]`
 Mówca: **Narrator**
 > "Without missing a beat, the Wruhec's Guardians brought Leona to the desk and pressed the pen firmly into her grip."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[269]`
+  - -> `[269]` (*Leona Sazon: ""What are you doing?! Let go of me!""*)
 
 ### Węzeł `[365]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[366]`
-  - -> `[367]`
+  - -> `[366]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[367]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[366]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[369]`
+  - -> `[369]` (*Narrator: "Titus gave the signal to Sevrio."*)
 
 ### Węzeł `[367]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[357]`
+  - -> `[357]` (*Narrator: "Titus gave his men the signal."*)
 
 ### Węzeł `[368]`
 Mówca: **Sevrio Castellanus**
 > ""Guardians, you know what to do. Move!""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[358]`
+  - -> `[358]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Target_StrikeHouseAzaro == true"*)
 
 ### Węzeł `[369]`
 Mówca: **Narrator**
 > "Titus gave the signal to Sevrio."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[368]`
+  - -> `[368]` (*Sevrio Castellanus: ""Guardians, you know what to do. Move!""*)
 
 ### Węzeł `[370]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[371]`
-  - -> `[372]`
+  - -> `[371]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[372]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[371]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[364]`
+  - -> `[364]` (*Narrator: "Without missing a beat, the Wruhec's Guardians brought Le..."*)
 
 ### Węzeł `[372]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[271]`
+  - -> `[271]` (*Narrator: "Without missing a beat, two men grabbed the pen, pushed L..."*)
 
 ### Węzeł `[373]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[374]`
-  - -> `[375]`
+  - -> `[374]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
+  - -> `[375]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_Wruhecs..."*)
 
 ### Węzeł `[374]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[376]`
+  - -> `[376]` (*Sevrio Castellanus: ""May she find redemption in the afterlife.""*)
 
 ### Węzeł `[375]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGuardians"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[376]`
 Mówca: **Sevrio Castellanus**
 > ""May she find redemption in the afterlife.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[209]`
+  - -> `[209]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformHugoOfPlan == true ||..."*)
 
 ### Węzeł `[377]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_ForcedSign = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_ForcedSign"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_ForcedSign = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Angelica_ForcedSign"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[342]`
+  - -> `[342]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)
 
 ### Węzeł `[378]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Narrator: "Manus hesitated at first, but then picked up the pen, as ..."*)
 
 ### Węzeł `[379]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Narrator: "Leona hesitated at first, but then picked up the pen, as ..."*)
 
 ### Węzeł `[380]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Manus_Signed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[182]`
+  - -> `[182]` (*Narrator: "Manus hesitated at first, but then picked up the pen, sig..."*)
 
 ### Węzeł `[381]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Journal_Turn10_Birthday_Leona_Signed"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
+  - -> `[144]` (*Narrator: "Leona hesitated at first, but then picked up the pen, sig..."*)
 
 ### Węzeł `[382]`
 Mówca: **Manus Sazon**
 > ""And in the end, these titles and land aren't really ours to give away, are they? What did either of us do to deserve them?""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Manus Sazon: ""Signing is our only option. And I will do what must be d..."*)
 
 ### Węzeł `[383]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[384]`
-  - -> `[385]`
+  - -> `[384]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Vina_MarriageDecision_Manus == true"*)
+  - -> `[385]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Vina_MarriageDecision_Manus == true)"*)
 
 ### Węzeł `[384]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Vina_MarriageDecision_Manus == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Vina_MarriageDecision_Manus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[386]`
+  - -> `[386]` (*Player_Romus: ""Why would I? You're still the Prince Consort.""*)
 
 ### Węzeł `[385]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Vina_MarriageDecision_Manus == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Vina_MarriageDecision_Manus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
+  - -> `[102]` (*Player_Romus: ""There's no need. Either way, the Sazon line will come to..."*)
 
 ### Węzeł `[386]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""Why would I? You're still the Prince Consort.""
+- **Wymagania odblokowania (kod gry):** `Variable["RiziaDLC.Vina_MarriageDecision_Manus"] == true`
+- **Kontekst wejściowy (poprzednik):** `[107]` (Manus Sazon)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[277]`
+  - -> `[277]` (*Narrator: "His tense shoulders relaxed."*)
 
 ### Węzeł `[387]`
 Mówca: **Manus Sazon**
 > ""Maybe that's for the best.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Narrator: "He bowed his head slightly before stepping back. Leona st..."*)
 
 ### Węzeł `[388]`
 Mówca: **Leona Sazon**
 > ""Signing our family's fate away? You're no Sazon at all.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[389]`
+  - -> `[389]` (*Leona Sazon: ""But I know when I'm outnumbered. I won't put up a fight.""*)
 
 ### Węzeł `[389]`
 Mówca: **Leona Sazon**
 > ""But I know when I'm outnumbered. I won't put up a fight.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[395]`
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "Jump to: [Signed Peacefully]"*)
 
 ### Węzeł `[390]`
 **[WYBÓR GRACZA]** — Mówca: **Player_Romus**
 > ""I'll remind you that you're vastly outnumbered. Think very carefully about your next steps.""
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[175]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[392]`
+  - -> `[392]` (*Narrator: "With a long sigh of regret, she lowered her hand again an..."*)
 
 ### Węzeł `[391]`
 **[WYBÓR GRACZA: "Don't say anything."]** — Mówca: **Player_Romus_Italic**
 > "I didn't intervene."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[175]` (Narrator)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[394]`
+  - -> `[394]` (*Narrator: "With a long sigh of regret, she lowered her hand again an..."*)
 
 ### Węzeł `[392]`
 Mówca: **Narrator**
 > "With a long sigh of regret, she lowered her hand again and signed the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[395]`
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "Jump to: [Signed Peacefully]"*)
 
 ### Węzeł `[393]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Signed Peacefully)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Signed Peacefully`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[266]`
-  - -> `[157]`
-  - -> `[156]`
-  - -> `[158]`
+  - -> `[266]` (*Player_Romus: ""Thank you for your cooperation.""*)
+  - -> `[157]` (*Player_Romus: ""What was once yours is now officially the Crown's.""*)
+  - -> `[156]` (*Player_Romus: ""There. It's done.""*)
+  - -> `[158]` (*Player_Romus: ""You can keep the clothes on your back, but from this day..."*)
 
 ### Węzeł `[394]`
 Mówca: **Narrator**
 > "With a long sigh of regret, she lowered her hand again and scribbled her signature on the document."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[395]`
+  - -> `[395]` (*Węzeł Logiki Narracyjnej: "Jump to: [Signed Peacefully]"*)
 
 ### Węzeł `[395]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: Jump to: [Signed Peacefully])*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `Jump to: [Signed Peacefully]`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[393]`
+  - -> `[393]` (*Węzeł Logiki Narracyjnej: "Signed Peacefully"*)
 
 ### Węzeł `[396]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[397]`
-  - -> `[398]`
+  - -> `[397]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Manus == false"*)
+  - -> `[398]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.BirthdayGathering_Invited_Manus == false)"*)
 
 ### Węzeł `[397]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.BirthdayGathering_Invited_Manus == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.BirthdayGathering_Invited_Manus == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[400]`
+  - -> `[400]` (*Leona Sazon: ""I hope you're happy, Your Majesty. You've taken everythi..."*)
 
 ### Węzeł `[398]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.BirthdayGathering_Invited_Manus == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.BirthdayGathering_Invited_Manus == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.BirthdayGathering_Invited_Manus"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[399]`
+  - -> `[399]` (*Manus Sazon: ""Not everything. We still have each other.""*)
 
 ### Węzeł `[399]`
 Mówca: **Manus Sazon**
 > ""Not everything. We still have each other.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[400]`
 Mówca: **Leona Sazon**
 > ""I hope you're happy, Your Majesty. You've taken everything and everyone from me.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[204]`
+  - -> `[204]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Turn09_TalkWithTitus_InformLucitaOfPlan == true ..."*)
 
 ### Węzeł `[401]`
 Mówca: **Leona Sazon**
 > ""Thank you, Your Majesty.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Narrator: "Leona bowed and stepped back."*)
 
 ### Węzeł `[402]`
 Mówca: **Narrator**
 > "Tears streamed down her face."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[403]`
+  - -> `[403]` (*Leona Sazon: ""Thank you, Your Majesty. And Manus, I am so sorry.""*)
 
 ### Węzeł `[403]`
 Mówca: **Leona Sazon**
 > ""Thank you, Your Majesty. And Manus, I am so sorry.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "Jump to: [Smirk_Hub]"*)
 
 ### Węzeł `[404]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Birthday_Gathering_SazonDidntResist"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[171]`
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "Jump to: [Smirk_Hub]"*)
 
 ### Węzeł `[405]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: PlaySoundEffect("GunshotEnding");)*
-- **Efekt (`userScript`):** `PlaySoundEffect("GunshotEnding");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `PlaySoundEffect("GunshotEnding");`
+- **Efekt skryptowy (`userScript`):** `PlaySoundEffect("GunshotEnding");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[406]`
+  - -> `[406]` (*Węzeł Logiki Narracyjnej: "SetRichPresence("Shooting nobles at their mother's birthd..."*)
 
 ### Węzeł `[406]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: SetRichPresence("Shooting nobles at their mother's birthday party", "Royal Library", "Porte Drazon");)*
-- **Efekt (`userScript`):** `SetRichPresence("Shooting nobles at their mother's birthday party","Royal Library","Porte Drazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `SetRichPresence("Shooting nobles at their mother's birthday party", "Royal Library", "Porte Drazon");`
+- **Efekt skryptowy (`userScript`):** `SetRichPresence("Shooting nobles at their mother's birthday party","Royal Library","Porte Drazon");
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Narrator: "Angelica’s body crumped lifelessly to the floor, blood po..."*)
 
 ### Węzeł `[407]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseSazon");
@@ -2790,8 +2991,8 @@ AddTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseToras");
-AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");)*
-- **Efekt (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
+AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseSazon");
@@ -2802,11 +3003,11 @@ AddTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Zpana","Rizia_City_HouseToras");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_Invited_Angelica == true"*)
 
 ### Węzeł `[408]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseSazon");
@@ -2815,8 +3016,8 @@ AddTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseToras");
-AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");)*
-- **Efekt (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
+AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseSazon");
@@ -2827,11 +3028,11 @@ AddTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Zpana","Rizia_City_HouseToras");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Angelica_Executed == true"*)
 
 ### Węzeł `[409]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseSazon");
@@ -2840,8 +3041,8 @@ AddTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseToras");
-AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");)*
-- **Efekt (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
+AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseSazon");
@@ -2852,11 +3053,11 @@ AddTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Zpana","Rizia_City_HouseToras");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Manus Sazon: ""There. It's done. Now please... don't hurt my family.""*)
 
 ### Węzeł `[410]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RemoveTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseSazon");
@@ -2865,8 +3066,8 @@ AddTokenStatusImmediately("Rizia_City_Argno", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Jales", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_MaveNortus", "Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes", "Rizia_City_HouseToras");
-AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");)*
-- **Efekt (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
+AddTokenStatusImmediately("Rizia_City_Zpana", "Rizia_City_HouseToras");`
+- **Efekt skryptowy (`userScript`):** `RemoveTokenStatusImmediately("Rizia_City_Argno","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Jales","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseSazon");
 RemoveTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseSazon");
@@ -2877,4 +3078,4 @@ AddTokenStatusImmediately("Rizia_City_MaveNortus","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Sallabes","Rizia_City_HouseToras");
 AddTokenStatusImmediately("Rizia_City_Zpana","Rizia_City_HouseToras");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[365]`
+  - -> `[365]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.BirthdayGathering_ViolentAction_Deploy_WruhecsGu..."*)

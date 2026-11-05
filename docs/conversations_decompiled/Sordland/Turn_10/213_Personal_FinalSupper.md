@@ -114,29 +114,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 44
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `BaseGame.Enable_RumburgWarPlans`
-- `BaseGame.Ending_RumburgWarLost`
-- `BaseGame.Ending_RumburgWarWin`
-- `BaseGame.Ending_WorldWar`
-- `GameCondition.Turn10_SnO_RumburgWarPlans`
-- `GameCondition.Turn10_SnO_RumburgWarSpeech`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[46]` (Deana): `Variable["BaseGame.Dinner_Petr"] = true;`
-- Węzeł `[47]` (Deana): `Variable["BaseGame.Dinner_Serge"] = true;`
-- Węzeł `[48]` (Deana): `Variable["BaseGame.Dinner_Alone"] = true;`
-- Węzeł `[49]` (Deana): `Variable["BaseGame.Dinner_MonicaDeanaBad"] = true;`
-- Węzeł `[50]` (Deana): `Variable["BaseGame.Dinner_MonicaDeanaGood"] = true;`
-- Węzeł `[51]` (Deana): `Variable["BaseGame.Dinner_JustFranc"] = true;`
-- Węzeł `[52]` (Deana): `Variable["BaseGame.Dinner_WholeFamBad"] = true;`
-- Węzeł `[53]` (Deana): `Variable["BaseGame.Dinner_WholeFamGood"] = true;`
-- *...oraz 36 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -145,469 +127,469 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Player)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Deana)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Lost == true"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Deana)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
 Mówca: **Narrator**
 > "With my impeachment trial looming and war on the horizon, I'd practically been sleeping in my office lately. But tonight, I made a deliberate effort to get home early."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_P..."*)
 
 ### Węzeł `[4]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[6]`
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_War == true)"*)
 
 ### Węzeł `[5]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
 
 ### Węzeł `[7]`
 Mówca: **Narrator**
 > "With the election looming, I'd practically been sleeping at the Maroon Palace lately. But tonight, I made a deliberate effort to get home early."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_P..."*)
 
 ### Węzeł `[8]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
-  - -> `[10]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_P..."*)
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07..."*)
 
 ### Węzeł `[9]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Franc_Opinion"] > 0  and  Variable["BaseGame.Turn07_Personal_University_Home_Public"] == true  and  Variable["BaseGame.Ending_ImpeachmentTrial"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Franc_Opinion"] > 0  and  Variable["BaseGame.Turn07_Personal_University_Home_Public"] == true  and  Variable["BaseGame.Ending_ImpeachmentTrial"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Narrator: "Franc was coming to dinner for the first time in months."*)
 
 ### Węzeł `[10]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Franc_Opinion"] > 0  and  Variable["BaseGame.Turn07_Personal_University_Home_Public"] == true  and  Variable["BaseGame.Ending_ImpeachmentTrial"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_Personal_University_Home_Public == true && BaseGame.Ending_ImpeachmentTrial == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Franc_Opinion"] > 0  and  Variable["BaseGame.Turn07_Personal_University_Home_Public"] == true  and  Variable["BaseGame.Ending_ImpeachmentTrial"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
 
 ### Węzeł `[11]`
 Mówca: **Narrator**
 > "Franc was coming to dinner for the first time in months."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
 
 ### Węzeł `[12]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
-  - -> `[14]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_Divorce == true)"*)
 
 ### Węzeł `[13]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Narrator: "FC Anrica had an important match this evening. Despite ev..."*)
 
 ### Węzeł `[14]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_Divorce == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_Divorce == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_DivorceAfterElection == true"*)
 
 ### Węzeł `[15]`
 Mówca: **Narrator**
 > "FC Anrica had an important match this evening. Despite everything that was going on, I didn't want to miss it."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn08_SecondScandal_DenyEverything == true || ..."*)
 
 ### Węzeł `[16]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
-  - -> `[18]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Turn08_SecondScandal_DenyEverything == true || ..."*)
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Turn08_SecondScandal_DenyEverything == true |..."*)
 
 ### Węzeł `[17]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: (BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn08_SecondScandal_DenyEverything"] == true  or  Variable["BaseGame.Turn08_SecondScandal_LiviaInvestigated"] == false  or  Variable["BaseGame.Turn08_SecondScandal_PetrSelfResigned"] == true  or  Variable["BaseGame.Turn08_SecondScandal_ShareBlame"] == true  or  Variable["BaseGame.Petr_isVP"] == true)  and  Variable["BaseGame.Petr_Dead"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn08_SecondScandal_DenyEverything"] == true  or  Variable["BaseGame.Turn08_SecondScandal_LiviaInvestigated"] == false  or  Variable["BaseGame.Turn08_SecondScandal_PetrSelfResigned"] == true  or  Variable["BaseGame.Turn08_SecondScandal_ShareBlame"] == true  or  Variable["BaseGame.Petr_isVP"] == true)  and  Variable["BaseGame.Petr_Dead"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Narrator: "I'd invited Petr over for the occasion. It had been ages ..."*)
 
 ### Węzeł `[18]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !((BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Turn08_SecondScandal_DenyEverything"] == true  or  Variable["BaseGame.Turn08_SecondScandal_LiviaInvestigated"] == false  or  Variable["BaseGame.Turn08_SecondScandal_PetrSelfResigned"] == true  or  Variable["BaseGame.Turn08_SecondScandal_ShareBlame"] == true  or  Variable["BaseGame.Petr_isVP"] == true)  and  Variable["BaseGame.Petr_Dead"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Turn08_SecondScandal_DenyEverything == true || BaseGame.Turn08_SecondScandal_LiviaInvestigated == false || BaseGame.Turn08_SecondScandal_PetrSelfResigned == true || BaseGame.Turn08_SecondScandal_ShareBlame == true || BaseGame.Petr_isVP == true) && BaseGame.Petr_Dead == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Turn08_SecondScandal_DenyEverything"] == true  or  Variable["BaseGame.Turn08_SecondScandal_LiviaInvestigated"] == false  or  Variable["BaseGame.Turn08_SecondScandal_PetrSelfResigned"] == true  or  Variable["BaseGame.Turn08_SecondScandal_ShareBlame"] == true  or  Variable["BaseGame.Petr_isVP"] == true)  and  Variable["BaseGame.Petr_Dead"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[21]`
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Serge_Friend == true && BaseGame.Turn0..."*)
 
 ### Węzeł `[19]`
 Mówca: **Narrator**
 > "I'd invited Petr over for the occasion. It had been ages since we'd spent time together. And the house was feeling awfully empty these days."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `214` (*Sordland/Turn10/DINNER WITH PETR*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[20]`
 Mówca: **Narrator**
 > "I'd invited Serge over for the occasion. The house was feeling awfully empty these days, and he was the closest thing I had left to a friend. Even if I was paying him."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `215` (*Sordland/Turn10/DINNER WITH SERGE*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[21]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
-  - -> `[23]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Serge_Friend == true && BaseGame.Turn0..."*)
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Serge_Friend == true && BaseGame.Tur..."*)
 
 ### Węzeł `[22]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Serge_Friend"] == true  and  Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Serge_Friend"] == true  and  Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
+  - -> `[20]` (*Narrator: "I'd invited Serge over for the occasion. The house was fe..."*)
 
 ### Węzeł `[23]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Serge_Friend"] == true  and  Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Serge_Friend == true && BaseGame.Turn09_MilitaryParade_SergeDead == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Serge_Friend"] == true  and  Variable["BaseGame.Turn09_MilitaryParade_SergeDead"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Narrator: "Even if the house was feeling awfully empty these days."*)
 
 ### Węzeł `[24]`
 Mówca: **Narrator**
 > "Even if the house was feeling awfully empty these days."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `216` (*Sordland/Turn10/DINNER ALONE*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[25]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
-  - -> `[27]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_Divorce == true)"*)
 
 ### Węzeł `[26]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `217` (*Sordland/Turn10/DINNER WITH ONLY FRANC*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[27]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_Divorce == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_Divorce == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_DivorceAfterElection == true"*)
 
 ### Węzeł `[28]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_DivorceAfterElection == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_DivorceAfterElection == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
-  - -> `[30]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_DivorceAfterElection == true"*)
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_DivorceAfterElection == true)"*)
 
 ### Węzeł `[29]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_DivorceAfterElection == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_DivorceAfterElection == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Narrator: "After much pleading on my part, Monica had given me rare ..."*)
 
 ### Węzeł `[30]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_DivorceAfterElection == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_DivorceAfterElection == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Narrator: "I'd told Monica and Deana I wanted a family supper, just ..."*)
 
 ### Węzeł `[31]`
 Mówca: **Narrator**
 > "I'd told Monica and Deana I wanted a family supper, just like in the old days. Monica had promised to cook something special."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `219` (*Sordland/Turn10/DINNER MONICA AND DEANA (GOOD)*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[32]`
 Mówca: **Narrator**
 > "After much pleading on my part, Monica had given me rare permission to join her and Deana for supper. I couldn't be late."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `218` (*Sordland/Turn10/DINNER MONICA AND DEANA (BAD)*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[33]`
 Mówca: **Narrator**
 > "And Monica had given me rare permission to join the whole family for supper."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `220` (*Sordland/Turn10/DINNER WHOLE FAMILY (BAD)*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[34]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_DivorceAfterElection == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_DivorceAfterElection == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_DivorceAfterElection == true"*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_DivorceAfterElection == true)"*)
 
 ### Węzeł `[35]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_DivorceAfterElection == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_DivorceAfterElection == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Narrator: "And Monica had given me rare permission to join the whole..."*)
 
 ### Węzeł `[36]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_DivorceAfterElection == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_DivorceAfterElection == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_DivorceAfterElection"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Narrator: "I'd told everyone I wanted a family supper, just like in ..."*)
 
 ### Węzeł `[37]`
 Mówca: **Narrator**
 > "I'd told everyone I wanted a family supper, just like in the old days. Monica had promised to cook something special."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `221` (*Sordland/Turn10/DINNER WHOLE FAMILY (GOOD)*), Węzeł `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[38]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_ImpeachmentTrial == true)"*)
 
 ### Węzeł `[39]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Narrator: "With my impeachment trial looming and war on the horizon,..."*)
 
 ### Węzeł `[40]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_ImpeachmentTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_ImpeachmentTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Narrator: "With the election looming and war on the horizon, I'd pra..."*)
 
 ### Węzeł `[41]`
 Mówca: **Narrator**
 > "With the election looming and war on the horizon, I'd practically been sleeping in my office lately. But tonight, I made a deliberate effort to get home early."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_P..."*)
 
 ### Węzeł `[42]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[44]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_ImpeachmentTrial == true)"*)
 
 ### Węzeł `[43]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Narrator: "With my impeachment trial looming, I'd practically been s..."*)
 
 ### Węzeł `[44]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_ImpeachmentTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_ImpeachmentTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Narrator: "With the election looming, I'd practically been sleeping ..."*)
 
 ### Węzeł `[45]`
 Mówca: **Narrator**
 > "With my impeachment trial looming, I'd practically been sleeping at the Maroon Palace lately. But tonight, I made a deliberate effort to get home early."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Franc_Opinion > 0 && BaseGame.Turn07_P..."*)
 
 ### Węzeł `[46]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_Petr = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_Petr"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_Petr = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_Petr"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[47]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_Serge = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_Serge"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_Serge = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_Serge"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[48]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_Alone = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_Alone"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_Alone = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_Alone"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[49]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_MonicaDeanaBad = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_MonicaDeanaBad"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_MonicaDeanaBad = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_MonicaDeanaBad"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[50]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_MonicaDeanaGood = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_MonicaDeanaGood"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_MonicaDeanaGood = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_MonicaDeanaGood"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[51]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_JustFranc = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_JustFranc"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_JustFranc = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_JustFranc"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[52]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_WholeFamBad = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_WholeFamBad"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_WholeFamBad = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_WholeFamBad"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[53]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Dinner_WholeFamGood = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Dinner_WholeFamGood"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Dinner_WholeFamGood = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Dinner_WholeFamGood"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
 
 ### Węzeł `[54]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
-  - -> `[56]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == false"*)
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_War == false)"*)
 
 ### Węzeł `[55]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[166]`
+  - -> `[166]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Retired == true || BaseGame..."*)
 
 ### Węzeł `[56]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_War == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_War == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[57]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Exile_LeaveNow == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Exile_LeaveNow == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "BaseGame.Exile_LeaveNow == true"*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Exile_LeaveNow == true)"*)
 
 ### Węzeł `[58]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Exile_LeaveNow == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Exile_LeaveNow"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Exile_LeaveNow == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Exile_LeaveNow"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup = false; BaseGame.Ending_Exile = tru..."*)
 
 ### Węzeł `[59]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Exile_LeaveNow == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Exile_LeaveNow"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Exile_LeaveNow == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Exile_LeaveNow"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[60]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup = false; BaseGame.Ending_Exile = true;
-BaseGame.Exile_CoupHappensAfterYouLeave = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_Coup"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup = false; BaseGame.Ending_Exile = true;
+BaseGame.Exile_CoupHappensAfterYouLeave = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_Coup"] = false;
 Variable["BaseGame.Ending_Exile"] = true;
 Variable["BaseGame.Exile_CoupHappensAfterYouLeave"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[61]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: GameCondition.Turn10_Personal_FinalSupper = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn10_Personal_FinalSupper"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn10_Personal_FinalSupper = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn10_Personal_FinalSupper"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
 
 ### Węzeł `[62]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true)"*)
 
 ### Węzeł `[63]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial = false;   BaseGame.Endi..."*)
 
 ### Węzeł `[64]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
 
 ### Węzeł `[65]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
-  - -> `[67]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial == true"*)
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_ImpeachmentTrial == true)"*)
 
 ### Węzeł `[66]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_R..."*)
 
 ### Węzeł `[67]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_ImpeachmentTrial == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_ImpeachmentTrial == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_ImpeachmentTrial"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.T..."*)
 
 ### Węzeł `[68]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial = false;  
-BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial = false;  
+BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
 Variable["BaseGame.Ending_ElectionSpeech"] = false;
 Variable["BaseGame.Ending_Retirement"] = false;
 Variable["BaseGame.Ending_RumburgWarLost"] = false;
@@ -616,69 +598,69 @@ Variable["BaseGame.Ending_WorldWar"] = false;
 Variable["BaseGame.Ending_Exile"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "BaseGame.Exile_LeaveNow == true"*)
 
 ### Węzeł `[69]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Exile_LeaveNow == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Exile_LeaveNow == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
-  - -> `[71]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.Exile_LeaveNow == true"*)
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Exile_LeaveNow == true)"*)
 
 ### Węzeł `[70]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Exile_LeaveNow == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Exile_LeaveNow"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Exile_LeaveNow == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Exile_LeaveNow"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial = false; BaseGame.Ending..."*)
 
 ### Węzeł `[71]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Exile_LeaveNow == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Exile_LeaveNow"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Exile_LeaveNow == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Exile_LeaveNow"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[72]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial = false; BaseGame.Ending_Exile = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial = false; BaseGame.Ending_Exile = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
 Variable["BaseGame.Ending_Exile"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[73]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
-  - -> `[75]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.T..."*)
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn10_FinalSupper_Retired == true || BaseGame..."*)
 
 ### Węzeł `[74]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn10_FinalSupper_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Retired"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn10_FinalSupper_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Retired"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_R..."*)
 
 ### Węzeł `[75]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn10_FinalSupper_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Retired"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn10_FinalSupper_Retired == true || BaseGame.Turn10_PartyCongress_Retired == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn10_FinalSupper_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Retired"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech = true"*)
 
 ### Węzeł `[76]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Retirement = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_Retirement"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Retirement = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_Retirement"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[77]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = false;
 Variable["BaseGame.Ending_Retirement"] = false;
 Variable["BaseGame.Ending_RumburgWarLost"] = false;
 Variable["BaseGame.Ending_RumburgWarWin"] = false;
@@ -686,724 +668,724 @@ Variable["BaseGame.Ending_WorldWar"] = false;
 Variable["BaseGame.Ending_Exile"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.Exile_LeaveNow == true"*)
 
 ### Węzeł `[78]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false; BaseGame.Ending_Exile = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = false;
 Variable["BaseGame.Ending_RumburgWarLost"] = false;
 Variable["BaseGame.Ending_RumburgWarWin"] = false;
 Variable["BaseGame.Ending_WorldWar"] = false;
 Variable["BaseGame.Ending_Exile"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Retirement = true"*)
 
 ### Węzeł `[79]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ElectionSpeech = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ElectionSpeech = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ElectionSpeech"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)
 
 ### Węzeł `[80]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
-  - -> `[82]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true)"*)
 
 ### Węzeł `[81]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "BaseGame.Enable_CoupNight = true"*)
 
 ### Węzeł `[82]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_SnO_CoupNight = true"*)
 
 ### Węzeł `[83]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Enable_CoupNight = true)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Enable_CoupNight"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Enable_CoupNight = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Enable_CoupNight"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[84]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: GameCondition.Turn10_SnO_CoupNight = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn10_SnO_CoupNight"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn10_SnO_CoupNight = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn10_SnO_CoupNight"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[85]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
-  - -> `[87]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Rumburg_War == true)"*)
 
 ### Węzeł `[86]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Rumburg_War == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Rumburg_War == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Rumburg_War"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_SnO_CoupNight = true"*)
 
 ### Węzeł `[87]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Rumburg_War == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Rumburg_War == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Rumburg_War"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_SnO_RumburgWarPlans = true"*)
 
 ### Węzeł `[88]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Enable_RumburgWarPlans = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Enable_RumburgWarPlans"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Enable_RumburgWarPlans = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Enable_RumburgWarPlans"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[89]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: GameCondition.Turn10_SnO_RumburgWarPlans = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn10_SnO_RumburgWarPlans"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn10_SnO_RumburgWarPlans = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn10_SnO_RumburgWarPlans"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_SnO_RumburgWarSpeech = true"*)
 
 ### Węzeł `[90]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: GameCondition.Turn10_SnO_RumburgWarSpeech = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn10_SnO_RumburgWarSpeech"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn10_SnO_RumburgWarSpeech = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn10_SnO_RumburgWarSpeech"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[91]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: GameCondition.Turn10_SnO_CoupNight = true)*
-- **Efekt (`userScript`):** `Variable["GameCondition.Turn10_SnO_CoupNight"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `GameCondition.Turn10_SnO_CoupNight = true`
+- **Efekt skryptowy (`userScript`):** `Variable["GameCondition.Turn10_SnO_CoupNight"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "BaseGame.Enable_RumburgWarPlans = true;"*)
 
 ### Węzeł `[92]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
-  - -> `[94]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_Divorce == true)"*)
 
 ### Węzeł `[93]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Codex_Characters_Family_Monica_Divorced =..."*)
 
 ### Węzeł `[94]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_Divorce == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_Divorce == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[95]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Codex_Characters_Family_Monica_Divorced = true;
-BaseGameSupport.Codex_Characters_Family_Monica = false)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Family_Monica_Divorced"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Codex_Characters_Family_Monica_Divorced = true;
+BaseGameSupport.Codex_Characters_Family_Monica = false`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Codex_Characters_Family_Monica_Divorced"] = true;
 Variable["BaseGameSupport.Codex_Characters_Family_Monica"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[96]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
-  - -> `[98]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true)"*)
 
 ### Węzeł `[97]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.Report_Turn10_Holsord_Coup = true; BaseGa..."*)
 
 ### Węzeł `[98]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
 
 ### Węzeł `[99]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.Report_Turn10_Holsord_Coup = true; BaseGameSupport.Report_Turn10_Erlory_Coup = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.Report_Turn10_Holsord_Coup"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.Report_Turn10_Holsord_Coup = true; BaseGameSupport.Report_Turn10_Erlory_Coup = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.Report_Turn10_Holsord_Coup"] = true;
 Variable["BaseGameSupport.Report_Turn10_Erlory_Coup"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
 
 ### Węzeł `[100]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
-  - -> `[102]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Monica_Divorce == true"*)
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Monica_Divorce == true)"*)
 
 ### Węzeł `[101]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Monica_Divorce == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Monica_Divorce == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Monica_Divorce"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[162]`
+  - -> `[162]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Deana_PresentAtFinalSupper == true"*)
 
 ### Węzeł `[102]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Monica_Divorce == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Monica_Divorce == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Monica_Divorce"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FPnT_RumburgIsolated == true"*)
 
 ### Węzeł `[103]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_LT_Monica_Divorce = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_Monica_Divorce"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_LT_Monica_Divorce = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_Monica_Divorce"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn05_Admin_Monica_Barred == true"*)
 
 ### Węzeł `[104]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn05_Admin_Monica_Barred == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn05_Admin_Monica_Barred == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
-  - -> `[106]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn05_Admin_Monica_Barred == true"*)
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn05_Admin_Monica_Barred == true)"*)
 
 ### Węzeł `[105]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn05_Admin_Monica_Barred == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn05_Admin_Monica_Barred"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn05_Admin_Monica_Barred == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn05_Admin_Monica_Barred"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_R_Monica_Divorce_Banned = true"*)
 
 ### Węzeł `[106]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn05_Admin_Monica_Barred == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn05_Admin_Monica_Barred"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn05_Admin_Monica_Barred == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn05_Admin_Monica_Barred"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FPnT_RumburgIsolated == true"*)
 
 ### Węzeł `[107]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_R_Monica_Divorce_Banned = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_Monica_Divorce_Banned"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_R_Monica_Divorce_Banned = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_Monica_Divorce_Banned"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FPnT_RumburgIsolated == true"*)
 
 ### Węzeł `[108]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
-  - -> `[110]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_EmergencyDecree_Banned_RY == false)"*)
 
 ### Węzeł `[109]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_EmergencyDecree_Banned_RY == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_EmergencyDecree_Banned_RY == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_R_CPS = true"*)
 
 ### Węzeł `[110]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_EmergencyDecree_Banned_RY == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_EmergencyDecree_Banned_RY == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_EmergencyDecree_Banned_RY"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[111]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_R_CPS = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_CPS"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_R_CPS = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_CPS"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "BaseGame.Rumburg_War == true"*)
 
 ### Węzeł `[112]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Lost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Lost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
-  - -> `[114]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Lost == true"*)
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn10_PartyCongress_Lost == true)"*)
 
 ### Węzeł `[113]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Lost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Lost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Lost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Lost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
 
 ### Węzeł `[114]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn10_PartyCongress_Lost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Lost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn10_PartyCongress_Lost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Lost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
 
 ### Węzeł `[115]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[116]`
-  - -> `[117]`
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_NFP == true)"*)
 
 ### Węzeł `[116]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_HP_Coalition_NFP_Cancelled = ..."*)
 
 ### Węzeł `[117]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_NFP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_NFP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
 
 ### Węzeł `[118]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
-  - -> `[120]`
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_PFJP == true)"*)
 
 ### Węzeł `[119]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_HP_Coalition_PFJP_Cancelled =..."*)
 
 ### Węzeł `[120]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_PFJP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_PFJP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[121]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_HP_Coalition_NFP_Cancelled = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_NFP_Cancelled"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_HP_Coalition_NFP_Cancelled = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_NFP_Cancelled"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[122]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_HP_Coalition_PFJP_Cancelled = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_PFJP_Cancelled"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_HP_Coalition_PFJP_Cancelled = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_PFJP_Cancelled"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[123]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.NFPLeader_Remus == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NFPLeader_Remus == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.NFPLeader_Remus == true"*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.NFPLeader_Remus == true)"*)
 
 ### Węzeł `[124]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.NFPLeader_Remus == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.NFPLeader_Remus"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.NFPLeader_Remus == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.NFPLeader_Remus"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_LT_RemusCancelsAlliance = true"*)
 
 ### Węzeł `[125]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.NFPLeader_Remus == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.NFPLeader_Remus"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.NFPLeader_Remus == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.NFPLeader_Remus"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
+  - -> `[130]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_LT_KibenerCancelsAlliance = true"*)
 
 ### Węzeł `[126]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
-  - -> `[128]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Refor..."*)
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Ref..."*)
 
 ### Węzeł `[127]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Deal_Signed"] == true  and  Variable["BaseGame.Reform_Alliance_NFP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Unrest_BFF_Deal_Signed"] == true  and  Variable["BaseGame.Reform_Alliance_NFP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[131]`
+  - -> `[131]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_NFP_Destroyed == false"*)
 
 ### Węzeł `[128]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Deal_Signed"] == true  and  Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Reform_Alliance_NFP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Unrest_BFF_Deal_Signed"] == true  and  Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[138]`
+  - -> `[138]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
 
 ### Węzeł `[129]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_LT_RemusCancelsAlliance = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_RemusCancelsAlliance"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_LT_RemusCancelsAlliance = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_RemusCancelsAlliance"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[130]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_LT_KibenerCancelsAlliance = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_KibenerCancelsAlliance"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_LT_KibenerCancelsAlliance = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_KibenerCancelsAlliance"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[131]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_NFP_Destroyed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_NFP_Destroyed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[132]`
-  - -> `[133]`
+  - -> `[132]` (*Węzeł Logiki Narracyjnej: "BaseGame.Faction_NFP_Destroyed == false"*)
+  - -> `[133]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Faction_NFP_Destroyed == false)"*)
 
 ### Węzeł `[132]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Faction_NFP_Destroyed == false)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Faction_NFP_Destroyed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Faction_NFP_Destroyed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Faction_NFP_Destroyed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "BaseGame.NFPLeader_Remus == true"*)
 
 ### Węzeł `[133]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Faction_NFP_Destroyed == false))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Faction_NFP_Destroyed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Faction_NFP_Destroyed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Faction_NFP_Destroyed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[134]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
-  - -> `[136]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_PFJP == true"*)
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_PFJP == true)"*)
 
 ### Węzeł `[135]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_PFJP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_PFJP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_PFJP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[137]`
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_HP_Coalition_PFJP = true"*)
 
 ### Węzeł `[136]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_PFJP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_PFJP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_PFJP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Refor..."*)
 
 ### Węzeł `[137]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_HP_Coalition_PFJP = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_PFJP"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_HP_Coalition_PFJP = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_Coalition_PFJP"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "BaseGame.Unrest_BFF_Deal_Signed == true && BaseGame.Refor..."*)
 
 ### Węzeł `[138]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
-  - -> `[140]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_Alliance_NFP == true"*)
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Reform_Alliance_NFP == true)"*)
 
 ### Węzeł `[139]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Reform_Alliance_NFP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Reform_Alliance_NFP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Reform_Alliance_NFP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[141]`
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_R_Coalition_NFP = true"*)
 
 ### Węzeł `[140]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Reform_Alliance_NFP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Reform_Alliance_NFP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_..."*)
 
 ### Węzeł `[141]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_R_Coalition_NFP = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_Coalition_NFP"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_R_Coalition_NFP = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_R_Coalition_NFP"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_..."*)
 
 ### Węzeł `[142]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: (BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
-  - -> `[144]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "(BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_..."*)
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "!((BaseGame.Reform_Alliance_NFP == true || BaseGame.Refor..."*)
 
 ### Węzeł `[143]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: (BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true)*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true  or  Variable["BaseGame.Reform_Alliance_PFJP"] == true)  and  Variable["BaseGame.Media_SordlandToday_Bias"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Reform_Alliance_NFP"] == true  or  Variable["BaseGame.Reform_Alliance_PFJP"] == true)  and  Variable["BaseGame.Media_SordlandToday_Bias"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[145]`
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_ST_Coalition_PFJPOrNFP_Media ..."*)
 
 ### Węzeł `[144]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !((BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true))*
-- **Warunek (`conditionsString`):** `((Variable["BaseGame.Reform_Alliance_NFP"] == true  or  Variable["BaseGame.Reform_Alliance_PFJP"] == true)  and  Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((BaseGame.Reform_Alliance_NFP == true || BaseGame.Reform_Alliance_PFJP == true) && BaseGame.Media_SordlandToday_Bias == true)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["BaseGame.Reform_Alliance_NFP"] == true  or  Variable["BaseGame.Reform_Alliance_PFJP"] == true)  and  Variable["BaseGame.Media_SordlandToday_Bias"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[145]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_ST_Coalition_PFJPOrNFP_Media = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_ST_Coalition_PFJPOrNFP_Media"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_ST_Coalition_PFJPOrNFP_Media = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_ST_Coalition_PFJPOrNFP_Media"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "BaseGame.Reform_EmergencyDecree_Banned_RY == false"*)
 
 ### Węzeł `[146]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_FPnT_RumburgIsolated == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_FPnT_RumburgIsolated == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[147]`
-  - -> `[148]`
+  - -> `[147]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_FPnT_RumburgIsolated == true"*)
+  - -> `[148]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn10_FPnT_RumburgIsolated == true)"*)
 
 ### Węzeł `[147]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_FPnT_RumburgIsolated == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn10_FPnT_RumburgIsolated"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_FPnT_RumburgIsolated == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn10_FPnT_RumburgIsolated"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[149]`
+  - -> `[149]` (*Węzeł Logiki Narracyjnej: "EnableNews("G_RumburgSanction");"*)
 
 ### Węzeł `[148]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn10_FPnT_RumburgIsolated == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn10_FPnT_RumburgIsolated"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn10_FPnT_RumburgIsolated == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn10_FPnT_RumburgIsolated"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech == true &&  (BaseGame.Enab..."*)
 
 ### Węzeł `[149]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: EnableNews("G_RumburgSanction");)*
-- **Efekt (`userScript`):** `EnableNews("G_RumburgSanction");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `EnableNews("G_RumburgSanction");`
+- **Efekt skryptowy (`userScript`):** `EnableNews("G_RumburgSanction");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[175]`
+  - -> `[175]` (*Węzeł Logiki Narracyjnej: "UpdateCountryRelationship("Sordland_Country_Rumburg", "Ho..."*)
 
 ### Węzeł `[150]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ElectionSpeech == true && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ElectionSpeech == true && 
 (BaseGame.Enable_Congress == false || BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Turn10_PartyCongress_FormNewParty == true) && 
-(BaseGame.Faction_PFJP_Destroyed == false || BaseGame.Faction_NFP_Destroyed == false || BaseGame.Turn10_PartyCongress_Lost == true))*
+(BaseGame.Faction_PFJP_Destroyed == false || BaseGame.Faction_NFP_Destroyed == false || BaseGame.Turn10_PartyCongress_Lost == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[151]`
-  - -> `[152]`
+  - -> `[151]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech == true &&  (BaseGame.Enab..."*)
+  - -> `[152]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_ElectionSpeech == true &&  (BaseGame.En..."*)
 
 ### Węzeł `[151]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ElectionSpeech == true && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ElectionSpeech == true && 
 (BaseGame.Enable_Congress == false || BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Turn10_PartyCongress_FormNewParty == true) && 
-(BaseGame.Faction_PFJP_Destroyed == false || BaseGame.Faction_NFP_Destroyed == false || BaseGame.Turn10_PartyCongress_Lost == true))*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_ElectionSpeech"] == true  and  
+(BaseGame.Faction_PFJP_Destroyed == false || BaseGame.Faction_NFP_Destroyed == false || BaseGame.Turn10_PartyCongress_Lost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_ElectionSpeech"] == true  and  
 (Variable["BaseGame.Enable_Congress"] == false  or  Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true)  and  
 (Variable["BaseGame.Faction_PFJP_Destroyed"] == false  or  Variable["BaseGame.Faction_NFP_Destroyed"] == false  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[155]`
+  - -> `[155]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_ST_SordlandFirstDebate_Before..."*)
 
 ### Węzeł `[152]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_ElectionSpeech == true && 
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_ElectionSpeech == true && 
 (BaseGame.Enable_Congress == false || BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Turn10_PartyCongress_FormNewParty == true) && 
 (BaseGame.Faction_PFJP_Destroyed == false || BaseGame.Faction_NFP_Destroyed == false || BaseGame.Turn10_PartyCongress_Lost == true)
-))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_ElectionSpeech"] == true  and  
+)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_ElectionSpeech"] == true  and  
 (Variable["BaseGame.Enable_Congress"] == false  or  Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true)  and  
 (Variable["BaseGame.Faction_PFJP_Destroyed"] == false  or  Variable["BaseGame.Faction_NFP_Destroyed"] == false  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation ..."*)
 
 ### Węzeł `[153]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneFormNewParty_BeforeDebate = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneFormNewParty_BeforeDebate"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneFormNewParty_BeforeDebate = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneFormNewParty_BeforeDebate"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation ..."*)
 
 ### Węzeł `[154]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneInUSP_BeforeDebate = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneInUSP_BeforeDebate"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneInUSP_BeforeDebate = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneInUSP_BeforeDebate"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation ..."*)
 
 ### Węzeł `[155]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_ST_SordlandFirstDebate_BeforeDebate = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_ST_SordlandFirstDebate_BeforeDebate = true;
 BaseGame.Enable_Debate = true;
-BaseGameSupport.Report_Turn10_Lachaven_DebatePrep = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_ST_SordlandFirstDebate_BeforeDebate"] = true;
+BaseGameSupport.Report_Turn10_Lachaven_DebatePrep = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_ST_SordlandFirstDebate_BeforeDebate"] = true;
 Variable["BaseGame.Enable_Debate"] = true;
 Variable["BaseGameSupport.Report_Turn10_Lachaven_DebatePrep"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[156]`
+  - -> `[156]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Dec..."*)
 
 ### Węzeł `[156]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[157]`
-  - -> `[158]`
+  - -> `[157]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Dec..."*)
+  - -> `[158]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn10_PartyCongress_Won == true || BaseGame.D..."*)
 
 ### Węzeł `[157]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[154]`
+  - -> `[154]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneI..."*)
 
 ### Węzeł `[158]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn10_PartyCongress_Won == true || BaseGame.Decision_Turn08_ExtendEmergency_Extend == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Won"] == true  or  Variable["BaseGame.Decision_Turn08_ExtendEmergency_Extend"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[159]`
+  - -> `[159]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == ..."*)
 
 ### Węzeł `[159]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[160]`
-  - -> `[161]`
+  - -> `[160]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == ..."*)
+  - -> `[161]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas =..."*)
 
 ### Węzeł `[160]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas"] == false  and  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas"] == false  and  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[153]`
+  - -> `[153]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_HP_SordlandFirstDebate_RayneF..."*)
 
 ### Węzeł `[161]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas"] == false  and  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas == false && BaseGame.Turn10_PartyCongress_FormNewParty == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn09_A_Investigation_OldGuard_Trial_Lileas"] == false  and  Variable["BaseGame.Turn10_PartyCongress_FormNewParty"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[173]`
+  - -> `[173]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation ..."*)
 
 ### Węzeł `[162]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Deana_PresentAtFinalSupper == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Deana_PresentAtFinalSupper == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[163]`
-  - -> `[164]`
+  - -> `[163]` (*Węzeł Logiki Narracyjnej: "BaseGame.Relations_Deana_PresentAtFinalSupper == true"*)
+  - -> `[164]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Relations_Deana_PresentAtFinalSupper == true)"*)
 
 ### Węzeł `[163]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Relations_Deana_PresentAtFinalSupper == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Relations_Deana_PresentAtFinalSupper"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Relations_Deana_PresentAtFinalSupper == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Relations_Deana_PresentAtFinalSupper"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[165]`
+  - -> `[165]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_LT_Monica_Divorce_AntonKeepDe..."*)
 
 ### Węzeł `[164]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Relations_Deana_PresentAtFinalSupper == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Relations_Deana_PresentAtFinalSupper"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Relations_Deana_PresentAtFinalSupper == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Relations_Deana_PresentAtFinalSupper"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "BaseGameSupport.News_Turn10_LT_Monica_Divorce = true"*)
 
 ### Węzeł `[165]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.News_Turn10_LT_Monica_Divorce_AntonKeepDeana = true)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_Monica_Divorce_AntonKeepDeana"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.News_Turn10_LT_Monica_Divorce_AntonKeepDeana = true`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.News_Turn10_LT_Monica_Divorce_AntonKeepDeana"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn05_Admin_Monica_Barred == true"*)
 
 ### Węzeł `[166]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[167]`
-  - -> `[168]`
+  - -> `[167]` (*Węzeł Logiki Narracyjnej: "BaseGame.Turn10_PartyCongress_Retired == true || BaseGame..."*)
+  - -> `[168]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Turn10_PartyCongress_Retired == true || BaseGa..."*)
 
 ### Węzeł `[167]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Turn10_PartyCongress_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[169]`
+  - -> `[169]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEst..."*)
 
 ### Węzeł `[168]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Turn10_PartyCongress_Retired == true || BaseGame.Turn10_PartyCongress_Lost == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Turn10_PartyCongress_Retired"] == true  or  Variable["BaseGame.Turn10_PartyCongress_Lost"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[169]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[170]`
-  - -> `[171]`
+  - -> `[170]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEst..."*)
+  - -> `[171]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenE..."*)
 
 ### Węzeł `[170]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Rumburg_GivenEstordAndNarbel"] == false  and  Variable["BaseGame.Exile_LeaveNow"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Rumburg_GivenEstordAndNarbel"] == false  and  Variable["BaseGame.Exile_LeaveNow"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[172]`
+  - -> `[172]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup = false; BaseGame.Ending_Exile = true;"*)
 
 ### Węzeł `[171]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: !(BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Rumburg_GivenEstordAndNarbel"] == false  and  Variable["BaseGame.Exile_LeaveNow"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Ending_Coup == true && BaseGame.Rumburg_GivenEstordAndNarbel == false && BaseGame.Exile_LeaveNow == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Ending_Coup"] == true  and  Variable["BaseGame.Rumburg_GivenEstordAndNarbel"] == false  and  Variable["BaseGame.Exile_LeaveNow"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_Coup == true"*)
 
 ### Węzeł `[172]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_Coup = false;
-BaseGame.Ending_Exile = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_Coup"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_Coup = false;
+BaseGame.Ending_Exile = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_Coup"] = false;
 Variable["BaseGame.Ending_Exile"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[176]`
+  - -> `[176]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ImpeachmentTrial = false;   BaseGame.Endi..."*)
 
 ### Węzeł `[173]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation = true;)*
-- **Efekt (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGameSupport.FactionReport_Turn10_ATO_WorldLiberation"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[174]`
+  - -> `[174]` (*Węzeł Logiki Narracyjnej: "End();"*)
 
 ### Węzeł `[174]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: End();)*
-- **Efekt (`userScript`):** `End();`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `End();`
+- **Efekt skryptowy (`userScript`):** `End();`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[175]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: UpdateCountryRelationship("Sordland_Country_Rumburg", "Hostile");)*
-- **Efekt (`userScript`):** `UpdateCountryRelationship("Sordland_Country_Rumburg","Hostile");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `UpdateCountryRelationship("Sordland_Country_Rumburg", "Hostile");`
+- **Efekt skryptowy (`userScript`):** `UpdateCountryRelationship("Sordland_Country_Rumburg","Hostile");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[150]`
+  - -> `[150]` (*Węzeł Logiki Narracyjnej: "BaseGame.Ending_ElectionSpeech == true &&  (BaseGame.Enab..."*)
 
 ### Węzeł `[176]`
-Mówca: **Deana**
-*(Węzeł logiki narracyjnej: BaseGame.Ending_ImpeachmentTrial = false;  
-BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false;)*
-- **Efekt (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Ending_ImpeachmentTrial = false;  
+BaseGame.Ending_ElectionSpeech = false; BaseGame.Ending_Retirement = false; BaseGame.Ending_RumburgWarLost = false; BaseGame.Ending_RumburgWarWin = false; BaseGame.Ending_WorldWar = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["BaseGame.Ending_ImpeachmentTrial"] = false;
 Variable["BaseGame.Ending_ElectionSpeech"] = false;
 Variable["BaseGame.Ending_Retirement"] = false;
 Variable["BaseGame.Ending_RumburgWarLost"] = false;
@@ -1411,4 +1393,4 @@ Variable["BaseGame.Ending_RumburgWarWin"] = false;
 Variable["BaseGame.Ending_WorldWar"] = false;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "GameCondition.Turn10_Personal_FinalSupper = true"*)

@@ -49,21 +49,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 3
-- **Węzły modyfikujące stan gry:** 37
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[12]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[13]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[17]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[18]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[22]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[26]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[27]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- Węzeł `[28]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc...`
-- *...oraz 29 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -72,916 +62,916 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon > 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon > 0"*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseSazon > 0)"*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseSazon > 0)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] > 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseSazon > 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseSazon"] > 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 8; RiziaDLCIsol..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseSazon > 0))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] > 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseSazon > 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseSazon"] > 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
-  - -> `[8]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 5"*)
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseToras >= 5)"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 5)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 6; RiziaDLCIsol..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseToras >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseToras >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 0"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
-  - -> `[11]`
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Re..."*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 10)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 10"*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseToras >= 10)"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 10)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 10`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 10`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 10`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseToras >= 10))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 10) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseToras >= 10)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 10) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 5"*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 6;
-RiziaDLCIsolated.Turn06_VotingCalc_RPP += 4)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 6;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 6;
+RiziaDLCIsolated.Turn06_VotingCalc_RPP += 4`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 6;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 4;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseToras >= 0"*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseToras >= 0)"*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseToras >= 0)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseToras >= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseToras"] >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 3; RiziaDLCIsol..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseToras >= 0))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseToras >= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseToras"] >= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 1; RiziaDLCIsol..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 3;
-RiziaDLCIsolated.Turn06_VotingCalc_RPP += 7)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 3;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 3;
+RiziaDLCIsolated.Turn06_VotingCalc_RPP += 7`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 3;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 7;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
-  - -> `[25]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true"*)
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)"*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Bad == true"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true"*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 20;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 20;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 1;
-RiziaDLCIsolated.Turn06_VotingCalc_RPP += 9)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 1;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 1;
+RiziaDLCIsolated.Turn06_VotingCalc_RPP += 9`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 1;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 9;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro < 0"*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Average == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Average == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
-  - -> `[34]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Average == true"*)
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_LivingStandards_Average == t..."*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Average == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Average"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Average == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Average"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_LivingStandards_Average == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Average"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_LivingStandards_Average == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Average"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Good == true"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
-  - -> `[37]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true"*)
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == t..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_Housing_WorseningCrisis"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_Housing_WorseningCrisis"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_Housing_WorseningCrisis"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_Housing_WorseningCrisis"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true"*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20;
-RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20;
+RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_PublicOpinion >= 5)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_PublicOpinion >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
-  - -> `[41]`
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_PublicOpinion >= 5"*)
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_PublicOpinion >= 5)"*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_PublicOpinion >= 5)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_PublicOpinion"] >= 5`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_PublicOpinion >= 5`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_PublicOpinion"] >= 5`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_PublicOpinion >= 5))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_PublicOpinion"] >= 5) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_PublicOpinion >= 5)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_PublicOpinion"] >= 5) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[43]`
-  - -> `[44]`
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true"*)
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true)"*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Generous"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Generous"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Generous"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Generous"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[46]`
-  - -> `[47]`
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_FreePress == true)"*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_PublicOpinion >= 5"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_FreePress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_FreePress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_PublicOpinion >= 0"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
-  - -> `[50]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_FreePress == true)"*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC  += 15; RiziaDLCIs..."*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_FreePress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_FreePress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: EvaluateConditionalInstruction("HouseElection_RPPWins");)*
-- **Efekt (`userScript`):** `EvaluateConditionalInstruction("HouseElection_RPPWins");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `EvaluateConditionalInstruction("HouseElection_RPPWins");`
+- **Efekt skryptowy (`userScript`):** `EvaluateConditionalInstruction("HouseElection_RPPWins");`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro < 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro < 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
-  - -> `[55]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseAzaro < 0"*)
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_HouseAzaro < 0)"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_HouseAzaro < 0)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro"] < 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_HouseAzaro < 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_HouseAzaro"] < 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_HouseAzaro < 0))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro"] < 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_HouseAzaro < 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_HouseAzaro"] < 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
-  - -> `[59]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Refo..."*)
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Re..."*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Focus_Government_Reform == true || RiziaDLC.Reforms_DiscussedOnYacht == true || RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Focus_Government_Reform"] == true  or  Variable["RiziaDLC.Reforms_DiscussedOnYacht"] == true  or  Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_HouseSazon > 0"*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 8;
-RiziaDLCIsolated.Turn06_VotingCalc_RNC += 2;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 8;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 8;
+RiziaDLCIsolated.Turn06_VotingCalc_RNC += 2;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 8;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 2;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Great == true"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 30;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 30;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Great == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Great == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[64]`
-  - -> `[65]`
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Great == true"*)
+  - -> `[65]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_LivingStandards_Great == true)"*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_LivingStandards_Great == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Great"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_LivingStandards_Great == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_LivingStandards_Great"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true"*)
 
 ### Węzeł `[65]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_LivingStandards_Great == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Great"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_LivingStandards_Great == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_LivingStandards_Great"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_LivingStandards_Average == true"*)
 
 ### Węzeł `[66]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
-  - -> `[68]`
+  - -> `[67]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true"*)
+  - -> `[68]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)"*)
 
 ### Węzeł `[67]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30"*)
 
 ### Węzeł `[68]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Horrible == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Horrible"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Bad == true"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10;
-RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10;
+RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 20;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Bad == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[71]`
-  - -> `[72]`
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Bad == true"*)
+  - -> `[72]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)"*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Bad == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10; RiziaDLCIso..."*)
 
 ### Węzeł `[72]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30"*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 30;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 30;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true"*)
 
 ### Węzeł `[76]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC  += 15;
-RiziaDLCIsolated.Turn06_VotingCalc_RPP += 5)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]  =  + 15;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC  += 15;
+RiziaDLCIsolated.Turn06_VotingCalc_RPP += 5`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]  =  + 15;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 5;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
 
 ### Węzeł `[77]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
-  - -> `[79]`
+  - -> `[78]` (*Węzeł Logiki Narracyjnej: "(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated..."*)
+  - -> `[79]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolat..."*)
 
 ### Węzeł `[78]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) >= 15`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) >= 15`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseElections_RPPWinsSeats = true"*)
 
 ### Węzeł `[79]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) >= 15) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) >= 15)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) >= 15) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[82]`
+  - -> `[82]` (*Węzeł Logiki Narracyjnej: "(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated..."*)
 
 ### Węzeł `[80]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseElections_RPPWinsSeats = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.HouseElections_RPPWinsSeats"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseElections_RPPWinsSeats = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.HouseElections_RPPWinsSeats"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[52]`
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "EvaluateConditionalInstruction("HouseElection_RPPWins");"*)
 
 ### Węzeł `[81]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseElections_RNCWinsSeats = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.HouseElections_RNCWinsSeats"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseElections_RNCWinsSeats = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.HouseElections_RNCWinsSeats"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[86]`
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "EvaluateConditionalInstruction("HouseElection_RNCWins");"*)
 
 ### Węzeł `[82]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
-  - -> `[84]`
+  - -> `[83]` (*Węzeł Logiki Narracyjnej: "(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated..."*)
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolat..."*)
 
 ### Węzeł `[83]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) < 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) < 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseElections_RNCWinsSeats = true"*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) < 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated.Turn06_VotingCalc_RNC) < 0)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] -Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"]) < 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.HouseElections_StatusQuo = true"*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.HouseElections_StatusQuo = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.HouseElections_StatusQuo"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.HouseElections_StatusQuo = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.HouseElections_StatusQuo"] = true;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: EvaluateConditionalInstruction("HouseElection_RNCWins");)*
-- **Efekt (`userScript`):** `EvaluateConditionalInstruction("HouseElection_RNCWins");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `EvaluateConditionalInstruction("HouseElection_RNCWins");`
+- **Efekt skryptowy (`userScript`):** `EvaluateConditionalInstruction("HouseElection_RNCWins");`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[87]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC -= 15)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] - 15;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC -= 15`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] - 15;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated..."*)
 
 ### Węzeł `[88]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
-  - -> `[90]`
+  - -> `[89]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true"*)
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true)"*)
 
 ### Węzeł `[89]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Decision_Turn05_RNCElectionFund_Moderate"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[123]`
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_PublicOpinion >= 0)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_PublicOpinion >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[92]`
-  - -> `[93]`
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Country_PublicOpinion >= 0"*)
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Country_PublicOpinion >= 0)"*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Country_PublicOpinion >= 0)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Country_PublicOpinion"] >= 0`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Country_PublicOpinion >= 0`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Country_PublicOpinion"] >= 0`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[75]`
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Country_PublicOpinion >= 0))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Country_PublicOpinion"] >= 0) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Country_PublicOpinion >= 0)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Country_PublicOpinion"] >= 0) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[103]`
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Bad == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[95]`
-  - -> `[96]`
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Bad == true"*)
+  - -> `[96]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)"*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Bad == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20; RiziaDLCIso..."*)
 
 ### Węzeł `[96]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Bad == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Bad"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true"*)
 
 ### Węzeł `[97]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
-  - -> `[99]`
+  - -> `[98]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true"*)
+  - -> `[99]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == ..."*)
 
 ### Węzeł `[98]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_Housing_LackOfAffordable"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_Housing_LackOfAffordable"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
 
 ### Węzeł `[99]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_Housing_LackOfAffordable"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_Housing_LackOfAffordable == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_Housing_LackOfAffordable"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[100]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
-  - -> `[102]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true"*)
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == ..."*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Acceptable"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Acceptable"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[106]`
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10; RiziaDLCIso..."*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Acceptable"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Acceptable == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Acceptable"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30"*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_Housing_WorseningCrisis == true"*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 30;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 30;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 30;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 30`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 30;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10;
-RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10;
+RiziaDLCIsolated.Turn06_VotingCalc_RNC += 20`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 20;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "//"*)
 
 ### Węzeł `[107]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Good == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Good == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
-  - -> `[109]`
+  - -> `[108]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Situation_Welfare_WorkersRights_Good == true"*)
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Situation_Welfare_WorkersRights_Good == true)"*)
 
 ### Węzeł `[108]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Situation_Welfare_WorkersRights_Good == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Good"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Situation_Welfare_WorkersRights_Good == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Situation_Welfare_WorkersRights_Good"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20; RiziaDLCIso..."*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Situation_Welfare_WorkersRights_Good == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Good"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Situation_Welfare_WorkersRights_Good == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Situation_Welfare_WorkersRights_Good"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 30"*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[111]`
-  - -> `[112]`
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
+  - -> `[112]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_FreePress == true)"*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[26]`
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10"*)
 
 ### Węzeł `[112]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_FreePress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_FreePress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10"*)
 
 ### Węzeł `[113]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: //)*
-- **Efekt (`userScript`):** `--;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `//`
+- **Efekt skryptowy (`userScript`):** `--;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
+  - -> `[118]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_ElectoralReform == true"*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
-  - -> `[116]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_FreePress == true)"*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10; RiziaDLCIso..."*)
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_FreePress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_FreePress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC  += 15; RiziaDLCIs..."*)
 
 ### Węzeł `[117]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Decision_Turn05_RNCElectionFund_Generous == true"*)
 
 ### Węzeł `[118]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
-  - -> `[120]`
+  - -> `[119]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_ElectoralReform == true"*)
+  - -> `[120]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)"*)
 
 ### Węzeł `[119]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_ElectoralReform == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RNC -= 15"*)
 
 ### Węzeł `[120]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_ElectoralReform == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_ElectoralReform"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Węzeł Logiki Narracyjnej: "(RiziaDLCIsolated.Turn06_VotingCalc_RPP -RiziaDLCIsolated..."*)
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10;
-RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RNC += 10;
+RiziaDLCIsolated.Turn06_VotingCalc_RPP += 10`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 10;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 10;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 20;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
-  - -> `[125]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_FreePress == true"*)
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_FreePress == true)"*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_FreePress == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_FreePress == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20"*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_FreePress == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_FreePress == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_FreePress"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[126]`
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 15; RiziaDLCIso..."*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Turn06_VotingCalc_RPP += 15;
-RiziaDLCIsolated.Turn06_VotingCalc_RNC += 5)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 15;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Turn06_VotingCalc_RPP += 15;
+RiziaDLCIsolated.Turn06_VotingCalc_RNC += 5`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RPP"] + 15;
 Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] = Variable["RiziaDLCIsolated.Turn06_VotingCalc_RNC"] + 5;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
 
 ### Węzeł `[127]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[128]`
-  - -> `[129]`
+  - -> `[128]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ==..."*)
+  - -> `[129]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners ..."*)
 
 ### Węzeł `[128]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Turn06_VotingCalc_RPP += 20"*)
 
 ### Węzeł `[129]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Policy_RD_Welfare_NaturalizationForForeigners"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Węzeł Logiki Narracyjnej: "//"*)

@@ -64,28 +64,11 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 4
-- **Węzły modyfikujące stan gry:** 16
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Główne modyfikowane wskaźniki i kluczowe flagi:**
-- `RiziaDLC.Diplomacy_Pales_IntermerkopumPotential`
-- `RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept`
-- `RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumRefusal`
-- `RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_NoZille`
-- `RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille`
-
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[6]` (Paskal Beniwoll): `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] = true; Variable["RiziaDLCIsolated....`
-- Węzeł `[7]` (Paskal Beniwoll): `Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = 0;`
-- Węzeł `[14]` (Paskal Beniwoll): `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] = true; Variable["RiziaDLCIsolated.I...`
-- Węzeł `[18]` (Paskal Beniwoll): `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] = true; Variable["RiziaDLCIsolated.I...`
-- Węzeł `[22]` (Paskal Beniwoll): `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] = true; Variable["RiziaDLCIsolated.In...`
-- Węzeł `[23]` (Paskal Beniwoll): `Variable["RiziaDLC.Intermerkopum_Efforts"] = false; Variable["RiziaDLCSupport.News_Turn09_G_Inter...`
-- Węzeł `[36]` (Paskal Beniwoll): `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille"] = true;`
-- Węzeł `[37]` (Paskal Beniwoll): `Variable["RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAcceptance"] = true;`
-- *...oraz 8 innych węzłów ze skryptami.*
+- *Brak decyzji i wyborów gracza w tej scenie (dialog liniowy lub sekwencja techniczna).*
 
 ---
 
@@ -94,442 +77,442 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[3]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
-  - -> `[5]`
+  - -> `[4]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDL..."*)
+  - -> `[5]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Morella_MITZFriendlyOutcome == true && ((Rizia..."*)
 
 ### Węzeł `[4]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Morella_MITZFriendlyOutcome"] == true  and  ((Variable["RiziaDLC.Policy_Economy_MorellaPipeline_Completed"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed"] == false)  or  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Morella_MITZFriendlyOutcome"] == true  and  ((Variable["RiziaDLC.Policy_Economy_MorellaPipeline_Completed"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed"] == false)  or  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = true;..."*)
 
 ### Węzeł `[5]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Morella_MITZFriendlyOutcome"] == true  and  ((Variable["RiziaDLC.Policy_Economy_MorellaPipeline_Completed"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed"] == false)  or  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDLC.Policy_Economy_MorellaPipeline_Completed == true && RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed == false) || RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Morella_MITZFriendlyOutcome"] == true  and  ((Variable["RiziaDLC.Policy_Economy_MorellaPipeline_Completed"] == true  and  Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Morella_Failed"] == false)  or  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true"*)
 
 ### Węzeł `[6]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] = true;
 Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = Variable["RiziaDLCIsolated.Intermerkopum_Counter"] + 1;
 ;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Derdia_Friendly == true || Rizi..."*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Intermerkopum_Counter = 0;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = 0;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Intermerkopum_Counter = 0;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = 0;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Morella_MITZFriendlyOutcome == true && ((RiziaDL..."*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Intermerkopum_Efforts == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Intermerkopum_Efforts == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[9]`
-  - -> `[10]`
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Intermerkopum_Efforts == true"*)
+  - -> `[10]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Intermerkopum_Efforts == true)"*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Intermerkopum_Efforts == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Intermerkopum_Efforts == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Intermerkopum_Counter = 0;"*)
 
 ### Węzeł `[10]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Intermerkopum_Efforts == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Intermerkopum_Efforts"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Intermerkopum_Efforts == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Intermerkopum_Efforts"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[11]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
-  - -> `[13]`
+  - -> `[12]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Derdia_Friendly == true || Rizi..."*)
+  - -> `[13]` (*Węzeł Logiki Narracyjnej: "!((RiziaDLC.CountryRelation_Derdia_Friendly == true || Ri..."*)
 
 ### Węzeł `[12]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: (RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false)*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Derdia_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Derdia_Allied"] == true)  and  ((Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed"] == false  and  Variable["RiziaDLC.Policy_Economy_DerdiaPipeline_Project"] == true)  or  (Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true  or Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true))  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `(RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.CountryRelation_Derdia_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Derdia_Allied"] == true)  and  ((Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed"] == false  and  Variable["RiziaDLC.Policy_Economy_DerdiaPipeline_Project"] == true)  or  (Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true  or Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true))  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = true; ..."*)
 
 ### Węzeł `[13]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !((RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false))*
-- **Warunek (`conditionsString`):** `((Variable["RiziaDLC.CountryRelation_Derdia_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Derdia_Allied"] == true)  and  ((Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed"] == false  and  Variable["RiziaDLC.Policy_Economy_DerdiaPipeline_Project"] == true)  or  (Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true  or Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true))  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!((RiziaDLC.CountryRelation_Derdia_Friendly == true || RiziaDLC.CountryRelation_Derdia_Allied == true) && ((RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed == false && RiziaDLC.Policy_Economy_DerdiaPipeline_Project == true) || (RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true ||RiziaDLC.Turn09_MorellaDerdiaMediation_Success == true)) && RiziaDLC.Turn09_MorellaDerdiaMediation_Failed == false && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false)`
+- **Warunek bezpośredni (`conditionsString`):** `((Variable["RiziaDLC.CountryRelation_Derdia_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Derdia_Allied"] == true)  and  ((Variable["RiziaDLC.Situation_Diplomacy_EnergyCommitment_Derdia_Failed"] == false  and  Variable["RiziaDLC.Policy_Economy_DerdiaPipeline_Project"] == true)  or  (Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true  or Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Success"] == true))  and  Variable["RiziaDLC.Turn09_MorellaDerdiaMediation_Failed"] == false  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true"*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] = true;
 Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = Variable["RiziaDLCIsolated.Intermerkopum_Counter"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.Country..."*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[16]`
-  - -> `[17]`
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.Country..."*)
+  - -> `[17]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.Count..."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true  and  (Variable["RiziaDLC.CountryRelation_Wehlen_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  or  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true  and  (Variable["RiziaDLC.CountryRelation_Wehlen_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  or  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = true; ..."*)
 
 ### Węzeł `[17]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false ))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true  and  (Variable["RiziaDLC.CountryRelation_Wehlen_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  or  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.CountryRelation_Wehlen_Friendly == true || RiziaDLC.CountryRelation_Wehlen_Allied == true || RiziaDLC.Turn09_DerdiaWehlenMediation_Success == true) && RiziaDLC.Turn09_DerdiaWehlenMediation_Failed == false )`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true  and  (Variable["RiziaDLC.CountryRelation_Wehlen_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Wehlen_Allied"] == true  or  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Success"] == true)  and  Variable["RiziaDLC.Turn09_DerdiaWehlenMediation_Failed"] == false) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[33]`
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] = true;
 Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = Variable["RiziaDLCIsolated.Intermerkopum_Counter"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_..."*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[20]`
-  - -> `[21]`
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.P..."*)
+  - -> `[21]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true  or  (Variable["RiziaDLC.Policy_Economy_PalesPipeline_Completed"] == true  and  Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.AxelVina_Married_Official"] == true  or  (Variable["RiziaDLC.Policy_Economy_PalesPipeline_Completed"] == true  and  Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = true; R..."*)
 
 ### Węzeł `[21]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true  or  (Variable["RiziaDLC.Policy_Economy_PalesPipeline_Completed"] == true  and  Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.Policy_Economy_PalesPipeline_Completed == true && RiziaDLC.CountryRelation_Pales_Friendly == true || RiziaDLC.CountryRelation_Pales_Allied == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.AxelVina_Married_Official"] == true  or  (Variable["RiziaDLC.Policy_Economy_PalesPipeline_Completed"] == true  and  Variable["RiziaDLC.CountryRelation_Pales_Friendly"] == true  or  Variable["RiziaDLC.CountryRelation_Pales_Allied"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = false; ..."*)
 
 ### Węzeł `[22]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] = true;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = true; RiziaDLCIsolated.Intermerkopum_Counter += 1;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] = true;
 Variable["RiziaDLCIsolated.Intermerkopum_Counter"] = Variable["RiziaDLCIsolated.Intermerkopum_Counter"] + 1;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Intermerkopum_Counter >= 2"*)
 
 ### Węzeł `[23]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Intermerkopum_Efforts = false; RiziaDLCSupport.News_Turn09_G_IntermerkopumTalksCanceled = true;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Intermerkopum_Efforts = false; RiziaDLCSupport.News_Turn09_G_IntermerkopumTalksCanceled = true;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Intermerkopum_Efforts"] = false;
 Variable["RiziaDLCSupport.News_Turn09_G_IntermerkopumTalksCanceled"] = true;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Intermerkopum_Counter >= 2)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Intermerkopum_Counter >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Intermerkopum_Counter >= 2"*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLCIsolated.Intermerkopum_Counter >= 2)"*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCIsolated.Intermerkopum_Counter >= 2)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLCIsolated.Intermerkopum_Counter"] >= 2`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCIsolated.Intermerkopum_Counter >= 2`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLCIsolated.Intermerkopum_Counter"] >= 2`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true"*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLCIsolated.Intermerkopum_Counter >= 2))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLCIsolated.Intermerkopum_Counter"] >= 2) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLCIsolated.Intermerkopum_Counter >= 2)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLCIsolated.Intermerkopum_Counter"] >= 2) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Intermerkopum_Efforts = false; RiziaDLCSupport.N..."*)
 
 ### Węzeł `[27]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
-  - -> `[29]`
+  - -> `[28]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true"*)
+  - -> `[29]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[28]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = false..."*)
 
 ### Węzeł `[29]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Derdia_Friendly == true || Rizi..."*)
 
 ### Węzeł `[30]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
-  - -> `[32]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true"*)
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = false;..."*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.Country..."*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
-  - -> `[35]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true"*)
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = false;"*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_Zille"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_..."*)
 
 ### Węzeł `[37]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAcceptance = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAcceptance"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAcceptance = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAcceptance"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true"*)
 
 ### Węzeł `[38]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
-  - -> `[40]`
+  - -> `[39]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true"*)
+  - -> `[40]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.ZilleReturn_Success == true)"*)
 
 ### Węzeł `[39]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.ZilleReturn_Success == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.ZilleReturn_Success == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.ZilleReturn_Success"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[36]`
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusa..."*)
 
 ### Węzeł `[40]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.ZilleReturn_Success == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.ZilleReturn_Success == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.ZilleReturn_Success"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusa..."*)
 
 ### Węzeł `[41]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
-  - -> `[43]`
+  - -> `[42]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true"*)
+  - -> `[43]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[42]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumAccep..."*)
 
 ### Węzeł `[43]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true"*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true"*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumAccept..."*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumAccept = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumAccept"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumAccept = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumAccept"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumAccept = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumAccept"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumAccept = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumAccept"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true"*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept"] = true;`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[49]`
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumAccept ..."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące:** *Brak (Węzeł końcowy)*
 
 ### Węzeł `[53]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = false;)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] = false;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential = false;`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] = false;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true"*)
 
 ### Węzeł `[54]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_NoZille = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_NoZille"] = true;`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_NoZille = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumRefusal_NoZille"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_..."*)
 
 ### Węzeł `[55]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
-  - -> `[57]`
+  - -> `[56]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true"*)
+  - -> `[57]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)"*)
 
 ### Węzeł `[56]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "RiziaDLCSupport.Reports_Turn09_Wehlen_IntermerkopumAccept..."*)
 
 ### Węzeł `[57]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Diplomacy_Wehlen_IntermerkopumPotential"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Diplomacy_Morella_IntermerkopumPotential == true"*)
 
 ### Węzeł `[58]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumRefusal = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Morella_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumRefusal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Morella_IntermerkopumPotential"] = false;
 Variable["RiziaDLCSupport.Reports_Turn09_Morella_IntermerkopumRefusal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Węzeł Logiki Narracyjnej: "(RiziaDLC.CountryRelation_Derdia_Friendly == true || Rizi..."*)
 
 ### Węzeł `[59]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true))*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
-  - -> `[61]`
+  - -> `[60]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_..."*)
+  - -> `[61]` (*Węzeł Logiki Narracyjnej: "!(RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pale..."*)
 
 ### Węzeł `[60]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true))*
-- **Warunek (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == false  and  (Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true  or  Variable["RiziaDLC.AxelVina_Married_Official"] == true)`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true)`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["RiziaDLC.Pales_War"] == false  and  (Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true  or  Variable["RiziaDLC.AxelVina_Married_Official"] == true)`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.AxelVina_Married_Official == true || (RiziaDLC.P..."*)
 
 ### Węzeł `[61]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true)))*
-- **Warunek (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == false  and  (Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true  or  Variable["RiziaDLC.AxelVina_Married_Official"] == true)) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(RiziaDLC.Pales_War == false && (RiziaDLC.Diplomacy_Pales_IntermerkopumPotential == true || RiziaDLC.AxelVina_Married_Official == true))`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["RiziaDLC.Pales_War"] == false  and  (Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] == true  or  Variable["RiziaDLC.AxelVina_Married_Official"] == true)) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Intermerkopum_Counter >= 2"*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumRefusal = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumRefusal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Derdia_IntermerkopumPotential"] = false;
 Variable["RiziaDLCSupport.Reports_Turn09_Derdia_IntermerkopumRefusal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "RiziaDLC.ZilleReturn_Success == true && (RiziaDLC.Country..."*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumRefusal = true)*
-- **Efekt (`userScript`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] = false;
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `RiziaDLC.Diplomacy_Pales_IntermerkopumPotential = false; RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumRefusal = true`
+- **Efekt skryptowy (`userScript`):** `Variable["RiziaDLC.Diplomacy_Pales_IntermerkopumPotential"] = false;
 Variable["RiziaDLCSupport.Reports_Turn09_Pales_IntermerkopumRefusal"] = true;`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "RiziaDLCIsolated.Intermerkopum_Counter >= 2"*)

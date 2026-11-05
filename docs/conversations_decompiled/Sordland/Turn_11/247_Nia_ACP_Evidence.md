@@ -49,13 +49,19 @@
 
 ---
 
-## 3. Podsumowanie Węzłowe i Kluczowe Odgałęzienia
+## 3. Kompletne Zestawienie Opcji Dialogowych Gracza i Wymagań
 
-- **Węzły kończące (Terminal Nodes):** 1
-- **Węzły modyfikujące stan gry:** 1
+> Każda opcja dialogowa została przeanalizowana pod kątem wymagań logicznych w silniku gry (warunki Lua na węzłach wejściowych i bramkach warunkowych).
 
-**Węzły wykonujące kluczowe operacje skryptowe:**
-- Węzeł `[146]` (Paskal Beniwoll): `UpdateCharacterTitle("Nia Morgna","Former Minister");`
+| Węzeł | Treść Opcji Gracza (Menu / Kwestia) | Kontekst (Z jakiej wypowiedzi) | Wymagania Odblokowania (Warunki z Kodu Gry) | Skutki Skryptowe (`userScript`) | Cel / Następna Kwestia |
+|---|---|---|---|---|---|
+| `[5]` | **"“After all I have done for you, you betrayed me.”"** | `[78]` **Nia Morgna**: "“Thank you.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[11]` **Nia Morgna**: "“No. You betrayed your country.”" |
+| `[21]` | **"“You little snake! I will have your head!”"** | `[78]` **Nia Morgna**: "“Thank you.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[87]` **Narrator**: "Loud chatter started spreading t..." |
+| `[43]` | **"Don't say anything."** | `[78]` **Nia Morgna**: "“Thank you.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[87]` **Narrator**: "Loud chatter started spreading t..." |
+| `[82]` | **"“Objection!”"** | `[78]` **Nia Morgna**: "“Thank you.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[97]` **Heron Garaci**: "“Overruled!”"<br>`[99]` **Ovid Grecer**: "“Overruled!”"<br>*(oraz 1 innych odgałęzień)* |
+| `[130]` | **"“Nia. Don't do this. Please. I beg you.”"** | `[17]` **Nia Morgna**: "“Thank you, your honor.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[133]` **Nia Morgna**: "“It's too late now, Mr. Presiden..." |
+| `[131]` | **"“I regret the day I made the decision to let you into my cabinet.”"** | `[17]` **Nia Morgna**: "“Thank you, your honor.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[133]` **Nia Morgna**: "“It's too late now, Mr. Presiden..." |
+| `[132]` | **"“I was a fool to trust you.”"** | `[17]` **Nia Morgna**: "“Thank you, your honor.”" | *Brak (Dostępna bezwarunkowo)* | *Brak zmian stanu* | `[134]` **Nia Morgna**: "“I could say the same, Mr. Presi..." |
 
 ---
 
@@ -64,958 +70,972 @@
 Punkt wejścia: `Entry 0 [START]`
 
 ### Węzeł `[0]`
-**[START / ROOT]** (Ovid Grecer)
+**[START / ROOT]** (System / START)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[1]`
+  - -> `[1]` (*System / INPUT: "input"*)
 
 ### Węzeł `[1]`
-**[INPUT / WEJŚCIE SCENY]** (Paskal Beniwoll)
+**[INPUT / WEJŚCIE SCENY]** (System / INPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[114]`
+  - -> `[114]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
 
 ### Węzeł `[2]`
-**[OUTPUT / WYJŚCIE ZE SCENY]** (Paskal Beniwoll)
+**[OUTPUT / WYJŚCIE ZE SCENY]** (System / OUTPUT)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> **[SKOK DO INNEJ ROZMOWY]** Conv `246` (*Sordland/Turn11/A_ImpeachmentTrial*), Węzeł `[42]`
+  - -> `[42]` (*Nia Morgna: "“What we found was, quite frankly, shocking.”"*)
 
 ### Węzeł `[3]`
 Mówca: **Ovid Grecer**
 > "“Silence! Silence in the court!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[118]`
+  - -> `[118]` (*Ovid Grecer: "“Thank you, Mrs. Morgna. You may leave the courtroom.”"*)
 
 ### Węzeł `[4]`
 Mówca: **Heron Garaci**
 > "“Silence! Silence in the court!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[119]`
+  - -> `[119]` (*Heron Garaci: "“Thank you, Mrs. Morgna. You may leave the courtroom.”"*)
 
 ### Węzeł `[5]`
 **[WYBÓR GRACZA: "“After all I have done for you, you betrayed me.”"]** — Mówca: **Player**
 > "“After all I have done for you, you betrayed me.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[78]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[11]`
+  - -> `[11]` (*Nia Morgna: "“No. You betrayed your country.”"*)
 
 ### Węzeł `[6]`
 Mówca: **Nia Morgna**
 > "“Mr. President personally prevented an investigation into Mr. Koronti's connections with the Koranelli Cartel, making him an accomplice and a criminal.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_Both == true"*)
 
 ### Węzeł `[7]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_Both == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_Both == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[8]`
-  - -> `[9]`
+  - -> `[8]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_Both == true"*)
+  - -> `[9]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_PrivatizationShares_Both == true)"*)
 
 ### Węzeł `[8]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_Both == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_Both"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_Both == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_Both"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[12]`
+  - -> `[12]` (*Nia Morgna: "“We have found evidence of backroom dealings related to t..."*)
 
 ### Węzeł `[9]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_PrivatizationShares_Both == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_Both"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_PrivatizationShares_Both == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_Both"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[18]`
+  - -> `[18]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti ..."*)
 
 ### Węzeł `[10]`
 Mówca: **Narrator**
 > "Nia Morgna, the Minister of Justice and the head of the Anti-Corruption Police, entered the room. She barely looked at me as she took her place before the judges."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Nia Morgna: "“Thank you, your honor.”"*)
 
 ### Węzeł `[11]`
 Mówca: **Nia Morgna**
 > "“No. You betrayed your country.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[12]`
 Mówca: **Nia Morgna**
 > "“We have found evidence of backroom dealings related to the privatization of Sordland's national corporations.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[13]`
+  - -> `[13]` (*Nia Morgna: "“Before the shares from privatization could go on the pub..."*)
 
 ### Węzeł `[13]`
 Mówca: **Nia Morgna**
 > "“Before the shares from privatization could go on the public market, President Rayne granted them directly to oligarchs Marcel Koronti and Walter Tusk. This is a criminal offence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == tr..."*)
 
 ### Węzeł `[14]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[15]`
-  - -> `[16]`
+  - -> `[15]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true"*)
+  - -> `[16]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true)"*)
 
 ### Węzeł `[15]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[37]`
+  - -> `[37]` (*Nia Morgna: "“By the President's order, we began a probe into the powe..."*)
 
 ### Węzeł `[16]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_MediaDeal"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation ..."*)
 
 ### Węzeł `[17]`
 Mówca: **Nia Morgna**
 > "“Thank you, your honor.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[130]`
-  - -> `[131]`
-  - -> `[132]`
+  - -> `[130]` (*Player: "“Nia. Don't do this. Please. I beg you.”"*)
+  - -> `[131]` (*Player: "“I regret the day I made the decision to let you into my ..."*)
+  - -> `[132]` (*Player: "“I was a fool to trust you.”"*)
 
 ### Węzeł `[18]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[19]`
-  - -> `[20]`
+  - -> `[19]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti ..."*)
+  - -> `[20]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_PrivatizationShares_MarcelKoront..."*)
 
 ### Węzeł `[19]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[23]`
+  - -> `[23]` (*Nia Morgna: "“We have found evidence of backroom dealings related to t..."*)
 
 ### Węzeł `[20]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_MarcelKoronti"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[143]`
+  - -> `[143]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == ..."*)
 
 ### Węzeł `[21]`
 **[WYBÓR GRACZA: "“You little snake! I will have your head!”"]** — Mówca: **Player**
 > "“You little snake! I will have your head!”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[78]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[22]`
 Mówca: **Nia Morgna**
 > "“Before the shares from privatization could go on the public market, President Rayne granted them directly to Marcel Koronti. This is a criminal offence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == tr..."*)
 
 ### Węzeł `[23]`
 Mówca: **Nia Morgna**
 > "“We have found evidence of backroom dealings related to the privatization of Sordland's national corporations.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[22]`
+  - -> `[22]` (*Nia Morgna: "“Before the shares from privatization could go on the pub..."*)
 
 ### Węzeł `[24]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[25]`
-  - -> `[26]`
+  - -> `[25]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true"*)
+  - -> `[26]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == t..."*)
 
 ### Węzeł `[25]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[79]`
+  - -> `[79]` (*Nia Morgna: "“Our investigations found that during the constitutional ..."*)
 
 ### Węzeł `[26]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_Bribe == true"*)
 
 ### Węzeł `[27]`
 Mówca: **Narrator**
 > "Nia approached the table next to mine and sat down with a large stack of papers."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[30]`
+  - -> `[30]` (*Nia Morgna: "“As the head of the Anti-Corruption Police, I have been t..."*)
 
 ### Węzeł `[28]`
 Mówca: **Nia Morgna**
 > "“Before the shares from privatization could go on the public market, President Rayne granted them directly to Walter Tusk. This is a criminal offence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == tr..."*)
 
 ### Węzeł `[29]`
 Mówca: **Nia Morgna**
 > "“We have found evidence of backroom dealings related to the privatization of Sordland's national corporations.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[28]`
+  - -> `[28]` (*Nia Morgna: "“Before the shares from privatization could go on the pub..."*)
 
 ### Węzeł `[30]`
 Mówca: **Nia Morgna**
 > "“As the head of the Anti-Corruption Police, I have been tasked by President Rayne to root out and eliminate corruption in the government.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[38]`
+  - -> `[38]` (*Nia Morgna: "“During our investigations, we have found dire incriminat..."*)
 
 ### Węzeł `[31]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[32]`
-  - -> `[33]`
+  - -> `[32]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
+  - -> `[33]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_HeronGaraci == true)"*)
 
 ### Węzeł `[32]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[4]`
+  - -> `[4]` (*Heron Garaci: "“Silence! Silence in the court!”"*)
 
 ### Węzeł `[33]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_HeronGaraci == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_HeronGaraci == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[73]`
+  - -> `[73]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
 
 ### Węzeł `[34]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[35]`
-  - -> `[36]`
+  - -> `[35]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == tr..."*)
+  - -> `[36]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == ..."*)
 
 ### Węzeł `[35]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[40]`
+  - -> `[40]` (*Nia Morgna: "“My Anti-Corruption Police force was asked to look into W..."*)
 
 ### Węzeł `[36]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true || BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true || BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true  or  Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Nia Morgna: "“As you can see, there is substantial incriminating evide..."*)
 
 ### Węzeł `[37]`
 Mówca: **Nia Morgna**
 > "“By the President's order, we began a probe into the powerful media mogul Marcel Koronti.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[55]`
+  - -> `[55]` (*Nia Morgna: "“We found that shortly after Mr. Rayne took office, Mr. K..."*)
 
 ### Węzeł `[38]`
 Mówca: **Nia Morgna**
 > "“During our investigations, we have found dire incriminating evidence against Mr. President himself.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[39]`
+  - -> `[39]` (*Nia Morgna: "“I, being a member of the cabinet and having worked with ..."*)
 
 ### Węzeł `[39]`
 Mówca: **Nia Morgna**
 > "“I, being a member of the cabinet and having worked with the defendant for many years, did not want to believe what I heard and saw. Yet the evidence could not be ignored.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[53]`
+  - -> `[53]` (*Nia Morgna: "“I have dedicated my life to the pursuit of justice, and ..."*)
 
 ### Węzeł `[40]`
 Mówca: **Nia Morgna**
 > "“My Anti-Corruption Police force was asked to look into Walter Tusk, the spokesperson for the Lotherberg Group.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[42]`
+  - -> `[42]` (*Nia Morgna: "“What we found was, quite frankly, shocking.”"*)
 
 ### Węzeł `[41]`
 Mówca: **Nia Morgna**
 > "“According to the evidence, Mr. Manger offered the President a personal stake in Underhall Construction.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[57]`
+  - -> `[57]` (*Nia Morgna: "“President Rayne subsequently chose Underhall Constructio..."*)
 
 ### Węzeł `[42]`
 Mówca: **Nia Morgna**
 > "“What we found was, quite frankly, shocking.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[44]`
+  - -> `[44]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true"*)
 
 ### Węzeł `[43]`
 **[WYBÓR GRACZA: "Don't say anything."]** — Mówca: **Player_Italic**
 > "I sat there, quietly seething."
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[78]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[44]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[45]`
-  - -> `[46]`
+  - -> `[45]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true"*)
+  - -> `[46]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == ..."*)
 
 ### Węzeł `[45]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[54]`
+  - -> `[54]` (*Nia Morgna: "“The President's business bailout was a direct result of ..."*)
 
 ### Węzeł `[46]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[47]`
+  - -> `[47]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true"*)
 
 ### Węzeł `[47]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[48]`
-  - -> `[49]`
+  - -> `[48]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true"*)
+  - -> `[49]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)"*)
 
 ### Węzeł `[48]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[58]`
+  - -> `[58]` (*Nia Morgna: "“The tax cuts for large corporations were the product of ..."*)
 
 ### Węzeł `[49]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true"*)
 
 ### Węzeł `[50]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[51]`
-  - -> `[52]`
+  - -> `[51]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true"*)
+  - -> `[52]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)"*)
 
 ### Węzeł `[51]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[60]`
+  - -> `[60]` (*Nia Morgna: "“Mr. Tusk engaged the President in flat-out bribery to en..."*)
 
 ### Węzeł `[52]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_UnderhallBribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Nia Morgna: "“As you can see, there is substantial incriminating evide..."*)
 
 ### Węzeł `[53]`
 Mówca: **Nia Morgna**
 > "“I have dedicated my life to the pursuit of justice, and that dedication has led me to a position of utmost responsibility.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[56]`
+  - -> `[56]` (*Nia Morgna: "“I am obligated to uphold my ideals by revealing the real..."*)
 
 ### Węzeł `[54]`
 Mówca: **Nia Morgna**
 > "“The President's business bailout was a direct result of hidden dealings with Mr. Tusk.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[139]`
+  - -> `[139]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true"*)
 
 ### Węzeł `[55]`
 Mówca: **Nia Morgna**
 > "“We found that shortly after Mr. Rayne took office, Mr. Koronti offered the President what amounted to government control over Sordland's major media in exchange for special protections for his conglomerate, Heart of Sordland.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[61]`
+  - -> `[61]` (*Nia Morgna: "“The President accepted. Needless to say, this deal is a ..."*)
 
 ### Węzeł `[56]`
 Mówca: **Nia Morgna**
 > "“I am obligated to uphold my ideals by revealing the reality behind Anton Rayne, the President of Sordland.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[121]`
+  - -> `[121]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
 
 ### Węzeł `[57]`
 Mówca: **Nia Morgna**
 > "“President Rayne subsequently chose Underhall Construction as the contractor for his new government megaproject, siphoning millions of SR from the government to his company.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true"*)
 
 ### Węzeł `[58]`
 Mówca: **Nia Morgna**
 > "“The tax cuts for large corporations were the product of a hidden deal between Mr. Tusk and Mr. President.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true"*)
 
 ### Węzeł `[59]`
 Mówca: **Nia Morgna**
 > "“I hereby present the following allegations against Anton Rayne.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[62]`
+  - -> `[62]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_AlbinClavin_Bribe == true"*)
 
 ### Węzeł `[60]`
 Mówca: **Nia Morgna**
 > "“Mr. Tusk engaged the President in flat-out bribery to ensure that his company Underhall Construction would be selected as the main contractor for a major infrastructure project.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[66]`
+  - -> `[66]` (*Nia Morgna: "“As you can see, there is substantial incriminating evide..."*)
 
 ### Węzeł `[61]`
 Mówca: **Nia Morgna**
 > "“The President accepted. Needless to say, this deal is a horrifying breach of democratic values.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[69]`
+  - -> `[69]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation ..."*)
 
 ### Węzeł `[62]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_AlbinClavin_Bribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_AlbinClavin_Bribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[63]`
-  - -> `[64]`
+  - -> `[63]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_AlbinClavin_Bribe == true"*)
+  - -> `[64]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_AlbinClavin_Bribe == true)"*)
 
 ### Węzeł `[63]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_AlbinClavin_Bribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_AlbinClavin_Bribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_AlbinClavin_Bribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_AlbinClavin_Bribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[81]`
+  - -> `[81]` (*Nia Morgna: "“Our investigations found a large sum of money transferre..."*)
 
 ### Węzeł `[64]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_AlbinClavin_Bribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_AlbinClavin_Bribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_AlbinClavin_Bribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_AlbinClavin_Bribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[24]`
+  - -> `[24]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_AlbinClavin_BribeSelectedVP == true"*)
 
 ### Węzeł `[65]`
 Mówca: **Nia Morgna**
 > "“Our investigations have revealed President Rayne's involvement in a bribery scheme with PFJP leader Frens Ricter.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[88]`
+  - -> `[88]` (*Nia Morgna: "“In return for his support in the Assembly, Frens Ricter ..."*)
 
 ### Węzeł `[66]`
 Mówca: **Nia Morgna**
 > "“As you can see, there is substantial incriminating evidence against Anton Rayne.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[72]`
+  - -> `[72]` (*Nia Morgna: "“As the man holding the highest office in this country, h..."*)
 
 ### Węzeł `[67]`
 Mówca: **Nia Morgna**
 > "“Our investigations have revealed President Rayne's involvement in a bribery scheme with PFJP leader Frens Ricter.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[100]`
+  - -> `[100]` (*Nia Morgna: "“In return for Mr. Ricter's support in the Assembly, the ..."*)
 
 ### Węzeł `[68]`
 Mówca: **Orso Hawker**
 > "“Silence! Silence in the court!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[117]`
+  - -> `[117]` (*Orso Hawker: "“Thank you, Mrs. Morgna. You may leave the courtroom.”"*)
 
 ### Węzeł `[69]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[70]`
-  - -> `[71]`
+  - -> `[70]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation ..."*)
+  - -> `[71]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigatio..."*)
 
 ### Węzeł `[70]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[80]`
+  - -> `[80]` (*Nia Morgna: "“Mr. President has been involved in the obstruction of ju..."*)
 
 ### Węzeł `[71]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_MarcelKoronti_TipOffInvestigation"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[7]`
+  - -> `[7]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_Both == true"*)
 
 ### Węzeł `[72]`
 Mówca: **Nia Morgna**
 > "“As the man holding the highest office in this country, he should be a shining example of democracy. Instead, he has abused his position for his own personal gain and desecrated Sordland's democratic ideals.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[76]`
+  - -> `[76]` (*Nia Morgna: "“I hope this court sees the ugly truth and relieves Anton..."*)
 
 ### Węzeł `[73]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[74]`
-  - -> `[75]`
+  - -> `[74]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
+  - -> `[75]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_OvidGrecer == true)"*)
 
 ### Węzeł `[74]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[3]`
+  - -> `[3]` (*Ovid Grecer: "“Silence! Silence in the court!”"*)
 
 ### Węzeł `[75]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_OvidGrecer == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_OvidGrecer == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[68]`
+  - -> `[68]` (*Orso Hawker: "“Silence! Silence in the court!”"*)
 
 ### Węzeł `[76]`
 Mówca: **Nia Morgna**
 > "“I hope this court sees the ugly truth and relieves Anton Rayne from his presidency once and for all.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[78]`
+  - -> `[78]` (*Nia Morgna: "“Thank you.”"*)
 
 ### Węzeł `[77]`
 Mówca: **Nia Morgna**
 > "“We have found a direct conflict of interest linked to the Minister of Agriculture and Rural Development, Gus Manger.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[41]`
+  - -> `[41]` (*Nia Morgna: "“According to the evidence, Mr. Manger offered the Presid..."*)
 
 ### Węzeł `[78]`
 Mówca: **Nia Morgna**
 > "“Thank you.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[5]`
-  - -> `[82]`
-  - -> `[21]`
-  - -> `[43]`
+  - -> `[5]` (*Player: "“After all I have done for you, you betrayed me.”"*)
+  - -> `[82]` (*Player: "“Objection!”"*)
+  - -> `[21]` (*Player: "“You little snake! I will have your head!”"*)
+  - -> `[43]` (*Player_Italic: "Don't say anything."*)
 
 ### Węzeł `[79]`
 Mówca: **Nia Morgna**
 > "“Our investigations found that during the constitutional reform process, Anton Rayne promised Albin Clavin the position of Vice President.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[96]`
+  - -> `[96]` (*Nia Morgna: "“It is therefore no coincidence that, not long after Mr. ..."*)
 
 ### Węzeł `[80]`
 Mówca: **Nia Morgna**
 > "“Mr. President has been involved in the obstruction of justice by tipping off the subject of a government investigation.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[83]`
+  - -> `[83]` (*Nia Morgna: "“The person in question is Marcel Koronti.”"*)
 
 ### Węzeł `[81]`
 Mówca: **Nia Morgna**
 > "“Our investigations found a large sum of money transferred between Anton Rayne and Albin Clavin during the constitutional reform process.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[89]`
+  - -> `[89]` (*Nia Morgna: "“All evidence suggests that this was a bribe meant to sec..."*)
 
 ### Węzeł `[82]`
 **[WYBÓR GRACZA: "“Objection!”"]** — Mówca: **Player**
 > "“Objection!”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[78]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[90]`
+  - -> `[90]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
 
 ### Węzeł `[83]`
 Mówca: **Nia Morgna**
 > "“The person in question is Marcel Koronti.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[6]`
+  - -> `[6]` (*Nia Morgna: "“Mr. President personally prevented an investigation into..."*)
 
 ### Węzeł `[84]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[85]`
-  - -> `[86]`
+  - -> `[85]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true"*)
+  - -> `[86]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_GusManger_UnderhallCollusion == ..."*)
 
 ### Węzeł `[85]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_GusManger_UnderhallCollusion"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_GusManger_UnderhallCollusion"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[77]`
+  - -> `[77]` (*Nia Morgna: "“We have found a direct conflict of interest linked to th..."*)
 
 ### Węzeł `[86]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_GusManger_UnderhallCollusion"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_GusManger_UnderhallCollusion"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[14]`
+  - -> `[14]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_MarcelKoronti_MediaDeal == true"*)
 
 ### Węzeł `[87]`
 Mówca: **Narrator**
 > "Loud chatter started spreading through the courtroom."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[31]`
+  - -> `[31]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
 
 ### Węzeł `[88]`
 Mówca: **Nia Morgna**
 > "“In return for his support in the Assembly, Frens Ricter received a large sum of money from the President.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true"*)
 
 ### Węzeł `[89]`
 Mówca: **Nia Morgna**
 > "“All evidence suggests that this was a bribe meant to secure Mr. Clavin's support for the constitutional changes in the Assembly.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_Bribe == true"*)
 
 ### Węzeł `[90]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[91]`
-  - -> `[92]`
+  - -> `[91]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
+  - -> `[92]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_HeronGaraci == true)"*)
 
 ### Węzeł `[91]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[97]`
+  - -> `[97]` (*Heron Garaci: "“Overruled!”"*)
 
 ### Węzeł `[92]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_HeronGaraci == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_HeronGaraci == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[93]`
+  - -> `[93]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
 
 ### Węzeł `[93]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[94]`
-  - -> `[95]`
+  - -> `[94]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
+  - -> `[95]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_OvidGrecer == true)"*)
 
 ### Węzeł `[94]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[99]`
+  - -> `[99]` (*Ovid Grecer: "“Overruled!”"*)
 
 ### Węzeł `[95]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_OvidGrecer == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_OvidGrecer == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[98]`
+  - -> `[98]` (*Orso Hawker: "“Overruled!”"*)
 
 ### Węzeł `[96]`
 Mówca: **Nia Morgna**
 > "“It is therefore no coincidence that, not long after Mr. Clavin supported the President's reforms in the Assembly, he was offered the Vice Presidency.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[101]`
+  - -> `[101]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_Bribe == true"*)
 
 ### Węzeł `[97]`
 Mówca: **Heron Garaci**
 > "“Overruled!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[98]`
 Mówca: **Orso Hawker**
 > "“Overruled!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[99]`
 Mówca: **Ovid Grecer**
 > "“Overruled!”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[87]`
+  - -> `[87]` (*Narrator: "Loud chatter started spreading through the courtroom."*)
 
 ### Węzeł `[100]`
 Mówca: **Nia Morgna**
 > "“In return for Mr. Ricter's support in the Assembly, the President promised to favor Taurus Holding, a company that Frens Ricter is directly involved in, for government infrastructure projects. This is a baldfaced conflict of interest.""
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true"*)
 
 ### Węzeł `[101]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_FrensRicter_Bribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_FrensRicter_Bribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[102]`
-  - -> `[103]`
+  - -> `[102]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_Bribe == true"*)
+  - -> `[103]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_FrensRicter_Bribe == true)"*)
 
 ### Węzeł `[102]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_FrensRicter_Bribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_FrensRicter_Bribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_FrensRicter_Bribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_FrensRicter_Bribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[65]`
+  - -> `[65]` (*Nia Morgna: "“Our investigations have revealed President Rayne's invol..."*)
 
 ### Węzeł `[103]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_FrensRicter_Bribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_FrensRicter_Bribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_FrensRicter_Bribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_FrensRicter_Bribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[104]`
+  - -> `[104]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true"*)
 
 ### Węzeł `[104]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[105]`
-  - -> `[106]`
+  - -> `[105]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true"*)
+  - -> `[106]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true)"*)
 
 ### Węzeł `[105]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_FrensRicter_TaurusBribe"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_FrensRicter_TaurusBribe"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[67]`
+  - -> `[67]` (*Nia Morgna: "“Our investigations have revealed President Rayne's invol..."*)
 
 ### Węzeł `[106]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_FrensRicter_TaurusBribe"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_FrensRicter_TaurusBribe == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_FrensRicter_TaurusBribe"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[84]`
+  - -> `[84]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_GusManger_UnderhallCollusion == true"*)
 
 ### Węzeł `[107]`
 Mówca: **Narrator**
 > "Nia gathered her documents and left the table."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[2]`
+  - -> `[2]` (*System / OUTPUT: "output"*)
 
 ### Węzeł `[108]`
 Mówca: **Orso Hawker**
 > "“This court now summons Nia Morgna to present the evidence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "BaseGame.Resigned_NiaMorgna == true"*)
 
 ### Węzeł `[109]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[110]`
-  - -> `[111]`
+  - -> `[110]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
+  - -> `[111]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_OvidGrecer == true)"*)
 
 ### Węzeł `[110]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[113]`
+  - -> `[113]` (*Ovid Grecer: "“This court now summons Nia Morgna to present the evidence.”"*)
 
 ### Węzeł `[111]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_OvidGrecer == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_OvidGrecer == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[108]`
+  - -> `[108]` (*Orso Hawker: "“This court now summons Nia Morgna to present the evidence.”"*)
 
 ### Węzeł `[112]`
 Mówca: **Heron Garaci**
 > "“This court now summons Nia Morgna to present the evidence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "BaseGame.Resigned_NiaMorgna == true"*)
 
 ### Węzeł `[113]`
 Mówca: **Ovid Grecer**
 > "“This court now summons Nia Morgna to present the evidence.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[135]`
+  - -> `[135]` (*Węzeł Logiki Narracyjnej: "BaseGame.Resigned_NiaMorgna == true"*)
 
 ### Węzeł `[114]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[115]`
-  - -> `[116]`
+  - -> `[115]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
+  - -> `[116]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_HeronGaraci == true)"*)
 
 ### Węzeł `[115]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[112]`
+  - -> `[112]` (*Heron Garaci: "“This court now summons Nia Morgna to present the evidence.”"*)
 
 ### Węzeł `[116]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_HeronGaraci == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_HeronGaraci == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[109]`
+  - -> `[109]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
 
 ### Węzeł `[117]`
 Mówca: **Orso Hawker**
 > "“Thank you, Mrs. Morgna. You may leave the courtroom.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Narrator: "Nia gathered her documents and left the table."*)
 
 ### Węzeł `[118]`
 Mówca: **Ovid Grecer**
 > "“Thank you, Mrs. Morgna. You may leave the courtroom.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Narrator: "Nia gathered her documents and left the table."*)
 
 ### Węzeł `[119]`
 Mówca: **Heron Garaci**
 > "“Thank you, Mrs. Morgna. You may leave the courtroom.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[107]`
+  - -> `[107]` (*Narrator: "Nia gathered her documents and left the table."*)
 
 ### Węzeł `[120]`
 Mówca: **Ovid Grecer**
 > "“Your hard work and dedication to justice are acknowledged and appreciated by the members of this court, Mrs. Morgna.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Nia Morgna: "“Thank you, your honor.”"*)
 
 ### Węzeł `[121]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[122]`
-  - -> `[123]`
+  - -> `[122]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_HeronGaraci == true"*)
+  - -> `[123]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_HeronGaraci == true)"*)
 
 ### Węzeł `[122]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_HeronGaraci == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_HeronGaraci == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_HeronGaraci"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[127]`
+  - -> `[127]` (*Heron Garaci: "“Your hard work and dedication to justice are acknowledge..."*)
 
 ### Węzeł `[123]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_HeronGaraci == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_HeronGaraci == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_HeronGaraci"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[124]`
+  - -> `[124]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
 
 ### Węzeł `[124]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[125]`
-  - -> `[126]`
+  - -> `[125]` (*Węzeł Logiki Narracyjnej: "BaseGame.ChiefJustice_OvidGrecer == true"*)
+  - -> `[126]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.ChiefJustice_OvidGrecer == true)"*)
 
 ### Węzeł `[125]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.ChiefJustice_OvidGrecer == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.ChiefJustice_OvidGrecer == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.ChiefJustice_OvidGrecer"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[120]`
+  - -> `[120]` (*Ovid Grecer: "“Your hard work and dedication to justice are acknowledge..."*)
 
 ### Węzeł `[126]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.ChiefJustice_OvidGrecer == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.ChiefJustice_OvidGrecer == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.ChiefJustice_OvidGrecer"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[128]`
+  - -> `[128]` (*Orso Hawker: "“Your hard work and dedication to justice are acknowledge..."*)
 
 ### Węzeł `[127]`
 Mówca: **Heron Garaci**
 > "“Your hard work and dedication to justice are acknowledged and appreciated by the members of this court, Mrs. Morgna.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Nia Morgna: "“Thank you, your honor.”"*)
 
 ### Węzeł `[128]`
 Mówca: **Orso Hawker**
 > "“Your hard work and dedication to justice are acknowledged and appreciated by the members of this court, Mrs. Morgna.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[129]`
+  - -> `[129]` (*Nia Morgna: "“Thank you, your honor.”"*)
 
 ### Węzeł `[129]`
 Mówca: **Nia Morgna**
 > "“Thank you, your honor.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[59]`
+  - -> `[59]` (*Nia Morgna: "“I hereby present the following allegations against Anton..."*)
 
 ### Węzeł `[130]`
 **[WYBÓR GRACZA: "“Nia. Don't do this. Please. I beg you.”"]** — Mówca: **Player**
 > "“Nia. Don't do this. Please. I beg you.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[17]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Nia Morgna: "“It's too late now, Mr. President. Justice will be served..."*)
 
 ### Węzeł `[131]`
 **[WYBÓR GRACZA: "“I regret the day I made the decision to let you into my cabinet.”"]** — Mówca: **Player**
 > "“I regret the day I made the decision to let you into my cabinet.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[17]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[133]`
+  - -> `[133]` (*Nia Morgna: "“It's too late now, Mr. President. Justice will be served..."*)
 
 ### Węzeł `[132]`
 **[WYBÓR GRACZA: "“I was a fool to trust you.”"]** — Mówca: **Player**
 > "“I was a fool to trust you.”"
+- **Wymagania odblokowania:** *Brak (Dostępna bezwarunkowo)*
+- **Kontekst wejściowy (poprzednik):** `[17]` (Nia Morgna)
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[134]`
+  - -> `[134]` (*Nia Morgna: "“I could say the same, Mr. President. But don't worry. Ju..."*)
 
 ### Węzeł `[133]`
 Mówca: **Nia Morgna**
 > "“It's too late now, Mr. President. Justice will be served today.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Narrator: "Nia approached the table next to mine and sat down with a..."*)
 
 ### Węzeł `[134]`
 Mówca: **Nia Morgna**
 > "“I could say the same, Mr. President. But don't worry. Justice will be served today.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[27]`
+  - -> `[27]` (*Narrator: "Nia approached the table next to mine and sat down with a..."*)
 
 ### Węzeł `[135]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Resigned_NiaMorgna == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Resigned_NiaMorgna == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[136]`
-  - -> `[137]`
+  - -> `[136]` (*Węzeł Logiki Narracyjnej: "BaseGame.Resigned_NiaMorgna == true"*)
+  - -> `[137]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.Resigned_NiaMorgna == true)"*)
 
 ### Węzeł `[136]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.Resigned_NiaMorgna == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.Resigned_NiaMorgna"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.Resigned_NiaMorgna == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.Resigned_NiaMorgna"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[146]`
+  - -> `[146]` (*Węzeł Logiki Narracyjnej: "UpdateCharacterTitle("Nia Morgna", "Former Minister");"*)
 
 ### Węzeł `[137]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.Resigned_NiaMorgna == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.Resigned_NiaMorgna"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.Resigned_NiaMorgna == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.Resigned_NiaMorgna"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[10]`
+  - -> `[10]` (*Narrator: "Nia Morgna, the Minister of Justice and the head of the A..."*)
 
 ### Węzeł `[138]`
 Mówca: **Narrator**
 > "Nia Morgna, the former Minister of Justice and the previous head of the Anti-Corruption Police, entered the room. She barely looked at me as she took her place before the judges."
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[17]`
+  - -> `[17]` (*Nia Morgna: "“Thank you, your honor.”"*)
 
 ### Węzeł `[139]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[140]`
-  - -> `[141]`
+  - -> `[140]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true"*)
+  - -> `[141]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)"*)
 
 ### Węzeł `[140]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[142]`
+  - -> `[142]` (*Nia Morgna: "“As were the tax cuts for Sordland's large corporations.”"*)
 
 ### Węzeł `[141]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_WalterTusk_TaxCutLargeCorp"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true"*)
 
 ### Węzeł `[142]`
 Mówca: **Nia Morgna**
 > "“As were the tax cuts for Sordland's large corporations.”"
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[50]`
+  - -> `[50]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_UnderhallBribe == true"*)
 
 ### Węzeł `[143]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true)*
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[144]`
-  - -> `[145]`
+  - -> `[144]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == ..."*)
+  - -> `[145]` (*Węzeł Logiki Narracyjnej: "!(BaseGame.LeakedScandal_PrivatizationShares_WalterTusk =..."*)
 
 ### Węzeł `[144]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true)*
-- **Warunek (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_WalterTusk"] == true`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true`
+- **Warunek bezpośredni (`conditionsString`):** `Variable["BaseGame.LeakedScandal_PrivatizationShares_WalterTusk"] == true`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[29]`
+  - -> `[29]` (*Nia Morgna: "“We have found evidence of backroom dealings related to t..."*)
 
 ### Węzeł `[145]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: !(BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true))*
-- **Warunek (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_WalterTusk"] == true) == false`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `!(BaseGame.LeakedScandal_PrivatizationShares_WalterTusk == true)`
+- **Warunek bezpośredni (`conditionsString`):** `(Variable["BaseGame.LeakedScandal_PrivatizationShares_WalterTusk"] == true) == false`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[34]`
+  - -> `[34]` (*Węzeł Logiki Narracyjnej: "BaseGame.LeakedScandal_WalterTusk_BailOutBusinesses == tr..."*)
 
 ### Węzeł `[146]`
-Mówca: **Paskal Beniwoll**
-*(Węzeł logiki narracyjnej: UpdateCharacterTitle("Nia Morgna", "Former Minister");)*
-- **Efekt (`userScript`):** `UpdateCharacterTitle("Nia Morgna","Former Minister");`
+**[WĘZEŁ LOGIKI NARRACYJNEJ]**
+*Tytuł logiczny:* `UpdateCharacterTitle("Nia Morgna", "Former Minister");`
+- **Efekt skryptowy (`userScript`):** `UpdateCharacterTitle("Nia Morgna","Former Minister");`
 - **Połączenia wychodzące (`outgoingLinks`):**
-  - -> `[138]`
+  - -> `[138]` (*Narrator: "Nia Morgna, the former Minister of Justice and the previo..."*)
