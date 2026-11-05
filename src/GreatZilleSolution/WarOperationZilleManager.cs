@@ -225,6 +225,13 @@ namespace GreatZilleSolution
                     MelonLogger.Msg("[WAR ENGINE] Added 'A royal briefing before the invasion of Zille' to EntityDataManager.AllConversationsData!");
                 }
 
+                // Register all 6 custom Great Zille scenes in EntityDataManager
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarBalconySpeech", "Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "Zille/WarBalconySpeech");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "Zille/WarLogisticsDispute");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/PreNegotiationsBriefing");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarSmolakParley", "Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "Zille/SmolakFinalParley");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/PeaceTreaty");
+
                 // 3. Register WarFragmentData for Zille invasion in EntityDataManager
                 var allWarList = EntityDataManager.AllWarFragmentsData ?? GetEntityBackingList<WarFragmentData>("warFragmentData");
 
@@ -743,40 +750,35 @@ namespace GreatZilleSolution
 
         // ================= NATIVE DIALOGUE ENGINE INJECTION =================
 
-        private static Link CreateLink(int convId, int fromId, int toId)
+        private static void RegisterAdditionalConversationData(Il2CppSystem.Collections.Generic.List<ConversationData> allConvList, string id, string nameInDb, string title, string subtitle, string dialogue)
         {
-            var link = new Link(convId, fromId, convId, toId);
-            link.priority = ConditionPriority.Normal;
-            link.isConnector = false;
-            return link;
-        }
-
-        private static DialogueEntry CreateDialogueEntry(int convId, int entryId, int actorId, int conversantId, string title, string text, string menuText = null, string sequence = "")
-        {
-            var entry = new DialogueEntry();
-            entry.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-            entry.outgoingLinks = new Il2CppSystem.Collections.Generic.List<Link>();
-            entry.id = entryId;
-            entry.conversationID = convId;
-            entry.ActorID = actorId;
-            entry.ConversantID = conversantId;
-            entry.Title = title ?? "";
-            entry.DialogueText = text ?? "";
-            entry.MenuText = menuText ?? text ?? "";
-            entry.Sequence = sequence ?? "";
-            entry.conditionPriority = ConditionPriority.Normal;
-            entry.isGroup = false;
-
-            entry.fields.Add(new Field("Title", title ?? "", FieldType.Text));
-            entry.fields.Add(new Field("Actor", actorId.ToString(), FieldType.Actor));
-            entry.fields.Add(new Field("Conversant", conversantId.ToString(), FieldType.Actor));
-            entry.fields.Add(new Field("Dialogue Text", text ?? "", FieldType.Text));
-            entry.fields.Add(new Field("en", text ?? "", FieldType.Localization));
-            entry.fields.Add(new Field("Menu Text", menuText ?? text ?? "", FieldType.Text));
-            entry.fields.Add(new Field("Sequence", sequence ?? "", FieldType.Text));
-            entry.fields.Add(new Field("Articy Id", $"0x0100005A_Zille_{entryId}", FieldType.Text));
-
-            return entry;
+            if (allConvList == null) return;
+            for (int i = 0; i < allConvList.Count; i++)
+            {
+                if (allConvList[i] != null && allConvList[i].NameInDatabase == nameInDb) return;
+            }
+            var cd = new ConversationData();
+            cd.Id = id;
+            cd.NameInDatabase = nameInDb;
+            cd.Path = "Rizia/Conversations";
+            cd.IsWIP = false;
+            cd.Notes = "";
+            cd.AssignedTokenProperties = new AssignedTokenProperties();
+            cd.AssignedTokenProperties.AssignedToken = "Rizia_City_PorteDrazon";
+            cd.StoryFragmentProperties = new StoryFragmentProperties();
+            cd.StoryFragmentProperties.IsDone = false;
+            cd.StoryFragmentProperties.StoryFragmentCondition = "";
+            cd.StoryFragmentProperties.OnStoryFragmentBeginInstruction = "";
+            cd.StoryFragmentProperties.OnStoryFragmentEndInstruction = "";
+            cd.ConversationProperties = new ConversationProperties();
+            cd.ConversationProperties.Title = title;
+            cd.ConversationProperties.Subtitle = subtitle;
+            cd.ConversationProperties.Dialogue = dialogue;
+            cd.ConversationProperties.TypeString = "SecurityAndOrder";
+            cd.ConversationProperties.IsOnStart = false;
+            cd.AppBundleProperties = CreateRiziaBundleProps();
+            allConvList.Add(cd);
+            MelonLogger.Msg($"[WAR ENGINE] Added '{title}' ({nameInDb}) to EntityDataManager.AllConversationsData!");
         }
 
         public static bool EnsureWarCouncilConversationRegistered()
@@ -790,448 +792,12 @@ namespace GreatZilleSolution
                     return false;
                 }
 
-                const string convTitle = "Zille/WarCouncil_Briefing";
-                var existing = db.GetConversation(convTitle);
-                if (existing != null)
-                {
-                    db.conversations.Remove(existing);
-                }
-
-                MelonLogger.Msg("[WAR ENGINE] Injecting native Royal War Council Briefing conversation into masterDatabase...");
-
-                // Default accurate actor IDs in Suzerain database
-                int narratorId = 10; // Narrator
-                int romusId = 95;    // Player_Romus
-                int titusId = 81;    // Titus Gordion
-                int lucitaId = 73;   // Lucita Azaro
-                int hugoId = 68;     // Hugo Toras
-                int laurentoId = 70; // Laurento Esquibel
-
-                if (db.actors != null)
-                {
-                    for (int i = 0; i < db.actors.Count; i++)
-                    {
-                        var a = db.actors[i];
-                        if (a == null) continue;
-                        string aName = a.Name ?? "";
-                        if (aName.Equals("Narrator", StringComparison.OrdinalIgnoreCase)) narratorId = a.id;
-                        else if (aName.Equals("Player_Romus", StringComparison.OrdinalIgnoreCase)) romusId = a.id;
-                        else if (aName.IndexOf("Titus", StringComparison.OrdinalIgnoreCase) >= 0) titusId = a.id;
-                        else if (aName.IndexOf("Lucita", StringComparison.OrdinalIgnoreCase) >= 0) lucitaId = a.id;
-                        else if (aName.IndexOf("Hugo", StringComparison.OrdinalIgnoreCase) >= 0) hugoId = a.id;
-                        else if (aName.IndexOf("Laurento", StringComparison.OrdinalIgnoreCase) >= 0) laurentoId = a.id;
-                    }
-                }
-
-                var conv = new Conversation();
-                conv.id = 9988;
-                conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-                conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-                conv.Title = convTitle;
-                conv.ActorID = romusId;
-                conv.ConversantID = lucitaId;
-
-                // --- Query Savegame Variables ---
-                int budget = DialogueHelper.GetIntVariable("RiziaDLC.Resources_Budget");
-                if (budget == 0) budget = DialogueHelper.GetIntVariable("Budget");
-                int energy = DialogueHelper.GetIntVariable("RiziaDLC.Resources_Energy");
-                int authority = DialogueHelper.GetIntVariable("RiziaDLC.Resources_Authority");
-                int manpower = DialogueHelper.GetIntVariable("RiziaDLC.Resources_Military_Manpower");
-                int equipment = DialogueHelper.GetIntVariable("RiziaDLC.Resources_Military_Equipment");
-
-                bool lucitaMarried = DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Married") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Marriage_Happened") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLCSupport.Journal_Turn08_Lucita_Married");
-                bool lucitaRomance = lucitaMarried ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Relations_Lucita_Together") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_RomanceHappened") ||
-                                     DialogueHelper.GetIntVariable("RiziaDLC.Relations_Lucita_Romance") > 0;
-                bool lucitaPregnant = DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Pregnant");
-
-                bool lespiaAllied = DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Lespia_Allied") ||
-                                    DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Lespia_Friendly") ||
-                                    DialogueHelper.GetBoolVariable("RiziaDLC.Diplomacy_Lespia_WehlenHelp") ||
-                                    DialogueHelper.GetBoolVariable("RiziaDLCIsolated.Lespia_Alvarez_Cooperative") ||
-                                    ZilleCampaignState.IsLespiaPactAccepted;
-                bool lespiaHostile = DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Lespia_Hostile") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Situation_Diplomacy_Lespia_SanctionsRizia") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.MITZ_ScrewedOverLespia");
-
-                bool suOminaStrong = DialogueHelper.GetBoolVariable("RiziaDLC.Situation_Diplomacy_Zille_StrongArmedResistance") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Situation_Diplomacy_Zille_GrowingArmedResistance") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Decision_Turn05_ZilleResistanceFunding_BeginSOFund") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Decision_Turn05_ZilleResistanceFunding_IncreasedSOFund") ||
-                                     DialogueHelper.GetBoolVariable("RiziaDLC.Prologue_JoinedSuOmina");
-                bool ataFunded = DialogueHelper.GetBoolVariable("RiziaDLC.Decision_Turn05_ZilleResistanceFunding_BeginATAFund") ||
-                                 DialogueHelper.GetBoolVariable("RiziaDLC.Decision_Turn05_ZilleResistanceFunding_IncreasedATAFund") ||
-                                 DialogueHelper.GetBoolVariable("RiziaDLC.Situation_Diplomacy_Zille_GrowingRiziaMovement") ||
-                                 DialogueHelper.GetBoolVariable("RiziaDLC.Situation_Diplomacy_Zille_MassiveRiziaMovement");
-                bool palesWarActive = DialogueHelper.GetBoolVariable("RiziaDLC.Pales_War") || ZilleCampaignState.IsTwoFrontWarThreat();
-
-                DialogueEntry AddLine(int id, int speaker, int listener, string title, string text, int nextId = -1)
-                {
-                    var e = CreateDialogueEntry(conv.id, id, speaker, listener, title, text);
-                    if (nextId >= 0) e.outgoingLinks.Add(CreateLink(conv.id, id, nextId));
-                    conv.dialogueEntries.Add(e);
-                    return e;
-                }
-
-                DialogueEntry AddChoice(int id, int listener, string title, string menuText, string spokenText, int nextId, string script = "")
-                {
-                    var e = CreateDialogueEntry(conv.id, id, romusId, listener, title, spokenText, menuText);
-                    if (!string.IsNullOrEmpty(script)) e.userScript = script;
-                    if (nextId >= 0) e.outgoingLinks.Add(CreateLink(conv.id, id, nextId));
-                    conv.dialogueEntries.Add(e);
-                    return e;
-                }
-
-                // Entry 0: START
-                var entry0 = CreateDialogueEntry(conv.id, 0, romusId, lucitaId, "START", "", "", "Continue()");
-                entry0.isRoot = true;
-                entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
-                conv.dialogueEntries.Add(entry0);
-
-                // --- OPENING SEQUENCE (Entries 1 to 16) ---
-                AddLine(1, narratorId, romusId, "Intro_Narrator_1",
-                    "The heavy oak doors of the Palas Rezna war chamber were bolted shut. Across the polished mahogany table lay an expansive topographical relief map of the Zille province, marked with brass pins and crimson operational arrows.", 2);
-
-                AddLine(2, hugoId, romusId, "Intro_Hugo_1",
-                    "Your Majesty. The Grand Vizier's office and the High Command have finalized the operational dossiers for the reclamation of Zille.", 3);
-
-                AddLine(3, hugoId, romusId, "Intro_Hugo_2",
-                    "For too long, President Wiktor Smolak has treated our ancestral homeland as his personal bargaining chip. Yet crossing the river with royal divisions will alter the balance of South Merkopa forever.", 4);
-
-                if (lucitaMarried)
-                {
-                    AddLine(4, narratorId, romusId, "Intro_Lucita_Narrator",
-                        "Lucita stood at the head of the tactical map. As both your War Councilor and your Queen Consort, her gaze carried a rare blend of fierce Azaro resolve and quiet personal devotion.", 5);
-                    AddLine(5, lucitaId, romusId, "Intro_Lucita_Greeting",
-                        "My love—Your Majesty. The General Staff has completed its mobilization schedule along the Brenas frontier. Our commanders await only the Crown's word.", 6);
-                }
-                else if (lucitaRomance)
-                {
-                    AddLine(4, narratorId, romusId, "Intro_Lucita_Narrator",
-                        "Lucita leaned over the southern sector of the map. Catching your eye, her expression softened for a fleeting heartbeat before returning to the crisp composure of a general.", 5);
-                    AddLine(5, lucitaId, romusId, "Intro_Lucita_Greeting",
-                        "Your Majesty. Everything we have discussed in private is now positioned on the field. The Azaro levies and the Royal Army are primed along the Brenas staging grounds.", 6);
-                }
-                else
-                {
-                    AddLine(4, narratorId, romusId, "Intro_Lucita_Narrator",
-                        "War Councilor Lucita Azaro stood rigid beside the southern frontier markers, her baton resting against the fortified hills of Zille.", 5);
-                    AddLine(5, lucitaId, romusId, "Intro_Lucita_Greeting",
-                        "Your Majesty. The Ministry of War has concluded its readiness audit. Our forward divisions are positioned along the Brenas line, awaiting your operational directive.", 6);
-                }
-
-                // Military readiness line based on savegame state
-                string milReadinessLine;
-                if (palesWarActive)
-                {
-                    milReadinessLine = "I must be candid: with a substantial portion of our royal forces already committed to the Palesian theatre, opening a second front against Wehlen will stretch our reserves thin.";
-                }
-                else if (manpower >= 3000 && equipment >= 1500)
-                {
-                    milReadinessLine = "Our barracks are well-staffed and our arsenals are thoroughly stocked. We possess the armored mobility and firepower needed to overwhelm Smolak's garrison before reinforcement columns can arrive.";
-                }
-                else
-                {
-                    milReadinessLine = "While our frontline brigades are disciplined, our equipment stockpiles and trained reserves are modest. We cannot afford a protracted war of attrition in the hills.";
-                }
-                AddLine(6, lucitaId, romusId, "Intro_Lucita_Readiness", milReadinessLine, 7);
-
-                // Titus Gordion (Intelligence & Internal Resistance)
-                AddLine(7, titusId, romusId, "Intro_Titus_1",
-                    "From an intelligence standpoint, Sire, the Golden Guard's couriers inside Zille confirm that Colonel Valdez commands four regular Wehzek brigades, backed by Smolak's irregular security detachments.", 8);
-
-                string resistanceLine;
-                if (suOminaStrong && ataFunded)
-                {
-                    resistanceLine = "Fortunately, our covert investments have paid off handsomely. Both the Su Omina cells and the Zille Association networks are deeply entrenched. The moment our guns open fire, they will sever Wehzek rail lines and paralyze Valdez's rear.";
-                }
-                else if (suOminaStrong)
-                {
-                    resistanceLine = "The Su Omina underground in Zille is armed and eager for blood. At your signal, their militants will strike Wehzek supply depots and communication relays from within.";
-                }
-                else if (ataFunded)
-                {
-                    resistanceLine = "While our armed cells are limited, the Zille Association has rallied strong civic sympathy for the Crown. Local dockworkers and railwaymen are prepared to stage strikes to hinder Wehzek troop movements.";
-                }
-                else
-                {
-                    resistanceLine = "However, our local underground in the province remains weak and fragmented. Smolak's secret police have kept the population under a tight curfew, so our troops will have to rely on their own firepower.";
-                }
-                AddLine(8, titusId, romusId, "Intro_Titus_2", resistanceLine, 9);
-
-                // Laurento Esquibel (Geopolitics & Lespia / CSP)
-                AddLine(9, laurentoId, romusId, "Intro_Laurento_1",
-                    "And then there is the diplomatic chessboard, Your Majesty. An armed incursion into Wehzek-occupied territory will send shockwaves from Kyrute to United Contana.", 10);
-
-                string lespiaLine;
-                if (lespiaAllied)
-                {
-                    lespiaLine = "Our understanding with Prime Minister Patricio Alvarez is a decisive asset here. Lespia has quietly agreed to share high-altitude reconnaissance and block any Contanan resupply efforts through the gulf.";
-                }
-                else if (lespiaHostile)
-                {
-                    lespiaLine = "With Alvarez openly hostile toward the Crown, we must expect Lespia to denounce our campaign at the Alliance of Nations and push for immediate economic sanctions.";
-                }
-                else
-                {
-                    lespiaLine = "Alvarez remains noncommittal. Without a formal understanding with Lespia, we walk a tightrope—both ATO and the Contanan Security Pact will be watching for any sign of Rizian weakness.";
-                }
-                AddLine(10, laurentoId, romusId, "Intro_Laurento_2", lespiaLine, 11);
-
-                // Hugo Toras (Treasury & Energy Reserves - qualitative, NO raw numbers!)
-                string budgetLine;
-                if (budget >= 8)
-                {
-                    budgetLine = "As for the Crown Treasury, Your Majesty, our fiscal position is remarkably strong. The royal coffers are overflowing with abundant reserves, more than capable of absorbing the heavy logistical costs of a military campaign.";
-                }
-                else if (budget >= 4)
-                {
-                    budgetLine = "Turning to the Crown Treasury, we currently hold acceptable financial reserves. We can fund the offensive without immediate crisis, provided the operation is swift and decisive.";
-                }
-                else if (budget >= 1)
-                {
-                    budgetLine = "I must urge caution regarding the Crown Treasury. Our fiscal reserves are noticeably strained; a prolonged campaign in Zille could force painful austerity across the kingdom.";
-                }
-                else
-                {
-                    budgetLine = "Your Majesty, I would be remiss if I did not sound the alarm on our finances. The Crown Treasury is virtually depleted, and waging war on credit will place immense strain on the realm.";
-                }
-                AddLine(11, hugoId, romusId, "Intro_Hugo_Budget", budgetLine, 12);
-
-                string energyLine;
-                if (energy >= 8)
-                {
-                    energyLine = "Our strategic fuel depots and energy reserves are likewise abundant. Our mechanized columns and air wings will face no shortages at the front.";
-                }
-                else if (energy >= 3)
-                {
-                    energyLine = "Our national energy stockpiles are at an acceptable level—sufficient to keep our tanks and transport trucks moving through the first phases of the assault.";
-                }
-                else
-                {
-                    energyLine = "More worryingly, our fuel and energy reserves are dangerously low. If our armored spearheads stall in the hills, keeping them supplied with fuel will be a severe challenge.";
-                }
-                AddLine(12, hugoId, romusId, "Intro_Hugo_Energy", energyLine, 15);
-
-                // --- FIRST ATTITUDE / REACTION HUB (Entry 15) ---
-                var hub15 = AddLine(15, lucitaId, romusId, "Intro_Lucita_Prompt",
-                    "The operational maps are before you, Your Majesty. Before we examine the specific battle plans, how do you view our strategic position?");
-                hub15.outgoingLinks.Add(CreateLink(conv.id, 15, 20));
-                hub15.outgoingLinks.Add(CreateLink(conv.id, 15, 23));
-                hub15.outgoingLinks.Add(CreateLink(conv.id, 15, 26));
-                hub15.outgoingLinks.Add(CreateLink(conv.id, 15, 29));
-
-                // Attitude 1: Decisive / Royal Pride
-                AddChoice(20, lucitaId, "Attitude_Decisive",
-                    "\"Smolak has tested our patience long enough. Zille is Rizian soil, and we will reclaim it by force of arms.\"",
-                    "Smolak has tested our patience long enough. Zille is Rizian soil, and we will reclaim it by force of arms.", 21);
-                AddLine(21, lucitaId, romusId, "Attitude_Decisive_Lucita",
-                    lucitaRomance
-                        ? "A smile of fierce pride touched Lucita's lips. \"Spoken like a true King of Rizia. The troops will fight twice as hard knowing their sovereign does not waver.\""
-                        : "\"Spoken like a true sovereign,\" Lucita replied, her eyes gleaming with approval. \"Decisiveness at the top is worth an entire division in the field.\"", 22);
-                AddLine(22, hugoId, romusId, "Attitude_Decisive_Hugo",
-                    "House Toras shares your resolve, Sire. Reclaiming our birthplace by the sword will silence every critic in Porte Drazon—so long as we prevail.", 35);
-
-                // Attitude 2: Cautious / Economy & Lives
-                AddChoice(23, hugoId, "Attitude_Cautious",
-                    "\"I do not take this step lightly. Every Rizian soldier and every guilder spent must be weighed carefully.\"",
-                    "I do not take this step lightly. Every Rizian soldier and every guilder spent must be weighed carefully.", 24);
-                AddLine(24, hugoId, romusId, "Attitude_Cautious_Hugo",
-                    "A prudent and kingly perspective, Your Majesty. A monarch who counts the cost before drawing the blade rarely loses his crown.", 25);
-                AddLine(25, lucitaId, romusId, "Attitude_Cautious_Lucita",
-                    "Precision and preparation save lives, Sire. That is why our operational plans focus on rapid encirclement rather than senseless attrition.", 35);
-
-                // Attitude 3: Diplomatic Concern
-                AddChoice(26, laurentoId, "Attitude_Diplomatic",
-                    "\"My primary concern is isolating Wehlen diplomatically so foreign powers cannot rob us of our victory.\"",
-                    "My primary concern is isolating Wehlen diplomatically so foreign powers cannot rob us of our victory.", 27);
-                AddLine(27, laurentoId, romusId, "Attitude_Diplomatic_Laurento",
-                    "Wise words, Your Majesty. Wars are won on the battlefield, but peace is secured in the chancelleries. If we strike fast and present the Alliance of Nations with a fait accompli, even Smolak's friends will hesitate.", 28);
-                AddLine(28, titusId, romusId, "Attitude_Diplomatic_Titus",
-                    "And if our agents secure the municipal archives in Zille City immediately, we will have plenty of evidence of Wehzek abuses to justify our intervention.", 35);
-
-                // Attitude 4: Personal / Warm to Lucita (especially if romanced/married)
-                string personalMenu = lucitaRomance
-                    ? "\"I place my trust in you, Lucita. Together, we will bring Zille back to the Crown.\""
-                    : "\"I have full confidence in the General Staff, Councilor Azaro. Proceed with the briefing.\"";
-                string personalSpoken = lucitaRomance
-                    ? "I place my trust in you, Lucita. Together, we will bring Zille back to the Crown."
-                    : "I have full confidence in the General Staff, Councilor Azaro. Proceed with the briefing.";
-                AddChoice(29, lucitaId, "Attitude_Personal", personalMenu, personalSpoken, 30);
-                if (lucitaMarried)
-                {
-                    AddLine(30, lucitaId, romusId, "Attitude_Personal_Lucita",
-                        "\"I will not fail you, Romus—nor our kingdom,\" she said softly, her hand briefly brushing yours over the map border before she straightened. (Hugo cleared his throat discreetly, looking away.)", 35);
-                }
-                else if (lucitaRomance)
-                {
-                    AddLine(30, lucitaId, romusId, "Attitude_Personal_Lucita",
-                        "\"You have my sword and my heart, Your Majesty,\" she murmured, a subtle warmth in her voice that earned a raised eyebrow from Laurento.", 35);
-                }
-                else
-                {
-                    AddLine(30, lucitaId, romusId, "Attitude_Personal_Lucita",
-                        "\"House Azaro and the Royal Armed Forces are honored by your trust, Your Majesty. We shall not disappoint you.\"", 35);
-                }
-
-                // --- MAIN INTERACTIVE DISCUSSION HUB (Entry 35) ---
-                var hub35 = AddLine(35, lucitaId, romusId, "Discussion_Hub",
-                    "What aspect of Operation Righteous Sword would you like the Council to elaborate on, Your Majesty, or are you ready to review the final attack doctrines?");
-                hub35.outgoingLinks.Add(CreateLink(conv.id, 35, 40)); // Military & Terrain
-                hub35.outgoingLinks.Add(CreateLink(conv.id, 35, 50)); // Economy & Logistics
-                hub35.outgoingLinks.Add(CreateLink(conv.id, 35, 60)); // Diplomacy & Lespia/CSP
-                hub35.outgoingLinks.Add(CreateLink(conv.id, 35, 70)); // Intelligence, Su Omina & Queen Mother
-                hub35.outgoingLinks.Add(CreateLink(conv.id, 35, 80)); // Proceed to Final Doctrines
-
-                // Branch 40: Military & Terrain Analysis (Lucita)
-                AddChoice(40, lucitaId, "Ask_Military",
-                    "\"Walk me through the military balance and the terrain of Zille. How will Wehlen defend the province?\"",
-                    "Walk me through the military balance and the terrain of Zille. How will Wehlen defend the province?", 41);
-                AddLine(41, lucitaId, romusId, "Mil_Lucita_1",
-                    "Zille is divided into five key operational sectors: our southern staging ground at the Brenas border, the central logistics hub of Wiktrany, the eastern gate at Nanta, the northern deepwater port of Munat, and Zille City itself in the west.", 42);
-                AddLine(42, lucitaId, romusId, "Mil_Lucita_2",
-                    "Colonel Valdez has concentrated his heaviest fortifications and armor around Zille City and entrenched infantry brigades at Wiktrany to block the main highway.", 43);
-                var milSubHub = AddLine(43, lucitaId, romusId, "Mil_Lucita_3",
-                    "However, Munat Port in the north and the eastern approaches through Nanta are more lightly held. Once we breach Wiktrany or seize Munat, Zille City will be completely cut off from Wehlen proper.");
-                milSubHub.outgoingLinks.Add(CreateLink(conv.id, 43, 44));
-                milSubHub.outgoingLinks.Add(CreateLink(conv.id, 43, 46));
-                milSubHub.outgoingLinks.Add(CreateLink(conv.id, 43, 35));
-
-                AddChoice(44, lucitaId, "Mil_Opinion_Armor",
-                    "\"Our armored brigades must lead the spearhead. I don't want our infantry bogged down in trench warfare.\"",
-                    "Our armored brigades must lead the spearhead. I don't want our infantry bogged down in trench warfare.", 45);
-                AddLine(45, lucitaId, romusId, "Mil_Opinion_Armor_Reply",
-                    "Agreed, Your Majesty. Shock and mobility are our greatest advantages over Smolak's conscripts. We will concentrate our tanks on the primary breakthrough sector.", 35);
-
-                AddChoice(46, lucitaId, "Mil_Opinion_Civilians",
-                    "\"Zille is a Rizian city. Instruct our commanders to avoid indiscriminate bombardment of civilian quarters.\"",
-                    "Zille is a Rizian city. Instruct our commanders to avoid indiscriminate bombardment of civilian quarters.", 47);
-                AddLine(47, hugoId, romusId, "Mil_Opinion_Civilians_Hugo",
-                    "A vital instruction, Sire. The citizens of Zille must greet our soldiers as liberators, not destroyers.", 48);
-                AddLine(48, lucitaId, romusId, "Mil_Opinion_Civilians_Lucita",
-                    "Strict rules of engagement will be issued to all artillery and air squadrons. We will target only Wehzek military depots and command bunkers.", 35);
-
-                // Branch 50: Economic & Logistical Impact (Hugo)
-                AddChoice(50, hugoId, "Ask_Economy",
-                    "\"Hugo, give me a frank assessment of the economic consequences. Can the realm sustain this war?\"",
-                    "Hugo, give me a frank assessment of the economic consequences. Can the realm sustain this war?", 51);
-                string hugoEconDetail = (budget >= 6 && energy >= 6)
-                    ? "Because your governance has kept both our treasury and energy reserves in a healthy state, the immediate shock to the Rizian economy will be manageable. Commercial shipping in the south will face temporary insurance spikes, but the state can absorb the cost."
-                    : "Candor compels me to warn you, Sire: with our reserves already under pressure, wartime requisitions will pinch the provinces. Fuel rationing and emergency war bonds may become necessary if the fighting drags on.";
-                AddLine(51, hugoId, romusId, "Econ_Hugo_1", hugoEconDetail, 52);
-                var econSubHub = AddLine(52, hugoId, romusId, "Econ_Hugo_2",
-                    "Yet we must also consider the prize. Reclaiming Zille restores its lucrative gold mines, customs revenues, and port facilities directly to the Crown—ending Smolak's extortion once and for all.");
-                econSubHub.outgoingLinks.Add(CreateLink(conv.id, 52, 53));
-                econSubHub.outgoingLinks.Add(CreateLink(conv.id, 52, 55));
-                econSubHub.outgoingLinks.Add(CreateLink(conv.id, 52, 35));
-
-                AddChoice(53, hugoId, "Econ_Opinion_Gold",
-                    "\"Once Zille is secured, its gold mines will more than repay the cost of this campaign.\"",
-                    "Once Zille is secured, its gold mines will more than repay the cost of this campaign.", 54);
-                AddLine(54, hugoId, romusId, "Econ_Opinion_Gold_Reply",
-                    "Precisely, Your Majesty. House Toras and the Royal Treasury stand ready to reintegrate Zille's mining administration the moment the guns fall silent.", 35);
-
-                AddChoice(55, hugoId, "Econ_Opinion_Rationing",
-                    "\"Ensure that wartime logistics do not disrupt civilian energy supplies in Porte Drazon and Brenas.\"",
-                    "Ensure that wartime logistics do not disrupt civilian energy supplies in Porte Drazon and Brenas.", 56);
-                AddLine(56, hugoId, romusId, "Econ_Opinion_Rationing_Reply",
-                    "I shall coordinate with Elena and the Ministry of Economy to prioritize domestic heating and industrial stability while routing military fuel through dedicated depots.", 35);
-
-                // Branch 60: Geopolitics, Lespia & Superpowers (Laurento)
-                AddChoice(60, laurentoId, "Ask_Diplomacy",
-                    "\"Laurento, what are the diplomatic repercussions? How will Lespia, Morella, and the superpowers react?\"",
-                    "Laurento, what are the diplomatic repercussions? How will Lespia, Morella, and the superpowers react?", 61);
-                string laurentoDetail = lespiaAllied
-                    ? "Our diplomatic groundwork with Lespia shields our western flank. Alvarez views Smolak as an unpredictable irritant; with Lespian intelligence sharing and diplomatic cover at the AN,ATO will quietly look the other way while we settle scores."
-                    : "The diplomatic waters are treacherous, Sire. Smolak will immediately cry foul at the Alliance of Nations. Without Lespia's backing, Alvarez may try to leverage our distraction, while Contana will protest the attack on their Wehzek client.";
-                AddLine(61, laurentoId, romusId, "Dip_Laurento_1", laurentoDetail, 62);
-                var dipSubHub = AddLine(62, laurentoId, romusId, "Dip_Laurento_2",
-                    "However, every chancellery in Merkopa knows that the original lease of Zille was supposed to end in peaceful return. If our campaign is swift and we frame it as restoring lawful order after Wehzek treaty violations, international outrage will remain rhetorical.");
-                dipSubHub.outgoingLinks.Add(CreateLink(conv.id, 62, 63));
-                dipSubHub.outgoingLinks.Add(CreateLink(conv.id, 62, 35));
-
-                AddChoice(63, laurentoId, "Dip_Opinion_AN",
-                    "\"Draft a formal declaration to the Alliance of Nations: Rizia is merely enforcing the sovereign return of its own territory.\"",
-                    "Draft a formal declaration to the Alliance of Nations: Rizia is merely enforcing the sovereign return of its own territory.", 64);
-                AddLine(64, laurentoId, romusId, "Dip_Opinion_AN_Reply",
-                    "The communiqué is already drafted, Your Majesty. The moment our forces cross the border, our envoys in Kyrute will present a full dossier of Smolak's provocations.", 35);
-
-                // Branch 70: Intelligence, Su Omina & Queen Mother Estela (Titus & Hugo)
-                AddChoice(70, titusId, "Ask_Intel",
-                    "\"Titus, what of the internal security situation—and the safety of my mother's childhood estate in Zille?\"",
-                    "Titus, what of the internal security situation—and the safety of my mother's childhood estate in Zille?", 71);
-                AddLine(71, titusId, romusId, "Intel_Titus_1",
-                    "Your Majesty, the Golden Guard has placed a special detachment on standby to secure Queen Mother Estela's ancestral home in Zille the moment we enter the city. And should the campaign falter, we have evacuation protocols prepared for Brenas.", 72);
-                AddLine(72, hugoId, romusId, "Intel_Hugo_1",
-                    "That is no small matter, Romus. If our offensive were to collapse and allow Wehzek troops to counterattack into Brenas, the humiliation—and the danger to the royal family—would be unthinkable.", 73);
-                AddLine(73, titusId, romusId, "Intel_Titus_2",
-                    suOminaStrong
-                        ? "With Su Omina cells rising up behind enemy lines, Colonel Valdez will be fighting fires in his own rear quarters from hour one. He will have no capacity for a counteroffensive."
-                        : "Even with limited partisans inside the city, our Golden Guard operatives have mapped every Wehzek command post. We will strike their leadership blind.", 35);
-
-                // --- FINAL DOCTRINE SELECTION (Entry 80) ---
-                AddChoice(80, lucitaId, "Proceed_To_Doctrines",
-                    "\"I have heard enough. Present the final operational doctrines for Operation Righteous Sword.\"",
-                    "I have heard enough. Present the final operational doctrines for Operation Righteous Sword.", 81);
-
-                AddLine(81, lucitaId, romusId, "Doctrine_Lucita_1",
-                    "At once, Your Majesty. The General Staff has prepared two primary operational doctrines for Phase I of Operation Righteous Sword.", 82);
-
-                AddLine(82, lucitaId, romusId, "Doctrine_Lucita_2",
-                    "Plan Alpha calls for a concentrated frontal breakthrough from the Brenas staging grounds straight into the central logistics hub of Wiktrany, shattering Smolak's main defensive line before driving west into Zille City.", 83);
-
-                var finalHub = AddLine(83, lucitaId, romusId, "Doctrine_Lucita_3",
-                    "Plan Beta emphasizes an enveloping maneuver—pinning their central forces while driving our mobile columns toward the eastern gate at Nanta and the northern port of Munat to sever Wehzek sea and land supply lines. Which doctrine do you authorize, Sire?");
-                finalHub.outgoingLinks.Add(CreateLink(conv.id, 83, 90)); // Plan Alpha
-                finalHub.outgoingLinks.Add(CreateLink(conv.id, 83, 93)); // Plan Beta
-                finalHub.outgoingLinks.Add(CreateLink(conv.id, 83, 96)); // Postpone
-                finalHub.outgoingLinks.Add(CreateLink(conv.id, 83, 35)); // Back to questions
-
-                // Option 90: Authorize Plan Alpha
-                AddChoice(90, lucitaId, "Choice_Alpha",
-                    "Authorize Plan Alpha: Launch a decisive frontal breakthrough through Wiktrany toward Zille City.",
-                    "I authorize Plan Alpha. Concentrate our armor and smash straight through their central line at Wiktrany.", 91, "Zille_War_Alfa");
-                AddLine(91, lucitaId, romusId, "Alpha_Ack_Lucita",
-                    lucitaMarried
-                        ? "\"It shall be done, my King,\" Lucita said, her voice ringing with steel. \"I will have the operational markers placed on the Zille frontier immediately. Join me at the war table when you are ready to deploy our divisions.\""
-                        : "\"Understood, Your Majesty!\" Lucita saluted sharply. \"The directive for Operation Righteous Sword is signed. The war marker is now active at Zille—awaiting your command to begin Phase I deployment.\"", 92);
-                AddLine(92, hugoId, romusId, "Alpha_Ack_Hugo",
-                    "May Saint Wruhec guide our banners to victory, Your Majesty.");
-
-                // Option 93: Authorize Plan Beta
-                AddChoice(93, lucitaId, "Choice_Beta",
-                    "Authorize Plan Beta: Execute an enveloping maneuver through Nanta and the port of Munat.",
-                    "I authorize Plan Beta. Outflank their defenses through Nanta and seize the port of Munat to cut them off.", 94, "Zille_War_Beta");
-                AddLine(94, lucitaId, romusId, "Beta_Ack_Lucita",
-                    lucitaMarried
-                        ? "\"A brilliant maneuver, my love,\" Lucita replied, her eyes shining. \"We will strangle Valdez's garrison before they know where the main blow fell. The operation marker is now ready at Zille whenever you wish to commence Phase I.\""
-                        : "\"A textbook encirclement, Your Majesty,\" Lucita said with a crisp nod. \"Orders are being transmitted to the Brenas staging grounds. You may initiate Phase I from the Zille operation marker at your discretion.\"", 95);
-                AddLine(95, laurentoId, romusId, "Beta_Ack_Laurento",
-                    "Seizing the port of Munat early will also prevent any foreign ships from meddling. Godspeed to our troops, Sire.");
-
-                // Option 96: Postpone
-                AddChoice(96, hugoId, "Choice_Postpone",
-                    "Hold the offensive for now. We need more time to prepare before crossing the border.",
-                    "Hold the offensive for now. Keep our divisions on standby along the border, but do not cross until I give the word.", 97, "Zille_War_Postpone");
-                AddLine(97, hugoId, romusId, "Postpone_Ack_Hugo",
-                    "A measured and prudent decision, Your Majesty. The Council and the General Staff will remain ready whenever you choose to reconvene.");
-
-                // Option: Return to questions
-                AddChoice(98, lucitaId, "Back_To_Questions",
-                    "\"Wait—let us review the council reports once more before I sign the directive.\"",
-                    "Wait—let us review the council reports once more before I sign the directive.", 35);
-                finalHub.outgoingLinks.Add(CreateLink(conv.id, 83, 98));
-
-                db.AddConversation(conv);
-                MelonLogger.Msg("[WAR ENGINE] Native Royal War Council Briefing conversation (English, dynamic Suzerain style) injected successfully!");
+                ZilleDialogueSystem.EnsureAllConversationsRegistered();
                 return true;
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[WAR ENGINE] Error injecting conversation: {ex.Message}\n{ex.StackTrace}");
+                MelonLogger.Error($"[WAR ENGINE] EnsureWarCouncilConversationRegistered error: {ex.Message}");
                 return false;
             }
         }

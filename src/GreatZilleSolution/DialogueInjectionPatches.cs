@@ -639,214 +639,12 @@ namespace GreatZilleSolution
         {
             try
             {
-                var db = DialogueManager.masterDatabase;
-                if (db == null || db.conversations == null || db.conversations.Count == 0) return;
-
-                int patchedCount = 0;
-                for (int i = 0; i < db.conversations.Count; i++)
-                {
-                    var conv = db.conversations[i];
-                    if (conv == null || string.IsNullOrEmpty(conv.Title)) continue;
-
-                    // 1. Turn 2 Council Meeting on Foreign Relations (FPnT_DiplomacyBriefing)
-                    if (conv.Title.IndexOf("FPnT_DiplomacyBriefing", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        if (InjectWehlenUltimatumOption(conv, db)) patchedCount++;
-                    }
-                    // 2. Turn 2 Wehzek-Rizian Friendship Day in Zille (FPnT_ZilleVisit)
-                    else if (conv.Title.IndexOf("FPnT_ZilleVisit", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        if (InjectSmolakFaceToFaceUltimatum(conv, db)) patchedCount++;
-                    }
-                }
-
-                if (patchedCount > 0 && !_vanillaConvsPatched)
-                {
-                    _vanillaConvsPatched = true;
-                    MelonLogger.Msg($"[WAR DIALOGUE] Successfully injected custom war pathways into {patchedCount} vanilla dialogue trees!");
-                }
+                ZilleDialogueSystem.InjectAllVanillaConversationPatches();
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning($"[WAR DIALOGUE] InjectWarOptionsIntoVanillaConversations: {ex.Message}");
             }
-        }
-
-        private static bool InjectWehlenUltimatumOption(Conversation conv, DialogueDatabase db)
-        {
-            if (conv == null || conv.dialogueEntries == null) return false;
-
-            // Check if already injected
-            for (int i = 0; i < conv.dialogueEntries.Count; i++)
-            {
-                var e = conv.dialogueEntries[i];
-                if (e != null && e.Title == "Zille_War_Ultimatum_Choice") return true;
-            }
-
-            // Find parent entry discussing Wehlen, Smolak, or Zille
-            DialogueEntry targetParent = null;
-            for (int i = 0; i < conv.dialogueEntries.Count; i++)
-            {
-                var e = conv.dialogueEntries[i];
-                if (e == null || e.outgoingLinks == null || e.outgoingLinks.Count == 0) continue;
-
-                string text = (e.DialogueText ?? "") + " " + (e.Title ?? "") + " " + (e.MenuText ?? "");
-                if (text.IndexOf("Wehlen", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    text.IndexOf("Smolak", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    text.IndexOf("Zille", StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    targetParent = e;
-                    break;
-                }
-            }
-
-            // Fallback: player choice hub
-            if (targetParent == null)
-            {
-                for (int i = 0; i < conv.dialogueEntries.Count; i++)
-                {
-                    var e = conv.dialogueEntries[i];
-                    if (e != null && e.outgoingLinks != null && e.outgoingLinks.Count >= 2)
-                    {
-                        targetParent = e;
-                        break;
-                    }
-                }
-            }
-
-            if (targetParent == null) return false;
-
-            int choiceId = 99201;
-            int replyId = 99202;
-            int romusId = conv.ActorID;
-            int laurentoId = conv.ConversantID;
-
-            // 1. Player choice entry
-            var choice = new DialogueEntry();
-            choice.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-            choice.outgoingLinks = new Il2CppSystem.Collections.Generic.List<Link>();
-            choice.id = choiceId;
-            choice.conversationID = conv.id;
-            choice.ActorID = romusId;
-            choice.ConversantID = laurentoId;
-            choice.Title = "Zille_War_Ultimatum_Choice";
-            choice.MenuText = "If Smolak does not return Zille on schedule, we will reclaim our province by force of arms.";
-            choice.DialogueText = "If Smolak does not return Zille on schedule, we will reclaim our ancestral province by force of arms. The armed forces must be placed on immediate alert.";
-            choice.userScript = "Variable[\"RiziaDLC.CountryRelation_Wehlen_AtWar\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_War_Ultimatum_Given\"] = true;";
-
-            // 2. Laurento response entry
-            var reply = new DialogueEntry();
-            reply.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-            reply.outgoingLinks = new Il2CppSystem.Collections.Generic.List<Link>();
-            reply.id = replyId;
-            reply.conversationID = conv.id;
-            reply.ActorID = laurentoId;
-            reply.ConversantID = romusId;
-            reply.Title = "Zille_War_Ultimatum_Reply";
-            reply.DialogueText = "Your Majesty, an armed invasion of Zille will provoke Smolak to outright fury and risks triggering a severe response from the Contanan Security Pact. Nevertheless, the General Staff shall draw up offensive battle plans should the agreement collapse.";
-            reply.MenuText = reply.DialogueText;
-
-            choice.outgoingLinks.Add(new Link(conv.id, choiceId, conv.id, replyId));
-
-            if (targetParent.outgoingLinks.Count > 0)
-            {
-                var nextLink = targetParent.outgoingLinks[0];
-                reply.outgoingLinks.Add(new Link(conv.id, replyId, conv.id, nextLink.destinationDialogueID));
-            }
-
-            targetParent.outgoingLinks.Add(new Link(conv.id, targetParent.id, conv.id, choiceId));
-
-            conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
-
-            MelonLogger.Msg($"[WAR DIALOGUE] Successfully injected Wehlen Ultimatum choice into '{conv.Title}' (parent id={targetParent.id})");
-            return true;
-        }
-
-        private static bool InjectSmolakFaceToFaceUltimatum(Conversation conv, DialogueDatabase db)
-        {
-            if (conv == null || conv.dialogueEntries == null) return false;
-
-            for (int i = 0; i < conv.dialogueEntries.Count; i++)
-            {
-                var e = conv.dialogueEntries[i];
-                if (e != null && e.Title == "Zille_Smolak_FaceToFace_Choice") return true;
-            }
-
-            DialogueEntry targetParent = null;
-            for (int i = 0; i < conv.dialogueEntries.Count; i++)
-            {
-                var e = conv.dialogueEntries[i];
-                if (e == null || e.outgoingLinks == null || e.outgoingLinks.Count == 0) continue;
-
-                string text = (e.DialogueText ?? "") + " " + (e.Title ?? "");
-                if (text.IndexOf("Smolak", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    text.IndexOf("Zille", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    text.IndexOf("Friendship", StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    targetParent = e;
-                    break;
-                }
-            }
-
-            if (targetParent == null)
-            {
-                for (int i = 0; i < conv.dialogueEntries.Count; i++)
-                {
-                    var e = conv.dialogueEntries[i];
-                    if (e != null && e.outgoingLinks != null && e.outgoingLinks.Count >= 2)
-                    {
-                        targetParent = e;
-                        break;
-                    }
-                }
-            }
-
-            if (targetParent == null) return false;
-
-            int choiceId = 99203;
-            int replyId = 99204;
-            int romusId = conv.ActorID;
-            int smolakId = conv.ConversantID;
-
-            var choice = new DialogueEntry();
-            choice.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-            choice.outgoingLinks = new Il2CppSystem.Collections.Generic.List<Link>();
-            choice.id = choiceId;
-            choice.conversationID = conv.id;
-            choice.ActorID = romusId;
-            choice.ConversantID = smolakId;
-            choice.Title = "Zille_Smolak_FaceToFace_Choice";
-            choice.MenuText = "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily, my tanks will remove you.";
-            choice.DialogueText = "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the lease expires, my tanks will remove you.";
-            choice.userScript = "Variable[\"RiziaDLC.CountryRelation_Wehlen_AtWar\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Smolak_Threatened\"] = true;";
-
-            var reply = new DialogueEntry();
-            reply.fields = new Il2CppSystem.Collections.Generic.List<Field>();
-            reply.outgoingLinks = new Il2CppSystem.Collections.Generic.List<Link>();
-            reply.id = replyId;
-            reply.conversationID = conv.id;
-            reply.ActorID = smolakId;
-            reply.ConversantID = romusId;
-            reply.Title = "Zille_Smolak_FaceToFace_Reply";
-            reply.DialogueText = "Threats, Romus? In my own city? Wehlen does not fear your parade-ground uniforms. Just dare to cross that river, and you will see South Merkopa burn!";
-            reply.MenuText = reply.DialogueText;
-
-            choice.outgoingLinks.Add(new Link(conv.id, choiceId, conv.id, replyId));
-
-            if (targetParent.outgoingLinks.Count > 0)
-            {
-                var nextLink = targetParent.outgoingLinks[0];
-                reply.outgoingLinks.Add(new Link(conv.id, replyId, conv.id, nextLink.destinationDialogueID));
-            }
-
-            targetParent.outgoingLinks.Add(new Link(conv.id, targetParent.id, conv.id, choiceId));
-
-            conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
-
-            MelonLogger.Msg($"[WAR DIALOGUE] Successfully injected Smolak face-to-face ultimatum option into '{conv.Title}'");
-            return true;
         }
 
         // ================= TOKEN INTERACTION PANEL POSTFIX =================
@@ -1015,19 +813,19 @@ namespace GreatZilleSolution
                 string menuText = e.DestinationEntry.MenuText ?? "";
 
                 // Check for war initiation via native Royal War Council Briefing or vanilla choice
-                if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
+                if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Plan_Alpha") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Plan Alpha chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
-                else if (script.Contains("Zille_War_Beta") || title.Contains("Choice_Beta") || menuText.Contains("Plan Beta"))
+                else if (script.Contains("Zille_War_Beta") || title.Contains("Choice_Plan_Beta") || title.Contains("Choice_Beta") || menuText.Contains("Plan Beta"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
-                else if (script.Contains("Zille_War_Postpone") || title.Contains("Choice_Postpone") || menuText.Contains("Postpone") || menuText.Contains("Wstrzymajmy"))
+                else if (script.Contains("Zille_War_Postpone") || title.Contains("Choice_Plan_Postpone") || title.Contains("Choice_Postpone") || menuText.Contains("Postpone") || menuText.Contains("Wstrzymajmy"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Postponing Zille invasion as requested by player.");
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = false;

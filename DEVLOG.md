@@ -137,3 +137,25 @@
   - Disassembled `EntityDataManager.get_OperationData` (`0x180856980`): discovered it dynamically filters the private static backing field `EntityDataManager.operationData` (`+0x258`) using `EntityDataManager.IsDataAvailable(item.AppBundleProperties)`.
   - Injected `Operation_Zille_1`, `MapToken_Zille_War`, `WarFragment_Zille_1_1`, and `WarCouncil_Zille_Briefing` directly into `EntityDataManager`'s backing lists with `AppBundleProperties.StoryPacks = ["StoryPack_Rizia"]`, non-null string properties, and initialized `SaveData.warSaveData` so `WarFlowManager.SetupWarFragment(wfd)` executes natively from start to finish (hiding civilian tokens, switching `MapManager` to `MapType.War`, starting war music, and opening `WarDeploymentPanel`).
 - Built clean binary `GreatZilleSolution.dll` (0 errors, 0 warnings) and deployed to `H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleSolution.dll`.
+
+### [2026-11-05] Complete Lore-Authentic Dialogue Overhaul & 6 Core Zille Scenes (v0.5.0)
+- **Eliminated Looped & Out-of-Character War Council:**
+  - Removed old repeating dialogue loop where Hugo Toras spoke inappropriately about treasury and gold reserves.
+  - Hugo Toras restored to canonical role: Grand Vizier, Toras patriarch, royal succession, dynastic prestige, and monarchist legitimacy.
+  - Elena Werner introduced in her authentic minister voice: assessing the Crown Treasury, fuel burn rate, inflation, and logistical strain.
+  - Lucita Azaro focused on military dispositions, terrain, Valdez's four brigades, and Plan Alpha (Frontal) vs Plan Beta (Munat flank), with full romance/marriage reactivity.
+  - Laurento Esquibel focused on superpowers and containment: realistic limits of CSP and ATO intervention.
+  - Titus Gordion focused on internal security, Su Omina/ATA networks, and protection of Queen Mother Estela's childhood estate.
+  - Replaced cyclical loop with a clean linear-to-inquiry progression that seamlessly transitions to operational doctrine authorization.
+- **Implemented Modular Master Narrative Engine (`ZilleDialogueSystem.cs`):**
+  - Registered and built all 6 master expansion scenes into PixelCrushers `masterDatabase`:
+    1. `Turn_Zille_WarBriefing` (ID 9988): Overhauled War Council Briefing.
+    2. `Turn_Zille_WarBalconySpeech` (ID 9989): Palace Balcony Proclamation of War (Revanchist, Liberating, or Legalist).
+    3. `Turn_Zille_WarLogisticsDispute` (ID 9990): House Azaro vs House Sazon logistics clash in Brenas.
+    4. `Turn_Zille_WarPreNegotiationsBriefing` (ID 9991): Council debrief + 3 Encrypted Hotline calls (Alvarez, Hegel, Beatrice) with strict lore adherence (no foreign boots on Wehlen soil; intelligence, AN veto, and de-escalation diplomacy only).
+    5. `Turn_Zille_WarSmolakFinalParley` (ID 9992): Tense frontline tent parley with Wiktor Smolak (tea, smokes, cynical tyrant persona).
+    6. `Turn_Zille_WarPeaceTreaty` (ID 9993): The 5 comprehensive war endings (Total Fiasco, Tactical Defeat, Bloody Stalemate, Decisive Victory, Overwhelming Triumph).
+  - Injected all required Suzerain fields (`Title`, `Actor`, `Conversant`, `Dialogue Text`, `en`, `Menu Text`, `Sequence`, `Articy Id`) with `ConditionPriority.Normal` to guarantee native engine rendering.
+  - Integrated scene metadata into `EntityDataManager.AllConversationsData`.
+- **Surgical Injections into Vanilla Dialogue Trees:**
+  - Injected options into Turn 1 (`EnT_CouncilBriefing`, `SnO_SecurityMilitaryMeeting`), Turn 2 (`FPnT_DiplomacyBriefing`, `FPnT_ZilleVisit`), Turn 3 (`SnO_ZilleSecurityDebrief`), Turn 4 (`FPnT_AlvarezCall`, `A_CouncilTalkAboutPales`), and Turn 8 (`FPnT_ZilleNegotiations`).
