@@ -18,7 +18,7 @@ namespace GreatZilleSolution
         public float Width { get; set; } = 90f;
         public float Height { get; set; } = 90f;
         
-        // Allegiance: Rizia, Wehlen, Contested
+        // Allegiance: Rizia, Wehlen, Derdia, EmptySea, Contested
         public string Allegiance { get; set; } = "Contested";
         
         // Tactical attributes
@@ -34,8 +34,10 @@ namespace GreatZilleSolution
         // Enemy reinforcement waves may spawn on this province (WarTile.SetIsReinforcementTile).
         public bool IsReinforcementTile { get; set; } = false;
 
-        // From the v13 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
+        // From the v14 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
         public bool IsSea { get; set; } = false;
+        // Yol (129). No movement links, and the table must not enter or select it.
+        public bool IsImpassable { get; set; } = false;
         public bool IsCity { get; set; } = false;
         // The name printed above the star. The province can be "Zille City" while the label is "Zille".
         public string CityName { get; set; } = "";
@@ -59,7 +61,7 @@ namespace GreatZilleSolution
         // Neighbour tile ids this province has a drawn road to.
         public List<string> RoadToIds { get; set; } = new List<string>();
 
-        // IDs of adjacent connected tiles (the v13 movement graph, including road and strait links).
+        // IDs of adjacent connected tiles (the v14 movement graph, including road and strait links).
         public List<string> AdjacentIds { get; set; } = new List<string>();
 
         // ---- In-game placement (see docs/ZILLE_MAP_INTEGRATION.md) ----

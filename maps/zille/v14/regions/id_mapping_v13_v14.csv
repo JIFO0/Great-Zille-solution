@@ -1,0 +1,187 @@
+v14_id,v14_name,v13_name,region,status,iou_same_id,reason,v13_overlaps (id:share_of_v14)
+ZilleTile_1,Corvis,Corvis,Zille,unchanged,1.0,,ZilleTile_1:1.0
+ZilleTile_2,Munat,Munat,Zille,unchanged,1.0,,ZilleTile_2:1.0
+ZilleTile_3,Manes Riuz,Manes Riuz,Zille,unchanged,1.0,,ZilleTile_3:1.0
+ZilleTile_4,Corvis East,Corvis East,Zille,unchanged,1.0,,ZilleTile_4:1.0
+ZilleTile_5,Tirsa,Tirsa,Zille,unchanged,1.0,,ZilleTile_5:1.0
+ZilleTile_6,Quella,Quella,Zille,unchanged,1.0,,ZilleTile_6:1.0
+ZilleTile_7,Corvis West,Corvis West,Zille,unchanged,1.0,,ZilleTile_7:1.0
+ZilleTile_8,Nanta West,Nanta West,Zille,unchanged,1.0,,ZilleTile_8:1.0
+ZilleTile_9,Nanta,Nanta,Zille,unchanged,1.0,,ZilleTile_9:1.0
+ZilleTile_10,Tirsa West,Tirsa West,Zille,unchanged,1.0,,ZilleTile_10:1.0
+ZilleTile_11,Isor,Isor,Zille,unchanged,1.0,,ZilleTile_11:1.0
+ZilleTile_12,Lido Isora,Lido Isora,Zille,unchanged,1.0,,ZilleTile_12:1.0
+ZilleTile_13,Lenta North,Lenta North,Zille,unchanged,1.0,,ZilleTile_13:1.0
+ZilleTile_14,Nanta Southwest,Nanta Southwest,Zille,unchanged,1.0,,ZilleTile_14:1.0
+ZilleTile_15,Mave Nortus Northwest,Mave Nortus Northwest,Zille,unchanged,1.0,,ZilleTile_15:1.0
+ZilleTile_16,Sostra Northeast,Sostra Northeast,Zille,unchanged,1.0,,ZilleTile_16:1.0
+ZilleTile_17,Lenta Northwest,Lenta Northwest,Zille,unchanged,1.0,,ZilleTile_17:1.0
+ZilleTile_18,Lenta,Lenta,Zille,unchanged,1.0,,ZilleTile_18:1.0
+ZilleTile_19,Venna Northwest,Venna Northwest,Zille,unchanged,1.0,,ZilleTile_19:1.0
+ZilleTile_20,Venna,Venna,Zille,unchanged,1.0,,ZilleTile_20:1.0
+ZilleTile_21,Ardo,Ardo,Zille,unchanged,1.0,,ZilleTile_21:1.0
+ZilleTile_22,Ossa North,Ossa North,Zille,unchanged,1.0,,ZilleTile_22:1.0
+ZilleTile_23,Mave Nortus,Mave Nortus,Brenas,unchanged,1.0,,ZilleTile_23:1.0
+ZilleTile_24,Cala Vessa East,Cala Vessa East,Zille,unchanged,1.0,,ZilleTile_24:1.0
+ZilleTile_25,Wiktrany East,Wiktrany East,Zille,unchanged,1.0,,ZilleTile_25:1.0
+ZilleTile_26,Ossa East,Ossa East,Zille,unchanged,1.0,,ZilleTile_26:1.0
+ZilleTile_27,Sabbiano,Sabbiano,Zille,unchanged,1.0,,ZilleTile_27:1.0
+ZilleTile_28,Wiktrany,Wiktrany,Zille,unchanged,1.0,,ZilleTile_28:1.0
+ZilleTile_29,Ossa South,Ossa South,Zille,unchanged,1.0,,ZilleTile_29:1.0
+ZilleTile_30,Ondaro Southeast,Ondaro Southeast,Zille,unchanged,1.0,,ZilleTile_30:1.0
+ZilleTile_31,Zille North,Zille North,Zille,unchanged,1.0,,ZilleTile_31:1.0
+ZilleTile_32,Wiktrany Southeast,Wiktrany Southeast,Zille,unchanged,1.0,,ZilleTile_32:1.0
+ZilleTile_33,Dapalle West,Dapalle West,Zille,unchanged,1.0,,ZilleTile_33:1.0
+ZilleTile_34,Vela Nova,Vela Nova,Zille,unchanged,1.0,,ZilleTile_34:1.0
+ZilleTile_35,Zille City,Zille City,Zille,unchanged,1.0,,ZilleTile_35:1.0
+ZilleTile_36,Pomara Northwest,Pomara Northwest,Zille,unchanged,1.0,,ZilleTile_36:1.0
+ZilleTile_37,Pomara North,Pomara North,Zille,unchanged,1.0,,ZilleTile_37:1.0
+ZilleTile_38,Rivamare,Rivamare,Zille,unchanged,1.0,,ZilleTile_38:1.0
+ZilleTile_39,Celle Vaz North,Celle Vaz North,Zille,unchanged,1.0,,ZilleTile_39:1.0
+ZilleTile_40,Mave Nortus East,Mave Nortus East,Brenas,unchanged,1.0,,ZilleTile_40:1.0
+ZilleTile_41,Mave Nortus South,Mave Nortus South,Brenas,unchanged,1.0,,ZilleTile_41:1.0
+ZilleTile_42,Tarnes,Tarnes,Brenas,unchanged,1.0,,ZilleTile_42:1.0
+ZilleTile_43,Venna South,Venna South,Brenas,unchanged,1.0,,ZilleTile_43:1.0
+ZilleTile_44,Zelles,Zelles,Brenas,unchanged,1.0,,ZilleTile_44:1.0
+ZilleTile_45,Tarnes Southeast,Tarnes Southeast,Brenas,unchanged,1.0,,ZilleTile_45:1.0
+ZilleTile_46,Dapalle North,Dapalle North,Brenas,unchanged,1.0,,ZilleTile_46:1.0
+ZilleTile_47,Dapalle East,Dapalle East,Brenas,unchanged,1.0,,ZilleTile_47:1.0
+ZilleTile_48,Zelles Southwest,Zelles Southwest,Brenas,unchanged,1.0,,ZilleTile_48:1.0
+ZilleTile_49,Zelles Southeast,Zelles Southeast,Brenas,unchanged,1.0,,ZilleTile_49:1.0
+ZilleTile_50,Morsa North,Morsa North,Brenas,unchanged,1.0,,ZilleTile_50:1.0
+ZilleTile_51,Dapalle,Dapalle,Brenas,unchanged,1.0,,ZilleTile_51:1.0
+ZilleTile_52,Ostrabe West,Ostrabe West,Brenas,unchanged,1.0,,ZilleTile_52:1.0
+ZilleTile_53,Ostrabe,Ostrabe,Brenas,unchanged,1.0,,ZilleTile_53:1.0
+ZilleTile_54,Ostrabe Northeast,Ostrabe Northeast,Brenas,unchanged,1.0,,ZilleTile_54:1.0
+ZilleTile_55,Pomara,Pomara Southwest,Brenas,id reused (new shape),0.545,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_55:0.576 ZilleTile_60:0.062 ZilleTile_56:0.055 ZilleTile_66:0.034
+ZilleTile_56,Morsa West,Morsa West,Brenas,kept (reshaped),0.657,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_56:0.996
+ZilleTile_57,Morsa,Morsa,Brenas,unchanged,1.0,,ZilleTile_57:1.0
+ZilleTile_58,Ostrabe South,Ostrabe South,Brenas,unchanged,1.0,,ZilleTile_58:1.0
+ZilleTile_59,Celle Vaz,Celle Vaz,Brenas,unchanged,1.0,,ZilleTile_59:1.0
+ZilleTile_60,Celle Vaz East,Celle Vaz East,Brenas,kept (reshaped),0.669,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_60:0.786 ZilleTile_66:0.113
+ZilleTile_61,Brivane,Brivane,Brenas,id reused (new shape),0.458,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_61:0.558 ZilleTile_66:0.234 ZilleTile_56:0.022
+ZilleTile_62,Brivane Northeast,Brivane East,Brenas,id reused (new shape),0.189,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_62:0.438 ZilleTile_56:0.081 ZilleTile_63:0.068 ZilleTile_61:0.024
+ZilleTile_63,Morsa Southeast,Morsa Southeast,Brenas,kept (reshaped),0.622,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_63:0.685 ZilleTile_62:0.197
+ZilleTile_64,Marbelas,Marbelas,Brenas,unchanged,1.0,,ZilleTile_64:1.0
+ZilleTile_65,Marbelas East,Marbelas East,Brenas,kept (reshaped),0.759,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_65:0.911 ZilleTile_66:0.032
+ZilleTile_66,Brivane Southwest,Brivane West,Brenas,id reused (new shape),0.133,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_67:0.518 ZilleTile_66:0.229 ZilleTile_65:0.082
+ZilleTile_67,Brivane Southeast,Brivane South,Brenas,id reused (new shape),0.3,Brivane block re-cut along the Zille-Brivane main road,ZilleTile_67:0.497 ZilleTile_62:0.275 ZilleTile_61:0.03
+ZilleTile_68,Zicek,Kessin West,Wehlen,kept (reshaped),0.797,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_68:0.919
+ZilleTile_69,Kessin,Kessin,Wehlen,id reused (new shape),0.464,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_69:0.752 ZilleTile_68:0.065
+ZilleTile_70,Kessin East,Harlitz North,Wehlen,id reused (new shape),0.544,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_70:0.71 ZilleTile_69:0.132
+ZilleTile_71,Kratsna,Kratsna,Wehlen,kept (reshaped),0.896,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_71:0.92 ZilleTile_75:0.033
+ZilleTile_72,Kreleck Islands,Kreleck Islands,Wehlen,unchanged,1.0,,ZilleTile_72:1.0
+ZilleTile_73,Opolje,Dornatz North,Wehlen,kept (reshaped),0.715,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_73:0.832 ZilleTile_74:0.024 ZilleTile_69:0.02
+ZilleTile_74,Dornatz,Dornatz Northeast,Wehlen,id reused (new shape),0.263,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_74:0.425 ZilleTile_76:0.25 ZilleTile_79:0.044 ZilleTile_73:0.033
+ZilleTile_75,Shwinouz,Kratsna Southeast,Wehlen,kept (reshaped),0.658,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_75:0.89 ZilleTile_78:0.038
+ZilleTile_76,Sulkov,Dornatz East,Wehlen,id reused (new shape),0.194,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_76:0.295 ZilleTile_85:0.295 ZilleTile_80:0.135
+ZilleTile_77,Harlitz,Harlitz,Wehlen,id reused (new shape),0.125,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_74:0.342 ZilleTile_77:0.235 ZilleTile_70:0.112 ZilleTile_69:0.055
+ZilleTile_78,Witsima,Trebnow,Wehlen,id reused (new shape),0.014,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_77:0.524 ZilleTile_75:0.125 ZilleTile_70:0.048 ZilleTile_78:0.024
+ZilleTile_79,Wizen,Dornatz,Wehlen,id reused (new shape),0.599,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_79:0.895
+ZilleTile_80,Witsima Southwest,Sulkov Northeast,Wehlen,id reused (new shape),0.151,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_80:0.254 ZilleTile_77:0.241 ZilleTile_76:0.161
+ZilleTile_81,Torunz,Trebnow Southwest,Wehlen,id reused (new shape),0.485,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_81:0.573 ZilleTile_80:0.147 ZilleTile_87:0.052
+ZilleTile_82,Leburk,Trebnow East,Wehlen,id reused (new shape),0.27,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_78:0.383 ZilleTile_82:0.317 ZilleTile_77:0.022
+ZilleTile_83,Vernen,Mirlow South,Wehlen,id reused (new shape),0.277,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_83:0.373 ZilleTile_79:0.14 ZilleTile_84:0.128
+ZilleTile_84,Vernen South,Sulkov Southwest,Wehlen,id reused (new shape),0.144,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_84:0.313 ZilleTile_89:0.227 ZilleTile_83:0.134 ZilleTile_88:0.032
+ZilleTile_85,Kastza North,Sulkov,Wehlen,id reused (new shape),0.186,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_84:0.479 ZilleTile_85:0.304
+ZilleTile_86,Warno,Sulkov Southeast,Wehlen,id reused (new shape),0.426,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_86:0.566 ZilleTile_85:0.095 ZilleTile_80:0.025
+ZilleTile_87,Ustkov,Trebnow South,Wehlen,id reused (new shape),0.332,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_87:0.46 ZilleTile_92:0.146 ZilleTile_82:0.126
+ZilleTile_88,Czerna,Brannitz West,Wehlen,id reused (new shape),0.395,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_88:0.611 ZilleTile_93:0.178
+ZilleTile_89,Brannitz,Brannitz,Wehlen,id reused (new shape),0.328,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_89:0.487 ZilleTile_90:0.134 ZilleTile_84:0.042
+ZilleTile_90,Kastza,Brannitz Northeast,Wehlen,id reused (new shape),0.499,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_90:0.638 ZilleTile_86:0.131
+ZilleTile_91,Stegnn,Port Rotsla Northwest,Wehlen,id reused (new shape),0.581,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_91:0.728
+ZilleTile_92,Kolobrzezg,Walsholm North,Wehlen,id reused (new shape),0.389,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_92:0.451 ZilleTile_87:0.145 ZilleTile_91:0.133
+ZilleTile_93,Kalischt,Yol Northwest,Wehlen,id reused (new shape),0.149,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_93:0.211
+ZilleTile_94,Grodzizg,Grodzizg,Wehlen,kept (reshaped),0.722,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_94:0.915
+ZilleTile_95,Artsnan,Brannitz Southwest,Wehlen,kept (reshaped),0.653,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_95:0.707 ZilleTile_89:0.066 ZilleTile_93:0.049
+ZilleTile_96,Rotsla,Rotsla,Wehlen,unchanged,1.0,,ZilleTile_96:1.0
+ZilleTile_97,Nanta Northwest,Nanta Northwest,Zille,unchanged,1.0,,ZilleTile_97:1.0
+ZilleTile_98,Quella Southeast,Quella Southeast,Zille,unchanged,1.0,,ZilleTile_98:1.0
+ZilleTile_99,Corvis South,Corvis South,Zille,unchanged,1.0,,ZilleTile_99:1.0
+ZilleTile_100,Quella Highlands,Quella Highlands,Zille,unchanged,1.0,,ZilleTile_100:1.0
+ZilleTile_101,Nanta Southeast,Nanta Southeast,Zille,unchanged,1.0,,ZilleTile_101:1.0
+ZilleTile_102,Venna North,Venna North,Zille,unchanged,1.0,,ZilleTile_102:1.0
+ZilleTile_103,Lenta East,Lenta East,Zille,unchanged,1.0,,ZilleTile_103:1.0
+ZilleTile_104,Venna East,Venna East,Zille,unchanged,1.0,,ZilleTile_104:1.0
+ZilleTile_105,Ardo Northeast,Ardo Northeast,Zille,unchanged,1.0,,ZilleTile_105:1.0
+ZilleTile_106,Ossa Northwest,Ossa Northwest,Zille,unchanged,1.0,,ZilleTile_106:1.0
+ZilleTile_107,Ossa Northeast,Ossa Northeast,Zille,unchanged,1.0,,ZilleTile_107:1.0
+ZilleTile_108,Venna Southwest,Venna Southwest,Zille,unchanged,1.0,,ZilleTile_108:1.0
+ZilleTile_109,Portoserra,Portoserra,Zille,unchanged,1.0,,ZilleTile_109:1.0
+ZilleTile_110,Ardo Southeast,Ardo Southeast,Zille,unchanged,1.0,,ZilleTile_110:1.0
+ZilleTile_111,Ossa,Ossa,Zille,unchanged,1.0,,ZilleTile_111:1.0
+ZilleTile_112,Ondaro Hills,Ondaro Hills,Zille,unchanged,1.0,,ZilleTile_112:1.0
+ZilleTile_113,Portoserra Southeast,Portoserra Southeast,Zille,unchanged,1.0,,ZilleTile_113:1.0
+ZilleTile_114,Dapalle Northwest,Dapalle Northwest,Zille,unchanged,1.0,,ZilleTile_114:1.0
+ZilleTile_115,Azzurra,Azzurra,Zille,unchanged,1.0,,ZilleTile_115:1.0
+ZilleTile_116,Vela Nova Southeast,Vela Nova Southeast,Zille,unchanged,1.0,,ZilleTile_116:1.0
+ZilleTile_117,Pomara West,Pomara West,Zille,unchanged,1.0,,ZilleTile_117:1.0
+ZilleTile_118,Praia Velha,Praia Velha,Zille,unchanged,1.0,,ZilleTile_118:1.0
+ZilleTile_119,Gnyezno,,Wehlen,new,0,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",ZilleTile_88:0.201 ZilleTile_83:0.071
+ZilleTile_120,Ostrelow,,Wehlen,new,0,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",
+ZilleTile_121,Plotzk,,Wehlen,new,0,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",
+ZilleTile_122,Bydgoszt,,Wehlen,new,0,"Wehlen re-partitioned (mountains/roads, +4 front provinces, coastal Kratsna/Grodzizg)",
+ZilleTile_123,Dertea West,,Derdia,new,0,new: Derdia strip,
+ZilleTile_124,Merzil,,Derdia,new,0,new: Derdia strip,
+ZilleTile_125,Dertea,,Derdia,new,0,new: Derdia strip,
+ZilleTile_126,Haldesh,,Derdia,new,0,new: Derdia strip,
+ZilleTile_127,Qerzan South,,Derdia,new,0,new: Derdia strip,
+ZilleTile_128,Qerzan,,Derdia,new,0,new: Derdia strip,
+ZilleTile_129,Yol,,Derdia,new,0,new: Derdia strip (Yol = impassable city),
+ZilleTile_S1,Kreleck Sound,Kreleck Sound,Sea,kept (reshaped),0.931,,ZilleTile_S1:0.931
+ZilleTile_S2,Kratsna Waters,Kratsna Waters,Sea,kept (reshaped),0.936,,ZilleTile_S2:0.936
+ZilleTile_S3,Munat Waters,Munat Waters,Sea,kept (reshaped),0.932,,ZilleTile_S3:0.932
+ZilleTile_S4,Munat Roads,Munat Roads,Sea,kept (reshaped),0.906,sea cut back out of Lespia's territorial waters,ZilleTile_S4:0.954
+ZilleTile_S5,Munat Reach,Munat Reach,Sea,unchanged,1.0,,ZilleTile_S5:1.0
+ZilleTile_S6,Munat Bight,Munat Bight,Sea,unchanged,1.0,,ZilleTile_S6:1.0
+ZilleTile_S7,Munat Narrows,Munat Narrows,Sea,unchanged,1.0,,ZilleTile_S7:1.0
+ZilleTile_S8,Trebnow Waters,Trebnow Waters,Sea,unchanged,1.0,,ZilleTile_S8:1.0
+ZilleTile_S9,Quella Waters,Quella Waters,Sea,unchanged,1.0,,ZilleTile_S9:1.0
+ZilleTile_S10,Munat Banks,Munat Banks,Sea,unchanged,1.0,,ZilleTile_S10:1.0
+ZilleTile_S11,Manes Riuz Sound,Manes Riuz Sound,Sea,kept (reshaped),0.794,sea cut back out of Lespia's territorial waters,ZilleTile_S11:1.0
+ZilleTile_S12,Munat Deep,Munat Deep,Sea,kept (reshaped),0.722,sea cut back out of Lespia's territorial waters,ZilleTile_S12:1.0
+ZilleTile_S13,Tirsa Waters,Tirsa Waters,Sea,kept (reshaped),0.659,sea cut back out of Lespia's territorial waters,ZilleTile_S13:1.0
+ZilleTile_S14,Trebnow Roads,Trebnow Roads,Sea,unchanged,1.0,,ZilleTile_S14:1.0
+ZilleTile_S15,Corvis Waters,Corvis Waters,Sea,unchanged,1.0,,ZilleTile_S15:1.0
+ZilleTile_S16,Munat Shoals,Munat Shoals,Sea,unchanged,1.0,,ZilleTile_S16:1.0
+ZilleTile_S17,Tirsa Roads,Tirsa Roads,Sea,unchanged,1.0,,ZilleTile_S17:1.0
+ZilleTile_S18,Tirsa Reach,Tirsa Reach,Sea,unchanged,1.0,,ZilleTile_S18:1.0
+ZilleTile_S19,Quella Roads,Quella Roads,Sea,unchanged,1.0,,ZilleTile_S19:1.0
+ZilleTile_S20,Nanta Waters,Nanta Waters,Sea,unchanged,1.0,,ZilleTile_S20:1.0
+ZilleTile_S21,Tirsa Bight,Tirsa Bight,Sea,unchanged,1.0,,ZilleTile_S21:1.0
+ZilleTile_S22,Tirsa Narrows,Tirsa Narrows,Sea,kept (reshaped),0.947,sea cut back out of Lespia's territorial waters,ZilleTile_S22:1.0
+ZilleTile_S23,Walsholm Waters,Walsholm Waters,Sea,unchanged,1.0,,ZilleTile_S23:1.0
+ZilleTile_S24,Quella Reach,Quella Reach,Sea,unchanged,1.0,,ZilleTile_S24:1.0
+ZilleTile_S25,Tirsa Banks,Tirsa Banks,Sea,unchanged,1.0,,ZilleTile_S25:1.0
+ZilleTile_S26,Tarnes Waters,Tarnes Waters,Sea,kept (reshaped),0.95,sea cut back out of Lespia's territorial waters,ZilleTile_S26:0.951
+ZilleTile_S27,Rotsla Sound,Rotsla Sound,Sea,unchanged,1.0,,ZilleTile_S27:1.0
+ZilleTile_S28,Walsholm Roads,Walsholm Roads,Sea,unchanged,1.0,,ZilleTile_S28:1.0
+ZilleTile_S29,Isor Waters,Isor Waters,Sea,unchanged,1.0,,ZilleTile_S29:1.0
+ZilleTile_S30,Mave Nortus Waters,Mave Nortus Waters,Sea,unchanged,1.0,,ZilleTile_S30:1.0
+ZilleTile_S31,Mave Nortus Roads,Mave Nortus Roads,Sea,unchanged,1.0,,ZilleTile_S31:1.0
+ZilleTile_S32,Tarnes Roads,Tarnes Roads,Sea,kept (reshaped),0.969,,ZilleTile_S32:0.969
+ZilleTile_S33,Port Rotsla Waters,Port Rotsla Waters,Sea,unchanged,1.0,,ZilleTile_S33:1.0
+ZilleTile_S34,Port Rotsla Roads,Port Rotsla Roads,Sea,unchanged,1.0,,ZilleTile_S34:1.0
+ZilleTile_S35,Walsholm Reach,Walsholm Reach,Sea,unchanged,1.0,,ZilleTile_S35:1.0
+ZilleTile_S36,Lido Isora Waters,Lido Isora Waters,Sea,unchanged,1.0,,ZilleTile_S36:1.0
+ZilleTile_S37,Tarnes Reach,Tarnes Reach,Sea,kept (reshaped),0.872,,ZilleTile_S37:0.872
+ZilleTile_S38,Yol Waters,Yol Waters,Sea,unchanged,1.0,,ZilleTile_S38:1.0
+ZilleTile_S39,Yol Roads,Yol Roads,Sea,unchanged,1.0,,ZilleTile_S39:1.0
+ZilleTile_S40,Grodzizg Waters,Grodzizg Waters,Sea,unchanged,1.0,,ZilleTile_S40:1.0
+ZilleTile_S41,Port Rotsla Channel,Port Rotsla Channel,Sea,unchanged,1.0,,ZilleTile_S41:1.0
+ZilleTile_S42,Sabbiano Waters,Sabbiano Waters,Sea,unchanged,1.0,,ZilleTile_S42:1.0
+ZilleTile_S43,Sabbiano Roads,Sabbiano Roads,Sea,unchanged,1.0,,ZilleTile_S43:1.0
+ZilleTile_S44,Marenta Waters,Marenta Waters,Sea,unchanged,1.0,,ZilleTile_S44:1.0
+ZilleTile_S45,Bellacosta Waters,Bellacosta Waters,Sea,unchanged,1.0,,ZilleTile_S45:1.0
+ZilleTile_S46,Capo Lisso Channel,Capo Lisso Channel,Sea,unchanged,1.0,,ZilleTile_S46:1.0
+ZilleTile_S47,Capo Lisso Waters,Capo Lisso Waters,Sea,unchanged,1.0,,ZilleTile_S47:1.0
+ZilleTile_S48,Bellacosta Roads,Bellacosta Roads,Sea,unchanged,1.0,,ZilleTile_S48:1.0
+ZilleTile_S49,Azzurra Channel,Azzurra Channel,Sea,unchanged,1.0,,ZilleTile_S49:1.0
+ZilleTile_S50,Capo Lisso Roads,Capo Lisso Roads,Sea,unchanged,1.0,,ZilleTile_S50:1.0
+ZilleTile_S51,Azzurra Waters,Azzurra Waters,Sea,unchanged,1.0,,ZilleTile_S51:1.0
+ZilleTile_S52,Zille Bay,Zille Bay,Sea,unchanged,1.0,,ZilleTile_S52:1.0
+ZilleTile_S53,Rotsla Deep,Rotsla Deep,Sea,unchanged,1.0,,ZilleTile_S53:1.0
+ZilleTile_S54,Santa Calla Banks,Santa Calla Banks,Sea,unchanged,1.0,,ZilleTile_S54:1.0
+ZilleTile_S55,Praia Velha Roads,Praia Velha Roads,Sea,unchanged,1.0,,ZilleTile_S55:1.0
+ZilleTile_S56,Costa Dalle Waters,Costa Dalle Waters,Sea,kept (reshaped),0.962,,ZilleTile_S56:0.962
+ZilleTile_S57,Marbelas Bight,Marbelas Bight,Sea,kept (reshaped),0.938,,ZilleTile_S57:0.938

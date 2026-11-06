@@ -1,0 +1,283 @@
+{
+ "counts": {
+  "Zille": 60,
+  "Brenas": 29,
+  "Wehlen": 33,
+  "Derdia": 7,
+  "Sea": 57
+ },
+ "total": 186,
+ "overlaps": [],
+ "land_on_water": [],
+ "sea_on_land": [],
+ "land_zone_holes": [],
+ "land_zone_uncovered_total": 3485,
+ "sea_corridor_holes": [],
+ "tile_violations": [],
+ "max_tile_alpha_extent_px": 500,
+ "max_map_extent_incl_effects": 957.0,
+ "limit_map": 980,
+ "max_shape_bbox_map": 857.2,
+ "tiles_512": true,
+ "count_ok": true,
+ "cities": [
+  [
+   "ZilleTile_2",
+   "Munat"
+  ],
+  [
+   "ZilleTile_9",
+   "Nanta"
+  ],
+  [
+   "ZilleTile_11",
+   "Isor"
+  ],
+  [
+   "ZilleTile_23",
+   "Mave Nortus"
+  ],
+  [
+   "ZilleTile_28",
+   "Wiktrany"
+  ],
+  [
+   "ZilleTile_35",
+   "Zille"
+  ],
+  [
+   "ZilleTile_51",
+   "Dapalle"
+  ],
+  [
+   "ZilleTile_71",
+   "Kratsna"
+  ],
+  [
+   "ZilleTile_94",
+   "Grodzizg"
+  ],
+  [
+   "ZilleTile_129",
+   "Yol"
+  ]
+ ],
+ "smallest_land": [
+  [
+   48053,
+   "ZilleTile_3"
+  ],
+  [
+   48504,
+   "ZilleTile_72"
+  ],
+  [
+   52675,
+   "ZilleTile_96"
+  ],
+  [
+   57194,
+   "ZilleTile_115"
+  ],
+  [
+   64900,
+   "ZilleTile_114"
+  ]
+ ],
+ "smallest_sea": [
+  [
+   62149,
+   "ZilleTile_S52"
+  ],
+  [
+   163489,
+   "ZilleTile_S48"
+  ],
+  [
+   164217,
+   "ZilleTile_S40"
+  ]
+ ],
+ "size_rule": "map extent incl. stroke+blur (longest bbox side) must be >512 and <980 map px; target 650-950",
+ "size_all": {
+  "n": 186,
+  "min": 478.5,
+  "p10": 564.6,
+  "median": 742.7,
+  "p90": 881.45,
+  "max": 957.0,
+  "hist": {
+   "450-500": 1,
+   "500-550": 7,
+   "550-600": 27,
+   "600-650": 14,
+   "650-700": 20,
+   "700-750": 30,
+   "750-800": 31,
+   "800-850": 28,
+   "850-900": 17,
+   "900-950": 10,
+   "950-1000": 1
+  }
+ },
+ "size_land_cells": {
+  "n": 116,
+  "min": 532.1,
+  "p10": 558.9,
+  "median": 694.8,
+  "p90": 846.95,
+  "max": 957.0,
+  "hist": {
+   "500-550": 7,
+   "550-600": 26,
+   "600-650": 12,
+   "650-700": 15,
+   "700-750": 18,
+   "750-800": 15,
+   "800-850": 14,
+   "850-900": 5,
+   "900-950": 3,
+   "950-1000": 1
+  }
+ },
+ "size_sea": {
+  "n": 57,
+  "min": 645.0,
+  "p10": 742.7,
+  "median": 811.6,
+  "p90": 904.9599999999999,
+  "max": 949.4,
+  "hist": {
+   "600-650": 1,
+   "650-700": 1,
+   "700-750": 7,
+   "750-800": 16,
+   "800-850": 14,
+   "850-900": 11,
+   "900-950": 7
+  }
+ },
+ "size_in_target_650_950": 136,
+ "size_exceptions_allowed": [
+  [
+   "ZilleTile_96",
+   "Rotsla",
+   478.5,
+   "island, physically small (allowed)"
+  ]
+ ],
+ "size_violations": [],
+ "shape_bbox_min_max": [
+  379.2,
+  857.2
+ ],
+ "duplicate_names": [],
+ "tiles_clip_free": true,
+ "count_le_224": true,
+ "mave_nortus": {
+  "id": "ZilleTile_23",
+  "region": "Brenas",
+  "owner": "Rizia",
+  "area_outside_rizia": 0.0,
+  "min_distance_to_border": 31.9,
+  "fully_inside_rizia": true
+ },
+ "owners": {
+  "Rizia": 29,
+  "Wehlen": 93,
+  "Derdia": 7,
+  "neutral": 57
+ },
+ "land_provinces_crossing_border": [],
+ "wehlen_derdia_border_crossing": [],
+ "lespia_territorial_waters": {
+  "min_distance_required": 180,
+  "closest_provinces": [
+   [
+    180.7,
+    "ZilleTile_S4"
+   ],
+   [
+    180.8,
+    "ZilleTile_S12"
+   ],
+   [
+    180.8,
+    "ZilleTile_S22"
+   ],
+   [
+    181.0,
+    "ZilleTile_S11"
+   ],
+   [
+    181.0,
+    "ZilleTile_S13"
+   ],
+   [
+    181.5,
+    "ZilleTile_S26"
+   ]
+  ],
+  "provinces_touching_lespia": [],
+  "provinces_inside_strip": [],
+  "ok": true
+ },
+ "bottom_edge": {
+  "frame_y": 7877,
+  "provinces": [
+   [
+    "ZilleTile_S56",
+    "sea",
+    7877.0
+   ],
+   [
+    "ZilleTile_S57",
+    "sea",
+    7877.0
+   ],
+   [
+    "ZilleTile_64",
+    "land",
+    7877.0
+   ],
+   [
+    "ZilleTile_65",
+    "land",
+    7877.0
+   ],
+   [
+    "ZilleTile_66",
+    "land",
+    7877.0
+   ]
+  ],
+  "flush": true
+ },
+ "derdia": {
+  "cells": [
+   "ZilleTile_123",
+   "ZilleTile_124",
+   "ZilleTile_125",
+   "ZilleTile_126",
+   "ZilleTile_127",
+   "ZilleTile_128"
+  ],
+  "yol": [
+   "ZilleTile_129"
+  ],
+  "yol_impassable": true
+ },
+ "ship_placement": {
+  "west": [
+   "ZilleTile_S56",
+   "ZilleTile_S57"
+  ],
+  "east": [
+   "ZilleTile_S26",
+   "ZilleTile_S30",
+   "ZilleTile_S31",
+   "ZilleTile_S32",
+   "ZilleTile_S37"
+  ]
+ }
+}
