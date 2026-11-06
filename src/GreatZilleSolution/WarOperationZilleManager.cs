@@ -143,13 +143,20 @@ namespace GreatZilleSolution
         {
             try
             {
-                var prop = HarmonyLib.AccessTools.Property(typeof(EntityDataManager), "All" + char.ToUpper(fieldName[0]) + fieldName.Substring(1));
-                if (prop != null)
+                string capName = char.ToUpper(fieldName[0]) + fieldName.Substring(1);
+                var propDirect = typeof(EntityDataManager).GetProperty(capName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (propDirect != null)
                 {
-                    var val = prop.GetValue(null) as Il2CppSystem.Collections.Generic.List<T>;
+                    var val = propDirect.GetValue(null) as Il2CppSystem.Collections.Generic.List<T>;
                     if (val != null) return val;
                 }
-                var field = HarmonyLib.AccessTools.Field(typeof(EntityDataManager), fieldName);
+                var propAll = typeof(EntityDataManager).GetProperty("All" + capName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                if (propAll != null)
+                {
+                    var val = propAll.GetValue(null) as Il2CppSystem.Collections.Generic.List<T>;
+                    if (val != null) return val;
+                }
+                var field = typeof(EntityDataManager).GetField(fieldName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
                 if (field != null)
                 {
                     var val = field.GetValue(null) as Il2CppSystem.Collections.Generic.List<T>;
@@ -325,9 +332,8 @@ namespace GreatZilleSolution
                     zilleMtd.StatusEffectsProperties.HasNewStatusEffect = false;
                     zilleMtd.StatusEffectsProperties.StatusEffects = new Il2CppSystem.Collections.Generic.List<string>();
                     zilleMtd.StatusEffectsProperties.ConditionalStatusEffectGroups = new Il2CppSystem.Collections.Generic.List<string>();
-                    zilleMtd.Title = "Invasion of Zille";
-                    zilleMtd.Subtitle = "Military Operation";
-                    zilleMtd.IsTokenEnabled = true;
+                    zilleMtd.DescriptionProperties = new DescriptionProperties();
+                    zilleMtd.DescriptionProperties.Description = "Military Operation";
                     zilleMtd.AppBundleProperties = CreateRiziaBundleProps();
 
                     if (allTokenList != null) allTokenList.Add(zilleMtd);

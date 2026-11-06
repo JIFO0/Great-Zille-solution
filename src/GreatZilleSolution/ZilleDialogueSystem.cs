@@ -64,6 +64,7 @@ namespace GreatZilleSolution
                 RegisterWarPeaceTreaty(db);
 
                 _conversationsRegistered = true;
+                DialogueOverrideManager.ApplyAllOverrides();
                 MelonLogger.Msg("[ZILLE DIALOGUE] All 6 custom scenes successfully registered into masterDatabase!");
             }
             catch (Exception ex)

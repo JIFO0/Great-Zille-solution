@@ -89,4 +89,11 @@ if (Test-Path $verDisabled) {
     Write-Host "[DEPLOY] Wlaczono MelonLoader (version.dll)"
 }
 
+# 7. Ensure steam_appid.txt exists for direct launching
+$steamAppIdPath = Join-Path $gameDir "steam_appid.txt"
+if (-not (Test-Path $steamAppIdPath)) {
+    [System.IO.File]::WriteAllText($steamAppIdPath, "1207650`r`n")
+    Write-Host "[DEPLOY] Utworzono steam_appid.txt (AppID 1207650)"
+}
+
 Write-Host "[DEPLOY] Gotowe! Mod Great Zille jest w pelni zainstalowany i gotowy do uruchomienia."
