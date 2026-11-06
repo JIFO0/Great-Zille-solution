@@ -126,7 +126,7 @@ namespace GreatZilleSolution
             if (!string.IsNullOrEmpty(script))
             {
                 e.userScript = script;
-                e.fields.Add(new Field("Script", script, FieldType.Script));
+                e.fields.Add(new Field("Script", script, FieldType.Text));
             }
             if (!string.IsNullOrEmpty(condition))
             {
@@ -719,8 +719,11 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 5: Turn_Zille_WarSmolakFinalParley (ID 9992) - FRONTLINE PARLEY
-        // Tense frontline meeting with Wiktor Smolak in a neutral field tent.
-        // Peak Smolak characterization: smiling tyrant, cynical humor, tea & smokes.
+        // Atmospheric face-to-face confrontation in a neutral canvas tent between lines.
+        // Deeply reactive to:
+        // 1. Battlefield outcome (Smolak winning / drawing / losing)
+        // 2. Military power projection & army size (Smolak respects iron strength)
+        // 3. Past treatment (Zille friendship speech, Rico extradition, investigation, broken promises)
         // =========================================================================
         public static void RegisterWarSmolakFinalParley(DialogueDatabase db)
         {
@@ -735,73 +738,118 @@ namespace GreatZilleSolution
             conv.ActorID = RomusId;
             conv.ConversantID = SmolakId;
 
+            // Entry 0: START
             var entry0 = CreateEntry(conv.id, 0, RomusId, SmolakId, "START", "", "", "Continue()");
             entry0.isRoot = true;
             entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
             conv.dialogueEntries.Add(entry0);
 
-            AddLine(conv, 1, NarratorId, RomusId, "Parley_Intro_1",
-                "A neutral canvas military pavilion had been erected in the shell-cratered no-man's land between the lines, flanked by armed Golden Guards and grim Wehzek Republican Guards. Outside, distant smoke rose from the burning oil storage tanks of Wiktrany.", 2);
-            AddLine(conv, 2, NarratorId, RomusId, "Parley_Intro_2",
-                "President Wiktor Smolak sat across a battered wooden field table, casually pouring steaming black tea into two tin cups. His signature olive-green military tunic was dusty at the elbows, but his grin was as wide and irreverent as ever.", 3);
+            // 1. Atmosphere & Setting
+            AddLine(conv, 1, NarratorId, RomusId, "Parley_Atmosphere_1",
+                "A large neutral canvas pavilion stood in the shell-cratered no-man's land between the lines, lashed by cold autumn rain. Armed Golden Guards in polished breastplates and grizzled Wehzek Republican Guards eyed each other in tense silence through the canvas slits. Beyond the wire, thick black smoke rolled up from the burning petroleum depots of Wiktrany.", 2);
 
-            AddLine(conv, 3, SmolakId, RomusId, "Smolak_Parley_1",
-                "Romus! Your Majesty! Look at us! Meeting like two brigands in a muddy tent instead of drinking fine Cantuavo wine in your glittering palace.", 4);
-            AddLine(conv, 4, SmolakId, RomusId, "Smolak_Parley_2",
-                "Tea? It's authentic Wehzek mountain tea. Strong enough to strip engine grease, but wonderful for clearing the smell of cordite from the nostrils. Here, take a cup.", 5);
+            AddLine(conv, 2, NarratorId, RomusId, "Parley_Atmosphere_2",
+                "President Wiktor Smolak sat casually across a scarred wooden folding table. A battered brass kettle steamed over a kerosene burner, filling the damp air with the sharp, bitter aroma of Wehzek black mountain tea. His signature olive-drab military tunic was spattered with mud at the cuffs, yet his dark eyes twinkled with familiar cynical amusement.", 3);
 
-            var parleyHub = AddLine(conv, 5, SmolakId, RomusId, "Smolak_Parley_Prompt",
-                "He slid the steaming tin cup across the scarred wood, his dark eyes twinkling with dangerous curiosity.");
+            // 3. Dynamic Opening depending on War Status
+            // Outcome 4 or 5: Smolak losing
+            var smolakLosing = AddLine(conv, 3, SmolakId, RomusId, "Smolak_Opening_Losing",
+                "\"Romus! Your Majesty! Look at you in that spotless white coat, striding into my humble tent like a conquering emperor from the old tapestry! I see your artillery gunners didn't leave many intact roof tiles in Wiktrany.\"", 4);
+            smolakLosing.conditionsString = "Variable[\"Zille_War_Outcome\"] >= 4 || Variable[\"Zille_War_Outcome\"] == 0";
 
-            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 10)); // Cold & Direct
-            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 20)); // Ironical & Mocking
-            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 30)); // Take the tea & Negotiate
+            // Outcome 3: Stalemate
+            var smolakStalemate = AddLine(conv, 3, SmolakId, RomusId, "Smolak_Opening_Stalemate",
+                "\"Romus. Sit down. Don't stand on royal ceremony—there are no foreign reporters here to admire your crown. We've spent weeks tearing each other's boys apart in the Brenas mud, and neither of us has bought anything except a butcher's bill.\"", 4);
+            smolakStalemate.conditionsString = "Variable[\"Zille_War_Outcome\"] == 3";
 
-            // Choice 10: Cold & Direct
-            AddChoice(conv, 10, SmolakId, "Parley_Cold",
-                "\"I did not come here to share tea, Wiktor. Your army is broken. Sign the evacuation order and leave Zille.\"",
-                "I did not come here to share tea, Wiktor. Your forward line at Wiktrany is in ruins, and your garrison is cut off. Sign the evacuation order and return our province.", 11);
-            AddLine(conv, 11, SmolakId, RomusId, "Smolak_Cold_Reply",
-                "Smolak chuckled softly, taking a leisurely sip from his own cup. \"Always so formal, Romus! 'Your army is broken, leave Zille!' Do you think winning a few trenches makes you Alexander the Great? In Wehlen, my people have eaten tree bark and fought through civil wars for twenty years without blinking!\"", 40);
+            // Outcome 1 or 2: Smolak upper hand
+            var smolakWinning = AddLine(conv, 3, SmolakId, RomusId, "Smolak_Opening_Winning",
+                "\"Ah, King Romus! Welcome, welcome! It is always a pleasure to host neighbors, especially when they finally discover that South Merkopa does not kneel to ancient family trees. Tea? Drink, drink—you look like a man whose supply wagons just ran out of fuel.\"", 4);
+            smolakWinning.conditionsString = "Variable[\"Zille_War_Outcome\"] == 1 || Variable[\"Zille_War_Outcome\"] == 2";
 
-            // Choice 20: Mocking
-            AddChoice(conv, 20, SmolakId, "Parley_Mocking",
-                "\"You seemed much fonder of parades when we met in Zille, Wiktor. What happened to all your tanks?\"",
-                "You seemed remarkably fond of military parades when we met in Zille, Wiktor. What happened to all those gleaming tanks you bragged about?", 21);
-            AddLine(conv, 21, SmolakId, RomusId, "Smolak_Mocking_Reply",
-                "Smolak threw his head back and laughed heartily, slapping the table. \"Ha! A direct hit! Touché, Your Majesty! Turns out diesel engines don't like artillery shells very much! But that's the beauty of tanks—they can always be replaced. What can't be replaced is a friendship between neighboring statesmen, right?\"", 40);
+            // 4. Slide Tea
+            AddLine(conv, 4, NarratorId, RomusId, "Parley_Tea_Action",
+                "Smolak picked up the dented kettle and poured steaming black tea into two tin cups. He pushed one across the scarred wood toward you, a crooked smile curling beneath his mustache.", 5);
 
-            // Choice 30: Take tea
-            AddChoice(conv, 30, SmolakId, "Parley_TakeTea",
-                "Accept the cup of tea and sit down calmly.",
-                "I will take the tea, Wiktor. But let us not pretend this is a social visit. Our cannons are still aimed at your headquarters.", 31);
-            AddLine(conv, 31, SmolakId, RomusId, "Smolak_Tea_Reply",
-                "\"Now that is the mark of a civilized sovereign!\" Smolak beamed, raising his cup in a mock toast. \"Two men of destiny, settling the fate of South Merkopa over a tin of boiling herbs while the guns stay quiet for an hour.\"", 40);
+            var parleyHub = AddLine(conv, 5, SmolakId, RomusId, "Parley_Hub_Prompt",
+                "\"Authentic Wehzek tea. Strong enough to strip engine varnish, but wonderful for washing the cordite out of your lungs. So, Romus... what brings the King into the mud?\"");
 
-            // Smolak drops the mask
-            AddLine(conv, 40, NarratorId, RomusId, "Smolak_Mask_Drop_1",
-                "Suddenly, Smolak's jovial expression evaporated like mist. His face hardened, the playful clown vanishing instantly into the calculating dictator who had survived coups, uprisings, and foreign plots.", 41);
-            AddLine(conv, 41, SmolakId, RomusId, "Smolak_Mask_Drop_2",
-                "Let us stop fencing, Romus. You have proven you have teeth. House Toras is not the toothless tiger your father was. But neither is Wehlen a province waiting to be carved up like roast mutton.", 42);
-            AddLine(conv, 42, SmolakId, RomusId, "Smolak_Mask_Drop_3",
-                "Both of our nations are bleeding money and men every single hour this front stays open. Our diplomats are waiting in the adjoining tent with the treaty instruments. Let us see what kind of peace your army has earned.", 43);
+            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 10)); // Assertive
+            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 20)); // Sarcastic / Funny
+            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 30)); // Diplomatic
+            parleyHub.outgoingLinks.Add(CreateLink(conv.id, 5, 40)); // Cold / Threatening
 
-            AddChoice(conv, 43, SmolakId, "Enter_Peace_Treaty",
-                "\"Lead the way. Let us put an end to this war on terms the Crown can accept.\"",
-                "Lead the way. Let us put an end to this war on terms the Kingdom of Rizia can accept.", 44);
+            // Choice 10: Assertive / Sovereign
+            AddChoice(conv, 10, SmolakId, "Parley_Choice_Assertive",
+                "\"Cut the theatrics, Wiktor. Your army in Zille is broken, and your garrison is surrounded. Let us talk terms.\"",
+                "\"Cut the theatrics, Wiktor. Your forward line is shattered, your supply hubs are burning, and your garrison in Zille City is cut off. Let us talk realistic terms.\"", 11);
+            AddLine(conv, 11, SmolakId, RomusId, "Parley_Reply_Assertive",
+                "Smolak took a noisy sip from his tin cup, chuckling into the steam. \"Always in a rush, Romus! 'Your army is broken, talk terms!' Winning a few trenches doesn't make you Alexander the Great. In Wehlen, my people have eaten dry grass and fought through twenty years of rebellion without blinking!\"", 50);
 
-            AddLine(conv, 44, SmolakId, RomusId, "Smolak_Enter_Treaty",
-                "\"After you, Your Majesty,\" Smolak gestured toward the flap leading to the treaty chamber with an ironic bow. \"History is waiting for our signatures.\"", -1);
+            // Choice 20: Sarcastic / Funny King
+            AddChoice(conv, 20, SmolakId, "Parley_Choice_Funny",
+                "\"I see you haven't lost your comedic talent, Mr. President. A pity your artillery couldn't match your mouth.\"",
+                "\"I see you haven't lost your comedic talent, Mr. President. A pity your artillery gunners couldn't aim as accurately as your sharp tongue.\"", 21);
+            AddLine(conv, 21, SmolakId, RomusId, "Parley_Reply_Funny",
+                "Smolak threw his head back and guffawed, slapping his knee with genuine delight. \"Ha! A direct hit! Touché, Your Majesty! Turns out diesel trucks don't like artillery shells very much! But that's the beauty of war materiel—it can always be replaced. What can't be replaced is mutual respect between strong men!\"", 50);
+
+            // Choice 30: Diplomatic / Statesmanlike
+            AddChoice(conv, 30, SmolakId, "Parley_Choice_Diplomatic",
+                "\"I will take the tea, Wiktor. But let us speak plainly as heads of state. We are here to halt the bleeding.\"",
+                "\"I will take the tea, Wiktor. But let us speak plainly as heads of state. Every hour this front remains active, both of our nations bleed treasure and youth. We are here to put an end to it.\"", 31);
+            AddLine(conv, 31, SmolakId, RomusId, "Parley_Reply_Diplomatic",
+                "\"Now that is the voice of a true statesman!\" Smolak grinned, raising his cup in a brief salute. \"Two rulers of destiny, deciding the future of South Merkopa over boiling leaves while the cannons rest for an hour.\"", 50);
+
+            // Choice 40: Cold / Threatening
+            AddChoice(conv, 40, SmolakId, "Parley_Choice_Cold",
+                "\"Keep your tea. The only thing I want from your hands today is your signature on the evacuation order.\"",
+                "\"Keep your tea. I did not ride to the front to drink with a tyrant. The only thing I want from your hands today is your signature on the evacuation order.\"", 41);
+            AddLine(conv, 41, SmolakId, RomusId, "Parley_Reply_Cold",
+                "Smolak's smile vanished for a split second, his dark eyes hardening into flint. \"Careful with the haughty tone, King. You are sitting in artillery range of my heavy mortars. If you want blood, Wehlen can give you an ocean of it.\"", 50);
+
+            // Entry 50: Appraising Military Strength & Armored Might
+            AddLine(conv, 50, NarratorId, RomusId, "Smolak_Appraise_Setup",
+                "Smolak set his cup down with a sharp metallic clatter. He turned his head toward the tent flap, looking out at the low silhouette of Rizian medium tanks idling in the mist, their diesel engines thrumming like distant thunder.", 51);
+
+            AddLine(conv, 51, SmolakId, RomusId, "Smolak_Power_Appraisal",
+                "\"I have to admit, Romus... when your father held court, House Toras was all gold fringe and trembling quills. But your army? Those armored divisions Councilor Azaro rolled across the Brenas... they hit like a mountain avalanche. A man backed by steel like that earns the right to be listened to.\"", 52);
+
+            // Entry 52: Reactivity to Past History
+            AddLine(conv, 52, SmolakId, RomusId, "Smolak_Past_History",
+                "\"And don't think I've forgotten our little history. When you visited Zille for Friendship Day, everyone thought you were a green prince playing at politics. Yet here we are, sitting across from each other with guns on the table. You followed through. Terrifying, perhaps, but respectable in its own ruthless way.\"", 53);
+
+            // Entry 53: Transition to the Treaty Room
+            AddLine(conv, 53, SmolakId, RomusId, "Smolak_Lead_To_Treaty_1",
+                "\"Enough posturing. Both of our treasuries are groaning, and our foreign ministers have been pacing like caged wolves in the adjoining pavilion. Foreign Minister Esquibel and Colonel Valdez have prepared the instrument of settlement.\"", 54);
+
+            AddLine(conv, 54, SmolakId, RomusId, "Smolak_Lead_To_Treaty_2",
+                "\"Let us see if you can negotiate a treaty as skillfully as your generals handle artillery shells.\"", 55);
+
+            AddChoice(conv, 55, SmolakId, "Enter_Peace_Chamber",
+                "\"Lead the way, Wiktor. Let us settle the fate of Zille once and for all.\"",
+                "\"Lead the way, Wiktor. Let us settle the fate of Zille once and for all.\"", 56);
+
+            var entry56 = AddLine(conv, 56, SmolakId, RomusId, "Smolak_Enter_Chamber",
+                "\"After you, Your Majesty,\" Smolak bowed with theatrical irony, holding the heavy canvas flap aside. \"History is waiting for our signatures.\"", -1);
+            entry56.Sequence = "StartConversation(Turn_Zille_WarPeaceTreaty);";
 
             db.AddConversation(conv);
-            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected Smolak Final Parley (ID 9992) into masterDatabase!");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected rich, authentic Smolak Final Parley (ID 9992) into masterDatabase!");
         }
 
         // =========================================================================
-        // SCENE 6: Turn_Zille_WarPeaceTreaty (ID 9993) - THE PEACE TREATY (5 OUTCOMES)
-        // Formal signing of the war treaty based on tactical performance:
-        // 1 = Total Fiasco, 2 = Tactical Defeat, 3 = Bloody Stalemate,
-        // 4 = Decisive Victory, 5 = Overwhelming Triumph.
+        // SCENE 6: Turn_Zille_WarPeaceTreaty (ID 9993) - THE PEACE TREATY OF ZILLE
+        // Full mechanical & narrative mirroring of the Turn 5 Wehlen Trade Deal!
+        // Interactive 5-clause treaty negotiation system:
+        // 1. Article I: Territorial Transfer & Border Demilitarization
+        // 2. Article II: Petroleum Extraction, Refineries & Offshore Rights
+        // 3. Article III: War Indemnities, Reparations & Border Reconstruction
+        // 4. Article IV: Status of Wehzek Settlers & Civil Protections
+        // 5. Article V: Border Security, Su Omina Demobilization & Anti-BFF
+        //
+        // Tracks running negotiation leverage points (Zille_Peace_Leverage).
+        // Initial leverage incorporates battlefield outcome + power projection + past respect.
+        // Multiple dynamic outcomes: Triumphant Accord, Fair Compromise, or Brutal Breakdown!
         // =========================================================================
         public static void RegisterWarPeaceTreaty(DialogueDatabase db)
         {
@@ -816,105 +864,297 @@ namespace GreatZilleSolution
             conv.ActorID = RomusId;
             conv.ConversantID = SmolakId;
 
+            // Entry 0: START
             var entry0 = CreateEntry(conv.id, 0, RomusId, SmolakId, "START", "", "", "Continue()");
             entry0.isRoot = true;
             entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
             conv.dialogueEntries.Add(entry0);
 
-            AddLine(conv, 1, NarratorId, RomusId, "Treaty_Intro",
-                "The treaty table was draped in neutral green baize. Diplomatic aides from Rizia and Wehlen stood arranged with fountain pens, official parchment, and the royal seal of Rizia. Smolak sat back in his chair, tapping a gold cigarette case against the armrest.", 2);
+            // Entry 1: Treaty Setting
+            AddLine(conv, 1, NarratorId, RomusId, "Treaty_Setting_1",
+                "The treaty pavilion was illuminated by warm brass hurricane lamps. A long table draped in green baize occupied the center, flanked by diplomatic secretaries from both nations with blotting paper, inkstands, and red sealing wax. Foreign Minister Laurento Esquibel sat to your right with the royal signet ring; across from him sat Colonel Valdez and President Smolak.", 2);
 
-            var branchOutcome = AddLine(conv, 2, NarratorId, RomusId, "Treaty_Branch_Prompt",
-                "The outcome of the operational campaign on the battlefield dictated the terms of the treaty before you.");
+            AddLine(conv, 2, LaurentoId, RomusId, "Treaty_Laurento_Opening",
+                "\"Your Majesty, President Smolak. We have before us the working draft of the Treaty of Zille-Brenas. Five substantive articles will define the cessation of hostilities, territorial governance, energy assets, financial indemnities, and regional security. Each clause must be settled between you.\"", 3);
 
-            branchOutcome.outgoingLinks.Add(CreateLink(conv.id, 2, 100)); // Outcome 1: Total Fiasco
-            branchOutcome.outgoingLinks.Add(CreateLink(conv.id, 2, 200)); // Outcome 2: Tactical Defeat
-            branchOutcome.outgoingLinks.Add(CreateLink(conv.id, 2, 300)); // Outcome 3: Stalemate
-            branchOutcome.outgoingLinks.Add(CreateLink(conv.id, 2, 400)); // Outcome 4: Decisive Victory
-            branchOutcome.outgoingLinks.Add(CreateLink(conv.id, 2, 500)); // Outcome 5: Overwhelming Triumph
+            AddLine(conv, 3, SmolakId, RomusId, "Treaty_Smolak_Cigarette",
+                "Smolak leaned back in his wicker chair, producing a gold cigarette case. He struck a match with a sharp hiss, blowing a blue plume of tobacco smoke toward the ceiling. \"Let us hear it, Esquibel. Start with the prize that started this whole war.\"", 100);
 
-            // ---------------- OUTCOME 1: TOTAL FIASCO ----------------
-            var f100 = AddLine(conv, 100, SmolakId, RomusId, "Outcome1_Smolak",
-                "Smolak smiled with predatory satisfaction. \"Well, well, Your Majesty. Your bold invasion collapsed before it even reached Wiktrany, and my Republican Guards are currently billeted in your border towns of Brenas. These terms are non-negotiable.\"");
-            f100.conditionsString = "Variable[\"Zille_War_Outcome\"] == 1";
+            // =========================================================================
+            // ARTICLE I: TERRITORIAL DEMARCATION & HANDOVER OF ZILLE (Hub 100)
+            // =========================================================================
+            var hubArt1 = AddLine(conv, 100, LaurentoId, RomusId, "Art1_Prompt",
+                "\"Article One: Sovereignty, territorial borders, and the timeline for the evacuation of military forces from the Zille peninsula.\"");
 
-            AddLine(conv, 101, NarratorId, RomusId, "Outcome1_Terms",
-                "The treaty dictated unconditional surrender of Rizian claims to Zille, the cession of a demilitarized buffer zone inside Brenas to Wehlen, and an astronomical indemnity of 5 Budget. In Porte Drazon, the royal guards were already preparing for violent unrest and military mutiny.", 102);
+            hubArt1.outgoingLinks.Add(CreateLink(conv.id, 100, 110)); // Max Demand (Immediate full return)
+            hubArt1.outgoingLinks.Add(CreateLink(conv.id, 100, 120)); // Balanced Compromise (Phased 12m + DMZ)
+            hubArt1.outgoingLinks.Add(CreateLink(conv.id, 100, 130)); // Concession to Wehlen (Port Munat lease)
 
-            AddChoice(conv, 102, SmolakId, "Sign_Outcome1",
-                "Sign the humiliating treaty to prevent Wehzek forces from marching on Porte Drazon.",
-                "With trembling fingers and a heavy heart, you sign the document, knowing House Toras will never recover from this disgrace.", 103,
-                "Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 5; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] - 5; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] - 3;");
+            // 110: Max Demand
+            AddChoice(conv, 110, SmolakId, "Art1_Choice_Max",
+                "\"Immediate, unconditional return. The entire province returns to the Crown; Wehzek forces must evacuate within 48 hours.\"",
+                "\"The entire Zille province must return to the Kingdom of Rizia immediately and unconditionally. All Wehzek garrisons must evacuate across the river within forty-eight hours, leaving all municipal facilities intact.\"", 111,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 3; Variable[\"Zille_Treaty_ZilleImmediate\"] = true;");
 
-            AddLine(conv, 103, SmolakId, RomusId, "Outcome1_End",
-                "\"A pleasure doing business with you, Romus. Give my regards to the coup leaders when you get back to your capital.\" Smolak took his parchment and walked out.", -1);
+            AddLine(conv, 111, SmolakId, RomusId, "Art1_Reply_Max",
+                "Smolak gritted his teeth, his jaw tightening as he tapped ashes into his saucer. \"Forty-eight hours? You want my officers to run like whipped dogs! A bitter pill... but your tanks sitting on the highway leave me few illusions. Very well, mark it down, Esquibel.\"", 200);
 
-            // ---------------- OUTCOME 2: TACTICAL DEFEAT ----------------
-            var f200 = AddLine(conv, 200, SmolakId, RomusId, "Outcome2_Smolak",
-                "Smolak leaned across the table, shaking his head with mock pity. \"You fought hard, Romus. But you lost key positions, and your supply lines collapsed. Wehlen holds the high ground.\"");
-            f200.conditionsString = "Variable[\"Zille_War_Outcome\"] == 2";
+            // 120: Balanced Compromise
+            AddChoice(conv, 120, SmolakId, "Art1_Choice_Compromise",
+                "\"A phased 12-month handover with a 15-kilometer demilitarized buffer zone along the river.\"",
+                "\"We propose an orderly, phased twelve-month administrative transition. All armed units will pull back, establishing a fifteen-kilometer demilitarized border zone along the river monitored by joint observers.\"", 121,
+                "Variable[\"Zille_Treaty_ZillePhased\"] = true;");
 
-            AddLine(conv, 201, NarratorId, RomusId, "Outcome2_Terms",
-                "The treaty required the immediate withdrawal of all Rizian troops from Zille, substantial reparations to Wehlen (-3 Budget), and the continuation of the lease under Wehzek administration. The campaign had ended in bitter failure.", 202);
+            AddLine(conv, 121, SmolakId, RomusId, "Art1_Reply_Compromise",
+                "Smolak nodded slowly, approving of the orderly timeline. \"Pragmatic, Romus. A phased withdrawal prevents panic in the streets, and a buffer zone keeps trigger-happy lieutenants from reigniting the war next week. Agreed.\"", 200);
 
-            AddChoice(conv, 202, SmolakId, "Sign_Outcome2",
-                "Sign the treaty to save the remnants of your army.",
-                "You affix your signature, accepting bitter defeat to prevent further useless bloodshed.", 203,
-                "Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 3; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] - 3;");
+            // 130: Concession to Wehlen
+            AddChoice(conv, 130, SmolakId, "Art1_Choice_Concession",
+                "\"Zille returns to Rizia, but Wehlen receives commercial terminal leasing and duty-free transit at Port Munat for 25 years.\"",
+                "\"Zille returns to royal sovereignty, but the Kingdom will grant Wehlen a twenty-five-year lease on commercial terminal facilities at Port Munat, including duty-free transit for Wehzek merchant vessels.\"", 131,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_MunatLease\"] = true;");
 
-            AddLine(conv, 203, SmolakId, RomusId, "Outcome2_End",
-                "\"Next time, Romus, stick to diplomacy. War is an expensive hobby for princes.\" Smolak nodded curtly and departed.", -1);
+            AddLine(conv, 131, SmolakId, RomusId, "Art1_Reply_Concession",
+                "Smolak smiled broadly, slapping the table with genuine enthusiasm. \"Now that is the vision of a statesman! You get your map back, and Wehlen keeps its trade door to the southern ocean. Outstanding!\"", 200);
 
-            // ---------------- OUTCOME 3: BLOODY STALEMATE ----------------
-            var f300 = AddLine(conv, 300, SmolakId, RomusId, "Outcome3_Smolak",
-                "Smolak rubbed his bloodshot eyes, genuinely exhausted. \"We have pounded each other into the mud for weeks, Romus. Neither of us can deliver a knockout punch without bankrupting our nations.\"");
-            f300.conditionsString = "Variable[\"Zille_War_Outcome\"] == 3";
+            // =========================================================================
+            // ARTICLE II: PETROLEUM & ENERGY ASSETS (Hub 200)
+            // =========================================================================
+            var hubArt2 = AddLine(conv, 200, LaurentoId, RomusId, "Art2_Prompt",
+                "Laurento turned the parchment. \"Article Two: The petroleum reserves, extraction platforms, and refineries of the Zille basin.\" Smolak leaned forward with intense interest: \"The black gold. The true lifeblood of the province.\"");
 
-            AddLine(conv, 301, NarratorId, RomusId, "Outcome3_Terms",
-                "The treaty established a compromise armistice: an immediate ceasefire, a demilitarized zone along the central peninsula, and a 50/50 joint revenue sharing agreement over the Zille oil facilities. Neither side achieved total victory, but the bloodshed was halted.", 302);
+            hubArt2.outgoingLinks.Add(CreateLink(conv.id, 200, 210)); // Total Nationalization (-2)
+            hubArt2.outgoingLinks.Add(CreateLink(conv.id, 200, 220)); // 50/50 Joint Consortium (+1)
+            hubArt2.outgoingLinks.Add(CreateLink(conv.id, 200, 230)); // Guaranteed Subsidized Crude (+3)
 
-            AddChoice(conv, 302, SmolakId, "Sign_Outcome3",
-                "Sign the mutual armistice and compromise agreement.",
-                "You sign the treaty, securing half of Zille's wealth while ending a bloody and exhausting stalemate.", 303,
-                "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 1;");
+            // 210: Nationalization
+            AddChoice(conv, 210, SmolakId, "Art2_Choice_Nationalize",
+                "\"Total nationalization under Rizian Oil; all Wehzek state concessions are revoked without compensation.\"",
+                "\"Total royal nationalization. All drilling rights, offshore platforms, and processing plants in Zille pass exclusively to Rizian Oil. All Wehzek state shares are declared forfeit without compensation.\"", 211,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_OilNationalized\"] = true;");
 
-            AddLine(conv, 303, SmolakId, RomusId, "Outcome3_End",
-                "\"Not what either of us dreamed of, but our soldiers get to go home alive. Safe travels back to Porte Drazon, Romus.\" He offered a brief, weary handshake.", -1);
+            AddLine(conv, 211, SmolakId, RomusId, "Art2_Reply_Nationalize",
+                "Smolak's eyes narrowed, his cigarette glowing orange. \"Taking the very refineries my engineers spent thirty years modernizing? You have an insatiable appetite, Romus. But let us see if your royal exchequer can afford what comes next.\"", 300);
 
-            // ---------------- OUTCOME 4: DECISIVE VICTORY ----------------
-            var f400 = AddLine(conv, 400, SmolakId, RomusId, "Outcome4_Smolak",
-                "Smolak stared down at the treaty with clenched teeth, his usual smile utterly gone. \"Your divisions have encircled Zille City and captured Wiktrany. You hold the cards, Romus.\"");
-            f400.conditionsString = "Variable[\"Zille_War_Outcome\"] == 4 || Variable[\"Zille_War_Outcome\"] == 0"; // Default victorious path
+            // 220: Joint Consortium
+            AddChoice(conv, 220, SmolakId, "Art2_Choice_Joint",
+                "\"A 50/50 Joint Petroleum Consortium: Rizian Oil and Wehlen Petroleum will co-manage the fields and split royalties.\"",
+                "\"We propose creating the Zille-Wehlen Petroleum Consortium: a fifty-fifty joint venture. Rizian Oil and Wehlen State Petroleum will co-manage the offshore fields, splitting extraction profits equally.\"", 221,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 1; Variable[\"Zille_Treaty_OilJoint\"] = true;");
 
-            AddLine(conv, 401, NarratorId, RomusId, "Outcome4_Terms",
-                "The treaty dictated the complete, unconditional, and immediate return of the Zille province to the Kingdom of Rizia. All Wehzek garrisons must evacuate within 48 hours, leaving all port infrastructure, gold mines, and oil refineries intact under royal ownership. No concessions or reparations granted to Wehlen.", 402);
+            AddLine(conv, 221, SmolakId, RomusId, "Art2_Reply_Joint",
+                "Smolak grinned knowingly. \"A shared pipeline is a safe pipeline! Neither of us will want to blow it up if we both profit from every barrel pumped. Excellent compromise, Romus.\"", 300);
 
-            AddChoice(conv, 402, SmolakId, "Sign_Outcome4",
-                "Sign the instrument of liberation. Zille returns to the Crown!",
-                "With a steady hand and quiet royal majesty, you sign the Treaty of Zille, ending thirty years of foreign occupation.", 403,
-                "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 3; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 2;");
+            // 230: Subsidized Crude
+            AddChoice(conv, 230, SmolakId, "Art2_Choice_Subsidized",
+                "\"Rizia retains ownership, but guarantees Wehlen 15,000 barrels per day of subsidized crude for 5 years.\"",
+                "\"The Crown assumes sole ownership of the fields, but guarantees Wehlen a fixed quota of fifteen thousand barrels of crude per day at production cost for five years to fuel your domestic reconstruction.\"", 231,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 3; Variable[\"Zille_Treaty_OilSubsidized\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = Variable[\"RiziaDLC.Resources_Energy\"] - 1;");
 
-            AddLine(conv, 403, SmolakId, RomusId, "Outcome4_End",
-                "Smolak signed with a bitter scrawl, tossing his pen onto the table. \"Take your province, Your Majesty. You fought like demons for it. But remember... South Merkopa has a very long memory.\" He turned on his heel and strode out into the rain.", -1);
+            AddLine(conv, 231, SmolakId, RomusId, "Art2_Reply_Subsidized",
+                "Smolak laughed heartily, raising his tea cup. \"Fuel for our power plants and tractors in South Wehlen! That will silence every critic in Erdmarg who claims I gave away our energy security!\"", 300);
 
-            // ---------------- OUTCOME 5: OVERWHELMING TRIUMPH ----------------
-            var f500 = AddLine(conv, 500, SmolakId, RomusId, "Outcome5_Smolak",
-                "Smolak looked pale, his hands trembling slightly as his aides whispered frantic reports of Rizian armored columns advancing deep into Wehlen territory. \"You broke my army, Romus. You took the port, you took Wiktrany, and your guns are aimed at my homeland.\"");
-            f500.conditionsString = "Variable[\"Zille_War_Outcome\"] == 5";
+            // =========================================================================
+            // ARTICLE III: WAR INDEMNITIES & REPARATIONS (Hub 300)
+            // =========================================================================
+            var hubArt3 = AddLine(conv, 300, LaurentoId, RomusId, "Art3_Prompt",
+                "Laurento cleared his throat, adjusting his spectacles. \"Article Three: Financial indemnities, war damages, and reconstruction costs.\" Smolak snorted softly: \"Money. Always the ugliest part of any treaty.\"");
 
-            AddLine(conv, 501, NarratorId, RomusId, "Outcome5_Terms",
-                "The Treaty of Porte Drazon was a total triumph: unconditional return of Zille, complete handover of all extraction infrastructure, renunciation of all future Wehzek border claims, and the payment of heavy war indemnities (+4 Budget, +3 Energy) from Wehlen's central oil reserves. Romus Toras had achieved the greatest military triumph in modern Rizian history.", 502);
+            hubArt3.outgoingLinks.Add(CreateLink(conv.id, 300, 310)); // Wehlen Pays 2 Budget (-3)
+            hubArt3.outgoingLinks.Add(CreateLink(conv.id, 300, 320)); // Mutual Waiver (0)
+            hubArt3.outgoingLinks.Add(CreateLink(conv.id, 300, 330)); // Rizia Pays Border Fund (+3)
 
-            AddChoice(conv, 502, SmolakId, "Sign_Outcome5",
-                "Sign the historic treaty of triumph. Rizia stands as the undisputed power of South Merkopa!",
-                "You press the royal wax seal into the parchment. The realm has not merely survived—it has triumphed with overwhelming glory.", 503,
-                "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] + 4; Variable[\"RiziaDLC.Resources_Energy\"] = Variable[\"RiziaDLC.Resources_Energy\"] + 3; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 4; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 3;");
+            // 310: Wehlen Pays
+            AddChoice(conv, 310, SmolakId, "Art3_Choice_WehlenPays",
+                "\"Wehlen must pay 2 Budget in war reparations to compensate Rizia for border destruction and civilian losses.\"",
+                "\"Wehlen must pay two Budget in official war indemnities to rebuild damaged towns in Brenas and compensate the families of soldiers fallen during the conflict.\"", 311,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 3; Variable[\"Zille_Treaty_ReparationsWehlen\"] = true;");
 
-            AddLine(conv, 503, SmolakId, RomusId, "Outcome5_End",
-                "Smolak affixed his presidential seal in silence, his defiance completely broken. As your escort formed up, the church bells of Brenas and Zille began to chime in unison, proclaiming the dawn of Romus the Restorer.", -1);
+            AddLine(conv, 311, SmolakId, RomusId, "Art3_Reply_WehlenPays",
+                "Smolak slammed his fist against the armrest, his face turning red. \"Reparations?! My treasury is bleeding, and you want Wehzek gold to decorate your palace ceilings?! A monstrous demand... but if it is the price to stop your guns, so be it!\"", 400);
+
+            // 320: Mutual Waiver
+            AddChoice(conv, 320, SmolakId, "Art3_Choice_MutualWaiver",
+                "\"Mutual waiver of all war damages; each nation absorbs its own costs and releases all POWs without ransom.\"",
+                "\"A mutual waiver of all war indemnities. Both nations absorb their own operational expenses, and all captured prisoners of war are repatriated immediately without ransom.\"", 321,
+                "Variable[\"Zille_Treaty_ReparationsMutualWaiver\"] = true;");
+
+            AddLine(conv, 321, SmolakId, RomusId, "Art3_Reply_MutualWaiver",
+                "Smolak exhaled with evident relief, his tension easing. \"A clean ledger. No unpaid debts hanging over our heads like a guillotine. Both nations can move forward with their pride intact.\"", 400);
+
+            // 330: Rizia Pays
+            AddChoice(conv, 330, SmolakId, "Art3_Choice_RiziaPays",
+                "\"Rizia will provide a 2 Budget border reconstruction fund to assist affected Wehzek civilian settlements.\"",
+                "\"The Kingdom of Rizia will establish a bilateral reconstruction fund of two Budget to rebuild war-torn villages and hospitals in the southern border district of Wehlen.\"", 331,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 3; Variable[\"Zille_Treaty_ReparationsRiziaPays\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 2;");
+
+            AddLine(conv, 331, SmolakId, RomusId, "Art3_Reply_RiziaPays",
+                "Smolak stared at you in stunned amazement before breaking into an appreciative grin. \"A king who pays to rebuild the broken windows of his adversary? My propaganda radio will compose epics about your saintly generosity, Romus!\"", 400);
+
+            // =========================================================================
+            // ARTICLE IV: WEHZEK MINORITIES & SETTLERS IN ZILLE (Hub 400)
+            // =========================================================================
+            var hubArt4 = AddLine(conv, 400, LaurentoId, RomusId, "Art4_Prompt",
+                "Laurento turned to the fourth page. \"Article Four: Civil status, residency, and property protections for Wehzek citizens currently residing in Zille.\" Smolak's posture stiffened: \"Thousands of my countrymen built lives in Zille over thirty years. I will not allow them to be hunted down by royalist vigilantes.\"");
+
+            hubArt4.outgoingLinks.Add(CreateLink(conv.id, 400, 410)); // Deport Settlers (-2)
+            hubArt4.outgoingLinks.Add(CreateLink(conv.id, 400, 420)); // Loyalty Oath & Work Permits (0)
+            hubArt4.outgoingLinks.Add(CreateLink(conv.id, 400, 430)); // Full Civic Rights (+2)
+
+            // 410: Deportation
+            AddChoice(conv, 410, SmolakId, "Art4_Choice_Deport",
+                "\"All Wehzek settlers who arrived during the lease must be repatriated across the border within sixty days.\"",
+                "\"Compulsory repatriation. All Wehzek settlers and commercial migrants who arrived during the thirty-year lease must relocate across the border within sixty days. Zille must remain purely Rizian.\"", 411,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_WehzekExpelled\"] = true;");
+
+            AddLine(conv, 411, SmolakId, RomusId, "Art4_Reply_Deport",
+                "Smolak's eyes burned with cold anger. \"Creating a wave of forty thousand refugees on my frontier right before winter? That is cruel, Romus. Even for a monarch with an old crown.\"", 500);
+
+            // 420: Conditional Loyalty
+            AddChoice(conv, 420, SmolakId, "Art4_Choice_Loyalty",
+                "\"Permanent residency and property guarantees for Wehzeks who swear a civil oath of allegiance to the Crown.\"",
+                "\"Permanent residency and property grandfathering. Established Wehzek residents may keep their homes, shops, and businesses, provided they register and swear an oath of civil loyalty to the Crown.\"", 421,
+                "Variable[\"Zille_Treaty_WehzekLoyaltyPermits\"] = true;");
+
+            AddLine(conv, 421, SmolakId, RomusId, "Art4_Reply_Loyalty",
+                "Smolak stroked his mustache thoughtfully. \"Strict, but lawful. As long as they keep their roofs and their livelihoods, my people know how to adapt to local authority. Agreed.\"", 500);
+
+            // 430: Full Equal Rights
+            AddChoice(conv, 430, SmolakId, "Art4_Choice_FullRights",
+                "\"Full equal rights, civic amnesty, and cultural protections for Wehzeks in Zille under royal law.\"",
+                "\"Full civic equality. Complete legal amnesty, dual-language administrative recognition in municipal councils, and full civil protection under royal law for all Wehzeks choosing to remain in Zille.\"", 431,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_WehzekFullRights\"] = true;");
+
+            AddLine(conv, 431, SmolakId, RomusId, "Art4_Reply_FullRights",
+                "Smolak beamed with deep satisfaction. \"Equal rights under the royal crest? Magnificent! That guarantees quiet streets and deprives foreign busybodies at the AN of any excuse to complain!\"", 500);
+
+            // =========================================================================
+            // ARTICLE V: SECURITY & EXTREMIST GROUPS (Hub 500)
+            // =========================================================================
+            var hubArt5 = AddLine(conv, 500, LaurentoId, RomusId, "Art5_Prompt",
+                "Laurento placed his finger upon the final section. \"Article Five: Regional security protocols, armed paramilitary factions, and cross-border terrorism.\" Smolak's voice dropped to a low, conspiratorial murmur: \"Now for the vipers. Su Omina, the BFF, the smugglers. How do we prevent the border from becoming a slaughterhouse?\"");
+
+            hubArt5.outgoingLinks.Add(CreateLink(conv.id, 500, 510)); // Royal Independence (-2)
+            hubArt5.outgoingLinks.Add(CreateLink(conv.id, 500, 520)); // Bilateral Crackdown (+1)
+            hubArt5.outgoingLinks.Add(CreateLink(conv.id, 500, 530)); // Anti-BFF Alliance (+2)
+
+            // 510: Royal Independence
+            AddChoice(conv, 510, SmolakId, "Art5_Choice_Unilateral",
+                "\"Rizia rejects restrictions; domestic security remains the sovereign prerogative of the Crown alone.\"",
+                "\"The Kingdom of Rizia will accept no external restrictions on its internal security forces. How the Crown manages patriotic groups and polices its borders is our sovereign affair alone.\"", 511,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_SecurityUnilateral\"] = true;");
+
+            AddLine(conv, 511, SmolakId, RomusId, "Art5_Reply_Unilateral",
+                "Smolak gave a dark, sardonic laugh. \"So you want to let royalist paramilitaries run wild along our frontier while pretending your hands are clean? You are playing with dynamite, Romus.\"", 600);
+
+            // 520: Bilateral Crackdown
+            AddChoice(conv, 520, SmolakId, "Art5_Choice_MutualCrackdown",
+                "\"A mutual security accord: Rizia disarms Su Omina cells; Wehlen shuts down border sabotage camps.\"",
+                "\"A bilateral anti-extremist protocol. Rizia will disarm and outlaw Su Omina militias within Zille, while Wehlen permanently closes and dismantles all covert infiltration camps along the frontier.\"", 521,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 1; Variable[\"Zille_Treaty_SecurityMutualCrackdown\"] = true;");
+
+            AddLine(conv, 521, SmolakId, RomusId, "Art5_Reply_MutualCrackdown",
+                "Smolak nodded firmly, stubbing out his cigarette in the tray. \"A fair trade. I muzzle my attack dogs, you put yours in a cage. South Merkopa might actually enjoy a peaceful night's sleep.\"", 600);
+
+            // 530: Anti-BFF Alliance
+            AddChoice(conv, 530, SmolakId, "Art5_Choice_AntiBFF",
+                "\"Designate the BFF as a terrorist entity, seal cross-border trails, and share anti-insurgent intelligence.\"",
+                "\"A formal security partnership. Rizia will officially designate the Bludish Freedom Front as a terrorist organisation, seal the southern mountain passes against insurgent movement, and share anti-terrorist intelligence with Wehlen.\"", 531,
+                "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_SecurityAntiBFF\"] = true;");
+
+            AddLine(conv, 531, SmolakId, RomusId, "Art5_Reply_AntiBFF",
+                "Smolak's eyes glittered with predatory triumph. \"Now you are speaking like a brother, Romus! Crushing those terrorists together will forge a bond between our nations that no foreign superpower can break!\"", 600);
+
+            // =========================================================================
+            // THE TALLY & FINAL VERDICT (Entries 600 - 930)
+            // =========================================================================
+            AddLine(conv, 600, NarratorId, RomusId, "Treaty_Tally_1",
+                "Laurento dipped his fountain pen in dark ink and systematically noted every agreed term, concession, and stipulation in the margins of the master parchment. When he finished, he blew upon the wet ink and passed the completed treaty to President Smolak.", 601);
+
+            AddLine(conv, 601, NarratorId, RomusId, "Treaty_Tally_2",
+                "Smolak put on a pair of tortoiseshell reading glasses, squinting through the fading smoke as his finger slowly traced down each article. The tent fell into an agonizing silence, broken only by the steady drumming of rain on canvas.", 602);
+
+            var verdictNode = AddLine(conv, 602, NarratorId, RomusId, "Treaty_Verdict_Gate",
+                "The total balance of military leverage, diplomatic respect, and mutual concessions weighed upon the scales.");
+
+            verdictNode.outgoingLinks.Add(CreateLink(conv.id, 602, 700)); // Delighted (Leverage >= 2)
+            verdictNode.outgoingLinks.Add(CreateLink(conv.id, 602, 800)); // Balanced (Leverage >= 0 && < 2)
+            verdictNode.outgoingLinks.Add(CreateLink(conv.id, 602, 900)); // Unacceptable (Leverage < 0)
+
+            // ---------------- PATH A: TRIUMPHANT ACCORD (700) ----------------
+            var p700 = AddLine(conv, 700, SmolakId, RomusId, "Verdict_Delighted_Smolak",
+                "\"By Saint Wruhec and the gods of the river, Romus! We have an accord! You fought like an Azaro on the battlefield, but at the negotiating table, you have shown the generosity and wisdom of a true emperor!\"");
+            p700.conditionsString = "Variable[\"Zille_Peace_Leverage\"] >= 2";
+
+            AddLine(conv, 701, SmolakId, RomusId, "Verdict_Delighted_Smolak_2",
+                "\"Wehlen can sign this document with its head held high. We gave blood, but we gained an honorable neighbor and an enduring partnership. Hand me the pen! Let us make history!\"", 702);
+
+            AddChoice(conv, 702, SmolakId, "Sign_Triumphant_Treaty",
+                "\"Sign the Treaty of Zille-Brenas with the royal signet ring. The province is restored in glory!\"",
+                "\"With a steady hand and calm sovereign majesty, you press the royal seal into the scarlet wax alongside Smolak's signature. Thirty years of exile are ended.\"", 703,
+                "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 3; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 2; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true; Variable[\"RiziaDLC.CountryRelation_Wehlen_Friendly\"] = true;");
+
+            AddLine(conv, 703, SmolakId, RomusId, "Verdict_Delighted_Conclusion",
+                "\"Smolak poured two glasses of Cantuavo wine and handed one to you with a boisterous laugh. \"To Romus the Restorer! Next time you visit Zille, the tarts are on me!\" Outside, royal trumpets began to sound across the trenches, proclaiming peace.\"", -1);
+
+            // ---------------- PATH B: BALANCED COMPROMISE (800) ----------------
+            var p800 = AddLine(conv, 800, SmolakId, RomusId, "Verdict_Balanced_Smolak",
+                "\"Smolak leaned back, tapping his chin thoughtfully before nodding with measured respect. \"It is not a feast, Romus, but neither is it poison. My generals in Erdmarg will grumble, and your nobles in Montaklar will complain you didn't hang me from a lamp post. Which means... it is an honest, workable treaty.\"\"");
+            p800.conditionsString = "Variable[\"Zille_Peace_Leverage\"] >= 0 && Variable[\"Zille_Peace_Leverage\"] < 2";
+
+            AddLine(conv, 801, SmolakId, RomusId, "Verdict_Balanced_Smolak_2",
+                "\"Neither of us got everything we wanted, but both of our nations can live with it. Our soldiers can pack up their kit and go home alive.\"", 802);
+
+            AddChoice(conv, 802, SmolakId, "Sign_Balanced_Treaty",
+                "\"Sign the Treaty of Zille-Brenas. An honorable peace is achieved.\"",
+                "\"You affix the royal crest to the treaty. The war is concluded on equitable terms, securing Zille for the Kingdom.\"", 803,
+                "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 1; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true;");
+
+            AddLine(conv, 803, SmolakId, RomusId, "Verdict_Balanced_Conclusion",
+                "\"Smolak signed steadily, shaking your hand with a firm, soldier's grip. \"Safe travels back to your palace, Romus. Let us hope our border guards have good discipline.\" He turned and walked into the rain.\"", -1);
+
+            // ---------------- PATH C: REJECTION & ULTIMATUM (900) ----------------
+            var p900 = AddLine(conv, 900, SmolakId, RomusId, "Verdict_Reject_Smolak",
+                "\"Do you take me for an illiterate peasant, Romus?! You sit in this tent and demand our land, our oil, our money, and the humiliation of my people, while offering Wehlen crumbs!\"");
+            p900.conditionsString = "Variable[\"Zille_Peace_Leverage\"] < 0";
+
+            var rejectHub = AddLine(conv, 901, SmolakId, RomusId, "Verdict_Reject_Prompt",
+                "\"Smolak rose to his feet, his hand resting near his holster, his guards instantly chambering rounds behind him. \"I did not survive twenty years of civil war to sign Wehlen's unconditional surrender! This parley is over!\"\"");
+
+            rejectHub.outgoingLinks.Add(CreateLink(conv.id, 901, 910)); // Royal Military Ultimatum
+            rejectHub.outgoingLinks.Add(CreateLink(conv.id, 901, 920)); // Last-Minute Compromise
+            rejectHub.outgoingLinks.Add(CreateLink(conv.id, 901, 930)); // War Resumes!
+
+            // 910: Royal Intimidation
+            AddChoice(conv, 910, SmolakId, "Verdict_Choice_Ultimatum",
+                "\"Look outside, Wiktor. Those are Rizian heavy tanks. Sign that parchment, or watch your regime burn.\"",
+                "\"Look through that tent flap, Wiktor. Those are royal armored divisions and heavy artillery batteries. If you walk out of this pavilion without signing, I will order the Third Army across the river, and we will not stop until the royal crest flies over your palace in Erdmarg. Sign the paper.\"", 911,
+                "", "Variable[\"Zille_War_Outcome\"] >= 4 || Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\"] == true || Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\"] == true");
+
+            AddLine(conv, 911, SmolakId, RomusId, "Verdict_Reply_Ultimatum",
+                "\"Smolak froze. A bead of sweat trickled down his temple as he stared out the canvas flap at the idling tanks. Slowly, with trembling rage and hollow eyes, he retrieved the parchment and scrawled his name. \"You win this round, Romus. But remember... South Merkopa has a very long memory.\" Zille was returned under iron royal will.\"", -1);
+            conv.dialogueEntries[conv.dialogueEntries.Count - 1].userScript = "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 4; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true;";
+
+            // 920: Last-Minute Concession
+            AddChoice(conv, 920, SmolakId, "Verdict_Choice_Concede",
+                "\"Calm yourself, Wiktor. The Crown will waive the reparations and grant subsidized energy transit to save the peace.\"",
+                "\"Calm yourself, Wiktor. We came here to end the war, not ignite a wider conflagration. The Crown will waive the indemnities and grant Wehlen discounted oil transit. Let us sign and end this.\"", 921);
+
+            AddLine(conv, 921, SmolakId, RomusId, "Verdict_Reply_Concede",
+                "\"Smolak paused, exhaling heavily as he wiped his brow. \"A grudging concession... but better than bleeding in the mud. Hand me the pen.\" Both leaders signed, averting catastrophe.\"", -1);
+            conv.dialogueEntries[conv.dialogueEntries.Count - 1].userScript = "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 1; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true;";
+
+            // 930: War Resumes
+            AddChoice(conv, 930, SmolakId, "Verdict_Choice_Breakdown",
+                "\"The Crown does not barter with tyrants. If you refuse these terms, let our artillery settle the score.\"",
+                "\"The Crown does not barter with tyrants. If you refuse these terms, let our artillery settle the score on the battlefield.\"", 931);
+
+            AddLine(conv, 931, SmolakId, RomusId, "Verdict_Reply_Breakdown",
+                "\"Smolak spat on the floor and stormed out into the rain. Within minutes, air-raid sirens wailed across the front lines, and the thunder of heavy guns shook the earth once more. The peace had failed.\"", -1);
+            conv.dialogueEntries[conv.dialogueEntries.Count - 1].userScript = "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] - 2; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 2;";
 
             db.AddConversation(conv);
-            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected Peace Treaty (ID 9993) into masterDatabase!");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected masterpiece Peace Treaty (ID 9993) into masterDatabase!");
         }
 
         // =========================================================================

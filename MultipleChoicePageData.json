@@ -1,0 +1,962 @@
+{
+  "items": [
+    {
+      "Id": "0x0100009A0000BC90",
+      "Path": "Rizia/Paged Decisions Panel/Executions Panel/Arrested People",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ArrestedPeople",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Arrested Criminals",
+        "Options": [
+          "Option_ArrestedPeople_Axel",
+          "Option_ArrestedPeople_Hugo",
+          "Option_ArrestedPeople_Lucita",
+          "Option_ArrestedPeople_Manus",
+          "Option_ArrestedPeople_Pabel",
+          "Option_ArrestedPeople_Rico",
+          "Option_ArrestedPeople_Rusty",
+          "Option_ArrestedPeople_Sal",
+          "Option_ArrestedPeople_Taddeus",
+          "Option_ArrestedPeople_Titus",
+          "Option_ArrestedPeople_Angelica",
+          "Option_ArrestedPeople_Adarfo"
+        ],
+        "Subtitle": "The below criminals are held in Porte Drazon Citadel, waiting for your verdict. Which ones should be executed?",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013B92",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 1",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section1",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section I: Presidential Vetoes",
+        "Options": [
+          "Option_DictatorConstitution_Section1_Default",
+          "Option_DictatorConstitution_Section1_LimitVetoes",
+          "Option_DictatorConstitution_Section1_Loophole"
+        ],
+        "Subtitle": "According to Article 77 & 82, the President may veto a bill by returning it to the Assembly with a written statement. The articles do not contain any information on how to override a veto. As a consequence, the President has an \u201cabsolute\u201d veto power that cannot even be overriden with a supermajority in the Grand Assembly of Sordland.\n\nWe may introduce a limit to vetoes by giving the Grand National Assembly the right to override a veto with a supermajority. If we prefer, we can also establish a loophole by not introducing a time limit for the president to act on a bill, giving them an absolute pocket veto power.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013BA8",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 2",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section2",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section II: Constitutional Amendment Process",
+        "Options": [
+          "Option_DictatorConstitution_Section2_RemoveCourtVote"
+        ],
+        "Subtitle": "According to Article 5 of the Constitution, an amendment that has the support of at least 150 signatures may be proposed to the Grand National Assembly. A two-thirds majority vote in the Grand National Assembly and a simple majority vote in the Supreme Court is required for the amendment. As a consequence, the Supreme Court, which is not part of the elected legislative branch, has voting rights that give them enormous power in the amendment process.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013BB7",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 3",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section3",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section III: Impeachment of the President",
+        "Options": [
+          "Option_DictatorConstitution_Section3_ImpeachmentHarder",
+          "Option_DictatorConstitution_Section3_ImpeachmentRemoved",
+          "Option_DictatorConstitution_Section3_ImpeachmentDefault"
+        ],
+        "Subtitle": "According to Article 17, the President of Sordland is not responsible for the actions performed in the exercise of presidential duties, except in the case of high treason or violation of the Constitution. In such cases, the President may be impeached by the Supreme Court in joint session, with an absolute majority of its members. \n\nTherefore, the impeachment process only includes the Supreme Court and it gives them great power over the executive.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013BDB",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 4",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section4",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section IV: Appointment of Ministers",
+        "Options": [
+          "Option_DictatorConstitution_Section4_ConfidenceVote",
+          "Option_DictatorConstitution_Section4_Assembly",
+          "Option_DictatorConstitution_Section4_Default"
+        ],
+        "Subtitle": "According to the Constitution, the President appoints the ministers to the Council of Ministers from elected members of the Assembly.\n\nWe may introduce a confidence vote by adding the line: \"The President may nominate ministers which will require a confidence vote from the Grand National Assembly for their appointment,\" or include the Assembly more in the process with: \"The Grand National Assembly may nominate a list of ministers, which the President may appoint.\"",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013BF8",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 5",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section5",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section V: Electoral Threshold",
+        "Options": [
+          "Option_DictatorConstitution_Section5_Threshold8",
+          "Option_DictatorConstitution_Section5_Threshold15",
+          "Option_DictatorConstitution_Section5_Default"
+        ],
+        "Subtitle": "According to Article 50, a political party needs a minimum of 10% of the total national vote to win seats in the Grand National Assembly. The votes of the parties who pass the threshold are re-distributed proportionally, meaning USP, which currently holds the lead, would be the main beneficiary.\n\nDecreasing the threshold may allow the Workers Party of Bludia and the Communist Party of Sordland to be elected in the next elections. Increasing the threshold, however, may put the National Front Party below the threshold.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013C15",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 6",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section6",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VI: Presidential Decrees",
+        "Options": [
+          "Option_DictatorConstitution_Section6_LimitedDecrees",
+          "Option_DictatorConstitution_Section6_StrongerDecrees",
+          "Option_DictatorConstitution_Section6_Default"
+        ],
+        "Subtitle": "According to Article 18 and 51, the President is able to issue decrees on political, social, and economic issues that would carry the force of law: they could not contradict the constitution and are subject to judicial review. Therefore, the President may issue decrees in many subjects without going through the Grand National Assembly. However, the Assembly may pass legislation on the same subjects to override presidential decrees. \n\nWe may include the Assembly in the process by requiring an enabling act from the Assembly to be able to enact decrees, or we may strengthen them by making them have priority over statute law and not subject to judicial review.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013C32",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 7",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section7",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VII: Term Limits",
+        "Options": [
+          "Option_DictatorConstitution_Section7_TwoTerms",
+          "Option_DictatorConstitution_Section7_Default"
+        ],
+        "Subtitle": "According to the Constitution, the President shall be elected to serve for four years. However, there is no mention of a term limit, allowing one individual to be able to run, be elected and serve as President without limits.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013C48",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 8",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section8",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VIII: Immunity of Justices",
+        "Options": [
+          "Option_DictatorConstitution_Section8_JudgeImpeachmentAssembly",
+          "Option_DictatorConstitution_Section8_JudgeImpeachmentPresident",
+          "Option_DictatorConstitution_Section8_Default"
+        ],
+        "Subtitle": "The Constitution gives the Justices of the Supreme Court absolute immunity before the law and describes no procedure of impeachment, making them untouchable by the other branches of government.\n\nWe may describe an impeachment procedure by giving the Grand National Assembly the right to propose an impeachment of a Justice on the legal grounds of unconstitutional behaviour, or we may give the President complete control over the Court by giving them the right to replace Justices.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013C5E",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel/Section 9",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DictatorConstitution_Section9",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section IX: \"Member of Honor\" Rights of Tarquin Soll",
+        "Options": [
+          "Option_DictatorConstitution_Section9_Abolish",
+          "Option_DictatorConstitution_Section9_EveryPresident",
+          "Option_DictatorConstitution_Section9_NoImmunity",
+          "Option_DictatorConstitution_Section9_Default"
+        ],
+        "Subtitle": "Article 99 of the Constitution defines the \"Member of Honor\" title, and the rights their members may exercise. A Member of Honor has absolute immunity and is considered to be a permanent member of the Grand National Assembly. They are given control of their own personal security team, provided by the state\u2019s Presidential Guards. A member is also eligible to live in a special private residence provided by the State for free. \n\nThe only person who holds the title is Tarquin Soll.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100006700000013",
+      "Path": "Sordland/Paged Decision Panels/Emergency Decree Panel/Section 1",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_EmergencyPanel_Section1",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section I: Internal Threats",
+        "Options": [
+          "Option_EmegencyPanel_Section1_YoungSords",
+          "Option_EmegencyPanel_Section1_RedYouth",
+          "Option_EmegencyPanel_Section1_WPB"
+        ],
+        "Subtitle": "In accordance with Article 57 and 58 of the Constitution, the State bans and declares the following a national security threat, as they have been found to pose an existential threat for the Republic of Sordland and public security of its citizens. \n\nThe following target(s) will be declared as terrorists and the police efforts will be directed against their members and the people who assisted them in the past.",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100006700000038",
+      "Path": "Sordland/Paged Decision Panels/Emergency Decree Panel/Section 2",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_EmergencyPanel_Section2",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section II: Security",
+        "Options": [
+          "Option_EmegencyPanel_Section2_PoliceAuthority",
+          "Option_EmegencyPanel_Section2_SuspensionofProtest",
+          "Option_EmegencyPanel_Section2_Detention"
+        ],
+        "Subtitle": "On the basis of Article 58 of the Constitution, the following is ordered in defense against national security threats:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100006700000055",
+      "Path": "Sordland/Paged Decision Panels/Emergency Decree Panel/Section 3",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_EmergencyPanel_Section3",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section III: External Threats",
+        "Options": [
+          "Option_EmegencyPanel_Section3_Rumburg",
+          "Option_EmegencyPanel_Section3_Arcasia",
+          "Option_EmegencyPanel_Section3_UC"
+        ],
+        "Subtitle": "On the basis of their acts of aggressive politics, interfering with the internal affairs and disrespecting the sovereignty of the Republic of Sordland, the State declares the severance of all diplomatic ties, places an embargo and denies entry to the citizens of the following nations:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 0
+      }
+    },
+    {
+      "Id": "0x0100009A0000BE9D",
+      "Path": "Rizia/Paged Decisions Panel/Executions Panel/Execution Method",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ExecutionMethod",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Method",
+        "Options": [
+          "Option_ExecutionMethod_Guillotine",
+          "Option_ExecutionMethod_Hanging",
+          "Option_ExecutionMethod_FiringSquad",
+          "Option_ExecutionMethod_Electrocution"
+        ],
+        "Subtitle": "What should the method of execution be?",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100008E00002CFC",
+      "Path": "Rizia/Paged Decisions Panel/Focus Panel/Economy",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FocusPanel_EconomicStrategy",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Economic Strategy",
+        "Options": [
+          "Option_FocusPanel_Economy_Energy",
+          "Option_FocusPanel_Economy_Diversification",
+          "Option_FocusPanel_Economy_Mixed"
+        ],
+        "Subtitle": "A focus on strengthening our resource economy involves leveraging natural assets and safeguarding long-term energy commitments. Alternatively, diversifying the economy beyond resource reliance aims for a balanced financial landscape, mitigating over-reliance risks. A mixed strategy offers more flexibility.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100008E00002CA2",
+      "Path": "Rizia/Paged Decisions Panel/Focus Panel/Diplomacy",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FocusPanel_ForeignStrategy",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Foreign Affairs Strategy",
+        "Options": [
+          "Option_FocusPanel_Diplomacy_Interventionism",
+          "Option_FocusPanel_Diplomacy_Appeasement",
+          "Option_FocusPanel_Diplomacy_ThirdWay"
+        ],
+        "Subtitle": "The Kingdom faces new diplomatic choices. Interventionism encourages active military involvement, while Appeasement aims to strengthen ties with Wehlen and Rumburg's monarchy. Alternatively, you could choose the Third Way, forming regional alliances with Derdia, Pales, and Morella to avoid major powers.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100008E00002CBF",
+      "Path": "Rizia/Paged Decisions Panel/Focus Panel/Government",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FocusPanel_GovernmentIntention",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Government Structure Intention",
+        "Options": [
+          "Option_FocusPanel_Government_Absolutism",
+          "Option_FocusPanel_Government_Reform",
+          "Option_FocusPanel_Government_StatusQuo"
+        ],
+        "Subtitle": "Opting for Absolutism would solidify monarchic traditions within House Toras, while considering Reform aligns with House Sazon and the Rizian People's Party, signaling a shift towards wider civic participation and resource redistribution. Conversely, the Status Quo upholds the current balance of power and provincial autonomy.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x010000520002787D",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Nationalization",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaNationalization_Concessions",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Nationalization Concessions",
+        "Options": [
+          "Concession_PollutionReparationsCheaper",
+          "Concession_PollutionReparationsExpensive",
+          "Concession_EnergyAgreement",
+          "Concession_DerdiaAssistance"
+        ],
+        "Subtitle": "In exchange for being allowed to purchase a 40 percent share in the nationalized Meftiem International Trade Zone, Rizia agrees to the following:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x010000520002682B",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Nationalization",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaNationalization_Demands",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Nationalization Demands",
+        "Options": [
+          "Demand_EnergyDeal",
+          "Demand_PalesANSupport",
+          "Demand_WehlenDiplomaticSupport",
+          "Demand_WehlenResistanceSupport",
+          "Demand_AirplaneSale"
+        ],
+        "Subtitle": "As a condition for approving Morella's proposal for the nationalization of the Meftiem International Trade Zone, Rizia requests that Morella fulfill the following demands.",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x01000052000278AA",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Renegotiation",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaRenegotiationConcessions_BuyLespia",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Renegotiation Concessions",
+        "Options": [
+          "Concession_StrictRegulations",
+          "Concession_PollutionReparationsExpensive",
+          "Concession_EnergyAgreement",
+          "Concession_DerdiaAssistance",
+          "Concession_PollutionReparationsCheaper"
+        ],
+        "Subtitle": "In exchange for taking over Lespia's share in the renegotiated Meftiem International Trade Zone, Rizia agrees to the following:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x01000052000278B4",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Renegotiation",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaRenegotiationConcessions_NoLespia",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Renegotiation Concessions",
+        "Options": [
+          "Concession_DerdiaAssistance",
+          "Concession_PollutionReparationsExpensive",
+          "Concession_EnergyAgreement",
+          "Concession_PollutionReparationsCheaper"
+        ],
+        "Subtitle": "In exchange for the elimination of Lespia's share in the renegotiated Meftiem International Trade Zone, Rizia agrees to the following:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x01000052000278BE",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Renegotiation",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaRenegotiationConcessions_SameShares",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Renegotiation Concessions",
+        "Options": [
+          "Concession_StrictRegulations",
+          "Concession_PollutionReparationsExpensive",
+          "Concession_EnergyAgreement",
+          "Concession_DerdiaAssistance",
+          "Concession_PollutionReparationsCheaper"
+        ],
+        "Subtitle": "As part of the new agreement for the Meftiem International Trade Zone, Rizia agrees to the following:",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005200027872",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands/Renegotiation",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_MorellaRenegotiation_Demands",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Rizia's Renegotiation Demands",
+        "Options": [
+          "Demand_EnergyDeal",
+          "Demand_PalesANSupport",
+          "Demand_WehlenDiplomaticSupport",
+          "Demand_WehlenResistanceSupport",
+          "Demand_AirplaneSale"
+        ],
+        "Subtitle": "As a condition for transferring part of its share to Morella in the new Meftiem International Trade Zone agreement, Rizia requests that Morella fulfill the following demands.",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005D000004CE",
+      "Path": "Sordland/Paged Decision Panels/Promises Panel/Diplomacy",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_PromisesPanel_Diplomacy",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Diplomatic Leaning",
+        "Options": [
+          "Option_PromisesPanel_Diplomacy_East",
+          "Option_PromisesPanel_Diplomacy_West",
+          "Option_PromisesPanel_Diplomacy_None"
+        ],
+        "Subtitle": "The global rivalries between capitalist Arcasia in the west, the monarchy of Rumburg to the north, and the communist United Contana in the east are intensifying. Sordland has the potential to align with others or lean towards neutrality.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005D000004C2",
+      "Path": "Sordland/Paged Decision Panels/Promises Panel/Economy",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_PromisesPanel_Economy",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Economic Direction",
+        "Options": [
+          "Option_PromisesPanel_Economy_Planned",
+          "Option_PromisesPanel_Economy_Market"
+        ],
+        "Subtitle": "After the recent market reforms and the recession, the country finds itself stuck between two different economic systems with indecision and turbulence, causing the population to demand a direction.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005D000004DE",
+      "Path": "Sordland/Paged Decision Panels/Promises Panel/Immigration",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_PromisesPanel_Immigration",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Immigration Policy",
+        "Options": [
+          "Option_PromisesPanel_Immigration_Tightened",
+          "Option_PromisesPanel_Immigration_Relaxed"
+        ],
+        "Subtitle": "In the last five years, Bludish, Wehzek, and Agnolian immigrants flocked to Sordland due to relaxed immigration laws enacted by former President Ewald Alphonso. As a result, these tensions are causing requests for a political solution.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100009A0000BE5E",
+      "Path": "Rizia/Paged Decisions Panel/Executions Panel/Publicity",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Publicity",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Publicity",
+        "Options": [
+          "Option_Publicity_Everyone",
+          "Option_Publicity_OnlyNobles",
+          "Option_Publicity_NoOne"
+        ],
+        "Subtitle": "Who should we invite to watch the execution that will take place?",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013A22",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 1",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section1",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section I: Presidential Vetoes",
+        "Options": [
+          "Option_ReformistConstitution_Section1_RemoveVetoes",
+          "Option_ReformistConstitution_Section1_LimitVetoes"
+        ],
+        "Subtitle": "According to Article 77 & 82, the President may veto a bill by returning it to the Assembly with a written statement. The articles do not contain any information on how to override a veto. \n\nAs a consequence, the President has an \u201cabsolute\u201d veto power that cannot even be overriden with a supermajority in the Grand Assembly of Sordland.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013A4F",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 2",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section2",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section II: Constitutional Amendment Process",
+        "Options": [
+          "Option_ReformistConstitution_Section2_RemoveCourtVote"
+        ],
+        "Subtitle": "According to Article 5 of the Constitution, an amendment that has the support of at least 150 signatures may be proposed to the Grand National Assembly. A two-thirds majority vote in the Grand National Assembly and a simple majority vote in the Supreme Court is required for the amendment. As a consequence, the Supreme Court, which is not part of the elected legislative branch, has voting rights that give them enormous power in the amendment process.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013A65",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 3",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section3",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section III: Impeachment of the President",
+        "Options": [
+          "Option_ReformistConstitution_Section3_ImpeachmentHarder",
+          "Option_ReformistConstitution_Section3_ImpeachmentRemoved",
+          "Option_ReformistConstitution_Section3_ImpeachmentDefault"
+        ],
+        "Subtitle": "According to Article 17, the President of Sordland is not responsible for the actions performed in the exercise of presidential duties, except in the case of high treason or violation of the Constitution. In such cases, the President may be impeached by the Supreme Court in joint session, with an absolute majority of its members. \n\nTherefore, the impeachment process only includes the Supreme Court and it gives them great power over the executive.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013A89",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 4",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section4",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section IV: Appointment of Ministers",
+        "Options": [
+          "Option_ReformistConstitution_Section4_ConfidenceVote",
+          "Option_ReformistConstitution_Section4_Assembly",
+          "Option_ReformistConstitution_Section4_Default"
+        ],
+        "Subtitle": "According to the Constitution, the President appoints the ministers to the Council of Ministers from elected members of the Assembly.\n\nWe may introduce a confidence vote by adding the line: \"The President may nominate ministers which will require a confidence vote from the Grand National Assembly for their appointment,\" or include the Assembly more in the process with: \"The Grand National Assembly may nominate a list of ministers, which the President may appoint.\"",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013AB0",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 5",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section5",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section V: Electoral Threshold",
+        "Options": [
+          "Option_ReformistConstitution_Section5_Threshold8",
+          "Option_ReformistConstitution_Section5_Threshold3",
+          "Option_ReformistConstitution_Section5_Default"
+        ],
+        "Subtitle": "According to Article 50, a political party needs a minimum of 10% of the total national vote to win seats in the Grand National Assembly. The votes of the parties who pass the threshold are re-distributed proportionally, meaning USP, which currently holds the lead, would be the main beneficiary.\n\nDecreasing the threshold may allow the Workers Party of Bludia and the Communist Party of Sordland to be elected in the next elections.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013AD3",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 6",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section6",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VI: Presidential Decrees",
+        "Options": [
+          "Option_ReformistConstitution_Section6_LimitedDecrees",
+          "Option_ReformistConstitution_Section6_RemovedDecrees",
+          "Option_ReformistConstitution_Section6_Default"
+        ],
+        "Subtitle": "According to Article 18 and 51, the President is able to issue decrees on political, social, and economic issues that would carry the force of law: they could not contradict the constitution and are subject to judicial review. \n\nTherefore, the President may issue decrees in many subjects without going through the Grand National Assembly. However, the Assembly may pass legislation on the same subjects to override presidential decrees. We may include the Assembly in the process by requiring an enabling act from the Assembly to be able to enact decrees or remove them completely, making the Assembly the sole lawmaking authority.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013AF3",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 7",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section7",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VII: Term Limits",
+        "Options": [
+          "Option_ReformistConstitution_Section7_TwoTerms",
+          "Option_ReformistConstitution_Section7_Default"
+        ],
+        "Subtitle": "According to the Constitution, the President shall be elected to serve for four years. However, there is no mention of a term limit, allowing one individual to be able to run, be elected and serve as President without limits.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013B11",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 8",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section8",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section VIII: Immunity of Justices",
+        "Options": [
+          "Option_ReformistConstitution_Section8_JudgeImpeachmentAssembly",
+          "Option_ReformistConstitution_Section8_Default"
+        ],
+        "Subtitle": "The Constitution gives the Justices of the Supreme Court absolute immunity before the law and describes no procedure of impeachment, making them untouchable by the other branches of government.\n\nWe may describe an impeachment procedure by giving the Grand National Assembly the right to propose an impeachment of a Justice on the legal grounds of unconstitutional behaviour.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x0100005100013B29",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel/Section 9",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReformistConstitution_Section9",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Section IX: \"Member of Honor\" Rights of Tarquin Soll",
+        "Options": [
+          "Option_ReformistConstitution_Section9_Abolish",
+          "Option_ReformistConstitution_Section9_EveryPresident",
+          "Option_ReformistConstitution_Section9_NoImmunity",
+          "Option_ReformistConstitution_Section9_Default"
+        ],
+        "Subtitle": "Article 99 of the Constitution defines the \"Member of Honor\" title, and the rights their members may exercise. A Member of Honor has absolute immunity and is considered to be a permanent member of the Grand National Assembly. They are given control of their own personal security team, provided by the state\u2019s Presidential Guards. A member is also eligible to live in a special private residence provided by the State for free. \n\nThe only person who holds the title is Tarquin Soll.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x010000520001C5AE",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel/Section 1 - Import",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_WehlenNegotiationPromises_Section1",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Import from Wehlen",
+        "Options": [
+          "ImportOption_Oil1",
+          "ImportOption_Drugs",
+          "ImportOption_Tobacco",
+          "ImportOption_Wood",
+          "ImportOption_Oil2",
+          "ImportOption_Oil3"
+        ],
+        "Subtitle": "Choose Wehzek goods to be imported to Rizia under the new trade agreement.",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 0
+      }
+    },
+    {
+      "Id": "0x010000520001C5B2",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel/Section 2 - Export",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_WehlenNegotiationPromises_Section2",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Export to Wehlen",
+        "Options": [
+          "ExportOption_Gold",
+          "ExportOption_Gas",
+          "ExportOption_Wine",
+          "ExportOption_Arms"
+        ],
+        "Subtitle": "Choose Rizian goods to be exported to Wehlen under the new trade agreement.",
+        "MaximumChoiceCount": -1,
+        "MinimumChoiceCount": 0
+      }
+    },
+    {
+      "Id": "0x010000640000C5F1",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel/Section 3 - Border Security",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_WehlenNegotiationPromises_Section3",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Counter-Insurgency Aid [Promise]",
+        "Options": [
+          "CounterTerrorism_AntiBFFAid",
+          "CounterTerrorism_NoAid"
+        ],
+        "Subtitle": "Wehlen is asking for Rizia to promise future aid against the Bludish Freedom Front, specifically by sending ships to the Strait of Kreleck to eliminate the possibility of BFF insurgents fleeing southward.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x010000520001C5BA",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel/Section 4 - Counter Insurgency",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_WehlenNegotiationPromises_Section4",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Counter-Terrorism Border Control",
+        "Options": [
+          "CounterTerrorism_StatusQuo",
+          "CounterTerrorism_BanBluds",
+          "CounterTerrorism_BanBludsAndDerdians"
+        ],
+        "Subtitle": "Wehlen has proposed new measures to prevent Bludish Freedom Front members from crossing the Rizian border. They are calling for Derdian passport holders and those holding Bludish identification documents to be banned from entering the kingdom by our border guards. [No Cost if Expanded Border Guards]",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    },
+    {
+      "Id": "0x010000520001C5B6",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel/Section 5 - Rights",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_WehlenNegotiationPromises_Section5",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "MultipleChoicePageProperties": {
+        "Title": "Wehzek Rights in Rizia [Immediate]",
+        "Options": [
+          "RightsOption_NoChangeIfGrantedWorkerRights",
+          "RightsOption_WorkersOnly",
+          "RightsOption_FullRights"
+        ],
+        "Subtitle": "Decide on the status of Wehzek citizens living in Rizia. Wehlen is asking you to grant full freedom of movement and full rights to its citizens, including the right to work, own property and access social services.",
+        "MaximumChoiceCount": 1,
+        "MinimumChoiceCount": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+{
+  "items": [
+    {
+      "Id": "0x0100005D000004B0",
+      "Path": "Sordland/Paged Decision Panels/Promises Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "PagedDecisionPanel_PromisesPanel",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_PromisesPanel_Economy",
+          "Page_PromisesPanel_Diplomacy",
+          "Page_PromisesPanel_Immigration",
+          "Page_PromisesPanel_Focus"
+        ],
+        "Title": "Election Campaign Promises",
+        "Description": "As Anton Rayne, you have made consequential promises to the people of Sordland to gain their votes in the 1953 election campaign. Consider these commitments carefully.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "Turn01_Start_Inauguration",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006700000089",
+      "Path": "Sordland/Paged Decision Panels/Budget Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Budget",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_Budget_Healthcare",
+          "Page_Budget_Security",
+          "Page_Budget_Education",
+          "Page_Budget_Military"
+        ],
+        "Title": "Term Budget",
+        "Description": "You can distribute the budget between the four branches below. Increasing the budget will result in an improvement of the branch which may also unlock new policy options, while maintaining may result in no visible changes and decreasing may result in a loss of efficiency.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "Final Budget",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "BaseGame.GovernmentBudget",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100005100013B82",
+      "Path": "Sordland/Paged Decision Panels/Dictator Constitution Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_DictatorConstitution",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_DictatorConstitution_Section1",
+          "Page_DictatorConstitution_Section2",
+          "Page_DictatorConstitution_Section3",
+          "Page_DictatorConstitution_Section4",
+          "Page_DictatorConstitution_Section5",
+          "Page_DictatorConstitution_Section6",
+          "Page_DictatorConstitution_Section7",
+          "Page_DictatorConstitution_Section8",
+          "Page_DictatorConstitution_Section9"
+        ],
+        "Title": "Constitutional Changes",
+        "Description": "",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006700000003",
+      "Path": "Sordland/Paged Decision Panels/Emergency Decree Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_EmergencyDecree",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_EmergencyPanel_Section1",
+          "Page_EmergencyPanel_Section2",
+          "Page_EmergencyPanel_Section3"
+        ],
+        "Title": "Emergency Decree",
+        "Description": "",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100009A0000BC89",
+      "Path": "Rizia/Paged Decisions Panel/Executions Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Executions",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_ArrestedPeople",
+          "Page_Publicity",
+          "Page_ExecutionMethod"
+        ],
+        "Title": "Executions",
+        "Description": "These arrested prisoners have committed grave crimes against the Crown and their King. Their punishment has to be decided on whether they should keep serving their sentence or they should meet the guillotine.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100008E00002C96",
+      "Path": "Rizia/Paged Decisions Panel/Focus Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Focus",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_FocusPanel_GovernmentIntention",
+          "Page_FocusPanel_EconomicStrategy",
+          "Page_FocusPanel_ForeignStrategy",
+          "Page_FocusPanel_MilitaryBranchFocus"
+        ],
+        "Title": "Strategic Focus Selection Panel",
+        "Description": "As King Romus Toras, you have extensive power to enact and shape the course of the Golden Kingdom. By choosing different focus options you can gain different strategic advantages.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "Turn01_Start_Coronation",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006700000176",
+      "Path": "Sordland/Paged Decision Panels/Nationalization Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Nationalization",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_Nationalization_HOS",
+          "Page_Nationalization_BergiaSteel"
+        ],
+        "Title": "Nationalization",
+        "Description": "The companies below are the two privately held corporations of the Big Four. They play a key role in the Sordish economy. You can nationalize them by transferring a minority, majority or the entirety of the shares of these companies to the state.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": true,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278D1",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Nationalization_Concessions_SeizeLespiaShare",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaNationalization_Concessions"
+        ],
+        "Title": "Proposal for Rizia to Buy Lespia's Share in the Meftiem International Trade Zone",
+        "Description": "In exchange for the following concessions, Rizia will take over the stake in the nationalized Meftiem International Trade Zone that would otherwise be offered to Lespia, bringing its total share to 40 percent.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278CD",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Nationalization_Demands_NoShare",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaNationalization_Demands"
+        ],
+        "Title": "Proposal for the Seizure of Rizia's Assets in the Meftiem International Trade Zone",
+        "Description": "Rizia hereby agrees to transfer its existing assets in the Meftiem International Trade Zone to Morella, in exchange for standard compensation as well as the following:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278E6",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Nationalization_Demands_Share",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaNationalization_Demands"
+        ],
+        "Title": "Proposal for the Seizure of Rizia's Assets in the Meftiem International Trade Zone",
+        "Description": "Rizia hereby agrees to transfer its existing assets in the Meftiem International Trade Zone to Morella, in exchange for a 20 percent stake in the restructured MITZ as well as the following:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x010000670000011D",
+      "Path": "Sordland/Paged Decision Panels/Privatization Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Privatization",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_Privatization_SSC",
+          "Page_Privatization_Nedam"
+        ],
+        "Title": "Privatization",
+        "Description": "The companies below are the two state-owned corporations of the Big Four. They play a key role in several strategic industries. You can privatize them by selling a minority, majority or the entirety of the companies to private interests.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": true,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100005100013A17",
+      "Path": "Sordland/Paged Decision Panels/Reformist Constitution Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_ReformistConstitution",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_ReformistConstitution_Section1",
+          "Page_ReformistConstitution_Section2",
+          "Page_ReformistConstitution_Section3",
+          "Page_ReformistConstitution_Section4",
+          "Page_ReformistConstitution_Section5",
+          "Page_ReformistConstitution_Section6",
+          "Page_ReformistConstitution_Section7",
+          "Page_ReformistConstitution_Section8",
+          "Page_ReformistConstitution_Section9"
+        ],
+        "Title": "Constitutional Changes",
+        "Description": "",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278D5",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Renegotiation_Concessions_BuyLespia",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaRenegotiationConcessions_BuyLespia"
+        ],
+        "Title": "Proposal for Rizia to Buy Lespia's Share in the Meftiem International Trade Zone",
+        "Description": "Morella will approve the sale of Lespia's share in the Meftiem International Trade Zone to Rizia, in exchange for the following concessions:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278D9",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Renegotiation_Concessions_NoLespia",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaRenegotiationConcessions_NoLespia"
+        ],
+        "Title": "Proposal for Morella to Buy Lespia's Share in the Meftiem International Trade Zone",
+        "Description": "As part of the renegotiated International Trade Zone agreement, Morella will take over Lespia's stake in exchange for the following concessions from Rizia:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278DD",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Renegotiation_Concessions_SameShares",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaRenegotiationConcessions_SameShares"
+        ],
+        "Title": "Proposal for the Renegotiated International Trade Zone Agreement",
+        "Description": "As part of the renegotiated Meftiem International Trade Zone agreement, Rizia will keep its current 25 percent stake and commit to the following:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x01000052000278C9",
+      "Path": "Rizia/Paged Decisions Panel/Morella Nationalization Demands",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Renegotiation_Demands_CedeRiziaShare",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_MorellaRenegotiation_Demands"
+        ],
+        "Title": "Proposal for the Renegotiated Meftiem International Trade Zone",
+        "Description": "As part of the new agreement for the Meftiem International Trade Zone, Rizia agrees to transfer a portion of its current stake to Morella. In exchange, Rizia asks that Morella commit to the following:",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C6AB",
+      "Path": "Rizia/Prologue Skip",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Rizia_PrologueSkip",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_SummersInRizia",
+          "Page_RelationshipToPanel",
+          "Page_FormativeYearsRomus",
+          "Page_Education",
+          "Page_ReclamationWarProtests",
+          "Page_Kidnapping",
+          "Page_DukeValenqiris",
+          "Page_RoyalFamily",
+          "Page_DiversityOrNationalism",
+          "Page_FamilyBoatTrip",
+          "Page_Religious",
+          "Page_CrownPrinceFocus",
+          "Page_PalesRelations",
+          "Page_RelationshipFather"
+        ],
+        "Title": "Prologue Choices",
+        "Description": "",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C722",
+      "Path": "Sordland/Prologue Skip",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_Sordland_PrologueSkip",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_Family",
+          "Page_FormativeYearsAnton",
+          "Page_University",
+          "Page_Extracurricular",
+          "Page_YouthOrganization",
+          "Page_OppositionUSP",
+          "Page_TakePower",
+          "Page_CampaignPromise"
+        ],
+        "Title": "Prologue Choices",
+        "Description": "",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "",
+        "PanelBarVariable": "",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    },
+    {
+      "Id": "0x0100006500004B3C",
+      "Path": "Rizia/Paged Decisions Panel/Wehlen Negotiations Promises Panel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Panel_WehlenNegotiationPromises",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "PagedDecisionPanelProperties": {
+        "Pages": [
+          "Page_WehlenNegotiationPromises_Section1",
+          "Page_WehlenNegotiationPromises_Section2",
+          "Page_WehlenNegotiationPromises_Section3",
+          "Page_WehlenNegotiationPromises_Section4",
+          "Page_WehlenNegotiationPromises_Section5"
+        ],
+        "Title": "Amendment to the Zille Agreement of 1927",
+        "Description": "The Zille agreement is being renegotiated to strengthen the economic, cultural and political ties between the nations of Wehlen and Rizia. Wehlen wants to meet certain new conditions in a new comprehensive bilateral agreement.",
+        "PanelBarMax": 10,
+        "PanelBarMin": -10,
+        "PanelBarText": "Negotiation Leverage",
+        "PanelBarVariable": "RiziaDLCIsolated.Turn05_Wehlen_TreatyNegotiationPoints",
+        "PanelCounterText": "",
+        "ConversationOnFinish": "",
+        "PanelCounterVariable": "",
+        "PreventFinishOnNoChange": false,
+        "PagedDecisionPanelOnFinish": ""
+      }
+    }
+  ]
+}

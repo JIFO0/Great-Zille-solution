@@ -1,0 +1,681 @@
+{
+  "items": [
+    {
+      "Id": "0x01000067000000D4",
+      "Path": "Sordland/Paged Decision Panels/Budget Panel/Education",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Budget_Education",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "III. Education",
+        "Options": [
+          "Option_Budget_Education_Maintain",
+          "Option_Budget_Education_Increase",
+          "Option_Budget_Education_Decrease"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100006700000093",
+      "Path": "Sordland/Paged Decision Panels/Budget Panel/Healthcare",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Budget_Healthcare",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "I. Healthcare",
+        "Options": [
+          "Option_Budget_Healthcare_Maintain",
+          "Option_Budget_Healthcare_Increase",
+          "Option_Budget_Healthcare_Decrease"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x01000067000000F3",
+      "Path": "Sordland/Paged Decision Panels/Budget Panel/Military",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Budget_Military",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "IV. Military",
+        "Options": [
+          "Option_Budget_Military_Maintain",
+          "Option_Budget_Military_Increase",
+          "Option_Budget_Military_Decrease"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x01000067000000B5",
+      "Path": "Sordland/Paged Decision Panels/Budget Panel/Security",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Budget_Security",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "II: Law & Order",
+        "Options": [
+          "Option_Budget_Security_Maintain",
+          "Option_Budget_Security_Increase",
+          "Option_Budget_Security_Decrease"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C50000065C",
+      "Path": "Sordland/Prologue Skip/Page_CampaignPromise",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_CampaignPromise",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Campaign Promise",
+        "Options": [
+          "Option_CampaignPromise_DemocraticReforms",
+          "Option_CampaignPromise_NationalValues"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C500000742",
+      "Path": "Rizia/Prologue Skip/Page_CrownPrinceFocus",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_CrownPrinceFocus",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Your Focus as Crown Prince",
+        "Options": [
+          "Option_CrownPrinceFocus_EnergyProduction",
+          "Option_CrownPrinceFocus_InternalSecurity",
+          "Option_CrownPrinceFocus_GoldExtractionAndTaxEfficiency",
+          "Option_CrownPrinceFocus_Military",
+          "Option_CrownPrinceFocus_PublicOpinion"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C5000006EE",
+      "Path": "Rizia/Prologue Skip/Page_DiversityOrNationalism",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DiversityOrNationalism",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Diversity Or Nationalism",
+        "Options": [
+          "Option_DiversityOrNationalism_Neutral",
+          "Option_DiversityOrNationalism_Nationalist",
+          "Option_DiversityOrNationalism_Diversity"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C5000006B6",
+      "Path": "Rizia/Prologue Skip/Page_DukeValenqiris",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_DukeValenqiris",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Reign as Duke of Valenqiris",
+        "Options": [
+          "Option_DukeValenqiris_PunishTraitors",
+          "Option_DukeValenqiris_RebuildRegion",
+          "Option_DukeValenqiris"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C50000067E",
+      "Path": "Rizia/Prologue Skip/Page_Education",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Education",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Educational Path",
+        "Options": [
+          "Option_Education_Military",
+          "Option_Education_University",
+          "Option_Education_RoyalCouncil"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C5000005EC",
+      "Path": "Sordland/Prologue Skip/Page_Extracurricular",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Extracurricular",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Extracurricular Activities",
+        "Options": [
+          "Option_Extracurricular_PoliticalDebateGroup",
+          "Option_Extracurricular_HumanRightsGroup",
+          "Option_Extracurricular_StudentCouncil"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C732",
+      "Path": "Sordland/Prologue Skip/Page_Family",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Family",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Family",
+        "Options": [
+          "Option_Family_Wealthy",
+          "Option_Family_Middle",
+          "Option_Family_Impoverished"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C50000070A",
+      "Path": "Rizia/Prologue Skip/Page_FamilyBoatTrip",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FamilyBoatTrip",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Take a Family Boat Trip",
+        "Options": [
+          "Option_FamilyBoatTrip_MeetLover",
+          "Option_FamilyBoatTrip_Work",
+          "Option_FamilyBoatTrip_Accompany"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100008E00002CD5",
+      "Path": "Rizia/Paged Decisions Panel/Focus Panel/Security",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FocusPanel_MilitaryBranchFocus",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Military Branch Focus",
+        "Options": [
+          "Option_FocusPanel_MilitaryBranch_Airforce",
+          "Option_FocusPanel_MilitaryBranch_Army",
+          "Option_FocusPanel_MilitaryBranch_Navy",
+          "Option_FocusPanel_MilitaryBranch_None"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C70000054B",
+      "Path": "Sordland/Prologue Skip/Page_FormativeYearsAnton",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FormativeYearsAnton",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Formative Years",
+        "Options": [
+          "Option_FormativeYearsAnton_HardLife",
+          "Option_FormativeYearsAnton_NormalLife",
+          "Option_FormativeYearsAnton_EasyLife"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C70000052E",
+      "Path": "Rizia/Prologue Skip/Page_FormativeYearsRomus",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_FormativeYearsRomus",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Formative Years",
+        "Options": [
+          "Option_FormativeYearsRomus_NormalLife",
+          "Option_FormativeYearsRomus_HardLife",
+          "Option_FormativeYearsRomus_EasyLife"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C700000353",
+      "Path": "Rizia/Prologue Skip/Page_Kidnapping",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Kidnapping",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Kidnapped by Masked Men",
+        "Options": [
+          "Option_Kidnapping_TryToRun",
+          "Option_Kidnapping_Comply",
+          "Option_Kidnapping_Fight"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x01000067000001A7",
+      "Path": "Sordland/Paged Decision Panels/Nationalization Panel/BergiaSteel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Nationalization_BergiaSteel",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "II. Bergia Steel",
+        "Options": [
+          "Option_Nationalization_BergiaSteel_FullPrivate",
+          "Option_Nationalization_BergiaSteel_MinorityState",
+          "Option_Nationalization_BergiaSteel_MajorityState",
+          "Option_Nationalization_BergiaSteel_FullState"
+        ],
+        "ImagePath": "Paged Decision Panel/bergiasteel"
+      }
+    },
+    {
+      "Id": "0x01000067000001FE",
+      "Path": "Sordland/Paged Decision Panels/Nationalization Panel/HOS",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Nationalization_HOS",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "I. Heart of Sordland",
+        "Options": [
+          "Option_Nationalization_HOS_FullPrivate",
+          "Option_Nationalization_HOS_MinorityState",
+          "Option_Nationalization_HOS_MajorityState",
+          "Option_Nationalization_HOS_FullState"
+        ],
+        "ImagePath": "Paged Decision Panel/hos"
+      }
+    },
+    {
+      "Id": "0x010000C500000624",
+      "Path": "Sordland/Prologue Skip/Page_OppositionUSP",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_OppositionUSP",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Opposition inside the United Sordland Party",
+        "Options": [
+          "Option_OppositionUSP_SupportAlphonso",
+          "Option_OppositionUSP_StayNeutral",
+          "Option_OppositionUSP_SupportSoll"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C500000772",
+      "Path": "Rizia/Prologue Skip/Page_PalesRelations",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_PalesRelations",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Relations to Pales",
+        "Options": [
+          "Option_PalesRelations_Hostile",
+          "Option_PalesRelations_Peaceful",
+          "Option_PalesRelations_Neutral"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000670000014A",
+      "Path": "Sordland/Paged Decision Panels/Privatization Panel/Nedam",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Privatization_Nedam",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "II. Nedam Mining Group",
+        "Options": [
+          "Option_Privatization_Nedam_FullState",
+          "Option_Privatization_Nedam_MinorPrivate",
+          "Option_Privatization_Nedam_MajorPrivate",
+          "Option_Privatization_Nedam_FullPrivate"
+        ],
+        "ImagePath": "Paged Decision Panel/nedam"
+      }
+    },
+    {
+      "Id": "0x0100006700000123",
+      "Path": "Sordland/Paged Decision Panels/Privatization Panel/SSC",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Privatization_SSC",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "I. Sordish State Corporation",
+        "Options": [
+          "Option_Privatization_SSC_FullState",
+          "Option_Privatization_SSC_MinorPrivate",
+          "Option_Privatization_SSC_MajorPrivate",
+          "Option_Privatization_SSC_FullPrivate"
+        ],
+        "ImagePath": "Paged Decision Panel/ssc"
+      }
+    },
+    {
+      "Id": "0x0100005D000004EA",
+      "Path": "Sordland/Paged Decision Panels/Promises Panel/Focus",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_PromisesPanel_Focus",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Term Focus",
+        "Options": [
+          "Option_PromisesPanel_Focus_Education",
+          "Option_PromisesPanel_Focus_Defence",
+          "Option_PromisesPanel_Focus_Law&Enforcement",
+          "Option_PromisesPanel_Focus_Health"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C50000069A",
+      "Path": "Rizia/Prologue Skip/Page_ReclamationWarProtests",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_ReclamationWarProtests",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Reclamation War Protests",
+        "Options": [
+          "Option_ReclamationWarProtests_StayNeutral",
+          "Option_ReclamationWarProtests_CrackDown",
+          "Option_ReclamationWarProtests_AgainstBloodshed"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C50000078E",
+      "Path": "Rizia/Prologue Skip/Page_RelationshipFather",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_RelationshipFather",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Relationship With Your Father",
+        "Options": [
+          "Option_RelationshipFather_Fallout",
+          "Option_RelationshipFather_Close"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C70A",
+      "Path": "Rizia/Prologue Skip/Page_RelationshipToPabel",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_RelationshipToPanel",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Relationship to Pabel",
+        "Options": [
+          "Option_RelationshipToPabel_Friends",
+          "Option_RelationshipToPabel_Superior",
+          "Option_RelationshipToPabel_Ignore"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C500000726",
+      "Path": "Rizia/Prologue Skip/Page_Religious",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_Religious",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Religion",
+        "Options": [
+          "Option_Religious_Not",
+          "Option_Religious"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C5000006D2",
+      "Path": "Rizia/Prologue Skip/Page_RoyalFamily",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_RoyalFamily",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Relationship With Your Family",
+        "Options": [
+          "Option_RoyalFamily_FamilyMan",
+          "Option_RoyalFamily_WorkAndAffairs",
+          "Option_RoyalFamily_DutiesOverLove"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C6B4",
+      "Path": "Rizia/Prologue Skip/Page_SummersInRizia",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_SummersInRizia",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Rizia"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Summers During Childhood",
+        "Options": [
+          "Option_SummersInRizia_Zille",
+          "Option_SummersInRizia_PorteDrazon",
+          "Option_SummersInRizia_Brenas"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C500000640",
+      "Path": "Sordland/Prologue Skip/Page_TakePower",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_TakePower",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Take Power from Alphonso",
+        "Options": [
+          "Option_TakePower_AdviseStepDown",
+          "Option_TakePower_BlameAlphonsoPublicly",
+          "Option_TakePower_BribeAlphonsosCircle"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x0100006A0001C74B",
+      "Path": "Sordland/Prologue Skip/Page_University",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_University",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "University",
+        "Options": [
+          "Option_University_Law",
+          "Option_University_Economics",
+          "Option_University_History"
+        ],
+        "ImagePath": ""
+      }
+    },
+    {
+      "Id": "0x010000C500000608",
+      "Path": "Sordland/Prologue Skip/Page_YouthOrganization",
+      "IsWIP": false,
+      "Notes": "",
+      "NameInDatabase": "Page_YouthOrganization",
+      "AppBundleProperties": {
+        "StoryPacks": [
+          "StoryPack_Main"
+        ]
+      },
+      "CarouselChoicePageProperties": {
+        "Title": "Join a Youth Organization",
+        "Options": [
+          "Option_YouthOrganization_RedYouth",
+          "Option_YouthOrganization_Neutral",
+          "Option_YouthOrganization_YoungSords"
+        ],
+        "ImagePath": ""
+      }
+    }
+  ]
+}
