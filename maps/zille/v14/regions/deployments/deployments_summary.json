@@ -1,0 +1,74 @@
+{
+ "minimal": {
+  "totals_by_type": {
+   "infantry": 18,
+   "mountain_infantry": 3,
+   "tanks": 6,
+   "mechanized_infantry": 8,
+   "militia": 10,
+   "paratroopers": 1,
+   "submarine": 4,
+   "destroyer": 6,
+   "flagship": 1
+  },
+  "land_units": 46,
+  "naval_units": 11,
+  "units_by_region": {
+   "Zille": 18,
+   "Wehlen": 28,
+   "Sea": 11
+  },
+  "max_units_per_province": 1,
+  "units_on_cities": 0,
+  "free_land_provinces": 40,
+  "free_sea_provinces": 39
+ },
+ "suspicious": {
+  "totals_by_type": {
+   "infantry": 18,
+   "mountain_infantry": 5,
+   "tanks": 7,
+   "mechanized_infantry": 8,
+   "militia": 10,
+   "paratroopers": 1,
+   "submarine": 7,
+   "destroyer": 9,
+   "flagship": 1
+  },
+  "land_units": 49,
+  "naval_units": 17,
+  "units_by_region": {
+   "Zille": 30,
+   "Wehlen": 19,
+   "Sea": 17
+  },
+  "max_units_per_province": 1,
+  "units_on_cities": 0,
+  "free_land_provinces": 37,
+  "free_sea_provinces": 33
+ },
+ "prepared": {
+  "totals_by_type": {
+   "infantry": 18,
+   "mountain_infantry": 9,
+   "tanks": 9,
+   "mechanized_infantry": 10,
+   "militia": 12,
+   "paratroopers": 2,
+   "submarine": 9,
+   "destroyer": 11,
+   "flagship": 1
+  },
+  "land_units": 60,
+  "naval_units": 21,
+  "units_by_region": {
+   "Zille": 45,
+   "Wehlen": 15,
+   "Sea": 21
+  },
+  "max_units_per_province": 1,
+  "units_on_cities": 0,
+  "free_land_provinces": 26,
+  "free_sea_provinces": 29
+ }
+}

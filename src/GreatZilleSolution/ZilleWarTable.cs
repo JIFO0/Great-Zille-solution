@@ -307,10 +307,21 @@ namespace GreatZilleSolution
             }
         }
 
+        private static bool _derdiaAllegianceLogged;
+
         public static WarToken.WarAllegiance ToAllegiance(string name)
         {
             if (name == "Rizia" || name == "Player") return WarToken.WarAllegiance.Player;
             if (name == "EmptySea" || name == "Sea") return WarToken.WarAllegiance.EmptySea;
+            if (name == "Derdia")
+            {
+                if (!_derdiaAllegianceLogged)
+                {
+                    _derdiaAllegianceLogged = true;
+                    MelonLogger.Msg("[ZilleMap] Derdia has no WarAllegiance. Derdia provinces are Enemy on the table (attackable, not Rizia) and stay marked Derdia in the layout.");
+                }
+                return WarToken.WarAllegiance.Enemy;
+            }
             return WarToken.WarAllegiance.Enemy;
         }
 
@@ -332,7 +343,8 @@ namespace GreatZilleSolution
             data.isAntiAirTile = td.HasNoAirZone;
             data.isInitialDeploymentTile = (td.Allegiance == "Rizia" && !td.IsSea) || td.IsNavalStart;
             data.isBorderTile = td.IsBorder;
-            if (td.IsCity) data.tileDefenceType = WarTile.TileDefenceType.City;
+            if (td.IsImpassable) data.tileDefenceType = WarTile.TileDefenceType.None;
+            else if (td.IsCity) data.tileDefenceType = WarTile.TileDefenceType.City;
             else if (td.FortLevel >= 2) data.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
             else if (td.FortLevel > 0 || td.Terrain == "hills") data.tileDefenceType = WarTile.TileDefenceType.DefencePoint;
             else if (td.IsCitySurroundings) data.tileDefenceType = WarTile.TileDefenceType.CitySurroundings;
@@ -523,8 +535,11 @@ namespace GreatZilleSolution
                     if (needs)
                     {
                         var list = new Il2CppSystem.Collections.Generic.List<WarTile>();
-                        foreach (var aid in td.AdjacentIds)
-                            if (resolved.TryGetValue(aid, out var nb) && nb != null) list.Add(nb);
+                        if (!td.IsImpassable)
+                        {
+                            foreach (var aid in td.AdjacentIds)
+                                if (resolved.TryGetValue(aid, out var nb) && nb != null) list.Add(nb);
+                        }
                         wt.adjacentWarTiles = list;
                         tb.AdjApplied = true;
                     }
@@ -537,7 +552,7 @@ namespace GreatZilleSolution
         private static readonly List<WarTile> _clonedTiles = new List<WarTile>();
 
         /// <summary>
-        /// Vanilla Pales has Tile_1..100 and Tile_S1..S33. v13 land runs to 118 and sea to S57.
+        /// Vanilla Pales has Tile_1..100 and Tile_S1..S33. v14 land runs to 129 and sea to S57.
         /// Extra land provinces are clones of a land tile. Extra sea provinces are clones of a sea tile.
         /// </summary>
         private static void EnsureClonedTiles(ZilleMapConfig cfg, Dictionary<string, WarTile> byName)
@@ -552,7 +567,7 @@ namespace GreatZilleSolution
                 else if (seaTemplate == null && kv.Key.StartsWith("Tile_S", StringComparison.Ordinal)) seaTemplate = kv.Value;
             }
             if (landTemplate == null && _warnedMissing.Add("no-land-template"))
-                MelonLogger.Warning("[ZTABLE] No land Tile_1..100 to clone Tile_101-Tile_118 from.");
+                MelonLogger.Warning("[ZTABLE] No land Tile_1..100 to clone Tile_101-Tile_129 from.");
             if (seaTemplate == null && _warnedMissing.Add("no-sea-template"))
                 MelonLogger.Warning("[ZTABLE] No sea Tile_S1..S33 to clone Tile_S34-Tile_S57 from.");
             Transform landParent = landTemplate != null ? landTemplate.transform.parent : null;
@@ -597,7 +612,7 @@ namespace GreatZilleSolution
             {
                 string landFrom = landTemplate != null ? landTemplate.gameObject.name : "(none)";
                 string seaFrom = seaTemplate != null ? seaTemplate.gameObject.name : "(none)";
-                MelonLogger.Msg("[ZTABLE] Cloned " + landCloned + " land tiles Tile_101-Tile_118 from " + landFrom
+                MelonLogger.Msg("[ZTABLE] Cloned " + landCloned + " land tiles Tile_101-Tile_129 from " + landFrom
                     + " and " + seaCloned + " sea tiles Tile_S34-Tile_S57 from " + seaFrom + ".");
             }
         }
@@ -978,14 +993,15 @@ namespace GreatZilleSolution
                 }
                 else if (token != null && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
                 {
-                    wash = _washEnemy;
-                    if (td.Allegiance != "Wehlen")
+                    wash = td.Allegiance == "Derdia" ? DerdiaWash() : _washEnemy;
+                    if (td.Allegiance != "Wehlen" && td.Allegiance != "Derdia" && !td.IsImpassable)
                     {
                         td.Allegiance = "Wehlen";
                         wt.SetTileAllegiance(WarToken.WarAllegiance.Enemy, false);
                     }
                 }
                 else if (td.Allegiance == "Rizia") wash = _washFriendly;
+                else if (td.Allegiance == "Derdia") wash = DerdiaWash();
                 else if (td.Allegiance == "Wehlen") wash = _washEnemy;
                 else wash = _washBlocked;
                 if (CanMoveOnto(wt) && _edgeMove.Ok)
@@ -1198,8 +1214,23 @@ namespace GreatZilleSolution
 
         public static void ClearFortify() => FortifyArmed = false;
 
+        private static PalesWash DerdiaWash()
+        {
+            var wash = _washEnemy;
+            if (!wash.Ok) return _washBlocked;
+            wash.Tile = new Color(0.55f, 0.38f, 0.16f, 1f);
+            return wash;
+        }
+
+        public static bool IsImpassableTile(WarTile wt)
+        {
+            var td = TileDataOf(wt);
+            return td != null && td.IsImpassable;
+        }
+
         public static bool CanMoveOnto(WarTile wt)
         {
+            if (IsImpassableTile(wt)) return false;
             var sel = SelectedUnit();
             if (sel == null || wt == null) return false;
             try
@@ -3768,7 +3799,7 @@ namespace GreatZilleSolution
             if (_garrisonsPlaced || _root == null) return;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             RemoveEnemyFromRizianStart(cfg);
-            if (cfg != null && !string.IsNullOrEmpty(cfg.Version) && cfg.Version.StartsWith("v13"))
+            if (cfg != null && !string.IsNullOrEmpty(cfg.Version) && cfg.Version.StartsWith("v14"))
             {
                 PlaceV13Deployment();
                 return;

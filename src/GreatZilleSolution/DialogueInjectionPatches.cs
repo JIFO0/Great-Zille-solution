@@ -50,6 +50,11 @@ namespace GreatZilleSolution
         /// <summary>Reinforcement uses the same deploy colours and rules, without the opening frontline requirement.</summary>
         public static void TileActionPostfix(WarTile __instance, ref WarTile.TileActionType __result)
         {
+            if (ZilleWarTable.IsImpassableTile(__instance))
+            {
+                __result = WarTile.TileActionType.None;
+                return;
+            }
             if (ZilleWarTable.IsDeploymentRefund(__instance))
             {
                 __result = WarTile.TileActionType.Refund;

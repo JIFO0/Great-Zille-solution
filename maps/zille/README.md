@@ -281,3 +281,21 @@ Forts (`regions/forts.json`): heavy on the west border (36, 37, 39, 117, 118), l
 Each province is a 512×512 PNG and SVG. The only size exception left is Rotsla.
 
 Files: `v13/map/` (six pages and the composite, PNG and SVG), `v13/regions/` (175 tiles, manifest, adjacency, starting owners, forts, id map, deployments, overlay, validation), `v13/previews/`, and `v13/scripts/` (including `validate_pack.py`).
+
+### v14
+
+Built on top of v13. 186 provinces: 129 land (60 Zille, 29 Brenas, 33 Wehlen, 7 Derdia) and 57 sea. No v13 id was removed. New land ids are `ZilleTile_119`–`129`: Gnyezno, Ostrelow, Plotzk, Bydgoszt, then the Derdia strip Dertea West, Merzil, Dertea, Haldesh, Qerzan South, Qerzan, and Yol. The id map is `regions/id_mapping_v13_v14.json`. v13 stays in `maps/zille/v13/`.
+
+The base map is re-cut. Kratsna and Grodzizg now meet the sea. Wehlen and Derdia have more town labels. The Brivane road runs through provinces 55, 61 and 67. Seas S56 and S57 and land 64–66 sit on the bottom frame. Northern seas S4, S11, S12, S13, S22 and S26 are pulled back at least 180 map px from Lespia. That gap is labelled Lespia's Territorial Waters and is not a province (`regions/lespia_territorial_waters.json`). `map/` is `T_Map_Zille_01`–`06` at 4096×4096 and `T_Map_Zille_Full_Composite` at 12288×8192, PNG and SVG. Forts are still data only and are not drawn.
+
+Starting owners: Rizia 29, Wehlen 93, Derdia 7, seas neutral. Rizia ship seas are unchanged: west S56 and S57, east S37, S30, S32, S31 and S26. The game has no Derdia allegiance, so those seven provinces stay marked Derdia in the layout and are sent to the table as Enemy. They can be attacked, and they are not Wehlen.
+
+Yol (`ZilleTile_129`) is impassable. The adjacency file gives it no links. The table does not enter it or select it for movement.
+
+Adjacency is 496 links (303 land, 111 sea, 79 coastal, 3 strait), symmetric, one passable component. Straits stay 2–3, 3–5 and 72–75. Derdia–Wehlen links are 122–124, 122–126, 88–128, 93–126 and 95–128. Smolak's southern front is 88, 93, 95 and 122. Road links: 52 (18 main, 34 secondary). Rail links: 15.
+
+Forts keep the v13 ids: heavy 36, 37, 39, 117, 118; light east 20, 26, 33, 104, 108, 114; light inner line 21, 17, 13, 8, 97.
+
+Deployments: minimal 57 (46 land, 11 naval), suspicious 66 (49 land, 17 naval, the default), prepared 81 (60 land, 21 naval). Still one unit per province, none on cities, one flagship. Switch with `{"deployment":"minimal"|"suspicious"|"prepared"}` in `Mods/GreatZilleAssets/zille_scenario.json`.
+
+Files: `v14/map/`, `v14/regions/` (186 tiles, manifest, adjacency, starting owners, forts, id map, Lespia waters, deployments), `v14/previews/`, and `v14/scripts/validate_pack.py`.

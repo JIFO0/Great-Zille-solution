@@ -598,6 +598,7 @@ namespace GreatZilleSolution
             {
                 "Rizia" => new Color(0.45f, 0.75f, 0.95f),
                 "Wehlen" => new Color(0.85f, 0.45f, 0.40f),
+                "Derdia" => new Color(0.72f, 0.52f, 0.22f),
                 "Empty" => new Color(0.75f, 0.75f, 0.75f),
                 "EmptySea" => new Color(0.55f, 0.62f, 0.68f),
                 _ => new Color(0.75f, 0.75f, 0.75f)

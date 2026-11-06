@@ -92,19 +92,19 @@ namespace GreatZilleSolution
             }
 
             bool fresh = CurrentConfig == null || CurrentConfig.Tiles == null || CurrentConfig.Tiles.Count < 40
-                || string.IsNullOrEmpty(CurrentConfig.Version) || !CurrentConfig.Version.StartsWith("v13")
+                || string.IsNullOrEmpty(CurrentConfig.Version) || !CurrentConfig.Version.StartsWith("v14")
                 || !CitiesNamed(CurrentConfig);
             if (fresh)
-                TryUpgradeToV13();
+                TryUpgradeToV14();
             else
                 ImportRoadsIfMissing(CurrentConfig);
-            bool v13 = CurrentConfig != null && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v13");
-            if (!v13)
+            bool v14 = CurrentConfig != null && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v14");
+            if (!v14)
                 MarkNavalStarts(CurrentConfig);
             RecomputeFrontline(CurrentConfig);
-            if (fresh && !v13)
-                MelonLogger.Warning("[ZilleMap] v13 province pack was not found. Looked in Mods/GreatZilleAssets/regions and c:\\Projects\\Great Zille solution\\maps\\zille\\v13\\regions.");
-            LogV13Summary(CurrentConfig);
+            if (fresh && !v14)
+                MelonLogger.Warning("[ZilleMap] v14 province pack was not found. Looked in Mods/GreatZilleAssets/regions and c:\\Projects\\Great Zille solution\\maps\\zille\\v14\\regions.");
+            LogV14Summary(CurrentConfig);
             LogAdjacencyFile(ResolveRegionsDir());
             ZilleDeployment.Load(_primaryAssetsDir, ResolveRegionsDir());
         }
@@ -272,18 +272,18 @@ namespace GreatZilleSolution
         }
 
         /// <summary>
-        /// Replaces a saved layout with the v13 province partition (masks, adjacency, owners, forts,
-        /// terrain, roads) the first time that data is on disk. A saved layout already marked v13 is left alone.
+        /// Replaces a saved layout with the v14 province partition (masks, adjacency, owners, forts,
+        /// terrain, roads) the first time that data is on disk. A saved layout already marked v14 is left alone.
         /// </summary>
-        private static void TryUpgradeToV13()
+        private static void TryUpgradeToV14()
         {
             if (CurrentConfig != null && CurrentConfig.Tiles != null && CurrentConfig.Tiles.Count > 40
-                && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v13")
+                && !string.IsNullOrEmpty(CurrentConfig.Version) && CurrentConfig.Version.StartsWith("v14")
                 && CitiesNamed(CurrentConfig))
                 return;
             MelonLogger.Msg("[ZilleMap] Saved layout is " + (CurrentConfig?.Version ?? "empty")
-                + " (" + (CurrentConfig?.Tiles?.Count ?? 0) + " tiles). Building v13.");
-            var built = TryBuildV13();
+                + " (" + (CurrentConfig?.Tiles?.Count ?? 0) + " tiles). Building v14.");
+            var built = TryBuildV14();
             if (built == null) return;
             if (CurrentConfig?.Orders != null && CurrentConfig.Orders.Count > 0)
                 built.Orders = CurrentConfig.Orders;
@@ -304,13 +304,13 @@ namespace GreatZilleSolution
         private static string ResolveRegionsDir()
         {
             string local = Path.Combine(_primaryAssetsDir ?? "", "regions");
-            if (IsV13Manifest(Path.Combine(local, "provinces_manifest.json"))) return local;
-            string repo = @"c:\Projects\Great Zille solution\maps\zille\v13\regions";
-            if (IsV13Manifest(Path.Combine(repo, "provinces_manifest.json"))) return repo;
+            if (IsV14Manifest(Path.Combine(local, "provinces_manifest.json"))) return local;
+            string repo = @"c:\Projects\Great Zille solution\maps\zille\v14\regions";
+            if (IsV14Manifest(Path.Combine(repo, "provinces_manifest.json"))) return repo;
             return null;
         }
 
-        private static bool IsV13Manifest(string path)
+        private static bool IsV14Manifest(string path)
         {
             if (string.IsNullOrEmpty(path) || !File.Exists(path)) return false;
             try
@@ -318,7 +318,7 @@ namespace GreatZilleSolution
                 using var doc = JsonDocument.Parse(File.ReadAllText(path));
                 if (!doc.RootElement.TryGetProperty("provinces", out var provinces) || provinces.ValueKind != JsonValueKind.Array)
                     return false;
-                return provinces.GetArrayLength() >= 160;
+                return provinces.GetArrayLength() >= 180;
             }
             catch
             {
@@ -328,15 +328,15 @@ namespace GreatZilleSolution
 
         private static string ResolveMapDir()
         {
-            // The v13 pages replace every older grid, including assets/map and a copied v12 pack.
-            string repo = @"c:\Projects\Great Zille solution\maps\zille\v13\map";
+            // The v14 pages replace every older grid, including assets/map and a copied v13 pack.
+            string repo = @"c:\Projects\Great Zille solution\maps\zille\v14\map";
             if (File.Exists(Path.Combine(repo, "T_Map_Zille_01.png"))) return repo;
             string local = Path.Combine(_primaryAssetsDir ?? "", "map");
             if (File.Exists(Path.Combine(local, "T_Map_Zille_01.png"))) return local;
             return null;
         }
 
-        private static ZilleMapConfig TryBuildV13()
+        private static ZilleMapConfig TryBuildV14()
         {
             try
             {
@@ -352,7 +352,7 @@ namespace GreatZilleSolution
                 var cfg = new ZilleMapConfig
                 {
                     MapTitle = "Great Zille Theatre of War",
-                    Version = "v13.0",
+                    Version = "v14.0",
                     BackgroundTexture = "T_Map_Zille_Full_Composite.png",
                     Tiles = new List<ZilleTileData>(),
                     Orders = new List<ZilleUnitOrder>()
@@ -372,7 +372,11 @@ namespace GreatZilleSolution
                     float cx = Num(p, "tile_center_x");
                     float cy = Num(p, "tile_center_y");
                     string owner = Str(p, "owner");
-                    string allegiance = (sea || owner == "neutral") ? "EmptySea" : (owner == "Rizia" ? "Rizia" : "Wehlen");
+                    string allegiance = (sea || owner == "neutral") ? "EmptySea"
+                        : owner == "Rizia" ? "Rizia"
+                        : owner == "Derdia" ? "Derdia"
+                        : "Wehlen";
+                    bool impassable = Bool(p, "impassable");
                     string fortKind = Str(p, "fort");
                     if (string.IsNullOrEmpty(fortKind)) fortKind = "none";
                     int fort = fortKind == "heavy" ? 2 : fortKind == "light" ? 1 : 0;
@@ -395,6 +399,7 @@ namespace GreatZilleSolution
                         IsSupplyHub = city && (display == "Wiktrany" || display == "Zille City" || display == "Kratsna"),
                         IsReinforcementTile = display == "Kratsna" || display == "Grodzizg",
                         IsSea = sea,
+                        IsImpassable = impassable,
                         IsCity = city,
                         CityName = city ? Str(p, "city_name") : "",
                         IsCoastal = Bool(p, "is_coastal"),
@@ -426,6 +431,7 @@ namespace GreatZilleSolution
                         {
                             string nid = Str(nb, "id");
                             if (!byProvince.TryGetValue(nid, out var other)) continue;
+                            if (tile.IsImpassable || other.IsImpassable) continue;
                             if (seen.Add(other.Id)) tile.AdjacentIds.Add(other.Id);
                             if (Bool(nb, "road_link"))
                             {
@@ -447,7 +453,8 @@ namespace GreatZilleSolution
                         foreach (var nb in nbs.EnumerateArray())
                         {
                             if (nb.ValueKind != JsonValueKind.String) continue;
-                            if (byProvince.TryGetValue(nb.GetString(), out var other) && !tile.AdjacentIds.Contains(other.Id))
+                            if (byProvince.TryGetValue(nb.GetString(), out var other)
+                                && !tile.IsImpassable && !other.IsImpassable && !tile.AdjacentIds.Contains(other.Id))
                                 tile.AdjacentIds.Add(other.Id);
                         }
                     }
@@ -491,33 +498,38 @@ namespace GreatZilleSolution
                     if (t.FortLevel >= 2) heavy++;
                     else if (t.FortLevel == 1) light++;
                 }
-                MelonLogger.Msg($"[ZilleMap] Built v13 theatre: {cfg.Tiles.Count} provinces ({landCount} land, {seaCount} sea), {mountains} mountain, {borders} Brenas border flags, {roadLinks / 2} road crossings, forts {heavy} heavy and {light} light.");
+                MelonLogger.Msg($"[ZilleMap] Built v14 theatre: {cfg.Tiles.Count} provinces ({landCount} land, {seaCount} sea), {mountains} mountain, {borders} Brenas border flags, {roadLinks / 2} road crossings, forts {heavy} heavy and {light} light.");
                 return cfg.Tiles.Count > 0 ? cfg : null;
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[ZilleMap] v13 build failed: {ex.Message}");
+                MelonLogger.Error($"[ZilleMap] v14 build failed: {ex.Message}");
                 return null;
             }
         }
 
-        private static void LogV13Summary(ZilleMapConfig cfg)
+        private static void LogV14Summary(ZilleMapConfig cfg)
         {
-            if (cfg?.Tiles == null || string.IsNullOrEmpty(cfg.Version) || !cfg.Version.StartsWith("v13")) return;
-            int land = 0, sea = 0, rizia = 0, wehlen = 0, neutral = 0, heavy = 0, light = 0;
+            if (cfg?.Tiles == null || string.IsNullOrEmpty(cfg.Version) || !cfg.Version.StartsWith("v14")) return;
+            int land = 0, sea = 0, rizia = 0, wehlen = 0, derdia = 0, neutral = 0, heavy = 0, light = 0, impassable = 0;
             var ships = new List<string>();
             foreach (var t in cfg.Tiles)
             {
                 if (t.IsSea) sea++; else land++;
                 if (t.Allegiance == "Rizia") rizia++;
+                else if (t.Allegiance == "Derdia") derdia++;
                 else if (t.IsSea || t.Allegiance == "EmptySea") neutral++;
                 else wehlen++;
                 if (t.FortLevel >= 2) heavy++;
                 else if (t.FortLevel == 1) light++;
+                if (t.IsImpassable) impassable++;
                 if (t.IsNavalStart && !string.IsNullOrEmpty(t.TileNumber)) ships.Add(t.TileNumber);
             }
             ships.Sort(CompareTileNumber);
-            MelonLogger.Msg($"[ZilleMap] Loaded v13 theatre: {cfg.Tiles.Count} provinces ({land} land, {sea} sea). Owners: Rizia {rizia}, Wehlen {wehlen}, neutral seas {neutral}.");
+            MelonLogger.Msg($"[ZilleMap] Loaded v14 theatre: {cfg.Tiles.Count} provinces ({land} land, {sea} sea). Owners: Rizia {rizia}, Wehlen {wehlen}, Derdia {derdia}, neutral seas {neutral}.");
+            MelonLogger.Msg("[ZilleMap] Derdia has no WarAllegiance. Those " + derdia + " provinces stay marked Derdia in the layout and are sent to the table as Enemy, so Rizia can attack them. They are not Wehlen.");
+            MelonLogger.Msg("[ZilleMap] Impassable provinces: " + impassable + ". Yol (Tile_129) has 0 movement links and cannot be entered or selected.");
+            MelonLogger.Msg("[ZilleMap] Lespia territorial waters stay off the board: the northern seas were pulled back, and the strip is not a province.");
             MelonLogger.Msg("[ZilleMap] Rizia ship seas: " + (ships.Count == 0 ? "(none)" : string.Join(" ", ships)) + ".");
             MelonLogger.Msg($"[ZilleMap] Forts: {heavy} heavy, {light} light.");
         }
@@ -834,7 +846,7 @@ namespace GreatZilleSolution
         {
             MelonLogger.Msg("[ZilleMap] Starting texture loading pipeline (DirectX/GPU active)...");
             
-            // v13 redrew the base map, so a missing page must not silently keep the v12 art.
+            // v14 redrew the base map, so a missing page must not silently keep the v13 art.
             string mapDir = ResolveMapDir();
             string compositePath = mapDir == null ? null : Path.Combine(mapDir, "T_Map_Zille_Full_Composite.png");
             if (compositePath != null && File.Exists(compositePath))
@@ -853,7 +865,7 @@ namespace GreatZilleSolution
                 }
             }
             if (mapDir == null)
-                MelonLogger.Warning("[ZilleMap] v13 map textures missing (T_Map_Zille_01.png). The base map changed; v12 pages are not used.");
+                MelonLogger.Warning("[ZilleMap] v14 map textures missing (T_Map_Zille_01.png). The base map changed; v13 pages are not used.");
 
             // 2. Also load all 6 individual map grid tiles (01..06) for modular 3D map tile meshes
             for (int t = 1; t <= 6; t++)
@@ -889,7 +901,7 @@ namespace GreatZilleSolution
                 for (int i = 41; i <= 45; i++) wanted.Add($"Frame {i}.png");
             }
             string regDir = ResolveRegionsDir() ?? Path.Combine(_primaryAssetsDir, "regions");
-            string repoDir = @"c:\Projects\Great Zille solution\maps\zille\v13\regions";
+            string repoDir = @"c:\Projects\Great Zille solution\maps\zille\v14\regions";
             foreach (var fname in wanted)
             {
                 string fpath = Path.Combine(regDir, fname);

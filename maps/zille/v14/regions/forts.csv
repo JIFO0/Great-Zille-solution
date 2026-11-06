@@ -1,0 +1,17 @@
+province_id,province_name,fort,defense_line,symbol_x,symbol_y,faces
+ZilleTile_20,Venna,light,border_east,9759.6,4085.6,ZilleTile_43
+ZilleTile_26,Ossa East,light,border_east,9368.2,4791.2,ZilleTile_43 ZilleTile_46
+ZilleTile_33,Dapalle West,light,border_east,9037.3,5678.7,ZilleTile_50 ZilleTile_51
+ZilleTile_104,Venna East,light,border_east,10135.6,4018.0,ZilleTile_23 ZilleTile_41 ZilleTile_43
+ZilleTile_108,Venna Southwest,light,border_east,9553.8,4264.9,ZilleTile_43
+ZilleTile_114,Dapalle Northwest,light,border_east,9332.1,5192.7,ZilleTile_46 ZilleTile_51
+ZilleTile_36,Pomara Northwest,heavy,border_west,8518.0,6217.4,ZilleTile_55 ZilleTile_56
+ZilleTile_37,Pomara North,heavy,border_west,8840.0,6035.8,ZilleTile_50 ZilleTile_56
+ZilleTile_39,Celle Vaz North,heavy,border_west,7715.9,6672.1,ZilleTile_59 ZilleTile_60
+ZilleTile_117,Pomara West,heavy,border_west,8233.9,6346.7,ZilleTile_55
+ZilleTile_118,Praia Velha,heavy,border_west,7096.7,6789.6,ZilleTile_59
+ZilleTile_8,Nanta West,light,north_line,8536.4,2924.3,
+ZilleTile_13,Lenta North,light,north_line,8450.8,3387.0,
+ZilleTile_17,Lenta Northwest,light,north_line,8132.1,3838.9,
+ZilleTile_21,Ardo,light,north_line,7910.3,4122.0,
+ZilleTile_97,Nanta Northwest,light,north_line,8795.8,2660.5,

@@ -256,7 +256,7 @@ namespace GreatZilleSolution
                 string local = Path.Combine(regionsDir, "deployments", name);
                 if (File.Exists(local)) return local;
             }
-            string repo = Path.Combine(@"c:\Projects\Great Zille solution\maps\zille\v13\regions", "deployments", name);
+            string repo = Path.Combine(@"c:\Projects\Great Zille solution\maps\zille\v14\regions", "deployments", name);
             if (File.Exists(repo)) return repo;
             return null;
         }
