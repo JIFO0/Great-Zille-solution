@@ -81,7 +81,37 @@ Planowana siatka taktyczna Zille opiera się na 4 kluczowych punktach miejskich 
 
 ---
 
-## 4. UI i Diagnostyka w Grze
+## 4. Scenariusze Zakończenia Wojny i Traktaty Pokojowe (5 Stanów)
+
+Wynik końcowy kampanii wojennej o Zille zależy od kontroli nad kluczowymi ośrodkami miejskimi (miasta startowe Rizii w Brenas: Marbelas, Dapalle, Mave Nortus oraz miasta pod kontrolą Wehlen na półwyspie: Zille, Wiktrany, Munat, Nanta):
+
+1. **Scenariusz 1: Total Fiasco (Katastrofalna Klęska):**
+   - Wehlen przełamuje obronę i okupuje 3 miasta w prowincji Brenas (Marbelas, Dapalle, Mave Nortus).
+   - Smolak dyktuje warunki kapitulacji bez negocjacji. Gwarantowany pucz wojskowy lub detronizacja.
+
+2. **Scenariusz 2: Tactical Defeat (Porażka Operacyjna / Raczej Porażka):**
+   - **Warunek A (Brak zdobyczy / Status Quo):** Wszystkie startowe miasta Rizii (Brenas) pozostają pod kontrolą Rizii, a wszystkie miasta Wehlen (Zille) pozostają pod kontrolą Wehlen. Mimo braku strat terytorialnych operacja odzyskania Zille kończy się politycznym i strategicznym fiaskiem — Rizia poniosła ogromne koszty i ofiary, nie osiągając celu wojennego.
+   - **Warunek B (Utrata pozycji):** Strata 1 miasta w Brenas bez zrównoważenia zdobyczami w Zille.
+   - **Skutek:** Wymuszone trudne negocjacje: Wehlen żąda reparacji lub koncesji, Rizia musi zrzec się roszczeń do Zille pod groźbą załamania wewnętrznego i buntu w Brenas.
+
+3. **Scenariusz 3: Bloody Stalemate (Zwykły PAT / Impas):**
+   - **Warunek A (Wymiana terytorialna):** Rizia traci jedno ze swoich startowych miast w Brenas, ale zajmuje 1 lub 2 miasta pod kontrolą Wehlen (np. Wiktrany i Nantę lub port Munat).
+   - **Warunek B (Częściowy sukces):** Zdobycie części półwyspu bez pełnej kontroli nad stolicą Zille przy utrzymaniu własnych miast.
+   - **Specjalna ścieżka negocjacyjna (Niepodległość Zille):**
+     - W wariancie PAT gracz przy stole negocjacyjnym nie musi godzić się na powrót Zille pod but Smolaka.
+     - **Można wynegocjować pełną niepodległość Zille** (jako neutralnego państwa buforowego), pod warunkiem **poczynienia drobnych koncesji na rzecz Wehlen** (np. preferencyjne umowy naftowo-handlowe, gwarancje tranzytowe lub częściowe rekompensaty finansowe dla Smolaka).
+
+4. **Scenariusz 4: Decisive Victory (Czyste Zwycięstwo):**
+   - Pełne wyzwolenie wszystkich 4 miast półwyspu Zille (Zille, Munat, Wiktrany, Nanta) przy zachowaniu miast Brenas.
+   - Natychmiastowa reaneksja Zille do Korony Rizii na mocy traktatu pokojowego bez konieczności czekania na referendum AN.
+
+5. **Scenariusz 5: Overwhelming Triumph (Totalny Triumf):**
+   - Pełna kontrola nad Zille oraz rajd / zajęcie strategicznych celów w głębi Wehlen (np. Port Rotsla).
+   - Wehlen płaci potężne reparacje wojenne, a region graniczny/Grodzizg zyskuje status wolnego miasta / protektoratu.
+
+---
+
+## 5. UI i Diagnostyka w Grze
 
 - **Wskaźnik w rogu:** Stały indykator w prawym górnym rogu ekranu (`[ Great Zille Solution v0.3.0 | ACTIVE (F9: Menu) ]`).
 - **Panel testowy F9:** Manualny wyzwalacz operacji wojennych, katastroficznej klęski Tury 3, sprawdzania rezerw i synchronizacji stanu.

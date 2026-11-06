@@ -267,11 +267,11 @@ Poniższa specyfikacja definiuje kompletne parametry rejestracyjne silnika dla 6
   - Wariant B: Tura 10, Krok 1.
   - Wariant C: Tura 10, Krok 3.
 * **5 Wariantów Finału:**
-  1. *Total Fiasco:* Wehlen okupuje Brenas, utrata Marbelas/Dapalle/Mave Nortus, `-5 Budget`, pucz gwarantowany.
-  2. *Tactical Defeat:* Utrata 1 miasta Brenas, reparacje dla Wehlen, zrzeczenie się roszczeń do Zille.
-  3. *Bloody Stalemate:* Częściowe zdobycze w Zille lub rajd na Port Rotsla, obustronne reparacje, demilitaryzacja.
+  1. *Total Fiasco:* Wehlen okupuje Brenas, utrata Marbelas/Dapalle/Mave Nortus, -5 Budget, pucz gwarantowany.
+  2. *Tactical Defeat (Raczej porażka):* Utrata 1 miasta Brenas LUB brak zdobycia jakiegokolwiek celu w Wehlen (wszystkie startowe miasta Rizii pozostają pod kontrolą Rizii, a wszystkie Wehlen pod kontrolą Wehlen — strategiczne i polityczne fiasko inwazji o Zille mimo poniesionych strat), reparacje/koncesje dla Wehlen, zrzeczenie się roszczeń do Zille.
+  3. *Bloody Stalemate (Zwykły PAT):* Utrata 1 miasta Rizii w Brenas przy jednoczesnym zajęciu 1 lub 2 miast Wehlen (wymiana terytorialna) LUB częściowe zdobycze w Zille bez stolicy. Przy negocjacjach: możliwość sprawienia, by Zille zyskało pełną niepodległość (jako neutralne państwo buforowe) pod warunkiem poczynienia drobnych koncesji na rzecz Wehlen.
   4. *Decisive Victory:* Pełne wyzwolenie Zille, natychmiastowa reaneksja do Korony, powrót uchodźców.
-  5. *Overwhelming Triumph:* Zdobycie Zille + Port Rotsla/Grodzizg, Wehlen płaci gigantyczne reparacje (`+4 Budget, +3 Energy`), Grodzizg staje się Wolnym Miastem.
+  5. *Overwhelming Triumph:* Zdobycie Zille + Port Rotsla/Grodzizg, Wehlen płaci gigantyczne reparacje (+4 Budget, +3 Energy), Grodzizg staje się Wolnym Miastem.
 
 ---
 
