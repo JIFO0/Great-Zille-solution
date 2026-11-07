@@ -47,12 +47,15 @@ namespace GreatZilleSolution
 
         public static void EnsureAllConversationsRegistered()
         {
-            if (_conversationsRegistered) return;
-
             try
             {
                 var db = DialogueManager.masterDatabase;
                 if (db == null) return;
+
+                if (db.GetConversation("Zille/WarCouncil_Briefing") != null && db.GetConversation("Turn_Zille_WarBriefing") != null)
+                {
+                    return;
+                }
 
                 MelonLogger.Msg("[ZILLE DIALOGUE] Registering 6 custom Great Zille narrative scenes into masterDatabase...");
 
@@ -74,6 +77,48 @@ namespace GreatZilleSolution
         }
 
         // ================= HELPER BUILDERS =================
+
+        private static void EnsureConvField(Conversation conv, string title, string val, FieldType type)
+        {
+            if (conv.fields == null) conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
+            for (int i = 0; i < conv.fields.Count; i++)
+            {
+                if (conv.fields[i] != null && conv.fields[i].title == title)
+                {
+                    conv.fields[i].value = val;
+                    return;
+                }
+            }
+            conv.fields.Add(new Field(title, val, type));
+        }
+
+        private static void AddConversationWithAlias(DialogueDatabase db, Conversation conv, string canonicalTitle, string aliasTitle)
+        {
+            conv.Title = canonicalTitle;
+            EnsureConvField(conv, "Title", canonicalTitle, FieldType.Text);
+            EnsureConvField(conv, "Actor", conv.ActorID.ToString(), FieldType.Actor);
+            EnsureConvField(conv, "Conversant", conv.ConversantID.ToString(), FieldType.Actor);
+
+            if (db.GetConversation(canonicalTitle) == null)
+            {
+                db.AddConversation(conv);
+            }
+
+            if (!string.IsNullOrEmpty(aliasTitle) && aliasTitle != canonicalTitle && db.GetConversation(aliasTitle) == null)
+            {
+                var alias = new Conversation();
+                alias.id = conv.id + 10000;
+                alias.fields = new Il2CppSystem.Collections.Generic.List<Field>();
+                alias.dialogueEntries = conv.dialogueEntries;
+                alias.ActorID = conv.ActorID;
+                alias.ConversantID = conv.ConversantID;
+                alias.Title = aliasTitle;
+                EnsureConvField(alias, "Title", aliasTitle, FieldType.Text);
+                EnsureConvField(alias, "Actor", conv.ActorID.ToString(), FieldType.Actor);
+                EnsureConvField(alias, "Conversant", conv.ConversantID.ToString(), FieldType.Actor);
+                db.AddConversation(alias);
+            }
+        }
 
         private static DialogueEntry CreateEntry(int convId, int entryId, int actorId, int conversantId, string title, string dialogueText, string menuText = "", string sequence = "")
         {
@@ -147,14 +192,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarCouncilBriefing(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarBriefing") != null || db.GetConversation("Zille/WarCouncil_Briefing") != null)
+            if (db.GetConversation("Turn_Zille_WarBriefing") != null && db.GetConversation("Zille/WarCouncil_Briefing") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarBriefing;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarBriefing";
+            conv.Title = "Zille/WarCouncil_Briefing";
             conv.ActorID = RomusId;
             conv.ConversantID = LucitaId;
 
@@ -409,8 +454,8 @@ namespace GreatZilleSolution
             AddLine(conv, 97, HugoId, RomusId, "Ack_Postpone_Hugo",
                 "A prudent and measured decision, Your Majesty. The General Staff will maintain full readiness along the frontier until you decide the hour is right.");
 
-            db.AddConversation(conv);
-            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected clean, lore-accurate War Council Briefing (ID 9988) into masterDatabase!");
+            AddConversationWithAlias(db, conv, "Zille/WarCouncil_Briefing", "Turn_Zille_WarBriefing");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected clean, lore-accurate War Council Briefing (ID 9988) into masterDatabase (titles: 'Zille/WarCouncil_Briefing', 'Turn_Zille_WarBriefing')!");
         }
 
         // =========================================================================
@@ -420,14 +465,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarBalconySpeech(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarBalconySpeech") != null || db.GetConversation("Zille/WarBalconySpeech") != null)
+            if (db.GetConversation("Turn_Zille_WarBalconySpeech") != null && db.GetConversation("Zille/WarBalconySpeech") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarBalconySpeech;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarBalconySpeech";
+            conv.Title = "Zille/WarBalconySpeech";
             conv.ActorID = RomusId;
             conv.ConversantID = HugoId;
 
@@ -480,7 +525,7 @@ namespace GreatZilleSolution
             AddLine(conv, 40, HugoId, RomusId, "Balcony_Conclusion",
                 "As the cheers continued to echo across the palace grounds, Hugo stepped beside you, bowing his head respectfully. \"The nation is behind you, Your Majesty. Now our divisions in Brenas must deliver the promise.\"", -1);
 
-            db.AddConversation(conv);
+            AddConversationWithAlias(db, conv, "Zille/WarBalconySpeech", "Turn_Zille_WarBalconySpeech");
             MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected War Balcony Speech (ID 9989) into masterDatabase!");
         }
 
@@ -491,14 +536,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarLogisticsDispute(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarLogisticsDispute") != null || db.GetConversation("Zille/WarLogisticsDispute") != null)
+            if (db.GetConversation("Turn_Zille_WarLogisticsDispute") != null && db.GetConversation("Zille/WarLogisticsDispute") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarLogisticsDispute;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarLogisticsDispute";
+            conv.Title = "Zille/WarLogisticsDispute";
             conv.ActorID = RomusId;
             conv.ConversantID = LucitaId;
 
@@ -567,7 +612,7 @@ namespace GreatZilleSolution
             AddLine(conv, 42, HugoId, RomusId, "Ack_Compromise_Hugo",
                 "\"A kingly solution, Romus. Unity between our great houses is the true shield of Rizia.\"", -1);
 
-            db.AddConversation(conv);
+            AddConversationWithAlias(db, conv, "Zille/WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute");
             MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected Logistics Dispute (ID 9990) into masterDatabase!");
         }
 
@@ -580,14 +625,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarPreNegotiationsBriefing(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarPreNegotiationsBriefing") != null || db.GetConversation("Zille/PreNegotiationsBriefing") != null)
+            if (db.GetConversation("Turn_Zille_WarPreNegotiationsBriefing") != null && db.GetConversation("Zille/PreNegotiationsBriefing") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarPreNegotiations;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarPreNegotiationsBriefing";
+            conv.Title = "Zille/PreNegotiationsBriefing";
             conv.ActorID = RomusId;
             conv.ConversantID = LaurentoId;
 
@@ -714,7 +759,7 @@ namespace GreatZilleSolution
             AddLine(conv, 51, LucitaId, RomusId, "PreNeg_Closing",
                 "\"The royal armored motorcade is standing by, Sire,\" Lucita reported, adjusting her sidearm. \"The Golden Guard and our forward battalions will secure the perimeter. Let us settle this once and for all.\"", -1);
 
-            db.AddConversation(conv);
+            AddConversationWithAlias(db, conv, "Zille/PreNegotiationsBriefing", "Turn_Zille_WarPreNegotiationsBriefing");
             MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected Pre-Negotiations Briefing (ID 9991) into masterDatabase!");
         }
 
@@ -728,14 +773,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarSmolakFinalParley(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarSmolakFinalParley") != null || db.GetConversation("Zille/SmolakFinalParley") != null)
+            if (db.GetConversation("Turn_Zille_WarSmolakFinalParley") != null && db.GetConversation("Zille/SmolakFinalParley") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarSmolakParley;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarSmolakFinalParley";
+            conv.Title = "Zille/SmolakFinalParley";
             conv.ActorID = RomusId;
             conv.ConversantID = SmolakId;
 
@@ -834,7 +879,7 @@ namespace GreatZilleSolution
                 "\"After you, Your Majesty,\" Smolak bowed with theatrical irony, holding the heavy canvas flap aside. \"History is waiting for our signatures.\"", -1);
             entry56.Sequence = "StartConversation(Turn_Zille_WarPeaceTreaty);";
 
-            db.AddConversation(conv);
+            AddConversationWithAlias(db, conv, "Zille/SmolakFinalParley", "Turn_Zille_WarSmolakFinalParley");
             MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected rich, authentic Smolak Final Parley (ID 9992) into masterDatabase!");
         }
 
@@ -854,14 +899,14 @@ namespace GreatZilleSolution
         // =========================================================================
         public static void RegisterWarPeaceTreaty(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_WarPeaceTreaty") != null || db.GetConversation("Zille/PeaceTreaty") != null)
+            if (db.GetConversation("Turn_Zille_WarPeaceTreaty") != null && db.GetConversation("Zille/PeaceTreaty") != null)
                 return;
 
             var conv = new Conversation();
             conv.id = ConvId_WarPeaceTreaty;
             conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
-            conv.Title = "Turn_Zille_WarPeaceTreaty";
+            conv.Title = "Zille/PeaceTreaty";
             conv.ActorID = RomusId;
             conv.ConversantID = SmolakId;
 
@@ -1154,7 +1199,7 @@ namespace GreatZilleSolution
                 "\"Smolak spat on the floor and stormed out into the rain. Within minutes, air-raid sirens wailed across the front lines, and the thunder of heavy guns shook the earth once more. The peace had failed.\"", -1);
             conv.dialogueEntries[conv.dialogueEntries.Count - 1].userScript = "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] - 2; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 2;";
 
-            db.AddConversation(conv);
+            AddConversationWithAlias(db, conv, "Zille/PeaceTreaty", "Turn_Zille_WarPeaceTreaty");
             MelonLogger.Msg("[ZILLE DIALOGUE] Re-injected masterpiece Peace Treaty (ID 9993) into masterDatabase!");
         }
 

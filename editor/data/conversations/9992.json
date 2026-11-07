@@ -1,0 +1,379 @@
+{
+  "id": 9992,
+  "title": "Turn_Zille_WarSmolakFinalParley",
+  "description": "Pojedynek ze Smolakiem w Namiocie Polowym",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Pojedynek ze Smolakiem w Namiocie Polowym",
+  "actors": [
+    "Narrator",
+    "Player_Romus",
+    "Wiktor Smolak"
+  ],
+  "readVariables": [],
+  "writtenVariables": [],
+  "choicesCount": 5,
+  "entriesCount": 21,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Parley_Atmosphere_1",
+      "dialogueText": "A large neutral canvas pavilion stood in the shell-cratered no-man's land between the lines, lashed by cold autumn rain. Armed Golden Guards in polished breastplates and grizzled Wehzek Republican Guards eyed each other in tense silence through the canvas slits. Beyond the wire, thick black smoke rolled up from the burning petroleum depots of Wiktrany.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Parley_Atmosphere_2",
+      "dialogueText": "President Wiktor Smolak sat casually across a scarred wooden folding table. A battered brass kettle steamed over a kerosene burner, filling the damp air with the sharp, bitter aroma of Wehzek black mountain tea. His signature olive-drab military tunic was spattered with mud at the cuffs, yet his dark eyes twinkled with familiar cynical amusement.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Opening_Winning",
+      "dialogueText": "\"Ah, King Romus! Welcome, welcome! It is always a pleasure to host neighbors, especially when they finally discover that South Merkopa does not kneel to ancient family trees. Tea? Drink, drinkâyou look like a man whose supply wagons just ran out of fuel.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 4,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Parley_Tea_Action",
+      "dialogueText": "Smolak picked up the dented kettle and poured steaming black tea into two tin cups. He pushed one across the scarred wood toward you, a crooked smile curling beneath his mustache.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 5,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Parley_Hub_Prompt",
+      "dialogueText": "\"Authentic Wehzek tea. Strong enough to strip engine varnish, but wonderful for washing the cordite out of your lungs. So, Romus... what brings the King into the mud?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Parley_Choice_Assertive",
+      "dialogueText": "\"Cut the theatrics, Wiktor. Your forward line is shattered, your supply hubs are burning, and your garrison in Zille City is cut off. Let us talk realistic terms.\"",
+      "menuText": "\"Cut the theatrics, Wiktor. Your army in Zille is broken, and your garrison is surrounded. Let us talk terms.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 11,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Parley_Reply_Assertive",
+      "dialogueText": "Smolak took a noisy sip from his tin cup, chuckling into the steam. \"Always in a rush, Romus! 'Your army is broken, talk terms!' Winning a few trenches doesn't make you Alexander the Great. In Wehlen, my people have eaten dry grass and fought through twenty years of rebellion without blinking!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Parley_Choice_Funny",
+      "dialogueText": "\"I see you haven't lost your comedic talent, Mr. President. A pity your artillery gunners couldn't aim as accurately as your sharp tongue.\"",
+      "menuText": "\"I see you haven't lost your comedic talent, Mr. President. A pity your artillery couldn't match your mouth.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Parley_Reply_Funny",
+      "dialogueText": "Smolak threw his head back and guffawed, slapping his knee with genuine delight. \"Ha! A direct hit! TouchÃ©, Your Majesty! Turns out diesel trucks don't like artillery shells very much! But that's the beauty of war materielâit can always be replaced. What can't be replaced is mutual respect between strong men!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Parley_Choice_Diplomatic",
+      "dialogueText": "\"I will take the tea, Wiktor. But let us speak plainly as heads of state. Every hour this front remains active, both of our nations bleed treasure and youth. We are here to put an end to it.\"",
+      "menuText": "\"I will take the tea, Wiktor. But let us speak plainly as heads of state. We are here to halt the bleeding.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        31
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 31,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Parley_Reply_Diplomatic",
+      "dialogueText": "\"Now that is the voice of a true statesman!\" Smolak grinned, raising his cup in a brief salute. \"Two rulers of destiny, deciding the future of South Merkopa over boiling leaves while the cannons rest for an hour.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Parley_Choice_Cold",
+      "dialogueText": "\"Keep your tea. I did not ride to the front to drink with a tyrant. The only thing I want from your hands today is your signature on the evacuation order.\"",
+      "menuText": "\"Keep your tea. The only thing I want from your hands today is your signature on the evacuation order.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 41,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Parley_Reply_Cold",
+      "dialogueText": "Smolak's smile vanished for a split second, his dark eyes hardening into flint. \"Careful with the haughty tone, King. You are sitting in artillery range of my heavy mortars. If you want blood, Wehlen can give you an ocean of it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 50,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Smolak_Appraise_Setup",
+      "dialogueText": "Smolak set his cup down with a sharp metallic clatter. He turned his head toward the tent flap, looking out at the low silhouette of Rizian medium tanks idling in the mist, their diesel engines thrumming like distant thunder.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 51,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Power_Appraisal",
+      "dialogueText": "\"I have to admit, Romus... when your father held court, House Toras was all gold fringe and trembling quills. But your army? Those armored divisions Councilor Azaro rolled across the Brenas... they hit like a mountain avalanche. A man backed by steel like that earns the right to be listened to.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 52,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Past_History",
+      "dialogueText": "\"And don't think I've forgotten our little history. When you visited Zille for Friendship Day, everyone thought you were a green prince playing at politics. Yet here we are, sitting across from each other with guns on the table. You followed through. Terrifying, perhaps, but respectable in its own ruthless way.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 53,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Lead_To_Treaty_1",
+      "dialogueText": "\"Enough posturing. Both of our treasuries are groaning, and our foreign ministers have been pacing like caged wolves in the adjoining pavilion. Foreign Minister Esquibel and Colonel Valdez have prepared the instrument of settlement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        54
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 54,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Lead_To_Treaty_2",
+      "dialogueText": "\"Let us see if you can negotiate a treaty as skillfully as your generals handle artillery shells.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        55
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 55,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Enter_Peace_Chamber",
+      "dialogueText": "\"Lead the way, Wiktor. Let us settle the fate of Zille once and for all.\"",
+      "menuText": "\"Lead the way, Wiktor. Let us settle the fate of Zille once and for all.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        56
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 56,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Enter_Chamber",
+      "dialogueText": "\"After you, Your Majesty,\" Smolak bowed with theatrical irony, holding the heavy canvas flap aside. \"History is waiting for our signatures.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

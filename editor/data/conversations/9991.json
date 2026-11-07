@@ -1,0 +1,625 @@
+{
+  "id": 9991,
+  "title": "Turn_Zille_WarPreNegotiationsBriefing",
+  "description": "Odprawa Wywiadu i Telefony Dyplomatyczne",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Odprawa Wywiadu i Telefony Dyplomatyczne",
+  "actors": [
+    "Beatrice Livingston",
+    "Elena Werner",
+    "Emmerich Hegel",
+    "Laurento Esquibel",
+    "Lucita Azaro",
+    "Narrator",
+    "Patricio Alvarez",
+    "Player_Romus"
+  ],
+  "readVariables": [],
+  "writtenVariables": [],
+  "choicesCount": 10,
+  "entriesCount": 35,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "PreNeg_Intro_1",
+      "dialogueText": "The war council in Porte Drazon was buried beneath a flurry of urgent dispatches from the front. Artillery rumbled like distant thunder across the southern wire. The first phase of operations had reached its climax, and Wiktor Smolak had requested an urgent parley.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "PreNeg_Elena_BurnRate",
+      "dialogueText": "Your Majesty, the financial toll of this offensive is mounting rapidly. Daily ammunition consumption and fuel requisitions have pushed our operating budget to its limit. Whatever outcome we seek, we must conclude this war swiftly before fiscal exhaustion sets in.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "PreNeg_Lucita_Casualties",
+      "dialogueText": "Our soldiers have fought with unmatched courage, Sire. But Valdez's remaining garrisons are dug in behind fortified concrete. Pushing deeper into mainland Wehlen would turn into a meat grinder. Smolak is feeling the noose tighten; now is the moment to dictate terms.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 4,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "PreNeg_Laurento_Hotline",
+      "dialogueText": "Before you enter the negotiation tent or take Smolak's call, Your Majesty, the royal communications bureau has secured encrypted channels to three key foreign leaders. A final word with them could grant us invaluable diplomatic leverage.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 5,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Hotline_Hub_Prompt",
+      "dialogueText": "The secure teletype and telephone lines sat waiting in the royal communications cabinet. Who will you contact before meeting Smolak?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10,
+        20,
+        30,
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Call_Alvarez",
+      "dialogueText": "Connect me with President Alvarez in Estord.",
+      "menuText": "Place an encrypted call to President Patricio Alvarez of Lespia.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 11,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Alvarez_Connect",
+      "dialogueText": "The line clicked and hissed before Alvarez's voice came through, punctuated by the clinking of ice against crystal and jazz playing faintly in the background.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        12
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 12,
+      "actorId": 99,
+      "speaker": "Patricio Alvarez",
+      "title": "Alvarez_Greeting",
+      "dialogueText": "Romus! Still holding the crown, I see? My staff tells me your artillery is giving my dear friend Wiktor a hell of a beating in Zille. I must admit, watching him sweat is the best entertainment I've had all season.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        13
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 13,
+      "actorId": 99,
+      "speaker": "Patricio Alvarez",
+      "title": "Alvarez_Prompt",
+      "dialogueText": "So, what brings the King of Rizia to my ear while his tanks are rolling?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        14,
+        16
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 14,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Alvarez_Ask_Troops",
+      "dialogueText": "Will Lespia deploy forces to assist us in breaking Smolak's remaining defenses?",
+      "menuText": "\"Will Lespia commit ground divisions or airstrikes to help us finish off Wehlen?\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        15
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 15,
+      "actorId": 99,
+      "speaker": "Patricio Alvarez",
+      "title": "Alvarez_Refuse_Troops",
+      "dialogueText": "Alvarez burst into loud, mocking laughter. \"Send Lespian soldiers into Wehlen? What do you take me for, Romus, an amateur? If I put one boot across that border, Malenyev's submarines will blockade my coastline and Arcasia will hold me responsible for World War Three! No, no, no. Lespian boys don't die for your royal pride. You started this fightâyou finish it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        13
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 16,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Alvarez_Leverage",
+      "dialogueText": "Patricio, let us speak as realists. If Lespia does not provide high-altitude reconnaissance and guarantee a veto against CSP sanctions at the AN, I will sign an armistice with Smolak today. Wehlen will keep its army intact, and you will be left dealing with an enraged dictator on your frontier alone.",
+      "menuText": "\"Patricio, if you won't provide intelligence and an AN veto, I will sign a ceasefire right now and leave Wehlen armed on your border.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        17
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 17,
+      "actorId": 99,
+      "speaker": "Patricio Alvarez",
+      "title": "Alvarez_Leverage_Yield",
+      "dialogueText": "A tense silence fell over the line. Alvarez sighed, the sound of ice swirling in his glass. \"You drive a ruthless bargain, Your Majesty. Fine. My defense ministry will transmit our latest aerial reconnaissance photographs of Valdez's bunkers, and Lespian envoys in Kyrute will kill any resolution pushing for economic sanctions against Rizia. Just make sure Smolak is thoroughly humiliated before you put down the pen.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 18,
+      "actorId": 99,
+      "speaker": "Patricio Alvarez",
+      "title": "Alvarez_Hangup",
+      "dialogueText": "\"Good luck, Romus. Don't make me regret this.\" The line went dead with a soft click.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Call_Hegel",
+      "dialogueText": "Connect me with Chancellor Hegel in Valgsland.",
+      "menuText": "Place an encrypted call to Chancellor Emmerich Hegel of Valgsland.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Hegel_Connect",
+      "dialogueText": "The line buzzed with heavy static. After two rings, Hegel's fiery voice boomed through the receiver.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        22
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 22,
+      "actorId": 78,
+      "speaker": "Emmerich Hegel",
+      "title": "Hegel_Rage",
+      "dialogueText": "Toras! Have you completely lost your royal mind? Bombarding cities, marching troops across borders, and playing feudal warlord right under the nose of the international community! The working people of South Merkopa are not pawns for your dynastic games!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 23,
+      "actorId": 78,
+      "speaker": "Emmerich Hegel",
+      "title": "Hegel_Prompt",
+      "dialogueText": "Give me one good reason why the Red Fleet shouldn't steam into the Southern Gulf this very afternoon!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        24,
+        26
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 24,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Hegel_Sovereignty",
+      "dialogueText": "Chancellor Hegel, calm yourself. Wehlen occupied our territory unlawfully for thirty years. Rizia has no designs on mainland Wehlen, nor will we interfere with international shipping. We seek only our rightful borders.",
+      "menuText": "\"Rizia is merely reclaiming stolen sovereign soil. We have no interest in mainland Wehlen or threatening maritime trade.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        25
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 25,
+      "actorId": 78,
+      "speaker": "Emmerich Hegel",
+      "title": "Hegel_Sovereignty_Reply",
+      "dialogueText": "A muffled thud echoed over the lineâHegel slamming his pipe against his desk. \"Words are cheap, King! But if you keep your armor strictly on your side of the river and do not dare threaten commercial vessels in the straits, Valgsland will stay its hand. We have no love for Smolak's clownish brutality, but we will not tolerate imperialist conquest!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 26,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Hegel_Deescalation_Deal",
+      "dialogueText": "Let us be pragmatic, Chancellor. If the upcoming treaty guarantees demilitarized naval access in Zille waters and respects free trade, Rizia is prepared to conclude the fighting immediately. A stable South Merkopa benefits your trade routes.",
+      "menuText": "\"If we conclude a swift treaty that guarantees naval demilitarization in Zille waters, can we establish stable relations?\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        27
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 27,
+      "actorId": 78,
+      "speaker": "Emmerich Hegel",
+      "title": "Hegel_Deal_Reply",
+      "dialogueText": "Hegel grunted, his tone shifting from outrage to shrewd socialist calculation. \"Now you are speaking like a statesman rather than a despot, Toras. If you guarantee naval demilitarization in the Zille gulf, Valgsland will discreetly authorize the export of modern coastal patrol escorts and fuel stabilization shipments to balance the region. Sign your treaty and withdraw your guns from the border!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        28
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 28,
+      "actorId": 78,
+      "speaker": "Emmerich Hegel",
+      "title": "Hegel_Hangup",
+      "dialogueText": "\"Remember my words, Romus. We are watching you.\" The call terminated abruptly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Call_Beatrice",
+      "dialogueText": "Patch me through to Thornbourgh. I wish to speak with Queen Beatrice.",
+      "menuText": "Place an encrypted call to Queen Beatrice Livingston of Rumburg.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        31
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 31,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Beatrice_Connect",
+      "dialogueText": "After a series of royal exchange operators verified the cipher, Beatrice's cool, aristocratic voice came over the speaker.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 32,
+      "actorId": 92,
+      "speaker": "Beatrice Livingston",
+      "title": "Beatrice_Greeting",
+      "dialogueText": "Romus. I trust you are calling with favorable dispatches from the south. The chancellery in Thornbourgh has been monitoring your military maneuvers with great interest.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        33
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 33,
+      "actorId": 92,
+      "speaker": "Beatrice Livingston",
+      "title": "Beatrice_Prompt",
+      "dialogueText": "How stands your campaign, Cousin?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        34,
+        36
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 34,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Beatrice_Report",
+      "dialogueText": "Our forces have shattered Wehzek resistance across the peninsula. Smolak has requested a parley, and we are preparing to dictate terms.",
+      "menuText": "\"Our forces have broken Valdez's forward line. Smolak is ready to negotiate.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        35
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 35,
+      "actorId": 92,
+      "speaker": "Beatrice Livingston",
+      "title": "Beatrice_Report_Reply",
+      "dialogueText": "\"Splendid news,\" Beatrice replied with measured warmth. \"A monarch who demonstrates the will to wield the sword commands the respect of every crowned head in the world. Smolak is a dangerous radical; seeing him humbled brings stability to GRACE's southern flank.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        33
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 36,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Beatrice_Oil_Pledge",
+      "dialogueText": "Once the oil fields of Zille are back under royal control, the Crown is prepared to guarantee Rumburg long-term petroleum concessions at favorable rates, securing our economic revival.",
+      "menuText": "\"Once Zille is secured, Rizia will guarantee Rumburg favorable oil contracts to assist our post-war recovery.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        37
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 37,
+      "actorId": 92,
+      "speaker": "Beatrice Livingston",
+      "title": "Beatrice_Oil_Reply",
+      "dialogueText": "\"A mutually beneficial arrangement, Romus,\" she approved. \"Rumburg will instruct our envoys to back Rizia unequivocally at the Alliance of Nations. Reclaim your birthright and restore order to the south. You have the full blessing of the Kingdom of Rumburg.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        38
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 38,
+      "actorId": 92,
+      "speaker": "Beatrice Livingston",
+      "title": "Beatrice_Hangup",
+      "dialogueText": "\"Give my fondest regards to your mother. Stand firm, Romus.\" The queen ended the connection.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 50,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Proceed_To_Parley",
+      "dialogueText": "I have gathered all the diplomatic leverage I need. Have the escort preparedâI will meet Smolak face to face.",
+      "menuText": "\"I have gathered all the diplomatic leverage I need. Have the car preparedâI will meet Smolak at the parley.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 51,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "PreNeg_Closing",
+      "dialogueText": "\"The royal armored motorcade is standing by, Sire,\" Lucita reported, adjusting her sidearm. \"The Golden Guard and our forward battalions will secure the perimeter. Let us settle this once and for all.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

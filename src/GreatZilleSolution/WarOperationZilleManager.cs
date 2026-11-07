@@ -227,6 +227,7 @@ namespace GreatZilleSolution
                     cd.ConversationProperties.TypeString = "SecurityAndOrder";
                     cd.ConversationProperties.IsOnStart = false;
                     cd.AppBundleProperties = CreateRiziaBundleProps();
+                    cd.TagsProperties = new TagsProperties();
 
                     if (allConvList != null) allConvList.Add(cd);
                     MelonLogger.Msg("[WAR ENGINE] Added 'A royal briefing before the invasion of Zille' to EntityDataManager.AllConversationsData!");
@@ -783,6 +784,7 @@ namespace GreatZilleSolution
             cd.ConversationProperties.TypeString = "SecurityAndOrder";
             cd.ConversationProperties.IsOnStart = false;
             cd.AppBundleProperties = CreateRiziaBundleProps();
+            cd.TagsProperties = new TagsProperties();
             allConvList.Add(cd);
             MelonLogger.Msg($"[WAR ENGINE] Added '{title}' ({nameInDb}) to EntityDataManager.AllConversationsData!");
         }
@@ -838,7 +840,7 @@ namespace GreatZilleSolution
                     }
 
                     ConversationData cd = null;
-                    var convList = EntityDataManager.ConversationsData;
+                    var convList = EntityDataManager.AllConversationsData ?? EntityDataManager.ConversationsData;
                     if (convList != null)
                     {
                         for (int i = 0; i < convList.Count; i++)
@@ -852,13 +854,30 @@ namespace GreatZilleSolution
                         }
                     }
 
-                    if (cd != null)
+                    if (cd == null)
                     {
-                        var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
-                        if (gfm != null)
-                        {
-                            gfm.OnStoryFragmentStart();
-                        }
+                        cd = new ConversationData();
+                        cd.Id = "Conv_Zille_RoyalBriefing";
+                        cd.NameInDatabase = "Turn_Zille_WarBriefing";
+                        cd.Path = "Rizia/Conversations";
+                        cd.IsWIP = false;
+                        cd.Notes = "";
+                        cd.AssignedTokenProperties = new AssignedTokenProperties();
+                        cd.AssignedTokenProperties.AssignedToken = "Rizia_City_PorteDrazon";
+                        cd.StoryFragmentProperties = new StoryFragmentProperties();
+                        cd.StoryFragmentProperties.IsDone = false;
+                        cd.StoryFragmentProperties.StoryFragmentCondition = "";
+                        cd.StoryFragmentProperties.OnStoryFragmentBeginInstruction = "";
+                        cd.StoryFragmentProperties.OnStoryFragmentEndInstruction = "";
+                        cd.ConversationProperties = new ConversationProperties();
+                        cd.ConversationProperties.Title = "A royal briefing before the invasion of Zille";
+                        cd.ConversationProperties.Subtitle = "Council Chambers, Palas Rezna";
+                        cd.ConversationProperties.Dialogue = "Zille/WarCouncil_Briefing";
+                        cd.ConversationProperties.TypeString = "SecurityAndOrder";
+                        cd.ConversationProperties.IsOnStart = false;
+                        cd.AppBundleProperties = CreateRiziaBundleProps();
+                        cd.TagsProperties = new TagsProperties();
+                        if (convList != null) convList.Add(cd);
                     }
 
                     System.Action onFinish = () => {
@@ -892,7 +911,13 @@ namespace GreatZilleSolution
                         convPanel.ForceStartConversation("Zille/WarCouncil_Briefing");
                     }
 
-                    // Populate conversant portraits for Titus, Lucita, Hugo, and Laurento in ConversationPanel
+                    if (!DialogueManager.isConversationActive)
+                    {
+                        MelonLogger.Msg("[WAR ENGINE] Starting conversation 'Zille/WarCouncil_Briefing' via DialogueManager...");
+                        DialogueManager.StartConversation("Zille/WarCouncil_Briefing");
+                    }
+
+                    // Populate conversant portraits for Titus, Lucita, Hugo, Elena, and Laurento in ConversationPanel
                     var chars = EntityDataManager.CharactersData;
                     if (chars != null)
                     {
@@ -904,6 +929,7 @@ namespace GreatZilleSolution
                             if (cName.IndexOf("Titus", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 cName.IndexOf("Lucita", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 cName.IndexOf("Hugo", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                cName.IndexOf("Elena", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 cName.IndexOf("Laurento", StringComparison.OrdinalIgnoreCase) >= 0)
                             {
                                 convPanel.AddConversant(ch);

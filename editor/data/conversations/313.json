@@ -1,0 +1,6455 @@
+{
+  "id": 313,
+  "title": "Rizia/Turn 4/A_CouncilTalkAboutPales",
+  "description": "",
+  "pack": "Rizia",
+  "folder": "Turn_04",
+  "turn": "Tura 04",
+  "modStatus": "MODEDIT",
+  "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn4_TwoFront_Warning, Zille_Turn4_TwoFront_Reply",
+  "actors": [
+    "Elena Werner",
+    "Hugo Toras",
+    "Laurento Esquibel",
+    "Lucita Azaro",
+    "Narrator",
+    "Player_Romus",
+    "Player_Romus_Italic"
+  ],
+  "readVariables": [
+    "RiziaDLC.Coronation_Speech_TakeBackLand",
+    "RiziaDLC.Lucita_CompromisingPhoto",
+    "RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded",
+    "RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed",
+    "RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project",
+    "RiziaDLC.Prologue_FriendlyToPales",
+    "RiziaDLC.Prologue_HostileToPales",
+    "RiziaDLC.Relations_Lucita_Romance",
+    "RiziaDLC.Resources_Energy",
+    "RiziaDLC.Resources_EnergyModifiersTotal",
+    "RiziaDLC.Resources_Military_NavalBombardmentCapability",
+    "RiziaDLC.Security_Pales_SendSpecialOps",
+    "RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport",
+    "RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport",
+    "RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal",
+    "RiziaDLC.Situation_Economy_Sordland_ResortDeal",
+    "RiziaDLC.Turn02_Diplomacy_Intention_ATO",
+    "RiziaDLC.Vina_OnCouncil",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.Diplomacy_Lespia_NegotiatingPower",
+    "RiziaDLC.Diplomacy_Morella_NegotiatingPower",
+    "RiziaDLC.Diplomacy_Pales_Military_BlockDrillship",
+    "RiziaDLC.Diplomacy_Pales_NegotiatingPower",
+    "RiziaDLC.Enable_Policy_RD_Order_ExpandFortAlesNavalBase",
+    "RiziaDLC.Enable_Policy_RD_Order_ExpandTeradorAirbase",
+    "RiziaDLC.Enable_Policy_RD_Order_PalesAdminDistrict_StrengthenedBorderFort",
+    "RiziaDLC.LeaningValue_Democratic",
+    "RiziaDLC.PersonalValue_Pacifist",
+    "RiziaDLC.PersonalValue_Tyrant",
+    "RiziaDLC.Relations_Hugo",
+    "RiziaDLC.Relations_Lucita_Romance",
+    "RiziaDLC.Resources_Authority",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize",
+    "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed",
+    "RiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende",
+    "RiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende1952",
+    "RiziaDLCSupport.Codex_Characters_ForeignLeaders_MaartinVanHoorten",
+    "RiziaDLCSupport.Codex_Locations_Countries_Agnolia",
+    "RiziaDLCSupport.Codex_Locations_Countries_Agnolia_1952",
+    "RiziaDLCSupport.Journal_Turn04_Pales_NavalBlockade",
+    "RiziaDLCSupport.Reports_Turn04_NavyDeployed",
+    "RiziaDLCSupport.Reports_Turn04_PorteDrazon_BFFUnmasked"
+  ],
+  "choicesCount": 83,
+  "entriesCount": 418,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 1,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 1,
+      "actorId": 2,
+      "speaker": "INPUT",
+      "title": "input",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        417
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 2,
+      "actorId": 2,
+      "speaker": "OUTPUT",
+      "title": "output",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 3,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I had called a council meeting in F...\"",
+      "dialogueText": "I had called a council meeting in Fort Ales to discuss our strategy in the Pales gas dispute.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 4,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The city was named after its most f...\"",
+      "dialogueText": "The city was named after its most famous building, a Valgish fortress that now served as the government headquarters for the Pales Administrative District.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        87
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 5,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Titus escorted me down the hallway...\"",
+      "dialogueText": "Titus escorted me down the hallway to a nondescript conference room, where Laurento, Lucita, Elena and Hugo were already waiting.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        88
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 6,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I took a seat across from Lucita.\"",
+      "dialogueText": "I took a seat across from Lucita.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        93
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 7,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I looked around the room.\"",
+      "dialogueText": "I looked around the room.",
+      "menuText": "Don't look at her.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        96
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 8,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Good morning, Your Majesty. Should...\"",
+      "dialogueText": "\"Good morning, Your Majesty. Should we fill you in on the situation so far?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9,
+        10
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 9,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Yes, please.\"\"",
+      "dialogueText": "\"Yes, please.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        13
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I've read the reports. I know abou...\"",
+      "dialogueText": "\"I've read the reports. I know about the Palesian drillship.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        413
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 11,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Duke Reinhart is now under the imp...\"",
+      "dialogueText": "\"Duke Reinhart is now under the impression that the entire gas field belongs to Pales. He has ordered that exploratory drilling begin immediately.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        103
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 12,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"We made eye contact for a brief mom...\"",
+      "dialogueText": "We made eye contact for a brief moment.",
+      "menuText": "Look at her.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        82
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 13,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I'll take it from here. As you kno...\"",
+      "dialogueText": "\"I'll take it from here. As you know, our joint team of researchers recently completed their assessment of the gas field between Pales and Rizia -- tentatively nicknamed Aureus.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        15
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 14,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"However, a few days after our team...\"",
+      "dialogueText": "\"However, a few days after our team's return to port, we received the news that the Palesians had made a different decision.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 15,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The Rizian surveyors determined th...\"",
+      "dialogueText": "\"The Rizian surveyors determined that the field lay in both Rizian and Palesian territory.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        14
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 16,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Then where should we start, Your M...\"",
+      "dialogueText": "\"Then where should we start, Your Majesty?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 17,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Well... why is this a dispute? I t...\"",
+      "dialogueText": "\"Well... why is this a dispute? I thought our maritime borders were clear.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 18,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Do we now know how much gas the fi...\"",
+      "dialogueText": "\"Do we now know how much gas the field contains?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        20
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 19,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That's enough information. I'm rea...\"",
+      "dialogueText": "\"That's enough information. I'm ready to discuss our response.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        44
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 20,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"We still don't have exact numbers....\"",
+      "dialogueText": "\"We still don't have exact numbers. But the surveyors have confirmed that it's a lot.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 21,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Quite possibly more than the curre...\"",
+      "dialogueText": "\"Quite possibly more than the current natural gas reserves of Rizia and Pales combined.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        22
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 22,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"In other words, whichever country...\"",
+      "dialogueText": "\"In other words, whichever country controls the Aureus field will become Merkopa's next energy superpower.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        68
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 23,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"They've been shifting for the past...\"",
+      "dialogueText": "\"They've been shifting for the past century.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        24
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 24,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The late Empire of Valgos used to...\"",
+      "dialogueText": "\"The late Empire of Valgos used to control the waters between Pales and Caleqabiz. But the area came into question when the island joined Rizia in 1855.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        414
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 25,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Ah, yes. ANDOR.\"\"",
+      "dialogueText": "\"Ah, yes. ANDOR.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        27
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 26,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"And in case of overlap, no one cou...\"",
+      "dialogueText": "\"And in case of overlap, no one country may exploit those resources without the other's agreement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        28,
+        31,
+        32
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 27,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"A nation has the sovereign right t...\"",
+      "dialogueText": "\"A nation has the sovereign right to any undersea gas and oil wells located within 200 kilometers of its coast.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        26
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 28,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"So it's clear. Pales is breaking t...\"",
+      "dialogueText": "\"So it's clear. Pales is breaking the law by claiming sole ownership.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 29,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The borders that Rizia recognizes...\"",
+      "dialogueText": "\"The borders that Rizia recognizes today are the ones defined by the 1942 AN Directive on Offshore Resources. According to those, the field should be split almost exactly evenly between our two nations.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        25
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 30,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Technically, no. Reinhart's predec...\"",
+      "dialogueText": "\"Technically, no. Reinhart's predecessor signed ANDOR, but the Duke has yet to ratify it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 31,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Are both Pales and Rizia signatori...\"",
+      "dialogueText": "\"Are both Pales and Rizia signatories of this directive?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        33
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 32,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What happens if a country violates...\"",
+      "dialogueText": "\"What happens if a country violates that directive?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        34
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 33,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Rizia has both signed and ratified...\"",
+      "dialogueText": "\"Rizia has both signed and ratified ANDOR. Reinhart's predecessor signed the directive, but the Duke has yet to ratify it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 34,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"They'd be subject to prosecution i...\"",
+      "dialogueText": "\"They'd be subject to prosecution in an international court. And any military action against them would be fully justified.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        35
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 35,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Technically, Pales wouldn't be vio...\"",
+      "dialogueText": "\"Technically, Pales wouldn't be violating ANDOR by drilling without Rizia's consent. Reinhart's predecessor signed the directive, but the Duke has yet to ratify it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 36,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Gas Dispute Question Hub",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        55,
+        58,
+        61,
+        64
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 37,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Jump to: [Gas Dispute Question Hub]",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 38,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Jump to: [Gas Dispute Question Hub]",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 39,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"You established a rapport with Duk...\"",
+      "dialogueText": "\"You established a rapport with Duke Reinhart prior to your coronation. Perhaps there's a way to build on that.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        224,
+        231,
+        229,
+        230
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 40,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FriendlyToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41,
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 41,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FriendlyToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_FriendlyToPales\"] == true",
+      "userScript": "",
+      "outgoing": [
+        39
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 42,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_FriendlyToPales == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_FriendlyToPales\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        43
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 43,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I know you and Duke Reinhart don't...\"",
+      "dialogueText": "\"I know you and Duke Reinhart don't have much of a rapport. But it might not be too late to come to an understanding.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        228,
+        226,
+        225
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 44,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Very well.\"\"",
+      "dialogueText": "\"Very well.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        174
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 45,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Can't we just split the field 50-5...\"",
+      "dialogueText": "\"Can't we just split the field 50-50 with Pales. That's what we have a legal claim to, isn't it?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        49
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 46,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What if I were to let Pales keep i...\"",
+      "dialogueText": "\"What if I were to let Pales keep its claim to the entire field?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        169
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 47,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Does Rizia need the gas from the f...\"",
+      "dialogueText": "\"Does Rizia need the gas from the field?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        130
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 48,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Jump to: [Gas Dispute Question Hub]",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 49,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Yes, that was the outcome I was ho...\"",
+      "dialogueText": "\"Yes, that was the outcome I was hoping for before this incident.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 50,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"But it seems that without the aid...\"",
+      "dialogueText": "\"But it seems that without the aid of a third party, sharing the field will be more difficult than expected.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        239,
+        240,
+        254
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 51,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Pales Diplomacy Hub",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        70,
+        73,
+        272,
+        77
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 52,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Jump to: [Pales Diplomacy Hub]",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 53,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The meeting drew to a close.\"",
+      "dialogueText": "The meeting drew to a close.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        54
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 54,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I spent a sleepless night in Fort A...\"",
+      "dialogueText": "I spent a sleepless night in Fort Ales, wondering what would happen when the ship from Pales got to its destination.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        411
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 55,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        56,
+        57
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 56,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders\"] == false",
+      "userScript": "",
+      "outgoing": [
+        17
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 57,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 58,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        59,
+        60
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 59,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize\"] == false",
+      "userScript": "",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 60,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 61,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        62,
+        63
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 62,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed\"] == false",
+      "userScript": "",
+      "outgoing": [
+        47
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 63,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 64,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        65,
+        66
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 65,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders\"] == true",
+      "userScript": "",
+      "outgoing": [
+        19
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 66,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize == true || RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Discovery\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 67,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_Borders\"] = true;",
+      "outgoing": [
+        37
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 68,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_FieldSize\"] = true;",
+      "outgoing": [
+        38
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 69,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_GasHub_RiziaNeed\"] = true;",
+      "outgoing": [
+        48
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 70,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        71,
+        72
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 71,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share\"] == false",
+      "userScript": "",
+      "outgoing": [
+        45
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 72,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 73,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        74,
+        75
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 74,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede\"] == false",
+      "userScript": "",
+      "outgoing": [
+        46
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 75,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 76,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share\"] = true;",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 77,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == true || RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == true ||RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        78,
+        79
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 78,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == true || RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == true ||RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede\"] == true  or Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share\"] == true",
+      "userScript": "",
+      "outgoing": [
+        80
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 79,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == true || RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede == true ||RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll\"] == true  or  Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede\"] == true  or Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Share\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 80,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I would welcome any other suggesti...\"",
+      "dialogueText": "\"I would welcome any other suggestions from my councilors.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        315
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 81,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The Palesians furthermore state th...\"",
+      "dialogueText": "\"The Palesians furthermore state that as a sparsely populated island, Caleqabiz should not have the same maritime radius as mainland Rizia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        123,
+        125,
+        127
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 82,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Lucita_CompromisingPhoto == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        83,
+        84
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 83,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Lucita_CompromisingPhoto == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_CompromisingPhoto\"] == true",
+      "userScript": "",
+      "outgoing": [
+        85
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 84,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Lucita_CompromisingPhoto == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_CompromisingPhoto\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        86
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 85,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She blushed. The other councilors s...\"",
+      "dialogueText": "She blushed. The other councilors studiously trained their eyes away from us.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 86,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She blushed. The other councilors d...\"",
+      "dialogueText": "She blushed. The other councilors didn't seem to notice.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 87,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "AddConversant(\"Laurento Esquibel\");\nAddConversant(\"Elena Werner\");\nAddConversant(\"Hugo Toras\");\nAddConversant(\"Lucita Azaro\");\n\n// Adds the conversant with the character name in database",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "AddConversant(\"Laurento Esquibel\");\nAddConversant(\"Elena Werner\");\nAddConversant(\"Hugo Toras\");\nAddConversant(\"Lucita Azaro\");\n-- Adds the conversant with the character name in database;",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 88,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        89,
+        90
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 89,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        91
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 90,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        6
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 91,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My daughter had requested to stay h...\"",
+      "dialogueText": "My daughter had requested to stay home this time around, claiming she was feeling unwell.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        6
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 92,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Reports_Turn04_NavyDeployed = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Reports_Turn04_NavyDeployed\"] = true;",
+      "outgoing": [
+        411
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 93,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        94,
+        95
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 94,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 1",
+      "userScript": "",
+      "outgoing": [
+        12,
+        7
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 95,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Relations_Lucita_Romance > 1)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 1) == false",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 96,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Lucita_CompromisingPhoto == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        97,
+        98
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 97,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Lucita_CompromisingPhoto == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_CompromisingPhoto\"] == true",
+      "userScript": "",
+      "outgoing": [
+        99
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 98,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Lucita_CompromisingPhoto == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_CompromisingPhoto\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 99,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The other councilors busied themsel...\"",
+      "dialogueText": "The other councilors busied themselves with the documents they were holding. Hugo finally spoke up.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 100,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My fellow councilors were all porin...\"",
+      "dialogueText": "My fellow councilors were all poring over various documents. Hugo finally stood up.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 101,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "End();",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "End();",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 102,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlayLoopedMusic(\"R_UpInTheAir\", \"R_UpInTheAir_Loop\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlayLoopedMusic(\"R_UpInTheAir\",\"R_UpInTheAir_Loop\");",
+      "outgoing": [
+        412
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 103,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita had a worried look on her fa...\"",
+      "dialogueText": "Lucita had a worried look on her face.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        104
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 104,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"A Palesian drillship departed the...\"",
+      "dialogueText": "\"A Palesian drillship departed the port of Remaz at 0800 this morning. It is expected to reach the field by this time tomorrow.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        413
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 105,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Your Majesty, I have advocated for...\"",
+      "dialogueText": "\"Your Majesty, I have advocated for caution regarding Pales in the past. But this strikes me as highly concerning.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107,
+        110,
+        111,
+        113
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 106,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I completely agree, Lucita. We can...\"",
+      "dialogueText": "\"I completely agree, Lucita. We cannot ignore this obvious provocation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        112
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 107,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 0",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        108,
+        109
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 108,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 0",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 0",
+      "userScript": "",
+      "outgoing": [
+        106
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 109,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Relations_Lucita_Romance > 0)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 0) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 110,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I share those concerns, Duchess. T...\"",
+      "dialogueText": "\"I share those concerns, Duchess. The Palesians were out of line to send that ship.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        114
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 111,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I still believe that caution is ca...\"",
+      "dialogueText": "\"I still believe that caution is called for. I want to know all the details before we decide on our reaction.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        115
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 112,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Hugo cast a sidelong glance at my u...\"",
+      "dialogueText": "Hugo cast a sidelong glance at my use of Lucita's first name.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        117
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 113,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm sure there is a logical explan...\"",
+      "dialogueText": "\"I'm sure there is a logical explanation. We shouldn't assume this was an act of aggression.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 114,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"A response from Rizia is certainly...\"",
+      "dialogueText": "\"A response from Rizia is certainly warranted. I called this meeting today to decide on our course of action.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 115,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Very wise of you, Your Majesty.\"\"",
+      "dialogueText": "\"Very wise of you, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 116,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I agree, Your Majesty. But we cann...\"",
+      "dialogueText": "\"I agree, Your Majesty. But we cannot let the act go unremarked upon.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 117,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Provocation or not, it indeed must...\"",
+      "dialogueText": "\"Provocation or not, it indeed mustn't be ignored. I called this meeting today to decide our course of action.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 118,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"We have a meeting set with Duke Re...\"",
+      "dialogueText": "\"We have a meeting set with Duke Reinhart in two days. By which time the ship will have reached its destination.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        119
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 119,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"It is my hope that the Palesians a...\"",
+      "dialogueText": "\"It is my hope that the Palesians are still open to negotiating the field's ownership, and that this is just a tactic to give them an edge.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        120
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 120,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"You're getting ahead of yourself,...\"",
+      "dialogueText": "\"You're getting ahead of yourself, Laurento. The King should be as informed about this dispute as possible before heading to Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        121,
+        122
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 121,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You're right as usual, Ms. Werner....\"",
+      "dialogueText": "\"You're right as usual, Ms. Werner. I want to know everything I can about the disputed field.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        16
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 122,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm all caught up on the details....\"",
+      "dialogueText": "\"I'm all caught up on the details. Let's get to the meat of the matter.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        167
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 123,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That's fair enough. What are we ev...\"",
+      "dialogueText": "\"That's fair enough. What are we even using Caleqabiz for, anyway?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        124
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 124,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Its strategic location between mai...\"",
+      "dialogueText": "\"Its strategic location between mainland Merkopa and Kyrute makes it a very useful port and naval base. And we should not forget about the presence of the exiled ex-Duchess Angelica Sazon.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 125,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"But that's nonsense, right? It wou...\"",
+      "dialogueText": "\"But that's nonsense, right? It wouldn't hold up in an international court.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        126
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 126,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"That's debatable, Your Majesty. Wi...\"",
+      "dialogueText": "\"That's debatable, Your Majesty. With enough legal firepower and international support, Pales could have a case.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 127,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"How dare they disparage our island...\"",
+      "dialogueText": "\"How dare they disparage our island? They will pay for their impertinence.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        128
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 128,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Tyrant += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Tyrant\"] = Variable[\"RiziaDLC.PersonalValue_Tyrant\"] + 1;",
+      "outgoing": [
+        129
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 129,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Caleqabiz may be small, but it hol...\"",
+      "dialogueText": "\"Caleqabiz may be small, but it holds large strategic importance. It is unfair to call it a lesser part of Rizia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 130,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_EnergyModifiersTotal <= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        131,
+        132
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 131,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_EnergyModifiersTotal <= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Resources_EnergyModifiersTotal\"] <= 1",
+      "userScript": "",
+      "outgoing": [
+        133
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 132,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Resources_EnergyModifiersTotal <= 1)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_EnergyModifiersTotal\"] <= 1) == false",
+      "userScript": "",
+      "outgoing": [
+        139
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 133,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I'll be blunt, Your Majesty. Our e...\"",
+      "dialogueText": "\"I'll be blunt, Your Majesty. Our existing gas reserves are dwindling.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        135
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 134,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"The Esqiris field off of Valenqiri...\"",
+      "dialogueText": "\"The Esqiris field off of Valenqiris is on the verge of shutting down if we do not invest in its expansion.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        140
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 135,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project == true || RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        136,
+        137
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 136,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project == true || RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project\"] == true  or  Variable[\"RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed\"] == true",
+      "userScript": "",
+      "outgoing": [
+        138
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 137,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project == true || RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Project\"] == true  or  Variable[\"RiziaDLC.Policy_RD_Economy_EsqirisGasFieldExpansion_Completed\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        134
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 138,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Our expansion of the Esqiris field...\"",
+      "dialogueText": "\"Our expansion of the Esqiris field will increase gas production, though access to even half of Aureus would yield better results.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        140
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 139,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"We are not desperate. For now.\"\"",
+      "dialogueText": "\"We are not desperate. For now.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        135
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 140,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true || RiziaDLC.Situation_Economy_Sordland_ResortDeal == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        141,
+        142
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 141,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true || RiziaDLC.Situation_Economy_Sordland_ResortDeal == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal\"] == true  or  Variable[\"RiziaDLC.Situation_Economy_Sordland_ResortDeal\"] == true",
+      "userScript": "",
+      "outgoing": [
+        143
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 142,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal == true || RiziaDLC.Situation_Economy_Sordland_ResortDeal == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Situation_Diplomacy_Sordland_WineWhiskeyDeal\"] == true  or  Variable[\"RiziaDLC.Situation_Economy_Sordland_ResortDeal\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        144
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 143,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"President Ewald Alphonso was pleas...\"",
+      "dialogueText": "\"President Ewald Alphonso was pleased enough with our trade deal that he has hinted at offering us a stake in his own gas company, Gasom. But next year's Sordish elections may jeopardize that offer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        147,
+        148,
+        146,
+        145
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 144,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Although we rejected Sordland's tr...\"",
+      "dialogueText": "\"Although we rejected Sordland's trade deal, President Alphonso has hinted at an opportunity to invest in his own gas company, Gasom, through back channels. But next year's Sordish elections may jeopardize that offer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        148,
+        146,
+        145
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 145,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Sounds shady. I wouldn't be surpri...\"",
+      "dialogueText": "\"Sounds shady. I wouldn't be surprised if this Gasom was on the verge of bankruptcy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        151
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 146,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Alphonso's slipping in the polls a...\"",
+      "dialogueText": "\"Alphonso's slipping in the polls already, eh? I wonder who the next guy will be.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        150
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 147,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That sounds promising nonetheless....\"",
+      "dialogueText": "\"That sounds promising nonetheless. Follow up that lead if you can.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        152
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 148,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Just as well. I've had enough deal...\"",
+      "dialogueText": "\"Just as well. I've had enough dealings with the Sords.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        149
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 149,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Their gas holdings are quite prodi...\"",
+      "dialogueText": "\"Their gas holdings are quite prodigious. I wouldn't write them off.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 150,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"It's too early to tell. He could s...\"",
+      "dialogueText": "\"It's too early to tell. He could still pull off a win.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 151,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Whatever the state of the company,...\"",
+      "dialogueText": "\"Whatever the state of the company, there's no denying that Sordland has prodigious gas holdings.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 152,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Yes, I'll keep you posted.\"\"",
+      "dialogueText": "\"Yes, I'll keep you posted.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 153,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_Energy > 3",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        154,
+        155
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 154,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_Energy > 3",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Resources_Energy\"] > 3",
+      "userScript": "",
+      "outgoing": [
+        156
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 155,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Resources_Energy > 3)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Energy\"] > 3) == false",
+      "userScript": "",
+      "outgoing": [
+        157
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 156,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Outside of gas, our overall energy...\"",
+      "dialogueText": "\"Outside of gas, our overall energy reserves are healthy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        158
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 157,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Sordish or otherwise, we could rea...\"",
+      "dialogueText": "\"Sordish or otherwise, we could really use the gas to bolster our overall energy reserves.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        161
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 158,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        159,
+        160
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 159,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport\"] == true  or  Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport\"] == true",
+      "userScript": "",
+      "outgoing": [
+        164
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 160,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport\"] == true  or  Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        165
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 161,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        162,
+        163
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 162,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport\"] == true  or  Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport\"] == true",
+      "userScript": "",
+      "outgoing": [
+        164
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 163,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport == true || RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_HighEnergyExport\"] == true  or  Variable[\"RiziaDLC.Situation_Diplomacy_Rumburg_AverageEnergyExport\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        166
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 164,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"And we can't forget about the cont...\"",
+      "dialogueText": "\"And we can't forget about the contract we signed with Rumburg. We are exporting and making good on our energy obligations already.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        69
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 165,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"But we don't know what the future...\"",
+      "dialogueText": "\"But we don't know what the future might bring.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        69
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 166,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"We're running low as it is, and we...\"",
+      "dialogueText": "\"We're running low as it is, and we don't know what the future might bring.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        69
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 167,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Very well.\"\"",
+      "dialogueText": "\"Very well.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        174
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 168,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Actually, I have some additional i...\"",
+      "dialogueText": "\"Actually, I have some additional information that could influence our response.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        178
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 169,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_EnergyModifiersTotal <= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        170,
+        171
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 170,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_EnergyModifiersTotal <= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Resources_EnergyModifiersTotal\"] <= 1",
+      "userScript": "",
+      "outgoing": [
+        172
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 171,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Resources_EnergyModifiersTotal <= 1)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_EnergyModifiersTotal\"] <= 1) == false",
+      "userScript": "",
+      "outgoing": [
+        173
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 172,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Given Rizia's current natural gas...\"",
+      "dialogueText": "\"Given Rizia's current natural gas needs, we should not relinquish our claim on the field without seriously considering the consequences.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        241
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 173,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Though we do not strictly need the...\"",
+      "dialogueText": "\"Though we do not strictly need the gas from the field, we should not relinquish it without seriously considering the consequences.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        241
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 174,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        175,
+        176
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 175,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"]",
+      "userScript": "",
+      "outgoing": [
+        177
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 176,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_Pales_SendSpecialOps)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"]) == false",
+      "userScript": "",
+      "outgoing": [
+        207
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 177,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita raised a hand.\"",
+      "dialogueText": "Lucita raised a hand.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        168
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 178,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"By all means, Duchess Azaro, go on.\"\"",
+      "dialogueText": "\"By all means, Duchess Azaro, go on.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        179
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 179,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She took out a photograph. It showe...\"",
+      "dialogueText": "She took out a photograph. It showed a number of men in business suits boarding a large vessel.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 180,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Our intelligence in Pales managed...\"",
+      "dialogueText": "\"Our intelligence in Pales managed to get a visual on the boat before it departed. This man here is a representative from LesPower, the Lespian energy corporation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        181
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 181,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Hugo stared at her coldly.\"",
+      "dialogueText": "Hugo stared at her coldly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        182
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 182,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I was not informed that we had act...\"",
+      "dialogueText": "\"I was not informed that we had active intelligence operating in Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        183
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 183,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"His Majesty and I made the decisio...\"",
+      "dialogueText": "\"His Majesty and I made the decision to establish it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        185
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 184,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You will not question Duchess Azar...\"",
+      "dialogueText": "\"You will not question Duchess Azaro's ability to do her job.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        194
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 185,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"You were involved in this, Your Ma...\"",
+      "dialogueText": "\"You were involved in this, Your Majesty? I thought the Wehlen investigation took full precedence.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        184,
+        189,
+        190,
+        186
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 186,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Duchess, I do hope this surveillan...\"",
+      "dialogueText": "\"Duchess, I do hope this surveillance didn't pull too much focus away from the Zille investigation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        188
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 187,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"It did not, Your Majesty. I'll rem...\"",
+      "dialogueText": "\"It did not, Your Majesty. I'll remind you that my department has been almost completely uninvolved in the Zille bombing fallout.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 188,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita tried to conceal her indigna...\"",
+      "dialogueText": "Lucita tried to conceal her indignance.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        202
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 189,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Actually, it was my idea.\"\"",
+      "dialogueText": "\"Actually, it was my idea.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        194
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 190,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I believed the same. But she convi...\"",
+      "dialogueText": "\"I believed the same. But she convinced me the Pales situation was worth keeping an eye on, and that turned out to be the case.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 191,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Actually, I don't understand how t...\"",
+      "dialogueText": "\"Actually, I don't understand how this changes anything. We knew Pales and Lespia were in cahoots.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        192
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 192,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"What this evidence proves is that...\"",
+      "dialogueText": "\"What this evidence proves is that it's not Pales alone asserting its claim to the field. Lespia, and by extension ATO, is after that gas and all the money and power that comes with it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        196
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 193,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I do find it worrying that Lespia...\"",
+      "dialogueText": "\"I do find it worrying that Lespia is so heavily involved in this expedition.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        192
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 194,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita flashed me a grateful smile.\"",
+      "dialogueText": "Lucita flashed me a grateful smile.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 195,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"It did, Your Majesty.\"\"",
+      "dialogueText": "\"It did, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 196,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"This photo sends a different messa...\"",
+      "dialogueText": "\"This photo sends a different message to me. Could it be possible that Lespia pressured Pales into claiming the field and sending the ship? And if so, can we use that fact to drive a wedge between the two?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        206
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 197,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I would humbly ask my fellow counc...\"",
+      "dialogueText": "\"I would humbly ask my fellow councilors to focus on the content of these findings, not the methods used to obtain them.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        199,
+        191,
+        193
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 198,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Forgive me, both of you. The last...\"",
+      "dialogueText": "\"Forgive me, both of you. The last thing we need in this council is discord. And Duchess Azaro's findings are concerning to me as well.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        192
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 199,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Yes, Hugo, don't try to turn me ag...\"",
+      "dialogueText": "\"Yes, Hugo, don't try to turn me against the Duchess. We're all colleagues here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        200
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 200,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Hugo -= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Hugo\"] = Variable[\"RiziaDLC.Relations_Hugo\"] - 1;",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 201,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Hugo's expression remained placid.\"",
+      "dialogueText": "Hugo's expression remained placid.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        198
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 202,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        203,
+        204
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 203,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded\"] == false",
+      "userScript": "",
+      "outgoing": [
+        187
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 204,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Policy_Order_RizianForeignIntelligence_Expanded\"] == false) == false",
+      "userScript": "",
+      "outgoing": [
+        205
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 205,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"It did not, Your Majesty. If anyth...\"",
+      "dialogueText": "\"It did not, Your Majesty. If anything, our forces in Wehlen have doubled down on their efforts as the Zille handover deadline approaches.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 206,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Alternately, we could find a compr...\"",
+      "dialogueText": "\"Alternately, we could find a compromise that involves all three of our countries.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        211,
+        215,
+        216,
+        212
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 207,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita raised a hand.\"",
+      "dialogueText": "Lucita raised a hand.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        208
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 208,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"What troubles me is the specter of...\"",
+      "dialogueText": "\"What troubles me is the specter of Lespia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        209
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 209,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"If Pales claims the field, I am al...\"",
+      "dialogueText": "\"If Pales claims the field, I am almost certain that our northern neighbors will end up with the rights to it. They could be a presence in our waters for years to come.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 210,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"That isn't necessarily bad for us....\"",
+      "dialogueText": "\"That isn't necessarily bad for us. Maybe a compromise can be found that involves all three of our countries.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        211,
+        215,
+        216,
+        212
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 211,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"There is no compromise where Lespi...\"",
+      "dialogueText": "\"There is no compromise where Lespia is involved. They'll steamroll over us at the first chance.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        221
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 212,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn02_Diplomacy_Intention_ATO == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        213,
+        214
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 213,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn02_Diplomacy_Intention_ATO == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Turn02_Diplomacy_Intention_ATO\"] == true",
+      "userScript": "",
+      "outgoing": [
+        217
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 214,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Turn02_Diplomacy_Intention_ATO == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Turn02_Diplomacy_Intention_ATO\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 215,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I want to leave Lespia out of it....\"",
+      "dialogueText": "\"I want to leave Lespia out of it. This dispute is between Rizia and Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        219
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 216,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"But then what happens if Morella a...\"",
+      "dialogueText": "\"But then what happens if Morella and their Valgslandian friends get involved? They won't be happy with an ATO member drilling so far south.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        218
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 217,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That would be one way to get close...\"",
+      "dialogueText": "\"That would be one way to get closer to ATO, yes.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 218,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"And that could lead to the kind of...\"",
+      "dialogueText": "\"And that could lead to the kind of consequences I was warning you about earlier, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        222
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 219,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I wish it were that simple, Your M...\"",
+      "dialogueText": "\"I wish it were that simple, Your Majesty. But Pales will have to sell the gas from the Aureus field to someone. And our northern neighbors are the most likely candidates.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        222
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 220,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Are we sure that's what we want, t...\"",
+      "dialogueText": "\"Are we sure that's what we want, though? Especially with Morella and Valgsland waiting in the wings...\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        222
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 221,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"You know what Lespian Protectionis...\"",
+      "dialogueText": "\"You know what Lespian Protectionism is like, Laurento. The republic isn't exactly keen on sharing resources.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        222
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 222,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento had a pained expression on...\"",
+      "dialogueText": "Laurento had a pained expression on his face.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        223
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 223,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I still don't think we should give...\"",
+      "dialogueText": "\"I still don't think we should give up on the possibility of negotiation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 224,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"He ruined his chances at building...\"",
+      "dialogueText": "\"He ruined his chances at building on our rapport when he sent that ship.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 225,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"He ruined his chances at reaching...\"",
+      "dialogueText": "\"He ruined his chances at reaching an understanding when he sent that ship.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 226,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't want to come to an underst...\"",
+      "dialogueText": "\"I don't want to come to an understanding. I want to crush his Grand Duchy to smithereens.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        227
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 227,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Pacifist -= 1; RiziaDLC.PersonalValue_Tyrant += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Pacifist\"] = Variable[\"RiziaDLC.PersonalValue_Pacifist\"] - 1;\nVariable[\"RiziaDLC.PersonalValue_Tyrant\"] = Variable[\"RiziaDLC.PersonalValue_Tyrant\"] + 1;",
+      "outgoing": [
+        234
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 228,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"For your sake, Mr. Esquibel, I wil...\"",
+      "dialogueText": "\"For your sake, Mr. Esquibel, I will try to be diplomatic.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        233
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 229,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I have no idea whether his intenti...\"",
+      "dialogueText": "\"I have no idea whether his intentions were sincere. He might still harbor a grudge against Rizia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        232
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 230,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That will be hard with Lespia look...\"",
+      "dialogueText": "\"That will be hard with Lespia looking over his shoulder. But I will try to be diplomatic.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        233
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 231,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You're right. If we meet in person...\"",
+      "dialogueText": "\"You're right. If we meet in person, I'm sure I'll be able to get him to back down.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        236
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 232,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The only way to find out is to tal...\"",
+      "dialogueText": "\"The only way to find out is to talk to him.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        237
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 233,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"You know how much I respected your...\"",
+      "dialogueText": "\"You know how much I respected your father. But with you, I see a chance for a new approach.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        237
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 234,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento blanched.\"",
+      "dialogueText": "Laurento blanched.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        238
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 235,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The ship has not started drilling...\"",
+      "dialogueText": "\"The ship has not started drilling yet. It could be he doesn't intend for it to do so.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        238
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 236,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I am sure of it as well.\"\"",
+      "dialogueText": "\"I am sure of it as well.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        237
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 237,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Shall we discuss our diplomatic op...\"",
+      "dialogueText": "\"Shall we discuss our diplomatic options? Are you leaning towards any particular outcome?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 238,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Perhaps we should at least discuss...\"",
+      "dialogueText": "\"Perhaps we should at least discuss our diplomatic options? Are you leaning towards any particular outcome?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 239,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We don't need a third party. We ca...\"",
+      "dialogueText": "\"We don't need a third party. We can settle this between ourselves.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        253
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 240,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Do you mean asking the Alliance of...\"",
+      "dialogueText": "\"Do you mean asking the Alliance of Nations to arbitrate the dispute?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        252
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 241,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Don't forget, Ms. Werner. What we...\"",
+      "dialogueText": "\"Don't forget, Ms. Werner. What we would lose from ceding the field, we might gain from a closer partnership with Pales and Lespia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        242
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 242,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"On the other hand, Mr. Esquibel, i...\"",
+      "dialogueText": "\"On the other hand, Mr. Esquibel, it will make us look weak. And the foreign powers will jump on the opportunity like vultures.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        246
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 243,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Think about how much territory we...\"",
+      "dialogueText": "\"Think about how much territory we have relinquished already. How much wealth we have lost because of it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        244
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 244,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I am certain that if we give up th...\"",
+      "dialogueText": "\"I am certain that if we give up this gas field, the Wehzeks will be even more emboldened to keep their grip on Zille.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        245,
+        247,
+        248,
+        258
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 245,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You're right, Hugo. First Pales, t...\"",
+      "dialogueText": "\"You're right, Hugo. First Pales, then Zille, then this? We must preserve what's left of our kingdom.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        250
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 246,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My uncle's hand unconsciously forme...\"",
+      "dialogueText": "My uncle's hand unconsciously formed a fist.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        243
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 247,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"On the other hand, won't fighting...\"",
+      "dialogueText": "\"On the other hand, won't fighting for our rightful part of the field take up resources we should be using to get Zille back?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        249
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 248,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What if we're actually wrong about...\"",
+      "dialogueText": "\"What if we're actually wrong about having a claim to the field? Ceding it to Pales would save us a lot of trouble.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        257
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 249,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"You do have a point there, Your Ma...\"",
+      "dialogueText": "\"You do have a point there, Your Majesty. We would have to allocate our funding very carefully.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        269
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 250,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"If we do cede the field, it must b...\"",
+      "dialogueText": "\"If we do cede the field, it must be done very carefully. We can't let Duke Reinhart think that his intimidation tactics worked on us.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        269
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 251,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Unfortunately, arbitration is an e...\"",
+      "dialogueText": "\"Unfortunately, arbitration is an expensive and time-consuming process. And there's no guarantee it would end in our favor.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        255
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 252,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Correct, Your Majesty. AN arbitrat...\"",
+      "dialogueText": "\"Correct, Your Majesty. AN arbitration is the typical path in disputes like these.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        251
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 253,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"If you can't, though, the Alliance...\"",
+      "dialogueText": "\"If you can't, though, the Alliance of Nations would be called in to arbitrate.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        251
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 254,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"A third party... like the Rizian m...\"",
+      "dialogueText": "\"A third party... like the Rizian military?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        256
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 255,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"With that said, it's definitely th...\"",
+      "dialogueText": "\"With that said, it's definitely the safest way to avoid a diplomatic incident.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        260,
+        261,
+        263,
+        262
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 256,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I believe Ms. Werner was referring...\"",
+      "dialogueText": "\"I believe Ms. Werner was referring to the Alliance of Nations. It's usually called on to arbitrate disputes like these.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        251
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 257,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"The value of the gas in the field...\"",
+      "dialogueText": "\"The value of the gas in the field is high enough that I think it's worth defending our claim for as long as we can.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        269
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 258,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't like the idea any more tha...\"",
+      "dialogueText": "\"I don't like the idea any more than you do, Hugo. But my father taught me that sometimes we have to sacrifice part of our kingdom to save the rest of it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        259
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 259,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Up to a point, Your Majesty. What...\"",
+      "dialogueText": "\"Up to a point, Your Majesty. What happens when we have nothing left to sacrifice?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        269
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 260,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We have Rumburg on our side. I'm s...\"",
+      "dialogueText": "\"We have Rumburg on our side. I'm sure Queen Beatrice would support us through the arbitration process.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        267
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 261,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It does sound like the law is on o...\"",
+      "dialogueText": "\"It does sound like the law is on our side. Maybe this is the easiest way forward.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        266
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 262,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We don't have time to spare. I wan...\"",
+      "dialogueText": "\"We don't have time to spare. I want that gas *now*.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        264
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 263,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"No, the AN will muddle everything...\"",
+      "dialogueText": "\"No, the AN will muddle everything up with its bureaucracy. I want to talk to the Duke man to man.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        268
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 264,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Even if we were granted part of th...\"",
+      "dialogueText": "\"Even if we were granted part of the field instantly, it would take a while before gas extraction could begin.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        265
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 265,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"But yes, arbitration would take ev...\"",
+      "dialogueText": "\"But yes, arbitration would take even longer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 266,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"On the other hand, if the AN does...\"",
+      "dialogueText": "\"On the other hand, if the AN does end up ruling against us, that would be definitive. We would be forced to completely give up our claim.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 267,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"The weight of GRACE versus that of...\"",
+      "dialogueText": "\"The weight of GRACE versus that of Lespia and ATO. We would be evenly matched.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 268,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I would encourage you to try, Your...\"",
+      "dialogueText": "\"I would encourage you to try, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 269,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_Cede\"] = true;",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 270,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She spoke slowly, as if thinking ou...\"",
+      "dialogueText": "She spoke slowly, as if thinking out loud.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        325
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 271,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Are you in your right mind, young...\"",
+      "dialogueText": "\"Are you in your right mind, young lady? The navy? We'd be escalating the situation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        327,
+        329,
+        330,
+        410
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 272,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        273,
+        274
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 273,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == false",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll\"] == false",
+      "userScript": "",
+      "outgoing": [
+        275
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 274,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll == false)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll\"] == false) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 275,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Is there a way we can claim the en...\"",
+      "dialogueText": "\"Is there a way we can claim the entire field for Rizia?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        276
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 276,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Not without major diplomatic reper...\"",
+      "dialogueText": "\"Not without major diplomatic repercussions, I'm afraid.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        277
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 277,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"No matter which maritime boundarie...\"",
+      "dialogueText": "\"No matter which maritime boundaries you look at, it's clear that half of the field lies in Palesian territory.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        278
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 278,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"The only way for Rizian Oil and Ga...\"",
+      "dialogueText": "\"The only way for Rizian Oil and Gas to access the entire field would be for us to purchase the exploration rights from Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        279,
+        280,
+        303
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 279,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That would make our gas extraction...\"",
+      "dialogueText": "\"That would make our gas extraction dependent on their conditions. No, thanks.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        308
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 280,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Sounds costlier than I envisioned,...\"",
+      "dialogueText": "\"Sounds costlier than I envisioned, but we would certainly reap the rewards. Why don't we pursue that option?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        283
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 281,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Or reconquer Pales. Right, Duchess...\"",
+      "dialogueText": "\"Or reconquer Pales. Right, Duchess Azaro?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        296
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 282,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"We could, but we have to remember...\"",
+      "dialogueText": "\"We could, but we have to remember that Lespia is involved.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        287
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 283,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        284,
+        285
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 284,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true",
+      "userScript": "",
+      "outgoing": [
+        282
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 285,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_Pales_SendSpecialOps == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        286
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 286,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"We could, but we have to consider...\"",
+      "dialogueText": "\"We could, but we have to consider Lespia's potential involvement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        294
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 287,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"We know for a fact that LesPower h...\"",
+      "dialogueText": "\"We know for a fact that LesPower has designs on the gas field. If we want the rights, we will have to outbid them.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        289
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 288,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Which may be difficult, considerin...\"",
+      "dialogueText": "\"Which may be difficult, considering the shaky state of Rizian-Palesian relations.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        312
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 289,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"And before that, we'd have to conv...\"",
+      "dialogueText": "\"And before that, we'd have to convince Duke Reinhart that Rizia is a trustworthy partner.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        290
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 290,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_HostileToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        291,
+        292
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 291,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_HostileToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_HostileToPales\"] == true",
+      "userScript": "",
+      "outgoing": [
+        288
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 292,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_HostileToPales == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_HostileToPales\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        293
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 293,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Which might be possible. Reinhart...\"",
+      "dialogueText": "\"Which might be possible. Reinhart still seems to trust you more than your father, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        312
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 294,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"If Lespia already has designs on t...\"",
+      "dialogueText": "\"If Lespia already has designs on the field, Pales could force us to outbid them for access to it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        289
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 295,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I saw a hint of a smile on Lucita's...\"",
+      "dialogueText": "I saw a hint of a smile on Lucita's face.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        299
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 296,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 2",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        297,
+        298
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 297,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance > 2",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 2",
+      "userScript": "",
+      "outgoing": [
+        295
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 298,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Relations_Lucita_Romance > 2)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Relations_Lucita_Romance\"] > 2) == false",
+      "userScript": "",
+      "outgoing": [
+        301
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 299,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I am still not convinced that's th...\"",
+      "dialogueText": "\"I am still not convinced that's the right course of action for us.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 300,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"However, if you insisted on a new...\"",
+      "dialogueText": "\"However, if you insisted on a new campaign against Pales, I would be obliged to provide counsel.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        313
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 301,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita shook her head.\"",
+      "dialogueText": "Lucita shook her head.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        302
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 302,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I am still not convinced that's th...\"",
+      "dialogueText": "\"I am still not convinced that's the right course of action for us.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        306
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 303,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Coronation_Speech_TakeBackLand == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        304,
+        305
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 304,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Coronation_Speech_TakeBackLand == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Coronation_Speech_TakeBackLand\"] == true",
+      "userScript": "",
+      "outgoing": [
+        281
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 305,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Coronation_Speech_TakeBackLand == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Coronation_Speech_TakeBackLand\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 306,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Although it would make this disput...\"",
+      "dialogueText": "\"Although it would make this dispute considerably less complicated.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        313
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 307,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Agreed, Your Majesty. And don't fo...\"",
+      "dialogueText": "\"Agreed, Your Majesty. And don't forget about Lespia's involvement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        287
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 308,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        309,
+        310
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 309,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true",
+      "userScript": "",
+      "outgoing": [
+        307
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 310,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_Pales_SendSpecialOps == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        311
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 311,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Agreed, Your Majesty. And don't fo...\"",
+      "dialogueText": "\"Agreed, Your Majesty. And don't forget about Lespia's potential involvement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        294
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 312,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn02_PalesCouncil_DiplomacyHub_ClaimAll\"] = true;",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 313,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento wiped his brow.\"",
+      "dialogueText": "Laurento wiped his brow.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        314
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 314,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I beg of you to trust your first i...\"",
+      "dialogueText": "\"I beg of you to trust your first instincts, Duchess Azaro. Pursuing a path of aggression could delay our access to the gas field for months or even years.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        312
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 315,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Hugo cleared his throat.\"",
+      "dialogueText": "Hugo cleared his throat.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        316
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 316,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"If I may, Your Majesty.\"\"",
+      "dialogueText": "\"If I may, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        317
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 317,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"We have still not decided what to...\"",
+      "dialogueText": "\"We have still not decided what to do about the Palesian drillship.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        318,
+        320,
+        319
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 318,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't like the idea of it being...\"",
+      "dialogueText": "\"I don't like the idea of it being present in the gas field during our negotiations. But I don't see a way to stop it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        321
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 319,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We shouldn't immediately interpret...\"",
+      "dialogueText": "\"We shouldn't immediately interpret the ship as a provocation. This could all be a misunderstanding.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        323
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 320,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We have to do *something*, obvious...\"",
+      "dialogueText": "\"We have to do *something*, obviously. The Palesians must not be allowed to get away with this.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        322
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 321,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I do, Your Majesty. But my fellow...\"",
+      "dialogueText": "\"I do, Your Majesty. But my fellow councilors won't like it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 322,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I have one idea, Your Majesty. But...\"",
+      "dialogueText": "\"I have one idea, Your Majesty. But my fellow councilors won't like it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 323,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Respectfully, Your Majesty, the Pa...\"",
+      "dialogueText": "\"Respectfully, Your Majesty, the Palesians' intentions are crystal clear to me. Even if Duke Reinhart is open to negotiations, he sent this ship to rattle us.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        324
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 324,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"My suggestion is to rattle him rig...\"",
+      "dialogueText": "\"My suggestion is to rattle him right back.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 325,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"With His Majesty's blessing... the...\"",
+      "dialogueText": "\"With His Majesty's blessing... the Rizian navy could surround the field, preventing the drillship from reaching its destination.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        326
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 326,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento looked up in outrage.\"",
+      "dialogueText": "Laurento looked up in outrage.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        271
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 327,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"'Young lady'? I know you come from...\"",
+      "dialogueText": "\"'Young lady'? I know you come from a different generation, Mr. Esquibel, but that address was completely out of line.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        328
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 328,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Excuse me, Your Majesty. But only...\"",
+      "dialogueText": "\"Excuse me, Your Majesty. But only the impetuousness of youth could be behind such a rash response.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        331
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 329,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I second that. A military response...\"",
+      "dialogueText": "\"I second that. A military response could have disastrous consequences.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        333
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 330,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's not an outlandish suggestion....\"",
+      "dialogueText": "\"It's not an outlandish suggestion. We've already established that Pales is violating international law.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        333
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 331,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Actually, my elderly friend, Duche...\"",
+      "dialogueText": "\"Actually, my elderly friend, Duchess Azaro may have the right idea.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        337
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 332,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Tensions with Pales are high enoug...\"",
+      "dialogueText": "\"Tensions with Pales are high enough already. This could bring them to a boiling point.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        339
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 333,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_HostileToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        334,
+        335
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 334,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_HostileToPales == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_HostileToPales\"] == true",
+      "userScript": "",
+      "outgoing": [
+        332
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 335,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_HostileToPales == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_HostileToPales\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        336
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 336,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"We were on the verge of reconcilin...\"",
+      "dialogueText": "\"We were on the verge of reconciling with Pales after all these years. This would shatter our chances.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        339
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 337,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento looked at her indignantly.\"",
+      "dialogueText": "Laurento looked at her indignantly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        338
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 338,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Of course we shouldn't fire on the...\"",
+      "dialogueText": "\"Of course we shouldn't fire on their ship. But a blockade would keep the gas field clear until you've had a chance to speak with Duke Reinhart.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        342
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 339,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"The Duchess is not talking about s...\"",
+      "dialogueText": "\"The Duchess is not talking about sinking the drilling ship, Mr. Esquibel.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        341
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 340,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"A blockade could keep the field cl...\"",
+      "dialogueText": "\"A blockade could keep the field clear until His Majesty has had a chance to speak with Duke Reinhart.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        342
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 341,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento looked at her indignantly.\"",
+      "dialogueText": "Laurento looked at her indignantly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        340
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 342,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"If we do end up in arbitration tal...\"",
+      "dialogueText": "\"If we do end up in arbitration talks, Pales having an established presence in the Aureus field would give them an unwarranted edge.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        343,
+        345,
+        347,
+        352
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 343,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That settles it, then. I want us t...\"",
+      "dialogueText": "\"That settles it, then. I want us to have a fighting chance to claim our rightful part of the field.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        353
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 344,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I too am wary of miring ourselves...\"",
+      "dialogueText": "\"I too am wary of miring ourselves in another conflict.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        359
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 345,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Even so, the risk of escalation is...\"",
+      "dialogueText": "\"Even so, the risk of escalation is too high. It doesn't seem worth it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        346
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 346,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Precisely, Your Majesty.\"\"",
+      "dialogueText": "\"Precisely, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        344
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 347,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        348,
+        349
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 348,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true",
+      "userScript": "",
+      "outgoing": [
+        350
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 349,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_Pales_SendSpecialOps == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 350,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I am hesitant to interfere. What i...\"",
+      "dialogueText": "\"I am hesitant to interfere. What if ATO retaliates?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        351
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 351,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"There may be LesPower executives o...\"",
+      "dialogueText": "\"There may be LesPower executives on board the ship, but it is flying the Palesian flag. Neither Lespia nor ATO would be allowed to get involved.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        344
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 352,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Pales and Lespia are literally tes...\"",
+      "dialogueText": "\"Pales and Lespia are literally testing the waters with us. If we let them reach the field, we have already lost it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        353
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 353,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I agree that asserting Rizian sove...\"",
+      "dialogueText": "\"I agree that asserting Rizian sovereignty is of the utmost importance.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        355
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 354,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Especially knowing what we know ab...\"",
+      "dialogueText": "\"Especially knowing what we know about Lespia's involvement.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        358
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 355,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        356,
+        357
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 356,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_Pales_SendSpecialOps == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true",
+      "userScript": "",
+      "outgoing": [
+        354
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 357,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_Pales_SendSpecialOps == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_Pales_SendSpecialOps\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        358
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 358,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"But I am wary of miring ourselves...\"",
+      "dialogueText": "\"But I am wary of miring ourselves in another conflict. What if the Palesians call our bluff?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        361
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 359,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Yes, sending the navy would help a...\"",
+      "dialogueText": "\"Yes, sending the navy would help assert Rizian sovereignty, but are we strong enough to defend ourselves should the Palesians call our bluff?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        361
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 360,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"We don't need to worry about that,...\"",
+      "dialogueText": "\"We don't need to worry about that, Your Grace. Our navy is capable of outgunning Pales if need be.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        365
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 361,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_Military_NavalBombardmentCapability > 0",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        362,
+        363
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 362,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Resources_Military_NavalBombardmentCapability > 0",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Resources_Military_NavalBombardmentCapability\"] > 0",
+      "userScript": "",
+      "outgoing": [
+        360
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 363,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Resources_Military_NavalBombardmentCapability > 0)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_NavalBombardmentCapability\"] > 0) == false",
+      "userScript": "",
+      "outgoing": [
+        364
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 364,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"That is a concern, Your Grace. We...\"",
+      "dialogueText": "\"That is a concern, Your Grace. We have a capable navy, but we won't be able to outgun Pales if it comes down to that.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        366
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 365,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Still, this is not a decision to t...\"",
+      "dialogueText": "\"Still, this is not a decision to take lightly.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        367,
+        370,
+        368,
+        369
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 366,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"This is not a decision to take lig...\"",
+      "dialogueText": "\"This is not a decision to take lightly.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        367,
+        370,
+        368,
+        369
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 367,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I understand the implications. But...\"",
+      "dialogueText": "\"I understand the implications. But I fear we have no other choice. We will institute a naval blockade of the gas field immediately.\"",
+      "menuText": "\"I understand the implications. But I fear we have no other choice. We will institute a naval blockade of the gas field immediately.\" [Order Blockade, +1 Authority]",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        379
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 368,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I agree. And I think we should exe...\"",
+      "dialogueText": "\"I agree. And I think we should exercise caution. I will meet with Duke Reinhart before deciding our next steps.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        375
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 369,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I see through your manipulations,...\"",
+      "dialogueText": "\"I see through your manipulations, Duchess Azaro, and I will not give in. We will refrain from provoking Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        371
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 370,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I do not take Duke Reinhart's viol...\"",
+      "dialogueText": "\"I do not take Duke Reinhart's violation of the law lightly, either. Our navy will show him that Rizia cannot be intimidated.\"",
+      "menuText": "\"I do not take Duke Reinhart's violation of the law lightly, either. Our navy will show him that Rizia cannot be intimidated.\" [Order Blockade, +1 Authority]",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        378
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 371,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Manipulations?! I--\"\"",
+      "dialogueText": "\"Manipulations?! I--\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        372
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 372,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She clenched her jaw and forced her...\"",
+      "dialogueText": "She clenched her jaw and forced herself to smile.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        373
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 373,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I understand, Your Majesty. Let me...\"",
+      "dialogueText": "\"I understand, Your Majesty. Let me know if there's any other way I can support you in your negotiations.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        374
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 374,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance -= 2;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Lucita_Romance\"] = Variable[\"RiziaDLC.Relations_Lucita_Romance\"] - 2;",
+      "outgoing": [
+        409
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 375,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento nodded, relieved.\"",
+      "dialogueText": "Laurento nodded, relieved.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        376
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 376,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Very good, Your Majesty. I'll get...\"",
+      "dialogueText": "\"Very good, Your Majesty. I'll get everything in order for your meeting.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        386
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 377,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita nodded.\"",
+      "dialogueText": "Lucita nodded.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        408
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 378,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Diplomacy_Pales_Military_BlockDrillship = true;\nRiziaDLCSupport.Journal_Turn04_Pales_NavalBlockade = true;\nRiziaDLC.Resources_Authority += 1;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Diplomacy_Pales_Military_BlockDrillship\"] = true;\nVariable[\"RiziaDLCSupport.Journal_Turn04_Pales_NavalBlockade\"] = true;\nVariable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 1;",
+      "outgoing": [
+        381
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 379,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Diplomacy_Pales_Military_BlockDrillship = true; RiziaDLCSupport.Journal_Turn04_Pales_NavalBlockade = true;\nRiziaDLC.Resources_Authority += 1;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Diplomacy_Pales_Military_BlockDrillship\"] = true;\nVariable[\"RiziaDLCSupport.Journal_Turn04_Pales_NavalBlockade\"] = true;\nVariable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 1;",
+      "outgoing": [
+        377
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 380,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"As you wish, Your Majesty. I'll ma...\"",
+      "dialogueText": "\"As you wish, Your Majesty. I'll make the order right away.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        382
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 381,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita nodded. Laurento and Elena e...\"",
+      "dialogueText": "Lucita nodded. Laurento and Elena exchanged troubled glances.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        408
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 382,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento attempted to smile.\"",
+      "dialogueText": "Laurento attempted to smile.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        383
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 383,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"This will add a tense background t...\"",
+      "dialogueText": "\"This will add a tense background to negotiations, to say the least. But I have faith it will all work out for the best.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        384
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 384,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"That's the spirit, Laurento. I'm s...\"",
+      "dialogueText": "\"That's the spirit, Laurento. I'm sure our ships will only be in place for a few days at most.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        385
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 385,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I'll adjourn the meeting so Duches...\"",
+      "dialogueText": "\"I'll adjourn the meeting so Duchess Azaro may begin preparations. We will inform you of the navy's position prior to your departure for Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        397,
+        398,
+        399,
+        404
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 386,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Our naval forces will be on standb...\"",
+      "dialogueText": "\"Our naval forces will be on standby in case you change your mind.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        387
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 387,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I pray to St. Wruhec that they wil...\"",
+      "dialogueText": "\"I pray to St. Wruhec that they will not be needed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        409
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 388,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"There was a moment's silence.\"",
+      "dialogueText": "There was a moment's silence.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        389
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 389,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"I'll adjourn the meeting so Mr. Es...\"",
+      "dialogueText": "\"I'll adjourn the meeting so Mr. Esquibel can begin his preparations. We'll keep you abreast of any changes prior to your departure for Pales.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        392,
+        391,
+        390,
+        393
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 390,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I hope I don't regret following yo...\"",
+      "dialogueText": "\"I hope I don't regret following your advice, Mr. Esquibel.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        395
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 391,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you all for your time.\"\"",
+      "dialogueText": "\"Thank you all for your time.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 392,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I fully expect a peaceful resoluti...\"",
+      "dialogueText": "\"I fully expect a peaceful resolution.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        396
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 393,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I hope there are no more unpleasan...\"",
+      "dialogueText": "\"I hope there are no more unpleasant surprises.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        394
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 394,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"We'll see to it that there aren't.\"\"",
+      "dialogueText": "\"We'll see to it that there aren't.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 395,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I am certain you would have regret...\"",
+      "dialogueText": "\"I am certain you would have regretted a military response more.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 396,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Good luck, Your Majesty. I mean th...\"",
+      "dialogueText": "\"Good luck, Your Majesty. I mean that sincerely.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 397,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I fully expect a peaceful resoluti...\"",
+      "dialogueText": "\"I fully expect a peaceful resolution. This is just a precaution.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        401
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 398,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I wish I could see the look on Rei...\"",
+      "dialogueText": "\"I wish I could see the look on Reinhart's face when he finds out about this.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        400
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 399,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you for the suggestion, Duch...\"",
+      "dialogueText": "\"Thank you for the suggestion, Duchess. I knew you could be counted on.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        403
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 400,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"You'll see him very soon, Your Maj...\"",
+      "dialogueText": "\"You'll see him very soon, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        405
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 401,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"No need to justify it, Your Majest...\"",
+      "dialogueText": "\"No need to justify it, Your Majesty. This is your decision.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        405
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 402,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I'm just doing my job, Your Majest...\"",
+      "dialogueText": "\"I'm just doing my job, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        407
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 403,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She bowed her head modestly.\"",
+      "dialogueText": "She bowed her head modestly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        402
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 404,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you all for your time.\"\"",
+      "dialogueText": "\"Thank you all for your time.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        405
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 405,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The meeting drew to a close.\"",
+      "dialogueText": "The meeting drew to a close.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        406
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 406,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I spent a sleepless night in Fort A...\"",
+      "dialogueText": "I spent a sleepless night in Fort Ales, wondering what would happen when the Rizian navy reached its destination.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 407,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Lucita_Romance += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Lucita_Romance\"] = Variable[\"RiziaDLC.Relations_Lucita_Romance\"] + 1;",
+      "outgoing": [
+        405
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 408,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Diplomacy_Pales_NegotiatingPower -= 2;\nRiziaDLC.Diplomacy_Lespia_NegotiatingPower -= 1;\nRiziaDLC.Diplomacy_Morella_NegotiatingPower += 1;\nRiziaDLC.LeaningValue_Democratic -= 1;\nRiziaDLC.PersonalValue_Pacifist -= 3;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Diplomacy_Pales_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Pales_NegotiatingPower\"] - 2;\nVariable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] - 1;\nVariable[\"RiziaDLC.Diplomacy_Morella_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Morella_NegotiatingPower\"] + 1;\nVariable[\"RiziaDLC.LeaningValue_Democratic\"] = Variable[\"RiziaDLC.LeaningValue_Democratic\"] - 1;\nVariable[\"RiziaDLC.PersonalValue_Pacifist\"] = Variable[\"RiziaDLC.PersonalValue_Pacifist\"] - 3;",
+      "outgoing": [
+        380
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 409,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Pacifist += 1;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Pacifist\"] = Variable[\"RiziaDLC.PersonalValue_Pacifist\"] + 1;",
+      "outgoing": [
+        388
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 410,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"They are the ones who are escalati...\"",
+      "dialogueText": "\"They are the ones who are escalating. We cannot simply stay idle. We need a strong response.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        333
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 411,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Enable_Policy_RD_Order_ExpandFortAlesNavalBase = true;\nRiziaDLC.Enable_Policy_RD_Order_ExpandTeradorAirbase = true;\nRiziaDLC.Enable_Policy_RD_Order_PalesAdminDistrict_StrengthenedBorderFort = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Enable_Policy_RD_Order_ExpandFortAlesNavalBase\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Order_ExpandTeradorAirbase\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Order_PalesAdminDistrict_StrengthenedBorderFort\"] = true;\n;",
+      "outgoing": [
+        101
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 412,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Reports_Turn04_PorteDrazon_BFFUnmasked = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Reports_Turn04_PorteDrazon_BFFUnmasked\"] = true;",
+      "outgoing": [
+        416
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 413,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "EnableToken(\"Rizia_Event_Aureus\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "EnableToken(\"Rizia_Event_Aureus\");",
+      "outgoing": [
+        105
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 414,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Since then, both Rizia and Pales h...\"",
+      "dialogueText": "\"Since then, both Rizia and Pales have variously claimed ownership of these waters and the resources therein.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 415,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "UpdateCountryPresident(\"Rizia_Country_Agnolia\", \"PM Maartin Van Hoorten\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "UpdateCountryPresident(\"Rizia_Country_Agnolia\",\"PM Maartin Van Hoorten\");",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 416,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Codex_Characters_ForeignLeaders_MaartinVanHoorten = true;\nRiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende1952 = true;\nRiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende = false;\nRiziaDLCSupport.Codex_Locations_Countries_Agnolia = false;\nRiziaDLCSupport.Codex_Locations_Countries_Agnolia_1952 = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Codex_Characters_ForeignLeaders_MaartinVanHoorten\"] = true;\nVariable[\"RiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende1952\"] = true;\nVariable[\"RiziaDLCSupport.Codex_Characters_ForeignLeaders_DijerkDanOtkende\"] = false;\nVariable[\"RiziaDLCSupport.Codex_Locations_Countries_Agnolia\"] = false;\nVariable[\"RiziaDLCSupport.Codex_Locations_Countries_Agnolia_1952\"] = true;\n;",
+      "outgoing": [
+        415
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 417,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "SetRichPresence(\"Managing the resource conflict with the Grand-Duchy of Pales\", \"Fort Ales\", \"Pales Administrative District\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "SetRichPresence(\"Managing the resource conflict with the Grand-Duchy of Pales\",\"Fort Ales\",\"Pales Administrative District\");\n;",
+      "outgoing": [
+        102
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 99403,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Zille_Turn4_TwoFront_Warning",
+      "dialogueText": "If we mobilize against Pales, will our supply networks be able to maintain both frontiers?",
+      "menuText": "\"If we mobilize against Pales, will our supply networks be able to maintain both frontiers?\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        99404
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Pytanie o ryzyko katastrofalnej wojny na dwa fronty"
+    },
+    {
+      "id": 99404,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Zille_Turn4_TwoFront_Reply",
+      "dialogueText": "For Dast's sake, Your Majesty, absolutely not without severe economic hemorrhaging. Waging war on Pales while our troops are mobilized against Wehlen would double our fuel burn and bring immediate rationing to the capital.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Elena Werner alarmuje przed drenażem ropy i zapaścią budżetu"
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "id": 9990,
+  "title": "Turn_Zille_WarLogisticsDispute",
+  "description": "Spór Logistyczny: Azaro vs Sazon",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Spór Logistyczny: Azaro vs Sazon",
+  "actors": [
+    "Angelica Sazon",
+    "Elena Werner",
+    "Hugo Toras",
+    "Lucita Azaro",
+    "Manus Sazon",
+    "Narrator",
+    "Player_Romus"
+  ],
+  "readVariables": [],
+  "writtenVariables": [
+    "RiziaDLC.HouseAzaro_Opinion",
+    "RiziaDLC.HouseSazon_Opinion",
+    "RiziaDLC.Resources_Budget",
+    "Zille_Logistics_House"
+  ],
+  "choicesCount": 3,
+  "entriesCount": 19,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Logistics_Intro_1",
+      "dialogueText": "The atmosphere inside the Ministry of War conference chamber was electric with tension. On the table lay logistical manifests of fuel consumption, rail capacity, and requisition orders from the southern provinces.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Complaint_1",
+      "dialogueText": "Your Majesty, we have an intolerable bottleneck along the Brenas corridor. Our heavy transport columns and fuel convoys are being delayed at civilian checkpoints and rail junctions.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Complaint_2",
+      "dialogueText": "The General Staff demands total military requisition authority over the southern rail network, fuel storage depots, and grain silos in Brenas. If my armored spearheads stall outside Wiktrany because local merchants are hoarding boxcars, the responsibility will rest on this council!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 4,
+      "actorId": 98,
+      "speaker": "Angelica Sazon",
+      "title": "Angelica_Interjection",
+      "dialogueText": "Brenas is not an occupied territory, Councilor Azaro! It is the ancestral breadbasket of Rizia and the home of House Sazon!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 5,
+      "actorId": 98,
+      "speaker": "Angelica Sazon",
+      "title": "Angelica_Argument",
+      "dialogueText": "Your officers are already confiscating livestock, impounding delivery trucks, and leaving our towns on the brink of winter scarcity. If you bleed Brenas dry to feed your armored battalions, you will provoke strikes and unrest across the entire province before your troops ever reach Zille!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        6
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 6,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus_Proposal",
+      "dialogueText": "Mother is right, Your Majesty. But there is a sensible alternative. House Sazon's agricultural syndicates and merchant guilds have managed these trade roads for generations. If the Crown grants us supervisory authority over the rear, we will guarantee steady deliveries of grain, flour, and fuel without resorting to martial confiscation.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        7
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 7,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena_Assessment",
+      "dialogueText": "For Dast's sake, both houses need to look at the ledgers rather than their heraldic pride. Councilor Azaro's military requisition method guarantees that artillery batteries receive shells without bureaucratic delay, but officer corruption and haphazard procurement will drain our treasury severely (-2 Budget).",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 8,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena_Assessment_2",
+      "dialogueText": "The Sazon syndicate model, on the other hand, utilizes local river barges and granaries efficientlyâreducing our per-turn fuel and budget drain while stiffening the defense of Brenas cities. However, Councilor Azaro's forward offensive tempo may lose its blitzkrieg edge.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 9,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Logistics_Decision_Prompt",
+      "dialogueText": "All eyes at the table turned toward you. The logistical command of the southern campaign hung on your decision.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        20,
+        30,
+        40
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choose_Azaro_Logistics",
+      "dialogueText": "Military necessity takes precedence over local trade. Grant Councilor Azaro and the General Staff full requisition authority over the southern transit network. The tanks must keep rolling.",
+      "menuText": "\"Military necessity comes first. Grant House Azaro full requisition powers across Brenas to fuel our offensive.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 2; Variable[\"RiziaDLC.HouseAzaro_Opinion\"] = Variable[\"RiziaDLC.HouseAzaro_Opinion\"] + 1; Variable[\"RiziaDLC.HouseSazon_Opinion\"] = Variable[\"RiziaDLC.HouseSazon_Opinion\"] - 1;",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Azaro_Logistics",
+      "dialogueText": "\"A decisive command, Your Majesty,\" Lucita nodded with satisfaction. \"Our mechanized columns will not lack for a single barrel of fuel or crate of ammunition.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        22
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 22,
+      "actorId": 98,
+      "speaker": "Angelica Sazon",
+      "title": "Ack_Azaro_Angelica",
+      "dialogueText": "Duchess Angelica tightened her shawl, her face hardening into cold aristocratic disapproval. \"The Crown may have its fuel, Sire. Let us hope our farmers do not starve in the process.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choose_Sazon_Logistics",
+      "dialogueText": "We cannot break the back of Brenas to win a battle. House Sazon will oversee rear supply and transit. Utilize your guild networks and granaries to keep our army fed and our people secure.",
+      "menuText": "\"House Sazon will manage the supply lines. Utilize merchant guilds and granaries to protect provincial stability.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.HouseSazon_Opinion\"] = Variable[\"RiziaDLC.HouseSazon_Opinion\"] + 1; Variable[\"RiziaDLC.HouseAzaro_Opinion\"] = Variable[\"RiziaDLC.HouseAzaro_Opinion\"] - 1;",
+      "outgoing": [
+        31
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 31,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Ack_Sazon_Manus",
+      "dialogueText": "\"Thank you, Your Majesty,\" Manus bowed deeply. \"We will ensure that our depots operate with utmost efficiency and fairness. The people of Brenas will stand firmly behind your banners.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 32,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Sazon_Lucita",
+      "dialogueText": "Lucita frowned, closing her operational ledger with an audible snap. \"I only pray, Sire, that our tanks do not run dry while waiting on Sazon guild manifests.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choose_Compromise_Logistics",
+      "dialogueText": "Neither house will dictate terms unilaterally. Elena Werner and the Ministry of Economy will establish a joint logistical board. Priority corridors will be reserved for military convoys, but all procurement and grain distribution will be handled through Sazon syndicates.",
+      "menuText": "\"Elena Werner will oversee a joint logistics board: military transport gets prioritized routes, but Sazon guilds manage procurement.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Logistics_House\"] = \"Compromise\"; Variable[\"RiziaDLC.HouseAzaro_Opinion\"] = Variable[\"RiziaDLC.HouseAzaro_Opinion\"] + 1; Variable[\"RiziaDLC.HouseSazon_Opinion\"] = Variable[\"RiziaDLC.HouseSazon_Opinion\"] + 1;",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 41,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Ack_Compromise_Elena",
+      "dialogueText": "\"Sensible and balanced, Your Majesty,\" Elena remarked with an approving nod. \"It keeps the army rolling without inviting financial graft or provincial outrage.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 42,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Compromise_Hugo",
+      "dialogueText": "\"A kingly solution, Romus. Unity between our great houses is the true shield of Rizia.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

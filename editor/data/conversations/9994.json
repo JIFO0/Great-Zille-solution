@@ -1,0 +1,161 @@
+{
+  "id": 9994,
+  "title": "WarFragment_Zille_1_1",
+  "description": "Operacja Righteous Sword - przejście na teatr operacyjny 3D mapy wojennej",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Operacja Righteous Sword - przejście na teatr operacyjny 3D mapy wojennej",
+  "actors": [
+    "Narrator",
+    "Player_Romus",
+    "Lucita Azaro",
+    "Hugo Toras"
+  ],
+  "readVariables": [
+    "RiziaDLC.Resources_Budget",
+    "RiziaDLC.Resources_Energy"
+  ],
+  "writtenVariables": [
+    "Zille_War_Alfa",
+    "Zille_War_Beta",
+    "Zille_War_Postpone"
+  ],
+  "choicesCount": 3,
+  "entriesCount": 8,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isRoot": true,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Scene_Setting",
+      "dialogueText": "Scena modyfikacji Great Zille Solution: Operacja Righteous Sword - przejście na teatr operacyjny 3D mapy wojennej",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10,
+        11,
+        12
+      ],
+      "isPlayer": false,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Aggressive",
+      "dialogueText": "Zille powróci do Królestwa, bez względu na koszty i opór Smolaka.",
+      "menuText": "\"Zille powróci do Królestwa, bez względu na koszty i opór Smolaka.\"",
+      "conditions": "",
+      "userScript": "Variable['Zille_War_Alfa'] = true;",
+      "outgoing": [
+        20
+      ],
+      "isPlayer": true,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 11,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Strategic",
+      "dialogueText": "Odetnijmy linię zaopatrzenia przez Wiktrany i zajmijmy port w Munat.",
+      "menuText": "\"Odetnijmy linię zaopatrzenia przez Wiktrany i zajmijmy port w Munat.\"",
+      "conditions": "Variable['RiziaDLC.Resources_Budget'] >= 2",
+      "userScript": "Variable['Zille_War_Beta'] = true;",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 12,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Caution",
+      "dialogueText": "Wstrzymajmy szturm dopóki sytuacja międzynarodowa nie będzie klarowna.",
+      "menuText": "\"Wstrzymajmy szturm dopóki sytuacja międzynarodowa nie będzie klarowna.\"",
+      "conditions": "",
+      "userScript": "Variable['Zille_War_Postpone'] = true;",
+      "outgoing": [
+        22
+      ],
+      "isPlayer": true,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 20,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Response_War",
+      "dialogueText": "Rozkaz został wydany, Wasza Królewska Mość. Brygady pancerne Azaro natychmiast przekraczają rzekę graniczną!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 21,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Response_Flank",
+      "dialogueText": "Manewr oskrzydlający rozpocznie się o świcie. Wiktrany i Munat zostaną odcięte zanim Smolak zrozumie nasz ruch.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    },
+    {
+      "id": 22,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Response_Caution",
+      "dialogueText": "Mądra decyzja, Romusie. Nie rzucajmy królestwa w otchłań wojny bez całkowitej pewności zwycięstwa.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": false,
+      "isModInjected": true,
+      "isModEdited": true
+    }
+  ]
+}

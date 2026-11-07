@@ -1,0 +1,833 @@
+{
+  "id": 9988,
+  "title": "Turn_Zille_WarBriefing",
+  "description": "Królewska Narada Wojenna w Palas Rezna",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Królewska Narada Wojenna w Palas Rezna",
+  "actors": [
+    "Elena Werner",
+    "Hugo Toras",
+    "Laurento Esquibel",
+    "Lucita Azaro",
+    "Narrator",
+    "Player_Romus",
+    "Titus Gordion"
+  ],
+  "readVariables": [],
+  "writtenVariables": [
+    "Zille_War_Active",
+    "Zille_War_Alfa",
+    "Zille_War_Beta",
+    "Zille_War_Doctrine",
+    "Zille_War_Postpone"
+  ],
+  "choicesCount": 12,
+  "entriesCount": 47,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Briefing_Atmosphere",
+      "dialogueText": "Outside the high arched windows of Palas Rezna, rain beat steadily against the glass. Inside the war room, the massive oak doors had been bolted shut by the Golden Guard. Across the polished mahogany table lay a hand-carved topographical relief map of the Zille peninsula, flanked by brass markers and crimson operational lines.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Opening_1",
+      "dialogueText": "Your Majesty. Or perhaps... Romus, if I may speak plainly as your uncle for a fleeting moment.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Opening_2",
+      "dialogueText": "Thirty years ago, your father signed away Zille with a trembling hand to quell a rebellion that threatened our dynasty. It was a national humiliation that has haunted House Toras ever since. But crossing that river with royal divisions is not a parade. If our offensive stumbles, if Smolak's armored cars reach Brenas, the divine prestige of the Crownâand the stability of the entire kingdomâwill be shaken to its foundation.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 4,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Lucita_Narration_Default",
+      "dialogueText": "War Councilor Lucita Azaro stood rigid beside the border pins, her uniform immaculate and her posture radiating the unyielding martial pride of House Azaro.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 5,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Opening_Default",
+      "dialogueText": "Your Majesty. The Ministry of War has concluded our operational audit. Our forward strike brigades are concentrated along the Brenas frontier. The army is poised, awaiting your command.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        6
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 6,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Forces",
+      "dialogueText": "Across the demarcation line, Colonel Valdez commands four entrenched Wehzek regular brigades, bolstered by irregular Republican Guard detachments. His forces are concentrated around the fortified redoubts of Zille City and the central transit hub at Wiktrany. If we strike decisively, we can encircle them before reinforcements arrive from mainland Wehlen.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        7
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 7,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena_Opening",
+      "dialogueText": "For Dast's sake, soldiers may fight the war, but the royal exchequer and our state energy reserves will have to carry the burden.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 8,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena_Audit",
+      "dialogueText": "[elenaAuditText]",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 9,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Opening",
+      "dialogueText": "And there is the international chessboard to consider, Your Majesty. Smolak is an eccentric tyrant, but he operates beneath the delicate equilibrium of South Merkopa.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Geopolitics",
+      "dialogueText": "United Contana and Chancellor Hegel will certainly howl with outrage at the Alliance of Nations in Kyrute, denouncing us as royalist aggressors. Yet Contana will not send soldiers to die for Wiktor Smolak unless our forces cross into mainland Wehlen. Meanwhile, President Alvarez in Lespia despises Smolak to his core; he will not commit Lespian troops directly, but with proper diplomatic framing, Lespia and ATO will quietly shield us from crippling international sanctions.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 11,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus_Security",
+      "dialogueText": "On the domestic front, Your Majesty, the Golden Guard has placed our agents inside Zille on maximum alert. Furthermore, I have deployed an elite guard detachment with standing orders to secure Queen Mother Estela's childhood estate the moment our vanguards enter the city.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        12
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 12,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus_Underground",
+      "dialogueText": "[titusResistanceLine]",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        13
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 13,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Briefing_Attitude_Prompt",
+      "dialogueText": "The ministers have laid out the reality, Your Majesty. Before we examine the specific doctrines of attack, how does the Crown intend to approach this fateful hour?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        20,
+        22,
+        24,
+        26
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Attitude_Martial",
+      "dialogueText": "Smolak has mocked our patience for too long. Zille is Rizian blood and soil, and we will reclaim it by the sword.",
+      "menuText": "\"Smolak has mocked our patience for too long. Zille is Rizian blood and soil, and we will reclaim it by the sword.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Attitude_Martial_Reply",
+      "dialogueText": "A fierce, radiant pride lit up Lucita's face. \"Spoken like a true king of Rizia, my love. Our soldiers will march with fire in their hearts knowing their sovereign does not flinch.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 22,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Attitude_Cautious",
+      "dialogueText": "I do not take this step lightly. Every Rizian life and every gold guilder spent must serve a clear purpose.",
+      "menuText": "\"I do not take this step lightly. Every Rizian life and every gold guilder spent must serve a clear purpose.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 23,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Attitude_Cautious_Reply",
+      "dialogueText": "\"A wise and kingly posture, nephew,\" Hugo nodded solemnly. \"A monarch who counts the cost of the blade rarely loses his crown to recklessness.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 24,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Attitude_Diplomatic",
+      "dialogueText": "Our objective is clear: reclaim Zille quickly while keeping the superpowers from intervening.",
+      "menuText": "\"Our objective is clear: reclaim Zille quickly while keeping the superpowers from intervening.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        25
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 25,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Attitude_Diplomatic_Reply",
+      "dialogueText": "\"Precisely, Sire,\" Laurento inclined his head respectfully. \"A swift, localized victory presented as a fait accompli will leave even Malenyev and Hegel with no legal basis for escalation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 26,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Attitude_Lucita_Personal",
+      "dialogueText": "I place my complete trust in you, Lucita. Together, we will bring our province home.",
+      "menuText": "\"I place my complete trust in you, Lucita. Together, we will bring our province home.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        27
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 27,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Attitude_Lucita_Personal_Reply",
+      "dialogueText": "\"I will not fail you, Romusâneither as your general nor as your queen,\" she answered softly, her fingers gently grazing yours over the edge of the map. Hugo cleared his throat discreetly, adjusting his collar.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Council_Inquiry_Hub",
+      "dialogueText": "The relief map is at your disposal, Your Majesty. Do you wish to examine any specific operational facet, or are you prepared to select our doctrine of assault?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40,
+        50,
+        60,
+        70,
+        80
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Inquire_Military",
+      "dialogueText": "Lucita, detail the terrain and Valdez's defensive layout across the peninsula.",
+      "menuText": "\"Lucita, detail the terrain and Valdez's defensive layout across the peninsula.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 41,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Inquire_Military_Answer_1",
+      "dialogueText": "Zille is framed by the Brenas marshes to the south, the central road junction of Wiktrany, the eastern gate at Nanta, and the northern deepwater port of Munat. Zille City itself sits in the west, shielded by concrete bunkers and coastal artillery.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 42,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Inquire_Military_Answer_2",
+      "dialogueText": "Valdez has dug his infantry into deep trenches along the Wiktrany highway, assuming we will charge head-on. But if we outflank his center or sever his sea supply line through Munat, his garrison will run out of ammunition within days.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 50,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Inquire_Economy",
+      "dialogueText": "Elena, give me a realistic assessment of our supply consumption and financial risks.",
+      "menuText": "\"Elena, give me a realistic assessment of our supply consumption and financial risks.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 51,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Inquire_Economy_Answer_1",
+      "dialogueText": "The logistical cost of moving mechanized columns across Brenas is steep. Requisitioning freight trains, procuring artillery shells, and replacing damaged trucks will drain our treasury every single week of active operations.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 52,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Inquire_Economy_Answer_2",
+      "dialogueText": "If we capture Zille intact, its lucrative gold extraction and customs tariffs will more than repay our expenses over time. But if the fighting drags on, civilian industries in Porte Drazon will face fuel shortages. We must achieve victory quickly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 60,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Inquire_Diplomacy",
+      "dialogueText": "Laurento, how do we guarantee that foreign powers do not turn this into a wider war?",
+      "menuText": "\"Laurento, how do we guarantee that foreign powers do not turn this into a wider war?\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        61
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 61,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Inquire_Diplomacy_Answer_1",
+      "dialogueText": "We must adhere strictly to sovereign legalism, Sire. Our diplomatic communiquÃ© emphasizes that the 1929 lease has expired and that Rizia is solely restoring constitutional order within its historical border.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        62
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 62,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Inquire_Diplomacy_Answer_2",
+      "dialogueText": "Contana will bluster, but their central leadership in Kyrute has no treaty mandate requiring them to declare war over Zille. And Lespia, wanting Smolak weakened, will ensure ATO does not intervene against us.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 70,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Inquire_Security",
+      "dialogueText": "Titus, what of internal safety in Brenas and my mother's ancestral estate in Zille?",
+      "menuText": "\"Titus, what of internal safety in Brenas and my mother's ancestral estate in Zille?\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        71
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 71,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Inquire_Security_Answer_1",
+      "dialogueText": "The Golden Guard has placed our premier royal protection detachment on standby. The instant our spearheads secure the municipal perimeter, they will establish an iron cordon around Queen Mother Estela's estate to ensure no looting or vandalism occurs.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        72
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 72,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Inquire_Security_Hugo",
+      "dialogueText": "A vital precaution, Romus. Your mother's lineage is deeply tied to that soil; seeing her family home desecrated by retreating Wehzeks would be a bitter pill for the realm to swallow.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 80,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Proceed_To_Doctrines",
+      "dialogueText": "I have heard enough. Present the operational battle plans for Operation Righteous Sword.",
+      "menuText": "\"I have heard enough. Present the operational battle plans for Operation Righteous Sword.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 81,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Doctrine_Presentation_1",
+      "dialogueText": "At once, Your Majesty. The General Staff has prepared two primary operational doctrines for Phase I.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        82
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 82,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Doctrine_Presentation_2",
+      "dialogueText": "Plan Alpha is a concentrated armored breakthrough: smashing directly through the Wiktrany junction from the Brenas staging grounds, shattering Valdez's defensive center, and driving west straight onto Zille City.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        83
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 83,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Doctrine_Presentation_3",
+      "dialogueText": "Plan Beta is an operational envelopment: fixing Valdez's forces in place while our mobile columns swing through the eastern pass at Nanta, advancing rapidly north to seize the deepwater port of Munat to sever Wehlen's maritime lifeline. Which doctrine do you authorize, Sire?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        90,
+        93,
+        96
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 90,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Plan_Alpha",
+      "dialogueText": "I authorize Plan Alpha. Concentrate our tanks and smash straight through their central defenses at Wiktrany.",
+      "menuText": "Authorize Plan Alpha: Launch a decisive armored spearhead through Wiktrany toward Zille City.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Doctrine\"] = \"Alfa\";",
+      "outgoing": [
+        91
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 91,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Alpha_Lucita",
+      "dialogueText": "\"It shall be done, my King,\" Lucita said with steely determination, saluting crisply. \"The order of battle is signed. I will meet you at the war table whenever you are ready to command our divisions in Phase I.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 92,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Alpha_Hugo",
+      "dialogueText": "May Saint Wruhec protect our soldiers and grant victory to the Crown. Glovurius axa Rizia!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 93,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Plan_Beta",
+      "dialogueText": "I authorize Plan Beta. Outflank their fortified line through Nanta and cut off their supplies at Munat.",
+      "menuText": "Authorize Plan Beta: Execute an operational envelopment through Nanta and the port of Munat.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Beta\"] = true; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Doctrine\"] = \"Beta\";",
+      "outgoing": [
+        94
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 94,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Beta_Lucita",
+      "dialogueText": "\"A brilliant tactical maneuver, my love,\" Lucita smiled with fierce pride. \"We will strangle Valdez's garrison before he realizes his retreat is cut off. Our staff is ready at the war table whenever you wish to begin Phase I deployment.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        95
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 95,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Beta_Laurento",
+      "dialogueText": "Seizing the deepwater port of Munat early also prevents any foreign vessels from meddling under the guise of relief. Godspeed to our forces, Sire.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 96,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Plan_Postpone",
+      "dialogueText": "Hold the offensive for now. Keep our divisions on alert along the border, but do not cross until I give the command.",
+      "menuText": "Hold the offensive for now. Keep our divisions on alert along the border, but do not cross.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Postpone\"] = true;",
+      "outgoing": [
+        97
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 97,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Postpone_Hugo",
+      "dialogueText": "A prudent and measured decision, Your Majesty. The General Staff will maintain full readiness along the frontier until you decide the hour is right.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

@@ -408,6 +408,14 @@ namespace GreatZilleSolution
                     MelonLogger.Msg("[Great Zille] Successfully hooked ConversationView.OnSelectedResponse!");
                 }
 
+                var startConvMethod = AccessTools.Method(typeof(DialogueManager), nameof(DialogueManager.StartConversation), new Type[] { typeof(string) });
+                if (startConvMethod != null)
+                {
+                    var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(StartConversationPrefix));
+                    harmony.Patch(startConvMethod, prefix: new HarmonyMethod(prefix));
+                    MelonLogger.Msg("[Great Zille] Successfully hooked DialogueManager.StartConversation!");
+                }
+
                 // 2. TokenInteractionPanel.Setup (Native Action Button Injection)
                 var panelSetupMethod = AccessTools.Method(
                     typeof(TokenInteractionPanel),
@@ -734,6 +742,7 @@ namespace GreatZilleSolution
         }
 
         private static readonly HashSet<int> _nativeClickArmed = new HashSet<int>();
+        private static readonly List<object> _pinnedActionDelegates = new List<object>();
 
         private static void EnsureButtonExists(TokenInteractionPanel panel, string title, string subtitle, StoryFragmentData fragmentData, Action onClick, bool keepNativeClick = false)
         {
@@ -782,10 +791,25 @@ namespace GreatZilleSolution
         {
             if (button == null) return;
             if (!keepNativeClick)
-                button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            {
+                try { button.onClick?.RemoveAllListeners(); } catch { }
+            }
             int id = button.GetInstanceID();
             if (keepNativeClick && !_nativeClickArmed.Add(id)) return;
-            button.onClick.AddListener((UnityEngine.Events.UnityAction)(() => { onClick?.Invoke(); }));
+
+            UnityEngine.Events.UnityAction action = (UnityEngine.Events.UnityAction)(() => {
+                try
+                {
+                    MelonLogger.Msg($"[TOKEN BUTTON CLICK] Native button clicked (instance ID: {id})! Invoking action...");
+                    onClick?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    MelonLogger.Error($"[TOKEN BUTTON CLICK] Error executing onClick: {ex}");
+                }
+            });
+            _pinnedActionDelegates.Add(action);
+            button.onClick.AddListener(action);
         }
 
         private static void MakeButtonVisible(TemplateInteractionButton tib, TokenInteractionPanel panel)
@@ -829,6 +853,15 @@ namespace GreatZilleSolution
         }
 
         // ================= RESPONSE SELECTION HOOK =================
+
+        public static void StartConversationPrefix(string title)
+        {
+            try
+            {
+                DialogueOverrideManager.ApplyAllOverrides();
+            }
+            catch { }
+        }
 
         public static void OnSelectedResponsePrefix(Il2CppSystem.Object sender, SelectedResponseEventArgs e)
         {

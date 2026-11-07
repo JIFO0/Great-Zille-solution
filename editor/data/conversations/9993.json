@@ -1,0 +1,1034 @@
+{
+  "id": 9993,
+  "title": "Turn_Zille_WarPeaceTreaty",
+  "description": "Traktat Pokojowy w Zille (5 Artykułów)",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Traktat Pokojowy w Zille (5 Artykułów)",
+  "actors": [
+    "Laurento Esquibel",
+    "Narrator",
+    "Player_Romus",
+    "Wiktor Smolak"
+  ],
+  "readVariables": [
+    "RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming",
+    "RiziaDLC.Situation_Diplomacy_PowerProjection_Strong",
+    "Zille_War_Outcome"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.CountryRelation_Wehlen_Friendly",
+    "RiziaDLC.Country_PublicOpinion",
+    "RiziaDLC.Resources_Authority",
+    "RiziaDLC.Resources_Budget",
+    "RiziaDLC.Resources_Energy",
+    "RiziaDLC.Zille_Returned",
+    "RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess",
+    "Zille_Peace_Leverage",
+    "Zille_Treaty_MunatLease",
+    "Zille_Treaty_OilJoint",
+    "Zille_Treaty_OilNationalized",
+    "Zille_Treaty_OilSubsidized",
+    "Zille_Treaty_ReparationsMutualWaiver",
+    "Zille_Treaty_ReparationsRiziaPays",
+    "Zille_Treaty_ReparationsWehlen",
+    "Zille_Treaty_SecurityAntiBFF",
+    "Zille_Treaty_SecurityMutualCrackdown",
+    "Zille_Treaty_SecurityUnilateral",
+    "Zille_Treaty_WehzekExpelled",
+    "Zille_Treaty_WehzekFullRights",
+    "Zille_Treaty_WehzekLoyaltyPermits",
+    "Zille_Treaty_ZilleImmediate",
+    "Zille_Treaty_ZillePhased"
+  ],
+  "choicesCount": 20,
+  "entriesCount": 58,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Treaty_Setting_1",
+      "dialogueText": "The treaty pavilion was illuminated by warm brass hurricane lamps. A long table draped in green baize occupied the center, flanked by diplomatic secretaries from both nations with blotting paper, inkstands, and red sealing wax. Foreign Minister Laurento Esquibel sat to your right with the royal signet ring; across from him sat Colonel Valdez and President Smolak.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Treaty_Laurento_Opening",
+      "dialogueText": "\"Your Majesty, President Smolak. We have before us the working draft of the Treaty of Zille-Brenas. Five substantive articles will define the cessation of hostilities, territorial governance, energy assets, financial indemnities, and regional security. Each clause must be settled between you.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Treaty_Smolak_Cigarette",
+      "dialogueText": "Smolak leaned back in his wicker chair, producing a gold cigarette case. He struck a match with a sharp hiss, blowing a blue plume of tobacco smoke toward the ceiling. \"Let us hear it, Esquibel. Start with the prize that started this whole war.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 100,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Art1_Prompt",
+      "dialogueText": "\"Article One: Sovereignty, territorial borders, and the timeline for the evacuation of military forces from the Zille peninsula.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        110,
+        120,
+        130
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 110,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art1_Choice_Max",
+      "dialogueText": "\"The entire Zille province must return to the Kingdom of Rizia immediately and unconditionally. All Wehzek garrisons must evacuate across the river within forty-eight hours, leaving all municipal facilities intact.\"",
+      "menuText": "\"Immediate, unconditional return. The entire province returns to the Crown; Wehzek forces must evacuate within 48 hours.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 3; Variable[\"Zille_Treaty_ZilleImmediate\"] = true;",
+      "outgoing": [
+        111
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 111,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art1_Reply_Max",
+      "dialogueText": "Smolak gritted his teeth, his jaw tightening as he tapped ashes into his saucer. \"Forty-eight hours? You want my officers to run like whipped dogs! A bitter pill... but your tanks sitting on the highway leave me few illusions. Very well, mark it down, Esquibel.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        200
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 120,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art1_Choice_Compromise",
+      "dialogueText": "\"We propose an orderly, phased twelve-month administrative transition. All armed units will pull back, establishing a fifteen-kilometer demilitarized border zone along the river monitored by joint observers.\"",
+      "menuText": "\"A phased 12-month handover with a 15-kilometer demilitarized buffer zone along the river.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Treaty_ZillePhased\"] = true;",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 121,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art1_Reply_Compromise",
+      "dialogueText": "Smolak nodded slowly, approving of the orderly timeline. \"Pragmatic, Romus. A phased withdrawal prevents panic in the streets, and a buffer zone keeps trigger-happy lieutenants from reigniting the war next week. Agreed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        200
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 130,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art1_Choice_Concession",
+      "dialogueText": "\"Zille returns to royal sovereignty, but the Kingdom will grant Wehlen a twenty-five-year lease on commercial terminal facilities at Port Munat, including duty-free transit for Wehzek merchant vessels.\"",
+      "menuText": "\"Zille returns to Rizia, but Wehlen receives commercial terminal leasing and duty-free transit at Port Munat for 25 years.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_MunatLease\"] = true;",
+      "outgoing": [
+        131
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 131,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art1_Reply_Concession",
+      "dialogueText": "Smolak smiled broadly, slapping the table with genuine enthusiasm. \"Now that is the vision of a statesman! You get your map back, and Wehlen keeps its trade door to the southern ocean. Outstanding!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        200
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 200,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Art2_Prompt",
+      "dialogueText": "Laurento turned the parchment. \"Article Two: The petroleum reserves, extraction platforms, and refineries of the Zille basin.\" Smolak leaned forward with intense interest: \"The black gold. The true lifeblood of the province.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210,
+        220,
+        230
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 210,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art2_Choice_Nationalize",
+      "dialogueText": "\"Total royal nationalization. All drilling rights, offshore platforms, and processing plants in Zille pass exclusively to Rizian Oil. All Wehzek state shares are declared forfeit without compensation.\"",
+      "menuText": "\"Total nationalization under Rizian Oil; all Wehzek state concessions are revoked without compensation.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_OilNationalized\"] = true;",
+      "outgoing": [
+        211
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 211,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art2_Reply_Nationalize",
+      "dialogueText": "Smolak's eyes narrowed, his cigarette glowing orange. \"Taking the very refineries my engineers spent thirty years modernizing? You have an insatiable appetite, Romus. But let us see if your royal exchequer can afford what comes next.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 220,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art2_Choice_Joint",
+      "dialogueText": "\"We propose creating the Zille-Wehlen Petroleum Consortium: a fifty-fifty joint venture. Rizian Oil and Wehlen State Petroleum will co-manage the offshore fields, splitting extraction profits equally.\"",
+      "menuText": "\"A 50/50 Joint Petroleum Consortium: Rizian Oil and Wehlen Petroleum will co-manage the fields and split royalties.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 1; Variable[\"Zille_Treaty_OilJoint\"] = true;",
+      "outgoing": [
+        221
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 221,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art2_Reply_Joint",
+      "dialogueText": "Smolak grinned knowingly. \"A shared pipeline is a safe pipeline! Neither of us will want to blow it up if we both profit from every barrel pumped. Excellent compromise, Romus.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 230,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art2_Choice_Subsidized",
+      "dialogueText": "\"The Crown assumes sole ownership of the fields, but guarantees Wehlen a fixed quota of fifteen thousand barrels of crude per day at production cost for five years to fuel your domestic reconstruction.\"",
+      "menuText": "\"Rizia retains ownership, but guarantees Wehlen 15,000 barrels per day of subsidized crude for 5 years.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 3; Variable[\"Zille_Treaty_OilSubsidized\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = Variable[\"RiziaDLC.Resources_Energy\"] - 1;",
+      "outgoing": [
+        231
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 231,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art2_Reply_Subsidized",
+      "dialogueText": "Smolak laughed heartily, raising his tea cup. \"Fuel for our power plants and tractors in South Wehlen! That will silence every critic in Erdmarg who claims I gave away our energy security!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 300,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Art3_Prompt",
+      "dialogueText": "Laurento cleared his throat, adjusting his spectacles. \"Article Three: Financial indemnities, war damages, and reconstruction costs.\" Smolak snorted softly: \"Money. Always the ugliest part of any treaty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        310,
+        320,
+        330
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 310,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art3_Choice_WehlenPays",
+      "dialogueText": "\"Wehlen must pay two Budget in official war indemnities to rebuild damaged towns in Brenas and compensate the families of soldiers fallen during the conflict.\"",
+      "menuText": "\"Wehlen must pay 2 Budget in war reparations to compensate Rizia for border destruction and civilian losses.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 3; Variable[\"Zille_Treaty_ReparationsWehlen\"] = true;",
+      "outgoing": [
+        311
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 311,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art3_Reply_WehlenPays",
+      "dialogueText": "Smolak slammed his fist against the armrest, his face turning red. \"Reparations?! My treasury is bleeding, and you want Wehzek gold to decorate your palace ceilings?! A monstrous demand... but if it is the price to stop your guns, so be it!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        400
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 320,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art3_Choice_MutualWaiver",
+      "dialogueText": "\"A mutual waiver of all war indemnities. Both nations absorb their own operational expenses, and all captured prisoners of war are repatriated immediately without ransom.\"",
+      "menuText": "\"Mutual waiver of all war damages; each nation absorbs its own costs and releases all POWs without ransom.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Treaty_ReparationsMutualWaiver\"] = true;",
+      "outgoing": [
+        321
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 321,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art3_Reply_MutualWaiver",
+      "dialogueText": "Smolak exhaled with evident relief, his tension easing. \"A clean ledger. No unpaid debts hanging over our heads like a guillotine. Both nations can move forward with their pride intact.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        400
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 330,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art3_Choice_RiziaPays",
+      "dialogueText": "\"The Kingdom of Rizia will establish a bilateral reconstruction fund of two Budget to rebuild war-torn villages and hospitals in the southern border district of Wehlen.\"",
+      "menuText": "\"Rizia will provide a 2 Budget border reconstruction fund to assist affected Wehzek civilian settlements.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 3; Variable[\"Zille_Treaty_ReparationsRiziaPays\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = Variable[\"RiziaDLC.Resources_Budget\"] - 2;",
+      "outgoing": [
+        331
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 331,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art3_Reply_RiziaPays",
+      "dialogueText": "Smolak stared at you in stunned amazement before breaking into an appreciative grin. \"A king who pays to rebuild the broken windows of his adversary? My propaganda radio will compose epics about your saintly generosity, Romus!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        400
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 400,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Art4_Prompt",
+      "dialogueText": "Laurento turned to the fourth page. \"Article Four: Civil status, residency, and property protections for Wehzek citizens currently residing in Zille.\" Smolak's posture stiffened: \"Thousands of my countrymen built lives in Zille over thirty years. I will not allow them to be hunted down by royalist vigilantes.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        410,
+        420,
+        430
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 410,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art4_Choice_Deport",
+      "dialogueText": "\"Compulsory repatriation. All Wehzek settlers and commercial migrants who arrived during the thirty-year lease must relocate across the border within sixty days. Zille must remain purely Rizian.\"",
+      "menuText": "\"All Wehzek settlers who arrived during the lease must be repatriated across the border within sixty days.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_WehzekExpelled\"] = true;",
+      "outgoing": [
+        411
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 411,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art4_Reply_Deport",
+      "dialogueText": "Smolak's eyes burned with cold anger. \"Creating a wave of forty thousand refugees on my frontier right before winter? That is cruel, Romus. Even for a monarch with an old crown.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        500
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 420,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art4_Choice_Loyalty",
+      "dialogueText": "\"Permanent residency and property grandfathering. Established Wehzek residents may keep their homes, shops, and businesses, provided they register and swear an oath of civil loyalty to the Crown.\"",
+      "menuText": "\"Permanent residency and property guarantees for Wehzeks who swear a civil oath of allegiance to the Crown.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Treaty_WehzekLoyaltyPermits\"] = true;",
+      "outgoing": [
+        421
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 421,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art4_Reply_Loyalty",
+      "dialogueText": "Smolak stroked his mustache thoughtfully. \"Strict, but lawful. As long as they keep their roofs and their livelihoods, my people know how to adapt to local authority. Agreed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        500
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 430,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art4_Choice_FullRights",
+      "dialogueText": "\"Full civic equality. Complete legal amnesty, dual-language administrative recognition in municipal councils, and full civil protection under royal law for all Wehzeks choosing to remain in Zille.\"",
+      "menuText": "\"Full equal rights, civic amnesty, and cultural protections for Wehzeks in Zille under royal law.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_WehzekFullRights\"] = true;",
+      "outgoing": [
+        431
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 431,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art4_Reply_FullRights",
+      "dialogueText": "Smolak beamed with deep satisfaction. \"Equal rights under the royal crest? Magnificent! That guarantees quiet streets and deprives foreign busybodies at the AN of any excuse to complain!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        500
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 500,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Art5_Prompt",
+      "dialogueText": "Laurento placed his finger upon the final section. \"Article Five: Regional security protocols, armed paramilitary factions, and cross-border terrorism.\" Smolak's voice dropped to a low, conspiratorial murmur: \"Now for the vipers. Su Omina, the BFF, the smugglers. How do we prevent the border from becoming a slaughterhouse?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        510,
+        520,
+        530
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 510,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art5_Choice_Unilateral",
+      "dialogueText": "\"The Kingdom of Rizia will accept no external restrictions on its internal security forces. How the Crown manages patriotic groups and polices its borders is our sovereign affair alone.\"",
+      "menuText": "\"Rizia rejects restrictions; domestic security remains the sovereign prerogative of the Crown alone.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] - 2; Variable[\"Zille_Treaty_SecurityUnilateral\"] = true;",
+      "outgoing": [
+        511
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 511,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art5_Reply_Unilateral",
+      "dialogueText": "Smolak gave a dark, sardonic laugh. \"So you want to let royalist paramilitaries run wild along our frontier while pretending your hands are clean? You are playing with dynamite, Romus.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        600
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 520,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art5_Choice_MutualCrackdown",
+      "dialogueText": "\"A bilateral anti-extremist protocol. Rizia will disarm and outlaw Su Omina militias within Zille, while Wehlen permanently closes and dismantles all covert infiltration camps along the frontier.\"",
+      "menuText": "\"A mutual security accord: Rizia disarms Su Omina cells; Wehlen shuts down border sabotage camps.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 1; Variable[\"Zille_Treaty_SecurityMutualCrackdown\"] = true;",
+      "outgoing": [
+        521
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 521,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art5_Reply_MutualCrackdown",
+      "dialogueText": "Smolak nodded firmly, stubbing out his cigarette in the tray. \"A fair trade. I muzzle my attack dogs, you put yours in a cage. South Merkopa might actually enjoy a peaceful night's sleep.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        600
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 530,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Art5_Choice_AntiBFF",
+      "dialogueText": "\"A formal security partnership. Rizia will officially designate the Bludish Freedom Front as a terrorist organisation, seal the southern mountain passes against insurgent movement, and share anti-terrorist intelligence with Wehlen.\"",
+      "menuText": "\"Designate the BFF as a terrorist entity, seal cross-border trails, and share anti-insurgent intelligence.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Peace_Leverage\"] = Variable[\"Zille_Peace_Leverage\"] + 2; Variable[\"Zille_Treaty_SecurityAntiBFF\"] = true;",
+      "outgoing": [
+        531
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 531,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Art5_Reply_AntiBFF",
+      "dialogueText": "Smolak's eyes glittered with predatory triumph. \"Now you are speaking like a brother, Romus! Crushing those terrorists together will forge a bond between our nations that no foreign superpower can break!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        600
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 600,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Treaty_Tally_1",
+      "dialogueText": "Laurento dipped his fountain pen in dark ink and systematically noted every agreed term, concession, and stipulation in the margins of the master parchment. When he finished, he blew upon the wet ink and passed the completed treaty to President Smolak.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        601
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 601,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Treaty_Tally_2",
+      "dialogueText": "Smolak put on a pair of tortoiseshell reading glasses, squinting through the fading smoke as his finger slowly traced down each article. The tent fell into an agonizing silence, broken only by the steady drumming of rain on canvas.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        602
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 602,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Treaty_Verdict_Gate",
+      "dialogueText": "The total balance of military leverage, diplomatic respect, and mutual concessions weighed upon the scales.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        700,
+        800,
+        900
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 700,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Delighted_Smolak",
+      "dialogueText": "\"By Saint Wruhec and the gods of the river, Romus! We have an accord! You fought like an Azaro on the battlefield, but at the negotiating table, you have shown the generosity and wisdom of a true emperor!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 701,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Delighted_Smolak_2",
+      "dialogueText": "\"Wehlen can sign this document with its head held high. We gave blood, but we gained an honorable neighbor and an enduring partnership. Hand me the pen! Let us make history!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        702
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 702,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Sign_Triumphant_Treaty",
+      "dialogueText": "\"With a steady hand and calm sovereign majesty, you press the royal seal into the scarlet wax alongside Smolak's signature. Thirty years of exile are ended.\"",
+      "menuText": "\"Sign the Treaty of Zille-Brenas with the royal signet ring. The province is restored in glory!\"",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 3; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 2; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true; Variable[\"RiziaDLC.CountryRelation_Wehlen_Friendly\"] = true;",
+      "outgoing": [
+        703
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 703,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Delighted_Conclusion",
+      "dialogueText": "\"Smolak poured two glasses of Cantuavo wine and handed one to you with a boisterous laugh. \"To Romus the Restorer! Next time you visit Zille, the tarts are on me!\" Outside, royal trumpets began to sound across the trenches, proclaiming peace.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 800,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Balanced_Smolak",
+      "dialogueText": "\"Smolak leaned back, tapping his chin thoughtfully before nodding with measured respect. \"It is not a feast, Romus, but neither is it poison. My generals in Erdmarg will grumble, and your nobles in Montaklar will complain you didn't hang me from a lamp post. Which means... it is an honest, workable treaty.\"\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 801,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Balanced_Smolak_2",
+      "dialogueText": "\"Neither of us got everything we wanted, but both of our nations can live with it. Our soldiers can pack up their kit and go home alive.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        802
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 802,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Sign_Balanced_Treaty",
+      "dialogueText": "\"You affix the royal crest to the treaty. The war is concluded on equitable terms, securing Zille for the Kingdom.\"",
+      "menuText": "\"Sign the Treaty of Zille-Brenas. An honorable peace is achieved.\"",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Zille_Returned\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 1; Variable[\"RiziaDLCSupport.News_Turn08_ZilleNegotiations_ZilleReturnSuccess\"] = true;",
+      "outgoing": [
+        803
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 803,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Balanced_Conclusion",
+      "dialogueText": "\"Smolak signed steadily, shaking your hand with a firm, soldier's grip. \"Safe travels back to your palace, Romus. Let us hope our border guards have good discipline.\" He turned and walked into the rain.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 900,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Reject_Smolak",
+      "dialogueText": "\"Do you take me for an illiterate peasant, Romus?! You sit in this tent and demand our land, our oil, our money, and the humiliation of my people, while offering Wehlen crumbs!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 901,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Reject_Prompt",
+      "dialogueText": "\"Smolak rose to his feet, his hand resting near his holster, his guards instantly chambering rounds behind him. \"I did not survive twenty years of civil war to sign Wehlen's unconditional surrender! This parley is over!\"\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        910,
+        920,
+        930
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 910,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Verdict_Choice_Ultimatum",
+      "dialogueText": "\"Look through that tent flap, Wiktor. Those are royal armored divisions and heavy artillery batteries. If you walk out of this pavilion without signing, I will order the Third Army across the river, and we will not stop until the royal crest flies over your palace in Erdmarg. Sign the paper.\"",
+      "menuText": "\"Look outside, Wiktor. Those are Rizian heavy tanks. Sign that parchment, or watch your regime burn.\"",
+      "conditions": "Variable[\"Zille_War_Outcome\"] >= 4 || Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\"] == true || Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\"] == true",
+      "userScript": "",
+      "outgoing": [
+        911
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 911,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Reply_Ultimatum",
+      "dialogueText": "\"Smolak froze. A bead of sweat trickled down his temple as he stared out the canvas flap at the idling tanks. Slowly, with trembling rage and hollow eyes, he retrieved the parchment and scrawled his name. \"You win this round, Romus. But remember... South Merkopa has a very long memory.\" Zille was returned under iron royal will.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 920,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Verdict_Choice_Concede",
+      "dialogueText": "\"Calm yourself, Wiktor. We came here to end the war, not ignite a wider conflagration. The Crown will waive the indemnities and grant Wehlen discounted oil transit. Let us sign and end this.\"",
+      "menuText": "\"Calm yourself, Wiktor. The Crown will waive the reparations and grant subsidized energy transit to save the peace.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        921
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 921,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Reply_Concede",
+      "dialogueText": "\"Smolak paused, exhaling heavily as he wiped his brow. \"A grudging concession... but better than bleeding in the mud. Hand me the pen.\" Both leaders signed, averting catastrophe.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 930,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Verdict_Choice_Breakdown",
+      "dialogueText": "\"The Crown does not barter with tyrants. If you refuse these terms, let our artillery settle the score on the battlefield.\"",
+      "menuText": "\"The Crown does not barter with tyrants. If you refuse these terms, let our artillery settle the score.\"",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        931
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 931,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Verdict_Reply_Breakdown",
+      "dialogueText": "\"Smolak spat on the floor and stormed out into the rain. Within minutes, air-raid sirens wailed across the front lines, and the thunder of heavy guns shook the earth once more. The peace had failed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

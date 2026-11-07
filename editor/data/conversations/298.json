@@ -1,0 +1,4864 @@
+{
+  "id": 298,
+  "title": "Rizia/Turn 2/FPnT_ZilleVisit",
+  "description": "Visit to Zille with Estela for \"Rizian-Wehzek Friendship Day.\" Meet and attend ceremony with Wiktor Smolak. End with bombing attempt",
+  "pack": "Rizia",
+  "folder": "Turn_02",
+  "turn": "Tura 02",
+  "modStatus": "MODEDIT",
+  "modNote": "Wstrzyknięto kwestie modowe: Zille_Smolak_FaceToFace_Choice, Zille_Smolak_FaceToFace_Reply",
+  "actors": [
+    "Narrator",
+    "Player_Romus",
+    "Player_Romus_Italic",
+    "Queen Mother Estela",
+    "Titus Gordion",
+    "Wiktor Smolak"
+  ],
+  "readVariables": [
+    "RiziaDLC.Prologue_JoinedMilitary",
+    "RiziaDLC.Prologue_Relations_PabelFriend",
+    "RiziaDLC.Prologue_Summer_Zille",
+    "RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel",
+    "RiziaDLC.Turn01_ZilleVisit_HostileSpeech",
+    "RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.Diplomacy_Wehlen_NegotiatingPower",
+    "RiziaDLC.LeaningValue_Democratic",
+    "RiziaDLC.PersonalValue_BrokeTradition",
+    "RiziaDLC.PersonalValue_Pacifist",
+    "RiziaDLC.Relations_Estela_TellAboutMurderCase",
+    "RiziaDLC.Said_GlovuriusAxaRizia",
+    "RiziaDLC.Turn01_ZilleVisit_HostileSpeech",
+    "RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse",
+    "RiziaDLCSupport.Journal_Turn02_Zille_ConciliatorySpeech",
+    "RiziaDLCSupport.Journal_Turn02_Zille_HostileSpeech",
+    "RiziaDLCSupport.News_Turn02_G_Bombing_HostileSpeech",
+    "RiziaDLCSupport.News_Turn02_G_Bombing_Neutral",
+    "RiziaDLCSupport.News_Turn02_RH_Bombing",
+    "RiziaDLCSupport.Reports_Turn02_Zille_BombingReport"
+  ],
+  "choicesCount": 106,
+  "entriesCount": 310,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 1,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 1,
+      "actorId": 2,
+      "speaker": "INPUT",
+      "title": "input",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        309
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 2,
+      "actorId": 2,
+      "speaker": "OUTPUT",
+      "title": "output",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 3,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I couldn't tell if the sky was grow...\"",
+      "dialogueText": "I couldn't tell if the sky was growing darker, or if it was just the tinted windows of the armored car.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 4,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Our motorcade slowed as it approach...\"",
+      "dialogueText": "Our motorcade slowed as it approached the Zille border. A concrete barrier rose up in front of us, its top strung with barbed wire.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 5,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My mother had insisted on accompany...\"",
+      "dialogueText": "My mother had insisted on accompanying me to the Wehzek-Rizian Friendship Day festivities. She leaned against the window, uncharacteristically quiet.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        6,
+        7,
+        8,
+        160
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 6,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Are you all right, Mother?\"\"",
+      "dialogueText": "\"Are you all right, Mother?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 7,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What are you thinking about?\"\"",
+      "dialogueText": "\"What are you thinking about?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 8,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I said nothing and kept my eyes fix...\"",
+      "dialogueText": "I said nothing and kept my eyes fixed in front of me.",
+      "menuText": "Say nothing.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        12
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 9,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I'm absolutely fine, darling.\"\"",
+      "dialogueText": "\"I'm absolutely fine, darling.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 10,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I'm thinking you ought to have cho...\"",
+      "dialogueText": "\"I'm thinking you ought to have chosen a different jacket to go with those trousers.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 11,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Say, might we have time for a quic...\"",
+      "dialogueText": "\"Say, might we have time for a quick detour once we reach town?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        13,
+        14
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 12,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"After a short while, she broke the...\"",
+      "dialogueText": "After a short while, she broke the silence.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 13,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Of course.\"\"",
+      "dialogueText": "\"Of course.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        16
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 14,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"No. I want to get this over with a...\"",
+      "dialogueText": "\"No. I want to get this over with as fast as possible.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        15
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 15,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"That's perfectly fine. Mind if I s...\"",
+      "dialogueText": "\"That's perfectly fine. Mind if I smoke?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        17
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 16,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She leaned forward and gave the dri...\"",
+      "dialogueText": "She leaned forward and gave the driver an address. He nodded.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        25
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 17,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Without waiting for an answer, she...\"",
+      "dialogueText": "Without waiting for an answer, she cracked open the window and lit a cigarette.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 18,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"At the border, we presented our ide...\"",
+      "dialogueText": "At the border, we presented our identification documents and the official invitation from President Smolak. As we crossed, the road turned uneven.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        19
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 19,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Promise me you'll get these highwa...\"",
+      "dialogueText": "\"Promise me you'll get these highways back up and running once Zille is returned.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        20,
+        21,
+        22
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"*If* Zille is returned.\"\"",
+      "dialogueText": "\"*If* Zille is returned.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 21,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's at the top of my list.\"\"",
+      "dialogueText": "\"It's at the top of my list.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 22,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I didn't respond.\"",
+      "dialogueText": "I didn't respond.",
+      "menuText": "Say nothing.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 23,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Factory smokestacks rose up on eith...\"",
+      "dialogueText": "Factory smokestacks rose up on either side of us. Through the haze, I spotted numerous shanty towns, built over the past few years to house miners and refinery workers.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        24
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 24,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We entered the city and drove on th...\"",
+      "dialogueText": "We entered the city and drove on through a maze of tenement buildings, their facades hastily repainted to hide the damage from the war 20 years ago.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        27
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 25,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse\"] = true;",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 26,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"As my mother had instructed him to,...\"",
+      "dialogueText": "As my mother had instructed him to, the driver veered down a side street that led toward the coast.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 27,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        28,
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 28,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse\"] == true",
+      "userScript": "",
+      "outgoing": [
+        26
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 29,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLCIsolated.Turn01_Zille_GrandparentsHouse\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        54
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 30,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We stopped in front of a small wood...\"",
+      "dialogueText": "We stopped in front of a small wooden building with a collapsed roof. The front porch was partly buried in sand; jagged teeth of broken glass lined the window frames.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        31
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 31,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"They say you can't go home again....\"",
+      "dialogueText": "\"They say you can't go home again. Rarely do they mean it this literally.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 32,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She blinked back tears.\"",
+      "dialogueText": "She blinked back tears.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        37,
+        34,
+        38
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 33,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I can't believe this is the same p...\"",
+      "dialogueText": "\"I can't believe this is the same place we used to go every summer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        43
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 34,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        35,
+        36
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 35,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Summer_Zille\"]",
+      "userScript": "",
+      "outgoing": [
+        33
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 36,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Summer_Zille)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Summer_Zille\"]) == false",
+      "userScript": "",
+      "outgoing": [
+        39
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 37,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't be so dramatic, Mother. It's...\"",
+      "dialogueText": "\"Don't be so dramatic, Mother. It's just a house.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 38,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Wehlen will pay for what happened...\"",
+      "dialogueText": "\"Wehlen will pay for what happened to your homeland.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        45
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 39,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"This is where you grew up?\"\"",
+      "dialogueText": "\"This is where you grew up?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 40,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She nodded.\"",
+      "dialogueText": "She nodded.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 41,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She glared at me.\"",
+      "dialogueText": "She glared at me.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 42,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I never brought my parents here af...\"",
+      "dialogueText": "\"I never brought my parents here after they fled to Rizia. I knew it would break their hearts.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        44
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 43,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She put a hand on my shoulder.\"",
+      "dialogueText": "She put a hand on my shoulder.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 44,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I wish they could have seen it one...\"",
+      "dialogueText": "\"I wish they could have seen it one last time. The way it used to be.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        47
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 45,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She swallowed hard.\"",
+      "dialogueText": "She swallowed hard.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 46,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I thought back to my carefree summe...\"",
+      "dialogueText": "I thought back to my carefree summers in Zille. My grandparents had spent the last 10 years of their lives in Palas Rezna, surrounded by luxury, but they never seemed as happy as they did in this house.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        55,
+        56,
+        57
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 47,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        48,
+        49
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 48,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Summer_Zille\"]",
+      "userScript": "",
+      "outgoing": [
+        46
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 49,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Summer_Zille)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Summer_Zille\"]) == false",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 50,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I tried to summon memories of my gr...\"",
+      "dialogueText": "I tried to summon memories of my grandparents. They'd spent the last 10 years of their lives in Palas Rezna, surrounded by luxury, yet they always seemed ill at ease.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        55,
+        56,
+        57
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 51,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Enough dallying. Driver, step on i...\"",
+      "dialogueText": "\"Enough dallying. Driver, step on it. We've got a date with a psychopath.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 52,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We returned to the main road and dr...\"",
+      "dialogueText": "We returned to the main road and drove towards Smolak Square, a circular plaza in the center of town that had once been named after Duke Fedo Sazon.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        59
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 53,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We both fell silent. After a few mo...\"",
+      "dialogueText": "We both fell silent. After a few moments, she plastered a smile on her face.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 54,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We kept going in the direction of S...\"",
+      "dialogueText": "We kept going in the direction of Smolak Square, a circular plaza in the center of town that had once been named after Duke Fedo Sazon.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        59
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 55,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"They could have stayed. Plenty of...\"",
+      "dialogueText": "\"They could have stayed. Plenty of Rizians did.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        58
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 56,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You did everything you could for t...\"",
+      "dialogueText": "\"You did everything you could for them. They should have been more grateful.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        82
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 57,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'll have it fixed up one day. It'...\"",
+      "dialogueText": "\"I'll have it fixed up one day. It'll be our summer home again.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        83
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 58,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"No. Not after that horrible civil...\"",
+      "dialogueText": "\"No. Not after that horrible civil war. The only way they could have stayed is if I hadn't convinced Valero to get Wehlen involved in our affairs.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        84
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 59,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"A silver stretch limousine was park...\"",
+      "dialogueText": "A silver stretch limousine was parked just in front of the square. Our driver stopped and we exited the car, flanked by our guards.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        70
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 60,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Your Majesty King Romus! Queen Mot...\"",
+      "dialogueText": "\"Your Majesty King Romus! Queen Mother Estela!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        61
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 61,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He made a sweeping, exaggerated bow...\"",
+      "dialogueText": "He made a sweeping, exaggerated bow and straightened up with a grin.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        62
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 62,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Welcome to Wehlen. Please, make yo...\"",
+      "dialogueText": "\"Welcome to Wehlen. Please, make yourselves at home.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        64,
+        195,
+        66,
+        191
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 63,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Actually, Mr. President, this *is*...\"",
+      "dialogueText": "\"Actually, Mr. President, this *is* my home. I spent my childhood summers here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        68
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 64,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you, Mr. President.\"\"",
+      "dialogueText": "\"Thank you, Mr. President.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        65
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 65,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Who is this Mr. President? Call me...\"",
+      "dialogueText": "\"Who is this Mr. President? Call me Wiktor. We're friends, right?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 66,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Mr. President. I wish I could say...\"",
+      "dialogueText": "\"Mr. President. I wish I could say I was happy to be here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        69
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 67,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He gestured out to the square, wher...\"",
+      "dialogueText": "He gestured out to the square, where a colorful banner reading '24 Years Of Wehzek-Rizian Friendship' hung above a trio of gleaming tanks.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        72,
+        73,
+        77,
+        74
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 68,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Of course, of course. My home is y...\"",
+      "dialogueText": "\"Of course, of course. My home is your home, your home is my home. We're friends!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 69,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Why so glum, Your Majesty? How cou...\"",
+      "dialogueText": "\"Why so glum, Your Majesty? How could anyone not be happy on a day like this?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 70,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Say what you will about Smolak, he...\"",
+      "dialogueText": "\"Say what you will about Smolak, he never makes a dull entrance.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        71
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 71,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"A dozen uniformed soldiers hurriedl...\"",
+      "dialogueText": "A dozen uniformed soldiers hurriedly got into formation around us and the limo. The door opened, and Wiktor Smolak stepped out.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        60
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 72,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Ah, yes. Nothing symbolizes friend...\"",
+      "dialogueText": "\"Ah, yes. Nothing symbolizes friendship like heavy artillery.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        75
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 73,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Looks impressive. Where did you ge...\"",
+      "dialogueText": "\"Looks impressive. Where did you get those tanks?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        80
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 74,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's my first time at one of these...\"",
+      "dialogueText": "\"It's my first time at one of these ceremonies. What's going to happen?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 75,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Exactly! Who doesn't love tanks? T...\"",
+      "dialogueText": "\"Exactly! Who doesn't love tanks? Today's audience certainly does.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        78
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 76,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"The usual. I make a speech, you ma...\"",
+      "dialogueText": "\"The usual. I make a speech, you make a speech, the press takes pictures, everyone goes home happy. Listen to the crowd! They're already happy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        78
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 77,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I've been wanting to speak with yo...\"",
+      "dialogueText": "\"I've been wanting to speak with you about the terms of this *friendship.*\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        79
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 78,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The square was surrounded by grands...\"",
+      "dialogueText": "The square was surrounded by grandstands -- one side decorated in the colors of Wehlen's flag, the other in Rizia's blue, orange and gold. I heard loud cheers emanating from them.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 79,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"In due time, Your Majesty. First w...\"",
+      "dialogueText": "\"In due time, Your Majesty. First we have some speeches to get through. We can't let down our adoring public!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        78
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 80,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Rizia isn't Wehlen's only friend,...\"",
+      "dialogueText": "\"Rizia isn't Wehlen's only friend, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        78
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 81,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"I've invited the finest representa...\"",
+      "dialogueText": "\"I've invited the finest representatives from both of our countries to join us for this special occasion. Follow me, if you will.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        305
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 82,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Grateful for what? If I hadn't con...\"",
+      "dialogueText": "\"Grateful for what? If I hadn't convinced Valero to get Wehlen involved in our affairs, they never would have had to leave.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        84
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 83,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"That ship has sailed, child. Just...\"",
+      "dialogueText": "\"That ship has sailed, child. Just think, If I hadn't convinced Valero to get Wehlen involved in our affairs, none of this would've happened.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        84
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 84,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She looked down at her hands.\"",
+      "dialogueText": "She looked down at her hands.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        85
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 85,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"The Wehzek president back then was...\"",
+      "dialogueText": "\"The Wehzek president back then was such an upstanding man. How could I have known he'd go and get himself killed?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        148,
+        151,
+        152,
+        189
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 86,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"A semicircular stage was set up in...\"",
+      "dialogueText": "A semicircular stage was set up in front of the tanks. The crowd roared as we crossed the square and made our way over to it. Looking up into the grandstands, I noticed armed guards standing on every level.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        95
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 87,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My mother and I took our seats. Wik...\"",
+      "dialogueText": "My mother and I took our seats. Wiktor stepped up to the microphone.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        88
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 88,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Wehzeks! Rizians! People of Zille!\"\"",
+      "dialogueText": "\"Wehzeks! Rizians! People of Zille!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        89
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 89,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Two dozen years ago, the glorious...\"",
+      "dialogueText": "\"Two dozen years ago, the glorious country of Wehlen was given custody over this land. A great honor, and a tremendous responsibility.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        90
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 90,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Wehlen didn't only gain new territ...\"",
+      "dialogueText": "\"Wehlen didn't only gain new territory that day. We gained new friends.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        91
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 91,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He gestured meaningfully towards th...\"",
+      "dialogueText": "He gestured meaningfully towards the Rizian side of the stands. After a few seconds, they broke out in scattered applause. My mother muttered a harsh-sounding curse in Zille dialect.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        111,
+        112,
+        113
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 92,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Together, we have overcome war, re...\"",
+      "dialogueText": "\"Together, we have overcome war, repaired our economy and made great strides in science and industry.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        115
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 93,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"I look forward to strengthening th...\"",
+      "dialogueText": "\"I look forward to strengthening that bond for many, many years to come!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        94
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 94,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He stepped to the side and pulled a...\"",
+      "dialogueText": "He stepped to the side and pulled a rope attached to a flagpole. A massive Wehzek flag unfurled, then a much smaller Rizian one.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        105,
+        106
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 95,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"A captive audience. That would exp...\"",
+      "dialogueText": "\"A captive audience. That would explain the enthusiasm.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        96,
+        97,
+        98,
+        101
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 96,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Disgusting. This whole ceremony is...\"",
+      "dialogueText": "\"Disgusting. This whole ceremony is a sham.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        87
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 97,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Nice idea. The crowd at my coronat...\"",
+      "dialogueText": "\"Nice idea. The crowd at my coronation sounded lackluster by comparison.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 98,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Maybe they're happy. They don't ge...\"",
+      "dialogueText": "\"Maybe they're happy. They don't get many excuses for celebration around here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        87
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 99,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Look at the sloppy way they're hol...\"",
+      "dialogueText": "\"Look at the sloppy way they're holding their guns. They have nothing on our recruits.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        104
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 100,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.LeaningValue_Democratic -= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.LeaningValue_Democratic\"] = Variable[\"RiziaDLC.LeaningValue_Democratic\"] - 1;",
+      "outgoing": [
+        87
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 101,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        102,
+        103
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 102,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true",
+      "userScript": "",
+      "outgoing": [
+        99
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 103,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_JoinedMilitary == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 104,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Pacifist -= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Pacifist\"] = Variable[\"RiziaDLC.PersonalValue_Pacifist\"] - 1;",
+      "outgoing": [
+        87
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 105,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I stood up and grabbed a microphone...\"",
+      "dialogueText": "I stood up and grabbed a microphone. I heard gasps and hushed whispers coming from the grandstands.",
+      "menuText": "Interject.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 106,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I sat back in my chair and kept sil...\"",
+      "dialogueText": "I sat back in my chair and kept silent.",
+      "menuText": "Let Wiktor finish his speech.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        110
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 107,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I stand before you at the dawning...\"",
+      "dialogueText": "\"I stand before you at the dawning of a new era. The reign of Valero Toras is over.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210,
+        211,
+        213,
+        212
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 108,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You may not know it, but I am a gr...\"",
+      "dialogueText": "\"You may not know it, but I am a grandson of Zille. The Queen Mother and I have deep ties to this land.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210,
+        211,
+        213,
+        212
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 109,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It is an honor to be here in Zille...\"",
+      "dialogueText": "\"It is an honor to be here in Zille on the anniversary of our historic treaty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210,
+        211,
+        213,
+        212
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 110,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Today, I am especially delighted t...\"",
+      "dialogueText": "\"Today, I am especially delighted to be blessed with the presence of Rizia's new king. As well as the Queen Mother, of course.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 111,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Quiet. We're supposed to play nice...\"",
+      "dialogueText": "\"Quiet. We're supposed to play nice, remember?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 112,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I know. I can't believe this guy.\"\"",
+      "dialogueText": "\"I know. I can't believe this guy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 113,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What did you just say?\"\"",
+      "dialogueText": "\"What did you just say?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        114
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 114,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"'May your testicles be stung by a...\"",
+      "dialogueText": "\"'May your testicles be stung by a thousand jellyfish.'\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 115,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Even the decision of the Toras fam...\"",
+      "dialogueText": "\"Even the decision of the Toras family to ally with Rumburg, a nation that obviously wishes Wehlen harm, could not diminish the beautiful bond we have formed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        93
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 116,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"They are heirs to a long, proud le...\"",
+      "dialogueText": "\"They are heirs to a long, proud legacy. One that would have been shattered had Wehlen and Rizia not made the fateful decision to work hand in hand.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        117
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 117,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"On that note...\"\"",
+      "dialogueText": "\"On that note...\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 118,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Please give a warm welcome to King...\"",
+      "dialogueText": "\"Please give a warm welcome to King Romus Toras!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        119
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 119,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I stood up. The Rizian side of the...\"",
+      "dialogueText": "I stood up. The Rizian side of the stands immediately erupted in loud, authentic-sounding applause.",
+      "menuText": "Rise.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        208
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 120,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you, President Smolak.\"\"",
+      "dialogueText": "\"Thank you, President Smolak.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107,
+        108,
+        109
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 121,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Zille Speech",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        120,
+        122,
+        209,
+        123
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 122,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"My fellow Rizians!\"\"",
+      "dialogueText": "\"My fellow Rizians!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107,
+        108,
+        109
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 123,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Brothers and sisters!\"\"",
+      "dialogueText": "\"Brothers and sisters!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107,
+        108,
+        109
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 124,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Long live our friendship!\"\"",
+      "dialogueText": "\"Long live our friendship!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 125,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Glovurius axa Rizia!\"\"",
+      "dialogueText": "\"Glovurius axa Rizia!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        307
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 126,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"\"Glory to Rizia!\" echoed the Rizian...\"",
+      "dialogueText": "\"Glory to Rizia!\" echoed the Rizian side of the stands. Wiktor gave me an appraising glance, then readjusted the microphone.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        299
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 127,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"All hail Wehlen!\"\"",
+      "dialogueText": "\"All hail Wehlen!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        302
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 128,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Both sides of the stands applauded....\"",
+      "dialogueText": "Both sides of the stands applauded. Wiktor gave me an appraising glance, then readjusted the microphone.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        299
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 129,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Loud applause broke out from the We...\"",
+      "dialogueText": "Loud applause broke out from the Wehzeks in the audience. Wiktor shot me an appraising glance, then turned back to his microphone.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        299
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 130,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"What a speech! The king's got char...\"",
+      "dialogueText": "\"What a speech! The king's got charisma!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        131
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 131,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"We have a terrific evening of ente...\"",
+      "dialogueText": "\"We have a terrific evening of entertainment lined up. But first, we must commemorate this landmark meeting of world leaders with a traditional triple-tank salute!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        132
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 132,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"There was a rumbling from behind us...\"",
+      "dialogueText": "There was a rumbling from behind us as the three tanks aimed their barrels into the air. My mother and I looked at each other.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        135,
+        136,
+        137
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 133,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"One!\"\"",
+      "dialogueText": "\"One!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        303
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 134,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The tank on the left fired, sending...\"",
+      "dialogueText": "The tank on the left fired, sending a plume of gold-colored smoke high over the stands. The crowd gasped in excitement.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        141
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 135,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That's the first time I've heard o...\"",
+      "dialogueText": "\"That's the first time I've heard of this tradition.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        138
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 136,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Those really are some impressive t...\"",
+      "dialogueText": "\"Those really are some impressive tanks.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        139
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 137,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Sure... After you, Mr. Smolak.\"\"",
+      "dialogueText": "\"Sure... After you, Mr. Smolak.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        138
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 138,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"A Wiktor Smolak special.\"\"",
+      "dialogueText": "\"A Wiktor Smolak special.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        140
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 139,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"We can thank his Eastern benefacto...\"",
+      "dialogueText": "\"We can thank his Eastern benefactors, I presume.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        140
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 140,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor raised a finger up in the ai...\"",
+      "dialogueText": "Wiktor raised a finger up in the air.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        133
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 141,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Two!\"\"",
+      "dialogueText": "\"Two!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        304
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 142,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The gun mounted to the tank on the...\"",
+      "dialogueText": "The gun mounted to the tank on the right went off. This time, the smoke was magenta.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        143
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 143,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Thr--\"\"",
+      "dialogueText": "\"Thr--\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        144
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 144,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His count was interrupted by an uni...\"",
+      "dialogueText": "His count was interrupted by an unidentified voice in the distance, shouting \"For the King!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        147
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 145,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Is that part of the program?\"\"",
+      "dialogueText": "\"Is that part of the program?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        155
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 146,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Who was that?\"\"",
+      "dialogueText": "\"Who was that?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        155
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 147,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor whipped his head around in s...\"",
+      "dialogueText": "Wiktor whipped his head around in shock, a frenzied look in his eyes. I turned to my mother.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        145,
+        146,
+        188
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 148,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"If he was so upstanding, he wouldn...\"",
+      "dialogueText": "\"If he was so upstanding, he wouldn't have agreed to stomp out a democratic revolution.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        149
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 149,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.LeaningValue_Democratic += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.LeaningValue_Democratic\"] = Variable[\"RiziaDLC.LeaningValue_Democratic\"] + 1;",
+      "outgoing": [
+        150
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 150,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"What revolution? If those terroris...\"",
+      "dialogueText": "\"What revolution? If those terrorists were acting on behalf of the Rizian people, they wouldn't have harmed innocents. Yourself included.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 151,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's not your fault. Father should...\"",
+      "dialogueText": "\"It's not your fault. Father should have reneged on the agreement immediately after the assassination.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 152,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It was a period of instability acr...\"",
+      "dialogueText": "\"It was a period of instability across all of Merkopa. You were playing with fire.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        154
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 153,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"And made outright enemies of Wehle...\"",
+      "dialogueText": "\"And made outright enemies of Wehlen while our own country was still weak? Don't be foolish.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 154,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Would you have done any differentl...\"",
+      "dialogueText": "\"Would you have done any differently if Vina was in danger?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 155,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I don't--\"\"",
+      "dialogueText": "\"I don't--\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        297
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 156,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"A deafening blast, much louder than...\"",
+      "dialogueText": "A deafening blast, much louder than the two that had preceded it, echoed from the opposite end of the square.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        260
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 157,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I dove from the dais and flung myse...\"",
+      "dialogueText": "I dove from the dais and flung myself onto the ground.",
+      "menuText": "Get down.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        287
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 158,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I rushed towards the stands.\"",
+      "dialogueText": "I rushed towards the stands.",
+      "menuText": "Run towards the stands.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        288
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 159,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I rushed away from the stands.\"",
+      "dialogueText": "I rushed away from the stands.",
+      "menuText": "Run away from the stands.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        288
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 160,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        161,
+        162
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 161,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel\"] == true",
+      "userScript": "",
+      "outgoing": [
+        163
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 162,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Security_ValeroPoisoningTalk_BelievedPabel\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 163,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I had an interesting talk with Pab...\"",
+      "dialogueText": "\"I had an interesting talk with Pabel recently.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        165
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 164,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Oh? I'm glad the two of you are st...\"",
+      "dialogueText": "\"Oh? I'm glad the two of you are still close.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        169,
+        170,
+        177,
+        171
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 165,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Relations_PabelFriend == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        166,
+        167
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 166,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Relations_PabelFriend == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Relations_PabelFriend\"] == true",
+      "userScript": "",
+      "outgoing": [
+        164
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 167,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Relations_PabelFriend == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Relations_PabelFriend\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        168
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 168,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"He talks? I always saw him as a so...\"",
+      "dialogueText": "\"He talks? I always saw him as a sort of walking hors d'oeuvre platter.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        169,
+        170,
+        177,
+        171
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 169,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Was Father acting out of the ordin...\"",
+      "dialogueText": "\"Was Father acting out of the ordinary the night of his death?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        174
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 170,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"When was the last time you saw Fat...\"",
+      "dialogueText": "\"When was the last time you saw Father? Before he died, I mean.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        172
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 171,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Do you know about mandragora?\"\"",
+      "dialogueText": "\"Do you know about mandragora?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        176
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 172,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She arched an eyebrow.\"",
+      "dialogueText": "She arched an eyebrow.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        173
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 173,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I told you, we had dinner together...\"",
+      "dialogueText": "\"I told you, we had dinner together. After he made Pabel taste the food.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 174,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Any more out of the ordinary than...\"",
+      "dialogueText": "\"Any more out of the ordinary than ordinary, you mean?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        175
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 175,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"No. He went to bed early, as he'd...\"",
+      "dialogueText": "\"No. He went to bed early, as he'd been doing for months. A symptom of old age, for some.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 176,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I've never heard of her. Is she a...\"",
+      "dialogueText": "\"I've never heard of her. Is she a noble?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        181,
+        183,
+        182
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 177,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Tell me again. How did you discove...\"",
+      "dialogueText": "\"Tell me again. How did you discover Father had died?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        178
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 178,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She arched an eyebrow.\"",
+      "dialogueText": "She arched an eyebrow.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        179
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 179,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"I told you. I went to check on him...\"",
+      "dialogueText": "\"I told you. I went to check on him a few hours after supper.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 180,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Why do you ask?\"\"",
+      "dialogueText": "\"Why do you ask?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        181,
+        183,
+        182
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 181,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Pabel thinks Father was poisoned.\"\"",
+      "dialogueText": "\"Pabel thinks Father was poisoned.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        285
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 182,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Never mind.\"\"",
+      "dialogueText": "\"Never mind.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        186
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 183,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'll tell you later.\"\"",
+      "dialogueText": "\"I'll tell you later.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        186
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 184,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"And they say butlers have no imagi...\"",
+      "dialogueText": "\"And they say butlers have no imaginations.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        185
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 185,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Your father had a long list of ene...\"",
+      "dialogueText": "\"Your father had a long list of enemies, and an equally long list of safeguards against them. His worries were what stopped his heart.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        187
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 186,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"How cruel of you to pique my inter...\"",
+      "dialogueText": "\"How cruel of you to pique my interest like that.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        187
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 187,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She folded her arms and was silent...\"",
+      "dialogueText": "She folded her arms and was silent for a while.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 188,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Mother. What happened?\"\"",
+      "dialogueText": "\"Mother. What happened?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        155
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 189,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"None of this was Wehlen's fault. I...\"",
+      "dialogueText": "\"None of this was Wehlen's fault. It was the superpowers trying to use the country as a pawn.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        190
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 190,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Nobody forced Wiktor Smolak to tur...\"",
+      "dialogueText": "\"Nobody forced Wiktor Smolak to turn my homeland into his country's armpit.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 191,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        192,
+        193
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 192,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Summer_Zille == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Summer_Zille\"] == true",
+      "userScript": "",
+      "outgoing": [
+        63
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 193,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Summer_Zille == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Summer_Zille\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        194
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 194,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Actually, Mr. President, this *is*...\"",
+      "dialogueText": "\"Actually, Mr. President, this *is* my mother's home.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        68
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 195,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's heartening to see that Zille...\"",
+      "dialogueText": "\"It's heartening to see that Zille remains in good hands.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        196
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 196,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Yes, yes! This square used to be g...\"",
+      "dialogueText": "\"Yes, yes! This square used to be gray and boring. Now look at it.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 197,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"It'll be your turn to speak in a m...\"",
+      "dialogueText": "\"It'll be your turn to speak in a minute, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        200,
+        199,
+        198
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 198,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"My mistake. Please go on, Mr. Pres...\"",
+      "dialogueText": "\"My mistake. Please go on, Mr. President.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        204
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 199,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Forgive me, but your words were so...\"",
+      "dialogueText": "\"Forgive me, but your words were so inspiring I couldn't stay quiet for a moment longer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        202
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 200,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You've said more than enough alrea...\"",
+      "dialogueText": "\"You've said more than enough already.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        202
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 201,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor stared me down for a second....\"",
+      "dialogueText": "Wiktor stared me down for a second. I suddenly became aware of how tall he was.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        203
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 202,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_BrokeTradition += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_BrokeTradition\"] = Variable[\"RiziaDLC.PersonalValue_BrokeTradition\"] + 1;",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 203,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"By all means, then, continue.\"\"",
+      "dialogueText": "\"By all means, then, continue.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        207
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 204,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor stared me down for a second....\"",
+      "dialogueText": "Wiktor stared me down for a second. I suddenly became aware of how tall he was.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        205
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 205,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"I will. Thank you.\"\"",
+      "dialogueText": "\"I will. Thank you.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        206
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 206,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He turned back to the crowd.\"",
+      "dialogueText": "He turned back to the crowd.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        110
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 207,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I turned to face the crowd. The Riz...\"",
+      "dialogueText": "I turned to face the crowd. The Rizian side of the stands erupted in loud, authentic-sounding applause.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 208,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Jump to: [Zille Speech]",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 209,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"My loyal subjects!\"\"",
+      "dialogueText": "\"My loyal subjects!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107,
+        108,
+        109
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 210,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It pained me when my father signed...\"",
+      "dialogueText": "\"It pained me when my father signed away this beautiful part of Rizia. Yet I knew it was for the greater good.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217,
+        218,
+        215,
+        227
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 211,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Today marks a chance to make a cle...\"",
+      "dialogueText": "\"Today marks a chance to make a clean break with the past and begin looking towards the future.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217,
+        218,
+        215,
+        214
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 212,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I know none of the Rizians here to...\"",
+      "dialogueText": "\"I know none of the Rizians here today asked for their homeland to be governed by Wehlen. I myself had no choice in the matter.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217,
+        215,
+        222,
+        214
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 213,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I will never forget what Wehlen di...\"",
+      "dialogueText": "\"I will never forget what Wehlen did for my family and my country.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217,
+        218,
+        215,
+        227
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 214,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I have come here to send Wiktor Sm...\"",
+      "dialogueText": "\"I have come here to send Wiktor Smolak a warning. If Zille is not returned, he will face Rizia's full retaliation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        223
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 215,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The past years have not been easy...\"",
+      "dialogueText": "\"The past years have not been easy for any of you. But the time will soon come when we are reunited.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220,
+        221,
+        216,
+        230
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 216,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"As ATO encroaches on our continent...\"",
+      "dialogueText": "\"As ATO encroaches on our continent, it is vital that the nations of Southeastern Merkopa unite as one.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        124,
+        242,
+        125,
+        127
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 217,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"In one year, Rizia will resume gov...\"",
+      "dialogueText": "\"In one year, Rizia will resume governorship of Zille. But I hope that will not mean an end to our countries' friendly cooperation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220,
+        221,
+        216,
+        230
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 218,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I commend Wiktor Smolak for his ex...\"",
+      "dialogueText": "\"I commend Wiktor Smolak for his exemplary leadership in the face of war and terrorism.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220,
+        221,
+        216,
+        230
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 219,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"To the Rizians here today, I say:...\"",
+      "dialogueText": "\"To the Rizians here today, I say: Do not forget your motherland. Be ready to defend her if necessary.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        231,
+        232,
+        233,
+        234
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 220,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I pledge to support Rizians and We...\"",
+      "dialogueText": "\"I pledge to support Rizians and Wehzeks alike through the upcoming peaceful transfer of power.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        124,
+        242,
+        125,
+        127
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 221,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I know that I can count on the Pre...\"",
+      "dialogueText": "\"I know that I can count on the President of Wehlen to do what's best for Zille until it is back in Rizia's custody.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        124,
+        242,
+        125,
+        127
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 222,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Yet I commend Wiktor Smolak for hi...\"",
+      "dialogueText": "\"Yet I commend Wiktor Smolak for his exemplary leadership in the face of war and terrorism.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220,
+        221,
+        216,
+        230
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 223,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_ZilleVisit_HostileSpeech = true; RiziaDLCSupport.Journal_Turn02_Zille_HostileSpeech = true;\nRiziaDLC.Diplomacy_Wehlen_NegotiatingPower -= 2",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Turn01_ZilleVisit_HostileSpeech\"] = true;\nVariable[\"RiziaDLCSupport.Journal_Turn02_Zille_HostileSpeech\"] = true;\nVariable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] - 2;",
+      "outgoing": [
+        224
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 224,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Pacifist -= 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Pacifist\"] = Variable[\"RiziaDLC.PersonalValue_Pacifist\"] - 1;",
+      "outgoing": [
+        228
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 225,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I pledge to support Rizians and We...\"",
+      "dialogueText": "\"I pledge to support Rizians and Wehzeks alike through the upcoming transfer of power.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        231,
+        232,
+        233,
+        234
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 226,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I call on the people of Rizia to r...\"",
+      "dialogueText": "\"I call on the people of Rizia to resist your Wehzek oppressors. Remind them in whose country they reside.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        231,
+        232,
+        233,
+        234
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 227,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"But I have come here to send Wikto...\"",
+      "dialogueText": "\"But I have come here to send Wiktor Smolak a warning. If Zille is not returned, he will face Rizia's full retaliation.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        223
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 228,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The crowd went completely silent. W...\"",
+      "dialogueText": "The crowd went completely silent. Wiktor's mouth hung open in disbelief.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        229,
+        219,
+        225,
+        226
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 229,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"To my countrymen, I say: Be patien...\"",
+      "dialogueText": "\"To my countrymen, I say: Be patient. A mere year from now, we will be reunited.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        231,
+        232,
+        233,
+        234
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 230,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Despite our political differences,...\"",
+      "dialogueText": "\"Despite our political differences, Rizia and Wehlen have much in common. There's no limit to what we can accomplish together.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        124,
+        242,
+        125,
+        127
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 231,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Wiktor, I know you are a man of ho...\"",
+      "dialogueText": "\"Wiktor, I know you are a man of honor. When the time comes, you will do what is right.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235,
+        236,
+        237
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 232,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The president of Wehlen believes t...\"",
+      "dialogueText": "\"The president of Wehlen believes these tanks will intimidate us. We will show him how wrong he is.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235,
+        236,
+        237
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 233,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"People of Wehlen, I invite you to...\"",
+      "dialogueText": "\"People of Wehlen, I invite you to stay in Zille once it is part of my kingdom again.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235,
+        236,
+        237
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 234,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"On behalf of House Toras, there wi...\"",
+      "dialogueText": "\"On behalf of House Toras, there will be justice for what has been done to Zille.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235,
+        236,
+        237
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 235,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you and happy Friendship Day!\"\"",
+      "dialogueText": "\"Thank you and happy Friendship Day!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        238
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 236,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Glovurius axa Rizia!\"\"",
+      "dialogueText": "\"Glovurius axa Rizia!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        308
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 237,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The King has spoken!\"\"",
+      "dialogueText": "\"The King has spoken!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        238
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 238,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"A few tentative claps came from the...\"",
+      "dialogueText": "A few tentative claps came from the Rizian side of the stands. I looked back at my mother. She spoke through gritted teeth.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        239
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 239,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Romus, are you insane?\"\"",
+      "dialogueText": "\"Romus, are you insane?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        240
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 240,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor's face remained placid. He r...\"",
+      "dialogueText": "Wiktor's face remained placid. He readjusted his microphone, gripping it so tightly that his knuckles turned white.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        241
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 241,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"That was some speech, Your Majesty...\"",
+      "dialogueText": "\"That was some speech, Your Majesty! And right in front of the international press, as well.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        243
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 242,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The King has spoken!\"\"",
+      "dialogueText": "\"The King has spoken!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 243,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Let's not allow King Romus to spoi...\"",
+      "dialogueText": "\"Let's not allow King Romus to spoil the mood on this fine day. It's time to commemorate the occasion with a traditional three-tank salute!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        132
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 244,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"YOUR MAJESTY!\"\"",
+      "dialogueText": "\"YOUR MAJESTY!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        248
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 245,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I flung myself in front of my mothe...\"",
+      "dialogueText": "I flung myself in front of my mother.",
+      "menuText": "Protect Estela.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        286
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 246,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"YOUR MAJESTY! GET DOWN!\"\"",
+      "dialogueText": "\"YOUR MAJESTY! GET DOWN!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        247
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 247,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Titus dove at me and tackled me to...\"",
+      "dialogueText": "Titus dove at me and tackled me to the ground. Screams of fear and confusion were rising up from all around.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        250,
+        249,
+        253
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 248,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Titus rushed to cover me, gun at th...\"",
+      "dialogueText": "Titus rushed to cover me, gun at the ready. Screams of fear and confusion were rising up from all around.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        250,
+        249,
+        253
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 249,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What's happening?\"\"",
+      "dialogueText": "\"What's happening?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        254
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 250,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Where's Mother?\"\"",
+      "dialogueText": "\"Where's Mother?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        256
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 251,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"YOUR MAJESTY!\"\"",
+      "dialogueText": "\"YOUR MAJESTY!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        252
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 252,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Titus rushed to our side, gun at th...\"",
+      "dialogueText": "Titus rushed to our side, gun at the ready. Screams of fear and confusion were rising up from all around.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        261,
+        262
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 253,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Where's Smolak?\"\"",
+      "dialogueText": "\"Where's Smolak?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        256
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 254,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"Security breach, sir.\"\"",
+      "dialogueText": "\"Security breach, sir.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        256
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 255,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Get me over there, Titus!\"\"",
+      "dialogueText": "\"Get me over there, Titus!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        268
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 256,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Romus!\"\"",
+      "dialogueText": "\"Romus!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        257
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 257,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My mother and Wiktor were still on...\"",
+      "dialogueText": "My mother and Wiktor were still on the podium, surrounded by a thick cordon of Wehzek guards.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        255,
+        258,
+        259
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 258,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't worry, Mother!\"\"",
+      "dialogueText": "\"Don't worry, Mother!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        268
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 259,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't you lay a hand on her, Smola...\"",
+      "dialogueText": "\"Don't you lay a hand on her, Smolak!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        268
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 260,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I turned towards the source of the...\"",
+      "dialogueText": "I turned towards the source of the sound and saw the Wehzek side of the stands engulfed in flames.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        158,
+        159,
+        157,
+        245
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 261,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What's happening?\"\"",
+      "dialogueText": "\"What's happening?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        263
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 262,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Where's Smolak?\"\"",
+      "dialogueText": "\"Where's Smolak?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        264
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 263,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"Security breach, sir.\"\"",
+      "dialogueText": "\"Security breach, sir.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        265
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 264,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Right here, Your Majesty.\"\"",
+      "dialogueText": "\"Right here, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        265
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 265,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Wiktor stood beside us on the podiu...\"",
+      "dialogueText": "Wiktor stood beside us on the podium, his own gun drawn. He was surrounded by a thick cordon of Wehzek guards.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        266
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 266,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"We've got to get you out of here.\"\"",
+      "dialogueText": "\"We've got to get you out of here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        267
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 267,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He and Smolak's guards exchanged a...\"",
+      "dialogueText": "He and Smolak's guards exchanged a series of hand signals. The crowd had begun fleeing in every direction.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 268,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus Gordion: \"\"They'll be fine. We have to get yo...\"",
+      "dialogueText": "\"They'll be fine. We have to get you out of here.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        269
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 269,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He and Smolak's guards exchanged a...\"",
+      "dialogueText": "He and Smolak's guards exchanged a series of hand signals. The crowd had begun fleeing in every direction.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 270,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Titus grabbed my arm and swiftly st...\"",
+      "dialogueText": "Titus grabbed my arm and swiftly started ushering me away. I took one last look back.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        271
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 271,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Smoke was now rising from the Wehze...\"",
+      "dialogueText": "Smoke was now rising from the Wehzek grandstand. Part of the structure had collapsed, and soldiers were working to free the people trapped underneath.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        272
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 272,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The next few moments were a blur as...\"",
+      "dialogueText": "The next few moments were a blur as we made our way through the panicked hordes of civilians. Wiktor's limo pulled up and Titus roughly shoved me inside.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        273
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 273,
+      "actorId": 64,
+      "speaker": "Queen Mother Estela",
+      "title": "Estela Toras: \"\"Thank God you're safe.\"\"",
+      "dialogueText": "\"Thank God you're safe.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        274
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 274,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My mother's voice shook. She and Wi...\"",
+      "dialogueText": "My mother's voice shook. She and Wiktor were sitting across from me, looking dazed.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        277,
+        275,
+        276
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 275,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We're going to get to the bottom o...\"",
+      "dialogueText": "\"We're going to get to the bottom of this.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        279
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 276,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What have you done, Smolak?\"\"",
+      "dialogueText": "\"What have you done, Smolak?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        280
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 277,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Are you hurt?\"\"",
+      "dialogueText": "\"Are you hurt?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        278
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 278,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"Of course she isn't. It seemed lik...\"",
+      "dialogueText": "\"Of course she isn't. It seemed like *no Rizian* was harmed.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        281
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 279,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"It's no great mystery, Your Majest...\"",
+      "dialogueText": "\"It's no great mystery, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        281
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 280,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"What have *I* done, Your Majesty?\"\"",
+      "dialogueText": "\"What have *I* done, Your Majesty?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        281
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 281,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Smolak had fire in his eyes.\"",
+      "dialogueText": "Smolak had fire in his eyes.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        282
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 282,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Wiktor Smolak (R): \"\"If your people have anything to do...\"",
+      "dialogueText": "\"If your people have anything to do with this, there will be a price to pay.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        283
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 283,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He kept his eyes on me as the car b...\"",
+      "dialogueText": "He kept his eyes on me as the car began pulling away.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        306
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 284,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlayLoopedMusic(\"R_Stress\", \"R_Stress_Loop\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlayLoopedMusic(\"R_Stress\",\"R_Stress_Loop\");\n;",
+      "outgoing": [
+        156
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 285,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Estela_TellAboutMurderCase = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Estela_TellAboutMurderCase\"] = true;",
+      "outgoing": [
+        184
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 286,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "AddConversant(\"Titus Gordion\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "AddConversant(\"Titus Gordion\");\n;",
+      "outgoing": [
+        251
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 287,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "AddConversant(\"Titus Gordion\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "AddConversant(\"Titus Gordion\");",
+      "outgoing": [
+        244
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 288,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "AddConversant(\"Titus Gordion\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "AddConversant(\"Titus Gordion\");",
+      "outgoing": [
+        246
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 289,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Diplomacy_Wehlen_NegotiatingPower -= 2;\nRiziaDLCSupport.News_Turn02_RH_Bombing = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] - 2;\nVariable[\"RiziaDLCSupport.News_Turn02_RH_Bombing\"] = true;",
+      "outgoing": [
+        291
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 290,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn02_G_Bombing_HostileSpeech = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn02_G_Bombing_HostileSpeech\"] = true;",
+      "outgoing": [
+        298
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 291,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_ZilleVisit_HostileSpeech == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        292,
+        293
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 292,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_ZilleVisit_HostileSpeech == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Turn01_ZilleVisit_HostileSpeech\"] == true",
+      "userScript": "",
+      "outgoing": [
+        290
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 293,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Turn01_ZilleVisit_HostileSpeech == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Turn01_ZilleVisit_HostileSpeech\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        294
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 294,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn02_G_Bombing_Neutral = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn02_G_Bombing_Neutral\"] = true;",
+      "outgoing": [
+        298
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 295,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "End();",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "End();",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 296,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlayLoopedMusic(\"R_Alliances\", \"R_Alliances_Loop\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlayLoopedMusic(\"R_Alliances\",\"R_Alliances_Loop\");",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 297,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"R_ZilleExplosion\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"R_ZilleExplosion\");\n;",
+      "outgoing": [
+        284
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 298,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Reports_Turn02_Zille_BombingReport = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Reports_Turn02_Zille_BombingReport\"] = true;",
+      "outgoing": [
+        295
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 299,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Journal_Turn02_Zille_ConciliatorySpeech = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Journal_Turn02_Zille_ConciliatorySpeech\"] = true;",
+      "outgoing": [
+        130
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 300,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"StandApplause\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"StandApplause\");\n;",
+      "outgoing": [
+        128
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 301,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"StandApplause\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"StandApplause\");\n;",
+      "outgoing": [
+        126
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 302,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"StandApplause\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"StandApplause\");\n;",
+      "outgoing": [
+        129
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 303,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"CannonLeft\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"CannonLeft\");\n;",
+      "outgoing": [
+        134
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 304,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"CannonRight\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"CannonRight\");\n;",
+      "outgoing": [
+        142
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 305,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlaySoundEffect(\"CheerCrowd\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlaySoundEffect(\"CheerCrowd\");",
+      "outgoing": [
+        86
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 306,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlayCustomMapMusic(\"Rizia_Map_Music_Tense\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlayCustomMapMusic(\"Rizia_Map_Music_Tense\");",
+      "outgoing": [
+        289
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 307,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Said_GlovuriusAxaRizia += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Said_GlovuriusAxaRizia\"] = Variable[\"RiziaDLC.Said_GlovuriusAxaRizia\"] + 1;",
+      "outgoing": [
+        301
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 308,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Said_GlovuriusAxaRizia += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Said_GlovuriusAxaRizia\"] = Variable[\"RiziaDLC.Said_GlovuriusAxaRizia\"] + 1;",
+      "outgoing": [
+        238
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 309,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "SetRichPresence(\"Surviving a bombing during the Rizia-Zille Friendship Day\", \"Zille\", \"Republic of Wehlen\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "SetRichPresence(\"Surviving a bombing during the Rizia-Zille Friendship Day\",\"Zille\",\"Republic of Wehlen\");\n;",
+      "outgoing": [
+        296
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 99203,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Zille_Smolak_FaceToFace_Choice",
+      "dialogueText": "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the lease expires, our tanks will remove you.",
+      "menuText": "\"This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the lease expires, our tanks will remove you.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Smolak_Threatened\"] = true;",
+      "outgoing": [
+        99204
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Bezpośrednia groźba czołgami prosto w twarz Wiktora Smolaka na Dniu Przyjaźni"
+    },
+    {
+      "id": 99204,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Zille_Smolak_FaceToFace_Reply",
+      "dialogueText": "Threats, Romus? In my own city? Wehlen does not fear your parade-ground uniforms. Just dare to cross that river, and you will see South Merkopa burn!",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Furia i odgrażanie się Wiktora Smolaka"
+    }
+  ]
+}
