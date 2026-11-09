@@ -46,6 +46,7 @@ namespace GreatZilleSolution
             public string PushedAllegiance;
             public string PushedSig;
             public string PaintSig;
+            public Material Instance;
         }
 
         /// <summary>When set, province masks drop to 25% opacity and the editor will not move them.</summary>
@@ -63,6 +64,7 @@ namespace GreatZilleSolution
 
         public static void Tick()
         {
+            ZilleProfiler.BeginTick();
             try
             {
                 if (!SkinEnabled)
@@ -90,7 +92,7 @@ namespace GreatZilleSolution
                     if (_root == null) return;
                     _chromeTries = 0;
                     _planes.Clear(); _tiles.Clear(); _loggedApplied = false; _citySpawned.Clear();
-                    _propsNudged = false; _propHolds.Clear(); _enlarged.Clear(); _tokenScale.Clear(); _zonePushed.Clear(); _roadsSig = null; _deploymentReady = false; _tilesAdopted = false; _raycastLayer = int.MinValue; _garrisonsPlaced = false; _framed = false; _frontFilled = false; _poolReady = false; _pointsGranted = false; _bannerCleared = false; _palesColorsRead = false; _colorAttempted = false; _tileMgr = null; _tokenMgr = null; _liveTiles = null; _clutterHidden = false; _peaksDone = false; _captionCache.Clear(); _nextCaptionScan = 0f; _rayInput = false; _lit = null; _hoverHitLogged = false; _victoryShown = false; _enemySince = 0f; _enemyUnstuck = false;
+                    _propsNudged = false; _propHolds.Clear(); _enlarged.Clear(); _tokenScale.Clear(); _zonePushed.Clear(); _roadsSig = null; _deploymentReady = false; _tilesAdopted = false; _raycastLayer = int.MinValue; _garrisonsPlaced = false; _framed = false; _frontFilled = false; _poolReady = false; _pointsGranted = false; _bannerCleared = false; _palesColorsRead = false; _colorAttempted = false; _tileMgr = null; _tokenMgr = null; _liveTiles = null; _clutterHidden = false; _peaksDone = false; _captionCache.Clear(); _nextCaptionScan = 0f; _rayInput = false; _lit = null; _hoverHitLogged = false; _victoryShown = false; _enemySince = 0f;
                     MelonLogger.Msg($"[ZTABLE] War map instance found: '{_root.name}' (id {_root.gameObject.GetInstanceID()}), applying Zille skin...");
                 }
 
@@ -126,6 +128,10 @@ namespace GreatZilleSolution
             {
                 MelonLogger.Warning($"[ZTABLE] Tick error: {ex.Message}\n{ex.StackTrace}");
             }
+            finally
+            {
+                ZilleProfiler.EndTick();
+            }
         }
 
         /// <summary>Puts every touched renderer/tile back to vanilla Pales state.</summary>
@@ -146,6 +152,7 @@ namespace GreatZilleSolution
                 foreach (var kv in _tiles)
                 {
                     var tb = kv.Value;
+                    if (tb.Instance != null) { UnityEngine.Object.Destroy(tb.Instance); tb.Instance = null; }
                     if (tb.Tile == null) continue;
                     tb.Tile.transform.localPosition = tb.LocalPos;
                     tb.Tile.transform.localScale = tb.LocalScale;
@@ -157,6 +164,11 @@ namespace GreatZilleSolution
                     if (r != null && r.material != null && r.material.HasProperty("_Tile_Texture") && tb.Tex != null)
                         r.material.SetTexture("_Tile_Texture", tb.Tex);
                 }
+                _cityLabelsApplied = false;
+                _chromeHidden = false;
+                _politicalHidden = false;
+                _battleContestedTiles.Clear();
+                _pendingContestedTiles.Clear();
                 MelonLogger.Msg($"[ZTABLE] Restored vanilla Pales table ({_planes.Count} pages, {_tiles.Count} tiles).");
             }
             catch (Exception ex)
@@ -460,7 +472,8 @@ namespace GreatZilleSolution
                     var rend = wt.GetWarTileRenderer();
                     if (rend != null)
                     {
-                        var m = rend.material;
+                        var m = tb.Instance;
+                        if (m == null) { m = rend.material; tb.Instance = m; }
                         if (m != null && m.HasProperty("_Tile_Texture"))
                         {
                             var ct = m.GetTexture("_Tile_Texture");
@@ -898,7 +911,10 @@ namespace GreatZilleSolution
                     try { mgr.SetTileColor(rend, wt.GetCurrentToken(), wt); } catch { }
                 return;
             }
-            var m = rend.material;
+            TileBackup tb = null;
+            _tiles.TryGetValue(wt.GetInstanceID(), out tb);
+            var m = tb != null && tb.Instance != null ? tb.Instance : rend.material;
+            if (tb != null && tb.Instance == null) tb.Instance = m;
             if (m == null || !m.HasProperty("_Tile_Colour")) return;
             bool deploying = DeploymentPanelOpen();
             var token = wt.GetCurrentToken();
@@ -1119,7 +1135,7 @@ namespace GreatZilleSolution
         private static WarToken _selCache;
         private static WarTokenManager _tokenMgr;
 
-        private static WarToken SelectedUnit()
+        public static WarToken SelectedUnit()
         {
             int frame = Time.frameCount;
             if (_selFrame == frame) return _selCache;
@@ -1248,14 +1264,30 @@ namespace GreatZilleSolution
             catch { return false; }
         }
 
-        /// <summary>A bombed or overrun enemy is not holding the province. Entering it plays their fall.</summary>
+        public static bool IsCityToken(WarToken tok)
+        {
+            if (tok == null) return false;
+            try { if (tok.IsCity()) return true; } catch { }
+            try { if (IsCityUnit(tok.GetWarUnitTypeData())) return true; } catch { }
+            try
+            {
+                var tile = tok.GetCurrentWarTile();
+                var td = TileDataOf(tile);
+                if (td != null && td.IsCity) return true;
+            }
+            catch { }
+            return false;
+        }
+
+        /// <summary>A bombed or overrun enemy is not holding the province. Entering it plays their fall. Cities can never be overrun.</summary>
         public static bool CanOverrun(WarToken mover, WarToken occupier)
         {
             if (mover == null || occupier == null || occupier == mover) return false;
+            if (IsCityToken(occupier)) return false;
             try
             {
                 if (occupier.GetTokenAllegiance() == mover.GetTokenAllegiance()) return false;
-                if (occupier.IsDead() || occupier.IsBombed() || occupier.IsOrganizationDepleted()) return true;
+                if (occupier.IsDead() || occupier.IsBombed() || occupier.IsOrganizationDepleted() || IsOverrun(occupier)) return true;
                 var effects = occupier.currentTokenStatusEffects;
                 if (effects == null) return false;
                 for (int i = 0; i < effects.Count; i++)
@@ -1268,6 +1300,40 @@ namespace GreatZilleSolution
             }
             catch { }
             return false;
+        }
+
+        public static bool IsOverrun(WarToken token)
+        {
+            if (token == null) return false;
+            try
+            {
+                if (token.IsOrganizationDepleted()) return true;
+                var effects = token.currentTokenStatusEffects;
+                if (effects != null)
+                {
+                    for (int i = 0; i < effects.Count; i++)
+                    {
+                        if (effects[i] == WarToken.WarTokenStatusEffectType.DepletedOrganization)
+                            return true;
+                    }
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public static bool CanReachTile(WarToken sel, WarTile target)
+        {
+            if (sel == null || target == null) return false;
+            try
+            {
+                var ut = sel.GetWarUnitTypeData();
+                if (ut == null) return false;
+                int range = ut.unitType == WarUnitTypeData.UnitType.NavalUnit ? 2 : 1;
+                if (!target.IsTileAdjacentToSelectedToken(range)) return false;
+                return ut.CanMoveToTileType(target.GetTileType());
+            }
+            catch { return false; }
         }
 
         /// <summary>The figure the province is actually holding, including one the tile pointer lost after a fight.</summary>
@@ -1781,13 +1847,16 @@ namespace GreatZilleSolution
             return !string.IsNullOrEmpty(td.CityName) ? td.CityName : (td.Name ?? "");
         }
 
-        private static void ApplyCityLabels()
+        private static bool _cityLabelsApplied = false;
+
+        private static void ApplyCityLabels(bool force = false)
         {
+            if (_cityLabelsApplied && !force) return;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             if (cfg?.Tiles == null) return;
             if (Time.unscaledTime >= _nextCaptionScan)
             {
-                _nextCaptionScan = Time.unscaledTime + 0.4f;
+                _nextCaptionScan = Time.unscaledTime + 2.0f;
                 _captionCache.Clear();
                 Il2CppTMPro.TMP_Text[] all = null;
                 try { all = UnityEngine.Object.FindObjectsOfType<Il2CppTMPro.TMP_Text>(); } catch { return; }
@@ -1799,6 +1868,7 @@ namespace GreatZilleSolution
                     _captionCache.Add(label);
                 }
             }
+            int updated = 0;
             for (int i = 0; i < _captionCache.Count; i++)
             {
                 var label = _captionCache[i];
@@ -1806,7 +1876,10 @@ namespace GreatZilleSolution
                 string want = CaptionForLabel(label, cfg);
                 if (string.IsNullOrEmpty(want) || label.text == want) continue;
                 label.text = want;
+                updated++;
             }
+            if (_captionCache.Count > 0)
+                _cityLabelsApplied = true;
         }
 
         private static bool CaptionBelongsToCity(Il2CppTMPro.TMP_Text label, ZilleMapConfig cfg)
@@ -1994,7 +2067,7 @@ namespace GreatZilleSolution
                 mgr.SetupSupplyLines(lines);
                 int shown = PaintLiveSupplyLines();
                 if (shown == 0) shown = DrawWithTemplate(lines);
-                if (shown > 0) _roadsSig = sig;
+                _roadsSig = sig;
                 MelonLogger.Msg($"[ZTABLE] Pales supply lines on the map: {shown}.");
                 return;
             }
@@ -2003,6 +2076,10 @@ namespace GreatZilleSolution
                 MelonLogger.Warning("[ZTABLE] SetupSupplyLines: " + ex.Message);
             }
             if (DrawWithTemplate(lines) > 0)
+            {
+                _roadsSig = sig;
+            }
+            else
             {
                 _roadsSig = sig;
             }
@@ -2231,50 +2308,67 @@ namespace GreatZilleSolution
         /// <summary>Lights the province under the cursor. The collider box is wider than the hex, so the hit has to land inside the mask.</summary>
         private static void HighlightUnderCursor()
         {
-            var cam = WarCamera();
-            if (cam == null) return;
-            var pos = CursorPos();
-            bool moved = !_haveMouse || (pos - _lastMouse).sqrMagnitude > 1f;
-            bool holding = _pressSeen || ButtonHeld() || RightPressed();
-            if (!moved && !holding && _hoverTile != null)
+            ZilleProfiler.BeginHighlight();
+            try
             {
-                TrackHold(_hoverTile);
-                return;
+                if (EnemyMayAct())
+                {
+                    if (_hoverTile != null)
+                    {
+                        try { _hoverTile.OnTileExit(); } catch { }
+                        _hoverTile = null;
+                    }
+                    HideHoldRing();
+                    return;
+                }
+                var cam = WarCamera();
+                if (cam == null) return;
+                var pos = CursorPos();
+                bool moved = !_haveMouse || (pos - _lastMouse).sqrMagnitude > 1f;
+                bool holding = _pressSeen || ButtonHeld() || RightPressed();
+                if (!moved && !holding && _hoverTile != null)
+                {
+                    TrackHold(_hoverTile);
+                    return;
+                }
+                _haveMouse = true;
+                _lastMouse = pos;
+                WarTile tile = ProvinceUnderCursor(cam, pos);
+                Renderer next = tile != null ? tile.GetWarTileRenderer() : null;
+                if (!_hoverHitLogged && tile != null)
+                {
+                    _hoverHitLogged = true;
+                    MelonLogger.Msg("[ZTABLE] Cursor is over province " + tile.gameObject.name + ".");
+                }
+                else if (!_hoverHitLogged && !_rayMissLogged && tile == null)
+                {
+                    _rayMissLogged = true;
+                    MelonLogger.Warning("[ZTABLE] No province under the cursor. Camera: " + cam.transform.position + ".");
+                }
+                var previous = _hoverTile;
+                TrackHold(tile);
+                if (tile != previous)
+                {
+                    RepaintTile(previous);
+                    RepaintTile(tile);
+                    var mgr = TileMgr();
+                    if (mgr != null && tile != null)
+                        try { mgr.SetHoveredWarTile(tile); } catch { }
+                    PresentUnitChrome();
+                }
+                _lit = next;
+                int sid = 0;
+                var sel = SelectedUnit();
+                if (sel != null) sid = sel.GetInstanceID();
+                if (sid != _paintedSel)
+                {
+                    _paintedSel = sid;
+                    RefreshBoard();
+                }
             }
-            _haveMouse = true;
-            _lastMouse = pos;
-            WarTile tile = ProvinceUnderCursor(cam, pos);
-            Renderer next = tile != null ? tile.GetWarTileRenderer() : null;
-            if (!_hoverHitLogged && tile != null)
+            finally
             {
-                _hoverHitLogged = true;
-                MelonLogger.Msg("[ZTABLE] Cursor is over province " + tile.gameObject.name + ".");
-            }
-            else if (!_hoverHitLogged && !_rayMissLogged && tile == null)
-            {
-                _rayMissLogged = true;
-                MelonLogger.Warning("[ZTABLE] No province under the cursor. Camera: " + cam.transform.position + ".");
-            }
-            var previous = _hoverTile;
-            TrackHold(tile);
-            if (tile != previous)
-            {
-                RepaintTile(previous);
-                RepaintTile(tile);
-                RepaintOccupied();
-                var mgr = TileMgr();
-                if (mgr != null && tile != null)
-                    try { mgr.SetHoveredWarTile(tile); } catch { }
-                PresentUnitChrome();
-            }
-            _lit = next;
-            int sid = 0;
-            var sel = SelectedUnit();
-            if (sel != null) sid = sel.GetInstanceID();
-            if (sid != _paintedSel)
-            {
-                _paintedSel = sid;
-                RefreshBoard();
+                ZilleProfiler.EndHighlight();
             }
         }
 
@@ -2382,15 +2476,41 @@ namespace GreatZilleSolution
             }
         }
 
+        private static readonly Dictionary<int, ZilleTileData> _tileDataCache = new Dictionary<int, ZilleTileData>();
+        private static readonly Dictionary<string, ZilleTileData> _tileDataByNum = new Dictionary<string, ZilleTileData>();
+
+        public static void ClearTileDataCache()
+        {
+            _tileDataCache.Clear();
+            _tileDataByNum.Clear();
+        }
+
         public static ZilleTileData TileDataOf(WarTile wt)
         {
             if (wt == null || wt.gameObject == null) return null;
+            int id = wt.GetInstanceID();
+            if (_tileDataCache.TryGetValue(id, out var cached)) return cached;
+
             string name = wt.gameObject.name ?? "";
             if (name.StartsWith("Tile_")) name = name.Substring("Tile_".Length);
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             if (cfg?.Tiles == null) return null;
-            for (int i = 0; i < cfg.Tiles.Count; i++)
-                if (cfg.Tiles[i].TileNumber == name) return cfg.Tiles[i];
+
+            if (_tileDataByNum.Count == 0)
+            {
+                for (int i = 0; i < cfg.Tiles.Count; i++)
+                {
+                    var item = cfg.Tiles[i];
+                    if (item != null && !string.IsNullOrEmpty(item.TileNumber))
+                        _tileDataByNum[item.TileNumber] = item;
+                }
+            }
+
+            if (_tileDataByNum.TryGetValue(name, out var data))
+            {
+                _tileDataCache[id] = data;
+                return data;
+            }
             return null;
         }
 
@@ -2405,6 +2525,14 @@ namespace GreatZilleSolution
         /// </summary>
         private static void TrackHold(WarTile tile)
         {
+            if (EnemyMayAct())
+            {
+                HideHoldRing();
+                _heldTile = null;
+                _pressSeen = false;
+                _committed = false;
+                return;
+            }
             if (tile != _hoverTile)
             {
                 if (_hoverTile != null)
@@ -2560,13 +2688,15 @@ namespace GreatZilleSolution
         /// That attempt is blocked, so the circle closes and the unit stays in the list. Hold the game's
         /// timer at zero until our ring finishes, and paint the ring again after the game has touched it.
         /// </summary>
+        private static WarTileRaycaster _cachedRaycaster;
+
         public static void FreezeGameHold()
         {
             if (!_pressSeen || _committed || _heldFor <= 0f || _heldFor >= HoldSeconds) return;
             try
             {
-                var ray = UnityEngine.Object.FindObjectOfType<WarTileRaycaster>();
-                if (ray != null) ray.mouseButtonHoldTimer = 0f;
+                if (_cachedRaycaster == null) _cachedRaycaster = UnityEngine.Object.FindObjectOfType<WarTileRaycaster>();
+                if (_cachedRaycaster != null) _cachedRaycaster.mouseButtonHoldTimer = 0f;
             }
             catch { }
             if (_heldTile == null) return;
@@ -2788,12 +2918,148 @@ namespace GreatZilleSolution
 
         public static void LatePass()
         {
-            if (!_pressSeen || _committed || _heldFor <= 0f) ClearHoldFill();
-            ApplyCityLabels();
-            RepaintDeployment();
+            ZilleProfiler.BeginLatePass();
+            try
+            {
+                if (!_pressSeen || _committed || _heldFor <= 0f) ClearHoldFill();
+                UpdateStatusEffectPositions();
+                ThrottleSweepBattles();
+                ThrottleRepairOccupants();
+                WatchEnemyTurn();
+            }
+            finally
+            {
+                ZilleProfiler.EndLatePass();
+            }
+        }
+
+        private static float _nextBattleSweepTime;
+        private static void ThrottleSweepBattles()
+        {
+            if (_tiles.Count == 0) return;
+            if (Time.unscaledTime < _nextBattleSweepTime) return;
+            _nextBattleSweepTime = Time.unscaledTime + 0.35f;
             SweepFinishedBattles();
-            RepairOccupants();
-            WatchEnemyTurn();
+        }
+
+        private static float _nextRepairTime;
+        private static void ThrottleRepairOccupants()
+        {
+            if (DeploymentPanelOpen() || !ScenarioStarted || _tiles.Count == 0) return;
+            if (Time.unscaledTime < _nextRepairTime) return;
+            _nextRepairTime = Time.unscaledTime + 1.5f;
+
+            try
+            {
+                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = _tokenMgr != null ? _tokenMgr.GetWarTokens() : null;
+                if (tokens == null || tokens.Count == 0) return;
+
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    var token = tokens[i];
+                    if (token == null || token.IsDead()) continue;
+                    var tile = token.GetCurrentWarTile();
+                    if (tile != null && tile.GetCurrentToken() != token)
+                    {
+                        var cur = tile.GetCurrentToken();
+                        if (cur == null || cur.IsDead())
+                        {
+                            tile.SetCurrentWarToken(token);
+                            UnlockTile(tile);
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private static void UpdateStatusEffectPositions()
+        {
+            ZilleProfiler.BeginStatus();
+            try
+            {
+                var panel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                if (panel == null) return;
+                var list = panel.instantiatedWarTokenStatusEffects;
+                if (list == null || list.Count == 0) return;
+
+                var cam = WarCamera();
+                if (cam == null) cam = Camera.main;
+
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    var item = list[i];
+                    if (item == null)
+                    {
+                        list.RemoveAt(i);
+                        continue;
+                    }
+                    var token = item.currentWarToken;
+                    if (token == null || token.IsDead() || token.gameObject == null)
+                    {
+                        try { UnityEngine.Object.Destroy(item.gameObject); } catch { }
+                        list.RemoveAt(i);
+                        continue;
+                    }
+
+                    if (cam != null && item.panelRect != null)
+                    {
+                        Vector3 worldPos = token.transform.position + Vector3.up * 0.14f;
+                        Vector3 sp = cam.WorldToScreenPoint(worldPos);
+                        if (sp.z > 0f)
+                        {
+                            item.panelRect.position = new Vector3(sp.x + item.offset.x, sp.y + item.offset.y, 0f);
+                            if (!item.gameObject.activeSelf) item.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            if (item.gameObject.activeSelf) item.gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
+            catch { }
+            finally
+            {
+                ZilleProfiler.EndStatus();
+            }
+        }
+
+        private static readonly Dictionary<long, WarTile> _battleContestedTiles = new Dictionary<long, WarTile>();
+        private static readonly Dictionary<int, WarTile> _pendingContestedTiles = new Dictionary<int, WarTile>();
+
+        public static void RecordBattleContestedTile(WarToken attacker, WarToken defender, WarTile tile)
+        {
+            if (defender == null || tile == null) return;
+            _pendingContestedTiles[defender.GetInstanceID()] = tile;
+        }
+
+        private static void TrackContestedTile(WarBattleManager.WarBattle battle, WarTile tile)
+        {
+            if (battle == null) return;
+            long bKey = battle.Pointer.ToInt64();
+            if (_battleContestedTiles.ContainsKey(bKey)) return;
+
+            if (battle.defender != null)
+            {
+                int defId = battle.defender.GetInstanceID();
+                if (_pendingContestedTiles.TryGetValue(defId, out var pt) && pt != null)
+                {
+                    _battleContestedTiles[bKey] = pt;
+                    return;
+                }
+                var defTile = battle.defender.GetCurrentWarTile();
+                if (defTile != null)
+                {
+                    _battleContestedTiles[bKey] = defTile;
+                    return;
+                }
+            }
+            if (tile != null)
+            {
+                _battleContestedTiles[bKey] = tile;
+            }
         }
 
         /// <summary>The enemy phase calls the same commit the player's click uses. Blocking it leaves the turn on Enemy Turn forever.</summary>
@@ -2814,21 +3080,23 @@ namespace GreatZilleSolution
             try
             {
                 var battle = tile.GetCurrentBattle();
-                return battle != null && !battle.isBattleOver;
+                if (battle != null && !battle.isBattleOver)
+                {
+                    TrackContestedTile(battle, tile);
+                    return true;
+                }
+                return false;
             }
             catch { return false; }
         }
 
         private static float _enemySince;
-        private static bool _enemyUnstuck;
-        private static int _enemyDrive;
-        private static float _enemyQuiet;
+        private static bool _enemyRunning;
 
         /// <summary>
         /// The stock enemy phase plans on the Zille neighbours and then plays those actions.
-        /// Handing the turn back without that leaves the phase flag set, and every later hold
-        /// reaches the game method and returns before the unit moves. This only steps in when
-        /// that phase has stopped producing moves, and it runs the same behaviour the phase uses.
+        /// When vanilla stalls, this runs the Wehlen behaviour via a safe coroutine that waits
+        /// until all movements and animations are 100% completed before handing back the player turn.
         /// </summary>
         private static void WatchEnemyTurn()
         {
@@ -2837,13 +3105,13 @@ namespace GreatZilleSolution
             if (flow == null || !flow.IsDisplayingEnemyMoves())
             {
                 _enemySince = 0f;
-                _enemyUnstuck = false;
-                _enemyDrive = 0;
-                _enemyQuiet = 0f;
+                _enemyRunning = false;
                 return;
             }
             if (_enemySince <= 0f) _enemySince = Time.unscaledTime;
-            if (_enemyDrive == 2) return;
+            if (_enemyRunning) return;
+            if (AnyLiveBattle()) return;
+
             bool moving = false;
             try
             {
@@ -2851,39 +3119,61 @@ namespace GreatZilleSolution
                 moving = _tokenMgr != null && _tokenMgr.IsAnyTokenMoving();
             }
             catch { }
-            if (moving) _enemyQuiet = Time.unscaledTime;
-            else if (_enemyQuiet <= 0f) _enemyQuiet = Time.unscaledTime;
+            if (moving) return;
 
-            if (_enemyDrive == 1)
+            // Wait 1.2s for any initial move/vanilla trigger. If still idle, run Wehlen behaviour!
+            if (Time.unscaledTime - _enemySince < 1.2f) return;
+
+            _enemyRunning = true;
+            MelonCoroutines.Start(RunEnemyTurnSafely(flow));
+        }
+
+        private static IEnumerator RunEnemyTurnSafely(WarFlowManager flow)
+        {
+            MelonLogger.Msg("[ZTABLE] Starting Wehlen enemy turn behaviour.");
+            if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+            if (_tokenMgr != null)
             {
-                if (moving || Time.unscaledTime - _enemyQuiet < 3f) return;
-                _enemyDrive = 2;
-                HandTurnBack(flow);
-                return;
-            }
-            if (Time.unscaledTime - _enemySince < 40f) return;
-            if (moving || Time.unscaledTime - _enemyQuiet < 8f) return;
-            if (AnyLiveBattle()) return;
-            _enemyDrive = 1;
-            _enemyQuiet = Time.unscaledTime;
-            _enemyUnstuck = true;
-            MelonLogger.Warning("[ZTABLE] Enemy phase never played its moves. Running the Wehlen behaviour.");
-            try
-            {
-                if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
-                if (_tokenMgr == null) throw new InvalidOperationException("WarTokenManager is missing.");
-                var battles = UnityEngine.Object.FindObjectOfType<WarBattleManager>();
-                var busy = battles != null ? battles.GetAllTokensIncludedInCurrentBattles() : null;
+                Il2CppSystem.Collections.Generic.List<WarToken> busy = null;
+                try
+                {
+                    var battles = UnityEngine.Object.FindObjectOfType<WarBattleManager>();
+                    busy = battles != null ? battles.GetAllTokensIncludedInCurrentBattles() : null;
+                }
+                catch { }
                 if (busy == null) busy = new Il2CppSystem.Collections.Generic.List<WarToken>();
-                _tokenMgr.SetAllTokenActions();
-                _tokenMgr.StartCoroutine(_tokenMgr.EnemyTokenBehaviourCoroutine(busy));
+
+                try { _tokenMgr.SetAllTokenActions(); } catch { }
+
+                try
+                {
+                    _tokenMgr.StartCoroutine(_tokenMgr.EnemyTokenBehaviourCoroutine(busy));
+                }
+                catch (Exception ex)
+                {
+                    MelonLogger.Warning("[ZTABLE] EnemyTokenBehaviourCoroutine error: " + ex.Message);
+                }
+
+                // Wait until all tokens have finished moving and animating
+                float waitStart = Time.unscaledTime;
+                yield return new WaitForSeconds(0.5f);
+                while (_tokenMgr != null && _tokenMgr.IsAnyTokenMoving())
+                {
+                    if (Time.unscaledTime - waitStart > 20f) break;
+                    yield return null;
+                }
             }
-            catch (Exception ex)
+
+            // Brief pause before handing back turn for visual polish
+            yield return new WaitForSeconds(0.6f);
+
+            while (AnyLiveBattle())
             {
-                MelonLogger.Warning("[ZTABLE] Wehlen behaviour: " + ex.GetBaseException().Message);
-                _enemyDrive = 2;
-                HandTurnBack(flow);
+                yield return new WaitForSeconds(0.3f);
             }
+
+            HandTurnBack(flow);
+            _enemyRunning = false;
         }
 
         private static bool AnyLiveBattle()
@@ -2983,6 +3273,7 @@ namespace GreatZilleSolution
             try { AdvanceAttacker(battle); }
             catch (Exception ex) { MelonLogger.Warning("[ZTABLE] battle advance: " + ex.GetBaseException().Message); }
             ClearBattle(battle);
+            try { _battleContestedTiles.Remove(battle.Pointer.ToInt64()); } catch { }
         }
 
         private static void AdvanceAttacker(WarBattleManager.WarBattle battle)
@@ -2990,13 +3281,18 @@ namespace GreatZilleSolution
             var atk = battle.attacker;
             if (atk == null) return;
             try { if (atk.IsDead()) return; } catch { return; }
-            if (!AttackerWon(battle)) return;
+
+            long bKey = battle.Pointer.ToInt64();
+            WarTile contestedTile = null;
+            if (_battleContestedTiles.TryGetValue(bKey, out var ct) && ct != null)
+            {
+                contestedTile = ct;
+            }
 
             var def = battle.defender;
             var sourceTile = atk.GetCurrentWarTile();
-            WarTile targetTile = def != null ? def.GetCurrentWarTile() : null;
 
-            if (targetTile == null || targetTile == sourceTile)
+            if (contestedTile == null)
             {
                 foreach (var tb in _tiles.Values)
                 {
@@ -3004,37 +3300,104 @@ namespace GreatZilleSolution
                     if (wt == null || wt == sourceTile) continue;
                     if (wt.GetCurrentBattle() == battle)
                     {
-                        targetTile = wt;
+                        contestedTile = wt;
                         break;
                     }
                 }
             }
-            if (targetTile == null) return;
+
+            if (contestedTile == null && def != null)
+            {
+                contestedTile = def.GetCurrentWarTile();
+            }
+
+            if (!AttackerWon(battle))
+            {
+                MelonLogger.Msg("[ZTABLE] Attacker lost the battle.");
+                if (atk != null && !atk.IsDead())
+                {
+                    atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
+                    atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                    try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(atk, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
+                }
+                return;
+            }
+
+            // Attacker won! Check if defending unit is a city!
+            bool isCityBattle = def != null && IsCityToken(def);
+            if (isCityBattle)
+            {
+                // A city NEVER disappears, gets overrun, or dies.
+                // It heals to full health and switches allegiance to the captor!
+                var newAlleg = atk.GetTokenAllegiance();
+                def.SetTokenAllegiance(newAlleg);
+                var cityUt = def.GetWarUnitTypeData();
+                if (cityUt != null) def.remainingOrganization = cityUt.organization;
+                def.RemoveAllTokenStatusEffect();
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllForToken(def); } catch { }
+
+                if (contestedTile != null)
+                {
+                    var ctd = TileDataOf(contestedTile);
+                    if (ctd != null)
+                    {
+                        ctd.Allegiance = newAlleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+                        contestedTile.SetTileAllegiance(newAlleg, false);
+                        SyncOwnership(contestedTile, ctd);
+                        TintTile(contestedTile, ctd);
+                    }
+                    contestedTile.SetCurrentWarToken(def);
+                }
+                MelonLogger.Msg("[ZTABLE] City " + def.name + " captured by " + newAlleg + " and healed to full organization!");
+                return;
+            }
+
+            // Attacker won non-city battle! Defeated defender gains overrun status (if alive after retreat)
+            if (def != null && !def.IsDead())
+            {
+                def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
+                def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(def, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
+                MelonLogger.Msg("[ZTABLE] Defeated defender marked as overrun: " + def.name);
+            }
+
+            if (contestedTile == null) return;
 
             var ut = atk.GetWarUnitTypeData();
-            if (ut != null && !ut.CanMoveToTileType(targetTile.GetTileType())) return;
+            if (ut != null && !ut.CanMoveToTileType(contestedTile.GetTileType())) return;
 
-            // If vanilla has not yet animated the attacker into the defeated province, move it now smoothly.
-            if (atk.GetCurrentWarTile() != targetTile)
+            // Clear contestedTile's reference if it still points to defender
+            if (contestedTile.GetCurrentToken() == def)
             {
-                try { atk.Move(targetTile, true); } catch { }
+                try { contestedTile.SetCurrentWarToken(null); } catch { }
             }
-            try { targetTile.SetCurrentWarToken(atk); } catch { }
 
-            var td = TileDataOf(targetTile);
+            // Move attacker smoothly into the contested province
+            if (atk.GetCurrentWarTile() != contestedTile)
+            {
+                try { atk.Move(contestedTile, true, WarToken.TokenAnimationType.BattleWin, null); }
+                catch { try { atk.Move(contestedTile, true); } catch { } }
+            }
+            try { contestedTile.SetCurrentWarToken(atk); } catch { }
+            if (sourceTile != null && sourceTile != contestedTile && sourceTile.GetCurrentToken() == atk)
+            {
+                try { sourceTile.SetCurrentWarToken(null); } catch { }
+            }
+
+            var td = TileDataOf(contestedTile);
             if (td != null)
             {
                 var alleg = atk.GetTokenAllegiance();
                 td.Allegiance = alleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
-                targetTile.SetTileAllegiance(alleg, false);
-                SyncOwnership(targetTile, td);
-                TintTile(targetTile, td);
+                contestedTile.SetTileAllegiance(alleg, false);
+                SyncOwnership(contestedTile, td);
+                TintTile(contestedTile, td);
             }
 
-            UnlockTile(targetTile);
+            UnlockTile(contestedTile);
             if (sourceTile != null) UnlockTile(sourceTile);
 
-            MelonLogger.Msg("[ZTABLE] Attacker took " + targetTile.gameObject.name + ".");
+            MelonLogger.Msg("[ZTABLE] Attacker successfully took contested province " + contestedTile.gameObject.name + ".");
         }
 
         public static void OnUnitMovedToTile(WarToken token, WarTile targetTile)
@@ -3172,11 +3535,43 @@ namespace GreatZilleSolution
             if (sel == null || tile == null) return false;
             var occ = Occupant(tile);
             if (occ == null || occ == sel || !CanOverrun(sel, occ)) return false;
-            try { if (!occ.IsDead()) occ.Kill(true); } catch { }
-            try { if (tile.GetCurrentToken() != null && tile.GetCurrentToken() != sel) tile.SetCurrentWarToken(null); } catch { }
-            try { if (sel.GetCurrentWarTile() != tile) sel.Move(tile, true); } catch { }
+
+            var sourceTile = sel.GetCurrentWarTile();
+
+            // Kill overrun / bombed enemy with full native death sequence
+            KillUnit(occ, tile);
+
+            // Move selected unit onto the tile with Overrun animation
+            try
+            {
+                if (sel.GetCurrentWarTile() != tile)
+                {
+                    sel.Move(tile, true, WarToken.TokenAnimationType.Overrun, null);
+                }
+            }
+            catch
+            {
+                try { sel.Move(tile, true); } catch { }
+            }
             try { tile.SetCurrentWarToken(sel); } catch { }
+            if (sourceTile != null && sourceTile != tile && sourceTile.GetCurrentToken() == sel)
+            {
+                try { sourceTile.SetCurrentWarToken(null); } catch { }
+            }
+
+            var td = TileDataOf(tile);
+            if (td != null)
+            {
+                var alleg = sel.GetTokenAllegiance();
+                td.Allegiance = alleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+                tile.SetTileAllegiance(alleg, false);
+                SyncOwnership(tile, td);
+                TintTile(tile, td);
+            }
+
             UnlockTile(tile);
+            if (sourceTile != null) UnlockTile(sourceTile);
+
             try
             {
                 var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
@@ -3189,8 +3584,89 @@ namespace GreatZilleSolution
                 if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
             }
             catch { }
-            MelonLogger.Msg("[ZTABLE] Overran " + tile.gameObject.name + ".");
+
+            MelonLogger.Msg("[ZTABLE] Overran and eliminated enemy on " + tile.gameObject.name + ".");
             return true;
+        }
+
+        public static void KillUnit(WarToken token, WarTile tile = null)
+        {
+            if (token == null) return;
+            try
+            {
+                if (IsCityToken(token))
+                {
+                    MelonLogger.Msg("[ZTABLE] Protected city token from destruction: " + (token.gameObject != null ? token.gameObject.name : "city"));
+                    return;
+                }
+
+                if (tile == null)
+                {
+                    try { tile = token.GetCurrentWarTile(); } catch { }
+                }
+                if (tile != null)
+                {
+                    try
+                    {
+                        if (tile.GetCurrentToken() == token)
+                            tile.SetCurrentWarToken(null);
+                    }
+                    catch { }
+                }
+
+                // Immediately clean up status effect indicators so nothing sticks to screen
+                try
+                {
+                    var panel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                    if (panel != null) panel.RemoveAllForToken(token);
+                }
+                catch { }
+
+                // Play death particle effects and animation (Pales style)
+                try
+                {
+                    token.isDead = true;
+                    if (token.animationEvents != null)
+                    {
+                        token.animationEvents.DustSlamParticle();
+                        token.animationEvents.SmokeStart();
+                    }
+                    token.PlayTokenAnimation(WarToken.TokenAnimationType.Death, null);
+                }
+                catch (Exception aex)
+                {
+                    MelonLogger.Warning("[ZTABLE] PlayTokenAnimation error: " + aex.Message);
+                }
+
+                // Delayed destroy so death animation plays in full
+                float delay = 1.4f;
+                try { if (token.deathAnimationDelay > 0.1f) delay = token.deathAnimationDelay; } catch { }
+                MelonCoroutines.Start(DelayedDestroyToken(token, delay));
+
+                MelonLogger.Msg("[ZTABLE] Unit playing death animation sequence: " + (token.gameObject != null ? token.gameObject.name : "token"));
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] KillUnit exception: " + ex.Message);
+            }
+        }
+
+        private static IEnumerator DelayedDestroyToken(WarToken token, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (token != null && token.gameObject != null)
+            {
+                try
+                {
+                    var mgr = _tokenMgr ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                    if (mgr != null) mgr.DestroyToken(token);
+                    else token.Kill(false);
+                }
+                catch
+                {
+                    try { UnityEngine.Object.Destroy(token.gameObject); } catch { }
+                }
+            }
         }
 
         private static void UnlockTile(WarTile tile)
@@ -3426,12 +3902,14 @@ namespace GreatZilleSolution
         }
 
         private static int _chromeTries;
+        private static bool _chromeHidden;
+        private static bool _politicalHidden;
         private static bool _victoryShown;
 
         /// <summary>Royal decrees sit on the campaign's right edge and come back when a war turn ends. Keep that column closed for the whole operation.</summary>
         private static void HidePoliticalLeftovers()
         {
-            if (!ScenarioStarted || DeploymentPanelOpen()) return;
+            if (_politicalHidden || !ScenarioStarted || DeploymentPanelOpen()) return;
             try { Panels.Instance?.HideAllRightPanels(); } catch { }
             Il2CppTMPro.TMP_Text[] all = null;
             try { all = UnityEngine.Object.FindObjectsOfType<Il2CppTMPro.TMP_Text>(); } catch { return; }
@@ -3453,6 +3931,7 @@ namespace GreatZilleSolution
                 target.SetActive(false);
                 MelonLogger.Msg("[ZTABLE] Hid political control '" + s + "' during the war.");
             }
+            _politicalHidden = true;
         }
 
         /// <summary>The operation ends once every scenario city is in Rizian hands.</summary>
@@ -3488,7 +3967,7 @@ namespace GreatZilleSolution
 
         private static void HideProfileChrome()
         {
-            if (_chromeTries > 16) return;
+            if (_chromeHidden || _chromeTries > 10) return;
             _chromeTries++;
             int hidden = 0;
             var profiles = Resources.FindObjectsOfTypeAll<ProfileHUDPanel>();
@@ -3530,32 +4009,12 @@ namespace GreatZilleSolution
                     }
                 }
             }
-            var images = Resources.FindObjectsOfTypeAll<UnityEngine.UI.Image>();
-            if (images != null)
+            if (hidden > 0)
             {
-                var corners = new Vector3[4];
-                for (int i = 0; i < images.Length; i++)
-                {
-                    var img = images[i];
-                    if (img == null || !img.gameObject.scene.IsValid() || !img.gameObject.activeInHierarchy) continue;
-                    string n = img.gameObject.name ?? "";
-                    if (n.IndexOf("Deploy", StringComparison.OrdinalIgnoreCase) >= 0) continue;
-                    if (n.IndexOf("Unit", StringComparison.OrdinalIgnoreCase) >= 0) continue;
-                    img.rectTransform.GetWorldCorners(corners);
-                    float x = corners[0].x;
-                    float y = corners[0].y;
-                    float w = corners[2].x - x;
-                    float h = corners[2].y - y;
-                    if (x > 40f || y > 280f || w < 90f || h < 70f || w > 640f) continue;
-                    var c = img.color;
-                    if (c.r > 0.12f || c.g > 0.12f || c.b > 0.12f || c.a < 0.4f) continue;
-                    img.gameObject.SetActive(false);
-                    hidden++;
-                    MelonLogger.Msg("[ZTABLE] Hid leftover black frame '" + n + "'.");
-                }
+                _chromeHidden = true;
+                _chromeTries = 9999;
+                MelonLogger.Msg("[ZTABLE] Profile chrome hidden.");
             }
-            if (hidden > 0 && _chromeTries == 1)
-                MelonLogger.Msg("[ZTABLE] Profile portrait, head button and the leftover frame hidden.");
         }
 
         private static void ShowProfileChrome()
@@ -4219,6 +4678,11 @@ namespace GreatZilleSolution
             {
                 var h = _propHolds[i];
                 if (h.t == null) continue;
+                if (h.localOffset != Vector3.zero)
+                {
+                    h.t.localPosition = h.baseLocal + h.localOffset;
+                    continue;
+                }
                 if (!TryClearance(h.t, cam, h.above, out Vector3 localDelta)) continue;
                 h.localOffset += localDelta;
                 h.t.localPosition = h.baseLocal + h.localOffset;
@@ -4329,7 +4793,7 @@ namespace GreatZilleSolution
 
         public static void DrawMapEditBar()
         {
-            if (_root == null || !SkinEnabled || ZilleWarMapEditorUI.AnyOpen || NativeDeploymentOpen()) return;
+            if (_root == null || !SkinEnabled || ScenarioStarted || ZilleWarMapEditorUI.AnyOpen || NativeDeploymentOpen()) return;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             if (cfg?.Tiles == null || cfg.Tiles.Count == 0) return;
             if (_mapSel < 0 || _mapSel >= cfg.Tiles.Count) _mapSel = 0;
@@ -4407,8 +4871,9 @@ namespace GreatZilleSolution
         private static bool FrontlineMissingLandUnit(ZilleMapConfig cfg)
         {
             if (cfg?.Tiles == null) return false;
-            WarToken[] tokens = null;
-            try { tokens = UnityEngine.Object.FindObjectsOfType<WarToken>(); } catch { return false; }
+            if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+            var tokens = _tokenMgr != null ? _tokenMgr.GetWarTokens() : null;
+            if (tokens == null) return false;
             var byId = new Dictionary<string, ZilleTileData>();
             for (int i = 0; i < cfg.Tiles.Count; i++)
                 if (!string.IsNullOrEmpty(cfg.Tiles[i].Id)) byId[cfg.Tiles[i].Id] = cfg.Tiles[i];
@@ -4431,12 +4896,12 @@ namespace GreatZilleSolution
             return false;
         }
 
-        private static bool TileHasLandUnit(ZilleTileData td, WarToken[] tokens)
+        private static bool TileHasLandUnit(ZilleTileData td, Il2CppSystem.Collections.Generic.List<WarToken> tokens)
         {
             var wt = FindLiveTile(td.TileNumber);
             if (wt == null || tokens == null) return false;
             var at = wt.transform.position;
-            for (int i = 0; i < tokens.Length; i++)
+            for (int i = 0; i < tokens.Count; i++)
             {
                 var tok = tokens[i];
                 if (tok == null) continue;
@@ -4983,6 +5448,60 @@ namespace GreatZilleSolution
             for (int i = 0; i < 8 && t != null; i++) { parts.Add(t.name); t = t.parent; }
             parts.Reverse();
             return string.Join("/", parts);
+        }
+    }
+
+    public static class ZilleProfiler
+    {
+        private static readonly System.Diagnostics.Stopwatch _swHighlight = new System.Diagnostics.Stopwatch();
+        private static readonly System.Diagnostics.Stopwatch _swLatePass = new System.Diagnostics.Stopwatch();
+        private static readonly System.Diagnostics.Stopwatch _swTick = new System.Diagnostics.Stopwatch();
+        private static readonly System.Diagnostics.Stopwatch _swOnGUI = new System.Diagnostics.Stopwatch();
+        private static readonly System.Diagnostics.Stopwatch _swStatus = new System.Diagnostics.Stopwatch();
+
+        public static double HighlightMs;
+        public static double LatePassMs;
+        public static double TickMs;
+        public static double OnGUIMs;
+        public static double StatusMs;
+
+        private static float _nextReportTime;
+        private static int _frameCount;
+        private static float _fpsAccum;
+
+        public static void BeginHighlight() => _swHighlight.Restart();
+        public static void EndHighlight() { _swHighlight.Stop(); HighlightMs = _swHighlight.Elapsed.TotalMilliseconds; }
+
+        public static void BeginLatePass() => _swLatePass.Restart();
+        public static void EndLatePass() { _swLatePass.Stop(); LatePassMs = _swLatePass.Elapsed.TotalMilliseconds; }
+
+        public static void BeginTick() => _swTick.Restart();
+        public static void EndTick() { _swTick.Stop(); TickMs = _swTick.Elapsed.TotalMilliseconds; }
+
+        public static void BeginOnGUI() => _swOnGUI.Restart();
+        public static void EndOnGUI() { _swOnGUI.Stop(); OnGUIMs = _swOnGUI.Elapsed.TotalMilliseconds; }
+
+        public static void BeginStatus() => _swStatus.Restart();
+        public static void EndStatus() { _swStatus.Stop(); StatusMs = _swStatus.Elapsed.TotalMilliseconds; }
+
+        public static void ReportFrame(float dt)
+        {
+            _frameCount++;
+            _fpsAccum += dt;
+            if (Time.unscaledTime >= _nextReportTime)
+            {
+                _nextReportTime = Time.unscaledTime + 5.0f;
+                float fps = _frameCount > 0 && _fpsAccum > 0 ? _frameCount / _fpsAccum : 0f;
+                _frameCount = 0;
+                _fpsAccum = 0f;
+                MelonLogger.Msg($"[PERF] FPS: {fps:0.0} | LatePass: {LatePassMs:0.00}ms | Highlight: {HighlightMs:0.00}ms | StatusEffects: {StatusMs:0.00}ms | Tick: {TickMs:0.00}ms | OnGUI: {OnGUIMs:0.00}ms");
+            }
+        }
+
+        public static void ForceReport()
+        {
+            float fps = Time.smoothDeltaTime > 0.0001f ? 1.0f / Time.smoothDeltaTime : 0f;
+            MelonLogger.Msg($"[PERF REPORT] FPS: {fps:0.0} | LatePass: {LatePassMs:0.00}ms | Highlight: {HighlightMs:0.00}ms | StatusEffects: {StatusMs:0.00}ms | Tick: {TickMs:0.00}ms | OnGUI: {OnGUIMs:0.00}ms");
         }
     }
 }

@@ -50,6 +50,11 @@ namespace GreatZilleSolution
         /// <summary>Reinforcement uses the same deploy colours and rules, without the opening frontline requirement.</summary>
         public static void TileActionPostfix(WarTile __instance, ref WarTile.TileActionType __result)
         {
+            if (ZilleWarTable.EnemyMayAct())
+            {
+                __result = WarTile.TileActionType.None;
+                return;
+            }
             if (ZilleWarTable.IsImpassableTile(__instance))
             {
                 __result = WarTile.TileActionType.None;
@@ -81,6 +86,19 @@ namespace GreatZilleSolution
                 __result = WarTile.TileActionType.Support;
             if (__result == WarTile.TileActionType.Support && !ZilleWarTable.LiveSupport(__instance))
                 __result = ZilleWarTable.CanMoveOnto(__instance) ? WarTile.TileActionType.Move : WarTile.TileActionType.None;
+            var sel = ZilleWarTable.SelectedUnit();
+            if (sel != null && __instance != null)
+            {
+                var occ = __instance.GetCurrentToken();
+                if (occ != null && occ != sel && ZilleWarTable.CanOverrun(sel, occ))
+                {
+                    if (ZilleWarTable.CanReachTile(sel, __instance))
+                    {
+                        __result = WarTile.TileActionType.Overrun;
+                        return;
+                    }
+                }
+            }
             if (__result == WarTile.TileActionType.Move && !ZilleWarTable.CanMoveOnto(__instance))
                 __result = WarTile.TileActionType.None;
         }
@@ -96,6 +114,7 @@ namespace GreatZilleSolution
         {
             if (!state) return true;
             if (DeploymentPanelShowing()) return false;
+            if (ZilleWarTable.EnemyMayAct()) return false;
             try
             {
                 if (__instance != null && __instance.GetTokenAllegiance() != WarToken.WarAllegiance.Player)
@@ -105,7 +124,12 @@ namespace GreatZilleSolution
             return true;
         }
 
-        public static bool BlockManagerSelectPrefix() => !DeploymentPanelShowing();
+        public static bool BlockManagerSelectPrefix()
+        {
+            if (DeploymentPanelShowing()) return false;
+            if (ZilleWarTable.EnemyMayAct()) return false;
+            return true;
+        }
 
         public static void IsRefundablePostfix(WarToken __instance, ref bool __result)
         {
@@ -124,8 +148,12 @@ namespace GreatZilleSolution
         /// <summary>A raw click must not deploy or move. Those run only after the hold opens the gate.</summary>
         public static bool BlockUntilHoldPrefix(object __instance)
         {
+            if (ZilleWarTable.EnemyMayAct())
+            {
+                // Only allow live battles to resolve during enemy phase, block all player clicks/commits/deployments
+                return __instance is WarTile wt && ZilleWarTable.BattleMayResolve(wt);
+            }
             if (ZilleWarTable.CommitAllowed) return true;
-            if (ZilleWarTable.EnemyMayAct()) return true;
             return __instance is WarTile tile && ZilleWarTable.BattleMayResolve(tile);
         }
 
@@ -235,6 +263,11 @@ namespace GreatZilleSolution
         /// <summary>A unit that already moved is locked out of a second move, but it still has to be clickable.</summary>
         public static void IsSelectablePostfix(WarToken __instance, ref bool __result)
         {
+            if (ZilleWarTable.EnemyMayAct())
+            {
+                __result = false;
+                return;
+            }
             if (__result || __instance == null || !ZilleWarTable.ScenarioStarted) return;
             try
             {
@@ -323,8 +356,71 @@ namespace GreatZilleSolution
                         return;
                     }
                 }
+
+                // If no retreat tile is available, the defeated defending unit is killed!
+                // But a city must NEVER be destroyed or killed!
+                if (__result == null)
+                {
+                    if (ZilleWarTable.IsCityToken(__instance))
+                    {
+                        MelonLogger.Msg("[ZTABLE] Defeated city token stays in place and does not retreat: " + __instance.gameObject.name);
+                        return;
+                    }
+                    MelonLogger.Msg("[ZTABLE] Defeated unit has nowhere to retreat! Dying in battle: " + __instance.gameObject.name);
+                    ZilleWarTable.KillUnit(__instance, curTile);
+                }
             }
             catch { }
+        }
+
+        public static void StartBattlePrefix(WarToken attacker, WarToken defender)
+        {
+            if (defender != null)
+            {
+                var tile = defender.GetCurrentWarTile();
+                if (tile != null)
+                {
+                    ZilleWarTable.RecordBattleContestedTile(attacker, defender, tile);
+                }
+            }
+        }
+
+        public static bool CanMovePrefix(WarToken __instance, WarTile targetTile, ref bool __result)
+        {
+            if (__instance != null)
+            {
+                if (__instance.IsDead() || __instance.IsOrganizationDepleted() || ZilleWarTable.IsOverrun(__instance))
+                {
+                    __result = false;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool EvaluateActionPrefix(WarToken enemyToken, ref WarToken.TokenAction __result)
+        {
+            if (enemyToken != null)
+            {
+                if (enemyToken.IsDead() || enemyToken.IsOrganizationDepleted() || ZilleWarTable.IsOverrun(enemyToken))
+                {
+                    var noneAction = new WarToken.TokenAction();
+                    noneAction.actionType = WarToken.TokenActionType.None;
+                    noneAction.tile = enemyToken.GetCurrentWarTile();
+                    __result = noneAction;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static void IsMovementLockedPostfix(WarToken __instance, ref bool __result)
+        {
+            if (!__result && __instance != null)
+            {
+                if (__instance.IsOrganizationDepleted() || ZilleWarTable.IsOverrun(__instance))
+                    __result = true;
+            }
         }
 
         /// <summary>The Wehlen behaviour executes the action list. Rebuild it from the Zille neighbours first, or every planned move is skipped.</summary>
@@ -413,7 +509,7 @@ namespace GreatZilleSolution
                 {
                     var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(StartConversationPrefix));
                     harmony.Patch(startConvMethod, prefix: new HarmonyMethod(prefix));
-                    MelonLogger.Msg("[Great Zille] Successfully hooked DialogueManager.StartConversation!");
+                    MelonLogger.Msg("[Great Zille] Successfully hooked DialogueManager.StartConversation!");
                 }
 
                 // 2. TokenInteractionPanel.Setup (Native Action Button Injection)
@@ -539,6 +635,18 @@ namespace GreatZilleSolution
                 var endBattle = AccessTools.Method(typeof(WarBattleManager), "EndBattle");
                 if (endBattle != null)
                     harmony.Patch(endBattle, finalizer: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EndBattleFinalizer))));
+                var startBattle = AccessTools.Method(typeof(WarBattleManager), "StartBattle");
+                if (startBattle != null)
+                    harmony.Patch(startBattle, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(StartBattlePrefix))));
+                var canMove = AccessTools.Method(typeof(WarToken), nameof(WarToken.CanMove));
+                if (canMove != null)
+                    harmony.Patch(canMove, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CanMovePrefix))));
+                var evalAction = AccessTools.Method(typeof(EnemyTokenActionEvaluator), nameof(EnemyTokenActionEvaluator.EvaluateAction));
+                if (evalAction != null)
+                    harmony.Patch(evalAction, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EvaluateActionPrefix))));
+                var isMoveLocked = AccessTools.Method(typeof(WarToken), nameof(WarToken.IsMovementLocked));
+                if (isMoveLocked != null)
+                    harmony.Patch(isMoveLocked, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsMovementLockedPostfix))));
                 var playerTurn = AccessTools.Method(typeof(WarFlowManager), "PlayerTurn");
                 if (playerTurn != null)
                     harmony.Patch(playerTurn, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerTurnPostfix))));

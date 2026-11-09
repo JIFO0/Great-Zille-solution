@@ -62,6 +62,7 @@ Końcowy wynik operacji wojennej oraz warunki negocjacji pokojowych z Wiktorem S
 ---
 
 ## 📁 Dokumentacja Projektu
+* [🗺️ Interaktywny Plan Wdrożenia (Roadmap z sekcjami)](file:///c:/Github/Great-Zille-solution/PROJECT_ROADMAP.md)
 * [Specyfikacja Projektowa i Fabularna](file:///c:/Github/Great-Zille-solution/docs/SPECIFICATION_GREAT_ZILLE.md)
 * [Master Implementation Plan](file:///c:/Github/Great-Zille-solution/docs/MASTER_IMPLEMENTATION_PLAN_GREAT_ZILLE.md)
 * [Community Feedback & War System Architecture](file:///c:/Github/Great-Zille-solution/docs/COMMUNITY_FEEDBACK_AND_EXPANSION_DESIGN.md)

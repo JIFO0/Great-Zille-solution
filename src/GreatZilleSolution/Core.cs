@@ -151,6 +151,8 @@ namespace GreatZilleSolution
 
             catch { }
 
+            ZilleProfiler.ReportFrame(Time.unscaledDeltaTime);
+
         }
 
 
@@ -168,6 +170,8 @@ namespace GreatZilleSolution
         public override void OnGUI()
 
         {
+
+            ZilleProfiler.BeginOnGUI();
 
             try
 
@@ -220,6 +224,8 @@ namespace GreatZilleSolution
                     else if (Event.current.keyCode == KeyCode.F8)
 
                     {
+
+                        ZilleProfiler.ForceReport();
 
                         ZilleWarTable.Diagnose("F8");
 
@@ -329,6 +335,10 @@ namespace GreatZilleSolution
 
                 Log.Error($"[Great Zille OnGUI Error]: {ex.Message}");
 
+            }
+            finally
+            {
+                ZilleProfiler.EndOnGUI();
             }
 
         }
