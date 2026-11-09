@@ -1,30 +1,5 @@
 [
   {
-    "id": "Turn02_Decision_ZilleWarUltimatum",
-    "rawId": "MOD_DEC_001",
-    "name": "Turn02_Decision_ZilleWarUltimatum",
-    "title": "Wojenne Ultimatum Wobec Wehlen ws. Zille",
-    "description": "Prezydent Wiktor Smolak ignoruje terminy zwrotu prowincji Zille i organizuje prowokacje na granicy. Rizia może skierować dywizje pancerne do Brenas i postawić Wehlen przed faktem dokonanym.",
-    "hubTitle": "Wojenne Ultimatum Zille",
-    "path": "Rizia/Decisions/War_Operation",
-    "pack": "Rizia",
-    "modStatus": "MODNEW",
-    "condition": "RiziaDLC.Resources_Authority >= 1",
-    "endInstruction": "Variable['Zille_War_Ultimatum_Given'] = true;",
-    "options": [
-      {
-        "text": "Wysłać oficjalne ultimatum militarne i zająć pozycje wyjściowe [-1 Budget, +1 Authority]",
-        "condition": "RiziaDLC.Resources_Budget >= 1",
-        "instruction": "RiziaDLC.Resources_Budget -= 1;\nRiziaDLC.Resources_Authority += 1;\nVariable['Zille_War_Ultimatum_Given'] = true;\nEnableReport('Report_Zille_Mobilization_Brenas');"
-      },
-      {
-        "text": "Ograniczyć się do protestu dyplomatycznego w AN [-1 Authority]",
-        "condition": "",
-        "instruction": "RiziaDLC.Resources_Authority -= 1;\nVariable['Zille_War_Postpone'] = true;"
-      }
-    ]
-  },
-  {
     "id": "Floating_Decision_DastnuristAntiDrugRally",
     "rawId": "0x010000C60000019E",
     "name": "Floating_Decision_DastnuristAntiDrugRally",

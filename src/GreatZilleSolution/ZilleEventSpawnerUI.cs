@@ -91,7 +91,7 @@ namespace GreatZilleSolution
                         catch { }
                     }), false);
 
-                    DialogueHelper.ShowAlert($"[Event] Rozpoczeto: {DisplayTitle}");
+                    DialogueHelper.ShowAlert($"[Event] Started: {DisplayTitle}");
                     return;
                 }
 
@@ -99,12 +99,12 @@ namespace GreatZilleSolution
                 Panels.Instance?.HideAllRightPanels();
                 Panels.Instance?.HideAllCenterPanels();
                 DialogueManager.StartConversation(ConvIdOrName);
-                DialogueHelper.ShowAlert($"[Event] Rozpoczeto: {DisplayTitle}");
+                DialogueHelper.ShowAlert($"[Event] Started: {DisplayTitle}");
             }
             catch (Exception ex)
             {
                 MelonLogger.Error($"[EVENT SPAWNER] Failed to launch event '{ConvIdOrName}': {ex.Message}");
-                DialogueHelper.ShowAlert($"[Blad] Nie udalo sie uruchomic {ConvIdOrName}: {ex.Message}");
+                DialogueHelper.ShowAlert($"[Error] Could not launch {ConvIdOrName}: {ex.Message}");
             }
         }
     }
@@ -134,24 +134,7 @@ namespace GreatZilleSolution
         {
             MelonLogger.Msg("[EVENT SPAWNER] Building event spawner catalog...");
 
-            // 1. (MODNEW) Events - Custom additions by Great Zille
-            AddModNewEvent("Turn_Zille_WarBriefing", "Krolewska Narada Wojenna w Palas Rezna", "A royal briefing before the invasion of Zille - Council Chambers", "RIZIA");
-            AddModNewEvent("Turn_Zille_WarBalconySpeech", "Przemowienie z Balkonu do Narodu", "Wypowiedzenie wojny, reakcja tlumu i 3 doktryny (Revanchist/Liberator/Legalist)", "RIZIA");
-            AddModNewEvent("Turn_Zille_WarLogisticsDispute", "Spor Logistyczny: Azaro vs Sazon", "Kryzys zaopatrzeniowy w prowincji Brenas (Wojna vs Rolnictwo)", "RIZIA");
-            AddModNewEvent("Turn_Zille_WarPreNegotiationsBriefing", "Odprawa Wywiadu i Telefony Dyplomatyczne", "Tajne kable: Alvarez (Lespia), Hegel (Valgsland), Beatrice (Rumburg)", "RIZIA");
-            AddModNewEvent("Turn_Zille_WarSmolakFinalParley", "Pojedynek ze Smolakiem w Namiocie Polowym", "Spotkanie na linii frontu z Wiktorem Smolakiem pod Zille", "RIZIA");
-            AddModNewEvent("Turn_Zille_WarPeaceTreaty", "Traktat Pokojowy w Zille (5 Artykulow)", "Pelne negocjacje pokojowe: terytorium, ropa, reparacje, osadnicy, demobilizacja", "RIZIA");
-            AddModNewEvent("WarFragment_Zille_1_1", "Operacja Righteous Sword (Bitwa 3D)", "Bezposrednie wejscie na teatr operacyjny inwazji Zille", "RIZIA");
-
-            // 2. (MODEDIT) Events - Vanilla conversations modified by Great Zille
-            AddModEditEvent("EnT_CouncilBriefing", "Turn 1: Narada Krolewska", "Dodano dyrektywe przygotowania operacji zbrojnego odzyskania Zille", "RIZIA");
-            AddModEditEvent("SnO_SecurityMilitaryMeeting", "Turn 1: Odprawa Wojskowa", "Dodano polecenie opracowania planu inwazji dla Rady Wojny Lucity", "RIZIA");
-            AddModEditEvent("FPnT_DiplomacyBriefing", "Turn 2: Odprawa Dyplomatyczna", "Dodano formalne ultimatum wojenne przeciwko Wehlen w obronie Zille", "RIZIA");
-            AddModEditEvent("FPnT_ZilleVisit", "Turn 2: Dzien Przyjazni w Zille", "Dodano bezposrednia konfrontacje i grozbe militarna w twarz Smolaka", "RIZIA");
-            AddModEditEvent("SnO_ZilleSecurityDebrief", "Turn 3: Debriefing po Zamachu", "Dodano natychmiastowy rozkaz mobilizacji bojowej III Korpusu w Brenas", "RIZIA");
-            AddModEditEvent("FPnT_AlvarezCall", "Turn 4: Telefon z Patricio Alvarezem", "Dodano negocjacje paktu z Lespia i parasola ochronnego w AN", "RIZIA");
-            AddModEditEvent("A_CouncilTalkAboutPales", "Turn 4: Debata o Wojnie z Pales", "Dodano analize ryzyka i ostrzezenie przed katastrofalna wojna na dwa fronty", "RIZIA");
-            AddModEditEvent("FPnT_ZilleNegotiations", "Turn 8: Negocjacje Zwrotu Zille", "Dodano zerwanie sfingowanego referendum i ostateczny rozkaz inwazji", "RIZIA");
+            // Mod events are loaded dynamically from masterDatabase and game data
 
             // 3. Scan EntityDataManager.AllConversationsData
             try
@@ -240,12 +223,7 @@ namespace GreatZilleSolution
                 MelonLogger.Warning($"[EVENT SPAWNER] MasterDatabase scan warning: {ex.Message}");
             }
 
-            // By default, spawn the flagship briefing into Porte Drazon if not yet spawned
-            var briefing = AllCatalogEvents.Find(e => e.ConvIdOrName == "Turn_Zille_WarBriefing");
-            if (briefing != null && !SpawnedInPorteDrazon.Contains(briefing))
-            {
-                SpawnedInPorteDrazon.Add(briefing);
-            }
+            // Porte Drazon briefing is managed directly by DialogueInjectionPatches
 
             MelonLogger.Msg($"[EVENT SPAWNER] Catalog built: {AllCatalogEvents.Count} total events available ({SpawnedInPorteDrazon.Count} spawned in Porte Drazon).");
         }
@@ -288,19 +266,19 @@ namespace GreatZilleSolution
             if (IsEventSpawned(entry))
             {
                 SpawnedInPorteDrazon.RemoveAll(e => e.ConvIdOrName == entry.ConvIdOrName);
-                DialogueHelper.ShowAlert($"[Porte Drazon] Usunieto event: {entry.DisplayTitle}");
+                DialogueHelper.ShowAlert($"[Porte Drazon] Removed event: {entry.DisplayTitle}");
             }
             else
             {
                 SpawnedInPorteDrazon.Add(entry);
-                DialogueHelper.ShowAlert($"[Porte Drazon] Zespawnowano event: {entry.DisplayTitle}");
+                DialogueHelper.ShowAlert($"[Porte Drazon] Spawned event: {entry.DisplayTitle}");
             }
         }
 
         public static void ClearAllSpawned()
         {
             SpawnedInPorteDrazon.Clear();
-            DialogueHelper.ShowAlert("[Porte Drazon] Wyczyszczono wszystkie zespawnowane eventy.");
+            DialogueHelper.ShowAlert("[Porte Drazon] Cleared all spawned events.");
         }
     }
 
@@ -315,11 +293,11 @@ namespace GreatZilleSolution
 
         private readonly string[] _tabLabels = new string[]
         {
-            "Wszystkie",
+            "All",
             "★ (MODNEW)",
             "✎ (MODEDIT)",
             "Rizia",
-            "Zespawnowane w Porte Drazon"
+            "Spawned in Porte Drazon"
         };
 
         public void DrawGUI()
@@ -332,7 +310,7 @@ namespace GreatZilleSolution
                 9903,
                 _windowRect,
                 (GUI.WindowFunction)DrawWindowContent,
-                "<b>[GREAT ZILLE] Event Spawner w Porte Drazon & Scene Browser | JIFO (jifo.dev)</b>"
+                "<b>[GREAT ZILLE] Event Spawner & Scene Browser | JIFO (jifo.dev)</b>"
             );
         }
 
@@ -344,10 +322,10 @@ namespace GreatZilleSolution
             float y = 28f;
 
             // Header info & Porte Drazon quick travel
-            GUI.Label(new Rect(pad, y, winW - 200f, 22f), "Wybierz dowolny event lub scene, aby <b>zespawnowac go w Porte Drazon</b> albo <b>odpalic od razu</b>:");
+            GUI.Label(new Rect(pad, y, winW - 200f, 22f), "Select any event or scene to <b>spawn it in Porte Drazon</b> or <b>launch immediately</b>:");
             
             GUI.color = new Color(0.3f, 0.85f, 1f);
-            if (GUI.Button(new Rect(winW - pad - 190f, y, 190f, 26f), ">> Idz do Porte Drazon <<"))
+            if (GUI.Button(new Rect(winW - pad - 190f, y, 190f, 26f), ">> Go to Porte Drazon <<"))
             {
                 WarOperationZilleManager.FocusPorteDrazonBriefing();
             }
@@ -355,13 +333,13 @@ namespace GreatZilleSolution
             y += 30f;
 
             // Search Filter & Clear button
-            GUI.Label(new Rect(pad, y + 2f, 95f, 24f), "<b>Szukaj eventu:</b>");
+            GUI.Label(new Rect(pad, y + 2f, 95f, 24f), "<b>Search event:</b>");
             _searchFilter = GUI.TextField(new Rect(pad + 100f, y, winW - pad - 240f - 100f, 24f), _searchFilter);
-            if (GUI.Button(new Rect(winW - pad - 230f, y, 90f, 24f), "Wyczysc"))
+            if (GUI.Button(new Rect(winW - pad - 230f, y, 90f, 24f), "Clear"))
             {
                 _searchFilter = "";
             }
-            if (GUI.Button(new Rect(winW - pad - 130f, y, 130f, 24f), "Odswiez baze"))
+            if (GUI.Button(new Rect(winW - pad - 130f, y, 130f, 24f), "Refresh"))
             {
                 ZilleEventSpawnerManager.RefreshCatalog();
             }
@@ -415,11 +393,11 @@ namespace GreatZilleSolution
             }
 
             // Results count bar
-            GUI.Label(new Rect(pad, y, 400f, 20f), $"<color=#90cdf4>Znaleziono: <b>{matches.Count}</b> eventow</color> | Zespawnowanych w stolicy: <b>{ZilleEventSpawnerManager.SpawnedInPorteDrazon.Count}</b>");
+            GUI.Label(new Rect(pad, y, 400f, 20f), $"<color=#90cdf4>Found: <b>{matches.Count}</b> events</color> | Spawned in capital: <b>{ZilleEventSpawnerManager.SpawnedInPorteDrazon.Count}</b>");
             if (ZilleEventSpawnerManager.SpawnedInPorteDrazon.Count > 0)
             {
                 GUI.color = new Color(1f, 0.6f, 0.6f);
-                if (GUI.Button(new Rect(winW - pad - 210f, y - 2f, 210f, 22f), "[Usun zespawnowane ze stolicy]"))
+                if (GUI.Button(new Rect(winW - pad - 210f, y - 2f, 210f, 22f), "[Remove spawned from capital]"))
                 {
                     ZilleEventSpawnerManager.ClearAllSpawned();
                 }
@@ -485,7 +463,7 @@ namespace GreatZilleSolution
                 if (isSpawned)
                 {
                     GUI.color = new Color(0.4f, 1f, 0.5f);
-                    if (GUI.Button(new Rect(btnX, rowY + 11f, 160f, 32f), "✓ W PORTE DRAZON (Usun)"))
+                    if (GUI.Button(new Rect(btnX, rowY + 11f, 160f, 32f), "✓ IN PORTE DRAZON (Remove)"))
                     {
                         ZilleEventSpawnerManager.ToggleSpawn(item);
                     }
@@ -493,7 +471,7 @@ namespace GreatZilleSolution
                 else
                 {
                     GUI.color = new Color(0.9f, 0.9f, 0.9f);
-                    if (GUI.Button(new Rect(btnX, rowY + 11f, 160f, 32f), "+ Zresp w Porte Drazon"))
+                    if (GUI.Button(new Rect(btnX, rowY + 11f, 160f, 32f), "+ Spawn in Porte Drazon"))
                     {
                         ZilleEventSpawnerManager.ToggleSpawn(item);
                     }
@@ -502,7 +480,7 @@ namespace GreatZilleSolution
 
                 // Button 2: Launch immediately
                 GUI.color = new Color(1f, 0.85f, 0.3f);
-                if (GUI.Button(new Rect(btnX + 168f, rowY + 11f, 150f, 32f), "▶ ODPAL TERAZ"))
+                if (GUI.Button(new Rect(btnX + 168f, rowY + 11f, 150f, 32f), "▶ LAUNCH NOW"))
                 {
                     item.Launch();
                 }
@@ -515,9 +493,9 @@ namespace GreatZilleSolution
 
             // Bottom bar
             float bottomY = winH - 38f;
-            GUI.Label(new Rect(pad, bottomY + 4f, 500f, 24f), "<size=11><color=#888888>Wszystkie dodane eventy pojawia sie natychmiast w oknie interakcji stolicy Porte Drazon na mapie.</color></size>");
+            GUI.Label(new Rect(pad, bottomY + 4f, 500f, 24f), "<size=11><color=#888888>All added events will appear immediately in the Porte Drazon interaction window on the map.</color></size>");
 
-            if (GUI.Button(new Rect(winW - pad - 120f, bottomY, 120f, 28f), "Zamknij (F6)"))
+            if (GUI.Button(new Rect(winW - pad - 120f, bottomY, 120f, 28f), "Close (F6)"))
             {
                 IsOpen = false;
             }

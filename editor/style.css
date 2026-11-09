@@ -1149,6 +1149,143 @@ body {
   color: #000;
   box-shadow: var(--neon-amber-glow);
 }
+
+.tree-home-btn {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s;
+}
+
+.tree-home-btn:hover {
+  background: var(--neon-cyan);
+  color: #000;
+  box-shadow: var(--neon-cyan-glow);
+}
+
+.zoom-telemetry-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-dim);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  min-width: 44px;
+  text-align: center;
+  user-select: none;
+  transition: all 0.15s;
+}
+
+.zoom-telemetry-pill:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--neon-cyan-glow);
+}
+
+.tree-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tree-search-input {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-dim);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 5px 24px 5px 8px;
+  border-radius: 4px;
+  outline: none;
+  width: 170px;
+  transition: all 0.2s;
+}
+
+.tree-search-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+  width: 220px;
+}
+
+.tree-search-wrap svg {
+  position: absolute;
+  right: 6px;
+  width: 12px;
+  height: 12px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+/* TACTICAL CANVAS BACKGROUND GRID */
+.tree-view-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #070b12;
+  background-image: 
+    radial-gradient(rgba(0, 240, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 120px 120px, 120px 120px;
+  cursor: grab;
+  user-select: none;
+}
+
+.tree-view-container.panning {
+  cursor: grabbing !important;
+}
+
+/* BADGES FOR PREREQUISITE AND SCRIPT ON CARDS */
+.tree-cond-pill {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: rgba(176, 38, 255, 0.15);
+  border: 1px solid rgba(176, 38, 255, 0.5);
+  color: #d8b4fe;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-script-pill {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  color: #86efac;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tree-node-card.search-matched {
+  outline: 2px solid var(--neon-cyan) !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.7) !important;
+  animation: pulse-search 1.5s infinite;
+}
+
+@keyframes pulse-search {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.8); }
+  50% { box-shadow: 0 0 35px rgba(0, 240, 255, 1); }
 }
 
 .tree-ctrl-btn {

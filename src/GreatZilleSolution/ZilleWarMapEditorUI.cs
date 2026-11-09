@@ -169,7 +169,7 @@ namespace GreatZilleSolution
             }
             else
             {
-                GUI.Box(mapRect, "Ładowanie tekstury mapy Zille (6 kafelków)...");
+                GUI.Box(mapRect, "Loading Zille map texture (6 tiles)...");
             }
 
             // Mouse position relative to group

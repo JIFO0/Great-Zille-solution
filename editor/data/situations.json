@@ -1,17 +1,5 @@
 [
   {
-    "id": "Situation_Zille_Frontline_Offensive",
-    "rawId": "MOD_SIT_001",
-    "name": "Situation_Zille_Frontline_Offensive",
-    "title": "Wojna o Odzyskanie Prowincji Zille",
-    "description": "Siły zbrojne Królestwa Rizii prowadzą pełnoskalową operację lądowo-morską mającą na celu wyzwolenie prowincji Zille spod okupacji Wehlen.",
-    "condition": "Variable['Zille_War_Alfa'] == true || Variable['Zille_War_Beta'] == true",
-    "severity": "VeryBad",
-    "category": "Military",
-    "pack": "Rizia",
-    "modStatus": "MODNEW"
-  },
-  {
     "id": "Diplomacy_Agnolia_Agriculture_Market_Access",
     "rawId": "0x010000460001C8E1",
     "name": "Diplomacy_Agnolia_Agriculture_Market_Access",

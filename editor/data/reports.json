@@ -1,16 +1,5 @@
 [
   {
-    "id": "Report_Zille_WarDeclaration_Frontline",
-    "rawId": "MOD_REP_001",
-    "name": "Report_Zille_WarDeclaration_Frontline",
-    "title": "Armia Królewska Przekracza Granicę Prowincji Brenas",
-    "description": "Sztab Generalny potwierdza rozpoczęcie natarcia sił połączonych rodów Azaro i Sazon na półwysep Zille. Punkty graniczne Wehlen zostały zajęte.",
-    "turn": 4,
-    "condition": "Variable['Zille_War_Alfa'] == true || Variable['Zille_War_Beta'] == true",
-    "pack": "Rizia",
-    "modStatus": "MODNEW"
-  },
-  {
     "id": "Construction_Argno_BorderPostUpgraded",
     "rawId": "0x010000A10000000E",
     "name": "Construction_Argno_BorderPostUpgraded",

@@ -608,7 +608,7 @@ namespace GreatZilleSolution
 
                     }
 
-                    DialogueHelper.ShowAlert("[Zille] Pionek wojenny i operacja Operation Righteous Sword Phase I aktywne w Zille.");
+                    DialogueHelper.ShowAlert("[Zille] War token and Operation Righteous Sword Phase I are active in Zille.");
                     return true;
                 }
 

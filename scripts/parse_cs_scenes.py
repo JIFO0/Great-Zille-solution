@@ -29,12 +29,12 @@ ACTOR_NAMES = {
 }
 
 SCENE_DEFS = [
-    (9988, "Turn_Zille_WarBriefing", "RegisterWarCouncilBriefing", "Królewska Narada Wojenna w Palas Rezna"),
-    (9989, "Turn_Zille_WarBalconySpeech", "RegisterWarBalconySpeech", "Przemówienie z Balkonu do Narodu"),
-    (9990, "Turn_Zille_WarLogisticsDispute", "RegisterWarLogisticsDispute", "Spór Logistyczny: Azaro vs Sazon"),
-    (9991, "Turn_Zille_WarPreNegotiationsBriefing", "RegisterWarPreNegotiationsBriefing", "Odprawa Wywiadu i Telefony Dyplomatyczne"),
-    (9992, "Turn_Zille_WarSmolakFinalParley", "RegisterWarSmolakFinalParley", "Pojedynek ze Smolakiem w Namiocie Polowym"),
-    (9993, "Turn_Zille_WarPeaceTreaty", "RegisterWarPeaceTreaty", "Traktat Pokojowy w Zille (5 Artykułów)")
+    (9988, "Turn_Zille_WarBriefing", "RegisterWarCouncilBriefing", "Royal War Council Briefing in Palas Rezna"),
+    (9989, "Turn_Zille_WarBalconySpeech", "RegisterWarBalconySpeech", "Balcony Address to the Nation"),
+    (9990, "Turn_Zille_WarLogisticsDispute", "RegisterWarLogisticsDispute", "Logistics Dispute: Azaro vs Sazon"),
+    (9991, "Turn_Zille_WarPreNegotiationsBriefing", "RegisterWarPreNegotiationsBriefing", "Intelligence Briefing & Diplomatic Cables"),
+    (9992, "Turn_Zille_WarSmolakFinalParley", "RegisterWarSmolakFinalParley", "Frontline Parley with Smolak"),
+    (9993, "Turn_Zille_WarPeaceTreaty", "RegisterWarPeaceTreaty", "Peace Treaty of Zille (5 Articles)")
 ]
 
 with open(CS_PATH, "r", encoding="utf-8") as f:
@@ -60,7 +60,7 @@ def resolve_actor_id(val):
 
 def clean_str(s):
     if not s: return ""
-    return s.encode().decode('unicode_escape', 'ignore').replace('\\"', '"')
+    return s.replace('\\"', '"').replace('\\\\', '\\')
 
 for i, (cid, title, meth_name, desc) in enumerate(SCENE_DEFS):
     m_start = cs_content.find("void " + meth_name)

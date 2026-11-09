@@ -16,14 +16,14 @@ os.makedirs(CONV_DIR, exist_ok=True)
 PLAYER_ACTOR_IDS = {5, 6, 93, 95}
 
 MODEDIT_CONVERSATION_TITLES = {
-    "EnT_CouncilBriefing": "Turn 1: Narada Krolewska (Dodano dyrektywę przygotowania operacji zbrojnego odzyskania Zille)",
-    "SnO_SecurityMilitaryMeeting": "Turn 1: Odprawa Wojskowa (Dodano polecenie opracowania planu inwazji)",
-    "FPnT_DiplomacyBriefing": "Turn 2: Odprawa Dyplomatyczna (Dodano formalne ultimatum wojenne przeciwko Wehlen)",
-    "FPnT_ZilleVisit": "Turn 2: Dzien Przyjazni w Zille (Dodano bezposrednia konfrontacje i grozbe militarna w twarz Smolaka)",
-    "SnO_ZilleSecurityDebrief": "Turn 3: Debriefing po Zamachu (Dodano mobilizacje bojowa III Korpusu)",
-    "FPnT_AlvarezCall": "Turn 4: Telefon z Patricio Alvarezem (Dodano negocjacje paktu z Lespia)",
-    "A_CouncilTalkAboutPales": "Turn 4: Debata o Wojnie z Pales (Dodano analize ryzyka wojny na dwa fronty)",
-    "FPnT_ZilleNegotiations": "Turn 8: Negocjacje Zwrotu Zille (Dodano zerwanie sfingowanego referendum i rozkaz inwazji)"
+    "EnT_CouncilBriefing": "Turn 1: Royal Council Briefing (Added directive to prepare armed operation to reclaim Zille)",
+    "SnO_SecurityMilitaryMeeting": "Turn 1: Military & Security Meeting (Added war planning directive for Lucita's War Council)",
+    "FPnT_DiplomacyBriefing": "Turn 2: Diplomatic Briefing (Added formal military ultimatum to Wehlen)",
+    "FPnT_ZilleVisit": "Turn 2: Friendship Day in Zille (Added direct confrontation and military warning to Smolak)",
+    "SnO_ZilleSecurityDebrief": "Turn 3: Security Debriefing (Added combat mobilization order for III Corps in Brenas)",
+    "FPnT_AlvarezCall": "Turn 4: Call with Patricio Alvarez (Added Lespia pact negotiations and AN leverage)",
+    "A_CouncilTalkAboutPales": "Turn 4: Council Debate on Pales (Added risk assessment and two-front war warning)",
+    "FPnT_ZilleNegotiations": "Turn 8: Zille Return Negotiations (Added rejection of rigged referendum and invasion order)"
 }
 
 MODNEW_CONVERSATIONS = [
@@ -34,7 +34,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Królewska Narada Wojenna w Palas Rezna - sala narad wojennych, prezentacja planów inwazji, Hugo, Lucita, Titus, Laurento",
+        "description": "Royal War Council Briefing in Palas Rezna - Council Chambers, invasion plan presentation",
         "category": "RIZIA"
     },
     {
@@ -44,7 +44,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Przemówienie z Balkonu do Narodu - orędzie królewskie Romusa, reakcja tłumu i wybór doktryny (Revanchist / Liberator / Legalist)",
+        "description": "Balcony Address to the Nation - King Romus speech and doctrine selection (Revanchist / Liberator / Legalist)",
         "category": "RIZIA"
     },
     {
@@ -54,7 +54,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Spór Logistyczny: Azaro vs Sazon - kryzys zaopatrzeniowy w prowincji Brenas (kolej, rekwizycje, wojsko vs rolnictwo)",
+        "description": "Logistics Dispute: Azaro vs Sazon - supply crisis in Brenas (railways, requisitioning, military vs agriculture)",
         "category": "RIZIA"
     },
     {
@@ -64,7 +64,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Odprawa Wywiadu i Telefony Dyplomatyczne - tajne kable do Patricio Alvareza, Emmericha Hegla i królowej Beatrice",
+        "description": "Intelligence Briefing & Diplomatic Cables - confidential lines to Patricio Alvarez, Emmerich Hegel and Queen Beatrice",
         "category": "RIZIA"
     },
     {
@@ -74,7 +74,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Pojedynek ze Smolakiem w Namiocie Polowym - dramatyczna konfrontacja twarzą w twarz na linii frontu pod Zille",
+        "description": "Frontline Parley with Smolak - dramatic face-to-face confrontation inside the command tent near Zille",
         "category": "RIZIA"
     },
     {
@@ -84,17 +84,7 @@ MODNEW_CONVERSATIONS = [
         "folder": "War_Operation",
         "turn": "Operacja Wojenna Zille (Mod)",
         "modStatus": "MODNEW",
-        "description": "Traktat Pokojowy w Zille (5 Artykułów) - pełne rozstrzygnięcie: granice, reparacje, ropa, wolne miasto, demobilizacja",
-        "category": "RIZIA"
-    },
-    {
-        "id": 9994,
-        "title": "WarFragment_Zille_1_1",
-        "pack": "Rizia",
-        "folder": "War_Operation",
-        "turn": "Operacja Wojenna Zille (Mod)",
-        "modStatus": "MODNEW",
-        "description": "Operacja Righteous Sword - przejście na teatr operacyjny 3D mapy wojennej",
+        "description": "Peace Treaty of Zille (5 Articles) - final settlement: borders, reparations, oil concessions, demobilization",
         "category": "RIZIA"
     }
 ]
@@ -580,34 +570,7 @@ def main():
                 "options": opts
             })
 
-    # Add custom MODNEW decisions
-    decisions_list.insert(0, {
-        "id": "Turn02_Decision_ZilleWarUltimatum",
-        "rawId": "MOD_DEC_001",
-        "name": "Turn02_Decision_ZilleWarUltimatum",
-        "title": "Wojenne Ultimatum Wobec Wehlen ws. Zille",
-        "description": "Prezydent Wiktor Smolak ignoruje terminy zwrotu prowincji Zille i organizuje prowokacje na granicy. Rizia może skierować dywizje pancerne do Brenas i postawić Wehlen przed faktem dokonanym.",
-        "hubTitle": "Wojenne Ultimatum Zille",
-        "path": "Rizia/Decisions/War_Operation",
-        "pack": "Rizia",
-        "modStatus": "MODNEW",
-        "condition": "RiziaDLC.Resources_Authority >= 1",
-        "endInstruction": "Variable['Zille_War_Ultimatum_Given'] = true;",
-        "options": [
-            {
-                "text": "Wysłać oficjalne ultimatum militarne i zająć pozycje wyjściowe [-1 Budget, +1 Authority]",
-                "condition": "RiziaDLC.Resources_Budget >= 1",
-                "instruction": "RiziaDLC.Resources_Budget -= 1;\nRiziaDLC.Resources_Authority += 1;\nVariable['Zille_War_Ultimatum_Given'] = true;\nEnableReport('Report_Zille_Mobilization_Brenas');"
-            },
-            {
-                "text": "Ograniczyć się do protestu dyplomatycznego w AN [-1 Authority]",
-                "condition": "",
-                "instruction": "RiziaDLC.Resources_Authority -= 1;\nVariable['Zille_War_Postpone'] = true;"
-            }
-        ]
-    })
-
-    with open(os.path.join(EDITOR_DATA_DIR, "decisions.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(EDITOR_DATA_DIR, "decisions.json"), "w", encoding="utf-8") as f:
         json.dump(decisions_list, f, indent=2, ensure_ascii=False)
     print(f"Exported {len(decisions_list)} decisions to decisions.json")
 
@@ -638,20 +601,7 @@ def main():
                 "modStatus": mod_status
             })
 
-    # Add custom MODNEW reports
-    reports_list.insert(0, {
-        "id": "Report_Zille_WarDeclaration_Frontline",
-        "rawId": "MOD_REP_001",
-        "name": "Report_Zille_WarDeclaration_Frontline",
-        "title": "Armia Królewska Przekracza Granicę Prowincji Brenas",
-        "description": "Sztab Generalny potwierdza rozpoczęcie natarcia sił połączonych rodów Azaro i Sazon na półwysep Zille. Punkty graniczne Wehlen zostały zajęte.",
-        "turn": 4,
-        "condition": "Variable['Zille_War_Alfa'] == true || Variable['Zille_War_Beta'] == true",
-        "pack": "Rizia",
-        "modStatus": "MODNEW"
-    })
-
-    with open(os.path.join(EDITOR_DATA_DIR, "reports.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(EDITOR_DATA_DIR, "reports.json"), "w", encoding="utf-8") as f:
         json.dump(reports_list, f, indent=2, ensure_ascii=False)
     print(f"Exported {len(reports_list)} reports to reports.json")
 
@@ -684,21 +634,7 @@ def main():
                 "modStatus": mod_status
             })
 
-    # Add custom MODNEW situations
-    situations_list.insert(0, {
-        "id": "Situation_Zille_Frontline_Offensive",
-        "rawId": "MOD_SIT_001",
-        "name": "Situation_Zille_Frontline_Offensive",
-        "title": "Wojna o Odzyskanie Prowincji Zille",
-        "description": "Siły zbrojne Królestwa Rizii prowadzą pełnoskalową operację lądowo-morską mającą na celu wyzwolenie prowincji Zille spod okupacji Wehlen.",
-        "condition": "Variable['Zille_War_Alfa'] == true || Variable['Zille_War_Beta'] == true",
-        "severity": "VeryBad",
-        "category": "Military",
-        "pack": "Rizia",
-        "modStatus": "MODNEW"
-    })
-
-    with open(os.path.join(EDITOR_DATA_DIR, "situations.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(EDITOR_DATA_DIR, "situations.json"), "w", encoding="utf-8") as f:
         json.dump(situations_list, f, indent=2, ensure_ascii=False)
     print(f"Exported {len(situations_list)} situations to situations.json")
 

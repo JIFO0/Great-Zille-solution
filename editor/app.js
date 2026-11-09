@@ -333,6 +333,14 @@ async function loadConversationWorkspace(convId) {
     if (!res.ok) throw new Error('Nie znaleziono pliku');
     const convData = await res.json();
     appState.activeItemFull = convData;
+
+    const entries = convData.entries || [];
+    const choices = entries.filter(e => e.isPlayer);
+    const nEl = document.getElementById('active-item-nodes-count');
+    if (nEl) nEl.textContent = entries.length;
+    const cEl = document.getElementById('active-item-choices-count');
+    if (cEl) cEl.textContent = choices.length;
+
     renderConversationWorkspace(convData);
   } catch (err) {
     document.getElementById('workspace-content').innerHTML = `
@@ -384,6 +392,29 @@ function setTreeOrientation(orient) {
   }
 }
 
+function frameTreeToStart() {
+  const container = document.getElementById('tree-view-container');
+  if (!container || !appState.activeItemFull) return;
+  const entries = appState.activeItemFull.entries || [];
+  if (entries.length === 0) return;
+
+  const root = entries.find(e => e.id === 0) || entries.find(e => e.isRoot) || entries[0];
+  const rootPos = (currentGraphTopology.positions && currentGraphTopology.positions[root.id]) || { x: 60, y: 60 };
+
+  const cw = container.clientWidth || 1000;
+  const ch = container.clientHeight || 700;
+
+  appState.treeZoom = 0.95;
+  if (appState.treeOrientation === 'horizontal') {
+    appState.treePanX = 60;
+    appState.treePanY = Math.max(40, (ch / 2) - (rootPos.y + 55) * appState.treeZoom);
+  } else {
+    appState.treePanX = Math.max(40, (cw / 2) - (rootPos.x + 120) * appState.treeZoom);
+    appState.treePanY = 60;
+  }
+  applyTreeTransform();
+}
+
 function jumpToFirstBranch() {
   if (!appState.activeItemFull || !appState.activeItemFull.entries) return;
   const entries = appState.activeItemFull.entries;
@@ -394,8 +425,8 @@ function jumpToFirstBranch() {
   if (card) {
     const container = document.getElementById('tree-view-container');
     if (!container) return;
-    const cw = container.clientWidth;
-    const ch = container.clientHeight;
+    const cw = container.clientWidth || 1000;
+    const ch = container.clientHeight || 700;
     const cardLeft = parseFloat(card.style.left) || 0;
     const cardTop = parseFloat(card.style.top) || 0;
     appState.treePanX = (cw / 2) - (cardLeft + 125) * appState.treeZoom;
@@ -406,6 +437,43 @@ function jumpToFirstBranch() {
   }
 }
 
+function searchNodeInScene(query) {
+  const q = (query || '').trim().toLowerCase();
+  document.querySelectorAll('.tree-node-card').forEach(c => c.classList.remove('search-matched'));
+  if (!q || !appState.activeItemFull) return;
+
+  const entries = appState.activeItemFull.entries || [];
+  const matched = entries.filter(e => {
+    const idStr = String(e.id);
+    const speaker = (e.speaker || '').toLowerCase();
+    const text = (e.dialogueText || '').toLowerCase();
+    const menu = (e.menuText || '').toLowerCase();
+    return idStr === q || idStr.includes(q) || speaker.includes(q) || text.includes(q) || menu.includes(q);
+  });
+
+  if (matched.length > 0) {
+    matched.forEach(m => {
+      const card = document.getElementById(`tree-card-${m.id}`);
+      if (card) card.classList.add('search-matched');
+    });
+
+    // Pan to first match
+    const firstCard = document.getElementById(`tree-card-${matched[0].id}`);
+    if (firstCard) {
+      const container = document.getElementById('tree-view-container');
+      if (container) {
+        const cw = container.clientWidth || 1000;
+        const ch = container.clientHeight || 700;
+        const cardLeft = parseFloat(firstCard.style.left) || 0;
+        const cardTop = parseFloat(firstCard.style.top) || 0;
+        appState.treePanX = (cw / 2) - (cardLeft + 125) * appState.treeZoom;
+        appState.treePanY = (ch / 2) - (cardTop + 55) * appState.treeZoom;
+        applyTreeTransform();
+      }
+    }
+  }
+}
+
 function renderFlowTreeView(container, conv, entries) {
   const isHorizontal = appState.treeOrientation !== 'vertical';
 
@@ -413,7 +481,7 @@ function renderFlowTreeView(container, conv, entries) {
   treeContainer.className = 'tree-view-container';
   treeContainer.id = 'tree-view-container';
 
-  // HUD Controls Overlay with Orientation Toggle & Jump Button
+  // Enhanced HUD Controls Overlay with Orientation, Home, Jump, Search, Zoom
   const hudControls = document.createElement('div');
   hudControls.className = 'tree-hud-controls';
   hudControls.innerHTML = `
@@ -428,15 +496,25 @@ function renderFlowTreeView(container, conv, entries) {
       </button>
     </div>
 
+    <button class="tree-home-btn" onclick="frameTreeToStart()" title="Wyśrodkuj kamerę na początku drzewa (Home)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>START</span>
+    </button>
+
     <button class="tree-jump-btn" onclick="jumpToFirstBranch()" title="Skocz do pierwszego rozgałęzienia wyborów fabularnych">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
       <span>SKOCZ DO WYBORU</span>
     </button>
 
-    <button class="tree-ctrl-btn" onclick="zoomTree(1.15)" title="Powiększ">+</button>
-    <button class="tree-ctrl-btn" onclick="zoomTree(0.85)" title="Pomniejsz">-</button>
-    <button class="tree-ctrl-btn" onclick="resetTreeZoom()" title="Reset widoku 1:1">1:1</button>
-    <button class="tree-ctrl-btn" onclick="fitTreeToView()" title="Dopasuj do ekranu" style="width: auto; padding: 0 8px; font-family: var(--font-mono); font-size: 10px;">FIT</button>
+    <div class="tree-search-wrap" title="Wyszukaj kwestię w bieżącej scenie (ID, rozmówca, słowo kluczowe)">
+      <input type="text" class="tree-search-input" placeholder="Szukaj w scenie..." oninput="searchNodeInScene(this.value)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+
+    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(1.15)" title="Powiększ (lub rolka myszy)">+</button>
+    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(0.85)" title="Pomniejsz (lub rolka myszy)">-</button>
+    <div class="zoom-telemetry-pill" id="tree-zoom-val" onclick="resetTreeZoom()" title="Kliknij aby zresetować do 100%">100%</div>
+    <button class="tree-ctrl-btn" onclick="fitTreeToView()" title="Dopasuj całe drzewo do ekranu" style="width: auto; padding: 0 8px; font-family: var(--font-mono); font-size: 10px;">FIT</button>
   `;
   treeContainer.appendChild(hudControls);
 
@@ -483,10 +561,10 @@ function renderFlowTreeView(container, conv, entries) {
   treeContainer.appendChild(canvas);
   container.appendChild(treeContainer);
 
-  // Pan & Zoom Event Listeners
+  // Pan & Zoom Event Listeners (Cursor-Anchored & Fluid)
   setupTreeInteractions(treeContainer, canvas);
 
-  // Compute Layout Positions (Parallel Scenario Lanes Engine)
+  // Compute Layout Positions (Parallel Scenario Lanes Engine - Zero Exponential Overflows)
   const layout = computeTreeLayout(entries, appState.treeOrientation);
   const nodePositions = layout.positions;
   const nodeScenarios = layout.nodeScenarios;
@@ -494,6 +572,7 @@ function renderFlowTreeView(container, conv, entries) {
   const backlinkEdges = layout.backlinkEdges;
   const isConvergenceHub = layout.isConvergenceHub;
 
+  currentGraphTopology.positions = nodePositions;
   currentGraphTopology.forwardChildren = layout.forwardChildren;
   currentGraphTopology.incomingParents = layout.incomingParents;
 
@@ -502,7 +581,7 @@ function renderFlowTreeView(container, conv, entries) {
 
   // Render Node Cards
   entries.forEach(e => {
-    const pos = nodePositions[e.id] || { x: 40, y: 40 };
+    const pos = nodePositions[e.id] || { x: 60, y: 60 };
     const card = document.createElement('div');
     const isPlayer = e.isPlayer || e.actorId === 95 || e.actorId === 93;
     const isHub = isConvergenceHub[e.id];
@@ -543,6 +622,16 @@ function renderFlowTreeView(container, conv, entries) {
       scenarioBadge = `<span class="hub-pill">ZBIEG (HUB)</span>`;
     }
 
+    let condPill = '';
+    if (e.conditions && e.conditions.trim()) {
+      condPill = `<span class="tree-cond-pill" title="Warunek: ${escapeHtml(e.conditions)}">WAR: ${escapeHtml(e.conditions.slice(0, 18))}</span>`;
+    }
+
+    let scriptPill = '';
+    if (e.userScript && e.userScript.trim()) {
+      scriptPill = `<span class="tree-script-pill" title="Skrypt: ${escapeHtml(e.userScript)}">SKR: ${escapeHtml(e.userScript.slice(0, 18))}</span>`;
+    }
+
     card.innerHTML = `
       <div class="tree-card-header">
         <span class="tree-speaker-tag ${isPlayer ? 'speaker-player' : ''}">[#${e.id}] ${escapeHtml(speakerDisplay)}</span>
@@ -552,6 +641,7 @@ function renderFlowTreeView(container, conv, entries) {
         </div>
       </div>
       <div class="tree-card-body">${escapeHtml(snippet)}</div>
+      ${(condPill || scriptPill) ? `<div style="display:flex; gap:4px; margin-top:4px;">${condPill}${scriptPill}</div>` : ''}
       <div class="tree-card-footer">
         <span>${isPlayer ? 'WYBOR GRACZA' : (isHub ? 'WSPOLNY HUB' : 'DIALOG')}</span>
         <span>${(e.outgoing || []).length} ROZGAŁĘZIEŃ</span>
@@ -566,9 +656,10 @@ function renderFlowTreeView(container, conv, entries) {
       clearScenarioHighlight();
     });
 
-    // Click to inspect node
+    // Click to inspect node (prevented if user was panning/dragging)
     card.addEventListener('click', (ev) => {
       ev.stopPropagation();
+      if (appState.didDrag) return;
       openNodeInspector(e.id);
     });
 
@@ -597,7 +688,6 @@ function renderFlowTreeView(container, conv, entries) {
         const y2 = dstPos.y + nodeHeight / 2;
 
         if (isBacklink || x2 <= x1) {
-          // Loop-back edge: curve arched downwards/upwards
           const loopHeight = Math.min(100, Math.abs(y2 - y1) + 60);
           pathD = `M ${x1} ${y1} C ${x1 + 60} ${y1 + loopHeight}, ${x2 - 60} ${y2 + loopHeight}, ${x2} ${y2}`;
         } else {
@@ -612,7 +702,6 @@ function renderFlowTreeView(container, conv, entries) {
         const y2 = dstPos.y;
 
         if (isBacklink || y2 <= y1) {
-          // Loop-back edge in vertical layout: curve to side
           const loopWidth = Math.min(120, Math.abs(x2 - x1) + 80);
           pathD = `M ${x1} ${y1} C ${x1 + loopWidth} ${y1 + 40}, ${x2 + loopWidth} ${y2 - 40}, ${x2} ${y2}`;
         } else {
@@ -645,7 +734,9 @@ function renderFlowTreeView(container, conv, entries) {
     });
   });
 
-  applyTreeTransform();
+  // Automatically frame the tree so the start is ALWAYS immediately visible at screen start!
+  frameTreeToStart();
+  setTimeout(() => frameTreeToStart(), 40);
 }
 
 // ================= PARALLEL SCENARIO LANE LAYOUT ENGINE =================
@@ -679,7 +770,6 @@ function computeTreeLayout(entries, orientation = 'horizontal') {
       if (pathSet.has(dstId)) {
         backlinkEdges.add(`${nid}->${dstId}`);
       } else if (visited.has(dstId)) {
-        // Re-converging edge into a common hub
         forwardChildren[nid].push(dstId);
         incomingParents[dstId].push(nid);
       } else {
@@ -739,7 +829,6 @@ function computeTreeLayout(entries, orientation = 'horizontal') {
         const theme = SCENARIO_THEMES[idx % SCENARIO_THEMES.length];
         edgeThemes[`${e.id}->${cId}`] = theme;
 
-        // Propagate down this branch until it hits a convergence hub
         const queue = [cId];
         const branchVisited = new Set();
         while (queue.length > 0) {
@@ -748,7 +837,6 @@ function computeTreeLayout(entries, orientation = 'horizontal') {
           branchVisited.add(curr);
 
           if (isConvergenceHub[curr]) {
-            // Stop individual scenario color past convergence point
             continue;
           }
 
@@ -762,126 +850,114 @@ function computeTreeLayout(entries, orientation = 'horizontal') {
     }
   });
 
-  // 4. Calculate Subtree Span (widths for parallel lane reservation)
-  const spanCache = {};
-  function getSpan(nid, vSet) {
-    if (spanCache[nid] !== undefined) return spanCache[nid];
-    if (vSet.has(nid)) return 1;
-    vSet.add(nid);
+  // 4. Parallel Track Allocation (Linear Non-Exponential Tracking)
+  const tracks = {};
+  let nextFreeTrack = 0;
 
-    const children = forwardChildren[nid] || [];
-    if (children.length === 0) {
-      spanCache[nid] = 1;
-    } else if (children.length === 1) {
-      spanCache[nid] = getSpan(children[0], vSet);
-    } else {
-      let sum = 0;
-      children.forEach(c => {
-        sum += getSpan(c, new Set(vSet));
-      });
-      spanCache[nid] = Math.max(1, sum);
-    }
-    return spanCache[nid];
-  }
+  function assignTracks() {
+    const queue = [rootId];
+    tracks[rootId] = 0;
+    const trackVisited = new Set();
 
-  const totalRootSpan = getSpan(rootId, new Set());
+    while (queue.length > 0) {
+      const nid = queue.shift();
+      if (trackVisited.has(nid)) continue;
+      trackVisited.add(nid);
 
-  // 5. Allocate Non-Overlapping Scenario Lanes
-  const secondaryPos = {};
-  const laneAllocVisited = new Set();
+      const myTrack = tracks[nid] !== undefined ? tracks[nid] : 0;
+      const ch = forwardChildren[nid] || [];
 
-  function allocateLanes(nid, yStart, yEnd) {
-    if (laneAllocVisited.has(nid)) return;
-    laneAllocVisited.add(nid);
-    secondaryPos[nid] = (yStart + yEnd) / 2.0;
-
-    const children = forwardChildren[nid] || [];
-    if (children.length === 0) return;
-    if (children.length === 1) {
-      // Linear continuation stays strictly in the same lane band!
-      allocateLanes(children[0], yStart, yEnd);
-    } else {
-      // Branching choices: divide lane space into parallel scenario tracks!
-      const childSpans = children.map(c => getSpan(c, new Set()));
-      const sumSpans = childSpans.reduce((a, b) => a + b, 0) || 1;
-      let currY = yStart;
-      const totalLaneBand = (yEnd - yStart);
-
-      children.forEach((c, idx) => {
-        const fraction = childSpans[idx] / sumSpans;
-        const cStart = currY;
-        const cEnd = currY + totalLaneBand * fraction;
-        allocateLanes(c, cStart, cEnd);
-        currY = cEnd;
-      });
+      if (ch.length === 1) {
+        const c = ch[0];
+        if (tracks[c] === undefined) {
+          tracks[c] = myTrack;
+        }
+        queue.push(c);
+      } else if (ch.length > 1) {
+        // Multi-choice branching: allocate distinct parallel scenario tracks!
+        ch.forEach((c, idx) => {
+          if (tracks[c] === undefined) {
+            if (idx === 0) {
+              tracks[c] = myTrack;
+            } else {
+              nextFreeTrack += 1;
+              tracks[c] = nextFreeTrack;
+            }
+          }
+          queue.push(c);
+        });
+      }
     }
   }
 
-  const baseLaneUnit = isHorizontal ? 180 : 270;
-  const totalLaneHeight = Math.max(1, totalRootSpan) * baseLaneUnit;
-  allocateLanes(rootId, 0, totalLaneHeight);
+  assignTracks();
 
-  // 6. Hub Centering Pass: Convergence hubs are centered across all incoming branch lanes
+  // 5. Hub Centering: Convergence hubs are centered across all incoming branch tracks
   entries.forEach(e => {
     const parents = incomingParents[e.id] || [];
     if (parents.length > 1) {
-      const parentYs = parents.filter(p => secondaryPos[p] !== undefined).map(p => secondaryPos[p]);
-      if (parentYs.length > 0) {
-        secondaryPos[e.id] = parentYs.reduce((a, b) => a + b, 0) / parentYs.length;
+      const pTracks = parents.filter(p => tracks[p] !== undefined).map(p => tracks[p]);
+      if (pTracks.length > 0) {
+        tracks[e.id] = pTracks.reduce((a, b) => a + b, 0) / pTracks.length;
       }
     }
   });
 
-  // Guarantee all orphan nodes have a position
+  // Allocate any unplaced orphan nodes
   entries.forEach(e => {
-    if (secondaryPos[e.id] === undefined) {
-      secondaryPos[e.id] = Object.keys(secondaryPos).length * (isHorizontal ? 130 : 260);
+    if (tracks[e.id] === undefined) {
+      nextFreeTrack += 1;
+      tracks[e.id] = nextFreeTrack;
     }
   });
 
-  // 7. Collision Avoidance Pass in Same Stage
+  // 6. Stage Grouping & Collision Clearance
   const stageBuckets = {};
   Object.entries(stages).forEach(([nid, st]) => {
     if (!stageBuckets[st]) stageBuckets[st] = [];
     stageBuckets[st].push(Number(nid));
   });
 
-  const minGap = isHorizontal ? 135 : 260;
+  const lanePos = {};
   Object.values(stageBuckets).forEach(nids => {
-    nids.sort((a, b) => secondaryPos[a] - secondaryPos[b]);
-    for (let i = 0; i < nids.length - 1; i++) {
-      const n1 = nids[i];
-      const n2 = nids[i+1];
-      if (secondaryPos[n2] - secondaryPos[n1] < minGap) {
-        const shift = minGap - (secondaryPos[n2] - secondaryPos[n1]);
-        secondaryPos[n2] += shift;
+    nids.sort((a, b) => tracks[a] - tracks[b]);
+    let currY = 0.0;
+    nids.forEach((nid, i) => {
+      const targetTrack = tracks[nid];
+      if (i > 0 && targetTrack < currY + 1.0) {
+        currY += 1.0;
+      } else {
+        currY = Math.max(currY, targetTrack);
       }
+      lanePos[nid] = currY;
+    });
+  });
+
+  // 7. Calculate Raw (X, Y) Coordinates
+  const colStep = isHorizontal ? 320 : 260;
+  const rowStep = isHorizontal ? 145 : 175;
+
+  const rawPos = {};
+  entries.forEach(e => {
+    const st = stages[e.id] || 0;
+    const lp = lanePos[e.id] || 0;
+    if (isHorizontal) {
+      rawPos[e.id] = { x: st * colStep, y: lp * rowStep };
+    } else {
+      rawPos[e.id] = { x: lp * colStep, y: st * rowStep };
     }
   });
 
-  // 8. Map to Final Screen Coordinates (X, Y)
+  // 8. MATHEMATICAL NORMALIZATION: Minimum coordinates are ALWAYS shifted to (60, 60)
+  const minX = Math.min(...Object.values(rawPos).map(p => p.x));
+  const minY = Math.min(...Object.values(rawPos).map(p => p.y));
+
   const positions = {};
-  const colStep = isHorizontal ? 320 : 260;
-  const rowStep = isHorizontal ? 140 : 180;
-  const margin = 60;
-
   entries.forEach(e => {
-    const st = stages[e.id] || 0;
-    const sec = secondaryPos[e.id] || 0;
-
-    if (isHorizontal) {
-      // Primary: X (stage progression), Secondary: Y (parallel scenario lane)
-      positions[e.id] = {
-        x: margin + st * colStep,
-        y: margin + sec
-      };
-    } else {
-      // Primary: Y (stage progression), Secondary: X (parallel scenario column)
-      positions[e.id] = {
-        x: margin + sec,
-        y: margin + st * rowStep
-      };
-    }
+    positions[e.id] = {
+      x: rawPos[e.id].x - minX + 60,
+      y: rawPos[e.id].y - minY + 60
+    };
   });
 
   return {
@@ -902,7 +978,6 @@ function highlightScenarioPath(selectedNodeId) {
   const { forwardChildren, incomingParents } = currentGraphTopology;
   if (!forwardChildren || !incomingParents) return;
 
-  // 1. Traverse Upstream to Roots
   const ancestors = new Set();
   const upQueue = [selectedNodeId];
   while (upQueue.length > 0) {
@@ -913,7 +988,6 @@ function highlightScenarioPath(selectedNodeId) {
     });
   }
 
-  // 2. Traverse Downstream to Terminal Leaves
   const descendants = new Set();
   const downQueue = [selectedNodeId];
   while (downQueue.length > 0) {
@@ -926,7 +1000,6 @@ function highlightScenarioPath(selectedNodeId) {
 
   const activePathNodes = new Set([...ancestors, ...descendants]);
 
-  // Dim unrelated nodes and highlight active ones
   document.querySelectorAll('.tree-node-card').forEach(card => {
     const nid = Number(card.id.replace('tree-card-', ''));
     if (activePathNodes.has(nid)) {
@@ -938,7 +1011,6 @@ function highlightScenarioPath(selectedNodeId) {
     }
   });
 
-  // Dim unrelated edges and highlight active ones
   document.querySelectorAll('.tree-edge').forEach(edge => {
     const parts = edge.id.replace('edge-', '').split('-');
     const src = Number(parts[0]);
@@ -954,7 +1026,7 @@ function highlightScenarioPath(selectedNodeId) {
 }
 
 function clearScenarioHighlight() {
-  if (appState.activeSelectedNodeId) return; // Keep highlight if node is actively selected in drawer
+  if (appState.activeSelectedNodeId) return;
   appState.highlightedScenarioNodeId = null;
   document.querySelectorAll('.tree-node-card').forEach(c => {
     c.classList.remove('scenario-active', 'scenario-dimmed');
@@ -964,51 +1036,187 @@ function clearScenarioHighlight() {
   });
 }
 
-// Tree Pan & Zoom Interactions
+// ================= FLUID PAN & CURSOR-ANCHORED ZOOM ENGINE =================
+
+let isTreePanning = false;
+let panStartX = 0;
+let panStartY = 0;
+let initialPanX = 0;
+let initialPanY = 0;
+let isSpaceKeyPressed = false;
+
 function setupTreeInteractions(container, canvas) {
-  container.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.tree-node-card') || e.target.closest('.tree-hud-controls')) return;
-    appState.isPanning = true;
-    appState.panStartX = e.clientX - appState.treePanX;
-    appState.panStartY = e.clientY - appState.treePanY;
-    container.classList.add('panning');
+  // Track spacebar for pan tool
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+      isSpaceKeyPressed = true;
+      container.style.cursor = 'grab';
+    }
+    // Keyboard navigation shortcuts
+    if (!e.target.matches('input, textarea')) {
+      if (e.key === '=' || e.key === '+') {
+        e.preventDefault();
+        zoomTreeAtPoint(1.15);
+      } else if (e.key === '-' || e.key === '_') {
+        e.preventDefault();
+        zoomTreeAtPoint(0.85);
+      } else if (e.key === '0') {
+        e.preventDefault();
+        resetTreeZoom();
+      } else if (e.key === 'h' || e.key === 'H') {
+        e.preventDefault();
+        frameTreeToStart();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        fitTreeToView();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        appState.treePanX -= 80;
+        applyTreeTransform();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        appState.treePanX += 80;
+        applyTreeTransform();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        appState.treePanY -= 80;
+        applyTreeTransform();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        appState.treePanY += 80;
+        applyTreeTransform();
+      }
+    }
   });
 
+  window.addEventListener('keyup', (e) => {
+    if (e.code === 'Space') {
+      isSpaceKeyPressed = false;
+      if (!isTreePanning) container.style.cursor = '';
+    }
+  });
+
+  // MOUSE DOWN: Start Pan
+  container.addEventListener('mousedown', (e) => {
+    // Check if middle click or spacebar or clicking canvas background
+    const isMiddleClick = (e.button === 1);
+    const isLeftOnBackground = (e.button === 0 && !e.target.closest('.tree-node-card') && !e.target.closest('.tree-hud-controls'));
+    const isSpaceDrag = (e.button === 0 && isSpaceKeyPressed);
+
+    if (isMiddleClick || isLeftOnBackground || isSpaceDrag) {
+      isTreePanning = true;
+      appState.didDrag = false;
+      panStartX = e.clientX;
+      panStartY = e.clientY;
+      initialPanX = appState.treePanX;
+      initialPanY = appState.treePanY;
+      container.classList.add('panning');
+      e.preventDefault();
+    }
+  });
+
+  // MOUSE MOVE: Pan smoothly
   window.addEventListener('mousemove', (e) => {
-    if (!appState.isPanning) return;
-    appState.treePanX = e.clientX - appState.panStartX;
-    appState.treePanY = e.clientY - appState.panStartY;
+    if (!isTreePanning) return;
+    const dx = e.clientX - panStartX;
+    const dy = e.clientY - panStartY;
+
+    if (Math.hypot(dx, dy) > 4) {
+      appState.didDrag = true;
+    }
+
+    appState.treePanX = initialPanX + dx;
+    appState.treePanY = initialPanY + dy;
     applyTreeTransform();
   });
 
+  // MOUSE UP: Stop Pan
   window.addEventListener('mouseup', () => {
-    appState.isPanning = false;
-    container.classList.remove('panning');
+    if (isTreePanning) {
+      isTreePanning = false;
+      container.classList.remove('panning');
+      container.style.cursor = isSpaceKeyPressed ? 'grab' : '';
+      setTimeout(() => { appState.didDrag = false; }, 50);
+    }
   });
 
+  // WHEEL: CURSOR-ANCHORED ZOOM & TOUCHPAD PANNING
   container.addEventListener('wheel', (e) => {
     e.preventDefault();
-    const factor = e.deltaY < 0 ? 1.08 : 0.92;
-    zoomTree(factor);
-  });
+
+    if (e.ctrlKey) {
+      // Touchpad Pinch-to-Zoom
+      const factor = Math.exp(-e.deltaY * 0.01);
+      zoomTreeAtPoint(factor, e.clientX, e.clientY);
+    } else if (Math.abs(e.deltaX) > 0 || (e.shiftKey && Math.abs(e.deltaY) > 0)) {
+      // Touchpad Two-Finger Pan or Shift+Scroll
+      const dx = e.shiftKey ? e.deltaY : e.deltaX;
+      const dy = e.shiftKey ? 0 : e.deltaY;
+      appState.treePanX -= dx;
+      appState.treePanY -= dy;
+      applyTreeTransform();
+    } else {
+      // Standard Mouse Wheel: Zoom Directly Towards Cursor!
+      const factor = e.deltaY < 0 ? 1.12 : 0.89;
+      zoomTreeAtPoint(factor, e.clientX, e.clientY);
+    }
+  }, { passive: false });
 }
 
-function zoomTree(factor) {
-  appState.treeZoom = Math.min(2.5, Math.max(0.2, appState.treeZoom * factor));
+// Cursor-Anchored Zoom Formula (Figma / Miro style)
+function zoomTreeAtPoint(factor, clientX, clientY) {
+  const container = document.getElementById('tree-view-container');
+  if (!container) return;
+  const rect = container.getBoundingClientRect();
+
+  const cx = (clientX !== undefined ? clientX : rect.left + rect.width / 2) - rect.left;
+  const cy = (clientY !== undefined ? clientY : rect.top + rect.height / 2) - rect.top;
+
+  const oldZoom = appState.treeZoom;
+  const newZoom = Math.min(2.5, Math.max(0.15, oldZoom * factor));
+  if (Math.abs(newZoom - oldZoom) < 0.001) return;
+
+  // Exact point on the canvas under mouse pointer before zooming
+  const wx = (cx - appState.treePanX) / oldZoom;
+  const wy = (cy - appState.treePanY) / oldZoom;
+
+  // New pan coordinates so the exact same canvas point remains under cursor
+  appState.treeZoom = newZoom;
+  appState.treePanX = cx - wx * newZoom;
+  appState.treePanY = cy - wy * newZoom;
+
   applyTreeTransform();
 }
 
 function resetTreeZoom() {
+  const container = document.getElementById('tree-view-container');
+  if (!container) return;
+  zoomTreeAtPoint(1.0 / appState.treeZoom, undefined, undefined);
   appState.treeZoom = 1.0;
-  appState.treePanX = 40;
-  appState.treePanY = 40;
   applyTreeTransform();
 }
 
 function fitTreeToView() {
-  appState.treeZoom = 0.65;
-  appState.treePanX = 20;
-  appState.treePanY = 20;
+  const container = document.getElementById('tree-view-container');
+  if (!container || !currentGraphTopology.positions) return;
+
+  const posList = Object.values(currentGraphTopology.positions);
+  if (posList.length === 0) return;
+
+  const nodeWidth = 250;
+  const nodeHeight = 115;
+  const maxX = Math.max(...posList.map(p => p.x)) + nodeWidth + 60;
+  const maxY = Math.max(...posList.map(p => p.y)) + nodeHeight + 60;
+
+  const cw = container.clientWidth || 1000;
+  const ch = container.clientHeight || 700;
+
+  const scaleX = (cw - 80) / maxX;
+  const scaleY = (ch - 80) / maxY;
+  appState.treeZoom = Math.min(1.0, Math.max(0.18, Math.min(scaleX, scaleY)));
+
+  appState.treePanX = 40;
+  appState.treePanY = 40;
   applyTreeTransform();
 }
 
@@ -1016,6 +1224,20 @@ function applyTreeTransform() {
   const canvas = document.getElementById('tree-canvas');
   if (canvas) {
     canvas.style.transform = `translate(${appState.treePanX}px, ${appState.treePanY}px) scale(${appState.treeZoom})`;
+  }
+
+  // Update background grid position on container
+  const container = document.getElementById('tree-view-container');
+  if (container) {
+    const gridScale = Math.max(12, 24 * appState.treeZoom);
+    container.style.backgroundPosition = `${appState.treePanX}px ${appState.treePanY}px`;
+    container.style.backgroundSize = `${gridScale}px ${gridScale}px, ${gridScale * 5}px ${gridScale * 5}px, ${gridScale * 5}px ${gridScale * 5}px`;
+  }
+
+  // Update Zoom Telemetry indicator
+  const zoomPill = document.getElementById('tree-zoom-val');
+  if (zoomPill) {
+    zoomPill.textContent = `${Math.round(appState.treeZoom * 100)}%`;
   }
 }
 
@@ -1311,6 +1533,18 @@ function addNewDialogueNode(isPlayerChoice) {
     isRoot: false
   };
 
+  // Automatically link to currently selected node if active
+  if (appState.activeSelectedNodeId) {
+    const parentNode = entries.find(e => e.id === appState.activeSelectedNodeId);
+    if (parentNode) {
+      parentNode.outgoing = parentNode.outgoing || [];
+      if (!parentNode.outgoing.includes(newId)) {
+        parentNode.outgoing.push(newId);
+      }
+      parentNode.isModEdited = true;
+    }
+  }
+
   entries.push(newEntry);
   renderConversationWorkspace(appState.activeItemFull);
   openNodeInspector(newId);
@@ -1321,6 +1555,12 @@ function deleteDialogueNode(entryId) {
   if (!appState.activeItemFull) return;
   if (!confirm(`Potwierdz usuniecie wezla [#${entryId}]?`)) return;
   appState.activeItemFull.entries = appState.activeItemFull.entries.filter(e => e.id !== entryId);
+  // Clean up any references in other nodes' outgoing links
+  appState.activeItemFull.entries.forEach(e => {
+    if (e.outgoing) {
+      e.outgoing = e.outgoing.filter(id => id !== entryId);
+    }
+  });
   closeInspectorDrawer();
   renderConversationWorkspace(appState.activeItemFull);
   showToast(`Usunieto wezel [#${entryId}]`, 'info');

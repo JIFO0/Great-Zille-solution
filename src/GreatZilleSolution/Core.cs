@@ -395,7 +395,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(0.9f, 0.45f, 1f);
 
-            if (GUI.Button(new Rect(btnX, curY, btnW, 30f), "[SPAWNER EVENTOW (F6)]"))
+            if (GUI.Button(new Rect(btnX, curY, btnW, 30f), "[EVENT SPAWNER (F6)]"))
 
             {
 
@@ -413,7 +413,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(0.4f, 0.95f, 0.5f);
 
-            if (GUI.Button(new Rect(btnX, curY, btnW, 30f), "[SPAWN EVENT ZILLE]"))
+            if (GUI.Button(new Rect(btnX, curY, btnW, 30f), "[SPAWN ZILLE EVENT]"))
 
             {
 
@@ -431,7 +431,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(0.3f, 0.8f, 1f);
 
-            if (GUI.Button(new Rect(btnX, curY, btnW, 32f), "[NARADA WOJENNA]"))
+            if (GUI.Button(new Rect(btnX, curY, btnW, 32f), "[WAR COUNCIL BRIEFING]"))
 
             {
 
@@ -449,7 +449,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(1f, 0.85f, 0.2f);
 
-            if (GUI.Button(new Rect(btnX, curY, btnW, 34f), "[TEATR 3D ZILLE]"))
+            if (GUI.Button(new Rect(btnX, curY, btnW, 34f), "[3D ZILLE THEATRE]"))
 
             {
 
@@ -505,7 +505,7 @@ namespace GreatZilleSolution
 
             GUI.color = theatreOpen ? new Color(1f, 0.75f, 0.35f) : new Color(0.95f, 0.7f, 0.35f);
 
-            if (GUI.Button(new Rect(btnX, curY, btnW, 28f), "[TEATR MENU (F11)]"))
+            if (GUI.Button(new Rect(btnX, curY, btnW, 28f), "[THEATRE MENU (F11)]"))
 
             {
 
@@ -615,13 +615,13 @@ namespace GreatZilleSolution
 
             GUI.Box(new Rect(x, y, w, 2f), GUIContent.none); y += 6f;
 
-            GUI.Label(new Rect(x, y, w, 20f), "<b>--- TEATR WOJENNY ZILLE (3D REAL WAR) ---</b>"); y += 22f;
+            GUI.Label(new Rect(x, y, w, 20f), "<b>--- ZILLE WAR THEATRE (3D REAL WAR) ---</b>"); y += 22f;
 
 
 
             GUI.color = new Color(0.9f, 0.45f, 1f);
 
-            if (GUI.Button(new Rect(x, y, w, 32f), "[SPAWNER EVENTOW PORTE DRAZON (F6)]"))
+            if (GUI.Button(new Rect(x, y, w, 32f), "[PORTE DRAZON EVENT SPAWNER (F6)]"))
 
             {
 
@@ -637,7 +637,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(0.4f, 0.95f, 0.5f);
 
-            if (GUI.Button(new Rect(x, y, w, 32f), "[Zrespij Token Eventu w Prowincji Zille]"))
+            if (GUI.Button(new Rect(x, y, w, 32f), "[Spawn Zille Event Token]"))
 
             {
 
@@ -651,7 +651,7 @@ namespace GreatZilleSolution
 
             GUI.color = new Color(1f, 0.85f, 0.2f);
 
-            if (GUI.Button(new Rect(x, y, w, 34f), "[TEATR 3D ZILLE (Operacja 1: Righteous Sword - Frontal)]"))
+            if (GUI.Button(new Rect(x, y, w, 34f), "[3D ZILLE THEATRE (Operation 1: Righteous Sword - Frontal)]"))
 
             {
 
@@ -665,7 +665,7 @@ namespace GreatZilleSolution
 
 
 
-            if (GUI.Button(new Rect(x, y, w, 32f), "[TEATR 3D ZILLE (Operacja 2: Kleszcze Munat / Wiktrany)]"))
+            if (GUI.Button(new Rect(x, y, w, 32f), "[3D ZILLE THEATRE (Operation 2: Pincer Munat / Wiktrany)]"))
 
             {
 
