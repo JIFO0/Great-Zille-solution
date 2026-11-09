@@ -94,13 +94,19 @@ Aby wygodnie zwijać/rozwijać sekcje i klikać checkboxy w czasie rzeczywistym:
 - [x] Integracja natywnego rozstrzygania starcia i fazy wroga (`FinishBattle`, `WarBattleTurnResult`, `PlayerTurnPostfix`).
 
 #### Zadania do wdrożenia:
+- [x] **Specyfikacja Regionów dla Planów Operacyjnych (Wersja v14):**
+  - [x] Opracowanie i walidacja list prowincji w `maps/zille/v14/regions/operation_regions_v14.json` (72/72 testów OK).
+  - [x] **Plan Sword:** Faza 1 (137 kafelków: Zille 60 + Brenas 29 + Rotsla 96 + 47 mórz) -> Faza 2 (179 kafelków: cała mapa bez Derdii).
+  - [x] **Plan Ark:** Faza 1 (130 kafelków: Wehlen 33 + Brenas 29 + pas Zille 11 + 57 mórz) -> Faza 2 (179 kafelków).
+  - [x] **Plan Ark (Derdia):** Faza 1 (137 kafelków: Ark + 7 kafelków Derdii) -> Faza 2 (186 kafelków: cała mapa z Derdią).
+  - [ ] Wdrożenie aktywacji/deaktywacji kafelków i blokad krawędzi (`boundary_edges_to_disabled`) w `ZilleWarTable.cs`.
 - [ ] **Zachodni morski deployment zone (Ścieżka Sazon):**
   - [ ] Dodanie dedykowanego morskiego pola startowego po zachodniej stronie półwyspu Zille (dostępnego tylko przy wyborze logistyki Sazonów).
   - [ ] Oznaczenie flagi w `DialogueInjectionPatches.cs` i `ZilleDeployment.cs`.
 - [ ] **Modyfikatory bojowe wyboru doktryny w Brenas:**
   - [ ] Aplikacja **+1 Defense** w kafelkach Brenas dla ścieżki Sazon.
   - [ ] Aplikacja **+1 Attack** w kafelkach Brenas dla ścieżki Azaro.
-- [ ] **Warunki Zakończenia Operacji:**
+- [ ] **Warunki Zakończenia Operacji (5 Stanów Końcowych):**
   - [ ] Detektor rozstrzygnięcia: zliczanie kontrolowanych miast pod koniec fazy bitewnej i przekazanie wyniku do `WarOperationZilleManager`.
 
 #### ➕ *Miejsce na Twoje notatki / nowe zadania w tej sekcji:*

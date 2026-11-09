@@ -37,6 +37,7 @@ namespace GreatZilleSolution
         // From the v14 manifest. Sea provinces use Allegiance "EmptySea" (open water, as in the Pales war).
         public bool IsSea { get; set; } = false;
         // Yol (129). No movement links, and the table must not enter or select it.
+        public bool IsDisabled { get; set; } = false;
         public bool IsImpassable { get; set; } = false;
         public bool IsCity { get; set; } = false;
         // The name printed above the star. The province can be "Zille City" while the label is "Zille".

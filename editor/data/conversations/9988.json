@@ -22,10 +22,13 @@
     "Zille_War_Alfa",
     "Zille_War_Beta",
     "Zille_War_Doctrine",
-    "Zille_War_Postpone"
+    "Zille_War_Postpone",
+    "Zille_War_PlanType",
+    "Zille_War_StaffPlan",
+    "Zille_War_RomulusPlan"
   ],
-  "choicesCount": 12,
-  "entriesCount": 47,
+  "choicesCount": 22,
+  "entriesCount": 65,
   "entries": [
     {
       "id": 0,
@@ -685,13 +688,13 @@
       "actorId": 73,
       "speaker": "Lucita Azaro",
       "title": "Doctrine_Presentation_3",
-      "dialogueText": "Plan Beta is an operational envelopment: fixing Valdez's forces in place while our mobile columns swing through the eastern pass at Nanta, advancing rapidly north to seize the deepwater port of Munat to sever Wehlen's maritime lifeline. Which doctrine do you authorize, Sire?",
+      "dialogueText": "We have prepared two operational pathways, Your Majesty. Either the Crown delegates field execution to the General Staff under one of four doctrines—Hawk, Sword, Ark, or Spear—where our officers execute the campaign, OR Your Majesty takes personal command at the War Table in a frontline operation: either 'Operation Righteous Sword' to reclaim Zille directly, or 'Plan Romulus Ark' to strike across the border into mainland Wehlen. How shall we proceed, Sire?",
       "menuText": "",
       "conditions": "",
       "userScript": "",
       "outgoing": [
-        90,
-        93,
+        100,
+        120,
         96
       ],
       "isPlayer": false,
@@ -825,6 +828,318 @@
       "userScript": "",
       "outgoing": [],
       "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 100,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Command",
+      "dialogueText": "Review the General Staff's operational plans. Our generals and admirals will conduct the campaign.",
+      "menuText": "Authorize General Staff execution: Delegate field command to our military leadership.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        101
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 101,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Staff_Doctrines_Overview",
+      "dialogueText": "The General Staff stands ready, Sire. Four strategic doctrines have been drawn up:\n\n• Plan Hawk: Relies on aerial bombardment and artillery to shatter enemy junctions before ground units advance.\n• Plan Sword: A massive armored fist led by House Azaro divisions pushing through the central axis.\n• Plan Ark: A methodical maritime encirclement by the Royal Navy, starving Valdez's supply lines.\n• Plan Spear: A covert, high-speed strike by the Golden Guard and mountain commandos to decapitate Wehzek command.\n\nWhich staff doctrine do you authorize?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        110,
+        112,
+        114,
+        116,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 110,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Hawk",
+      "dialogueText": "Authorize Plan Hawk. Unleash our air wings and heavy batteries. Hammer their fortifications from the sky before a single infantryman crosses the border.",
+      "menuText": "Authorize Plan Hawk (Air & Artillery Dominance): Pulverize enemy strongpoints from above.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Staff\"; Variable[\"Zille_War_StaffPlan\"] = \"Hawk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Alfa\"] = true;",
+      "outgoing": [
+        111
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 111,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Staff_Hawk",
+      "dialogueText": "\"The flight wings are fueled and the spotters in position,\" Lucita nodded sharply. \"Our bombers will turn Valdez's supply dumps into ash. The General Staff will deliver regular situation reports to the throne room as Phase I unfolds.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 112,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Sword",
+      "dialogueText": "Authorize Plan Sword. Form an armored spearhead of royal tanks and Azaro motorized divisions to smash through their lines at Wiktrany.",
+      "menuText": "Authorize Plan Sword (Armored Breakthrough): Direct our tanks to smash through the center.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Staff\"; Variable[\"Zille_War_StaffPlan\"] = \"Sword\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Alfa\"] = true;",
+      "outgoing": [
+        113
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 113,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Staff_Sword",
+      "dialogueText": "\"House Azaro will not disappoint you, my King,\" Lucita's eyes flashed with ferocious pride. \"Our armored columns will ride like thunder. The staff will oversee the battlefield and report our conquests directly to your council.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 114,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Ark",
+      "dialogueText": "Authorize Plan Ark. Deploy the Royal Navy to strangle maritime traffic from Wehlen and seal the gulf. Let hunger and isolation do our work.",
+      "menuText": "Authorize Plan Ark (Naval Strangulation): Encircle the peninsula and sever Wehlen's sea lanes.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Staff\"; Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Beta\"] = true;",
+      "outgoing": [
+        115
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 115,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Staff_Ark",
+      "dialogueText": "\"A calculated, suffocating approach,\" Laurento observed, adjusting his glasses. \"Smolak cannot reinforce by sea without challenging our battleships. Our naval command will report as the noose tightens around Valdez.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 116,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Spear",
+      "dialogueText": "Authorize Plan Spear. Send Titus and the Golden Guard on a covert decapitation strike to seize the command bunker and bridges before Wehlen can react.",
+      "menuText": "Authorize Plan Spear (Surgical Strike): Elite commandos and Golden Guard seize key command nodes.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Staff\"; Variable[\"Zille_War_StaffPlan\"] = \"Spear\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Alfa\"] = true;",
+      "outgoing": [
+        117
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 117,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Ack_Staff_Spear",
+      "dialogueText": "\"My guardsmen are ready, Sire,\" Titus said softly, placing a gauntleted fist against his chestplate. \"We strike under darkness. Smolak's garrison will find their communications cut and their officers in chains before sunrise.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 118,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Back",
+      "dialogueText": "Let me review our strategic options once more before committing our forces.",
+      "menuText": "Step back and reconsider the high-level options.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        83
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 120,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Personal_Command",
+      "dialogueText": "I will take personal command at the War Table. A King of Rizia does not delegate the liberation of royal soil.",
+      "menuText": "Take Personal Command at the War Table: Personally direct our divisions in tactical battle.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 121,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Personal_Command_Overview",
+      "dialogueText": "Spoken like true Toras blood, Your Majesty! The tactical table has two distinct operational theatres mapped:\n\n• Operation Righteous Sword: Concentrates our royal divisions on the Zille peninsula, using our fortified staging grounds in Brenas and coastal waters to liberate Zille, Wiktrany, Munat, and Nanta.\n• Plan Romulus Ark: A daring, offensive thrust across the frontier directly into mainland Wehlen, tying down Smolak's reinforcements and threatening his logistics at the source.\n\nWhich operational theatre do you wish to command?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        130,
+        132,
+        134
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 130,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Romulus_Sword",
+      "dialogueText": "Prepare Operation Righteous Sword. We strike directly into the Zille peninsula from our positions in Brenas and liberate our homeland town by town.",
+      "menuText": "Authorize Operation: Righteous Sword (Zille Peninsula & Brenas): Direct assault to liberate Zille.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"Sword\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Alfa\"] = true;",
+      "outgoing": [
+        131
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 131,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Romulus_Sword",
+      "dialogueText": "\"The map markers are prepared, my King!\" Lucita saluted crisply, her eyes blazing. \"Our forward divisions in Brenas await your command. I will meet you at the War Table whenever you are ready to open Phase I.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 132,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Romulus_Ark",
+      "dialogueText": "Prepare Plan Romulus Ark. We will cross the river into mainland Wehlen, seize their border corridor, and strangle Zille from behind.",
+      "menuText": "Authorize Plan Romulus: Ark (Mainland Wehlen & Border Corridor): Strike into Wehlen's heartland.",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Beta\"] = true;",
+      "outgoing": [
+        133
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 133,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Romulus_Ark",
+      "dialogueText": "\"A masterclass in operational audacity!\" Lucita grinned fiercely. \"Smolak expects us to bleed against his trenches in Zille—he will panic when royal armor crosses into Wehlen proper. The War Table is ready for your deployment, Sire.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 134,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Personal_Back",
+      "dialogueText": "Let me reconsider our operational approach before I take to the table.",
+      "menuText": "Step back and reconsider the high-level options.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        83
+      ],
+      "isPlayer": true,
       "isModInjected": true,
       "isModEdited": true,
       "isRoot": false

@@ -3,6 +3,39 @@ using MelonLoader;
 
 namespace GreatZilleSolution
 {
+    public enum ZillePlanType
+    {
+        None,
+        Staff,
+        Romulus
+    }
+
+    public enum ZilleStaffPlan
+    {
+        None,
+        Hawk,
+        Sword,
+        Ark,
+        Spear
+    }
+
+    public enum ZilleRomulusPlan
+    {
+        None,
+        Sword,    // Operacja Righteous Sword (Półwysep Zille + Brenas + Morza)
+        Ark       // Plan Romulusa: Wehlen + Brenas + Pas Graniczny Zille + Morza
+    }
+
+    public enum ZilleWarOutcome
+    {
+        None = 0,
+        TotalFiasco = 1,
+        TacticalDefeat = 2,
+        BloodyStalemate = 3,
+        DecisiveVictory = 4,
+        OverwhelmingTriumph = 5
+    }
+
     public enum ZilleOperationPath
     {
         None,
@@ -13,11 +46,17 @@ namespace GreatZilleSolution
     public enum ZilleOperationPhase
     {
         NotStarted,
-        Phase1_RighteousSword,
-        Phase2_TotalRepayment,
-        Completed_Victory,
-        Defeat_MotherCaptured,
-        Defeat_BrenasLost
+        Phase1 = 1,
+        Phase2 = 2,
+        Phase3 = 3,
+        Phase4 = 4,
+        Completed_Outcome = 5,
+        // Compatibility aliases:
+        Phase1_RighteousSword = Phase1,
+        Phase2_TotalRepayment = Phase2,
+        Completed_Victory = 10,
+        Defeat_MotherCaptured = 11,
+        Defeat_BrenasLost = 12
     }
 
     public static class ZilleCampaignState
@@ -27,6 +66,14 @@ namespace GreatZilleSolution
 
         public static ZilleOperationPhase CurrentPhase { get; set; } = ZilleOperationPhase.NotStarted;
         public static ZilleOperationPath ChosenPath { get; set; } = ZilleOperationPath.None;
+
+        public static ZillePlanType PlanType { get; set; } = ZillePlanType.None;
+        public static ZilleStaffPlan StaffPlan { get; set; } = ZilleStaffPlan.None;
+        public static ZilleRomulusPlan RomulusPlan { get; set; } = ZilleRomulusPlan.None;
+        public static ZilleWarOutcome Outcome { get; set; } = ZilleWarOutcome.None;
+        public static bool IsIndependentZilleAgreed { get; set; } = false;
+        public static int CurrentPhaseNumber { get; set; } = 1;
+        public static int StaffVictoryPoints { get; set; } = 0;
 
         public static bool IsNavalBlockadeActive { get; set; } = false;
         public static bool IsLespiaPactAccepted { get; set; } = false;
@@ -152,6 +199,12 @@ namespace GreatZilleSolution
             {
                 DialogueHelper.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
                 DialogueHelper.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
+                DialogueHelper.SetVariable("Zille_War_Phase", CurrentPhaseNumber);
+                DialogueHelper.SetVariable("Zille_War_PlanType", PlanType.ToString());
+                DialogueHelper.SetVariable("Zille_War_StaffPlan", StaffPlan.ToString());
+                DialogueHelper.SetVariable("Zille_War_RomulusPlan", RomulusPlan.ToString());
+                DialogueHelper.SetVariable("Zille_War_Outcome", (int)Outcome);
+                DialogueHelper.SetVariable("Zille_Independent_Buffer", IsIndependentZilleAgreed);
                 DialogueHelper.SetVariable("Zille_NavalBlockadeActive", IsNavalBlockadeActive);
                 DialogueHelper.SetVariable("Zille_LespiaPactAccepted", IsLespiaPactAccepted);
                 DialogueHelper.SetVariable("Zille_DerdiaHybridActive", IsDerdiaHybridSupportActive);

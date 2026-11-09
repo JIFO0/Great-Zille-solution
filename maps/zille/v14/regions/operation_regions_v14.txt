@@ -1,0 +1,322 @@
+ZILLE v14 - WYKAZ REGIONÓW DLA PLANÓW OPERACYJNYCH
+Status: WERSJA KOŃCOWA. Morza w Sword (faza 1) potwierdzone przez Ciebie: wszystkie oprócz S1, S2, S3, S27, S33, S34, S38, S39, S40, S53.
+Znaczenie: lista prowincji AKTYWNYCH w danej fazie (teatr działań), a NIE własność startowa ani rozstawienie jednostek.
+Identyfikatory: ZilleTile_N (ląd), ZilleTile_SN (morze); w grze Tile_N / Tile_SN. Poniżej w skrócie: numer + nazwa.
+Źródło: versions/v14/regions (provinces_manifest.json, provinces_adjacency.json, starting_provinces.json).
+
+PODSUMOWANIE (aktywne: razem / ląd / morze)
+  Plan Ark (Derdia)  Faza 1: 137 /  80 / 57   (Zille 11, Brenas 29, Wehlen 33, Derdia 7)
+  Plan Ark (Derdia)  Faza 2: 186 / 129 / 57   (Zille 60, Brenas 29, Wehlen 33, Derdia 7)
+  Plan Ark           Faza 1: 130 /  73 / 57   (Zille 11, Brenas 29, Wehlen 33, Derdia 0)
+  Plan Ark           Faza 2: 179 / 122 / 57   (Zille 60, Brenas 29, Wehlen 33, Derdia 0)
+  Plan Sword         Faza 1: 137 /  90 / 47   (Zille 60, Brenas 29, Wehlen 1, Derdia 0)
+  Plan Sword         Faza 2: 179 / 122 / 57   (Zille 60, Brenas 29, Wehlen 33, Derdia 0)
+
+FAKTY ZE ŹRÓDŁA
+  - Zille (60): półwysep, w tym wyspa 3 Manes Riuz. Na starcie należy do Wehlen.
+  - Wehlen (33): kontynentalne Wehlen + wyspy 72 Kreleck Islands i 96 Rotsla. Z Zille nie ma granicy lądowej.
+  - Brenas (29): ziemie Rizii 23, 40-67. ZAWSZE AKTYWNE we wszystkich planach i fazach (potwierdzone).
+  - Derdia (7): 123-128 (pas) + 129 Yol - ZAWSZE NIEPRZEJEZDNA (0 połączeń, bez jednostek, bez ruchu).
+  - 96 Rotsla ma tylko połączenia morskie (S27, S28, S34, S35), więc nie może wejść do pasa Ark.
+
+PAS 1 PROWINCJI W GŁĄB ZILLE (Ark, Ark D)
+  Metoda: prowincje regionu Zille sąsiadujące z Brenas przez krawędź typu "land" (bez mórz, wybrzeży i cieśnin).
+    20 Venna  <- graniczy z: 43 Venna South
+    26 Ossa East  <- graniczy z: 43 Venna South, 46 Dapalle North
+    33 Dapalle West  <- graniczy z: 50 Morsa North, 51 Dapalle
+    36 Pomara Northwest  <- graniczy z: 55 Pomara, 56 Morsa West
+    37 Pomara North  <- graniczy z: 50 Morsa North, 56 Morsa West
+    39 Celle Vaz North  <- graniczy z: 59 Celle Vaz, 60 Celle Vaz East
+    104 Venna East  <- graniczy z: 23 Mave Nortus, 41 Mave Nortus South, 43 Venna South
+    108 Venna Southwest  <- graniczy z: 43 Venna South
+    114 Dapalle Northwest  <- graniczy z: 46 Dapalle North, 51 Dapalle
+    117 Pomara West  <- graniczy z: 55 Pomara
+    118 Praia Velha  <- graniczy z: 59 Celle Vaz
+
+MORZA W SWORD, FAZA 1 (POTWIERDZONE)
+  Twoja decyzja: "Wszystko minus (S1, S2, S3, S38, S39, S40, S27, S33, S34, S53)".
+  Wyłączone (10):
+    S1 Kreleck Sound: wybrzeże 71 Kratsna (Wehlen), 72 Kreleck Islands (Wehlen), 75 Shwinouz (Wehlen)
+    S2 Kratsna Waters: wybrzeże 72 Kreleck Islands (Wehlen)
+    S3 Munat Waters: wybrzeże brak (otwarte morze)
+    S27 Rotsla Sound: wybrzeże 91 Stegnn (Wehlen), 92 Kolobrzezg (Wehlen), 96 Rotsla (Wehlen)
+    S33 Port Rotsla Waters: wybrzeże 91 Stegnn (Wehlen), 94 Grodzizg (Wehlen)
+    S34 Port Rotsla Roads: wybrzeże 96 Rotsla (Wehlen)
+    S38 Yol Waters: wybrzeże 95 Artsnan (Wehlen)
+    S39 Yol Roads: wybrzeże 94 Grodzizg (Wehlen)
+    S40 Grodzizg Waters: wybrzeże 89 Brannitz (Wehlen), 94 Grodzizg (Wehlen), 95 Artsnan (Wehlen)
+    S53 Rotsla Deep: wybrzeże brak (otwarte morze)
+  Aktywne (47): wszystkie pozostałe. Rotsla 96 ma nadal dostęp do morza przez S28 i S35.
+  W fazie 2 aktywne są wszystkie 57 mórz.
+
+ZAŁOŻENIA I USTALENIA
+  - Ark: "wszystkie prowincje w Wehlen" obejmują też wyspy 72 i 96.
+  - Ark (D): pas Derdii to 7 prowincji 123-129; Yol 129 jest widoczny, ale nieprzejezdny.
+  - Sword, faza 1: cały region Zille (z wyspą 3 Manes Riuz) + wyspa 96 Rotsla + całe Brenas.
+  - Faza 2: Ark (D) = cała mapa z Derdią (186). Ark i Sword = cała mapa bez Derdii (179).
+  - Krawędzie między prowincjami aktywnymi i nieaktywnymi trzeba zablokować; ich lista jest w JSON (boundary_edges_to_disabled).
+  - Milicja w Wehlen co 2 tury (faza 2) nie jest tu zaimplementowana.
+
+==============================================================================
+PLAN ARK (DERDIA)   [Ark (D) -> cała mapa (+D)]
+--- FAZA 1: aktywne 137 (ląd 80, morze 57), nieaktywne 49
+  Ląd:
+    20 Venna, 23 Mave Nortus, 26 Ossa East, 33 Dapalle West, 36 Pomara Northwest, 37 Pomara North
+    39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes, 43 Venna South, 44 Zelles
+    45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest, 49 Zelles Southeast, 50 Morsa North
+    51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast, 55 Pomara, 56 Morsa West
+    57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East, 61 Brivane, 62 Brivane Northeast
+    63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest, 67 Brivane Southeast, 68 Zicek
+    69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands, 73 Opolje, 74 Dornatz
+    75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima, 79 Wizen, 80 Witsima Southwest
+    81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South, 85 Kastza North, 86 Warno
+    87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza, 91 Stegnn, 92 Kolobrzezg
+    93 Kalischt, 94 Grodzizg, 95 Artsnan, 96 Rotsla, 104 Venna East, 108 Venna Southwest
+    114 Dapalle Northwest, 117 Pomara West, 118 Praia Velha, 119 Gnyezno, 120 Ostrelow, 121 Plotzk
+    122 Bydgoszt, 123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh, 127 Qerzan South
+    128 Qerzan, 129 Yol [NIEPRZEJEZDNA]
+  Morze:
+    S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S4 Munat Roads, S5 Munat Reach, S6 Munat Bight
+    S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters, S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep
+    S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters, S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach
+    S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight, S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach
+    S25 Tirsa Banks, S26 Tarnes Waters, S27 Rotsla Sound, S28 Walsholm Roads, S29 Isor Waters, S30 Mave Nortus Waters
+    S31 Mave Nortus Roads, S32 Tarnes Roads, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S41 Port Rotsla Channel, S42 Sabbiano Waters
+    S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters, S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads
+    S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters, S52 Zille Bay, S53 Rotsla Deep, S54 Santa Calla Banks
+    S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nieaktywne (49):
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 21 Ardo, 22 Ossa North, 24 Cala Vessa East, 25 Wiktrany East, 27 Sabbiano
+    28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast, 31 Zille North, 32 Wiktrany Southeast, 34 Vela Nova
+    35 Zille City, 38 Rivamare, 97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands
+    101 Nanta Southeast, 102 Venna North, 103 Lenta East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 115 Azzurra
+    116 Vela Nova Southeast
+
+--- FAZA 2: aktywne 186 (ląd 129, morze 57), nieaktywne 0
+  Ląd:
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 20 Venna, 21 Ardo, 22 Ossa North, 23 Mave Nortus, 24 Cala Vessa East
+    25 Wiktrany East, 26 Ossa East, 27 Sabbiano, 28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast
+    31 Zille North, 32 Wiktrany Southeast, 33 Dapalle West, 34 Vela Nova, 35 Zille City, 36 Pomara Northwest
+    37 Pomara North, 38 Rivamare, 39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes
+    43 Venna South, 44 Zelles, 45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest
+    49 Zelles Southeast, 50 Morsa North, 51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast
+    55 Pomara, 56 Morsa West, 57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East
+    61 Brivane, 62 Brivane Northeast, 63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest
+    67 Brivane Southeast, 68 Zicek, 69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands
+    73 Opolje, 74 Dornatz, 75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima
+    79 Wizen, 80 Witsima Southwest, 81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South
+    85 Kastza North, 86 Warno, 87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza
+    91 Stegnn, 92 Kolobrzezg, 93 Kalischt, 94 Grodzizg, 95 Artsnan, 96 Rotsla
+    97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands, 101 Nanta Southeast, 102 Venna North
+    103 Lenta East, 104 Venna East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast, 108 Venna Southwest
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 114 Dapalle Northwest
+    115 Azzurra, 116 Vela Nova Southeast, 117 Pomara West, 118 Praia Velha, 119 Gnyezno, 120 Ostrelow
+    121 Plotzk, 122 Bydgoszt, 123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh
+    127 Qerzan South, 128 Qerzan, 129 Yol [NIEPRZEJEZDNA]
+  Morze:
+    S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S4 Munat Roads, S5 Munat Reach, S6 Munat Bight
+    S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters, S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep
+    S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters, S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach
+    S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight, S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach
+    S25 Tirsa Banks, S26 Tarnes Waters, S27 Rotsla Sound, S28 Walsholm Roads, S29 Isor Waters, S30 Mave Nortus Waters
+    S31 Mave Nortus Roads, S32 Tarnes Roads, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S41 Port Rotsla Channel, S42 Sabbiano Waters
+    S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters, S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads
+    S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters, S52 Zille Bay, S53 Rotsla Deep, S54 Santa Calla Banks
+    S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nowo odblokowane w fazie 2 (49):
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 21 Ardo, 22 Ossa North, 24 Cala Vessa East, 25 Wiktrany East, 27 Sabbiano
+    28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast, 31 Zille North, 32 Wiktrany Southeast, 34 Vela Nova
+    35 Zille City, 38 Rivamare, 97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands
+    101 Nanta Southeast, 102 Venna North, 103 Lenta East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 115 Azzurra
+    116 Vela Nova Southeast
+  Nieaktywne (0):
+    (brak)
+
+==============================================================================
+PLAN ARK   [Ark -> cała mapa]
+--- FAZA 1: aktywne 130 (ląd 73, morze 57), nieaktywne 56
+  Ląd:
+    20 Venna, 23 Mave Nortus, 26 Ossa East, 33 Dapalle West, 36 Pomara Northwest, 37 Pomara North
+    39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes, 43 Venna South, 44 Zelles
+    45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest, 49 Zelles Southeast, 50 Morsa North
+    51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast, 55 Pomara, 56 Morsa West
+    57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East, 61 Brivane, 62 Brivane Northeast
+    63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest, 67 Brivane Southeast, 68 Zicek
+    69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands, 73 Opolje, 74 Dornatz
+    75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima, 79 Wizen, 80 Witsima Southwest
+    81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South, 85 Kastza North, 86 Warno
+    87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza, 91 Stegnn, 92 Kolobrzezg
+    93 Kalischt, 94 Grodzizg, 95 Artsnan, 96 Rotsla, 104 Venna East, 108 Venna Southwest
+    114 Dapalle Northwest, 117 Pomara West, 118 Praia Velha, 119 Gnyezno, 120 Ostrelow, 121 Plotzk
+    122 Bydgoszt
+  Morze:
+    S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S4 Munat Roads, S5 Munat Reach, S6 Munat Bight
+    S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters, S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep
+    S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters, S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach
+    S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight, S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach
+    S25 Tirsa Banks, S26 Tarnes Waters, S27 Rotsla Sound, S28 Walsholm Roads, S29 Isor Waters, S30 Mave Nortus Waters
+    S31 Mave Nortus Roads, S32 Tarnes Roads, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S41 Port Rotsla Channel, S42 Sabbiano Waters
+    S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters, S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads
+    S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters, S52 Zille Bay, S53 Rotsla Deep, S54 Santa Calla Banks
+    S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nieaktywne (56):
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 21 Ardo, 22 Ossa North, 24 Cala Vessa East, 25 Wiktrany East, 27 Sabbiano
+    28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast, 31 Zille North, 32 Wiktrany Southeast, 34 Vela Nova
+    35 Zille City, 38 Rivamare, 97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands
+    101 Nanta Southeast, 102 Venna North, 103 Lenta East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 115 Azzurra
+    116 Vela Nova Southeast, 123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh, 127 Qerzan South
+    128 Qerzan, 129 Yol [NIEPRZEJEZDNA]
+
+--- FAZA 2: aktywne 179 (ląd 122, morze 57), nieaktywne 7
+  Ląd:
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 20 Venna, 21 Ardo, 22 Ossa North, 23 Mave Nortus, 24 Cala Vessa East
+    25 Wiktrany East, 26 Ossa East, 27 Sabbiano, 28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast
+    31 Zille North, 32 Wiktrany Southeast, 33 Dapalle West, 34 Vela Nova, 35 Zille City, 36 Pomara Northwest
+    37 Pomara North, 38 Rivamare, 39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes
+    43 Venna South, 44 Zelles, 45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest
+    49 Zelles Southeast, 50 Morsa North, 51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast
+    55 Pomara, 56 Morsa West, 57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East
+    61 Brivane, 62 Brivane Northeast, 63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest
+    67 Brivane Southeast, 68 Zicek, 69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands
+    73 Opolje, 74 Dornatz, 75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima
+    79 Wizen, 80 Witsima Southwest, 81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South
+    85 Kastza North, 86 Warno, 87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza
+    91 Stegnn, 92 Kolobrzezg, 93 Kalischt, 94 Grodzizg, 95 Artsnan, 96 Rotsla
+    97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands, 101 Nanta Southeast, 102 Venna North
+    103 Lenta East, 104 Venna East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast, 108 Venna Southwest
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 114 Dapalle Northwest
+    115 Azzurra, 116 Vela Nova Southeast, 117 Pomara West, 118 Praia Velha, 119 Gnyezno, 120 Ostrelow
+    121 Plotzk, 122 Bydgoszt
+  Morze:
+    S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S4 Munat Roads, S5 Munat Reach, S6 Munat Bight
+    S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters, S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep
+    S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters, S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach
+    S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight, S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach
+    S25 Tirsa Banks, S26 Tarnes Waters, S27 Rotsla Sound, S28 Walsholm Roads, S29 Isor Waters, S30 Mave Nortus Waters
+    S31 Mave Nortus Roads, S32 Tarnes Roads, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S41 Port Rotsla Channel, S42 Sabbiano Waters
+    S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters, S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads
+    S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters, S52 Zille Bay, S53 Rotsla Deep, S54 Santa Calla Banks
+    S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nowo odblokowane w fazie 2 (49):
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 21 Ardo, 22 Ossa North, 24 Cala Vessa East, 25 Wiktrany East, 27 Sabbiano
+    28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast, 31 Zille North, 32 Wiktrany Southeast, 34 Vela Nova
+    35 Zille City, 38 Rivamare, 97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands
+    101 Nanta Southeast, 102 Venna North, 103 Lenta East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 115 Azzurra
+    116 Vela Nova Southeast
+  Nieaktywne (7):
+    123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh, 127 Qerzan South, 128 Qerzan
+    129 Yol [NIEPRZEJEZDNA]
+
+==============================================================================
+PLAN SWORD   [Sword -> cała mapa]
+--- FAZA 1: aktywne 137 (ląd 90, morze 47), nieaktywne 49
+  Ląd:
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 20 Venna, 21 Ardo, 22 Ossa North, 23 Mave Nortus, 24 Cala Vessa East
+    25 Wiktrany East, 26 Ossa East, 27 Sabbiano, 28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast
+    31 Zille North, 32 Wiktrany Southeast, 33 Dapalle West, 34 Vela Nova, 35 Zille City, 36 Pomara Northwest
+    37 Pomara North, 38 Rivamare, 39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes
+    43 Venna South, 44 Zelles, 45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest
+    49 Zelles Southeast, 50 Morsa North, 51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast
+    55 Pomara, 56 Morsa West, 57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East
+    61 Brivane, 62 Brivane Northeast, 63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest
+    67 Brivane Southeast, 96 Rotsla, 97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands
+    101 Nanta Southeast, 102 Venna North, 103 Lenta East, 104 Venna East, 105 Ardo Northeast, 106 Ossa Northwest
+    107 Ossa Northeast, 108 Venna Southwest, 109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills
+    113 Portoserra Southeast, 114 Dapalle Northwest, 115 Azzurra, 116 Vela Nova Southeast, 117 Pomara West, 118 Praia Velha
+  Morze:
+    S4 Munat Roads, S5 Munat Reach, S6 Munat Bight, S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters
+    S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep, S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters
+    S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach, S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight
+    S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach, S25 Tirsa Banks, S26 Tarnes Waters, S28 Walsholm Roads
+    S29 Isor Waters, S30 Mave Nortus Waters, S31 Mave Nortus Roads, S32 Tarnes Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S41 Port Rotsla Channel, S42 Sabbiano Waters, S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters
+    S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads, S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters
+    S52 Zille Bay, S54 Santa Calla Banks, S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nieaktywne (49):
+    68 Zicek, 69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands, 73 Opolje
+    74 Dornatz, 75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima, 79 Wizen
+    80 Witsima Southwest, 81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South, 85 Kastza North
+    86 Warno, 87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza, 91 Stegnn
+    92 Kolobrzezg, 93 Kalischt, 94 Grodzizg, 95 Artsnan, 119 Gnyezno, 120 Ostrelow
+    121 Plotzk, 122 Bydgoszt, 123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh
+    127 Qerzan South, 128 Qerzan, 129 Yol [NIEPRZEJEZDNA], S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters
+    S27 Rotsla Sound, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters
+    S53 Rotsla Deep
+
+--- FAZA 2: aktywne 179 (ląd 122, morze 57), nieaktywne 7
+  Ląd:
+    1 Corvis, 2 Munat, 3 Manes Riuz, 4 Corvis East, 5 Tirsa, 6 Quella
+    7 Corvis West, 8 Nanta West, 9 Nanta, 10 Tirsa West, 11 Isor, 12 Lido Isora
+    13 Lenta North, 14 Nanta Southwest, 15 Mave Nortus Northwest, 16 Sostra Northeast, 17 Lenta Northwest, 18 Lenta
+    19 Venna Northwest, 20 Venna, 21 Ardo, 22 Ossa North, 23 Mave Nortus, 24 Cala Vessa East
+    25 Wiktrany East, 26 Ossa East, 27 Sabbiano, 28 Wiktrany, 29 Ossa South, 30 Ondaro Southeast
+    31 Zille North, 32 Wiktrany Southeast, 33 Dapalle West, 34 Vela Nova, 35 Zille City, 36 Pomara Northwest
+    37 Pomara North, 38 Rivamare, 39 Celle Vaz North, 40 Mave Nortus East, 41 Mave Nortus South, 42 Tarnes
+    43 Venna South, 44 Zelles, 45 Tarnes Southeast, 46 Dapalle North, 47 Dapalle East, 48 Zelles Southwest
+    49 Zelles Southeast, 50 Morsa North, 51 Dapalle, 52 Ostrabe West, 53 Ostrabe, 54 Ostrabe Northeast
+    55 Pomara, 56 Morsa West, 57 Morsa, 58 Ostrabe South, 59 Celle Vaz, 60 Celle Vaz East
+    61 Brivane, 62 Brivane Northeast, 63 Morsa Southeast, 64 Marbelas, 65 Marbelas East, 66 Brivane Southwest
+    67 Brivane Southeast, 68 Zicek, 69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands
+    73 Opolje, 74 Dornatz, 75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima
+    79 Wizen, 80 Witsima Southwest, 81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South
+    85 Kastza North, 86 Warno, 87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza
+    91 Stegnn, 92 Kolobrzezg, 93 Kalischt, 94 Grodzizg, 95 Artsnan, 96 Rotsla
+    97 Nanta Northwest, 98 Quella Southeast, 99 Corvis South, 100 Quella Highlands, 101 Nanta Southeast, 102 Venna North
+    103 Lenta East, 104 Venna East, 105 Ardo Northeast, 106 Ossa Northwest, 107 Ossa Northeast, 108 Venna Southwest
+    109 Portoserra, 110 Ardo Southeast, 111 Ossa, 112 Ondaro Hills, 113 Portoserra Southeast, 114 Dapalle Northwest
+    115 Azzurra, 116 Vela Nova Southeast, 117 Pomara West, 118 Praia Velha, 119 Gnyezno, 120 Ostrelow
+    121 Plotzk, 122 Bydgoszt
+  Morze:
+    S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S4 Munat Roads, S5 Munat Reach, S6 Munat Bight
+    S7 Munat Narrows, S8 Trebnow Waters, S9 Quella Waters, S10 Munat Banks, S11 Manes Riuz Sound, S12 Munat Deep
+    S13 Tirsa Waters, S14 Trebnow Roads, S15 Corvis Waters, S16 Munat Shoals, S17 Tirsa Roads, S18 Tirsa Reach
+    S19 Quella Roads, S20 Nanta Waters, S21 Tirsa Bight, S22 Tirsa Narrows, S23 Walsholm Waters, S24 Quella Reach
+    S25 Tirsa Banks, S26 Tarnes Waters, S27 Rotsla Sound, S28 Walsholm Roads, S29 Isor Waters, S30 Mave Nortus Waters
+    S31 Mave Nortus Roads, S32 Tarnes Roads, S33 Port Rotsla Waters, S34 Port Rotsla Roads, S35 Walsholm Reach, S36 Lido Isora Waters
+    S37 Tarnes Reach, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S41 Port Rotsla Channel, S42 Sabbiano Waters
+    S43 Sabbiano Roads, S44 Marenta Waters, S45 Bellacosta Waters, S46 Capo Lisso Channel, S47 Capo Lisso Waters, S48 Bellacosta Roads
+    S49 Azzurra Channel, S50 Capo Lisso Roads, S51 Azzurra Waters, S52 Zille Bay, S53 Rotsla Deep, S54 Santa Calla Banks
+    S55 Praia Velha Roads, S56 Costa Dalle Waters, S57 Marbelas Bight
+  Nowo odblokowane w fazie 2 (42):
+    68 Zicek, 69 Kessin, 70 Kessin East, 71 Kratsna, 72 Kreleck Islands, 73 Opolje
+    74 Dornatz, 75 Shwinouz, 76 Sulkov, 77 Harlitz, 78 Witsima, 79 Wizen
+    80 Witsima Southwest, 81 Torunz, 82 Leburk, 83 Vernen, 84 Vernen South, 85 Kastza North
+    86 Warno, 87 Ustkov, 88 Czerna, 89 Brannitz, 90 Kastza, 91 Stegnn
+    92 Kolobrzezg, 93 Kalischt, 94 Grodzizg, 95 Artsnan, 119 Gnyezno, 120 Ostrelow
+    121 Plotzk, 122 Bydgoszt, S1 Kreleck Sound, S2 Kratsna Waters, S3 Munat Waters, S27 Rotsla Sound
+    S33 Port Rotsla Waters, S34 Port Rotsla Roads, S38 Yol Waters, S39 Yol Roads, S40 Grodzizg Waters, S53 Rotsla Deep
+  Nieaktywne (7):
+    123 Dertea West, 124 Merzil, 125 Dertea, 126 Haldesh, 127 Qerzan South, 128 Qerzan
+    129 Yol [NIEPRZEJEZDNA]
+
+==============================================================================
+WALIDACJA: OK - 72 testów, 0 nieudanych (szczegóły: operation_regions_v14_validation.json)

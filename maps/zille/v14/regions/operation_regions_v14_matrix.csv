@@ -1,0 +1,187 @@
+id,game_tile,name,type,group,impassable,ark_band,sword_sea_proposal,ark_derdia.phase1,ark_derdia.phase2,ark.phase1,ark.phase2,sword.phase1,sword.phase2
+ZilleTile_1,Tile_1,Corvis,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_2,Tile_2,Munat,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_3,Tile_3,Manes Riuz,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_4,Tile_4,Corvis East,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_5,Tile_5,Tirsa,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_6,Tile_6,Quella,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_7,Tile_7,Corvis West,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_8,Tile_8,Nanta West,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_9,Tile_9,Nanta,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_10,Tile_10,Tirsa West,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_11,Tile_11,Isor,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_12,Tile_12,Lido Isora,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_13,Tile_13,Lenta North,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_14,Tile_14,Nanta Southwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_15,Tile_15,Mave Nortus Northwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_16,Tile_16,Sostra Northeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_17,Tile_17,Lenta Northwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_18,Tile_18,Lenta,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_19,Tile_19,Venna Northwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_20,Tile_20,Venna,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_21,Tile_21,Ardo,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_22,Tile_22,Ossa North,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_23,Tile_23,Mave Nortus,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_24,Tile_24,Cala Vessa East,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_25,Tile_25,Wiktrany East,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_26,Tile_26,Ossa East,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_27,Tile_27,Sabbiano,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_28,Tile_28,Wiktrany,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_29,Tile_29,Ossa South,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_30,Tile_30,Ondaro Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_31,Tile_31,Zille North,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_32,Tile_32,Wiktrany Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_33,Tile_33,Dapalle West,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_34,Tile_34,Vela Nova,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_35,Tile_35,Zille City,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_36,Tile_36,Pomara Northwest,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_37,Tile_37,Pomara North,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_38,Tile_38,Rivamare,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_39,Tile_39,Celle Vaz North,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_40,Tile_40,Mave Nortus East,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_41,Tile_41,Mave Nortus South,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_42,Tile_42,Tarnes,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_43,Tile_43,Venna South,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_44,Tile_44,Zelles,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_45,Tile_45,Tarnes Southeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_46,Tile_46,Dapalle North,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_47,Tile_47,Dapalle East,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_48,Tile_48,Zelles Southwest,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_49,Tile_49,Zelles Southeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_50,Tile_50,Morsa North,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_51,Tile_51,Dapalle,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_52,Tile_52,Ostrabe West,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_53,Tile_53,Ostrabe,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_54,Tile_54,Ostrabe Northeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_55,Tile_55,Pomara,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_56,Tile_56,Morsa West,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_57,Tile_57,Morsa,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_58,Tile_58,Ostrabe South,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_59,Tile_59,Celle Vaz,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_60,Tile_60,Celle Vaz East,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_61,Tile_61,Brivane,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_62,Tile_62,Brivane Northeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_63,Tile_63,Morsa Southeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_64,Tile_64,Marbelas,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_65,Tile_65,Marbelas East,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_66,Tile_66,Brivane Southwest,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_67,Tile_67,Brivane Southeast,land,Brenas,0,0,,1,1,1,1,1,1
+ZilleTile_68,Tile_68,Zicek,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_69,Tile_69,Kessin,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_70,Tile_70,Kessin East,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_71,Tile_71,Kratsna,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_72,Tile_72,Kreleck Islands,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_73,Tile_73,Opolje,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_74,Tile_74,Dornatz,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_75,Tile_75,Shwinouz,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_76,Tile_76,Sulkov,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_77,Tile_77,Harlitz,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_78,Tile_78,Witsima,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_79,Tile_79,Wizen,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_80,Tile_80,Witsima Southwest,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_81,Tile_81,Torunz,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_82,Tile_82,Leburk,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_83,Tile_83,Vernen,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_84,Tile_84,Vernen South,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_85,Tile_85,Kastza North,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_86,Tile_86,Warno,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_87,Tile_87,Ustkov,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_88,Tile_88,Czerna,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_89,Tile_89,Brannitz,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_90,Tile_90,Kastza,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_91,Tile_91,Stegnn,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_92,Tile_92,Kolobrzezg,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_93,Tile_93,Kalischt,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_94,Tile_94,Grodzizg,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_95,Tile_95,Artsnan,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_96,Tile_96,Rotsla,land,Wehlen,0,0,,1,1,1,1,1,1
+ZilleTile_97,Tile_97,Nanta Northwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_98,Tile_98,Quella Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_99,Tile_99,Corvis South,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_100,Tile_100,Quella Highlands,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_101,Tile_101,Nanta Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_102,Tile_102,Venna North,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_103,Tile_103,Lenta East,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_104,Tile_104,Venna East,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_105,Tile_105,Ardo Northeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_106,Tile_106,Ossa Northwest,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_107,Tile_107,Ossa Northeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_108,Tile_108,Venna Southwest,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_109,Tile_109,Portoserra,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_110,Tile_110,Ardo Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_111,Tile_111,Ossa,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_112,Tile_112,Ondaro Hills,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_113,Tile_113,Portoserra Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_114,Tile_114,Dapalle Northwest,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_115,Tile_115,Azzurra,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_116,Tile_116,Vela Nova Southeast,land,Zille,0,0,,0,1,0,1,1,1
+ZilleTile_117,Tile_117,Pomara West,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_118,Tile_118,Praia Velha,land,Zille,0,1,,1,1,1,1,1,1
+ZilleTile_119,Tile_119,Gnyezno,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_120,Tile_120,Ostrelow,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_121,Tile_121,Plotzk,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_122,Tile_122,Bydgoszt,land,Wehlen,0,0,,1,1,1,1,0,1
+ZilleTile_123,Tile_123,Dertea West,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_124,Tile_124,Merzil,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_125,Tile_125,Dertea,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_126,Tile_126,Haldesh,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_127,Tile_127,Qerzan South,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_128,Tile_128,Qerzan,land,Derdia,0,0,,1,1,0,0,0,0
+ZilleTile_129,Tile_129,Yol,land,Derdia,1,0,,1,1,0,0,0,0
+ZilleTile_S1,Tile_S1,Kreleck Sound,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S2,Tile_S2,Kratsna Waters,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S3,Tile_S3,Munat Waters,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S4,Tile_S4,Munat Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S5,Tile_S5,Munat Reach,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S6,Tile_S6,Munat Bight,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S7,Tile_S7,Munat Narrows,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S8,Tile_S8,Trebnow Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S9,Tile_S9,Quella Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S10,Tile_S10,Munat Banks,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S11,Tile_S11,Manes Riuz Sound,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S12,Tile_S12,Munat Deep,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S13,Tile_S13,Tirsa Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S14,Tile_S14,Trebnow Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S15,Tile_S15,Corvis Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S16,Tile_S16,Munat Shoals,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S17,Tile_S17,Tirsa Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S18,Tile_S18,Tirsa Reach,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S19,Tile_S19,Quella Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S20,Tile_S20,Nanta Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S21,Tile_S21,Tirsa Bight,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S22,Tile_S22,Tirsa Narrows,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S23,Tile_S23,Walsholm Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S24,Tile_S24,Quella Reach,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S25,Tile_S25,Tirsa Banks,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S26,Tile_S26,Tarnes Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S27,Tile_S27,Rotsla Sound,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S28,Tile_S28,Walsholm Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S29,Tile_S29,Isor Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S30,Tile_S30,Mave Nortus Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S31,Tile_S31,Mave Nortus Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S32,Tile_S32,Tarnes Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S33,Tile_S33,Port Rotsla Waters,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S34,Tile_S34,Port Rotsla Roads,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S35,Tile_S35,Walsholm Reach,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S36,Tile_S36,Lido Isora Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S37,Tile_S37,Tarnes Reach,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S38,Tile_S38,Yol Waters,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S39,Tile_S39,Yol Roads,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S40,Tile_S40,Grodzizg Waters,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S41,Tile_S41,Port Rotsla Channel,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S42,Tile_S42,Sabbiano Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S43,Tile_S43,Sabbiano Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S44,Tile_S44,Marenta Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S45,Tile_S45,Bellacosta Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S46,Tile_S46,Capo Lisso Channel,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S47,Tile_S47,Capo Lisso Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S48,Tile_S48,Bellacosta Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S49,Tile_S49,Azzurra Channel,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S50,Tile_S50,Capo Lisso Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S51,Tile_S51,Azzurra Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S52,Tile_S52,Zille Bay,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S53,Tile_S53,Rotsla Deep,sea,Sea,0,0,excluded,1,1,1,1,0,1
+ZilleTile_S54,Tile_S54,Santa Calla Banks,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S55,Tile_S55,Praia Velha Roads,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S56,Tile_S56,Costa Dalle Waters,sea,Sea,0,0,included,1,1,1,1,1,1
+ZilleTile_S57,Tile_S57,Marbelas Bight,sea,Sea,0,0,included,1,1,1,1,1,1

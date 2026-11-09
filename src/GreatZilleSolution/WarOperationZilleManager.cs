@@ -40,6 +40,149 @@ namespace GreatZilleSolution
         private static bool _customOperationConfigured = false;
         private static WarOperation _zilleWarOp = null;
 
+        public static void InitializeStaffPlan(ZilleStaffPlan plan)
+        {
+            ZilleCampaignState.PlanType = ZillePlanType.Staff;
+            ZilleCampaignState.StaffPlan = plan;
+            ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase1;
+            ZilleCampaignState.CurrentPhaseNumber = 1;
+            ZilleCampaignState.StaffVictoryPoints = 0;
+
+            MelonLogger.Msg("============================================================");
+            MelonLogger.Msg($"[WAR ENGINE] Initializing Staff-Led Zille Campaign: Plan {plan}");
+            MelonLogger.Msg("============================================================");
+
+            ZilleCampaignState.ApplyGeopoliticalShifts();
+            if (ZilleCampaignState.IsTwoFrontWarThreat()) CalculateUnitReserves();
+            ZilleCampaignState.SyncToLua();
+        }
+
+        public static void InitializeRomulusPlan(ZilleRomulusPlan plan)
+        {
+            ZilleCampaignState.PlanType = ZillePlanType.Romulus;
+            ZilleCampaignState.RomulusPlan = plan;
+            ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase1;
+            ZilleCampaignState.CurrentPhaseNumber = 1;
+
+            MelonLogger.Msg("============================================================");
+            MelonLogger.Msg($"[WAR ENGINE] Initializing Player-Controlled Romulus Campaign: Plan {plan}");
+            MelonLogger.Msg("============================================================");
+
+            ZilleCampaignState.ApplyGeopoliticalShifts();
+            if (ZilleCampaignState.IsTwoFrontWarThreat()) CalculateUnitReserves();
+            ZilleCampaignState.SyncToLua();
+        }
+
+        public static void TriggerOutcome(ZilleWarOutcome outcome, string summary = "")
+        {
+            ZilleCampaignState.Outcome = outcome;
+            ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Completed_Outcome;
+            MelonLogger.Msg($"[WAR ENGINE] Zille Campaign Outcome set to: {outcome} ({summary})");
+
+            try
+            {
+                DialogueHelper.SetVariable("Zille_War_Outcome", (int)outcome);
+
+                switch (outcome)
+                {
+                    case ZilleWarOutcome.TotalFiasco:
+                        ZilleCampaignState.IsBrenasLost = true;
+                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                        DialogueHelper.SetVariable("Brenas_Lost_To_Wehlen", true);
+                        DialogueHelper.SetVariable("Country_MilitaryCoupHappens", true);
+                        break;
+                    case ZilleWarOutcome.TacticalDefeat:
+                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                        break;
+                    case ZilleWarOutcome.BloodyStalemate:
+                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("Zille_Stalemate", true);
+                        break;
+                    case ZilleWarOutcome.DecisiveVictory:
+                        DialogueHelper.SetVariable("ZilleReturn_Success", true);
+                        DialogueHelper.SetVariable("_Zille_OwnState", 1);
+                        DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
+                        DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                        break;
+                    case ZilleWarOutcome.OverwhelmingTriumph:
+                        DialogueHelper.SetVariable("ZilleReturn_Success", true);
+                        DialogueHelper.SetVariable("_Zille_OwnState", 1);
+                        DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
+                        DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                        DialogueHelper.SetVariable("Grodzizg_FreeCity", true);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"Error setting outcome flags: {ex.Message}");
+            }
+
+            ZilleCampaignState.SyncToLua();
+        }
+
+        public static ZilleWarOutcome ResolveStaffPhase(ZilleStaffPlan plan, int phase)
+        {
+            int score = 0;
+            try
+            {
+                int pp = DialogueHelper.GetIntVariable("Country_Military_PowerProjection");
+                int equipment = DialogueHelper.GetIntVariable("Resources_Military_Equipment");
+                int energy = DialogueHelper.GetIntVariable("Resources_Energy");
+
+                score += pp;
+                score += Math.Min(3, equipment / 2);
+
+                switch (plan)
+                {
+                    case ZilleStaffPlan.Hawk:
+                        if (DialogueHelper.GetBoolVariable("Policy_RD_Order_BomberPlaneFactory_Completed")) score += 2;
+                        if (energy >= 3) score += 1;
+                        break;
+                    case ZilleStaffPlan.Sword:
+                        if (DialogueHelper.GetIntVariable("Army_Unit_Tank_Total") >= 2) score += 2;
+                        if (!DialogueHelper.GetBoolVariable("Country_HouseAzaro_Enemy")) score += 1;
+                        break;
+                    case ZilleStaffPlan.Ark:
+                        int fleet = DialogueHelper.GetIntVariable("Army_Unit_Battleship_Total") + DialogueHelper.GetIntVariable("Army_Unit_Submarine_Total");
+                        if (fleet >= 2) score += 2;
+                        if (ZilleCampaignState.IsNavalBlockadeActive) score += 1;
+                        break;
+                    case ZilleStaffPlan.Spear:
+                        if (DialogueHelper.GetBoolVariable("Policy_Order_GoldenGuard_Expanded")) score += 2;
+                        if (DialogueHelper.GetBoolVariable("Policy_RD_Order_BuildMaveNortusIntelHub_Completed")) score += 1;
+                        break;
+                }
+
+                string logistics = DialogueHelper.GetStringVariable("Zille_War_Logistics");
+                if (logistics == "Sazon" || logistics == "Azaro") score += 1;
+
+                if (ZilleCampaignState.IsLespiaPactAccepted) score += 2;
+                if (ZilleCampaignState.IsDerdiaHybridSupportActive) score += 1;
+
+                if (ZilleCampaignState.IsTwoFrontWarThreat()) score -= 3;
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"ResolveStaffPhase calculation error: {ex.Message}");
+            }
+
+            ZilleCampaignState.StaffVictoryPoints += score;
+            MelonLogger.Msg($"[WAR ENGINE] Staff Phase {phase} resolved for Plan {plan}. Phase score: {score}, Total Staff VP: {ZilleCampaignState.StaffVictoryPoints}");
+
+            ZilleWarOutcome outcome = ZilleWarOutcome.BloodyStalemate;
+            int totalVp = ZilleCampaignState.StaffVictoryPoints;
+            if (totalVp <= 3) outcome = ZilleWarOutcome.TotalFiasco;
+            else if (totalVp <= 6) outcome = ZilleWarOutcome.TacticalDefeat;
+            else if (totalVp <= 10) outcome = ZilleWarOutcome.BloodyStalemate;
+            else if (totalVp <= 14) outcome = ZilleWarOutcome.DecisiveVictory;
+            else outcome = ZilleWarOutcome.OverwhelmingTriumph;
+
+            return outcome;
+        }
+
         public static void InitializeOperation(ZilleOperationPath path)
         {
             ZilleCampaignState.ChosenPath = path;

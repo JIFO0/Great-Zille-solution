@@ -1,0 +1,422 @@
+{
+ "ok": true,
+ "n_checks": 72,
+ "n_failed": 0,
+ "checks": [
+  {
+   "check": "source totals 186/129/57",
+   "ok": true
+  },
+  {
+   "check": "source groups Zille60 Brenas29 Wehlen33 Derdia7 Sea57",
+   "ok": true,
+   "detail": {
+    "Zille": 60,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 7,
+    "Sea": 57
+   }
+  },
+  {
+   "check": "impassable is exactly [ZilleTile_129]",
+   "ok": true
+  },
+  {
+   "check": "Yol 129 has 0 adjacency edges",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    136
+   ]
+  },
+  {
+   "check": "ark_derdia.phase2: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    185
+   ]
+  },
+  {
+   "check": "ark_derdia: phase1 subset of phase2",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia: phase2 = phase1 + newly_unlocked",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    130
+   ]
+  },
+  {
+   "check": "ark.phase2: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    179
+   ]
+  },
+  {
+   "check": "ark: phase1 subset of phase2",
+   "ok": true
+  },
+  {
+   "check": "ark: phase2 = phase1 + newly_unlocked",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    137
+   ]
+  },
+  {
+   "check": "sword.phase2: all ids exist",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: no duplicates",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: land/sea split matches manifest type",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: active + disabled = 186 disjoint",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: game tile list aligned",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: passable active set is one connected component",
+   "ok": true,
+   "detail": [
+    179
+   ]
+  },
+  {
+   "check": "sword: phase1 subset of phase2",
+   "ok": true
+  },
+  {
+   "check": "sword: phase2 = phase1 + newly_unlocked",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1 - ark.phase1 == Derdia(7)",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2 - ark.phase2 == Derdia(7)",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2 == whole map (186)",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2 == sword.phase2 == whole map minus Derdia (179)",
+   "ok": true
+  },
+  {
+   "check": "Derdia absent from ark and sword in both phases",
+   "ok": true
+  },
+  {
+   "check": "Ark phase1 has all seas, all Wehlen, all Brenas",
+   "ok": true
+  },
+  {
+   "check": "Ark phase1 Zille part == band exactly",
+   "ok": true
+  },
+  {
+   "check": "band ids all group Zille",
+   "ok": true
+  },
+  {
+   "check": "band built from land edges only (each member has >=1 land edge to Brenas)",
+   "ok": true
+  },
+  {
+   "check": "Rotsla 96 not in band; 96 has no land edges",
+   "ok": true
+  },
+  {
+   "check": "Manes Riuz 3 not in band",
+   "ok": true
+  },
+  {
+   "check": "Sword phase1 land == whole Zille + Rotsla 96 + all Brenas (no other Wehlen, no Derdia)",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase1: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "ark_derdia.phase2: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "ark.phase1: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "ark.phase2: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "sword.phase1: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "sword.phase2: Brenas (29) always active, none disabled",
+   "ok": true
+  },
+  {
+   "check": "Sword phase1 counts 137/90/47, phase2 179 with 42 newly unlocked",
+   "ok": true
+  },
+  {
+   "check": "Sword excluded seas == user list (10), included == 47",
+   "ok": true
+  },
+  {
+   "check": "Sword seas: every sea touching Zille is included",
+   "ok": true
+  },
+  {
+   "check": "Sword: Rotsla 96 keeps >=1 active sea neighbour",
+   "ok": true,
+   "detail": [
+    "ZilleTile_S28",
+    "ZilleTile_S35"
+   ]
+  },
+  {
+   "check": "Sword seas: all Rizia ship-placement seas included",
+   "ok": true,
+   "detail": [
+    "ZilleTile_S26",
+    "ZilleTile_S30",
+    "ZilleTile_S31",
+    "ZilleTile_S32",
+    "ZilleTile_S37",
+    "ZilleTile_S56",
+    "ZilleTile_S57"
+   ]
+  },
+  {
+   "check": "Sword seas form one sea-connected network",
+   "ok": true
+  },
+  {
+   "check": "Sword excluded seas exist and are sea",
+   "ok": true
+  },
+  {
+   "check": "impassable never in a movable list without flag",
+   "ok": true
+  }
+ ],
+ "stage_totals": {
+  "ark_derdia.phase1": {
+   "total": 137,
+   "land": 80,
+   "sea": 57,
+   "by_region": {
+    "Zille": 11,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 7,
+    "Sea": 57
+   },
+   "impassable_active": 1,
+   "disabled": 49
+  },
+  "ark_derdia.phase2": {
+   "total": 186,
+   "land": 129,
+   "sea": 57,
+   "by_region": {
+    "Zille": 60,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 7,
+    "Sea": 57
+   },
+   "impassable_active": 1,
+   "disabled": 0,
+   "newly_unlocked": 49
+  },
+  "ark.phase1": {
+   "total": 130,
+   "land": 73,
+   "sea": 57,
+   "by_region": {
+    "Zille": 11,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 0,
+    "Sea": 57
+   },
+   "impassable_active": 0,
+   "disabled": 56
+  },
+  "ark.phase2": {
+   "total": 179,
+   "land": 122,
+   "sea": 57,
+   "by_region": {
+    "Zille": 60,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 0,
+    "Sea": 57
+   },
+   "impassable_active": 0,
+   "disabled": 7,
+   "newly_unlocked": 49
+  },
+  "sword.phase1": {
+   "total": 137,
+   "land": 90,
+   "sea": 47,
+   "by_region": {
+    "Zille": 60,
+    "Brenas": 29,
+    "Wehlen": 1,
+    "Derdia": 0,
+    "Sea": 47
+   },
+   "impassable_active": 0,
+   "disabled": 49
+  },
+  "sword.phase2": {
+   "total": 179,
+   "land": 122,
+   "sea": 57,
+   "by_region": {
+    "Zille": 60,
+    "Brenas": 29,
+    "Wehlen": 33,
+    "Derdia": 0,
+    "Sea": 57
+   },
+   "impassable_active": 0,
+   "disabled": 7,
+   "newly_unlocked": 42
+  }
+ }
+}

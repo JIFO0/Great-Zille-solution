@@ -1,356 +1,361 @@
-# The Great Zille Solution: Gigantyczny Kompletny Plan Wdrożenia (Master Implementation Plan)
+# The Great Zille Solution: Master Implementation Plan (Wersja 2.0)
 
-*Techniczny, architektoniczny i produkcyjny plan wdrożenia moda „The Great Zille Solution” do gry Suzerain: Kingdom of Rizia.*
-*Wersja: 1.0.0-PROD | Cel: Pełna integracja z silnikiem Unity, PixelCrushers DialogueSystem i GameFlow.*
+*Techniczny, narracyjny i architektoniczny plan wdrożenia teatru militarnego wyzwolenia prowincji Zille w grze Suzerain: Kingdom of Rizia.*  
+*Wersja: 2.0.0-PROD | Status: Integracja silnika Unity, PixelCrushers DialogueSystem, GameFlow Rescheduling i 3D War Table.*
 
 ---
 
 ## SPIS TREŚCI
 1. [Architektura Systemowa i Hooki Silnika (Engine & Patcher)](#1-architektura-systemowa-i-hooki-silnika-engine--patcher)
-2. [Integracja Mapy Taktycznej i Mechaniki Walki (Hex War Engine)](#2-integracja-mapy-taktycznej-i-mechaniki-walki-hex-war-engine)
-3. [Silnik Sterowania Przepływem Gry (GameFlow Rescheduling Engine)](#3-silnik-sterowania-przepływem-gry-gameflow-rescheduling-engine)
-4. [Potok Konwersji i Wstrzykiwania Dialogów (Dialogue Pipeline)](#4-potok-konwersji-i-wstrzykiwania-dialogów-dialogue-pipeline)
-5. [Specyfikacja Techniczna 6 Nowych Scen Modu](#5-specyfikacja-techniczna-6-nowych-scen-modu)
-6. [Gospodarka, Zasoby i Zmienne Stanu Państwa](#6-gospodarka-zasoby-i-zmienne-stanu-państwa)
-7. [System Diagnostyki, Menu F9 i Zautomatyzowane Testy QA](#7-system-diagnostyki-menu-f9-i-zautomatyzowane-testy-qa)
-8. [Harmonogram Produkcyjny i Kamienie Milowe](#8-harmonogram-produkcyjny-i-kamienie-milowe)
+2. [Typologia Planów Wojennych: Sztab vs Osobiste Dowodzenie Romulusa](#2-typologia-planów-wojennych-sztab-vs-osobiste-dowodzenie-romulusa)
+   - 2.1. Plany Sztabowe (*Staff-Led*): Hawk, Sword, Ark, Spear
+   - 2.2. Plany Romulusa (*Player-Controlled*): Romulus Ark & Romulus Sword (Operacja Righteous Sword)
+   - 2.3. Struktura Fazowa i Zasięg Terytorialny (Zille vs Głąb Wehlen)
+3. [Chronologia, GameFlow Rescheduling i Przesunięcie Referendum](#3-chronologia-gameflow-rescheduling-i-przesunięcie-referendum)
+   - 3.1. Dlaczego Referendum w Turze 9 było Wąskim Gardłem?
+   - 3.2. Nowy Harmonogram Referendum (Plebiscyt w Turze 7)
+   - 3.3. Trzy Scenariusze Czasowe (Wczesny, Średni w T7, Zwykły w T8)
+4. [Spięcie Fabularne z Kampanią Vanilla (Narrative & Lore Cohesion)](#4-spięcie-fabularne-z-kampanią-vanilla-narrative--lore-cohesion)
+   - 4.1. Ewolucja Pretekstu Smolaka (Od Zamachu Bombowego do Plebiscytu AN)
+   - 4.2. Konsekwencje dla Szczytu Alliance of Nations w Kyrute (Tura 8)
+   - 4.3. Dylemat Wojny Dwufrontowej (Zille + Pales)
+   - 4.4. Spór Logistyczny Rodów: Azaro vs Sazon
+5. [Matryca Warunków Zwycięstwa i Porażki (5 Stanów Końcowych)](#5-matryca-warunków-zwycięstwa-i-porażki-5-stanów-końcowych)
+   - 5.1. Ewaluacja dla Planów Sztabowych (Staff Calculation)
+   - 5.2. Ewaluacja dla Planów Romulusa (Hex Capture Detection)
+   - 5.3. 5 Finałów Traktatowych i Scenariusz „Niepodległe Zille”
+6. [Specyfikacja Scen Dialogowych i Potok Wstrzykiwania (PixelCrushers)](#6-specyfikacja-scen-dialogowych-i-potok-wstrzykiwania-pixelcrushers)
+7. [Gospodarka, Zasoby i Zmienne Stanu Państwa](#7-gospodarka-zasoby-i-zmienne-stanu-państwa)
+8. [System Diagnostyki, Menu F9 i Zautomatyzowane Testy QA](#8-system-diagnostyki-menu-f9-i-zautomatyzowane-testy-qa)
+9. [Harmonogram Produkcyjny i Kamienie Milowe](#9-harmonogram-produkcyjny-i-kamienie-milowe)
 
 ---
 
 ## 1. Architektura Systemowa i Hooki Silnika (Engine & Patcher)
 
-Gra *Suzerain* zbudowana jest w środowisku Unity (wersja 2021/2022) w architekturze Mono / IL2CPP. Warstwa narracyjna operuje w oparciu o silnik **PixelCrushers Dialogue System** oraz autorski automat stanów Torpor Games (`Torpor.StoryPack`, `GameFlow`, `EntityDataManager`).
+Modyfikacja operuje w środowisku **MelonLoader 0.6+** pod silnikiem Unity 6000.3.9f1 (Il2Cpp metadata v39), integrując się bezpośrednio z logiką narracyjną PixelCrushers oraz stanami gry Torpor Games (`Torpor.StoryPack`, `GameFlow`, `EntityDataManager`).
 
-### 1.1. Patcher Framework: BepInEx + HarmonyX
-Modyfikacja ładowana jest jako plugin BepInEx 5.x / 6.x.
-Główny punkt wejścia (`GreatZillePlugin.cs`):
-```csharp
-using BepInEx;
-using HarmonyLib;
-using PixelCrushers.DialogueSystem;
-using UnityEngine;
-
-[BepInPlugin("com.greatzille.solution", "The Great Zille Solution", "1.0.0")]
-public class GreatZillePlugin : BaseUnityPlugin
-{
-    private Harmony harmony;
-
-    void Awake()
-    {
-        harmony = new Harmony("com.greatzille.solution");
-        harmony.PatchAll();
-        Logger.LogInfo("[Great Zille Solution] Native Patches Injected Successfully.");
-    }
-}
-```
-
-### 1.2. Punkty Wstrzyknięć Harmony (Critical Patches)
-1. **`DialogueManager.Awake` / `MasterDatabase`:**
-   - *Cel:* Po załadowaniu oficjalnej bazy dialogowej gry, patcher wstrzykuje nowe assety konwersacji (ID 9988–9993) oraz dodaje brakujące węzły do istniejących konwersacji.
+### 1.1. Kluczowe Punkty Wstrzyknięć (Critical Patches)
+1. **`DialogueManager.Awake` & `MasterDatabase`:**
+   - Wstrzykiwanie zmodyfikowanych węzłów i nowych assetów konwersacji (ID `9988`–`9994`) do pamięci `DialogueDatabase`.
+   - Obsługa dynamicznych branchy dialogowych z poziomu `DialogueOverrideManager.cs`.
 2. **`GameFlow.ExecuteStep` & `GameFlow.TriggerConversation`:**
-   - *Cel:* Przechwytywanie kroków w Turze 8, 9 i 10, blokowanie scen anulowanych (`[INTERRUPT]`) oraz dynamiczne przekierowanie na zmodyfikowane eventy wojenne.
-3. **`OperationManager.StartOperation`:**
-   - *Cel:* Inicjalizacja operacji taktycznej Zille z dedykowanymi hexami z `wartiles_dump.json`.
+   - Przechwytywanie kroków w Turach 7, 8, 9 i 10.
+   - Wstrzymanie vanillowych sekwencji kolidujących (`[INTERRUPT]`) oraz przekierowanie na aktywne fazy wojenne w Zille.
+3. **`WarFlowManager` & `WarTable`:**
+   - Ładowanie układu taktycznego Zille z `zille_tiles_layout.json`.
+   - Dynamiczne przełączanie teatru: teatr Pales vs teatr Zille / Wehlen w zależności od wybranego tokena i flagi `Zille_War_Active`.
+4. **`TokenInteractionPanel.Open`:**
+   - Generowanie natywnych przycisków startu operacji (`Operation: Righteous Sword - Phase I`, `Phase II`, `Phase III`) po kliknięciu piona wojskowego Zille.
 
 ---
 
-## 2. Integracja Mapy Taktycznej i Mechaniki Walki (Hex War Engine)
+## 2. Typologia Planów Wojennych: Sztab vs Osobiste Dowodzenie Romulusa
 
-Kampania o Zille wykorzystuje sprawdzony system walki z Pales (Operation Golden Shield), rozszerzając go o dedykowany teatr południowy.
-
-### 2.1. Teatr 4 Miast Półwyspu Zille + 3 Miasta Osłonowe Brenas
-Na podstawie wyekstrahowanych danych z `docs/wartiles_dump.json` oraz `docs/operation_data_dump.json`:
+W odpowiedzi na głębię RPG i zróżnicowane style gry wprowadzamy fundamentalny podział na **dwa tryby prowadzenia wojny**:
 
 ```
-                           [PORT ROTSLA (Wehlen)]
-                                     ▲
-                                     │ (Zaopatrzenie morskie)
-                                     ▼
-                            [MUNAT (Północ)]
-                                   ▲
-                                   │ (Szosa Nadmorska)
-                                   ▼
- [ZILLE (Twierdza Główna)] ◄──► [WIKTRANY (Węzeł Centralny)] ◄──► [NANTA (Wschód)]
-                                   ▲
-                          (Przełęcz i Bagna)
-                                   ▼
-          ─────────────────────────────────────────────────────────────
-                          DEMARKACJA GRANICY BRENAS
-          ─────────────────────────────────────────────────────────────
-               ▲                           ▲                         ▲
-               │                           │                         │
-     [MARBELAS (Sazon)]           [DAPALLE (Sazon)]        [MAVE NORTUS (Sazon)]
+                              ┌───────────────────────────────────────────────┐
+                              │      KRÓLEWSKA NARADA WOJENNA (SCENA 9988)    │
+                              └───────────────────────┬───────────────────────┘
+                                                      │
+                       ┌──────────────────────────────┴──────────────────────────────┐
+                       ▼                                                             ▼
+     ┌───────────────────────────────────┐                         ┌───────────────────────────────────┐
+     │       PLANY SZTABOWE              │                         │         PLANY ROMULUSA            │
+     │      (General Staff-Led)          │                         │     (Player-Controlled Map)       │
+     └─────────────────┬─────────────────┘                         └─────────────────┬─────────────────┘
+                       │                                                             │
+        ┌──────────────┼──────────────┐                               ┌──────────────┴──────────────┐
+        ▼              ▼              ▼                               ▼                             ▼
+   [HAWK / SWORD / ARK / SPEAR]                               [ROMULUS SWORD]                 [ROMULUS ARK]
+   • Kampania rozstrzygana przez sztab                        • Teatr Zille + Morze           • Teatr Wehlen + Granica
+   • Brak manualnej mapy hexowej                              • Bezpośrednie dowodzenie       • Bezpośrednie dowodzenie
+   • Wpływ doktryny, budżetu i decyzji                        • 2 fazy planu podstawowego     • 2 fazy planu głębokiego
+   • Płynne raporty i zdarzenia losowe                        • + 1-2 fazy drugiego etapu     • + 1-2 fazy drugiego etapu
 ```
 
-### 2.2. Kafelki Operacyjne (Wartiles Mapping)
-* **`Zille_City_Center` (Hex #101):** Miasto stołeczne, 3 poziomy fortyfikacji, osłona rafinerii. Wymaga okrążenia lub zmasowanego przygotowania artyleryjskiego.
-* **`Wiktrany_Junction` (Hex #102):** Klucz do całego półwyspu. Przejęcie węzła odcina dostawy z Wehlen do Zille i Nanty.
-* **`Munat_Deepwater_Port` (Hex #103):** Głęboki port. Cel uderzenia Planu Beta lub desantu spadochronowego z Lespii.
-* **`Nanta_Redoubts` (Hex #104):** Posterunki graniczne Wehlen, magazyny amunicji.
-* **`Brenas_Buffer_Marbelas/Dapalle/MaveNortus` (Hex #201-#203):** Miasta Rizii. Jeśli Smolak przełamie linię obrony i zajmie wszystkie 3 — gracz ponosi **Total Fiasco (Stan 1)**.
+### 2.1. Plany Sztabowe (*Staff-Led*): Hawk, Sword, Ark, Spear
+W przypadku wyboru jednego z planów sztabowych król Romus deleguje operacyjne dowodzenie do **Sztabu Generalnego** (pod przewodnictwem Lucity Azaro, Titusa Gordiona lub generałów armii). **Gracz nie przesuwa pionów na mapie hexowej.**
 
-### 2.3. Akcje Wsparcia i Doktryny Sojusznicze
-* **Wsparcie Azaro:** Koszt: 2 AP. Natychmiastowy nalot bombowy na pozycje wroga w zasięgu 2 hexów.
-* **Wsparcie Sazon:** Koszt: 1 AP. Przywrócenie 1 punktu wytrzymałości i amunicji dowolnej jednostce w prowincji Brenas.
-* **Desant ATO (Patricio Alvarez):** Dostępny, jeśli podpisano Pakt z Lespią. Zrzut jednostki spadochronowej na dowolny niezajęty hex za linią wroga (np. pod Munat).
-* **Rajd Nurycki (Wiseman Azmal):** Dostępny, jeśli zawarto układ z Derdią. Dywersja niszcząca punkty obronne węzła Wiktrany.
+* **Plan Hawk (Jastrząb):**
+  - *Doktryna:* Dominacja powietrzna i zmasowane uderzenia rakietowo-artyleryjskie na węzły komunikacyjne.
+  - *Wymagania:* Rozwinięte lotnictwo (baza w Teradorze, fabryka bombowców Morelli) oraz zapasy energii.
+  - *Przebieg:* Sztab raportuje sukcesy w niszczeniu infrastruktury Wehlen; minimalne straty własne w ludziach, lecz ogromne zniszczenia miejskie i ryzyko ofiar cywilnych.
+* **Plan Sword (Miecz Sztabowy):**
+  - *Doktryna:* Klasyczny, frontalny klin pancerno-zmechanizowany prowadzony przez dywizje rodu Azaro.
+  - *Wymagania:* Wysoka liczba dywizji czołgów i piechoty zmechanizowanej, poparcie Lucity.
+  - *Przebieg:* Krwawe, bezpośrednie starcia o Wiktrany i Zille City. Sukces zależny od przewagi sprzętowej.
+* **Plan Ark (Arka Sztabowa):**
+  - *Doktryna:* Operacja połączona z naciskiem na dominację morską, blokadę zaopatrzenia z Port Rotsla i desanty przybrzeżne.
+  - *Wymagania:* Silna flota królewska (okręty wojenne i podwodne) oraz współpraca z flotyllą Brenas.
+  - *Przebieg:* Odcięcie posiłków Smolaka drogą morską; powolne, metodyczne duszenie garnizonu Zille.
+* **Plan Spear (Włócznia):**
+  - *Doktryna:* Błyskawiczny rajd komandosów, Złotej Straży i oddziałów górskich przez trudny teren w celu eliminacji dowództwa Wehlen i opanowania kluczowych mostów.
+  - *Wymagania:* Rozbudowana Złota Straż Titusa, wysoki poziom wywiadu wojskowego.
+  - *Przebieg:* Niezwykle ryzykowna operacja chirurgiczna o charakterze "wszystko albo nic".
+
+*Mechanizm rozstrzygania planów sztabowych:*
+W każdej fazie operacji silnik oblicza współczynnik sukcesu na podstawie:
+`PowerProjection` + `Army_Equipment` + `Doctrine_Synergy` - `Wehlen_Entrenchment`. Gracz otrzymuje meldunki sytuacyjne i podejmuje kluczowe decyzje makro (np. rzucenie rezerw, zgoda na bombardowanie miast, wsparcie logistyczne Sazonów).
 
 ---
 
-## 3. Silnik Sterowania Przepływem Gry (GameFlow Rescheduling Engine)
+### 2.2. Plany Romulusa (*Player-Controlled*): Specyfikacja Regionów v14
+Gdy Romus osobiście przypina miecz i przejmuje bezpośrednie dowodzenie nad całością sił zbrojnych, **gra otwiera w pełni interaktywną, trójwymiarową mapę wojenną Zille War Table**.
 
-### 3.1. Reorganizacja Kroków w Turze 8, 9 i 10
-Poniższy algorytm patchera zarządza egzekucją kroków w zależności od aktywnego wariantu wojny:
+Zgodnie z zatwierdzoną specyfikacją topologiczną (**Wersja v14: `maps/zille/v14/regions/operation_regions_v14.json`**) teatry operacyjne dzielą się na ściśle zdefiniowane pule prowincji aktywnych w Fazie 1 i Fazie 2:
 
-```csharp
-[HarmonyPatch(typeof(GameFlow), "ExecuteStep")]
-public static class GameFlow_StepInterceptor_Patch
-{
-    static bool Prefix(GameFlow __instance, int stepIndex)
-    {
-        int turn = __instance.CurrentTurn;
-        bool isZilleWar = DialogueLua.GetVariable("Zille_War_Active").asBool;
-        int warVariant = DialogueLua.GetVariable("Zille_War_Variant").asInt;
+```
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                        ZESTAWIENIE REGIONÓW OPERACYJNYCH DLA PLANÓW (WERSJA v14)                      │
+├──────────────────────┬─────────────┬─────────────┬─────────────────────────────────────────────────────┤
+│ Plan Operacyjny      │ Faza 1      │ Faza 2      │ Zakres Terytorialny (Aktywne Prowincje)             │
+├──────────────────────┼─────────────┼─────────────┼─────────────────────────────────────────────────────┤
+│ 1. Plan Sword        │ 137 kafelków│ 179 kafelków│ Faza 1: Całe Zille (60) + całe Brenas (29) +        │
+│    (Righteous Sword) │ (90 ląd /   │ (122 ląd /  │ wyspa Rotsla (96) + 47 mórz (bez 10 pod Wehlen).    │
+│                      │  47 morze)  │  57 morze)  │ Faza 2: Cała mapa bez Derdii (+42 kafelki: Wehlen   │
+│                      │             │             │ 32, morza 10).                                      │
+├──────────────────────┼─────────────┼─────────────┼─────────────────────────────────────────────────────┤
+│ 2. Plan Ark          │ 130 kafelków│ 179 kafelków│ Faza 1: Całe Wehlen (33) + całe Brenas (29) +       │
+│    (Standard)        │ (73 ląd /   │ (122 ląd /  │ pas 11 prowincji Zille przy Brenas + 57 mórz.       │
+│                      │  57 morze)  │  57 morze)  │ Faza 2: Cała mapa bez Derdii (+49 prowincji Zille). │
+├──────────────────────┼─────────────┼─────────────┼─────────────────────────────────────────────────────┤
+│ 3. Plan Ark (Derdia) │ 137 kafelków│ 186 kafelków│ Faza 1: To samo co Ark + 7 kafelków Derdii (123-128 │
+│    (Sojusz z Azmalem)│ (80 ląd /   │ (129 ląd /  │ oraz 129 Yol jako nieprzejezdna baza tranzytowa).   │
+│                      │  57 morze)  │  57 morze)  │ Faza 2: Cała mapa łącznie z Derdią (+49 Zille).     │
+└──────────────────────┴─────────────┴─────────────┴─────────────────────────────────────────────────────┘
+```
 
-        // TUR 9 INTERRUPTS & RESCHEDULING
-        if (turn == 9 && isZilleWar)
-        {
-            // Blokada spokojnego wieczoru ze Smolakiem
-            if (__instance.CurrentStepName == "Turn9_FPnT_CallWithSmolak")
-            {
-                __instance.TriggerConversation("9992_ZilleWar_SmolakFinalParley");
-                return false; // Pomijamy vanilla step
-            }
+#### Szczegółowy Skład Teatrów i Ograniczenia Graniczne:
 
-            // Blokada referendum w War. B (wojna wybuchła w T8)
-            if (warVariant == 2 && (__instance.CurrentStepName == "Turn9_FPnT_ZilleReferendum" || 
-                                    __instance.CurrentStepName == "Turn9_FPnT_ZilleReferendumInterference"))
-            {
-                // Zamiast referendum odpalamy Fazę IIb operacji wojennej
-                OperationManager.Instance.LaunchPhase("Zille_Operation_Phase2B");
-                return false;
-            }
+##### A. Plan Sword (Operacja Righteous Sword — Półwysep Zille, Brenas & Wody Przybrzeżne)
+* **Faza 1 (Wyzwolenie Zille ze Wsparciem Brenas):**
+  - **Ląd (90 prowincji):** 
+    - Cały Półwysep Zille (60 prowincji, w tym miasta *Zille City, Wiktrany, Munat, Nanta* oraz wyspa *3 Manes Riuz*).
+    - **Całe Brenas (29 prowincji)** — baza operacyjna i terytorium domowe Rizii (*23 Mave Nortus, 40-67*). **Prowincja Brenas jest ZAWSZE aktywna** we wszystkich planach i fazach!
+    - Wyspa Wehlen **`96 Rotsla`** (dostępna drogą morską przez S28 i S35).
+  - **Morze (47 prowincji):** 47 akwenów morskich. Zgodnie z decyzją operacyjną wyłączono 10 wód u wybrzeży Wehlen:
+    `S1 (Kreleck Sound)`, `S2 (Kratsna Waters)`, `S3 (Munat Waters)`, `S27 (Rotsla Sound)`, `S33 (Port Rotsla Waters)`, `S34 (Port Rotsla Roads)`, `S38 (Yol Waters)`, `S39 (Yol Roads)`, `S40 (Grodzizg Waters)`, `S53 (Rotsla Deep)`.
+  - **Rozmieszczenie i manewr:** Wojska lądowe Korony ruszają z miast i twierdz Brenas (*Marbelas, Dapalle, Mave Nortus*) uderzając bezpośrednio przez granicę w głąb Zille, a marynarka operuje z 7 zatwierdzonych morskich pól startowych (`S26, S30, S31, S32, S37, S56, S57`).
+* **Faza 2 (Przełamanie na Kontynent Wehlen):**
+  - Odblokowanie **42 prowincji**: 32 prowincje lądowe kontynentalnego Wehlen oraz 10 brakujących mórz. 
+  - Łącznie 179 kafelków aktywnych (cała mapa bez prowincji Derdii).
 
-            // Blokada pokojowego przemówienia w T9
-            if (__instance.CurrentStepName == "Turn9_A_ZilleReturnedSpeech")
-            {
-                // Przesunięte na Turę 10 po traktacie
-                return false;
-            }
-        }
+##### B. Plan Ark (Uderzenie na Granicy i w Głąb Wehlen)
+* **Faza 1 (Izolacja Zille i Uderzenie na Zaplecze Smolaka):**
+  - **Ląd (73 prowincje):** Wszystkie 33 prowincje Wehlen + wszystkie 29 prowincji Brenas + **pas 11 prowincji Zille** graniczących bezpośrednio z Brenas:
+    `20 Venna`, `26 Ossa East`, `33 Dapalle West`, `36 Pomara Northwest`, `37 Pomara North`, `39 Celle Vaz North`, `104 Venna East`, `108 Venna Southwest`, `114 Dapalle Northwest`, `117 Pomara West`, `118 Praia Velha`.
+  - **Morze (57 prowincji):** Wszystkie 57 akwenów morskich aktywnych od samego początku operacji.
+  - **Zablokowane (56 prowincji):** 49 prowincji głębi Zille oraz 7 prowincji Derdii.
+* **Faza 2 (Szturm Generalny i Konsolidacja):**
+  - Odblokowanie pozostałych **49 prowincji Zille** (w tym *Zille City, Wiktrany, Munat, Nanta*). Łącznie 179 kafelków aktywnych.
 
-        // TURA 10 TRAKTAT POKOJOWY I FAZA III
-        if (turn == 10 && isZilleWar && stepIndex == 1)
-        {
-            if (warVariant == 3) // Wariant C: Faza III szturmu
-            {
-                OperationManager.Instance.LaunchPhase("Zille_Operation_Phase3_FinalAssault");
-            }
-            else // Wariant B: Natychmiastowy Traktat Pokojowy
-            {
-                __instance.TriggerConversation("9993_ZilleWar_PeaceTreaty");
-            }
-        }
+##### C. Plan Ark z Derdią (Korytarz Północny przez Yol)
+* Dostępny wyłącznie, jeśli gracz zawarł porozumienie z Najwyższym Mędrcem Azmalem (`Zille_DerdiaPact_Signed == true`).
+* Odblokowuje 7 prowincji Derdii (`123 Dertea West`, `124 Merzil`, `125 Dertea`, `126 Haldesh`, `127 Qerzan South`, `128 Qerzan`) oraz `129 Yol` (widoczny kafel bazowy o statusie `impassable: true`, symbolizujący neutralne wsparcie logistyczne).
+* Faza 2 obejmuje **186 kafelków** (100% zintegrowanej mapy v14).
 
-        return true; // Domyślna egzekucja
-    }
-}
+---
+
+### 2.3. Struktura Fazowa Kampanii Romulusa (Zasada 2 + 1-2 Fazy)
+Wojna o Zille prowadzona przez gracza **liczy od 3 do 4 faz bojowych**, zapewniając pełnowymiarowy teatr wojenny:
+
+1. **Faza I (Otwarcie Teatru Wstępnego):** 
+   - W Sword: Natarcie z Brenas na pozycje Wehlen w Zille na 137 kafelkach (90 ląd, 47 morze).
+   - W Ark: Walka graniczna w Brenas i uderzenie na posterunki Wehlen na 130/137 kafelkach.
+2. **Faza II (Zabezpieczenie Celów Etapu 1):** 
+   - Rozbicie głównych sił przeciwnika w aktywnym sektorze (zdobycie węzłów manewrowych).
+3. **Faza III (Odblokowanie Całej Mapy — Etap 2):** 
+   - Granice operacyjne pękają: odblokowuje się pełna mapa (179 lub 186 kafelków).
+   - W Sword: Wkroczenie do Wehlen i zabezpieczenie Brenas.
+   - W Ark: Wkroczenie do serca Zille City i likwidacja odciętego garnizonu Valdeza.
+4. **Faza IV (Opcjonalny Finał / Rozstrzygnięcie):** 
+   - Ostateczna likwidacja punktów oporu i przejście do negocjacji traktatowych (5 Stanów Końcowych).
+
+---
+
+### 2.4. Blokada Krawędzi Granicznych (`boundary_edges_to_disabled`)
+W Fazie 1 silnik gry (`ZilleWarTable.cs`) aktywuje dynamiczne blokady krawędzi (`boundary_edges_to_disabled` z `operation_regions_v14.json`):
+- Pomiędzy kafelkiem aktywnym a nieaktywnym krawędź staje się nieprzejezdna dla jednostek obu stron (brak możliwości ataku, ruchu i rozprzestrzeniania linii zaopatrzenia).
+- Zapobiega to ucieczce jednostek AI Smolaka na wyłączone obszary oraz próbom ataku na zablokowane miasta przed odblokowaniem Fazy 2.
+
+---
+
+## 3. Chronologia, GameFlow Rescheduling i Przesunięcie Referendum
+
+### 3.1. Dlaczego Referendum w Turze 9 było Wąskim Gardłem?
+W pierwotnym zarysie Suzeraina referendum w Zille odbywa się dopiero w **Turze 9 Krok 9** (`Turn9_FPnT_ZilleReferendum`). Pozostawiało to zaledwie ułamek Tury 9 i Turę 10 na jakiekolwiek działania militarne. 
+Wymuszenie **minimum 3-4 faz operacyjnych** w takim układzie doprowadziłoby do nienaturalnego stłoczenia walk i całkowitej utraty dramaturgii politycznej.
+
+### 3.2. Nowy Harmonogram Referendum (Plebiscyt w Turze 7)
+Aby stworzyć odpowiednią przestrzeń operacyjną, **plebiscyt i polityczny kryzys referendum zostają przesunięte na Turę 7**:
+* **Środek Tury 7:** Gdy śledztwo w sprawie zamachu bombowego ujawnia matactwa Wehlen (lub Rizia odmawia zaspokojenia roszczeń Smolaka), Wiktor Smolak jednostronnie ogłasza organizację plebiscytu pod kontrolą swoich służb bezpieczeństwa.
+* **Koniec Tury 7:** Odbywa się sfałszowane referendum. Wyniki ogłaszają rzekome "92% poparcia dla pozostania w Republice Wehlen".
+* **Natychmiastowe Casus Belli:** Korona uznaje to za jawne złamanie traktatu z 1929 roku i aneksję terytorium. Zgoda na interwencję zbrojną.
+
+---
+
+### 3.3. Trzy Zintegrowane Scenariusze Czasowe
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                             NOWA OŚ CZASU KAMPANII WOJENNEJ O ZILLE                              │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. SCENARIUSZ WCZESNY (Tura 3/4): ODWET PO ZAMACHU                                               │
+│ • Rozpoczęcie: Koniec Tury 3 / Tura 4 (Romus uznaje zamach za casus belli i wkracza do Zille).  │
+│ • Czas trwania: Tura 4 (Faza I), Tura 5 (Faza II), Tura 6 (Faza III i Traktat Pokojowy).         │
+│ • Stan Pales: Całkowity spokój (przed incydentem morskim). Brak dylematu dwufrontowości.         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 2. SCENARIUSZ ŚREDNI (Koniec Tury 7): REAKCJA NA SFAŁSZOWANE REFERENDUM                          │
+│ • Rozpoczęcie: Koniec Tury 7 (po ogłoszeniu sfałszowanych wyników plebiscytu).                   │
+│ • Faza I: Koniec Tury 7 (Błyskawiczne uderzenie graniczne).                                      │
+│ • Faza II: Tura 8 (Krok 2 - Bitwa manewrowa o węzły centralne).                                  │
+│ • Faza III: Tura 9 (Krok 6 - Przełamanie obrony Zille City / Rajd w głąb Wehlen).                │
+│ • Faza IV / Traktat Pokojowy: Koniec Tury 9 / Początek Tury 10.                                  │
+├──────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 3. SCENARIUSZ ZWYKŁY (Tura 8): ZERWANIE ROKOWAŃ I KRYZYS DYPLOMATYCZNY                           │
+│ • Rozpoczęcie: Tura 8 Krok 12 (Ostateczne fiasko osobistych negocjacji ze Smolakiem).             │
+│ • Faza I: Tura 8 Krok 13 (Uderzenie wyprzedzające przed aneksją).                                │
+│ • Faza II: Tura 9 Krok 3 (Operacja główna).                                                      │
+│ • Faza III: Tura 9 Krok 14 / Tura 10 Krok 1 (Szturm ostateczny).                                 │
+│ • Traktat Pokojowy: Tura 10 Krok 2.                                                              │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 4. Potok Konwersji i Wstrzykiwania Dialogów (Dialogue Pipeline)
+## 4. Spięcie Fabularne z Kampanią Vanilla (Narrative & Lore Cohesion)
 
-### 4.1. Struktura Bazy PixelCrushers
-W silniku `PixelCrushers.DialogueSystem.DialogueDatabase` każda konwersacja posiada unikalny identyfikator numeryczny (`Conversation.id`), węzły dialogowe (`DialogueEntry`), warunki logiczne (`ConditionsString`) oraz skrypty wyjściowe (`UserScript`).
+### 4.1. Ewolucja Pretekstu Smolaka (Od Zamachu Bombowego do Plebiscytu AN)
+* **Dlaczego Smolak przyspiesza referendum w Turze 7?**
+  Smolak nie jest szaleńcem — jest wyrachowanym dyktatorem. Widząc, że śledztwo prowadzone przez Rizię (Złotą Straż Titusa lub wywiad Lucity) zaczyna go demaskować, a presja na arenie międzynarodowej rośnie, Smolak zdaje sobie sprawę, że karta "zamachu bombowego" się wyczerpała. 
+  Wymyśla więc "demokratyczny" plebiscyt, powołując się na Kartę Praw AN o prawie narodów do samostanowienia. Gdy Rizia protestuje, Smolak przeprowadza głosowanie w ekspresowym tempie pod lufami karabinów.
 
-```
-                    ┌──────────────────────────────────────────┐
-                    │    PixelCrushers Master Database         │
-                    └─────────────────────┬────────────────────┘
-                                          │
-                  ┌───────────────────────┴───────────────────────┐
-                  ▼                                               ▼
-     ┌────────────────────────┐                      ┌────────────────────────┐
-     │  Vanilla Conversations │                      │ Great Zille Mod Pack   │
-     │  (ID: 1 - 599)         │                      │ (ID: 9988 - 9995)      │
-     └────────────┬───────────┘                      └────────────┬───────────┘
-                  │                                               │
-                  ├─ [FLAVOR INJECTS] (Nowe kwestie)             ├─ 9988: War Council Briefing
-                  ├─ [BRANCHES] (Nowe rozwidlenia)               ├─ 9989: War Balcony Speech
-                  └─ [INTERRUPTS] (Przekierowania)               ├─ 9990: Logistics Dispute
-                                                                  ├─ 9991: Pre-Negotiations
-                                                                  ├─ 9992: Smolak Front Parley
-                                                                  └─ 9993: Peace Treaty (5 Stanów)
-```
+### 4.2. Konsekwencje dla Szczytu Alliance of Nations w Kyrute (Tura 8 Step 15)
+W vanilli sesja AN w Turze 8 jest nudnawą debatą prawną. **Po zmianach staje się jednym z najbardziej emocjonujących punktów gry:**
+* **Jeśli wojna wybuchła pod koniec Tury 7:** Romus wchodzi na mównicę AN w Kyrute w blasku fleszy, podczas gdy na południu trwają walki!
+  - Może przedstawić dowody fałszerstw plebiscytu i terroryzmu państwowego Wehlen.
+  - **Lespia i Arcasia:** Alvarez może poprzeć Rizię i zablokować sankcje ATO przeciw Koronie.
+  - **Valgsland i Contana:** Premier Hegel uderza butem w pulpit, oskarżając Rizię o monarchistyczny imperializm, lecz Romus może wykorzystać prawo międzynarodowe, by zneutralizować weto CSP.
 
-### 4.2. Format JSON Assetu Wstrzykiwanej Konwersacji
-Patcher odczytuje definicje scen z plików JSON w katalogu `mods/GreatZille/dialogues/`. Przykładowa struktura węzła:
-```json
-{
-  "id": 9991,
-  "title": "Zille/PreNegotiationsBriefing",
-  "entries": [
-    {
-      "id": 10,
-      "actor": 10,
-      "conversant": 95,
-      "dialogueText": "The war room in Porte Drazon was buried under a blizzard of urgent dispatches. Across the table, Elena Flores looked up, dark circles ringing her eyes.",
-      "conditionsString": "Variable[\"Zille_War_Active\"] == true",
-      "userScript": "",
-      "outgoingLinks": [20, 21]
-    }
-  ]
-}
-```
+### 4.3. Dylemat Wojny Dwufrontowej (Zille + Pales)
+Jeśli gracz zdecydował się na inwazję Pales w Turze 6/7, wybuch wojny w Zille pod koniec Tury 7 lub w Turze 8 tworzy autentyczny **koszmar geostrategiczny**:
+- Rezerwy poborowych muszą być dzielone między dwa teatry.
+- Każda tura walk na dwóch frontach nakłada podwójną karę budżetową i energetyczną (`-2 Budget, -2 Energy`).
+- Generałowie obu rodów (Lucita Azaro na froncie Pales vs generałowie sztabowi w Zille) kłócą się o dostawy amunicji i sprzętu.
+
+### 4.4. Spór Logistyczny Rodów: Azaro vs Sazon
+Wydarzenie `9990_ZilleWar_LogisticsDispute` zyskuje fundamentalne znaczenie operacyjne:
+* **Linia Azaro (Sztabowo-Militarna):** Szybszy dostęp do ciężkiej artylerii i posiłków, ale kosztem korupcji sztabowej (`-2 Budget`).
+* **Linia Sazon (Kupiecko-Obronna w Brenas):** Zapewnienie stabilnego zaplecza magazynowego w Brenas, zmniejszenie strat w zaopatrzeniu, ochrona miast granicznych przed kontratakiem Smolaka.
 
 ---
 
-## 5. Specyfikacja Techniczna 6 Nowych Scen Modu
+## 5. Matryca Warunków Zwycięstwa i Porażki (5 Stanów Końcowych)
 
-Poniższa specyfikacja definiuje kompletne parametry rejestracyjne silnika dla 6 nowych scen:
-
-### 1. `9988_WarCouncil_Briefing` (Zille Invasion Briefing)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 4, Krok 1 (po debriefingu T3).
-  - Wariant B: Tura 8, Krok 2 (po fiasku negocjacji w `SnO_SecurityBriefAndZille`).
-  - Wariant C: Tura 9, Krok 10 (po ogłoszeniu sfałszowanego referendum).
-* **Lokalizacja w grze:** `Porte Drazon Palace - War Chambers`.
-* **Uczestnicy:** Narrator, Romus, Lucita Azaro, Hugo Toras, Titus Griz, Laurento Esquibel, Elena Flores.
-* **Kluczowy wybór gracza:**
-  - `Plan Alfa` (`Variable["Zille_War_Alfa"] = true;`): Frontalny szturm pancerny na miasto Zille.
-  - `Plan Beta` (`Variable["Zille_War_Beta"] = true;`): Oskrzydlenie przez Wiktrany i desant na port Munat.
-  - `Wstrzymanie inwazji` (tylko wariant B/C przed pierwszym strzałem).
-
-### 2. `9989_ZilleWar_BalconySpeech` (Zille War Speech)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 4, Krok 3.
-  - Wariant B: Tura 8, Krok 4.
-  - Wariant C: Tura 9, Krok 11.
-* **Lokalizacja:** `Porte Drazon Palace - Royal Balcony & Radio Transmitter`.
-* **Ton:** Orędzie do narodu, mobilizacja patriotyczna, odpowiedź na terror Wehlen.
-* **Efekt skryptowy:** `RiziaDLC.Resources_Authority += 2; RiziaDLC.Country_PublicOpinion += 1;`.
-
-### 3. `9990_ZilleWar_LogisticsDispute` (Spór Logistyczny Azaro vs Sazon)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 4, Krok 7.
-  - Wariant B: Tura 8, Krok 6.
-  - Wariant C: Tura 9, Krok 12.
-* **Uczestnicy:** Lucita Azaro, Angelica Sazon, Manus Sazon, Elena Flores.
-* **Kluczowy wybór gracza:**
-  - `Opcja Azaro`: Szybszy cooldown nalotów artyleryjskich, +1 Azaro Levy, ale `-2 Budget` (korupcja i marnotrawstwo sztabowe).
-  - `Opcja Sazon`: Oparcie na spichlerzach i kupcach Brenas, redukcja drenażu energii/budżetu o 1 na turę, +1 Sazon Levy, bonus obronny miast Brenas, ale niezadowolenie Lucity Azaro (`HouseAzaro_Opinion -= 1`).
-
-### 4. `9991_ZilleWar_PreNegotiationsBriefing` (Narada Przednegocjacyjna & Ostatnie Telefony)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 6, Krok 2.
-  - Wariant B: Tura 9, Krok 6.
-  - Wariant C: Tura 10, Krok 1.
-* **Zawartość:**
-  - Panel A: Narada z Radą Królewską (raporty strat, kalkulacja demobilizacji, panika przed bankructwem).
-  - Panel B: Gabinet łączności (3 opcjonalne telefony last-minute):
-    - *Patricio Alvarez (Lespia):* Odradza kompromis, odmawia posiłków bez koncesji, Romus może go zaszantażować.
-    - *Emmerich Hegel (Valgsland):* Krzyk, groźba interwencji Czerwonej Floty, oferta deeskalacji za okręty wojenne (1 Budżet za 1 Okręt Wojenny i 1 Okręt Podwodny) lub +2 Energii.
-    - *Queen Beatrice (Rumburg):* Wsparcie za ropę lub chłodna reprymenda za dwufrontowość.
-
-### 5. `9992_ZilleWar_SmolakFinalParley` (Ostatnia Rozmowa ze Smolakiem)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 6, Krok 3.
-  - Wariant B: Tura 9, Krok 8 (zastępuje `Turn9_FPnT_CallWithSmolak`).
-  - Wariant C: Tura 10, Krok 2.
-* **Lokalizacja:** Namiot negocjacyjny na pasie ziemi niczyjej pod Zille lub zabezpieczona polowa linia telefoniczna.
-* **Dynamika:** Konfrontacja z pokonanym lub triumfującym Smolakiem przed ostatecznym podpisaniem traktatu.
-
-### 6. `9993_ZilleWar_PeaceTreaty` (Traktat Pokojowy - 5 Stanów Końcowych)
-* **Kiedy odpalać:**
-  - Wariant A: Tura 6, Krok 4.
-  - Wariant B: Tura 10, Krok 1.
-  - Wariant C: Tura 10, Krok 3.
-* **5 Wariantów Finału:**
-  1. *Total Fiasco:* Wehlen okupuje Brenas, utrata Marbelas/Dapalle/Mave Nortus, -5 Budget, pucz gwarantowany.
-  2. *Tactical Defeat (Raczej porażka):* Utrata 1 miasta Brenas LUB brak zdobycia jakiegokolwiek celu w Wehlen (wszystkie startowe miasta Rizii pozostają pod kontrolą Rizii, a wszystkie Wehlen pod kontrolą Wehlen — strategiczne i polityczne fiasko inwazji o Zille mimo poniesionych strat), reparacje/koncesje dla Wehlen, zrzeczenie się roszczeń do Zille.
-  3. *Bloody Stalemate (Zwykły PAT):* Utrata 1 miasta Rizii w Brenas przy jednoczesnym zajęciu 1 lub 2 miast Wehlen (wymiana terytorialna) LUB częściowe zdobycze w Zille bez stolicy. Przy negocjacjach: możliwość sprawienia, by Zille zyskało pełną niepodległość (jako neutralne państwo buforowe) pod warunkiem poczynienia drobnych koncesji na rzecz Wehlen.
-  4. *Decisive Victory:* Pełne wyzwolenie Zille, natychmiastowa reaneksja do Korony, powrót uchodźców.
-  5. *Overwhelming Triumph:* Zdobycie Zille + Port Rotsla/Grodzizg, Wehlen płaci gigantyczne reparacje (+4 Budget, +3 Energy), Grodzizg staje się Wolnym Miastem.
+### 5.1. Ewaluacja dla Planów Sztabowych (Staff Calculation)
+Dla planów *Hawk, Sword, Ark, Spear* wynik końcowy jest kalkulowany po zakończeniu ostatniej fazy na podstawie sumy punktów operacyjnych:
+* **Punkty Sukcesu Sztabu ($S$):**
+  $$S = \text{PowerProjection} + \text{StaffSynergy} + \text{ResourceAllocation} - \text{WehlenResistance}$$
+  - $S \le 1$: **Stan 1 (Total Fiasco)** — Załamanie ofensywy, Wehlen wkracza do Brenas.
+  - $S \in [2, 3]$: **Stan 2 (Tactical Defeat)** — Front zamiera na linii demarkacyjnej, brak postępów, ogromne straty.
+  - $S \in [4, 6]$: **Stan 3 (Bloody Stalemate)** — Częściowe sukcesy (np. odbicie Wiktran bez Zille City), wzajemne wykrwawienie.
+  - $S \in [7, 8]$: **Stan 4 (Decisive Victory)** — Wyzwolenie całego Półwyspu Zille.
+  - $S \ge 9$: **Stan 5 (Overwhelming Triumph)** — Całkowite zmiażdżenie Wehzek Republican Guards, panika w Wehlen.
 
 ---
 
-## 6. Gospodarka, Zasoby i Zmienne Stanu Państwa
+### 5.2. Ewaluacja dla Planów Romulusa (Hex Capture Detection)
+Dla kampanii prowadzonych na mapie 3D Zille War Table detektor stanu (`ZilleCampaignState`) zlicza kontrolę nad kluczowymi kafelkami miejskimi pod koniec fazy bitewnej:
 
-### 6.1. Zmienne Systemowe Silnika (Data Dictionary)
-Patcher rejestruje następujące zmienne w tablicy `DialogueLua`:
-
-| Zmienna | Typ | Opis |
+| Stan Końcowy | Warunki Kontroli Kafelków (Prowincji) | Konsekwencje Polityczne i Traktatowe |
 | :--- | :--- | :--- |
-| `Zille_War_Active` | `bool` | Czy w danej turze trwają działania wojenne w Zille. |
-| `Zille_War_Variant` | `int` | 1 = Wczesny (T3/4), 2 = Środkowy (T8), 3 = Późny (T9). |
-| `Zille_War_Phase` | `int` | Bieżąca faza operacyjna (1, 2, 3). |
-| `Zille_War_Doctrine` | `string` | `"Alfa"` (frontalny) lub `"Beta"` (oskrzydlenie Munat). |
-| `Zille_War_Logistics` | `string` | `"Azaro"` (militarna) lub `"Sazon"` (spichlerze kupieckie). |
-| `Zille_War_Outcome` | `int` | Wynik końcowy (1 = Fiasco, 2 = Defeat, 3 = Stalemate, 4 = Victory, 5 = Triumph). |
-| `Zille_TwoFrontWar` | `bool` | Równoległa wojna z Pales i Wehlen. |
-| `Zille_LespiaPact_Signed` | `bool` | Pakt z Alvarezem (dane satelitarne, desant, weto w AN). |
-| `Zille_DerdiaPact_Signed` | `bool` | Korytarz tranzytowy przez Yol z Azmalem. |
-| `Zille_HegelPact_Signed` | `bool` | Tajne porozumienie deeskalacyjne z Valgslandem. |
-
-### 6.2. Koszty Operacyjne i Wpływ na Rezerwy
-W każdej turze trwania wojny silnik aplikuje kalkulację kosztów:
-* **Drenaż Bazowy:** `-1 Budget, -1 Energy` na turę.
-* **Modyfikator Doktryny Logistycznej:**
-  - Jeśli wybrano `Azaro`: `-1 dodatkowy Budget` (korupcja i luksusy oficerskie).
-  - Jeśli wybrano `Sazon`: `+1 redukcja drenażu Energy i Budget` (lokalne zapasy żywności i paliwa).
-* **Kara za Dwufrontowość (`Zille_TwoFrontWar == true`):**
-  - Dodatkowo `-2 Budget, -2 Energy` na turę z powodu rozciągnięcia transportu morskiego i kołowego.
+| **1. Total Fiasco** | Wehlen kontroluje co najmniej 2 z 3 miast Brenas (*Marbelas, Dapalle, Mave Nortus*). | Katastrofa dynastii. Wehlen okupuje Brenas, -5 Budget, natychmiastowe ryzyko puczu wojskowego. |
+| **2. Tactical Defeat (Raczej Porażka)** | Rizia utrzymała Brenas, ale **nie zdobyła żadnego miasta Wehlen** (Status Quo po krwawej inwazji) LUB utraciła 1 miasto Brenas bez zysków. | Kompromitacja militarna. Smolak żąda reparacji za agresję, Rizia zrzeka się praw do Zille. |
+| **3. Bloody Stalemate (Zwykły PAT)** | Rizia kontroluje 1–2 miasta Wehlen (np. *Wiktrany* lub *Nantę*), lecz nie zdobyła *Zille City* LUB utraciła 1 miasto Brenas w zamian za zdobycze w Zille. | Obustronny impas. **Opcja specjalna: Utworzenie Niepodległego Zille** jako neutralnego buforu. |
+| **4. Decisive Victory** | Rizia kontroluje wszystkie 4 miasta Półwyspu Zille (*Zille, Wiktrany, Munat, Nanta*), a Brenas jest bezpieczne. | Pełny powrót prowincji Zille do Korony. Triumf wojenny Romusa, powrót uchodźców. |
+| **5. Overwhelming Triumph** | Rizia kontroluje Zille + co najmniej 1 strategiczny punkt głębi Wehlen (*Port Rotsla* lub korytarz naftowy *Oktan*). | Zmiażdżenie Smolaka. Olbrzymie reparacje (+4 Budget, +3 Energy), Zille wraca, Grodzizg Wolnym Miastem. |
 
 ---
 
-## 7. System Diagnostyki, Menu F9 i Zautomatyzowane Testy QA
-
-### 7.1. Wbudowane Menu Deweloperskie (Klawisz F9)
-Podczas gry naciśnięcie klawisza **`F9`** otwiera diagnostyczny panel ImGUI:
-* **War Status Indicator:** Wyświetla stan `Zille_War_Active`, aktywny wariant, stan frontu i poziom zniszczeń.
-* **Instant Outbreak Trigger:** Ręczne wywołanie inwazji w dowolnej turze (Wariant A, B lub C).
-* **Outcome Force Selector:** Wymuszenie jednego z 5 Stanów Końcowych w celach testowania epilogów.
-* **Variable Inspector & Editor:** Podgląd i edycja zmiennych `RiziaDLC.Resources_Budget`, `Energy`, `Authority`.
-
-### 7.2. Automatyzacja Testów Integralności Grafu Dialogowego
-W ramach potoku CI/CD skrypt testowy weryfikuje bazę danych:
-1. **Broken Link Audit:** Sprawdzenie, czy każdy wychodzący link dialogowy wskazuje na istniejący węzeł.
-2. **Orphan Node Check:** Wyszukiwanie węzłów, do których nie prowadzi żadna ścieżka.
-3. **Deadlock / Infinite Loop Scan:** Weryfikacja braku nieskończonych cykli w hubach dyskusyjnych.
-4. **Variable Type Safety:** Upewnienie się, że wszystkie zapytania w `ConditionsString` operują na istniejących zmiennych silnika.
+### 5.3. Finał Traktatowy i Ścieżka Kompromisowa: „Niepodległe Zille”
+W przypadku **Stanu 3 (Bloody Stalemate)** Romus staje przed unikalnym dylematem podczas rozmów pokojowych:
+- Zamiast ciągnąć wyniszczającą wojnę pozycyjną, Romus może zaproponować **utworzenie Wolnego i Niepodległego Państwa Zille**:
+  - Zille staje się suwerenną, zdemilitaryzowaną republiką buforową pod wspólną gwarancją AN.
+  - Wehlen otrzymuje preferencyjne stawki tranzytowe na ropę.
+  - Rizia zyskuje bezpieczną granicę i prestiż państwa stojącego na straży pokoju bez ryzyka dalszych ofiar.
 
 ---
 
-## 8. Harmonogram Produkcyjny i Kamienie Milowe
+## 6. Specyfikacja Scen Dialogowych i Potok Wstrzykiwania (PixelCrushers)
+
+Modyfikacja operuje na zestawie wstrzykiwanych assetów dialogowych:
+
+```
+┌──────────┬──────────────────────────────────────────┬─────────────────────────────────────────────────┐
+│ ID Sceny │ Tytuł Sceny w Systemie                   │ Główna Rola Narracyjna i Wybory                 │
+├──────────┼──────────────────────────────────────────┼─────────────────────────────────────────────────┤
+│ 9988     │ Turn_Zille_WarBriefing                   │ Wybór Doktryny: Plany Sztabowe vs Plany Romulusa│
+│ 9989     │ Turn_Zille_BalconySpeech                 │ Orędzie Wojenne do Narodu (Autorytet i morale)   │
+│ 9990     │ Turn_Zille_LogisticsDispute              │ Spór o Linie Zaopatrzenia: Dom Azaro vs Sazon    │
+│ 9991     │ Turn_Zille_PreNegotiationsBriefing       │ Raport Strat, Telefony: Alvarez, Hegel, Beatrice│
+│ 9992     │ Turn_Zille_SmolakFinalParley             │ Ostatnia Rozmowa na Linii Frontu ze Smolakiem   │
+│ 9993     │ Turn_Zille_PeaceTreaty                   │ Podpisanie Traktatu Pokojowego (5 Wyników)      │
+│ 9994     │ Turn_Zille_StaffBattleReport             │ Meldunki Operacyjne dla Planów Sztabowych       │
+└──────────┴──────────────────────────────────────────┴─────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Gospodarka, Zasoby i Zmienne Stanu Państwa
+
+### 7.1. Słownik Zmiennych Systemowych (DialogueLua)
+* `Zille_War_Active` (`bool`): Flaga aktywności stanu wojny.
+* `Zille_War_PlanType` (`string`): `"Staff"` lub `"Romulus"`.
+* `Zille_War_StaffPlan` (`string`): `"Hawk"`, `"Sword"`, `"Ark"`, `"Spear"`.
+* `Zille_War_RomulusPlan` (`string`): `"RomulusSword"` (Półwysep) lub `"RomulusArk"` (Głąb Wehlen).
+* `Zille_War_Phase` (`int`): Aktualna faza operacyjna (1 do 4).
+* `Zille_War_Outcome` (`int`): Rozstrzygnięcie końcowe (1 = Fiasco, 2 = Defeat, 3 = Stalemate, 4 = Victory, 5 = Triumph).
+* `Zille_Independent_Buffer` (`bool`): Czy zrealizowano wariant neutralnego państwa Zille w Stanie 3.
+* `Zille_TwoFrontWar` (`bool`): Aktywna równoległa wojna z Pales i Wehlen.
+
+---
+
+## 8. System Diagnostyki, Menu F9 i Zautomatyzowane Testy QA
+
+* **Panel Podglądu F9:**
+  - Status planu wojennego (Sztab vs Romulus).
+  - Przełącznik fazy operacyjnej (Phase 1 / 2 / 3 / 4).
+  - Wymuszenie rezultatu traktatowego do testów dialogów końcowych.
+* **Audyt Integralności Drzewa:**
+  - Walidacja węzłów i poprawności warunków `ConditionsString` w `assets/mod_dialogue_overrides.json`.
+
+---
+
+## 9. Harmonogram Produkcyjny i Kamienie Milowe
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                        HARMONOGRAM WDROŻENIA MODA "GREAT ZILLE"                        │
+│                     HARMONOGRAM WDROŻENIA MASTER PLANU (WERSJA 2.0)                    │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ FAZA 1: FUNDAMENTY SILNIKA & PATCHER (Tydzień 1 - 2)                                   │
-│ • Przygotowanie BepInEx patchera i biblioteki HarmonyX.                                │
-│ • Rejestracja hooków w DialogueManager i MasterDatabase.                               │
-│ • Implementacja struktur danych w tablicy DialogueLua.                                 │
+│ ETAP 1: AKTUALIZACJA SILNIKA ROZKAZÓW I PLANÓW (Obecny)                                │
+│ • Wdrożenie rozróżnienia planów sztabowych (Hawk/Sword/Ark/Spear) oraz Romulusa.        │
+│ • Rozbudowa sceny narady 9988 o selekcję teatrów (Righteous Sword vs Romulus Ark).      │
+│ • Oprogramowanie detektora hexów w ZilleWarTable.cs dla 2 teatrów.                     │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ FAZA 2: TEATR WOJENNY & KAFELKI TAKTYCZNE (Tydzień 3 - 4)                              │
-│ • Wdrożenie mapy 4 miast Zille na siatce heksagonalnej z wartiles_dump.json.           │
-│ • Skonfigurowanie jednostek Wehzek Republican Guards oraz riziańskich korpusów.        │
-│ • Oprogramowanie wsparcia Azaro, Sazon, Lespii i Derdii.                               │
+│ ETAP 2: PRZESUNIĘCIE REFERENDUM & GAMEFLOW RESCHEDULING                                │
+│ • Przesunięcie eventu plebiscytu na koniec Tury 7 w GameFlow_StepInterceptor.          │
+│ • Aktywacja faz operacyjnych w Turach 7, 8 i 9.                                        │
+│ • Wdrożenie spięcia narracyjnego z sesją AN w Turze 8.                                 │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ FAZA 3: DIALOGI & RESTRUKTURYZACJA KROKÓW (Tydzień 5 - 6)                              │
-│ • Wstrzyknięcie 6 nowych scen (ID 9988 - 9993) do PixelCrushers.                       │
-│ • Oprogramowanie GameFlow_StepInterceptor dla Tur 8, 9 i 10.                           │
-│ • Wdrożenie przesunięć eventów (mowa o Zille, referendum, Beatrice).                   │
+│ ETAP 3: DIALOGI TRAKTATOWE I 5 STANÓW KOŃCOWYCH                                        │
+│ • Implementacja sceny traktatu 9993 dla wszystkich 5 wariantów.                         │
+│ • Dopisanie ścieżki "Niepodległe Zille" w Stanie 3.                                     │
+│ • Dostosowanie reakcji rodziny królewskiej (Estela, Hugo, Vina).                       │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ FAZA 4: POLISHING NARRACYJNY & TONE PASS (Tydzień 7)                                   │
-│ • Implementacja wstrzyknięć Narratora dla wszystkich tur (Prolog - Epilog).            │
-│ • Weryfikacja głosu postaci zgodnie z Character Bible v2.0.                            │
-│ • Korekta 5 epilogów traktatowych.                                                     │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ FAZA 5: TESTY QA, BALANS & WYDANIE (Tydzień 8)                                         │
-│ • Zautomatyzowany audyt drzew dialogowych bez softlocków.                              │
-│ • Balans ekonomiczny drenażu budżetowego w testach z Pales i bez Pales.                │
-│ • Publiczny release v1.0.0 na NexusMods i GitHub.                                      │
+│ ETAP 4: BALANS, QA I SZLIF KOŃCOWY                                                     │
+│ • Weryfikacja drenażu budżetowego w wojnie jedno- i dwufrontowej.                      │
+│ • Testy manualne na 3D War Table w scenariuszach 3-fazowych i 4-fazowych.               │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```

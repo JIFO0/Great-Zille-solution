@@ -112,6 +112,15 @@ namespace GreatZilleSolution
         /// <summary>Deployment picks units from the side list. An enemy figure is never selectable: selecting the defender cancels the attack.</summary>
         public static bool BlockTokenSelectPrefix(WarToken __instance, bool state)
         {
+            if (__instance != null && __instance.animator == null)
+            {
+                try { __instance.animator = __instance.GetComponentInChildren<UnityEngine.Animator>(); } catch { }
+                if (__instance.animator == null)
+                {
+                    __instance.isSelected = state;
+                    return false;
+                }
+            }
             if (!state) return true;
             if (DeploymentPanelShowing()) return false;
             if (ZilleWarTable.EnemyMayAct()) return false;
@@ -148,10 +157,15 @@ namespace GreatZilleSolution
         /// <summary>A raw click must not deploy or move. Those run only after the hold opens the gate.</summary>
         public static bool BlockUntilHoldPrefix(object __instance)
         {
-            if (ZilleWarTable.EnemyMayAct())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.AnyLiveBattle())
             {
-                // Only allow live battles to resolve during enemy phase, block all player clicks/commits/deployments
+                // Only allow live battles to resolve during enemy phase or combat resolution, block all player clicks/commits/deployments
                 return __instance is WarTile wt && ZilleWarTable.BattleMayResolve(wt);
+            }
+            if (__instance is WarTile wtCommit)
+            {
+                var sel = ZilleWarTable.SelectedUnit();
+                if (sel != null) ZilleWarTable.RecordCommittedAttackTile(sel, wtCommit);
             }
             if (ZilleWarTable.CommitAllowed) return true;
             return __instance is WarTile tile && ZilleWarTable.BattleMayResolve(tile);
@@ -263,7 +277,7 @@ namespace GreatZilleSolution
         /// <summary>A unit that already moved is locked out of a second move, but it still has to be clickable.</summary>
         public static void IsSelectablePostfix(WarToken __instance, ref bool __result)
         {
-            if (ZilleWarTable.EnemyMayAct())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.AnyLiveBattle())
             {
                 __result = false;
                 return;
@@ -373,17 +387,92 @@ namespace GreatZilleSolution
             catch { }
         }
 
-        public static void StartBattlePrefix(WarToken attacker, WarToken defender)
+        public static void StartBattlePrefix(WarToken attacker, WarToken defender, bool shouldSpendActionPoints)
         {
             if (defender != null)
             {
                 var tile = defender.GetCurrentWarTile();
                 if (tile != null)
                 {
-                    ZilleWarTable.RecordBattleContestedTile(attacker, defender, tile);
+                    ZilleWarTable.RecordDefenderStartingTile(attacker, defender, tile);
                 }
             }
         }
+
+        public static void CreateBattlePostfix(WarToken attacker, WarToken defender, WarBattleManager.WarBattle __result)
+        {
+            if (__result != null && defender != null)
+            {
+                var tile = defender.GetCurrentWarTile();
+                if (tile != null)
+                {
+                    ZilleWarTable.RecordBattleContestedTile(__result, attacker, defender, tile);
+                }
+            }
+        }
+
+        public static bool MakeTokensLookAtEachOtherPrefix(WarTokenManager __instance)
+        {
+            if (__instance == null) return false;
+            try
+            {
+                var tokens = __instance.instantiatedWarTokens;
+                if (tokens == null) return false;
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    var tok = tokens[i];
+                    if (tok != null && !tok.IsDead() && tok.gameObject != null && tok.gameObject.activeInHierarchy)
+                    {
+                        try { tok.LookAtClosestOpponentToken(); } catch { }
+                    }
+                }
+            }
+            catch { }
+            return false;
+        }
+
+        public static void PlayerActionsPanelSetupPostfix(WarPlayerActionsPanel __instance, WarPlayerActionsPanel.WarActionPanelValues actionValues)
+        {
+            if (__instance == null) return;
+            int strikeCd = actionValues.airStrikeCooldown;
+            int airCd = actionValues.airSupportCooldown;
+            ZilleWarTable.UpdateCooldownDisplay(__instance.bombButtonData, strikeCd);
+            ZilleWarTable.UpdateCooldownDisplay(__instance.airSupportButtonData, airCd);
+            ZilleWarTable.LockAbility(__instance.bombButtonData, strikeCd <= 0);
+            ZilleWarTable.LockAbility(__instance.airSupportButtonData, airCd <= 0);
+        }
+
+        public static bool OnWarAirStrikePrefix()
+        {
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null && flow.currentAirStrikeCooldown > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool OnWarAirSupportPrefix()
+        {
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null && flow.currentAirSupportCooldown > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool WarTokenHoverPrefix(WarToken __instance, bool state)
+        {
+            if (__instance == null) return false;
+            if (__instance.animator == null)
+            {
+                try { __instance.animator = __instance.GetComponentInChildren<UnityEngine.Animator>(); } catch { }
+                if (__instance.animator == null) return false;
+            }
+            return true;
+        }
+
 
         public static bool CanMovePrefix(WarToken __instance, WarTile targetTile, ref bool __result)
         {
@@ -568,8 +657,17 @@ namespace GreatZilleSolution
                 {
                     var other = AccessTools.Method(typeof(WarPlayerActionsPanel), name);
                     if (other != null)
+                    {
                         harmony.Patch(other, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ClearFortifyPostfix))));
+                        if (name == "OnWarAirStrike")
+                            harmony.Patch(other, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnWarAirStrikePrefix))));
+                        else if (name == "OnWarAirSupport")
+                            harmony.Patch(other, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnWarAirSupportPrefix))));
+                    }
                 }
+                var tokenHover = AccessTools.Method(typeof(WarToken), nameof(WarToken.Hover));
+                if (tokenHover != null)
+                    harmony.Patch(tokenHover, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(WarTokenHoverPrefix))));
                 var hover = AccessTools.Method(typeof(WarTileRaycaster), "HoverRaycast");
                 if (hover != null)
                     harmony.Patch(hover, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(RememberHoverPostfix))));
@@ -662,6 +760,15 @@ namespace GreatZilleSolution
                 var getBattleLossTile = AccessTools.Method(typeof(WarToken), nameof(WarToken.GetBattleLossTile));
                 if (getBattleLossTile != null)
                     harmony.Patch(getBattleLossTile, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(GetBattleLossTilePostfix))));
+                var createBattle = AccessTools.Method(typeof(WarBattleManager), "CreateBattle");
+                if (createBattle != null)
+                    harmony.Patch(createBattle, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CreateBattlePostfix))));
+                var makeTokensLook = AccessTools.Method(typeof(WarTokenManager), nameof(WarTokenManager.MakeTokensLookAtEachOther));
+                if (makeTokensLook != null)
+                    harmony.Patch(makeTokensLook, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MakeTokensLookAtEachOtherPrefix))));
+                var actionsSetup = AccessTools.Method(typeof(WarPlayerActionsPanel), "Setup");
+                if (actionsSetup != null)
+                    harmony.Patch(actionsSetup, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerActionsPanelSetupPostfix))));
 
                 var tutorialMethod = AccessTools.Method(typeof(WarOperationManager), nameof(WarOperationManager.IsCurrentOperationTutorial));
                 if (tutorialMethod != null)
