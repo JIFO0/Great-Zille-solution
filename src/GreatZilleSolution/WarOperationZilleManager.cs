@@ -514,8 +514,8 @@ namespace GreatZilleSolution
                     zilleOp.OperationProperties.OperationStartCondition = "";
                     zilleOp.OperationProperties.IsOperationFinishedEarly = "";
                     zilleOp.OperationProperties.ResultConditionalInstruction = "";
-                    zilleOp.OperationProperties.WinReport = "";
-                    zilleOp.OperationProperties.LoseReport = "";
+                    zilleOp.OperationProperties.WinReport = "Report_Zille_Conclusion";
+                    zilleOp.OperationProperties.LoseReport = "Report_Zille_Conclusion";
                     zilleOp.OperationProperties.Phases = new Il2CppSystem.Collections.Generic.List<string>();
                     zilleOp.OperationProperties.Phases.Add("WarFragment_Zille_1_1");
                     zilleOp.OperationProperties.ResultVariable = "War_Zille_Result";
@@ -535,8 +535,8 @@ namespace GreatZilleSolution
                         if (zilleOp.OperationProperties.OperationStartCondition == null) zilleOp.OperationProperties.OperationStartCondition = "";
                         if (zilleOp.OperationProperties.IsOperationFinishedEarly == null) zilleOp.OperationProperties.IsOperationFinishedEarly = "";
                         if (zilleOp.OperationProperties.ResultConditionalInstruction == null) zilleOp.OperationProperties.ResultConditionalInstruction = "";
-                        if (zilleOp.OperationProperties.WinReport == null) zilleOp.OperationProperties.WinReport = "";
-                        if (zilleOp.OperationProperties.LoseReport == null) zilleOp.OperationProperties.LoseReport = "";
+                        zilleOp.OperationProperties.WinReport = "Report_Zille_Conclusion";
+                        zilleOp.OperationProperties.LoseReport = "Report_Zille_Conclusion";
                         if (zilleOp.OperationProperties.Phases != null && !zilleOp.OperationProperties.Phases.Contains("WarFragment_Zille_1_1"))
                         {
                             zilleOp.OperationProperties.Phases.Add("WarFragment_Zille_1_1");
@@ -1430,6 +1430,7 @@ namespace GreatZilleSolution
                     Panels.Instance?.TokenInteractionPanel?.Hide();
                     Panels.Instance?.HideAllRightPanels();
                     Panels.Instance?.HideAllCenterPanels();
+                    SetCivilianTogglesVisible(false);
                 }
                 catch (Exception ex)
                 {
@@ -1534,6 +1535,8 @@ namespace GreatZilleSolution
 
         // ================= PERSISTENT THEATRE SYNCHRONIZATION (CALLED EVERY FRAME) =================
 
+        private static float _lastToggleHideTime = 0f;
+
         public static void UpdateWarTheatreState()
         {
             // The table skin handles its own enable/disable (restores vanilla Pales when disabled).
@@ -1542,6 +1545,12 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Zille) return;
             try
             {
+                if (Time.unscaledTime - _lastToggleHideTime > 2.0f)
+                {
+                    _lastToggleHideTime = Time.unscaledTime;
+                    SetCivilianTogglesVisible(false);
+                }
+
                 if (ZilleWarTable.EditMode)
                     ZilleWarTable.SuppressInvasionChrome();
                 else if (ZilleWarTable.HasLiveMap)
@@ -1591,6 +1600,32 @@ namespace GreatZilleSolution
             }
         }
 
+        public static void SetCivilianTogglesVisible(bool visible)
+        {
+            try
+            {
+                var navPanel = Panels.Instance != null ? Panels.Instance.NavigationPanel : UnityEngine.Object.FindObjectOfType<NavigationPanel>();
+                if (navPanel == null) return;
+                var toggles = navPanel.instantiatedPanelToggles;
+                if (toggles != null)
+                {
+                    for (int i = 0; i < toggles.Count; i++)
+                    {
+                        var t = toggles[i];
+                        if (t == null) continue;
+                        if (t.IsReusableDecreesPanelToggle() || t.IsWarProductionPanelToggle())
+                        {
+                            t.gameObject.SetActive(visible);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR THEATRE] SetCivilianTogglesVisible({visible}) error: {ex.Message}");
+            }
+        }
+
         public static void ReturnToCivilianMap()
         {
             MelonLogger.Msg("[WAR ENGINE] Returning to civilian map...");
@@ -1600,6 +1635,22 @@ namespace GreatZilleSolution
 
             try
             {
+                // Restore civilian toggles
+                SetCivilianTogglesVisible(true);
+
+                // Restore audio
+                try
+                {
+                    var audioMgr = Managers.Instance?.AudioManager ?? UnityEngine.Object.FindObjectOfType<AudioManager>();
+                    if (audioMgr != null)
+                    {
+                        audioMgr.StopMusic();
+                        audioMgr.PlayMapMusic();
+                        audioMgr.PlayMapAmbience();
+                    }
+                }
+                catch { }
+
                 // Put the live war table back to vanilla Pales (per-renderer material instances are dropped, tiles restored).
                 ZilleWarTable.SkinEnabled = false;
                 ZilleWarTable.Restore();
@@ -1620,6 +1671,90 @@ namespace GreatZilleSolution
             catch (Exception ex)
             {
                 MelonLogger.Error($"[WAR ENGINE] ReturnToCivilianMap error: {ex.Message}");
+            }
+        }
+
+        public static void ReturnToCivilianMapWithReport()
+        {
+            if (CurrentTheatre == ActiveWarTheatre.Civilian && !ZilleWarTable.ScenarioStarted) return;
+            MelonLogger.Msg("[WAR ENGINE] ReturnToCivilianMapWithReport triggered.");
+            try
+            {
+                ZilleWarTable.CheckCityVictory(true);
+                ReturnToCivilianMap();
+                MelonCoroutines.Start(ShowConclusionReportCoroutine());
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[WAR ENGINE] ReturnToCivilianMapWithReport error: {ex.Message}");
+            }
+        }
+
+        private static System.Collections.IEnumerator ShowConclusionReportCoroutine()
+        {
+            yield return new WaitForSeconds(1.2f);
+
+            var outcome = ZilleCampaignState.Outcome;
+            bool won = outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph;
+
+            string title = won
+                ? "Operation: Righteous Sword - Victory"
+                : "Operation: Righteous Sword - Campaign Conclusion";
+
+            string desc = won
+                ? "The Rizian Armed Forces have successfully liberated the territory of Zille! Wehzek garrisons have retreated beyond the border, and royal administration has been re-established over all key districts."
+                : "The military operations in Zille have concluded without full territorial control. Casualties and logistics have forced an operational pause, leaving the border contested.";
+
+            try
+            {
+                var reports = EntityDataManager.ReportsData;
+                ReportData rep = null;
+                if (reports != null)
+                {
+                    for (int i = 0; i < reports.Count; i++)
+                    {
+                        var r = reports[i];
+                        if (r != null && (r.NameInDatabase == "Report_Zille_Conclusion" || r.Id == "Report_Zille_Conclusion"))
+                        {
+                            rep = r;
+                            break;
+                        }
+                    }
+                }
+
+                if (rep == null)
+                {
+                    rep = new ReportData();
+                    rep.Id = "Report_Zille_Conclusion";
+                    rep.NameInDatabase = "Report_Zille_Conclusion";
+                    rep.Path = "Rizia/Reports";
+                    rep.ReportProperties = new ReportProperties();
+                    rep.AppBundleProperties = CreateRiziaBundleProps();
+                    if (reports != null) reports.Add(rep);
+                }
+
+                if (rep.ReportProperties != null)
+                {
+                    rep.ReportProperties.Title = title;
+                    rep.ReportProperties.Description = desc;
+                    rep.ReportProperties.IsDone = false;
+                    rep.ReportProperties.IsNotificationActive = true;
+                }
+
+                var reportPanel = Panels.Instance != null ? Panels.Instance.ReportPanel : UnityEngine.Object.FindObjectOfType<ReportPanel>();
+                if (reportPanel != null)
+                {
+                    if (!reportPanel.gameObject.activeSelf) reportPanel.gameObject.SetActive(true);
+                    reportPanel.SetupDefault(rep);
+                    reportPanel.Show();
+                }
+
+                DialogueHelper.ShowAlert($"[{title}]: Sprawdz raport wojenny.");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] ShowConclusionReportCoroutine error: {ex.Message}");
+                DialogueHelper.ShowAlert($"[Operacja Zille]: {(won ? "Zwyciestwo!" : "Kampania zakonczona.")}");
             }
         }
     }

@@ -266,7 +266,28 @@ namespace GreatZilleSolution
                         __instance.currentActionPoints = Math.Max(1, __instance.ActionPointsPerTurn);
                 }
                 var mgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
-                if (mgr != null) mgr.SetAllTokenActions();
+                if (mgr != null)
+                {
+                    mgr.ResetTokenMovements();
+                    mgr.ResetPlayerTokens();
+                    var tokens = mgr.instantiatedWarTokens;
+                    if (tokens != null)
+                    {
+                        for (int i = 0; i < tokens.Count; i++)
+                        {
+                            var t = tokens[i];
+                            if (t == null || t.IsDead()) continue;
+                            if (t.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
+                            {
+                                if (t.IsMovementLocked())
+                                {
+                                    t.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                                }
+                            }
+                        }
+                    }
+                    mgr.SetAllTokenActions();
+                }
             }
             catch (Exception ex)
             {
@@ -314,8 +335,9 @@ namespace GreatZilleSolution
         }
 
         /// <summary>
-        /// A defeated unit retreats to an empty friendly tile. It must never retreat onto an occupied tile,
-        /// onto the attacker's starting tile, or across into hostile player territory.
+        /// A defeated unit retreats to an empty passable tile without opposing units.
+        /// It must not retreat onto an occupied tile, onto the attacker's starting tile, or onto sea.
+        /// Priority is given to friendly tiles, but any free adjacent land tile is valid so units don't die needlessly.
         /// </summary>
         public static void GetBattleLossTilePostfix(WarToken __instance, ref WarTile __result)
         {
@@ -329,49 +351,62 @@ namespace GreatZilleSolution
                     try { atkTile = battle.attacker.GetCurrentWarTile(); } catch { }
                 }
 
-                // If candidate is attacker's tile, occupied, or across allegiance border, reject it
-                if (__result != null)
-                {
-                    bool invalid = false;
-                    if (__result == atkTile) invalid = true;
-                    var occ = __result.GetCurrentToken();
-                    if (occ != null && occ != __instance) invalid = true;
-
-                    var td = ZilleWarTable.TileDataOf(__result);
-                    var alleg = __instance.GetTokenAllegiance();
-                    if (alleg == WarToken.WarAllegiance.Enemy && td != null && td.Allegiance == "Rizia")
-                        invalid = true;
-                    else if (alleg == WarToken.WarAllegiance.Player && td != null && td.Allegiance == "Wehlen")
-                        invalid = true;
-
-                    if (!invalid) return;
-                    __result = null;
-                }
-
-                // If invalid or null, try to find an adjacent empty tile of the same allegiance
                 var curTile = __instance.GetCurrentWarTile();
                 if (curTile == null) return;
                 var adj = curTile.adjacentWarTiles;
                 if (adj == null) return;
 
                 var unitAlleg = __instance.GetTokenAllegiance();
-                string wantAlleg = unitAlleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+                string friendlyAlleg = unitAlleg == WarToken.WarAllegiance.Player ? "Rizia" : "Wehlen";
+
+                // Check if current candidate is valid
+                if (__result != null)
+                {
+                    bool invalid = false;
+                    if (__result == atkTile || __result == curTile) invalid = true;
+                    var occ = __result.GetCurrentToken();
+                    if (occ != null && occ != __instance && !occ.IsDead()) invalid = true;
+                    var tdRes = ZilleWarTable.TileDataOf(__result);
+                    if (tdRes == null || tdRes.IsSea) invalid = true;
+
+                    if (!invalid) return;
+                    __result = null;
+                }
+
+                WarTile fallbackCandidate = null;
 
                 for (int i = 0; i < adj.Count; i++)
                 {
                     var t = adj[i];
                     if (t == null || t == curTile || t == atkTile) continue;
-                    if (t.GetCurrentToken() != null && t.GetCurrentToken() != __instance) continue;
+                    var occ = t.GetCurrentToken();
+                    if (occ != null && occ != __instance && !occ.IsDead()) continue;
+
                     var td = ZilleWarTable.TileDataOf(t);
                     if (td == null || td.IsSea) continue;
-                    if (td.Allegiance == wantAlleg)
+
+                    var ut = __instance.GetWarUnitTypeData();
+                    if (ut != null && !ut.CanMoveToTileType(t.GetTileType())) continue;
+
+                    if (td.Allegiance == friendlyAlleg)
                     {
                         __result = t;
                         return;
                     }
+
+                    if (fallbackCandidate == null)
+                    {
+                        fallbackCandidate = t;
+                    }
                 }
 
-                // If no retreat tile is available, the defeated defending unit is killed!
+                if (fallbackCandidate != null)
+                {
+                    __result = fallbackCandidate;
+                    return;
+                }
+
+                // If no retreat tile is available anywhere adjacent, the defeated defending unit is killed!
                 // But a city must NEVER be destroyed or killed!
                 if (__result == null)
                 {
@@ -536,8 +571,8 @@ namespace GreatZilleSolution
         }
 
         /// <summary>
-        /// The stock check samples the mask alpha and rejects our provinces, so the outline and the hold timer never start.
-        /// A hit on the province mesh is already inside that province.
+        /// Accurately test if cursor raycast hits inside province boundaries using quad local UVs.
+        /// Avoids material cloning, uses tile.warTileTexture / sharedMaterial to prevent per-frame allocation and 4 FPS drops.
         /// </summary>
         public static bool IsHoveringPrefix(RaycastHit hit, ref bool __result)
         {
@@ -545,19 +580,165 @@ namespace GreatZilleSolution
             {
                 var tile = hit.collider != null ? hit.collider.GetComponentInParent<WarTile>() : null;
                 if (tile == null) return true;
-                var rend = tile.GetWarTileRenderer();
-                var tex = rend != null ? rend.material.GetTexture("_Tile_Texture") as Texture2D : null;
-                if (tex != null && tex.isReadable)
+
+                var tex = tile.warTileTexture;
+                if (tex == null)
                 {
-                    var sample = tex.GetPixelBilinear(hit.textureCoord.x, hit.textureCoord.y);
-                    __result = sample.a >= 0.5f;
-                    return false;
+                    var rend = tile.GetWarTileRenderer();
+                    if (rend != null && rend.sharedMaterial != null && rend.sharedMaterial.HasProperty("_Tile_Texture"))
+                        tex = rend.sharedMaterial.GetTexture("_Tile_Texture") as Texture2D;
                 }
+
+                if (hit.point != Vector3.zero)
+                {
+                    Vector3 local = tile.transform.InverseTransformPoint(hit.point);
+                    float u = local.x + 0.5f;
+                    float v = local.y + 0.5f;
+                    if (u < 0f || u > 1f || v < 0f || v > 1f)
+                    {
+                        __result = false;
+                        return false;
+                    }
+                    if (tex != null && tex.isReadable)
+                    {
+                        __result = tex.GetPixelBilinear(u, v).a >= 0.25f;
+                        return false;
+                    }
+                }
+
                 __result = true;
                 return false;
             }
             catch { }
+            __result = true;
+            return false;
+        }
+
+        public static bool EndWarTurnPrefix()
+        {
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsAnyTokenMoving())
+            {
+                MelonLogger.Msg("[ZTABLE] End turn blocked: enemy is acting or tokens are in motion.");
+                return false;
+            }
             return true;
+        }
+
+        public static bool OnWarHUDButtonClickPrefix()
+        {
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsAnyTokenMoving())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool OnWarHUDScriptEndTurnPrefix()
+        {
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsAnyTokenMoving())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static void WarTurnPanelSetupPrefix(ref string title, int turn)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(title))
+                {
+                    if (title.Contains("Phase 0") || title.Equals("Phase 0", StringComparison.OrdinalIgnoreCase))
+                        title = title.Replace("Phase 0", "Phase I");
+                    else if (title.Contains("Phase 1") || title.Equals("Phase 1", StringComparison.OrdinalIgnoreCase))
+                        title = title.Replace("Phase 1", "Phase I");
+                    else if (title.Contains("Phase 2") || title.Equals("Phase 2", StringComparison.OrdinalIgnoreCase))
+                        title = title.Replace("Phase 2", "Phase II");
+                    else if (title.Contains("Phase 3") || title.Equals("Phase 3", StringComparison.OrdinalIgnoreCase))
+                        title = title.Replace("Phase 3", "Phase III");
+                }
+            }
+            catch { }
+        }
+
+        public static void ObjectiveIndicatorSetupTokenPostfix(TemplateWarObjectiveIndicator __instance, WarToken cityToken, WarTile warTile)
+        {
+            UpdateObjectiveIndicatorTitle(__instance, cityToken, warTile);
+        }
+
+        public static void ObjectiveIndicatorSetupObjectivePostfix(TemplateWarObjectiveIndicator __instance, WarObjectiveData warObjectiveData, WarTile warTile)
+        {
+            UpdateObjectiveIndicatorTitle(__instance, null, warTile);
+        }
+
+        public static void UpdateObjectiveIndicatorTitle(TemplateWarObjectiveIndicator indicator, WarToken cityToken, WarTile warTile)
+        {
+            if (indicator == null) return;
+            try
+            {
+                if (warTile == null && cityToken != null)
+                    warTile = cityToken.GetCurrentWarTile();
+
+                string cityName = null;
+                if (warTile != null)
+                {
+                    var td = ZilleWarTable.TileDataOf(warTile);
+                    if (td != null)
+                        cityName = !string.IsNullOrEmpty(td.CityName) ? td.CityName : td.Name;
+                }
+
+                if (string.IsNullOrEmpty(cityName) && cityToken != null)
+                {
+                    try
+                    {
+                        var ut = cityToken.GetWarUnitTypeData();
+                        if (ut != null && !string.IsNullOrEmpty(ut.UnitName) && ut.UnitName != "Arces")
+                            cityName = ut.UnitName;
+                    }
+                    catch { }
+                }
+
+                if (!string.IsNullOrEmpty(cityName))
+                {
+                    bool playerOwned = false;
+                    if (warTile != null)
+                        playerOwned = warTile.GetTileAllegiance() == WarToken.WarAllegiance.Player;
+                    else if (cityToken != null)
+                        playerOwned = cityToken.GetTokenAllegiance() == WarToken.WarAllegiance.Player;
+
+                    string verb = playerOwned ? "Defend" : "Capture";
+                    var titleProp = indicator.tooltipTitle;
+                    if (titleProp != null)
+                    {
+                        titleProp.text = $"{verb} {cityName}";
+                    }
+                }
+            }
+            catch { }
+        }
+
+        public static void OnEndWarFragmentPostfix(WarFlowManager __instance)
+        {
+            if (!ZilleWarTable.ScenarioStarted) return;
+            MelonLogger.Msg("[WAR ENGINE] War fragment finished! Returning to civilian map with conclusion report...");
+            ZilleWarTable.CheckCityVictory(true);
+            WarOperationZilleManager.ReturnToCivilianMapWithReport();
+        }
+
+        public static void ContinueButtonPanelClickPostfix()
+        {
+            if (!ZilleWarTable.ScenarioStarted) return;
+            try
+            {
+                var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                if (flow != null && flow.currentWarTurn >= 5) // all turns finished
+                {
+                    MelonLogger.Msg("[WAR ENGINE] Continue clicked on final turn! Returning to civilian map...");
+                    ZilleWarTable.CheckCityVictory(true);
+                    WarOperationZilleManager.ReturnToCivilianMapWithReport();
+                }
+            }
+            catch { }
         }
 
         public static bool IsCurrentOperationTutorialPrefix(WarOperationManager __instance, ref bool __result)
@@ -769,6 +950,38 @@ namespace GreatZilleSolution
                 var actionsSetup = AccessTools.Method(typeof(WarPlayerActionsPanel), "Setup");
                 if (actionsSetup != null)
                     harmony.Patch(actionsSetup, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerActionsPanelSetupPostfix))));
+
+                // Lock End Turn when enemy is moving or acting (Issue #4)
+                var endWarTurn = AccessTools.Method(typeof(WarFlowManager), nameof(WarFlowManager.EndWarTurn));
+                if (endWarTurn != null)
+                    harmony.Patch(endWarTurn, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EndWarTurnPrefix))));
+                var hudButtonClick = AccessTools.Method(typeof(WarHUDPanel), "OnButtonClick");
+                if (hudButtonClick != null)
+                    harmony.Patch(hudButtonClick, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnWarHUDButtonClickPrefix))));
+                var hudEndTurn = AccessTools.Method(typeof(WarHUDPanel), "OnEndTurn");
+                if (hudEndTurn != null)
+                    harmony.Patch(hudEndTurn, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnWarHUDScriptEndTurnPrefix))));
+
+                // Phase 0 -> Phase I (Issue #7)
+                var turnPanelSetup = AccessTools.Method(typeof(WarTurnPanel), nameof(WarTurnPanel.Setup), new Type[] { typeof(string), typeof(int) });
+                if (turnPanelSetup != null)
+                    harmony.Patch(turnPanelSetup, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(WarTurnPanelSetupPrefix))));
+
+                // Objective Indicators: Dynamic city names instead of "Capture Arces" (Issue #5)
+                var indSetupToken = AccessTools.Method(typeof(TemplateWarObjectiveIndicator), nameof(TemplateWarObjectiveIndicator.Setup), new Type[] { typeof(WarToken), typeof(WarTile) });
+                if (indSetupToken != null)
+                    harmony.Patch(indSetupToken, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ObjectiveIndicatorSetupTokenPostfix))));
+                var indSetupObj = AccessTools.Method(typeof(TemplateWarObjectiveIndicator), nameof(TemplateWarObjectiveIndicator.Setup), new Type[] { typeof(WarObjectiveData), typeof(WarTile) });
+                if (indSetupObj != null)
+                    harmony.Patch(indSetupObj, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ObjectiveIndicatorSetupObjectivePostfix))));
+
+                // End of Campaign return to civilian map (Issue #8)
+                var endFragment = AccessTools.Method(typeof(WarFlowManager), "OnEndWarFragment");
+                if (endFragment != null)
+                    harmony.Patch(endFragment, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnEndWarFragmentPostfix))));
+                var continueBtnClick = AccessTools.Method(typeof(ContinueButtonPanel), nameof(ContinueButtonPanel.OnContinueButtonClick));
+                if (continueBtnClick != null)
+                    harmony.Patch(continueBtnClick, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ContinueButtonPanelClickPostfix))));
 
                 var tutorialMethod = AccessTools.Method(typeof(WarOperationManager), nameof(WarOperationManager.IsCurrentOperationTutorial));
                 if (tutorialMethod != null)
