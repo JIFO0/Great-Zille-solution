@@ -634,7 +634,7 @@ namespace GreatZilleSolution
 
 
 
-        private static string ResolveRegionsDir()
+        public static string ResolveRegionsDir()
 
         {
 

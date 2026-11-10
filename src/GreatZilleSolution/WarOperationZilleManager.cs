@@ -1545,10 +1545,20 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Zille) return;
             try
             {
-                if (Time.unscaledTime - _lastToggleHideTime > 2.0f)
+                if (Time.unscaledTime - _lastToggleHideTime > 0.4f)
                 {
                     _lastToggleHideTime = Time.unscaledTime;
                     SetCivilianTogglesVisible(false);
+                }
+
+                var turnPanel = Panels.Instance?.WarTurnPanel;
+                if (turnPanel != null && turnPanel.titleText != null)
+                {
+                    var txt = turnPanel.titleText.text;
+                    if (!string.IsNullOrEmpty(txt) && txt.Contains("Phase 0"))
+                    {
+                        turnPanel.titleText.text = txt.Replace("Phase 0", "Phase I");
+                    }
                 }
 
                 if (ZilleWarTable.EditMode)
@@ -1632,9 +1642,28 @@ namespace GreatZilleSolution
             CurrentTheatre = ActiveWarTheatre.Civilian;
             _tilesConfiguredForZille = false;
             _deploymentOpened = false;
+            ZilleWarTable.ScenarioStarted = false;
 
             try
             {
+                // Reset camera back to standard civilian main map view
+                var camMgr = UnityEngine.Object.FindObjectOfType<CameraManager>();
+                if (camMgr != null)
+                {
+                    try { camMgr.LookAtModeOff(); } catch { }
+                    try { camMgr.GoToMainMapCenter(); } catch { }
+                    try { camMgr.ResetPosition(); } catch { }
+                }
+
+                // Hide war UI panels
+                try { Panels.Instance?.WarHUDPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTurnPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarActionHoverPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTokenSelectionPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarDeploymentPanel?.Hide(); } catch { }
+                try { Panels.Instance?.ContinueButtonPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllInstances(); } catch { }
+
                 // Restore civilian toggles
                 SetCivilianTogglesVisible(true);
 
@@ -1728,9 +1757,24 @@ namespace GreatZilleSolution
                     rep.Id = "Report_Zille_Conclusion";
                     rep.NameInDatabase = "Report_Zille_Conclusion";
                     rep.Path = "Rizia/Reports";
+                    rep.IsWIP = false;
+                    rep.Notes = "";
                     rep.ReportProperties = new ReportProperties();
+                    rep.AssignedTokenProperties = new AssignedTokenProperties();
+                    rep.AssignedTokenProperties.AssignedToken = "Rizia_City_PorteDrazon";
                     rep.AppBundleProperties = CreateRiziaBundleProps();
+                    rep.TagsProperties = new TagsProperties();
                     if (reports != null) reports.Add(rep);
+                }
+
+                if (rep.AssignedTokenProperties == null)
+                {
+                    rep.AssignedTokenProperties = new AssignedTokenProperties();
+                    rep.AssignedTokenProperties.AssignedToken = "Rizia_City_PorteDrazon";
+                }
+                if (rep.TagsProperties == null)
+                {
+                    rep.TagsProperties = new TagsProperties();
                 }
 
                 if (rep.ReportProperties != null)
@@ -1745,7 +1789,28 @@ namespace GreatZilleSolution
                 if (reportPanel != null)
                 {
                     if (!reportPanel.gameObject.activeSelf) reportPanel.gameObject.SetActive(true);
-                    reportPanel.SetupDefault(rep);
+                    ReportData baseRep = null;
+                    if (reports != null && reports.Count > 0)
+                    {
+                        for (int i = 0; i < reports.Count; i++)
+                        {
+                            var r = reports[i];
+                            if (r != null && r != rep) { baseRep = r; break; }
+                        }
+                    }
+
+                    try
+                    {
+                        reportPanel.SetupDefault(baseRep ?? rep);
+                    }
+                    catch (Exception exSetup)
+                    {
+                        MelonLogger.Warning("[WAR ENGINE] SetupDefault exception (fallback direct texts): " + exSetup.Message);
+                    }
+
+                    if (reportPanel.reportTitleText != null) reportPanel.reportTitleText.text = title;
+                    if (reportPanel.reportDescriptionText != null) reportPanel.reportDescriptionText.text = desc;
+                    if (reportPanel.tokenNameText != null) reportPanel.tokenNameText.text = "Zille Military Campaign";
                     reportPanel.Show();
                 }
 

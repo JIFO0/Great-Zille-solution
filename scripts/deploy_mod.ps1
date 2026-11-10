@@ -1,4 +1,4 @@
-# scripts/deploy_mod.ps1
+﻿# scripts/deploy_mod.ps1
 $ErrorActionPreference = "Stop"
 
 . "$PSScriptRoot\detect_game.ps1"
@@ -17,13 +17,20 @@ if (-not (Test-Path $modsDir)) {
     New-Item -ItemType Directory -Path $modsDir -Force | Out-Null
 }
 
-# 1. Copy DLL
-$dllSrc = Join-Path $PSScriptRoot "..\src\GreatZilleSolution\bin\Debug\GreatZilleSolution.dll"
+# 1. Copy DLL (prefer newer between Release and Debug)
+$dllRel = Join-Path $PSScriptRoot "..\src\GreatZilleSolution\bin\Release\GreatZilleSolution.dll"
+$dllDbg = Join-Path $PSScriptRoot "..\src\GreatZilleSolution\bin\Debug\GreatZilleSolution.dll"
+$dllSrc = $dllDbg
+if (Test-Path $dllRel) {
+    if (-not (Test-Path $dllDbg) -or (Get-Item $dllRel).LastWriteTimeUtc -gt (Get-Item $dllDbg).LastWriteTimeUtc) {
+        $dllSrc = $dllRel
+    }
+}
 if (Test-Path $dllSrc) {
     Copy-Item -Path $dllSrc -Destination (Join-Path $modsDir "GreatZilleSolution.dll") -Force
-    Write-Host "[DEPLOY] Skopiowano GreatZilleSolution.dll do $modsDir"
+    Write-Host "[DEPLOY] Skopiowano GreatZilleSolution.dll (z $dllSrc) do $modsDir"
 } else {
-    Write-Warning "[DEPLOY] Brak skompilowanego DLL pod $dllSrc!"
+    Write-Warning "[DEPLOY] Brak skompilowanego DLL!"
 }
 
 # 2. Copy GreatZilleAssets

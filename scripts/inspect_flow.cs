@@ -1,21 +1,25 @@
 using System;
 using System.IO;
-using System.Linq;
-using AsmResolver.DotNet;
+using System.Drawing;
 
 class Program
 {
     static void Main(string[] args)
     {
-        string asmPath = @"C:\Program Files (x86)\Steam\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll";
-        var module = ModuleDefinition.FromFile(asmPath);
-
-        var ut = module.GetAllTypes().FirstOrDefault(t => t.Name == "WarUnitTypeData");
-        if (ut != null)
+        string path = @"H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleAssets\ZilleTile_1.png";
+        if (!File.Exists(path))
         {
-            Console.WriteLine("WarUnitTypeData fields & props:");
-            foreach (var f in ut.Fields) Console.WriteLine("  field: " + f.Name);
-            foreach (var m in ut.Methods) if (m.Name.Contains("Org") || m.Name.Contains("Health") || m.Name.Contains("get_")) Console.WriteLine("  prop: " + m.Name);
+            Console.WriteLine("File not found: " + path);
+            return;
+        }
+
+        using (var bmp = new Bitmap(path))
+        {
+            Console.WriteLine($"Image size: {bmp.Width}x{bmp.Height}, PixelFormat: {bmp.PixelFormat}");
+            var center = bmp.GetPixel(bmp.Width / 2, bmp.Height / 2);
+            Console.WriteLine($"Center pixel: R={center.R}, G={center.G}, B={center.B}, A={center.A}");
+            var corner = bmp.GetPixel(0, 0);
+            Console.WriteLine($"Corner pixel: R={corner.R}, G={corner.G}, B={corner.B}, A={corner.A}");
         }
     }
 }

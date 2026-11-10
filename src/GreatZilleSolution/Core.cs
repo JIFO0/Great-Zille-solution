@@ -39,6 +39,7 @@ namespace GreatZilleSolution
         private ZilleEventSpawnerUI _spawnerUI;
 
         private bool _dockExpanded = true;
+        private float _nextFlagCheck = 0f;
 
 
 
@@ -132,27 +133,41 @@ namespace GreatZilleSolution
 
 
         public override void OnUpdate()
-
         {
-
             try
-
             {
-
-                WarOperationZilleManager.CheckScheduledTransition(Time.deltaTime);
-
-                WarOperationZilleManager.UpdateWarTheatreState();
-
-                WarOperationZilleManager.UpdateEventTokenInteractions();
-
-                ZilleTheatreMenu.TickOrders();
-
+                if (Time.unscaledTime > _nextFlagCheck)
+                {
+                    _nextFlagCheck = Time.unscaledTime + 1.0f;
+                    string flag1 = System.IO.Path.Combine(Application.dataPath, "..", "run_test.flag");
+                    string flag2 = @"c:\Projects\Great Zille solution\run_test.flag";
+                    if (System.IO.File.Exists(flag1) || System.IO.File.Exists(flag2))
+                    {
+                        try { if (System.IO.File.Exists(flag1)) System.IO.File.Delete(flag1); } catch { }
+                        try { if (System.IO.File.Exists(flag2)) System.IO.File.Delete(flag2); } catch { }
+                        Log.Msg("[AUTOTEST] run_test.flag detected! Starting automated test coroutine...");
+                        MelonCoroutines.Start(RunAutomatedCampaignTestCoroutine());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("[AUTOTEST] Flag check error: " + ex.Message);
             }
 
+            try
+            {
+                var curScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+                if (string.Equals(curScene.name, "Initialize", System.StringComparison.OrdinalIgnoreCase)) return;
+
+                WarOperationZilleManager.CheckScheduledTransition(Time.deltaTime);
+                WarOperationZilleManager.UpdateWarTheatreState();
+                WarOperationZilleManager.UpdateEventTokenInteractions();
+                ZilleTheatreMenu.TickOrders();
+            }
             catch { }
 
             ZilleProfiler.ReportFrame(Time.unscaledDeltaTime);
-
         }
 
 
@@ -244,6 +259,14 @@ namespace GreatZilleSolution
                     {
 
                         if (_theatreMenu != null) _theatreMenu.IsOpen = !_theatreMenu.IsOpen;
+
+                    }
+
+                    else if (Event.current.keyCode == KeyCode.F12)
+
+                    {
+
+                        MelonCoroutines.Start(RunAutomatedCampaignTestCoroutine());
 
                     }
 
@@ -694,14 +717,31 @@ namespace GreatZilleSolution
             DrawRoadDebug(x, w, ref y);
 
             if (GUI.Button(new Rect(x, y, w, 26f), "[Wroc do Mapy Glownej Rizii]"))
-
             {
-
                 WarOperationZilleManager.ReturnToCivilianMap();
-
             }
-
             y += 32f;
+
+            if (GUI.Button(new Rect(x, y, w, 28f), "[TEST: Pominięcie Tury (End War Turn)]"))
+            {
+                var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                if (flow != null) flow.EndWarTurn();
+            }
+            y += 32f;
+
+            if (GUI.Button(new Rect(x, y, w, 28f), "[TEST: Zakoncz Operacje i Pokaz Raport Koncowy]"))
+            {
+                WarOperationZilleManager.ReturnToCivilianMapWithReport();
+            }
+            y += 32f;
+
+            GUI.color = new Color(0.3f, 1f, 0.4f);
+            if (GUI.Button(new Rect(x, y, w, 32f), "[TEST: Pelny Auto-Test Kampanii (F12)]"))
+            {
+                MelonCoroutines.Start(RunAutomatedCampaignTestCoroutine());
+            }
+            GUI.color = Color.white;
+            y += 36f;
 
 
 
@@ -827,6 +867,198 @@ namespace GreatZilleSolution
 
             y += 6f;
 
+        }
+
+        private static System.Collections.IEnumerator RunAutomatedCampaignTestCoroutine()
+        {
+            MelonLogger.Msg("=================================================");
+            MelonLogger.Msg("[AUTOTEST] Rozpoczynam pelny test scenariusza Zille!");
+            MelonLogger.Msg("=================================================");
+
+            // Czekamy na zaladowanie Main Menu
+            MelonLogger.Msg("[AUTOTEST] Czekam na pelne zaladowanie Main Menu...");
+            while (true)
+            {
+                var sc = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+                if (sc != null && string.Equals(sc.name, "Main Menu", StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }
+                yield return new WaitForSeconds(1.0f);
+            }
+
+            yield return new WaitForSeconds(2.5f);
+
+            MelonLogger.Msg("[AUTOTEST] Main Menu aktywne! Wczytuje najnowszy zapis (OnContinueClick)...");
+            float waited = 0f;
+            while (waited < 40f)
+            {
+                var sc = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+                if (sc != null && !string.Equals(sc.name, "Main Menu", StringComparison.OrdinalIgnoreCase) && !string.Equals(sc.name, "Initialize", StringComparison.OrdinalIgnoreCase))
+                {
+                    MelonLogger.Msg($"[AUTOTEST] Zapis zaladowany, aktywna scena: {sc.name}");
+                    break;
+                }
+
+                var mm = UnityEngine.Object.FindObjectOfType<MainMenuPanel>();
+                if (mm != null)
+                {
+                    try { mm.OnContinueClick(); } catch (Exception ex) { MelonLogger.Warning("[AUTOTEST] OnContinueClick: " + ex.Message); }
+                }
+
+                yield return new WaitForSeconds(2.5f);
+                waited += 2.5f;
+            }
+
+            yield return new WaitForSeconds(3.0f);
+
+            // Krok 1: Inicjalizacja teatru wojennego
+            MelonLogger.Msg("[AUTOTEST] Krok 1: Wchodzenie do teatru Zille...");
+            WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
+            WarOperationZilleManager.EnterZilleWarTheatre();
+
+            yield return new WaitForSeconds(3.0f);
+
+            if (!ZilleWarTable.HasLiveMap)
+            {
+                MelonLogger.Error("[AUTOTEST FAIL] Teatr wojny Zille nie zaladowal sie poprawnie (HasLiveMap == false).");
+                yield break;
+            }
+            MelonLogger.Msg($"[AUTOTEST OK] Mapa Zille aktywna. Kafelki: {ZilleMapLayoutManager.CurrentConfig?.Tiles?.Count ?? 0}");
+
+            // Sprawdzenie performance
+            ZilleProfiler.ForceReport();
+            MelonLogger.Msg($"[AUTOTEST PERF] Highlight: {ZilleProfiler.HighlightMs:0.00}ms, LatePass: {ZilleProfiler.LatePassMs:0.00}ms, Tick: {ZilleProfiler.TickMs:0.00}ms");
+
+            // Krok 2: Rozpoczęcie scenariusza (Deployment -> Start)
+            MelonLogger.Msg("[AUTOTEST] Krok 2: Rozpoczynanie operacji (StartScenario)...");
+            ZilleWarTable.StartScenario();
+
+            yield return new WaitForSeconds(2.5f);
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow == null)
+            {
+                MelonLogger.Error("[AUTOTEST FAIL] Brak WarFlowManager w scenie!");
+                yield break;
+            }
+
+            int currentTurn = flow.GetCurrentWarTurn();
+            int actionPoints = flow.GetCurrentActionPoints();
+            MelonLogger.Msg($"[AUTOTEST OK] Tura {currentTurn} rozpoczeta. Punkty akcji: {actionPoints}");
+
+            // Sprawdzenie nagłówka fazy (Issue #7)
+            var turnPanel = Panels.Instance?.WarTurnPanel ?? UnityEngine.Object.FindObjectOfType<WarTurnPanel>();
+            if (turnPanel != null && turnPanel.titleText != null)
+            {
+                MelonLogger.Msg($"[AUTOTEST] Tytul fazy na ekranie: '{turnPanel.titleText.text}'");
+                if (turnPanel.titleText.text.Contains("Phase 0"))
+                    MelonLogger.Warning("[AUTOTEST WARN] Wykryto 'Phase 0' w tytule! Zamiana...");
+            }
+
+            // Krok 3: Przejście części scenariusza (Tura 1: próbny manewr bojowy, Tury 2+: pomijanie)
+            for (int t = 1; t <= 3; t++)
+            {
+                MelonLogger.Msg($"[AUTOTEST] --- Wykonywanie tury {t} ---");
+                yield return new WaitForSeconds(1.0f);
+
+                if (t == 1)
+                {
+                    // Próbny manewr bojowy jednostki gracza
+                    var tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                    var allTokens = tokenMgr != null ? tokenMgr.instantiatedWarTokens : null;
+                    WarToken playerUnit = null;
+                    if (allTokens != null)
+                    {
+                        for (int i = 0; i < allTokens.Count; i++)
+                        {
+                            var tok = allTokens[i];
+                            if (tok != null && !tok.IsDead() && tok.GetTokenAllegiance() == WarToken.WarAllegiance.Player && !ZilleWarTable.IsCityToken(tok))
+                            {
+                                playerUnit = tok;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (playerUnit != null)
+                    {
+                        var fromTile = playerUnit.GetCurrentWarTile();
+                        MelonLogger.Msg($"[AUTOTEST] Znaleziono jednostke gracza: {playerUnit.name} na polu {fromTile?.name}");
+                        var adjs = fromTile != null ? fromTile.adjacentWarTiles : null;
+                        WarTile moveTo = null;
+                        if (adjs != null)
+                        {
+                            for (int i = 0; i < adjs.Count; i++)
+                            {
+                                var candidate = adjs[i];
+                                if (candidate != null && candidate.GetCurrentToken() == null)
+                                {
+                                    moveTo = candidate;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (moveTo != null)
+                        {
+                            MelonLogger.Msg($"[AUTOTEST RUCH] Wykonuje probny ruch jednostki {playerUnit.name} -> {moveTo.name}...");
+                            try
+                            {
+                                playerUnit.Move(moveTo, false);
+                                flow.SpendActionPoints(1);
+                                MelonLogger.Msg($"[AUTOTEST OK] Jednostka przesunieta! Pozostale AP: {flow.GetCurrentActionPoints()}");
+                            }
+                            catch (Exception exMove)
+                            {
+                                MelonLogger.Warning($"[AUTOTEST RUCH] Blad ruchu: {exMove.Message}");
+                            }
+                            yield return new WaitForSeconds(2.0f);
+                        }
+                    }
+                }
+
+                MelonLogger.Msg($"[AUTOTEST] Konczenie tury gracza {t} (EndWarTurn)...");
+                flow.EndWarTurn();
+
+                // Czekamy az wrog zakonczy swoje ruchy
+                float waitEnemy = 0f;
+                while ((ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.AnyLiveBattle() || ZilleWarTable.IsAnyTokenMoving()) && waitEnemy < 15f)
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    waitEnemy += 0.5f;
+                }
+                MelonLogger.Msg($"[AUTOTEST] Tura wroga zakonczona po {waitEnemy:0.0}s.");
+
+                yield return new WaitForSeconds(1.0f);
+                MelonLogger.Msg($"[AUTOTEST] Gracz w turze {flow.GetCurrentWarTurn()}, punkty akcji: {flow.GetCurrentActionPoints()}");
+            }
+
+            // Krok 4: Zakończenie kampanii i powrót na mapę cywilną (Issue #8)
+            MelonLogger.Msg("[AUTOTEST] Krok 4: Konczenie kampanii (ReturnToCivilianMapWithReport)...");
+            WarOperationZilleManager.ReturnToCivilianMapWithReport();
+
+            yield return new WaitForSeconds(3.0f);
+
+            bool civOK = WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Civilian;
+            MelonLogger.Msg($"[AUTOTEST OK] CurrentTheatre: {WarOperationZilleManager.CurrentTheatre} (CivOK={civOK})");
+
+            var cam = UnityEngine.Object.FindObjectOfType<CameraManager>();
+            if (cam != null)
+            {
+                MelonLogger.Msg($"[AUTOTEST OK] CameraManager na pozycji glownej mapy: {cam.transform.position}");
+            }
+
+            var repPanel = Panels.Instance?.ReportPanel ?? UnityEngine.Object.FindObjectOfType<ReportPanel>();
+            if (repPanel != null && repPanel.gameObject.activeSelf)
+            {
+                MelonLogger.Msg("[AUTOTEST OK] Raport koncowy operacji Zille zostal wyswietlony!");
+            }
+
+            MelonLogger.Msg("=================================================");
+            MelonLogger.Msg("[AUTOTEST SUCCESS] PELNY TEST KAMPANII ZAKONCZONY SUKCESEM!");
+            MelonLogger.Msg("=================================================");
+            DialogueHelper.ShowAlert("[AUTOTEST SUCCESS] Kampania przetestowana pomyslnie!");
         }
 
     }

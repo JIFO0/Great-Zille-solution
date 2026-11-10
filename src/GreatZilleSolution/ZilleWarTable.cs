@@ -59,6 +59,10 @@ namespace GreatZilleSolution
         private static float _nextFind = 0f;
         private static bool _loggedApplied = false;
         private static string _lastDeployKey = "none";
+        private static int _lastSelectedTokenId = 0;
+        private static bool _boardRefreshRequested = false;
+
+        public static void RequestBoardRefresh() => _boardRefreshRequested = true;
         private static readonly HashSet<string> _warnedMissing = new HashSet<string>();
 
         // ================================================================== public API
@@ -130,9 +134,13 @@ namespace GreatZilleSolution
                 {
                     bool dep = DeploymentPanelOpen();
                     string depKey = dep ? DeployPaintKey() : "none";
-                    if (depKey != _lastDeployKey)
+                    var sel = SelectedUnit();
+                    int selId = sel != null ? sel.GetInstanceID() : 0;
+                    if (depKey != _lastDeployKey || selId != _lastSelectedTokenId || _boardRefreshRequested)
                     {
                         _lastDeployKey = depKey;
+                        _lastSelectedTokenId = selId;
+                        _boardRefreshRequested = false;
                         RefreshBoard();
                     }
 
@@ -314,6 +322,92 @@ namespace GreatZilleSolution
                     _liveTileMap[name] = t;
                 }
             }
+            if (_gridIds != null)
+            {
+                _tileByGridId = new WarTile[_gridIds.Count];
+                for (int i = 1; i < _gridIds.Count; i++)
+                {
+                    string id = _gridIds[i];
+                    string num = id.StartsWith("ZilleTile_") ? id.Substring("ZilleTile_".Length) : id;
+                    _tileByGridId[i] = FindLiveTile(num);
+                }
+            }
+        }
+
+        private static byte[] _gridBytes;
+        private static List<string> _gridIds;
+        private static WarTile[] _tileByGridId;
+        private static bool _gridLoaded;
+
+        public static void EnsureProvinceGridLoaded()
+        {
+            if (_gridLoaded && _tileByGridId != null) return;
+            try
+            {
+                string dir = ZilleMapLayoutManager.ResolveRegionsDir();
+                if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir))
+                {
+                    dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mods", "GreatZilleAssets", "regions");
+                }
+                string binPath = Path.Combine(dir, "zille_province_id_grid.bin");
+                string jsonPath = Path.Combine(dir, "zille_province_ids.json");
+                if (!File.Exists(binPath) || !File.Exists(jsonPath))
+                {
+                    MelonLogger.Warning($"[ZTABLE] Province ID grid files not found in {dir}");
+                    return;
+                }
+
+                _gridBytes = File.ReadAllBytes(binPath);
+                string json = File.ReadAllText(jsonPath);
+                _gridIds = System.Text.Json.JsonSerializer.Deserialize<List<string>>(json);
+
+                if (_gridIds != null)
+                {
+                    _tileByGridId = new WarTile[_gridIds.Count];
+                    for (int i = 1; i < _gridIds.Count; i++)
+                    {
+                        string id = _gridIds[i];
+                        string num = id.StartsWith("ZilleTile_") ? id.Substring("ZilleTile_".Length) : id;
+                        _tileByGridId[i] = FindLiveTile(num);
+                    }
+                }
+                _gridLoaded = _gridBytes != null && _gridBytes.Length == 1536 * 1024 && _tileByGridId != null;
+                MelonLogger.Msg($"[ZTABLE] Loaded province ID grid: {_gridBytes.Length} bytes, {_tileByGridId.Length} province entries mapped.");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[ZTABLE] Error loading province ID grid: {ex.Message}");
+            }
+        }
+
+        public static WarTile GetProvinceAt(Camera cam, Vector2 screenPos)
+        {
+            if (_root == null) return null;
+            if (!_gridLoaded || _tileByGridId == null) EnsureProvinceGridLoaded();
+            if (_gridBytes == null || _tileByGridId == null) return null;
+            if (cam == null) cam = WarCamera();
+            if (cam == null) return null;
+
+            var ray = cam.ScreenPointToRay(new Vector3(screenPos.x, screenPos.y, 0f));
+            Vector3 normal = _root.TransformDirection(Vector3.forward);
+            var plane = new Plane(normal, _root.position);
+            if (!plane.Raycast(ray, out float dist)) return null;
+
+            Vector3 local = _root.InverseTransformPoint(ray.GetPoint(dist));
+            float px = (local.x - MapLeft) / PxToWorld;
+            float py = (MapTop - local.y) / PxToWorld;
+
+            int gx = (int)(px / 8f);
+            int gy = (int)(py / 8f);
+            if (gx < 0 || gx >= 1536 || gy < 0 || gy >= 1024) return null;
+
+            int idx = gy * 1536 + gx;
+            byte provIdx = _gridBytes[idx];
+            if (provIdx > 0 && provIdx < _tileByGridId.Length)
+            {
+                return _tileByGridId[provIdx];
+            }
+            return null;
         }
 
         public static WarTile FindLiveTile(string tileNumber)
@@ -383,17 +477,8 @@ namespace GreatZilleSolution
 
         public static WarToken.WarAllegiance ToAllegiance(string name)
         {
-            if (name == "Rizia" || name == "Player") return WarToken.WarAllegiance.Player;
+            if (name == "Rizia" || name == "Player" || name == "Derdia") return WarToken.WarAllegiance.Player;
             if (name == "EmptySea" || name == "Sea") return WarToken.WarAllegiance.EmptySea;
-            if (name == "Derdia")
-            {
-                if (!_derdiaAllegianceLogged)
-                {
-                    _derdiaAllegianceLogged = true;
-                    MelonLogger.Msg("[ZilleMap] Derdia has no WarAllegiance. Derdia provinces are Enemy on the table (attackable, not Rizia) and stay marked Derdia in the layout.");
-                }
-                return WarToken.WarAllegiance.Enemy;
-            }
             return WarToken.WarAllegiance.Enemy;
         }
 
@@ -413,7 +498,7 @@ namespace GreatZilleSolution
             data.isEnemyAirfield = td.IsAirfield;
             data.isCoastalArtilleryTile = td.HasCoastalArtillery;
             data.isAntiAirTile = td.HasNoAirZone;
-            data.isInitialDeploymentTile = (td.Allegiance == "Rizia" && !td.IsSea) || td.IsNavalStart;
+            data.isInitialDeploymentTile = ((td.Allegiance == "Rizia" || td.Allegiance == "Derdia") && !td.IsSea) || td.IsNavalStart;
             data.isBorderTile = td.IsBorder;
             if (td.IsImpassable) data.tileDefenceType = WarTile.TileDefenceType.None;
             else if (td.IsCity) data.tileDefenceType = WarTile.TileDefenceType.City;
@@ -782,7 +867,7 @@ namespace GreatZilleSolution
         private static readonly List<(Transform t, Vector3 baseLocal, Vector3 localOffset, bool above)> _propHolds = new List<(Transform, Vector3, Vector3, bool)>();
         private static readonly HashSet<int> _enlarged = new HashSet<int>();
         private static bool _deploymentReady;
-        public static bool ScenarioStarted { get; private set; }
+        public static bool ScenarioStarted { get; set; }
 
         /// <summary>The Pales Start button calls OnInitialDeploymentFinished. After that, deployment rules stop.</summary>
         public static void MarkOperationBegun()
@@ -903,50 +988,71 @@ namespace GreatZilleSolution
         /// <summary>Reads the wash and outline colours serialized on the Pales tile manager. The states below are the ones that manager already names.</summary>
         private static void CachePalesColors()
         {
-            if (_palesColorsRead || _colorAttempted) return;
+            if (_palesColorsRead) return;
             var mgr = TileMgr();
-            if (mgr == null) return;
-            _colorAttempted = true;
-            _washDeploy = FromWash(mgr.deploymentBackgroundColor);
-            _washRefund = FromWash(mgr.refundableBackgroundColor);
-            _washFriendly = FromWash(mgr.friendlyBackgroundColor);
-            _washEnemy = FromWash(mgr.enemyBackgroundColor);
-            _washSea = FromWash(mgr.emptySeaBackgroundColor);
-            _washBattle = FromWash(mgr.battleBackgroundColor);
-            _washBlocked = FromWash(mgr.notInteractableBackgroundColor);
-            _washSelected = FromWash(mgr.selectedBackgroundColor);
-            _edgeHover = FromEdge(mgr.highlightedOutlineColor);
-            _edgeBattle = FromEdge(mgr.battleOutlineColor);
-            _edgeMove = FromEdge(mgr.selectedOutlineColor);
-            _edgePlain = FromEdge(mgr.defaultOutlineColor);
-            _palesColorsRead = _washDeploy.Ok && _washFriendly.Ok && _washEnemy.Ok;
-            if (_palesColorsRead)
+            if (mgr != null)
             {
-                if (_washBattle.Ok)
+                try
                 {
-                    _washBattle.Tile = new Color(_washBattle.Tile.r, _washBattle.Tile.g, _washBattle.Tile.b, 0.10f);
-                    _washBattle.Gradient = new Color(_washBattle.Gradient.r, _washBattle.Gradient.g, _washBattle.Gradient.b, 0.12f);
+                    _washDeploy = FromWash(mgr.deploymentBackgroundColor);
+                    _washRefund = FromWash(mgr.refundableBackgroundColor);
+                    _washFriendly = FromWash(mgr.friendlyBackgroundColor);
+                    _washEnemy = FromWash(mgr.enemyBackgroundColor);
+                    _washSea = FromWash(mgr.emptySeaBackgroundColor);
+                    _washBattle = FromWash(mgr.battleBackgroundColor);
+                    _washBlocked = FromWash(mgr.notInteractableBackgroundColor);
+                    _washSelected = FromWash(mgr.selectedBackgroundColor);
+                    _edgeHover = FromEdge(mgr.highlightedOutlineColor);
+                    _edgeBattle = FromEdge(mgr.battleOutlineColor);
+                    _edgeMove = FromEdge(mgr.selectedOutlineColor);
+                    _edgePlain = FromEdge(mgr.defaultOutlineColor);
+                    _palesColorsRead = _washDeploy.Ok && _washFriendly.Ok && _washEnemy.Ok;
+                    if (_palesColorsRead)
+                    {
+                        if (_washBattle.Ok)
+                        {
+                            _washBattle.Tile = new Color(_washBattle.Tile.r, _washBattle.Tile.g, _washBattle.Tile.b, 0.10f);
+                            _washBattle.Gradient = new Color(_washBattle.Gradient.r, _washBattle.Gradient.g, _washBattle.Gradient.b, 0.12f);
+                        }
+                        if (_edgeBattle.Ok)
+                        {
+                            _edgeBattle.Color = new Color(_edgeBattle.Color.r, _edgeBattle.Color.g, _edgeBattle.Color.b, 0.35f);
+                            _edgeBattle.Pulse = false;
+                            _edgeBattle.Gradient = false;
+                        }
+                        if (_washEnemy.Ok)
+                        {
+                            _washEnemy.Tile = new Color(_washEnemy.Tile.r, _washEnemy.Tile.g, _washEnemy.Tile.b, 0.20f);
+                            _washEnemy.Gradient = new Color(_washEnemy.Gradient.r, _washEnemy.Gradient.g, _washEnemy.Gradient.b, 0.22f);
+                        }
+                        if (_washFriendly.Ok)
+                        {
+                            _washFriendly.Tile = new Color(_washFriendly.Tile.r, _washFriendly.Tile.g, _washFriendly.Tile.b, 0.18f);
+                            _washFriendly.Gradient = new Color(_washFriendly.Gradient.r, _washFriendly.Gradient.g, _washFriendly.Gradient.b, 0.20f);
+                        }
+                        MelonLogger.Msg("[ZTABLE] Province colours taken from the Pales tile manager. Friendly " + _washFriendly.Tile + ", enemy " + _washEnemy.Tile + ", sea " + _washSea.Tile + ".");
+                    }
                 }
-                if (_edgeBattle.Ok)
-                {
-                    _edgeBattle.Color = new Color(_edgeBattle.Color.r, _edgeBattle.Color.g, _edgeBattle.Color.b, 0.35f);
-                    _edgeBattle.Pulse = false;
-                    _edgeBattle.Gradient = false;
-                }
-                if (_washEnemy.Ok)
-                {
-                    _washEnemy.Tile = new Color(_washEnemy.Tile.r, _washEnemy.Tile.g, _washEnemy.Tile.b, 0.20f);
-                    _washEnemy.Gradient = new Color(_washEnemy.Gradient.r, _washEnemy.Gradient.g, _washEnemy.Gradient.b, 0.22f);
-                }
-                if (_washFriendly.Ok)
-                {
-                    _washFriendly.Tile = new Color(_washFriendly.Tile.r, _washFriendly.Tile.g, _washFriendly.Tile.b, 0.18f);
-                    _washFriendly.Gradient = new Color(_washFriendly.Gradient.r, _washFriendly.Gradient.g, _washFriendly.Gradient.b, 0.20f);
-                }
-                MelonLogger.Msg("[ZTABLE] Province colours taken from the Pales tile manager. Friendly " + _washFriendly.Tile + ", enemy " + _washEnemy.Tile + ", sea " + _washSea.Tile + ".");
+                catch { }
             }
-            else
-                MelonLogger.Warning("[ZTABLE] Pales colour fields were not readable. Occupied and hover outlines stay on the game painter.");
+
+            if (!_palesColorsRead)
+            {
+                // Fallback palette matching Rizia, Wehlen and sea
+                _washFriendly = new PalesWash { Ok = true, Tile = new Color(0.85f, 0.72f, 0.42f, 0.25f), Gradient = new Color(0.9f, 0.8f, 0.5f, 0.3f), GradientOn = true };
+                _washEnemy = new PalesWash { Ok = true, Tile = new Color(0.72f, 0.25f, 0.25f, 0.25f), Gradient = new Color(0.8f, 0.3f, 0.3f, 0.3f), GradientOn = true };
+                _washSea = new PalesWash { Ok = true, Tile = new Color(0.18f, 0.35f, 0.48f, 0.25f), Gradient = new Color(0.2f, 0.4f, 0.5f, 0.3f), GradientOn = true };
+                _washDeploy = new PalesWash { Ok = true, Tile = new Color(0.3f, 0.8f, 0.3f, 0.35f), Gradient = new Color(0.4f, 0.9f, 0.4f, 0.4f), GradientOn = true };
+                _washRefund = new PalesWash { Ok = true, Tile = new Color(0.8f, 0.2f, 0.2f, 0.35f), Gradient = new Color(0.9f, 0.3f, 0.3f, 0.4f), GradientOn = true };
+                _washSelected = new PalesWash { Ok = true, Tile = new Color(0.95f, 0.85f, 0.3f, 0.4f), Gradient = new Color(1.0f, 0.9f, 0.4f, 0.5f), GradientOn = true };
+                _washBlocked = new PalesWash { Ok = true, Tile = new Color(0.3f, 0.3f, 0.3f, 0.15f), Gradient = new Color(0.4f, 0.4f, 0.4f, 0.15f) };
+                _washBattle = new PalesWash { Ok = true, Tile = new Color(0.9f, 0.1f, 0.1f, 0.15f), Gradient = new Color(1.0f, 0.2f, 0.2f, 0.2f) };
+                _edgeHover = new PalesEdge { Ok = true, On = true, Color = new Color(1f, 1f, 0.8f, 0.8f) };
+                _edgeBattle = new PalesEdge { Ok = true, On = true, Color = new Color(1f, 0.2f, 0.2f, 0.8f) };
+                _edgeMove = new PalesEdge { Ok = true, On = true, Color = new Color(0.4f, 0.9f, 0.4f, 0.8f) };
+                _edgePlain = new PalesEdge { Ok = true, On = false, Color = new Color(0.5f, 0.5f, 0.5f, 0.2f) };
+                _palesColorsRead = true;
+            }
         }
 
         private static PalesWash FromWash(WarTileManager.WarTileBackgroundColor src)
@@ -1055,7 +1161,7 @@ namespace GreatZilleSolution
                 // The whole board follows the unit chosen in the list. Hover never changes the fill,
                 // or the game's hover painter leaves one province orange after the cursor leaves.
                 var pick = DeploymentPick();
-                bool landDrop = !td.IsSea && !td.IsCity && td.Allegiance == "Rizia";
+                bool landDrop = !td.IsSea && !td.IsCity && (td.Allegiance == "Rizia" || td.Allegiance == "Derdia");
                 bool shipDrop = td.IsSea && td.IsNavalStart;
                 // Enemy land stays the default grey. Sea stays sea-coloured. Only a picked-up
                 // player unit is the refund red, and only a legal drop is orange.
@@ -1067,12 +1173,10 @@ namespace GreatZilleSolution
                     wash = _washDeploy;
                 else if (td.IsSea)
                     wash = _washSea;
-                else if (td.Allegiance == "Rizia")
+                else if (td.Allegiance == "Rizia" || td.Allegiance == "Derdia")
                     wash = _washFriendly;
                 else if (td.Allegiance == "Wehlen")
                     wash = _washEnemy;
-                else if (td.Allegiance == "Derdia")
-                    wash = DerdiaWash();
                 else
                     wash = _washBlocked;
                 if (occupied && anyAttention && token.GetTokenAllegiance() != WarToken.WarAllegiance.Enemy)
@@ -1108,15 +1212,14 @@ namespace GreatZilleSolution
                 }
                 else if (token != null && token.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy)
                 {
-                    wash = td.Allegiance == "Derdia" ? DerdiaWash() : _washEnemy;
-                    if (td.Allegiance != "Wehlen" && td.Allegiance != "Derdia" && !td.IsImpassable)
+                    wash = _washEnemy;
+                    if (td.Allegiance != "Wehlen" && !td.IsImpassable)
                     {
                         td.Allegiance = "Wehlen";
                         wt.SetTileAllegiance(WarToken.WarAllegiance.Enemy, false);
                     }
                 }
-                else if (td.Allegiance == "Rizia") wash = _washFriendly;
-                else if (td.Allegiance == "Derdia") wash = DerdiaWash();
+                else if (td.Allegiance == "Rizia" || td.Allegiance == "Derdia") wash = _washFriendly;
                 else if (td.Allegiance == "Wehlen") wash = _washEnemy;
                 else wash = _washBlocked;
                 if (CanMoveOnto(wt) && _edgeMove.Ok)
@@ -1342,10 +1445,7 @@ namespace GreatZilleSolution
 
         private static PalesWash DerdiaWash()
         {
-            var wash = _washEnemy;
-            if (!wash.Ok) return _washBlocked;
-            wash.Tile = new Color(0.55f, 0.38f, 0.16f, 1f);
-            return wash;
+            return _washFriendly;
         }
 
         public static bool IsImpassableTile(WarTile wt)
@@ -1694,37 +1794,26 @@ namespace GreatZilleSolution
         /// SpawnWarToken is the story-script path, used when deployment is already closed.
         /// </summary>
         /// <summary>
-        /// Pales hover samples the mask at the raycast UV. A box we added has no UVs, so the province never lights up
-        /// and the hold-to-deploy timer never starts. Keep the mesh collider and drop the box.
+        /// Ensure tile has standard BoxCollider matching vanilla Pales so WarTileRaycaster detects it flawlessly.
         /// </summary>
         private static void EnsureTileCollider(WarTile wt)
         {
             if (wt == null) return;
+            // Clean up any custom MeshColliders that disrupt PhysX raycasts
             var meshes = wt.GetComponentsInChildren<MeshCollider>(true);
-            if (meshes == null || meshes.Length == 0)
-            {
-                var filter = wt.GetComponent<MeshFilter>() ?? wt.GetComponentInChildren<MeshFilter>(true);
-                if (filter != null && filter.sharedMesh != null)
-                {
-                    var mesh = filter.gameObject.GetComponent<MeshCollider>();
-                    if (mesh == null) mesh = filter.gameObject.AddComponent<MeshCollider>();
-                    mesh.sharedMesh = filter.sharedMesh;
-                    mesh.convex = false;
-                    mesh.enabled = true;
-                    meshes = wt.GetComponentsInChildren<MeshCollider>(true);
-                }
-            }
             if (meshes != null)
             {
                 for (int i = 0; i < meshes.Length; i++)
-                    if (meshes[i] != null) meshes[i].enabled = true;
+                    if (meshes[i] != null) UnityEngine.Object.Destroy(meshes[i]);
             }
-            var boxes = wt.GetComponents<BoxCollider>();
-            if (boxes != null && meshes != null && meshes.Length > 0)
-            {
-                for (int i = 0; i < boxes.Length; i++)
-                    if (boxes[i] != null) UnityEngine.Object.Destroy(boxes[i]);
-            }
+
+            // Ensure BoxCollider exists and is sized to prevent adjacent overlaps
+            var box = wt.GetComponent<BoxCollider>();
+            if (box == null) box = wt.gameObject.AddComponent<BoxCollider>();
+            box.size = new Vector3(0.92f, 0.92f, 0.2f);
+            box.center = Vector3.zero;
+            box.enabled = true;
+
             AlignTileRaycastLayer(wt);
         }
 
@@ -1736,29 +1825,26 @@ namespace GreatZilleSolution
             if (_raycastLayer == int.MinValue)
             {
                 _raycastLayer = -1;
-                var sample = UnityEngine.GameObject.Find("Tile_1");
-                if (sample != null)
+                var ray = UnityEngine.Object.FindObjectOfType<WarTileRaycaster>();
+                if (ray != null)
                 {
-                    _raycastLayer = sample.layer;
-                }
-                else
-                {
-                    var ray = UnityEngine.Object.FindObjectOfType<WarTileRaycaster>();
-                    if (ray != null)
+                    try
                     {
-                        try
+                        int mask = ray.raycastLayerMask.value;
+                        if (mask != 0 && mask != ~0)
                         {
-                            int mask = ray.raycastLayerMask.value;
-                            if (mask != 0 && mask != ~0)
+                            for (int i = 0; i < 32; i++)
                             {
-                                for (int i = 0; i < 32; i++)
-                                {
-                                    if ((mask & (1 << i)) != 0) { _raycastLayer = i; break; }
-                                }
+                                if ((mask & (1 << i)) != 0) { _raycastLayer = i; break; }
                             }
                         }
-                        catch { }
                     }
+                    catch { }
+                }
+                if (_raycastLayer < 0)
+                {
+                    var sample = UnityEngine.GameObject.Find("Tile_1");
+                    if (sample != null) _raycastLayer = sample.layer;
                 }
             }
             if (_raycastLayer < 0) return;
@@ -2432,7 +2518,7 @@ namespace GreatZilleSolution
         private static Vector2 _lastMouse;
         private static bool _haveMouse;
 
-        /// <summary>Lights the province under the cursor. The collider box is wider than the hex, so the hit has to land inside the mask.</summary>
+        /// <summary>Lights the province under the cursor using fast physics and vanilla raycaster.</summary>
         private static void HighlightUnderCursor()
         {
             ZilleProfiler.BeginHighlight();
@@ -2477,22 +2563,15 @@ namespace GreatZilleSolution
                 TrackHold(tile);
                 if (tile != previous)
                 {
-                    RepaintTile(previous);
-                    RepaintTile(tile);
+                    _hoverTile = tile;
+                    if (previous != null) RepaintTile(previous);
+                    if (tile != null) RepaintTile(tile);
                     var mgr = TileMgr();
                     if (mgr != null && tile != null)
                         try { mgr.SetHoveredWarTile(tile); } catch { }
                     PresentUnitChrome();
                 }
                 _lit = next;
-                int sid = 0;
-                var sel = SelectedUnit();
-                if (sel != null) sid = sel.GetInstanceID();
-                if (sid != _paintedSel)
-                {
-                    _paintedSel = sid;
-                    RefreshBoard();
-                }
             }
             finally
             {
@@ -2510,12 +2589,19 @@ namespace GreatZilleSolution
             _gameHover = tile;
         }
 
-        /// <summary>The province the game is highlighting. Falls back to plane raycast if physics ray misses.</summary>
+        /// <summary>Pixel-perfect province detection via baked ID grid.</summary>
+        public static WarTile FindTileUnderCursor(Camera cam, Vector2 pos)
+        {
+            return GetProvinceAt(cam, pos);
+        }
+
+        /// <summary>The province the game is highlighting. Falls back to baked ID grid if not yet updated.</summary>
         private static WarTile ProvinceUnderCursor(Camera cam, Vector2 pos)
         {
             if (_gameHover != null && _gameHover.gameObject != null && _gameHover.gameObject.activeInHierarchy)
                 return _gameHover;
-            return PlaneHover(cam, pos);
+
+            return GetProvinceAt(cam, pos);
         }
 
         private static Vector3 _lastCamPos;
@@ -2578,39 +2664,7 @@ namespace GreatZilleSolution
 
         private static int _paintedSel;
 
-        /// <summary>The page quads eat the physics ray. The province under the cursor is matched by its mask on the map plane.</summary>
-        private static WarTile PlaneHover(Camera cam, Vector2 pos)
-        {
-            if (_root == null || _tiles.Count == 0 || cam == null) return null;
-            var ray = cam.ScreenPointToRay(new Vector3(pos.x, pos.y, 0f));
-            var plane = new Plane(_root.TransformDirection(Vector3.forward), _root.position);
-            if (!plane.Raycast(ray, out float dist)) return null;
-            var point = ray.GetPoint(dist);
-            WarTile bestTile = null;
-            float bestD = 0.25f * 0.25f;
-            foreach (var tb in _tiles.Values)
-            {
-                var wt = tb.Tile;
-                if (wt == null) continue;
-                float d = (wt.transform.position - point).sqrMagnitude;
-                if (d >= bestD || !MaskCovers(wt, point)) continue;
-                bestD = d;
-                bestTile = wt;
-            }
-            return bestTile;
-        }
 
-        private static bool MaskCovers(WarTile wt, Vector3 worldPoint)
-        {
-            Vector3 local = wt.transform.InverseTransformPoint(worldPoint);
-            float u = local.x + 0.5f;
-            float v = local.y + 0.5f;
-            if (u < 0f || u > 1f || v < 0f || v > 1f) return false;
-            var rend = wt.GetWarTileRenderer();
-            var tex = rend != null && rend.sharedMaterial != null ? rend.sharedMaterial.GetTexture("_Tile_Texture") as Texture2D : null;
-            if (tex == null || !tex.isReadable) return true;
-            return tex.GetPixelBilinear(u, v).a >= 0.5f;
-        }
 
         private static void RepaintTile(WarTile wt)
         {
@@ -2690,14 +2744,9 @@ namespace GreatZilleSolution
             }
             if (tile != _hoverTile)
             {
-                if (_hoverTile != null)
-                {
-                    try { _hoverTile.OnTileExit(); } catch { }
-                }
                 _hoverTile = tile;
                 if (tile != null)
                 {
-                    try { tile.OnTileEnter(); } catch { }
                     HidePromptUnlessLegal(tile);
                 }
             }
@@ -2772,11 +2821,9 @@ namespace GreatZilleSolution
             WarTile target = tile != null && Holdable(tile) ? tile : held;
             bool finished = _heldFor >= HoldSeconds && target != null && (tile == held || parked);
             float shown = Mathf.Clamp01(_heldFor / HoldSeconds) * cap;
-            if (!finished) shown = Mathf.Min(shown, cap * 0.98f);
             if (!finished)
             {
                 ShowHoldRing(target, shown);
-                FreezeGameHold();
                 return;
             }
             _committed = true;
@@ -2817,7 +2864,7 @@ namespace GreatZilleSolution
             catch { return false; }
         }
 
-        private static Vector2 CursorPos()
+        public static Vector2 CursorPos()
         {
             var mouse = UnityEngine.InputSystem.Mouse.current;
             if (mouse != null) return mouse.position.ReadValue();
@@ -2949,7 +2996,50 @@ namespace GreatZilleSolution
                         armed = true;
                     }
                     var unit = panel.GetSelectedUnitTypeData();
-                    if (unit != null) panel.DeployToken(unit, tile);
+                    if (unit != null)
+                    {
+                        int beforeDeployed = unit.UnitDeployedCount;
+                        int beforeListCount = panel.deployedTokensToTile != null ? panel.deployedTokensToTile.Count : 0;
+                        panel.DeployToken(unit, tile);
+
+                        bool deployedByVanilla = unit.UnitDeployedCount > beforeDeployed ||
+                            (panel.deployedTokensToTile != null && panel.deployedTokensToTile.Count > beforeListCount);
+
+                        // Direct verification & robust fallback ONLY if vanilla completely failed:
+                        if (!deployedByVanilla && tile.GetCurrentToken() == null)
+                        {
+                            MelonLogger.Msg($"[ZTABLE] Vanilla DeployToken did not place token on {tile.name}. Executing robust fallback deployment...");
+                            var tm = TokenMgr();
+                            if (tm != null)
+                            {
+                                tm.DeployToken(unit, tile, WarToken.WarAllegiance.Player);
+                            }
+                            try
+                            {
+                                var deployedList = panel.deployedTokensToTile;
+                                if (deployedList != null)
+                                {
+                                    var entry = new WarDeploymentPanel.DeployedTokenToTile();
+                                    entry.tile = tile;
+                                    entry.unitTypeData = unit;
+                                    deployedList.Add(entry);
+                                }
+                                if (unit.UnitDeployedCount <= beforeDeployed)
+                                {
+                                    unit.UnitDeployedCount = beforeDeployed + 1;
+                                }
+                                panel.UpdateDeployingUnitCount();
+                                if (unit.UnitDeployedCount >= unit.UnitTotalCount)
+                                {
+                                    panel.CancelUnitDeployment();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MelonLogger.Warning($"[ZTABLE] Deployed list fallback update: {ex.Message}");
+                            }
+                        }
+                    }
                 }
                 else if (!TurnHasPoints())
                 {
@@ -2957,18 +3047,33 @@ namespace GreatZilleSolution
                 }
                 else
                 {
-                    // The action list is built from whatever neighbours the tile had at the time.
-                    // Rebuild it from the Zille graph before the hold asks the tile to move, attack, bomb, or drop.
-                    try
-                    {
-                        if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
-                        if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
-                    }
-                    catch { }
+                    var sel = SelectedUnit();
+                    var actType = tile.GetTileActionType();
+                    var oldTile = sel != null ? sel.GetCurrentWarTile() : null;
+
                     if (!OverrunFallen(tile))
                     {
                         tile.OnTileEnter();
                         tile.OnTileCommitAction();
+                    }
+
+                    // Direct fallback for movement if vanilla tile.OnTileCommitAction didn't move the unit
+                    if (actType == WarTile.TileActionType.Move && sel != null && sel.GetCurrentWarTile() != tile)
+                    {
+                        MelonLogger.Msg($"[ZTABLE] Executing direct movement fallback for {sel.name} -> {tile.name}");
+                        try
+                        {
+                            sel.Move(tile, false);
+                            var flow = FlowMgr();
+                            if (flow != null && flow.GetCurrentActionPoints() > 0)
+                            {
+                                flow.SpendActionPoints(1);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MelonLogger.Warning($"[ZTABLE] Direct move fallback exception: {ex.Message}");
+                        }
                     }
                 }
                 var now = tile.GetCurrentToken();
@@ -3020,15 +3125,20 @@ namespace GreatZilleSolution
             {
                 var panel = Panels.Instance != null ? Panels.Instance.WarActionHoverPanel : null;
                 if (panel == null) return;
-                // Setup every frame. The stock fill bails when its remembered tile is not this one,
-                // which is how a finished ring hid Deploy or Move and then did nothing.
-                panel.Setup(tile);
+                if (panel.currentWarTile != tile)
+                {
+                    panel.Setup(tile);
+                }
                 if (!_ringOpen)
                 {
                     panel.Show();
                     _ringOpen = true;
                 }
                 panel.UpdateWarActionMissclickTimer(tile, progress);
+                if (panel.holdTimerProgressImage != null)
+                {
+                    panel.holdTimerProgressImage.fillAmount = Mathf.Clamp01(_heldFor / HoldSeconds);
+                }
                 if (!_holdRingLogged)
                 {
                     _holdRingLogged = true;
@@ -3488,6 +3598,7 @@ namespace GreatZilleSolution
             if (atkSource != null) { UnlockTile(atkSource); RepaintTile(atkSource); }
             if (defSource != null) { UnlockTile(defSource); RepaintTile(defSource); }
             RefreshBoard();
+            RefreshAllTokenStatusEffects();
         }
 
         private static void AdvanceAttacker(WarBattleManager.WarBattle battle)
@@ -3567,6 +3678,7 @@ namespace GreatZilleSolution
                 {
                     atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
                     atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                    try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(atk, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
                 }
                 return;
             }
@@ -3604,6 +3716,7 @@ namespace GreatZilleSolution
             {
                 def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
                 def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(def, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
                 MelonLogger.Msg("[ZTABLE] Defeated defender marked as overrun: " + def.name);
             }
 
@@ -3765,15 +3878,12 @@ namespace GreatZilleSolution
             if (token == null) return;
             WarUnitTypeData ut = null;
             try { ut = token.GetWarUnitTypeData(); } catch { }
-            int beforeDeployed = 0;
-            int beforeTotal = 0;
-            if (ut != null)
-            {
-                beforeDeployed = ut.UnitDeployedCount;
-                beforeTotal = ut.UnitTotalCount;
-            }
             if (panel != null && ut != null)
             {
+                int beforeDeployed = ut.UnitDeployedCount;
+                try { panel.RefundToken(ut); }
+                catch (Exception ex) { MelonLogger.Warning("[ZTABLE] refund: " + ex.GetBaseException().Message); }
+
                 var list = panel.deployedTokensToTile;
                 if (list != null)
                 {
@@ -3783,10 +3893,11 @@ namespace GreatZilleSolution
                         if (entry != null && entry.tile == tile) list.RemoveAt(i);
                     }
                 }
-                try { panel.RefundToken(ut); }
-                catch (Exception ex) { MelonLogger.Warning("[ZTABLE] refund: " + ex.GetBaseException().Message); }
-                ut.UnitDeployedCount = Math.Max(0, beforeDeployed - 1);
-                ut.UnitTotalCount = beforeTotal;
+
+                if (ut.UnitDeployedCount >= beforeDeployed && beforeDeployed > 0)
+                {
+                    ut.UnitDeployedCount = beforeDeployed - 1;
+                }
                 try { panel.UpdateDeployingUnitCount(); } catch { }
             }
             if (tile.GetCurrentToken() != null)
@@ -3943,6 +4054,61 @@ namespace GreatZilleSolution
             if (tile == null) return;
             try { if (tile.IsLocked()) tile.SetLockState(false); } catch { }
             try { if (tile.IsActionLocked()) tile.SetActionLockState(false); } catch { }
+        }
+
+        public static void UnlockAllTiles()
+        {
+            foreach (var tb in _tiles.Values)
+            {
+                var wt = tb?.Tile;
+                if (wt == null) continue;
+                try
+                {
+                    if (wt.IsLocked()) wt.SetLockState(false);
+                    if (wt.IsActionLocked()) wt.SetActionLockState(false);
+                }
+                catch { }
+            }
+        }
+
+        public static void RefreshAllTokenStatusEffects()
+        {
+            try
+            {
+                var panel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                if (panel == null) return;
+                var mgr = _tokenMgr ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = mgr != null ? mgr.instantiatedWarTokens : null;
+                if (tokens == null) return;
+
+                var existingTokens = new HashSet<IntPtr>();
+                var list = panel.instantiatedWarTokenStatusEffects;
+                if (list != null)
+                {
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        var eff = list[i];
+                        if (eff != null && eff.currentWarToken != null)
+                        {
+                            existingTokens.Add(eff.currentWarToken.Pointer);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < tokens.Count; i++)
+                {
+                    var t = tokens[i];
+                    if (t == null || t.IsDead()) continue;
+                    if (t.IsOrganizationDepleted() || IsOverrun(t))
+                    {
+                        if (!existingTokens.Contains(t.Pointer))
+                        {
+                            panel.Add(t, WarToken.WarTokenStatusEffectType.DepletedOrganization);
+                        }
+                    }
+                }
+            }
+            catch { }
         }
 
         /// <summary>After a fight the winner can be standing on the province without being its token, so clicks miss and other units walk in.</summary>
@@ -4115,6 +4281,14 @@ namespace GreatZilleSolution
         /// <summary>A province the selected deployment unit is allowed to land on, even if the game's action guess says otherwise.</summary>
         public static bool IsDeploymentTarget(WarTile tile) => DeploymentTarget(tile);
 
+        /// <summary>All Rizian and Derdian land (non-city) and naval start waters are valid deployment territories in Zille.</summary>
+        public static bool IsZilleDeploymentTile(WarTile tile)
+        {
+            var td = TileDataOf(tile);
+            if (td == null) return false;
+            return ((td.Allegiance == "Rizia" || td.Allegiance == "Derdia") && !td.IsSea && !td.IsCity) || td.IsNavalStart;
+        }
+
         /// <summary>Only the Rizian land that touches Wehlen has to be filled before Start.</summary>
         public static bool IsZilleFrontTile(WarTile tile)
         {
@@ -4133,7 +4307,7 @@ namespace GreatZilleSolution
                 var unit = panel.GetSelectedUnitTypeData();
                 if (unit == null || tile.GetCurrentToken() != null) return false;
                 if (unit.unitType == WarUnitTypeData.UnitType.NavalUnit) return td.IsNavalStart;
-                if (unit.unitType == WarUnitTypeData.UnitType.LandUnit) return td.Allegiance == "Rizia" && !td.IsSea && !td.IsCity;
+                if (unit.unitType == WarUnitTypeData.UnitType.LandUnit) return (td.Allegiance == "Rizia" || td.Allegiance == "Derdia") && !td.IsSea && !td.IsCity;
             }
             catch { }
             return false;
@@ -4508,10 +4682,12 @@ namespace GreatZilleSolution
             }
         }
 
+        private static int _lastActionTurn = -1;
+
         /// <summary>This save starts the operation on zero action points, so the turn opens already finished. The budget has to be written before Start, and the banner the game shows at zero has to be dismissed once the turn actually has moves.</summary>
         private static void EnsureActionPoints()
         {
-            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            var flow = FlowMgr();
             if (flow == null) return;
             const int want = 5;
             try
@@ -4524,6 +4700,15 @@ namespace GreatZilleSolution
             }
             catch { }
             if (!ScenarioStarted) return;
+
+            int curTurn = flow.GetCurrentWarTurn();
+            if (curTurn != _lastActionTurn)
+            {
+                _lastActionTurn = curTurn;
+                _pointsGranted = false;
+                _bannerCleared = false;
+            }
+
             if (!_pointsGranted)
             {
                 if (flow.GetCurrentActionPoints() <= 0)
@@ -4852,11 +5037,9 @@ namespace GreatZilleSolution
         }
 
 
-        private static Material _peakMat;
-
-        /// <summary>A small peak on every province marked mountains, so the Gora button is visible on the table.</summary>
         private static bool _peaksDone;
 
+        /// <summary>Clean up any mountain marker primitives from tiles.</summary>
         private static void SyncMountainMarkers()
         {
             if (_peaksDone) return;
@@ -4865,37 +5048,15 @@ namespace GreatZilleSolution
             bool live = false;
             foreach (var td in cfg.Tiles)
             {
-                if (td.IsSea || string.IsNullOrEmpty(td.TileNumber)) continue;
+                if (string.IsNullOrEmpty(td.TileNumber)) continue;
                 var tile = FindLiveTile(td.TileNumber);
                 if (tile == null) continue;
                 live = true;
                 Transform peak = tile.transform.Find("ZilleMountain");
-                bool want = td.Terrain == "mountains";
-                if (!want)
+                if (peak != null)
                 {
-                    if (peak != null) UnityEngine.Object.Destroy(peak.gameObject);
-                    continue;
+                    UnityEngine.Object.Destroy(peak.gameObject);
                 }
-                if (peak != null) continue;
-                var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                go.name = "ZilleMountain";
-                var col = go.GetComponent<Collider>();
-                if (col != null) UnityEngine.Object.Destroy(col);
-                go.transform.SetParent(tile.transform, false);
-                go.transform.localPosition = new Vector3(0f, 0f, -0.05f);
-                go.transform.localScale = new Vector3(0.045f, 0.045f, 0.07f);
-                if (_peakMat == null)
-                {
-                    var sh = Shader.Find("Unlit/Color");
-                    if (sh == null) sh = Shader.Find("Sprites/Default");
-                    if (sh != null)
-                    {
-                        _peakMat = new Material(sh);
-                        _peakMat.color = new Color(0.55f, 0.52f, 0.48f, 1f);
-                    }
-                }
-                var rend = go.GetComponent<Renderer>();
-                if (rend != null && _peakMat != null) rend.sharedMaterial = _peakMat;
             }
             if (live) _peaksDone = true;
         }
@@ -5006,7 +5167,7 @@ namespace GreatZilleSolution
         private static float _nextCamCheck;
 
         /// <summary>The camera that is actually framing the war table, not whichever one is tagged Main.</summary>
-        private static Camera WarCamera()
+        public static Camera WarCamera()
         {
             if (_cachedWarCam != null && _cachedWarCam.enabled && _cachedWarCam.gameObject.activeInHierarchy)
             {
@@ -5114,7 +5275,6 @@ namespace GreatZilleSolution
             while (true)
             {
                 if (_propHolds.Count > 0) HoldProps();
-                if (_pressSeen && !_committed) FreezeGameHold();
                 yield return wait;
             }
         }

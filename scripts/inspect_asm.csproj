@@ -4,17 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsmResolver.DotNet">
-      <HintPath>bin\Debug\net8.0\AsmResolver.DotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver.PE">
-      <HintPath>bin\Debug\net8.0\AsmResolver.PE.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver.PE.File">
-      <HintPath>bin\Debug\net8.0\AsmResolver.PE.File.dll</HintPath>
-    </Reference>
-    <Reference Include="AsmResolver">
-      <HintPath>bin\Debug\net8.0\AsmResolver.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AsmResolver.DotNet" Version="5.5.1" />
   </ItemGroup>
 </Project>
