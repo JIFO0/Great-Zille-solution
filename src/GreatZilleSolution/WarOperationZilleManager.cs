@@ -710,11 +710,54 @@ namespace GreatZilleSolution
                         var allTrans = _spawnedZilleWarToken.GetComponentsInChildren<Transform>(true);
                         for (int i = 0; i < allTrans.Length; i++)
                         {
-                            if (allTrans[i] != null) allTrans[i].gameObject.layer = palesWarTemplate.layer;
+                            if (allTrans[i] != null)
+                            {
+                                allTrans[i].gameObject.layer = palesWarTemplate.layer;
+                                if (allTrans[i].name.ToLowerInvariant().Contains("shadow"))
+                                {
+                                    allTrans[i].gameObject.SetActive(true);
+                                    var r = allTrans[i].GetComponent<Renderer>();
+                                    if (r != null) r.enabled = true;
+                                }
+                            }
+                        }
+
+                        // Check siblings for shadow decal/projector (Issue #8)
+                        if (parent != null)
+                        {
+                            for (int i = 0; i < parent.childCount; i++)
+                            {
+                                var sibling = parent.GetChild(i);
+                                if (sibling == null || sibling.gameObject == palesWarTemplate) continue;
+                                string sName = sibling.name.ToLowerInvariant();
+                                if (sName.Contains("shadow"))
+                                {
+                                    // Deactivate orphaned Pales shadow
+                                    sibling.gameObject.SetActive(false);
+
+                                    // Clone it for Zille token
+                                    var existingZilleShadow = parent.Find("InvasionOfZille Shadow");
+                                    if (existingZilleShadow == null)
+                                    {
+                                        var zilleShadow = UnityEngine.Object.Instantiate(sibling.gameObject, parent);
+                                        zilleShadow.name = "InvasionOfZille Shadow";
+                                        zilleShadow.transform.position = new Vector3(zilleWarPos.x, sibling.position.y, zilleWarPos.z);
+                                        zilleShadow.transform.rotation = sibling.rotation;
+                                        zilleShadow.transform.localScale = sibling.localScale;
+                                        zilleShadow.SetActive(true);
+                                        MelonLogger.Msg($"[WAR SHADOW] Cloned sibling shadow '{sibling.name}' to Zille at {zilleShadow.transform.position}.");
+                                    }
+                                    else
+                                    {
+                                        existingZilleShadow.position = new Vector3(zilleWarPos.x, sibling.position.y, zilleWarPos.z);
+                                        existingZilleShadow.gameObject.SetActive(true);
+                                    }
+                                }
+                            }
                         }
 
                         _spawnedZilleWarToken.SetActive(true);
-                        palesWarTemplate.SetActive(false); // Double ensure Pales template stays hidden in Turn 2!
+                        palesWarTemplate.SetActive(false); // Ensure Pales template stays hidden in Turn 2!
                         MelonLogger.Msg($"[WAR ENGINE] Successfully instantiated separate InvasionOfZille Event Variant at {zilleWarPos} (Pales marker untouched)!");
                     }
                 }
@@ -1699,6 +1742,27 @@ namespace GreatZilleSolution
             if (_deploymentOpened) return;
             try
             {
+                if (ZilleCampaignState.CurrentPhaseNumber == 2)
+                {
+                    // Phase II: Resume directly from saved Phase 1 frontline state!
+                    ZilleWarTable.RestorePhaseBoardState();
+                    ZilleWarTable.MarkOperationBegun();
+                    var flow = Managers.Instance?.WarFlowManager ?? UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                    if (flow != null)
+                    {
+                        flow.PlayerTurn();
+                    }
+                    var hud2 = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
+                    if (hud2 != null)
+                    {
+                        if (!hud2.gameObject.activeSelf) hud2.gameObject.SetActive(true);
+                        hud2.Show();
+                    }
+                    _deploymentOpened = true;
+                    MelonLogger.Msg("[WAR THEATRE] Phase II started directly on the frontline without initial deployment!");
+                    return;
+                }
+
                 var deployPanel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : null;
                 if (deployPanel == null) deployPanel = UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
                 if (deployPanel == null)

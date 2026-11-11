@@ -171,6 +171,114 @@ namespace GreatZilleSolution
     }
 
         /// <summary>Puts every touched renderer/tile back to vanilla Pales state.</summary>
+        public class SavedTileState
+        {
+            public string TileNumber;
+            public string Allegiance;
+            public int FortLevel;
+            public string UnitTypeName;
+            public WarToken.WarAllegiance UnitAllegiance;
+            public bool HasToken;
+        }
+
+        private static readonly List<SavedTileState> _phaseSavedState = new List<SavedTileState>();
+
+        public static void SavePhaseBoardState()
+        {
+            _phaseSavedState.Clear();
+            var cfg = ZilleMapLayoutManager.CurrentConfig;
+            if (cfg?.Tiles == null) return;
+
+            foreach (var td in cfg.Tiles)
+            {
+                if (td == null || string.IsNullOrEmpty(td.TileNumber)) continue;
+                var wt = FindLiveTile(td.TileNumber);
+                var state = new SavedTileState
+                {
+                    TileNumber = td.TileNumber,
+                    Allegiance = td.Allegiance,
+                    FortLevel = td.FortLevel
+                };
+
+                if (wt != null)
+                {
+                    var tok = wt.GetCurrentToken();
+                    if (tok != null && !tok.IsDead())
+                    {
+                        var ut = tok.GetWarUnitTypeData();
+                        if (ut != null && !IsCityUnit(ut))
+                        {
+                            state.HasToken = true;
+                            state.UnitTypeName = ut.name;
+                            state.UnitAllegiance = tok.GetTokenAllegiance();
+                        }
+                    }
+                }
+                _phaseSavedState.Add(state);
+            }
+            MelonLogger.Msg($"[ZTABLE] Saved board state for Phase transition: {_phaseSavedState.Count} tiles.");
+        }
+
+        public static bool RestorePhaseBoardState()
+        {
+            if (_phaseSavedState == null || _phaseSavedState.Count == 0) return false;
+            var cfg = ZilleMapLayoutManager.CurrentConfig;
+            if (cfg?.Tiles == null) return false;
+
+            var mgr = TokenMgr() ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+            if (mgr == null) return false;
+
+            var types = UnitTypes();
+            int restoredTokens = 0;
+
+            foreach (var state in _phaseSavedState)
+            {
+                var td = cfg.Tiles.Find(t => t != null && t.TileNumber == state.TileNumber);
+                if (td != null)
+                {
+                    td.Allegiance = state.Allegiance;
+                    td.FortLevel = state.FortLevel;
+                }
+                var wt = FindLiveTile(state.TileNumber);
+                if (wt != null)
+                {
+                    var alleg = ToAllegiance(state.Allegiance);
+                    wt.SetTileAllegiance(alleg, false);
+                    if (state.FortLevel > 0) wt.ChangeWarTileFortLevelStat(state.FortLevel);
+
+                    if (state.HasToken && !string.IsNullOrEmpty(state.UnitTypeName))
+                    {
+                        WarUnitTypeData ut = null;
+                        for (int i = 0; i < types.Count; i++)
+                        {
+                            if (types[i] != null && types[i].name == state.UnitTypeName)
+                            {
+                                ut = types[i];
+                                break;
+                            }
+                        }
+
+                        if (ut != null && wt.GetCurrentToken() == null)
+                        {
+                            try
+                            {
+                                int dep = ut.UnitDeployedCount;
+                                mgr.DeployToken(ut, wt, state.UnitAllegiance);
+                                if (state.UnitAllegiance == WarToken.WarAllegiance.Enemy) ut.UnitDeployedCount = dep;
+                                restoredTokens++;
+                            }
+                            catch (Exception ex)
+                            {
+                                MelonLogger.Warning($"[ZTABLE] Failed to restore token {state.UnitTypeName} on tile {state.TileNumber}: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+            }
+            MelonLogger.Msg($"[ZTABLE] Restored Phase board state ({restoredTokens} units placed onto frontline).");
+            return true;
+        }
+
         public static void Restore()
         {
             try
@@ -185,11 +293,39 @@ namespace GreatZilleSolution
                         if (pb.Instance != null) UnityEngine.Object.Destroy(pb.Instance);
                     }
                 }
+
+                // Clean up sticky objective indicators (Issue #6)
+                try
+                {
+                    var indicators = Resources.FindObjectsOfTypeAll<TemplateWarObjectiveIndicator>();
+                    if (indicators != null)
+                    {
+                        for (int i = 0; i < indicators.Length; i++)
+                        {
+                            var ind = indicators[i];
+                            if (ind != null && ind.gameObject != null) ind.gameObject.SetActive(false);
+                        }
+                    }
+                }
+                catch { }
+
+                // Clean up fort levels and mountain/cube primitives from tiles
                 foreach (var kv in _tiles)
                 {
                     var tb = kv.Value;
                     if (tb.Instance != null) { UnityEngine.Object.Destroy(tb.Instance); tb.Instance = null; }
                     if (tb.Tile == null) continue;
+                    try { tb.Tile.ChangeWarTileFortLevelStat(0); } catch { }
+                    for (int i = tb.Tile.transform.childCount - 1; i >= 0; i--)
+                    {
+                        var child = tb.Tile.transform.GetChild(i);
+                        if (child == null) continue;
+                        string cName = child.name;
+                        if (cName.StartsWith("Zille") || cName.Contains("Mountain") || cName.Contains("Cube"))
+                        {
+                            UnityEngine.Object.Destroy(child.gameObject);
+                        }
+                    }
                     tb.Tile.transform.localPosition = tb.LocalPos;
                     tb.Tile.transform.localScale = tb.LocalScale;
                     tb.Tile.warTileTexture = tb.Tex;
@@ -200,6 +336,13 @@ namespace GreatZilleSolution
                     if (r != null && r.material != null && r.material.HasProperty("_Tile_Texture") && tb.Tex != null)
                         r.material.SetTexture("_Tile_Texture", tb.Tex);
                 }
+
+                if (_root != null)
+                {
+                    var roads = _root.Find("ZilleRoads");
+                    if (roads != null) UnityEngine.Object.Destroy(roads.gameObject);
+                }
+
                 _cityLabelsApplied = false;
                 _chromeHidden = false;
                 _politicalHidden = false;
@@ -3600,6 +3743,9 @@ namespace GreatZilleSolution
             WarTile defSource = null;
             try { if (battle.defender != null) defSource = battle.defender.GetCurrentWarTile(); } catch { }
 
+            WarTile focusTile = defSource ?? atkSource;
+            if (focusTile != null) ShowEnemyMove(focusTile);
+
             try { AdvanceAttacker(battle); }
             catch (Exception ex) { MelonLogger.Warning("[ZTABLE] battle advance: " + ex.GetBaseException().Message); }
             ClearBattle(battle);
@@ -4177,23 +4323,25 @@ namespace GreatZilleSolution
             catch { }
         }
 
-        /// <summary>Camera smoothly centers on the province where the enemy token is moving.</summary>
+        public static void MarkEnemyTurnStarted()
+        {
+            _enemyTurnActive = true;
+            _enemySince = Time.unscaledTime;
+        }
+
+        /// <summary>Camera smoothly centers on the province where combat or movement takes place.</summary>
         public static void ShowEnemyMove(WarTile tile)
         {
             if (tile == null) return;
             try
             {
+                var cam = UnityEngine.Object.FindObjectOfType<MapCamera>();
+                if (cam != null) cam.SetFollowTarget(null);
                 var mgr = TileMgr() ?? UnityEngine.Object.FindObjectOfType<WarTileManager>();
                 if (mgr != null) mgr.LookAtTile(tile);
             }
             catch { }
-            try
-            {
-                var cam = UnityEngine.Object.FindObjectOfType<MapCamera>();
-                if (cam != null) cam.SetFollowTarget(tile.transform);
-            }
-            catch { }
-            MelonLogger.Msg("[ZTABLE] Camera followed enemy movement to " + (tile.gameObject != null ? tile.gameObject.name : "tile") + ".");
+            MelonLogger.Msg("[ZTABLE] Camera followed action to " + (tile.gameObject != null ? tile.gameObject.name : "tile") + ".");
         }
 
         private static void DeselectCurrentUnit()
@@ -4570,6 +4718,8 @@ namespace GreatZilleSolution
                 {
                     // Phase I ended with partial gains -> Advance to Phase II via Mave Nortus Field HQ!
                     MelonLogger.Msg($"[ZTABLE] Phase I complete ({summary}). Transitioning to Mave Nortus Frontline HQ...");
+                    SavePhaseBoardState();
+                    ZilleCampaignState.Phase1Finished = true;
                     try { DialogueHelper.ShowAlert("Phase I Complete: Convening at Mave Nortus HQ..."); } catch { }
                     try { WarOperationZilleManager.TriggerMaveNortusHQ(); } catch { }
                 }
@@ -4650,7 +4800,7 @@ namespace GreatZilleSolution
             }
         }
 
-        private static void ShowProfileChrome()
+        public static void ShowProfileChrome()
         {
             var cornerPanels = Resources.FindObjectsOfTypeAll<BottomLeftPanel>();
             if (cornerPanels != null)
@@ -4663,14 +4813,29 @@ namespace GreatZilleSolution
                 }
             }
             var all = Resources.FindObjectsOfTypeAll<ProfileHUDPanel>();
-            if (all == null) return;
-            for (int i = 0; i < all.Length; i++)
+            if (all != null)
             {
-                var hud = all[i];
-                if (hud == null || !hud.gameObject.scene.IsValid()) continue;
-                if (!hud.gameObject.activeSelf) hud.gameObject.SetActive(true);
+                for (int i = 0; i < all.Length; i++)
+                {
+                    var hud = all[i];
+                    if (hud == null || !hud.gameObject.scene.IsValid()) continue;
+                    if (!hud.gameObject.activeSelf) hud.gameObject.SetActive(true);
+                }
+            }
+            var portraits = Resources.FindObjectsOfTypeAll<PortraitPanel>();
+            if (portraits != null)
+            {
+                for (int i = 0; i < portraits.Length; i++)
+                {
+                    var p = portraits[i];
+                    if (p == null || !p.gameObject.scene.IsValid()) continue;
+                    if (!p.gameObject.activeSelf) p.gameObject.SetActive(true);
+                    var frame = p.transform.parent;
+                    if (frame != null && !frame.gameObject.activeSelf) frame.gameObject.SetActive(true);
+                }
             }
             _chromeTries = 0;
+            _chromeHidden = false;
         }
 
         /// <summary>Hover shows the Pales stat card. The unit symbol stays only while the unit is selected and the cursor is elsewhere.</summary>
@@ -4773,7 +4938,7 @@ namespace GreatZilleSolution
             // NEVER grant action points during enemy moves, combat or enemy turn!
             if (IsEnemyTurnActive() || flow.IsDisplayingEnemyMoves() || _enemyRunning) return;
 
-            if (!_pointsGranted || flow.GetCurrentActionPoints() <= 0)
+            if (!_pointsGranted)
             {
                 try { flow.currentActionPoints = want; } catch { }
                 _pointsGranted = true;
@@ -4797,7 +4962,7 @@ namespace GreatZilleSolution
 
         public static bool IsPlayerUnit(WarUnitTypeData u)
         {
-            if (u == null || u.IsCity()) return false;
+            if (u == null || u.IsCity() || IsAirUnit(u)) return false;
             var a = u.unitAlignment;
             return a == WarUnitTypeData.UnitAlignment.RizianArmy ||
                    a == WarUnitTypeData.UnitAlignment.HouseToras ||
@@ -4805,7 +4970,7 @@ namespace GreatZilleSolution
                    a == WarUnitTypeData.UnitAlignment.HouseSazon;
         }
 
-        /// <summary>Ensures every player unit type (infantry, tanks, support, militia, mountain, paratroopers, marines, flagship, submarines, military ships, house guards) is fully unlocked and available in the deployment panel.</summary>
+        /// <summary>Ensures player unit pool reflects campaign inventory without artificially boosting special forces or injecting air units.</summary>
         public static void EnsurePlayerPool()
         {
             var all = Resources.FindObjectsOfTypeAll<WarUnitTypeData>();
@@ -4821,24 +4986,10 @@ namespace GreatZilleSolution
                 }
             }
 
-            // Ensure ample available pool for every Rizian unit type
-            FloorAnyUnit("infantry", 16);
-            FloorAnyUnit("armor", 4);
-            FloorAnyUnit("tank", 4);
-            FloorAnyUnit("support", 4);
-            FloorAnyUnit("militia", 6);
-            FloorAnyUnit("mountain", 4);
-            FloorAnyUnit("paratrooper", 4);
-            FloorAnyUnit("marine", 4);
-            FloorAnyUnit("azaro", 4);
-            FloorAnyUnit("sazon", 4);
-            FloorAnyUnit("toras", 4);
-            FloorAnyUnit("flagship", 1);
-            FloorAnyUnit("submarine", 4);
-            FloorAnyUnit("militaryship", 4);
-            FloorAnyUnit("ship", 4);
+            // Ensure baseline standard infantry so the frontline border can always be manned
+            FloorAnyUnit("infantry", 12);
 
-            // Register missing player units into WarDeploymentPanel.availableDeploymentUnits
+            // Register owned player units into WarDeploymentPanel.availableDeploymentUnits
             var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
             if (panel != null)
             {
@@ -4855,12 +5006,14 @@ namespace GreatZilleSolution
                 for (int i = 0; i < all.Length; i++)
                 {
                     var u = all[i];
-                    if (!IsPlayerUnit(u)) continue;
+                    if (!IsPlayerUnit(u) || IsAirUnit(u) || u.IsCity()) continue;
+                    // Only include units the player actually possesses in the campaign
+                    if (u.UnitTotalCount <= 0) continue;
 
                     if (existing.Add(u.name))
                     {
                         panel.availableDeploymentUnits.Add(u);
-                        MelonLogger.Msg($"[ZTABLE] Injected unit '{u.name}' ({u.UnitName}) into deployment panel.");
+                        MelonLogger.Msg($"[ZTABLE] Injected available unit '{u.name}' ({u.UnitName}) total={u.UnitTotalCount}.");
                     }
                 }
 
@@ -4893,6 +5046,7 @@ namespace GreatZilleSolution
         /// <summary>The native Start button stays locked until every Rizian border province has a land unit. Place them through the deployment panel so the count and the refund list stay honest.</summary>
         private static void FillFrontlineFromPanel()
         {
+            if (ZilleCampaignState.CurrentPhaseNumber == 2) return;
             if (_frontFilled || _root == null) return;
             var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
             if (panel == null || !panel.IsShowing()) return;
@@ -4924,6 +5078,11 @@ namespace GreatZilleSolution
         /// <summary>Places the selected v13 Wehlen preset. One unit per province, never on a city, never on a Rizia ship sea.</summary>
         private static void PlaceV13Deployment()
         {
+            if (ZilleCampaignState.CurrentPhaseNumber == 2)
+            {
+                _garrisonsPlaced = true;
+                return;
+            }
             if (ZilleDeployment.Units.Count == 0)
             {
                 if (_warnedMissing.Add("no-deployment"))

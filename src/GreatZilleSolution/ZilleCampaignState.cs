@@ -86,6 +86,7 @@ namespace GreatZilleSolution
         public static ZilleWarOutcome Outcome { get; set; } = ZilleWarOutcome.None;
         public static bool IsIndependentZilleAgreed { get; set; } = false;
         public static int CurrentPhaseNumber { get; set; } = 1;
+        public static bool Phase1Finished { get; set; } = false;
         public static int StaffVictoryPoints { get; set; } = 0;
 
         public static void SetOperationVariant(ZilleOperationVariant variant)

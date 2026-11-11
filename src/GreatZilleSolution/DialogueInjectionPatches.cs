@@ -540,6 +540,15 @@ namespace GreatZilleSolution
                 if (tile != null)
                 {
                     ZilleWarTable.RecordDefenderStartingTile(attacker, defender, tile);
+                    ZilleWarTable.ShowEnemyMove(tile);
+                }
+            }
+            else if (attacker != null)
+            {
+                var tile = attacker.GetCurrentWarTile();
+                if (tile != null)
+                {
+                    ZilleWarTable.ShowEnemyMove(tile);
                 }
             }
         }
@@ -691,6 +700,8 @@ namespace GreatZilleSolution
             return false;
         }
 
+        private static float _lastEndTurnClickTime;
+
         public static bool EndWarTurnPrefix()
         {
             if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
@@ -704,15 +715,24 @@ namespace GreatZilleSolution
             {
                 flow.currentActionPoints = 0;
             }
+            ZilleWarTable.MarkEnemyTurnStarted();
             return true;
         }
 
         public static bool OnWarHUDButtonClickPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving() || (Time.unscaledTime - _lastEndTurnClickTime < 2.0f && _lastEndTurnClickTime > 0f))
             {
                 return false;
             }
+
+            _lastEndTurnClickTime = Time.unscaledTime;
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null)
+            {
+                flow.currentActionPoints = 0;
+            }
+            ZilleWarTable.MarkEnemyTurnStarted();
             return true;
         }
 
@@ -728,6 +748,7 @@ namespace GreatZilleSolution
             {
                 flow.currentActionPoints = 0;
             }
+            ZilleWarTable.MarkEnemyTurnStarted();
             return true;
         }
 
@@ -1475,8 +1496,26 @@ namespace GreatZilleSolution
                         __instance.subtitleText.text = "Military Operation";
                     }
 
-                    EnsureButtonExists(__instance, "Operation: Righteous Sword - Phase I", "Invasion of Zille", null, () => {
-                        MelonLogger.Msg("[TOKEN PANEL] Operation: Righteous Sword opens the Zille war table.");
+                    if (ZilleCampaignState.CurrentPhaseNumber == 1 && ZilleCampaignState.Phase1Finished)
+                    {
+                        // Phase 1 finished, waiting for Phase 2 briefing / orders
+                        EnsureButtonExists(__instance, "Phase I Concluded", "Report to Mave Nortus Field HQ", null, () => {
+                            DialogueHelper.ShowAlert("Phase I has concluded. Convene at Mave Nortus HQ to issue Phase II directives.");
+                            WarOperationZilleManager.TriggerMaveNortusHQ();
+                        });
+                        return;
+                    }
+
+                    string opButtonTitle = ZilleCampaignState.CurrentPhaseNumber == 2
+                        ? "Operation: Righteous Sword - Phase II"
+                        : "Operation: Righteous Sword - Phase I";
+
+                    string opButtonSub = ZilleCampaignState.CurrentPhaseNumber == 2
+                        ? "Breakthrough Campaign"
+                        : "Invasion of Zille";
+
+                    EnsureButtonExists(__instance, opButtonTitle, opButtonSub, null, () => {
+                        MelonLogger.Msg($"[TOKEN PANEL] {opButtonTitle} opens the Zille war table.");
                         WarOperationZilleManager.EnterZilleWarTheatre();
                     });
                 }
