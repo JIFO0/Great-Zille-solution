@@ -68,7 +68,14 @@ namespace GreatZilleSolution
         {
             try
             {
-                return DialogueLua.GetVariable(name).asBool;
+                var v = DialogueLua.GetVariable(name);
+                if (v != null && v.asBool) return true;
+                if (!name.StartsWith("RiziaDLC.", StringComparison.OrdinalIgnoreCase))
+                {
+                    var v2 = DialogueLua.GetVariable("RiziaDLC." + name);
+                    if (v2 != null && v2.asBool) return true;
+                }
+                return false;
             }
             catch
             {
@@ -80,7 +87,14 @@ namespace GreatZilleSolution
         {
             try
             {
-                return DialogueLua.GetVariable(name).asInt;
+                var v = DialogueLua.GetVariable(name);
+                if (v != null && v.asInt != 0) return v.asInt;
+                if (!name.StartsWith("RiziaDLC.", StringComparison.OrdinalIgnoreCase))
+                {
+                    var v2 = DialogueLua.GetVariable("RiziaDLC." + name);
+                    if (v2 != null && v2.asInt != 0) return v2.asInt;
+                }
+                return v != null ? v.asInt : 0;
             }
             catch
             {

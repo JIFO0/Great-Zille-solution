@@ -135,7 +135,6 @@ namespace GreatZilleSolution
                 }
             }
             if (!state) return true;
-            if (DeploymentPanelShowing()) return false;
             if (ZilleWarTable.EnemyMayAct()) return false;
             try
             {
@@ -148,7 +147,6 @@ namespace GreatZilleSolution
 
         public static bool BlockManagerSelectPrefix()
         {
-            if (DeploymentPanelShowing()) return false;
             if (ZilleWarTable.EnemyMayAct()) return false;
             return true;
         }
@@ -704,13 +702,13 @@ namespace GreatZilleSolution
 
         public static bool EndWarTurnPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null && flow.IsDisplayingEnemyMoves())
             {
-                MelonLogger.Msg("[ZTABLE] End turn blocked: enemy turn is active.");
+                MelonLogger.Msg("[ZTABLE] End turn blocked: enemy moves are currently displaying.");
                 return false;
             }
 
-            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
             if (flow != null)
             {
                 flow.currentActionPoints = 0;
@@ -721,34 +719,50 @@ namespace GreatZilleSolution
 
         public static bool OnWarHUDButtonClickPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving() || (Time.unscaledTime - _lastEndTurnClickTime < 2.0f && _lastEndTurnClickTime > 0f))
+            if (!ZilleWarTable.ScenarioStarted)
+            {
+                // Operation Start button during deployment phase
+                return true;
+            }
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null && flow.IsDisplayingEnemyMoves())
+            {
+                return false;
+            }
+
+            if (Time.unscaledTime - _lastEndTurnClickTime < 1.0f && _lastEndTurnClickTime > 0f)
             {
                 return false;
             }
 
             _lastEndTurnClickTime = Time.unscaledTime;
-            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
             if (flow != null)
             {
                 flow.currentActionPoints = 0;
             }
-            ZilleWarTable.MarkEnemyTurnStarted();
+            // Do not set MarkEnemyTurnStarted here — vanilla OnButtonClick calls EndWarTurn() which sets it in EndWarTurnPrefix
             return true;
         }
 
         public static bool OnWarHUDScriptEndTurnPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
+            if (!ZilleWarTable.ScenarioStarted)
+            {
+                return true;
+            }
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null && flow.IsDisplayingEnemyMoves())
             {
                 return false;
             }
 
-            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
             if (flow != null)
             {
                 flow.currentActionPoints = 0;
             }
-            ZilleWarTable.MarkEnemyTurnStarted();
+            // Do not set MarkEnemyTurnStarted here — EndWarTurnPrefix sets it when EndWarTurn executes
             return true;
         }
 

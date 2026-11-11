@@ -726,7 +726,7 @@ namespace GreatZilleSolution
             }
 
             int ok = 0;
-            bool deploying = DeploymentPanelOpen();
+            bool deploying = !ScenarioStarted && DeploymentPanelOpen();
             foreach (var td in cfg.Tiles)
             {
                 if (!resolved.TryGetValue(td.Id, out var wt)) continue;
@@ -1052,6 +1052,10 @@ namespace GreatZilleSolution
         public static void MarkOperationBegun()
         {
             ScenarioStarted = true;
+            _enemyTurnActive = false;
+            _enemyTurnObserved = false;
+            _enemySince = 0f;
+            _pointsGranted = false;
             try
             {
                 if (_tokenMgr == null) _tokenMgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
@@ -1290,7 +1294,7 @@ namespace GreatZilleSolution
             var m = tb != null && tb.Instance != null ? tb.Instance : rend.material;
             if (tb != null && tb.Instance == null) tb.Instance = m;
             if (m == null || !m.HasProperty("_Tile_Colour")) return;
-            bool deploying = DeploymentPanelOpen();
+            bool deploying = !ScenarioStarted && DeploymentPanelOpen();
             var token = wt.GetCurrentToken();
             bool occupied = token != null;
             bool fighting = IsMainFight(wt);
@@ -3581,6 +3585,19 @@ namespace GreatZilleSolution
                     _enemySince = 0f;
                     HandTurnBack(flow);
                 }
+                else if (_enemyTurnActive && !AnyLiveBattle() && _enemySince > 0f && Time.unscaledTime - _enemySince > 1.5f)
+                {
+                    // Enemy phase had no pending moves or battles to display; return turn to player
+                    _enemySince = 0f;
+                    HandTurnBack(flow);
+                }
+                else if (_enemyTurnActive && _enemySince > 0f && Time.unscaledTime - _enemySince > 20f)
+                {
+                    // Watchdog fallback if battles hang > 20s
+                    MelonLogger.Warning("[ZTABLE] Enemy phase watchdog timeout (20s). Restoring turn to player.");
+                    _enemySince = 0f;
+                    HandTurnBack(flow);
+                }
             }
         }
 
@@ -4964,82 +4981,106 @@ namespace GreatZilleSolution
         {
             if (u == null || u.IsCity() || IsAirUnit(u)) return false;
             var a = u.unitAlignment;
-            return a == WarUnitTypeData.UnitAlignment.RizianArmy ||
-                   a == WarUnitTypeData.UnitAlignment.HouseToras ||
-                   a == WarUnitTypeData.UnitAlignment.HouseAzaro ||
-                   a == WarUnitTypeData.UnitAlignment.HouseSazon;
+            if (a == WarUnitTypeData.UnitAlignment.RizianArmy ||
+                a == WarUnitTypeData.UnitAlignment.HouseToras ||
+                a == WarUnitTypeData.UnitAlignment.HouseAzaro ||
+                a == WarUnitTypeData.UnitAlignment.HouseSazon)
+                return true;
+
+            string alignStr = a.ToString();
+            return alignStr.IndexOf("GoldenGuard", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        /// <summary>Ensures player unit pool reflects campaign inventory without artificially boosting special forces or injecting air units.</summary>
+        private static bool IsPlayerSideUnitIncludingAir(WarUnitTypeData u)
+        {
+            if (u == null || u.IsCity()) return false;
+            var a = u.unitAlignment;
+            if (a == WarUnitTypeData.UnitAlignment.RizianArmy ||
+                a == WarUnitTypeData.UnitAlignment.HouseToras ||
+                a == WarUnitTypeData.UnitAlignment.HouseAzaro ||
+                a == WarUnitTypeData.UnitAlignment.HouseSazon)
+                return true;
+
+            string alignStr = a.ToString();
+            return alignStr.IndexOf("GoldenGuard", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private static bool IsDeployablePanelUnit(WarUnitTypeData u)
+        {
+            if (!IsPlayerUnit(u)) return false;
+            string n = (u.name + " " + (u.UnitName ?? "")).ToLowerInvariant();
+            // Paratroopers and Marines are ability-only special units (Paradrop / Naval Invasion), never placed from Deployment Panel
+            if (n.Contains("paratroop") || n.Contains("airborne")) return false;
+            if (n.Contains("marine") && !n.Contains("submarine")) return false;
+            return true;
+        }
+
+        private static int ResolveStateMilitaryCount(WarUnitTypeData u)
+        {
+            string n = (u.name + " " + (u.UnitName ?? "")).ToLowerInvariant();
+            if (n.Contains("bomber")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Bomber_Total");
+            if (n.Contains("fighter")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Fighter_Total");
+            if (n.Contains("flagship")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Flagship_Total");
+            if (n.Contains("submarine")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Submarine_Total");
+            if (n.Contains("militaryship") || n.Contains("ship") || n.Contains("destroyer") || n.Contains("battleship"))
+                return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Ship_Total");
+            if (n.Contains("azaro")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Azaro_Total");
+            if (n.Contains("sazon")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Sazon_Total");
+            if (n.Contains("toras")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Toras_Total");
+            if (n.Contains("golden")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_GoldenGuard_Total");
+            if (n.Contains("mercenary")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Mercenary_Total");
+            if (n.Contains("tank") || n.Contains("armor")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Tank_Total");
+            if (n.Contains("support")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Support_Total");
+            if (n.Contains("mountain")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Mountaineer_Total");
+            if (n.Contains("paratroop")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Paratrooper_Total");
+            if (n.Contains("marine")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Marine_Total");
+            if (n.Contains("militia")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Militia_Total");
+            if (n.Contains("infantry")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Infantry_Total");
+            return u.UnitTotalCount;
+        }
+
+        /// <summary>Ensures player unit pool strictly reflects state military recruitment ledger without fake boosts or non-deployable cards.</summary>
         public static void EnsurePlayerPool()
         {
             var all = Resources.FindObjectsOfTypeAll<WarUnitTypeData>();
             if (all == null || all.Length == 0) return;
 
-            // Reset deployed count for all player units before scenario start
             for (int i = 0; i < all.Length; i++)
             {
                 var u = all[i];
-                if (IsPlayerUnit(u))
-                {
-                    u.UnitDeployedCount = 0;
-                }
+                if (!IsPlayerSideUnitIncludingAir(u)) continue;
+
+                u.UnitDeployedCount = 0;
+                int exactCount = Math.Max(0, ResolveStateMilitaryCount(u));
+                u.UnitTotalCount = exactCount;
+                MelonLogger.Msg($"[ZTABLE] State ledger '{u.name}' ({u.UnitName}) align={u.unitAlignment}: count={u.UnitTotalCount}");
             }
 
-            // Ensure baseline standard infantry so the frontline border can always be manned
-            FloorAnyUnit("infantry", 12);
-
-            // Register owned player units into WarDeploymentPanel.availableDeploymentUnits
+            // Rebuild WarDeploymentPanel.availableDeploymentUnits cleanly from state inventory
             var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
             if (panel != null)
             {
                 if (panel.availableDeploymentUnits == null)
                     panel.availableDeploymentUnits = new Il2CppSystem.Collections.Generic.List<WarUnitTypeData>();
 
-                var existing = new HashSet<string>();
-                for (int i = 0; i < panel.availableDeploymentUnits.Count; i++)
-                {
-                    var u = panel.availableDeploymentUnits[i];
-                    if (u != null && !string.IsNullOrEmpty(u.name)) existing.Add(u.name);
-                }
+                panel.availableDeploymentUnits.Clear();
+                var added = new HashSet<string>();
 
                 for (int i = 0; i < all.Length; i++)
                 {
                     var u = all[i];
-                    if (!IsPlayerUnit(u) || IsAirUnit(u) || u.IsCity()) continue;
-                    // Only include units the player actually possesses in the campaign
+                    if (!IsDeployablePanelUnit(u)) continue;
                     if (u.UnitTotalCount <= 0) continue;
 
-                    if (existing.Add(u.name))
+                    if (added.Add(u.name))
                     {
                         panel.availableDeploymentUnits.Add(u);
-                        MelonLogger.Msg($"[ZTABLE] Injected available unit '{u.name}' ({u.UnitName}) total={u.UnitTotalCount}.");
+                        MelonLogger.Msg($"[ZTABLE] Deployment panel unit '{u.name}' ({u.UnitName}): {u.UnitTotalCount}.");
                     }
                 }
 
                 try { panel.Setup(); } catch { }
                 try { panel.UpdateDeployingUnitCount(); } catch { }
-            }
-        }
-
-        private static void FloorAnyUnit(string nameNeedle, int want)
-        {
-            var types = UnitTypes();
-            for (int i = 0; i < types.Count; i++)
-            {
-                var u = types[i];
-                if (!IsPlayerUnit(u)) continue;
-
-                string n = (u.name + " " + (u.UnitName ?? "")).ToLowerInvariant();
-                if (n.Contains(nameNeedle.ToLowerInvariant()))
-                {
-                    int available = u.UnitTotalCount - u.UnitDeployedCount;
-                    if (available < want)
-                    {
-                        u.UnitTotalCount += (want - available);
-                        MelonLogger.Msg($"[ZTABLE] {u.name} pool boosted to {u.UnitTotalCount}.");
-                    }
-                }
             }
         }
 

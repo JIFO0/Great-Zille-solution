@@ -648,9 +648,52 @@ namespace GreatZilleSolution
 
         // ================= SPAWN / FOCUS WAR EVENT AT ZILLE =================
 
+        public static void SuppressPalesWarMarker()
+        {
+            try
+            {
+                var allObjs = Resources.FindObjectsOfTypeAll<GameObject>();
+                if (allObjs == null) return;
+                for (int i = 0; i < allObjs.Length; i++)
+                {
+                    var go = allObjs[i];
+                    if (go == null || !go.scene.IsValid()) continue;
+                    string n = go.name;
+                    if (n.Contains("InvasionOfPales") || (n.Contains("Pales") && n.Contains("Event Variant")))
+                    {
+                        if (go.activeSelf)
+                        {
+                            go.SetActive(false);
+                            MelonLogger.Msg($"[WAR SHADOW] Suppressed Pales war marker: '{go.name}' at {go.transform.position}.");
+                        }
+                        var rends = go.GetComponentsInChildren<Renderer>(true);
+                        for (int r = 0; r < rends.Length; r++)
+                        {
+                            if (rends[r] != null && rends[r].enabled)
+                            {
+                                rends[r].enabled = false;
+                            }
+                        }
+                    }
+                    else if (n.Contains("Pales") && n.ToLowerInvariant().Contains("shadow"))
+                    {
+                        if (go.activeSelf) go.SetActive(false);
+                        var rends = go.GetComponentsInChildren<Renderer>(true);
+                        for (int r = 0; r < rends.Length; r++)
+                            if (rends[r] != null && rends[r].enabled) rends[r].enabled = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[WAR SHADOW] SuppressPalesWarMarker: " + ex.Message);
+            }
+        }
+
         public static bool SpawnZilleWarEventToken()
         {
             RegisterNativeZilleEntities();
+            SuppressPalesWarMarker();
 
             try
             {
@@ -798,6 +841,18 @@ namespace GreatZilleSolution
                         }
 
                     }
+
+                    var zRends = _spawnedZilleWarToken.GetComponentsInChildren<Renderer>(true);
+                    for (int r = 0; r < zRends.Length; r++)
+                    {
+                        if (zRends[r] != null)
+                        {
+                            zRends[r].enabled = true;
+                            zRends[r].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                            zRends[r].receiveShadows = true;
+                        }
+                    }
+                    SuppressPalesWarMarker();
 
                     DialogueHelper.ShowAlert("[Zille] War token and Operation Righteous Sword Phase I are active in Zille.");
                     return true;
@@ -1268,8 +1323,16 @@ namespace GreatZilleSolution
             _transitionTimer = 0.5f;
         }
 
+        private static float _nextPalesCheckTime;
+
         public static void CheckScheduledTransition(float deltaTime)
         {
+            if (CurrentTheatre == ActiveWarTheatre.Civilian && Time.unscaledTime > _nextPalesCheckTime)
+            {
+                _nextPalesCheckTime = Time.unscaledTime + 2.0f;
+                SuppressPalesWarMarker();
+            }
+
             if (!_transitionScheduled) return;
 
             _transitionTimer -= deltaTime;
@@ -1850,6 +1913,9 @@ namespace GreatZilleSolution
                 try { Panels.Instance?.WarDeploymentPanel?.Hide(); } catch { }
                 try { Panels.Instance?.ContinueButtonPanel?.Hide(); } catch { }
                 try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllInstances(); } catch { }
+
+                // Suppress Pales invasion marker and orphaned shadow
+                SuppressPalesWarMarker();
 
                 // Restore civilian toggles
                 SetCivilianTogglesVisible(true);
