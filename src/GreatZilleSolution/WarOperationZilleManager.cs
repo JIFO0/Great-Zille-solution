@@ -87,30 +87,30 @@ namespace GreatZilleSolution
                 {
                     case ZilleWarOutcome.TotalFiasco:
                         ZilleCampaignState.IsBrenasLost = true;
-                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
-                        DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReferendum_Lost", true);
                         DialogueHelper.SetVariable("Brenas_Lost_To_Wehlen", true);
-                        DialogueHelper.SetVariable("Country_MilitaryCoupHappens", true);
+                        DialogueHelper.SetVariable("RiziaDLC.Azaro_HasPowerToCoup", true);
                         break;
                     case ZilleWarOutcome.TacticalDefeat:
-                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
-                        DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReferendum_Lost", true);
                         break;
                     case ZilleWarOutcome.BloodyStalemate:
-                        DialogueHelper.SetVariable("ZilleReturn_Success", false);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", false);
                         DialogueHelper.SetVariable("Zille_Stalemate", true);
                         break;
                     case ZilleWarOutcome.DecisiveVictory:
-                        DialogueHelper.SetVariable("ZilleReturn_Success", true);
-                        DialogueHelper.SetVariable("_Zille_OwnState", 1);
-                        DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
-                        DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", true);
+                        DialogueHelper.SetVariable("RiziaDLC.Zille_PromisedToHouseToras", true);
+                        DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Wehlen_Hostile", true);
+                        DialogueHelper.SetVariable("RiziaDLC.MapLayer_Zille_Brenas", true);
                         break;
                     case ZilleWarOutcome.OverwhelmingTriumph:
-                        DialogueHelper.SetVariable("ZilleReturn_Success", true);
-                        DialogueHelper.SetVariable("_Zille_OwnState", 1);
-                        DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
-                        DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                        DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", true);
+                        DialogueHelper.SetVariable("RiziaDLC.Zille_PromisedToHouseToras", true);
+                        DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Wehlen_Hostile", true);
+                        DialogueHelper.SetVariable("RiziaDLC.MapLayer_Zille_Brenas", true);
                         DialogueHelper.SetVariable("Grodzizg_FreeCity", true);
                         break;
                 }
@@ -146,7 +146,9 @@ namespace GreatZilleSolution
                         if (!DialogueHelper.GetBoolVariable("Country_HouseAzaro_Enemy")) score += 1;
                         break;
                     case ZilleStaffPlan.Ark:
-                        int fleet = DialogueHelper.GetIntVariable("Army_Unit_Battleship_Total") + DialogueHelper.GetIntVariable("Army_Unit_Submarine_Total");
+                        int fleet = DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Ship_Total")
+                                  + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Flagship_Total")
+                                  + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Submarine_Total");
                         if (fleet >= 2) score += 2;
                         if (ZilleCampaignState.IsNavalBlockadeActive) score += 1;
                         break;
@@ -156,8 +158,10 @@ namespace GreatZilleSolution
                         break;
                 }
 
-                string logistics = DialogueHelper.GetStringVariable("Zille_War_Logistics");
-                if (logistics == "Sazon" || logistics == "Azaro") score += 1;
+                string logistics = DialogueHelper.GetStringVariable("Zille_Logistics_Route");
+                if (string.IsNullOrEmpty(logistics)) logistics = DialogueHelper.GetStringVariable("Zille_Logistics_House");
+                if (string.IsNullOrEmpty(logistics)) logistics = DialogueHelper.GetStringVariable("Zille_War_Logistics");
+                if (logistics == "Sazon" || logistics == "Azaro" || logistics == "Compromise") score += 1;
 
                 if (ZilleCampaignState.IsLespiaPactAccepted) score += 2;
                 if (ZilleCampaignState.IsDerdiaHybridSupportActive) score += 1;
@@ -218,10 +222,10 @@ namespace GreatZilleSolution
 
             try
             {
-                DialogueHelper.SetVariable("ZilleReturn_Success", true);
-                DialogueHelper.SetVariable("_Zille_OwnState", 1);
-                DialogueHelper.SetVariable("Zille_PromisedToHouseToras", true);
-                DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", true);
+                DialogueHelper.SetVariable("RiziaDLC.Zille_PromisedToHouseToras", true);
+                DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Wehlen_Hostile", true);
+                DialogueHelper.SetVariable("RiziaDLC.MapLayer_Zille_Brenas", true);
             }
             catch (Exception ex)
             {
@@ -245,8 +249,8 @@ namespace GreatZilleSolution
 
             try
             {
-                DialogueHelper.SetVariable("ZilleReturn_Success", false);
-                DialogueHelper.SetVariable("ZilleReferendum_Lost", true);
+                DialogueHelper.SetVariable("RiziaDLC.ZilleReturn_Success", false);
+                DialogueHelper.SetVariable("RiziaDLC.ZilleReferendum_Lost", true);
                 if (brenasLost) DialogueHelper.SetVariable("Brenas_Lost_To_Wehlen", true);
                 if (motherDied) DialogueHelper.SetVariable("QueenMother_Estela_Dead", true);
             }
@@ -384,9 +388,9 @@ namespace GreatZilleSolution
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaTalks", "Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "Zille/DerdiaTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_LespiaTalks", "Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "Zille/LespiaTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_RumburgTalks", "Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "Zille/RumburgTalks");
-                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/PreNegotiationsBriefing");
-                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarSmolakParley", "Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "Zille/SmolakFinalParley");
-                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/PeaceTreaty");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/WarPreNegotiationsBriefing");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarSmolakParley", "Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "Zille/WarSmolakFinalParley");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/WarPeaceTreaty");
 
                 // 3. Register WarFragmentData for Zille invasion in EntityDataManager
                 var allWarList = EntityDataManager.AllWarFragmentsData ?? GetEntityBackingList<WarFragmentData>("warFragmentData");
@@ -1274,6 +1278,31 @@ namespace GreatZilleSolution
                         DialogueManager.StartConversation(dialogueTitle);
                     }
 
+                    // Populate conversant portraits so all characters show properly in custom scenes
+                    var chars = EntityDataManager.CharactersData;
+                    if (chars != null)
+                    {
+                        string[] portraitNames = new[] {
+                            "Titus", "Lucita", "Hugo", "Elena", "Laurento", "Taddeus",
+                            "Manus", "Angelica", "Leona", "Carlos", "Sal", "Smolak",
+                            "Alvarez", "Hegel", "Beatrice", "Azmal", "Vina", "Estela"
+                        };
+                        for (int i = 0; i < chars.Count; i++)
+                        {
+                            var ch = chars[i];
+                            if (ch == null) continue;
+                            string cName = ch.CharacterName ?? ch.NameInDatabase ?? "";
+                            foreach (var p in portraitNames)
+                            {
+                                if (cName.IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)
+                                {
+                                    convPanel.AddConversant(ch);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     convPanel.Show();
                     MelonLogger.Msg($"[WAR ENGINE] Triggered conversation '{dialogueTitle}' ({nameInDb})!");
                     return true;
@@ -1307,9 +1336,10 @@ namespace GreatZilleSolution
         {
             MelonLogger.Msg("[WAR ENGINE] Returning to civilian map for Wartime Peace Parley with Wiktor Smolak...");
             ReturnToCivilianMap();
-            TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/SmolakFinalParley", () => {
+            ZilleCampaignState.SyncToLua();
+            TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
                 MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
-                TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/PeaceTreaty", () => {
+                TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
                     MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
                 });
             });
@@ -1813,12 +1843,16 @@ namespace GreatZilleSolution
                     var flow = Managers.Instance?.WarFlowManager ?? UnityEngine.Object.FindObjectOfType<WarFlowManager>();
                     if (flow != null)
                     {
+                        flow.SetWarState(WarFlowManager.WarState.Operation);
+                        flow.currentActionPoints = 5;
                         flow.PlayerTurn();
                     }
                     var hud2 = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
                     if (hud2 != null)
                     {
                         if (!hud2.gameObject.activeSelf) hud2.gameObject.SetActive(true);
+                        try { hud2.Setup(WarHUDPanel.WarHUDButtonState.EndTurn); } catch { }
+                        try { hud2.SetInteractable(true); } catch { }
                         hud2.Show();
                     }
                     _deploymentOpened = true;
@@ -1838,11 +1872,17 @@ namespace GreatZilleSolution
                 ZilleWarTable.EnsurePlayerPool();
                 try { deployPanel.Setup(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Deployment Setup: " + ex.Message); }
                 try { deployPanel.Show(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Deployment Show: " + ex.Message); }
+                var flowInit = Managers.Instance?.WarFlowManager ?? UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                if (flowInit != null && flowInit.GetWarState() != WarFlowManager.WarState.InitialDeployment)
+                {
+                    try { flowInit.SetWarState(WarFlowManager.WarState.InitialDeployment); } catch { }
+                }
                 var hud = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
                 if (hud != null && !ZilleWarTable.ScenarioStarted)
                 {
                     if (!hud.gameObject.activeSelf) hud.gameObject.SetActive(true);
                     try { hud.Setup(WarHUDPanel.WarHUDButtonState.OperationStart); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Start button setup: " + ex.Message); }
+                    try { hud.SetInteractable(true); } catch { }
                     try { hud.Show(); } catch (Exception ex) { MelonLogger.Warning("[WAR THEATRE] Start button show: " + ex.Message); }
                 }
                 var portraits = UnityEngine.Object.FindObjectsOfType<PortraitPanel>();

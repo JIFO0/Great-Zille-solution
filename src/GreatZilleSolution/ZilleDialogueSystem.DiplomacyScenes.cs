@@ -11,8 +11,10 @@ namespace GreatZilleSolution
     {
         // =========================================================================
         // SCENE 6: Turn_Zille_DerdiaTalks (ID 9995) - TALKS WITH DERDIA
-        // Modeled on: 377_FPnT_DerdiaNegotiations, 436_Morella_Derdia_Mediation
-        // Grand Wiseman Jorga Azmal, Titus Gordion, Archpriest Sal Ignacius.
+        // Fixed: Supreme Wiseman Jorga Azmal, Silver Garrison outside Naeal,
+        // Grand Wiseman Sal Ignacius (no pectoral cross/crossing himself!),
+        // real Golcondist pilgrimage stakes (lifting border ban & Plavo/Zille access),
+        // Sal/Titus arrest checks & pre-existing Derdia hostility checks.
         // =========================================================================
         public static void RegisterDerdiaTalks(DialogueDatabase db)
         {
@@ -33,78 +35,124 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Derdia_Intro_1",
-                "The private royal telecommunications chamber was heavy with the aroma of burning sandalwood and frankincense. On the encrypted high-frequency transceiver from Ozkaban, the resonant, gravelly voice of Grand Wiseman Jorga Azmal cut through the static with solemn majesty.", 2);
+                "The private royal telecommunications chamber was heavy with the aroma of burning sandalwood and frankincense. Over the encrypted high-frequency transceiver from the Silver Garrison outside Naeal, the resonant baritone of Supreme Wiseman Jorga Azmal cut through the static with austere authority.", -1);
 
             AddLine(conv, 2, AzmalId, RomusId, "Azmal_Opening_Greeting",
-                "Peace and the fire of Saint Dast be upon you, King Romus of Rizia. The desert winds carry whispers of iron and smoke rising from the southern frontier. You prepare to strike the butcher of Wehlen, do you not?", 3);
+                "May God's light guide you, Your Majesty. The mountain winds carry whispers of iron and smoke rising along Wehlen's borders. You prepare to strike the butcher of Wraclawitz, do you not?", 3,
+                "Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] ~= true");
+
+            AddLine(conv, 102, AzmalId, RomusId, "Azmal_Opening_Hostile",
+                "I am surprised the King of Rizia dares call the Silver Garrison after all the insults our faithful have endured, Your Majesty. Yet even an estranged neighbor becomes useful when Wiktor Smolak stands across the border. Speak quickly.", 3,
+                "Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] == true");
+
+            AddLink(conv, 1, 2);
+            AddLink(conv, 1, 102);
 
             var azmalHub = AddLine(conv, 3, RomusId, AzmalId, "Romus_Azmal_Open_Prompt",
-                "I leaned toward the gilded receiver, measuring my words before the spiritual leader of Derdia.");
+                "I leaned toward the gilded receiver, measuring my words before the Supreme Wiseman of Derdia.");
 
-            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Appeal to shared faith & justice
-            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11)); // Pragmatic military alliance
-            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12)); // Question Azmal's motives
+            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
+            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
+            azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12));
 
             AddChoice(conv, 10, AzmalId, "Choice_Faith_Justice",
-                "\"Smolak has desecrated our sacred heritage and persecuted our Nurist brothers in Zille. Justice demands action.\"",
-                "Smolak has desecrated our ancient sacred heritage and tormented the faithful of Zille for thirty years. Justice and faith demand that the sword be drawn against him.", 20,
+                "\"Smolak has persecuted the faithful and oppressed Bludish and Rizian believers alike. Justice demands action.\"",
+                "Smolak has trampled sacred law and tormented believers across Wehlen and Zille for far too long. As followers of Saint Wruhec, justice demands that the sword be drawn against him.", 20,
                 "Variable[\"Derdia_Romus_Faithful\"] = true;");
 
             AddChoice(conv, 11, AzmalId, "Choice_Military_Pragmatism",
                 "\"Wehlen is our common adversary. A coordinated strike will break his stranglehold on both our borders.\"",
-                "Wehlen is our common adversary, Wiseman Azmal. If Rizia strikes from the north and Derdia applies pressure from the south, Smolak's military apparatus will shatter under two fronts.", 20,
+                "Wehlen is our common adversary, Supreme Wiseman. If Rizia strikes Zille and the Gulf ports while Derdia applies pressure on Wehlen's southern land border, Smolak's army will crack under two fronts.", 20,
                 "Variable[\"Derdia_Romus_Pragmatic\"] = true;");
 
             AddChoice(conv, 12, AzmalId, "Choice_Question_Motives",
-                "\"What interest does Derdia possess in the liberation of Zille?\"",
-                "What interest does Derdia possess in the outcome of our conflict in Zille, Wiseman? Speak plainly.", 20,
+                "\"What interest does Derdia possess in our campaign for Zille?\"",
+                "What interest does Derdia possess in the outcome of our conflict over Zille, Supreme Wiseman? Speak plainly.", 20,
                 "Variable[\"Derdia_Romus_Cautious\"] = true;");
 
             AddLine(conv, 20, AzmalId, RomusId, "Azmal_Theological_Stakes",
-                "Know this, O King: on the eastern hills of Zille stands the ancient Sanctuary of the Martyr's Tear-a holy site revered by Golcondist pilgrims long before your ancestors forged the Crown of Rizia. For three decades, Smolak's thugs have extorted, beaten, and murdered our pilgrims seeking salvation at that shrine.", 21);
+                "Know this, Your Majesty: Smolak's regime has slaughtered Bludish Golcondists in the mountains for decades, while Rizia's own border laws have barred our pilgrims from the Archsanctuary of Plavo and the sacred shrines of our shared Nurist heritage.", -1);
 
             AddLine(conv, 21, AzmalId, RomusId, "Azmal_Offer_Proposal",
-                "If you pledge by your royal honor to protect the Golcondist faithful, to exempt our pilgrims from taxes, and to grant Derdia religious sanctuary in Zille, then three thousand holy irregulars and mountain scouts will cross Wehlen's southern border tonight. They will cut telegraph cables, burn Valdez's ammunition depots, and tie down his southern brigades in blood and fire!", 22);
+                "Pledge by your royal word to keep Rizia's borders open to Golcondist pilgrims and guarantee their safety at Plavo and the sanctuaries of liberated Zille. In return, three thousand seasoned Golcondist irregulars and mountain scouts will raid Wehlen's southern frontier—cutting telegraph lines, torching Valdez's supply depots, and tying down his reserves.", -1,
+                "Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] ~= true");
+
+            AddLine(conv, 121, AzmalId, RomusId, "Azmal_Offer_Proposal_AlreadyAllowed",
+                "You showed rare goodwill by permitting our pilgrims across your border, Your Majesty. Formalize that protection for our faithful in Plavo and liberated Zille, and three thousand Golcondist irregulars will strike Wehlen's southern frontier depots tonight.", -1,
+                "Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] == true");
+
+            AddLink(conv, 20, 21);
+            AddLink(conv, 20, 121);
 
             AddLine(conv, 22, SalId, RomusId, "Sal_Ignacius_Warning",
-                "Archpriest Sal Ignacius leaned in, clutching his golden Wruhecist pectoral cross. \"Your Majesty, tread cautiously! Granting religious concessions to Golcondist zealots in Zille will cause profound outrage among the orthodox priests of Iza and the High Clergy!\"", 23);
+                "Grand Wiseman Sal Ignacius leaned forward, his fingers tightening around his golden Six Stars medallion. \"Your Majesty, tread cautiously! Encouraging Golcondist pilgrims in Plavo and Zille will deeply unsettle the orthodox Wruhecist hierarchy!\"", -1,
+                "Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true");
+
+            AddLine(conv, 122, HugoId, RomusId, "Hugo_Clergy_Warning_NoSal",
+                "Hugo murmured beside you with furrowed brow. \"Be cautious, Romus. Opening our sanctuaries to Derdian Golcondists will provoke fierce outcry among the orthodox clergy.\"", -1,
+                "(Variable[\"RiziaDLC.Sal_Arrested\"] == true or Variable[\"RiziaDLC.Sal_Executed\"] == true) and Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
+
+            AddLine(conv, 123, LaurentoId, RomusId, "Laurento_Clergy_Warning_Fallback",
+                "Laurento whispered discreetly, \"Bear in mind, Your Majesty, that religious concessions to Derdia will draw sharp criticism from traditionalist Wruhecist leaders at home.\"", -1,
+                "(Variable[\"RiziaDLC.Sal_Arrested\"] == true or Variable[\"RiziaDLC.Sal_Executed\"] == true) and (Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
+
+            foreach (int pId in new[] { 21, 121 })
+            {
+                AddLink(conv, pId, 22);
+                AddLink(conv, pId, 122);
+                AddLink(conv, pId, 123);
+            }
 
             AddLine(conv, 23, TitusId, RomusId, "Titus_Tactical_Perspective",
-                "Titus Gordion stepped forward respectfully. \"From a military standpoint, Your Majesty, Derdian guerrilla sabotage in Valdez's rear would divert enemy reserves and grant our armored columns invaluable operational tempo.\"", 30);
+                "Titus Gordion stepped forward respectfully. \"From a military standpoint, Your Majesty, Derdian guerrilla raids across Wehlen's southern border will force General Valdez to split his reserves and leave Zille under-reinforced.\"", 30,
+                "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
+
+            AddLine(conv, 124, CarlosId, RomusId, "Carlos_Tactical_Perspective",
+                "General Carlos Azaro nodded curtly. \"Militarily, Your Majesty, Derdian raids on Wehlen's southern depots will pin down brigades Smolak would otherwise ship to Zille.\"", 30,
+                "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
+
+            foreach (int wId in new[] { 22, 122, 123 })
+            {
+                AddLink(conv, wId, 23);
+                AddLink(conv, wId, 124);
+            }
 
             var pactHub = AddLine(conv, 30, NarratorId, RomusId, "Derdia_Pact_Hub_Prompt",
-                "Wiseman Azmal awaited your verdict on the holy transceiver, the faint chanting of Derdian monks audible across the wires.");
+                "Supreme Wiseman Azmal awaited your verdict on the transceiver, the distant unison chants of the Silver Garrison audible across the line.");
 
             pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Accept Holy Coalition
             pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Pragmatic Compromise
             pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 60)); // Reject Faith Interference
 
             AddChoice(conv, 40, AzmalId, "Accept_Holy_Coalition",
-                "\"I swear by Saint Dast: The Sanctuary shall be protected, and Golcondist pilgrims shall walk unmolested in Zille.\"",
-                "I swear by Saint Dast and my royal honor: The Sanctuary of the Martyr's Tear shall be protected under the Crown's direct aegis, and Golcondist pilgrims will enjoy total freedom of worship in liberated Zille. Let your holy fighters strike!", 41,
-                "ZilleCampaignState.IsDerdiaHybridSupportActive = true; Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] + 2;");
+                "\"I pledge by Saint Wruhec: Golcondist pilgrims shall have safe passage to Plavo and liberated Zille.\"",
+                "I pledge by Saint Wruhec and my royal honor: Rizia's borders will remain open to Golcondist pilgrims, and they shall worship safely in Plavo and liberated Zille. Unleash your irregulars against Wehlen's southern frontier!", 41,
+                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] or 0) + 2;");
 
             AddLine(conv, 41, AzmalId, RomusId, "Ack_Holy_Coalition",
-                "Azmal's voice rose with ecstatic thunder over the receiver. \"Halaita! The righteous blood shall flow, and the chains of the tyrant shall be severed! My irregulars are unleashed. May the fiery sun guide your royal swords, King Romus!\"", 42);
+                "Azmal's voice boomed with solemn fervor over the receiver. \"Halaita! Let the chains of the tyrant be broken! My fighters will cross into southern Wehlen before dawn. May God shield your armies, Your Majesty.\"", -1);
 
             AddLine(conv, 42, SalId, RomusId, "Sal_Derdia_Grumble",
-                "Archpriest Sal muttered a sullen prayer, crossing himself with tight lips. \"May Saint Wruhec forgive this unholy alliance for the sake of our kingdom's borders...\"", -1);
+                "Grand Wiseman Sal murmured a quiet prayer, pressing his palm to his Six Stars medallion. \"May Saint Wruhec forgive this compromise for the sake of the kingdom's peace...\"", -1,
+                "Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true");
+
+            AddLink(conv, 41, 42);
 
             AddChoice(conv, 50, AzmalId, "Counter_Pragmatic_Derdia",
-                "\"I offer economic passage and trade protections for pilgrims, but no special theological privileges.\"",
-                "I can guarantee safe commercial passage and police protection for all foreign travelers, including Golcondists, but I will not grant extraterritorial religious privileges that divide our kingdom. Let us strike Smolak as sovereign allies.", 51,
-                "ZilleCampaignState.IsDerdiaHybridSupportActive = true; Variable[\"Zille_DerdiaHybridActive\"] = true;");
+                "\"I guarantee safe border transit and civil protection, but no special sanctuary privileges.\"",
+                "I can guarantee safe transit and police protection for Derdian travelers across our borders, but I will not alter our Wruhecist sanctuary laws. Let us strike Smolak together as sovereign partners.", 51,
+                "Variable[\"Zille_DerdiaHybridActive\"] = true;");
 
             AddLine(conv, 51, AzmalId, RomusId, "Ack_Pragmatic_Derdia",
-                "Azmal paused in contemplation before sighing heavily. \"You speak with the cautious tongue of a king rather than a prophet, Romus. Yet our hatred for Smolak burns brighter than our disappointment. Our desert scouts will raid his supply lines. But remember our people when the city is yours.\"", -1);
+                "Azmal paused in silent reflection before exhaling slowly. \"You speak with the cautious tongue of a king rather than a prophet, Romus. Yet our hatred for Smolak outweighs our disappointment. Our mountain scouts will raid his supply depots—but remember your promise to our pilgrims when Zille is yours.\"", -1);
 
             AddChoice(conv, 60, AzmalId, "Reject_Derdia_Demands",
-                "\"Rizia fights under the banner of Saint Wruhec alone. We will not barter our sovereign faith for guerrilla raiders.\"",
-                "Rizia marches under the holy banner of Saint Wruhec and the divine authority of House Toras. We will not barter our church's orthodoxy for tribal raiders. Keep your holy fighters in the desert, Wiseman Azmal.", 61,
-                "ZilleCampaignState.IsDerdiaHybridSupportActive = false; Variable[\"RiziaDLC.CountryRelation_Derdia_Unfriendly\"] = true;");
+                "\"Rizia upholds its own religious laws without foreign conditions. Keep your fighters behind your borders.\"",
+                "Rizia answers to Saint Wruhec and the Crown alone. We will not barter our sanctuary laws for irregular raiders. Keep your fighters in Derdia, Supreme Wiseman.", 61,
+                "Variable[\"Zille_DerdiaHybridActive\"] = false; Variable[\"RiziaDLC.CountryRelation_Derdia_Unfriendly\"] = true;");
 
             AddLine(conv, 61, AzmalId, RomusId, "Ack_Reject_Derdia",
-                "Static hissed fiercely as Azmal's tone turned frigid and harsh. \"Then choke on your arrogant pride, King of Rizia! When Smolak's bullets pierce your royal armor, do not cry out to the sands for salvation!\" The line severed with a violent snap.", -1);
+                "Static hissed fiercely as Azmal's tone turned frigid. \"Then face Smolak's guns alone, King of Rizia! Do not look to Naeal when your campaign stalls.\" The line severed with a sharp click.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaTalks", "Turn_Zille_DerdiaTalks");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Derdia Talks (ID 9995) into masterDatabase!");
@@ -112,8 +160,8 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 7: Turn_Zille_LespiaTalks (ID 9996) - NEGOTIATIONS WITH LESPIA
-        // Modeled on: 314_FPnT_AlvarezCall, 423_FPnT_AlvarezVisit
-        // Romus, Patricio Alvarez, Laurento Esquibel.
+        // Fixed: Prime Minister Alvarez (not President!), Perla (not Porte Lespia!),
+        // No desert buzzards, Two-Front Pales War & sanctions awareness!
         // =========================================================================
         public static void RegisterLespiaTalks(DialogueDatabase db)
         {
@@ -134,69 +182,89 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Lespia_Intro_1",
-                "The red secure hotline to Porte Lespia clicked alive with the unmistakable clink of ice cubes against fine crystal glass, followed by a theatrical cough and a satisfied exhale of cigar smoke.", 2);
+                "The red secure hotline to Perla clicked alive with the unmistakable clink of ice cubes against crystal glass, followed by a raspy cough and a satisfied exhale of cigar smoke.", -1);
 
             AddLine(conv, 2, AlvarezId, RomusId, "Alvarez_Opening_Banter",
-                "Romus! My dear friend! Or should I say... His Imperial Majesty, Conqueror of the South? Don't tell me you called to invite me to another stuffy royal opera. I hear through certain Arcasian channels that you're about to give that mustachioed clown Smolak the thrashing he's had coming for thirty years!", 3);
+                "Romus! My royal friend! Don't tell me you called to invite me to another stuffy opera in Porte Drazon. Word through Arcasian channels is that you're finally ready to give that clown Smolak the thrashing he's been begging for!", 3,
+                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true)");
+
+            AddLine(conv, 102, AlvarezId, RomusId, "Alvarez_Opening_TwoFront",
+                "Have you completely lost your mind, Romus?! You're already firing on our allies in Pales, and now you call Perla expecting favors for a campaign against Wehlen? Give me one good reason not to hang up right now!", 3,
+                "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true)");
+
+            AddLink(conv, 1, 2);
+            AddLink(conv, 1, 102);
 
             var alvarezHub = AddLine(conv, 3, RomusId, AlvarezId, "Romus_Alvarez_Open_Prompt",
-                "I leaned against the console, matching Alvarez's relaxed tempo while keeping my guard up.");
+                "I leaned against the console, matching Alvarez's brisk tempo while keeping my guard up.");
 
-            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Sarcastic parity
-            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11)); // Straight to business
-            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12)); // Diplomatic pressure
+            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
+            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
+            alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12));
 
             AddChoice(conv, 10, AlvarezId, "Banter_Sarcastic",
-                "\"Enjoying your afternoon rum, Patricio? I thought you might appreciate seeing Wehlen's teeth kicked in.\"",
-                "Enjoying your afternoon rum, Patricio? I assumed you might appreciate watching someone finally kick Wehlen's teeth in.", 20);
+                "\"Enjoying an afternoon drink, Patricio? I thought you might appreciate seeing Wehlen's teeth kicked in.\"",
+                "Enjoying an afternoon drink, Patricio? I assumed you might appreciate watching someone finally kick Wehlen's teeth in.", -1);
 
             AddChoice(conv, 11, AlvarezId, "Banter_Business",
-                "\"Let us skip the theatrics, President Alvarez. We both know why this line was opened.\"",
-                "Let us skip the theatrics, President Alvarez. We both know why this hotline was opened. Let us talk about intelligence and border security.", 20);
+                "\"Let us skip the theatrics, Prime Minister Alvarez. We both know why this line was opened.\"",
+                "Let us skip the theatrics, Prime Minister Alvarez. We both know why this hotline was opened. Let us talk about intelligence and regional security.", -1);
 
             AddChoice(conv, 12, AlvarezId, "Banter_Pressure",
-                "\"Wehlen is destabilizing the entire region. Lespia has a direct economic stake in our success.\"",
-                "Wehlen's bandit state destabilizes the entire regional economy. If Smolak controls Zille indefinitely, your shipping corridors in the Gulf are at his mercy.", 20);
+                "\"Wehlen is destabilizing South Merkopa. Lespia has a direct economic stake in our success.\"",
+                "Wehlen's bandit regime destabilizes every trade route in the region. If Smolak holds Zille indefinitely, shipping across the Gulf of Moridia remains at his mercy.", -1);
 
             AddLine(conv, 20, AlvarezId, RomusId, "Alvarez_Business_Pitch",
-                "Alvarez took another sip, his tone shifting from jovial drunkard to sharp capitalist shark. \"Look, Romus, I won't shed a single tear if Valdez's goons end up feeding the desert buzzards. But Lespia isn't a charity foundation. You want our high-altitude ATO surveillance planes to map Valdez's camouflaged trenches, and you want Arcasian encrypted radios so your tanks don't drive into an ambush.\"", 21);
+                "Alvarez took another sip, his tone shifting from jovial schemer to sharp capitalist shark. \"Look, Romus, I won't shed a single tear if Valdez's goons end up rotting in the Zille mud. But Lespia isn't a charity. You want our high-altitude ATO reconnaissance flights to map Valdez's camouflaged bunkers, and you want Arcasian-encrypted radios so your armor doesn't walk into an ambush.\"", 21,
+                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true)");
 
             AddLine(conv, 21, AlvarezId, RomusId, "Alvarez_Price_Demand",
-                "\"Here is my price: 20% guaranteed crude oil delivery contracts from your southern wells to Lespian refineries at discounted rates, PLUS your royal vote backing Lespia's positions at the upcoming MITZ maritime summit. Do that, and my defense ministry will feed your generals live radar coordinates that will let your artillery blow Valdez's command bunkers straight into orbit.\"", 22);
+                "\"Here is my price: twenty percent guaranteed crude oil deliveries from your southern wells to Lespian refineries at preferential rates, PLUS Rizia's vote backing Lespia's position on the MITZ board. Agree, and my defense ministry will feed your generals live coordinates to blow Valdez's headquarters straight off the map.\"", 22);
+
+            AddLine(conv, 120, AlvarezId, RomusId, "Alvarez_TwoFront_Pitch",
+                "Alvarez laughed coldly into the receiver. \"You want ATO reconnaissance on Wehlen while your navy is blockading Duke Reinhart in Pales? Bottom line, Romus: call off your ships from Pales and commit to a full energy pact with Lespia, or you can fight Smolak blind!\"", 22,
+                "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true)");
+
+            foreach (int chId in new[] { 10, 11, 12 })
+            {
+                AddLink(conv, chId, 20);
+                AddLink(conv, chId, 120);
+            }
 
             AddLine(conv, 22, LaurentoId, RomusId, "Laurento_Alvarez_Evaluation",
-                "Laurento leaned close to the receiver, speaking in a low, measured whisper. \"Your Majesty, Alvarez's terms are extortionate on oil, but ATO radar reconnaissance would drastically reduce our combat casualties and grant our staff total battlefield clarity. We can negotiate him down if we leverage regional stability.\"", 30);
+                "Laurento leaned close to the receiver, speaking in a low whisper. \"Your Majesty, Alvarez's oil terms are steep, yet ATO aerial reconnaissance would drastically reduce our casualties and grant our commanders total battlefield clarity. We can press him down if we leverage his hatred of Smolak.\"", 30);
 
             var dealHub = AddLine(conv, 30, NarratorId, RomusId, "Alvarez_Deal_Hub_Prompt",
                 "Alvarez swirled the ice in his glass, awaiting your counter-offer.");
 
             dealHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Accept Alvarez terms
-            dealHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Hard bargain / Outsmart
-            dealHub.outgoingLinks.Add(CreateLink(conv.id, 30, 60)); // Reject Lespian greed
+            dealHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Hard bargain
+            dealHub.outgoingLinks.Add(CreateLink(conv.id, 30, 60)); // Reject
 
             AddChoice(conv, 40, AlvarezId, "Accept_Alvarez_Pact",
-                "\"Agreed. Lespia gets preferential oil deliveries in exchange for total ATO satellite and radar intelligence.\"",
-                "Agreed, Patricio. We will guarantee your oil deliveries at favorable terms, provided your defense ministry delivers uninterrupted satellite surveillance and radar intelligence to my war room.", 41,
-                "ZilleCampaignState.IsLespiaPactAccepted = true; ZilleCampaignState.IsLespiaIntelActive = true; Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.CountryRelation_Lespia_Allied\"] = true;");
+                "\"Agreed. Lespia gets preferential oil contracts in exchange for ATO reconnaissance and diplomatic cover.\"",
+                "Agreed, Patricio. We will guarantee your preferential oil contracts and peace along the northern seas, provided Perla delivers uninterrupted aerial reconnaissance and diplomatic cover at the AN.", 41,
+                "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.CountryRelation_Lespia_Allied\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_WehlenHelp\"] = true;");
 
             AddLine(conv, 41, AlvarezId, RomusId, "Ack_Alvarez_Pact",
-                "Alvarez burst into a hearty laugh, clinking his glass against the receiver. \"Now that is what I call statesmanship! Consider it done, Romus. Our reconnaissance flights are taking off from Porte Lespia as we speak. Happy hunting in Zille!\"", -1);
+                "Alvarez burst into a hearty laugh, clinking his glass against the receiver. \"Now that is statesmanship! Consider it done, Romus. Our reconnaissance planes are scrambling out of Perla as we speak. Happy hunting in Zille!\"", -1);
 
             AddChoice(conv, 50, AlvarezId, "Hard_Bargain_Alvarez",
-                "\"Ten percent oil contracts, and not a single concession on MITZ. Take it, or we conduct the campaign without you.\"",
-                "Ten percent oil contracts on standard commercial terms, and not a single sovereign concession on the MITZ. Take it or leave it, Patricio. If Rizia liberates Zille alone, your leverage in the south evaporates entirely.", 51,
-                "ZilleCampaignState.IsLespiaPactAccepted = true; ZilleCampaignState.IsLespiaIntelActive = true; Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] = Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] - 1;");
+                "\"Ten percent oil contracts, and zero concessions on the MITZ. Take it, or we fight without you.\"",
+                "Ten percent oil contracts on commercial terms, and not a single sovereign concession on the MITZ. Take it or leave it, Patricio. If Rizia crushes Wehlen alone, your leverage in South Merkopa evaporates.", 51,
+                "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] or 0) - 1;",
+                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true)");
 
             AddLine(conv, 51, AlvarezId, RomusId, "Ack_Hard_Bargain",
-                "Alvarez cursed under his breath in colloquial Lespian before letting out an amused grunt. \"You drive a harder bargain than your father ever did, Your Majesty. Fine! Ten percent it is. The radar frequencies will be in your war room within the hour.\"", -1);
+                "Alvarez swore softly under his breath before letting out an amused grunt. \"You drive a harder bargain than your father ever did, Your Majesty. Fine—ten percent it is. The radar coordinates will be in your war room within the hour.\"", -1);
 
             AddChoice(conv, 60, AlvarezId, "Reject_Alvarez_Greed",
                 "\"Rizian blood will not be bartered for Lespian corporate profits. We will reclaim Zille on our own terms.\"",
-                "Rizian soldiers will not bleed to line the pockets of your oil oligarchs, President Alvarez. The Royal Army does not require Lespian charity to defeat Wehlen. Good day.", 61,
-                "ZilleCampaignState.IsLespiaPactAccepted = false; ZilleCampaignState.IsLespiaIntelActive = false; Variable[\"RiziaDLC.CountryRelation_Lespia_Unfriendly\"] = true;");
+                "Rizian soldiers will not bleed to fatten your oil conglomerates, Prime Minister Alvarez. The Royal Army does not require Lespian charity to defeat Wehlen. Good day.", 61,
+                "Variable[\"Zille_LespiaPactAccepted\"] = false; Variable[\"Zille_Lespia_Intel\"] = false; Variable[\"RiziaDLC.CountryRelation_Lespia_Unfriendly\"] = true;");
 
             AddLine(conv, 61, AlvarezId, RomusId, "Ack_Reject_Lespia",
-                "Alvarez's amusement vanished instantly into cold diplomatic venom. \"Then good luck against Valdez's mines and artillery, Romus. Don't come crawling back to Kyrute when your tanks are burning in the mud.\" The line went dead.", -1);
+                "Alvarez's amusement vanished instantly into cold venom. \"Then good luck against Valdez's mines and artillery, Romus. Don't come begging to Perla when your tanks are burning in the mud.\" The line went dead.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/LespiaTalks", "Turn_Zille_LespiaTalks");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Lespia Talks (ID 9996) into masterDatabase!");
@@ -204,8 +272,8 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 8: Turn_Zille_RumburgTalks (ID 9997) - ROYAL HOTLINE WITH RUMBURG
-        // Modeled on: 305_FPnT_QueenBeatriceVisit, 389_FPnT_RumburgMeeting, 433_FPnT_GRACERumburgMeeting
-        // Romus, Queen Beatrice Livingston, Hugo Toras, Laurento Esquibel.
+        // Fixed: Beatrice is Romus's SISTER-IN-LAW (NOT Cousin!), Hugo absent variant,
+        // GRACE / Rumburg hostility check, Lespia pact tension check!
         // =========================================================================
         public static void RegisterRumburgTalks(DialogueDatabase db)
         {
@@ -226,63 +294,90 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Rumburg_Intro_1",
-                "The brass-and-ivory royal trunk line to Thornbourgh buzzed with crystal clarity. Across two thousand miles of cable, the poised, commanding voice of Queen Beatrice Livingston echoed into the private study, carrying the unmistakable weight of the Imperial House of Livingston.", 2);
+                "The brass-and-ivory royal trunk line to Thornbourgh buzzed with crystal clarity. Across two thousand miles of wire, the poised, imperious voice of Queen Beatrice Livingston echoed into the study, carrying all the weight of your late wife Lena's royal house.", -1);
 
             AddLine(conv, 2, BeatriceId, RomusId, "Beatrice_Royal_Greeting",
-                "Cousin Romus. We in Thornbourgh have followed your confrontation with the Wehzek upstart with keen imperial interest. A monarch cannot permit a petty dictator to mock the sovereign honor of our noble houses.", 3);
+                "Romus, my dear brother-in-law. We in Thornbourgh have watched your confrontation with that Wehzek upstart with keen interest. A sovereign monarch cannot allow a petty dictator to trample the honor of a sister crown.", 3,
+                "Variable[\"RiziaDLC.CountryRelation_Rumburg_Hostile\"] ~= true");
+
+            AddLine(conv, 102, BeatriceId, RomusId, "Beatrice_Hostile_Greeting",
+                "Your Majesty. Given recent disappointments between Thornbourgh and Porte Drazon, I was surprised to hear your call—though even I have little patience for Wiktor Smolak's antics. Speak your mind.", 3,
+                "Variable[\"RiziaDLC.CountryRelation_Rumburg_Hostile\"] == true");
+
+            AddLink(conv, 1, 2);
+            AddLink(conv, 1, 102);
 
             var beatriceHub = AddLine(conv, 3, RomusId, BeatriceId, "Romus_Beatrice_Open_Prompt",
-                "I straightened my tunic, addressing my imperial cousin with the dignified courtesy expected between royal houses.");
+                "I straightened my tunic, addressing Lena's sister with the formal dignity expected between two royal courts.");
 
-            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Royal cousin solidarity
-            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11)); // Request heavy munitions
-            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12)); // Assert sovereign independence
+            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
+            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
+            beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12));
 
             AddChoice(conv, 10, BeatriceId, "Solidarity_Royal",
-                "\"Cousin Beatrice. House Toras stands proud, and we are determined to restore our rightful borders.\"",
-                "Cousin Beatrice. It is an honor to speak with you. House Toras stands resolute. Thirty years of Wehzek insolence will be answered with royal steel.", 20,
+                "\"Your Majesty. House Toras stands resolute, and we are determined to restore our rightful borders.\"",
+                "Beatrice, it is good to hear your voice. House Toras stands resolute. Over twenty-five years of Wehzek insolence will be answered with royal steel.", 20,
                 "Variable[\"Rumburg_Romus_Loyal\"] = true;");
 
             AddChoice(conv, 11, BeatriceId, "Munitions_Request",
                 "\"Your Majesty, Rizia requires heavy artillery shells and diplomatic shielding in the Alliance of Nations.\"",
-                "Your Majesty. Rizia's cause is just, but our campaign requires heavy caliber munitions and strong diplomatic shielding in the Alliance of Nations against Contanan interference.", 20,
+                "Your Majesty. Rizia's cause is just, yet our campaign requires heavy-caliber munitions and strong diplomatic shielding in the Alliance of Nations against Contanan interference.", 20,
                 "Variable[\"Rumburg_Romus_Munitions\"] = true;");
 
             AddChoice(conv, 12, BeatriceId, "Sovereign_Assertive",
-                "\"We will resolve this conflict ourselves, but GRACE solidarity would be welcomed.\"",
-                "Rizia will fight and win this campaign with our own blood, but solidarity among the monarchies of GRACE will show the world that our bloc remains indomitable.", 20,
+                "\"Rizia will win this campaign with its own blood, though GRACE solidarity is welcomed.\"",
+                "Rizia will fight and win this campaign with our own blood, yet solidarity among the monarchies of GRACE will show the world that our crowns stand together.", 20,
                 "Variable[\"Rumburg_Romus_Proud\"] = true;");
 
             AddLine(conv, 20, BeatriceId, RomusId, "Beatrice_Imperial_Offer",
-                "You speak like a true sovereign, Romus. Rumburg will not stand idly by while republican rabble threatens an imperial crown. We have already instructed our naval attachés to monitor maritime traffic in the Gulf, and three dedicated freight trains carrying 152mm heavy artillery munitions from our royal arsenals are currently en route to the Brenas railyards.", 21);
+                "You speak as a true king, Romus. Rumburg will not stand idly by while republican rabble mocks an allied throne. We have instructed our naval attachés to monitor shipping in the Gulf, and three freight trains carrying 152mm heavy artillery munitions from our royal arsenals can be routed toward Brenas.", -1);
 
             AddLine(conv, 21, BeatriceId, RomusId, "Beatrice_AN_Pledge",
-                "Furthermore, our ambassador in Kyrute will wield Rumburg's full diplomatic weight in the Alliance of Nations to veto any punitive resolutions Malenyev or Hegel attempt to pass against Rizia. We ask only one thing in return: that Rizia remains an unyielding bulwark of GRACE, keeping ATO and Arcasian meddlers far from your royal court.", 22);
+                "Furthermore, our envoy in Konstantium will wield Rumburg's weight in the Alliance of Nations to blunt any sanctions Hegel or Malenyev propose. We ask only one thing in return: that Rizia remains an unyielding pillar of GRACE, keeping ATO and Arcasian profiteers far from your court.", -1,
+                "Variable[\"Zille_LespiaPactAccepted\"] ~= true");
+
+            AddLine(conv, 121, BeatriceId, RomusId, "Beatrice_AN_Pledge_LespiaWarn",
+                "Still, whispers from Perla tell me you have already been bargaining with Prime Minister Alvarez. Do not trade your sovereign dignity to ATO merchants, Romus—Rumburg's support relies on Rizia remaining faithful to GRACE, not becoming Lespia's junior partner.", -1,
+                "Variable[\"Zille_LespiaPactAccepted\"] == true");
+
+            AddLink(conv, 20, 21);
+            AddLink(conv, 20, 121);
 
             AddLine(conv, 22, HugoId, RomusId, "Hugo_Beatrice_Support",
-                "Hugo nodded with profound reverence, dabbing a tear from his eye. \"A magnificent demonstration of royal fraternity! With Rumburg's heavy shells and diplomatic shield, Smolak stands utterly abandoned by the civilized world.\"", 30);
+                "Hugo nodded with deep reverence. \"A magnificent display of royal solidarity! With Rumburg's heavy shells and diplomatic shield, Smolak stands isolated.\"", 30,
+                "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
+
+            AddLine(conv, 122, LaurentoId, RomusId, "Laurento_Beatrice_Support",
+                "Laurento inclined his head discreetly. \"With Thornbourgh's diplomatic cover at the AN and heavy munitions on the rails, our strategic hand strengthens dramatically, Your Majesty.\"", 30,
+                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
+
+            foreach (int pId in new[] { 21, 121 })
+            {
+                AddLink(conv, pId, 22);
+                AddLink(conv, pId, 122);
+            }
 
             var responseHub = AddLine(conv, 30, NarratorId, RomusId, "Beatrice_Response_Prompt",
-                "Queen Beatrice waited with quiet imperial authority for your royal acknowledgment.");
+                "Queen Beatrice waited with cool regal authority for your acknowledgment.");
 
-            responseHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Pledge GRACE Solidarity
-            responseHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Grateful but Sovereign
+            responseHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40));
+            responseHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50));
 
             AddChoice(conv, 40, BeatriceId, "Pledge_GRACE_Solidarity",
-                "\"House Toras pledges unwavering loyalty to GRACE. Together, our crowns will triumph.\"",
-                "House Toras pledges unwavering solidarity to the Imperial Crown and the GRACE alliance. Together, our royal crowns will demonstrate that monarchical order will always triumph over republican chaos. Thank you, Cousin Beatrice.", 41,
-                "ZilleCampaignState.IsRumburgMunitionsActive = true; Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Allied\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = Variable[\"RiziaDLC.Resources_Military_Equipment\"] + 2;");
+                "\"House Toras pledges unwavering solidarity to GRACE. Together, our crowns will prevail.\"",
+                "House Toras pledges unwavering solidarity to GRACE and our royal kinship, Beatrice. Together, our crowns will prove that sovereign order outlasts republican chaos. Thank you, sister-in-law.", 41,
+                "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Allied\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 2;");
 
             AddLine(conv, 41, BeatriceId, RomusId, "Ack_Beatrice_Pledge",
-                "Beatrice smiled with imperious satisfaction. \"Splendid, Romus. Smolak will learn the price of defying imperial blood. Go forth and claim your victory. Thornbourgh stands with you.\"", -1);
+                "Beatrice smiled with imperious satisfaction. \"Splendid, Romus. For Lena's memory and for the future of our houses—go forth and claim Zille. Thornbourgh stands with you.\"", -1);
 
             AddChoice(conv, 50, BeatriceId, "Grateful_Sovereign",
-                "\"We accept your munitions with royal gratitude, Cousin. Rizia will remember who stood by us in our hour of need.\"",
-                "We accept your heavy munitions and diplomatic backing with deep gratitude, Cousin. Rizia will always remember who stood by our side in our hour of need. May Saint Wruhec watch over both our realms.", 51,
-                "ZilleCampaignState.IsRumburgMunitionsActive = true; Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Friendly\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = Variable[\"RiziaDLC.Resources_Military_Equipment\"] + 1;");
+                "\"We accept your munitions with royal gratitude, Beatrice. Rizia remembers who stood by us.\"",
+                "We accept your heavy munitions and diplomatic backing with deep gratitude, Beatrice. Rizia will remember who stood beside us in our hour of need. May Saint Wruhec watch over both our realms.", 51,
+                "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Friendly\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 1;");
 
             AddLine(conv, 51, BeatriceId, RomusId, "Ack_Beatrice_Sovereign",
-                "\"May victory crown your banners, Romus. We expect a triumphant report when Zille is once more Rizian.\" The imperial line softly disconnected.", -1);
+                "\"May victory crown your banners, Romus. I expect good news when Zille is once more Rizian.\" The imperial line softly disconnected.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/RumburgTalks", "Turn_Zille_RumburgTalks");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Rumburg Talks (ID 9997) into masterDatabase!");
@@ -290,7 +385,7 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 9: Turn_Zille_WarPreNegotiationsBriefing (ID 9991) - PRE-NEGOTIATIONS
-        // Romus, Hugo Toras, Lucita Azaro, Laurento Esquibel, Elena Werner.
+        // Fixed: No river valley, Lucita/Hugo absent checks, Outcome-aware briefing!
         // =========================================================================
         public static void RegisterWarPreNegotiationsBriefing(DialogueDatabase db)
         {
@@ -303,43 +398,74 @@ namespace GreatZilleSolution
             conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
             conv.Title = "Zille/WarPreNegotiationsBriefing";
             conv.ActorID = RomusId;
-            conv.ConversantID = LucitaId;
+            conv.ConversantID = LaurentoId;
 
-            var entry0 = CreateEntry(conv.id, 0, RomusId, LucitaId, "START", "", "", "Continue()");
+            var entry0 = CreateEntry(conv.id, 0, RomusId, LaurentoId, "START", "", "", "Continue()");
             entry0.isRoot = true;
             entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "PreNeg_Intro_1",
-                "The battlefield guns had fallen eerily silent along the smoke-shrouded river valley. In the War Room, courier dispatches were piled high alongside telegrams from Kyrute and foreign capitals. Smolak had dispatched a military envoy under a white flag proposing an emergency face-to-face parley.", 2);
+                "The heavy guns had fallen eerily silent along the smoke-shrouded Zille frontier and across the waters of the Gulf of Moridia. In the War Room, courier dispatches lay piled beside urgent telegrams from Konstantium. Wiktor Smolak had dispatched an envoy under a white flag proposing an immediate face-to-face parley.", -1);
 
             AddLine(conv, 2, LucitaId, RomusId, "Lucita_PreNeg_Report",
-                "Your Majesty. The fighting has paused along the frontline. Smolak's armored regiments are bloodied and broken, but our own divisions have spent enormous ammunition reserves. Smolak's envoy awaits our response at the neutral border pavilion.", 3);
+                "Your Majesty. Fighting has paused along the front. Both armies have expended immense ammunition reserves, and Smolak's envoy awaits your answer at the neutral border pavilion.", -1,
+                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+
+            AddLine(conv, 102, CarlosId, RomusId, "Carlos_PreNeg_Report",
+                "Your Majesty. A temporary ceasefire holds along the front lines. Both sides are exhausted of shells and fuel, and Smolak's envoy awaits our response at the neutral border pavilion.", -1,
+                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+
+            AddLink(conv, 1, 2);
+            AddLink(conv, 1, 102);
 
             AddLine(conv, 3, LaurentoId, RomusId, "Laurento_PreNeg_Warning",
-                "The Alliance of Nations has issued an urgent ceasefire appeal, Your Majesty. Both superpowers are watching. If we negotiate from our position of strength, we can extract total territorial restoration without facing crippling sanctions.", 4);
+                "The Alliance of Nations has issued an urgent ceasefire appeal, Your Majesty. Both superpowers are watching closely. What we win at the table now depends entirely on the ground our troops hold.", -1);
+
+            AddLink(conv, 2, 3);
+            AddLink(conv, 102, 3);
 
             AddLine(conv, 4, HugoId, RomusId, "Hugo_PreNeg_Counsel",
-                "Romus... Remember who Smolak is. He is a cornered wolf. He will try to bluster, joke, and wheedle his way out of defeat. Do not give him an inch of Rizian dignity.", 10);
+                "Romus... Remember who Smolak is. He is a cornered fox who shifts between jester and butcher in a heartbeat. Guard the dignity of House Toras, whatever terms lie ahead.", 10,
+                "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
-            var preNegHub = AddLine(conv, 10, RomusId, LucitaId, "Romus_PreNeg_Prompt",
-                "I looked at the map showing our battle lines across Zille. The time had come to face Wiktor Smolak in person.");
+            AddLine(conv, 104, LaurentoId, RomusId, "Laurento_PreNeg_NoHugo",
+                "Remember Smolak's nature, Your Majesty—he will alternate between clownish charm and sudden threats. Keep a cool head when you sit across from him.", 10,
+                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
-            preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20)); // March to parley with strength
-            preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 21)); // Demanding unconditional surrender
+            AddLink(conv, 3, 4);
+            AddLink(conv, 3, 104);
 
-            AddChoice(conv, 20, LucitaId, "Choice_Parley_Strength",
-                "\"Prepare the royal motorcade. I will meet Smolak and dictate our terms under the royal standard.\"",
-                "Prepare the royal armored motorcade. Lucita, assemble the Golden Guard and forward commanders. I will meet Smolak at the border pavilion and dictate our sovereign terms face to face.", 22,
+            var preNegHub = AddLine(conv, 10, RomusId, LaurentoId, "Romus_PreNeg_Prompt",
+                "I looked across the map showing the final positions of our divisions from Brenas to the Gulf. The hour had come to face Wiktor Smolak in person.");
+
+            preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20));
+            preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 21));
+
+            AddChoice(conv, 20, LaurentoId, "Choice_Parley_Strength",
+                "\"Prepare the royal motorcade. I will meet Smolak and negotiate under the royal standard.\"",
+                "Prepare the royal armored motorcade. Assemble our escort and forward commanders. I will meet Smolak at the border pavilion and settle this face to face.", -1,
                 "Variable[\"Zille_Parley_Ready\"] = true;");
 
-            AddChoice(conv, 21, LucitaId, "Choice_Unconditional_Surrender",
-                "\"Smolak will sign a complete evacuation, or my artillery will resume shelling his palace.\"",
-                "Inform Smolak that if he comes to barter or stall, our artillery will resume firing within the hour. Nothing less than total evacuation of Zille will be accepted.", 22,
-                "Variable[\"Zille_Parley_Ready\"] = true; Variable[\"Zille_Parley_Uncompromising\"] = true;");
+            AddChoice(conv, 21, LaurentoId, "Choice_Unconditional_Surrender",
+                "\"Tell Smolak our guns are still loaded—if he stalls, the bombardment resumes!\"",
+                "Inform Smolak that if he tries to stall or play games at the pavilion, our batteries and ships will reopen fire within the hour. Let us go settle Zille's fate.", -1,
+                "Variable[\"Zille_Parley_Ready\"] = true; Variable[\"Zille_Parley_Uncompromising\"] = true;",
+                "(Variable[\"Zille_War_Outcome\"] or 0) >= 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0");
 
             AddLine(conv, 22, LucitaId, RomusId, "Ack_PreNeg_Lucita",
-                "Lucita strapped on her sidearm and saluted with iron resolve. \"The royal escort is mounted, Your Majesty. Let us bring this tyrant to his knees.\"", -1);
+                "Lucita strapped on her sidearm and saluted with iron resolve. \"The royal escort is mounted, Your Majesty. Let us bring this to an end.\"", -1,
+                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+
+            AddLine(conv, 122, CarlosId, RomusId, "Ack_PreNeg_Carlos",
+                "General Carlos Azaro snapped a crisp salute. \"The armored escort is ready, Your Majesty.\"", -1,
+                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+
+            foreach (int chId in new[] { 20, 21 })
+            {
+                AddLink(conv, chId, 22);
+                AddLink(conv, chId, 122);
+            }
 
             AddConversationWithAlias(db, conv, "Zille/WarPreNegotiationsBriefing", "Turn_Zille_WarPreNegotiationsBriefing");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Pre-Negotiations Briefing (ID 9991) into masterDatabase!");

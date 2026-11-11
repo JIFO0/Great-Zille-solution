@@ -12212,7 +12212,7 @@
       "dialogueText": "If Smolak does not return Zille on schedule, we will reclaim our ancestral province by force of arms. The armed forces must be placed on alert.",
       "menuText": "\"If Smolak does not return Zille on schedule, we will reclaim our ancestral province by force of arms. The armed forces must be placed on alert.\"",
       "conditions": "",
-      "userScript": "Variable[\"RiziaDLC.CountryRelation_Wehlen_AtWar\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_War_Ultimatum_Given\"] = true;",
+      "userScript": "Variable[\"Zille_Staff_Planning\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_War_Ultimatum_Given\"] = true;",
       "outgoing": [
         99202
       ],

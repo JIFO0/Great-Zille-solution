@@ -9,16 +9,22 @@
   "modNote": "Przemówienie z Balkonu do Narodu",
   "actors": [
     "Hugo Toras",
+    "Laurento Esquibel",
     "Narrator",
     "Player_Romus"
   ],
-  "readVariables": [],
+  "readVariables": [
+    "RiziaDLC.Hugo_Arrested",
+    "RiziaDLC.Hugo_Executed",
+    "RiziaDLC.Hugo_Resigned"
+  ],
   "writtenVariables": [
     "RiziaDLC.Country_PublicOpinion",
-    "RiziaDLC.Resources_Authority"
+    "RiziaDLC.Resources_Authority",
+    "Zille_Speech_Tone"
   ],
   "choicesCount": 3,
-  "entriesCount": 12,
+  "entriesCount": 11,
   "entries": [
     {
       "id": 0,
@@ -41,13 +47,14 @@
       "id": 1,
       "actorId": 10,
       "speaker": "Narrator",
-      "title": "Balcony_Atmosphere_1",
-      "dialogueText": "The double doors opened onto the grand marble balcony of Palas Rezna. Below, the Royal Square of Porte Drazon was filled to overflowing with thousands of citizens. Silk banners of House Toras, Azaro, and Sazon fluttered in the southern breeze alongside the royal crest of Rizia.",
+      "title": "Balcony_Intro_1",
+      "dialogueText": "The grand double doors of the Palas Rezna balcony swung open to the roar of over forty thousand citizens packed shoulder to shoulder in the Royal Plaza. Banners of House Toras, Azaro, and Sazon fluttered in the sea breeze. Below, brass microphones were wired to radio broadcasting trucks transmitting your voice to every household across Rizia.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
       "outgoing": [
-        2
+        2,
+        102
       ],
       "isPlayer": false,
       "isModInjected": true,
@@ -56,12 +63,12 @@
     },
     {
       "id": 2,
-      "actorId": 10,
-      "speaker": "Narrator",
-      "title": "Balcony_Atmosphere_2",
-      "dialogueText": "Brass microphones stood arranged at the parapet, transmitting your voice live to state radio towers across the realm, from the vineyards of Valenqiris to the workshops of Brenas. Grand Vizier Hugo Toras and War Councilor Lucita Azaro stood one step behind you.",
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Balcony_Whisper",
+      "dialogueText": "Hugo leaned in, his voice barely audible beneath the roar of the crowd. \"The whole kingdom listens, Romus. Give them words worthy of a king.\"",
       "menuText": "",
-      "conditions": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
       "userScript": "",
       "outgoing": [
         3
@@ -73,27 +80,10 @@
     },
     {
       "id": 3,
-      "actorId": 68,
-      "speaker": "Hugo Toras",
-      "title": "Balcony_Hugo_Whisper",
-      "dialogueText": "The realm is listening, Your Majesty. Speak with the conviction of our ancestors.",
-      "menuText": "",
-      "conditions": "",
-      "userScript": "",
-      "outgoing": [
-        4
-      ],
-      "isPlayer": false,
-      "isModInjected": true,
-      "isModEdited": true,
-      "isRoot": false
-    },
-    {
-      "id": 4,
       "actorId": 10,
       "speaker": "Narrator",
-      "title": "Balcony_Speech_Prompt",
-      "dialogueText": "A profound silence descended over the great plaza. You stepped up to the microphones.",
+      "title": "Speech_Doctrine_Prompt",
+      "dialogueText": "You stepped forward to the stone balustrade, raising your sovereign hand. A profound hush fell over the ocean of citizens.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
@@ -112,10 +102,10 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Speech_Revanchist",
-      "dialogueText": "Citizens of Rizia! For thirty long years, our sacred soil in Zille has languished under foreign occupation. We gave diplomacy every opportunity, yet our goodwill was answered only with deceit and terror. Today, that humiliation ends! By royal decree, the armed forces of the Kingdom have crossed the frontier to restore our ancestral homeland! Glovurius axa Rizia!",
-      "menuText": "\"Citizens of Rizia! For thirty years, Zille has endured foreign tyranny. Today, that humiliation ends! By royal decree, our army marches to reclaim our ancestral soil!\"",
+      "dialogueText": "Sons and daughters of Rizia! For over twenty-five years, our kingdom has borne the sting of separation in silence. But House Toras does not bow to tyrants! Today, the Royal Army marches to reclaim our sovereign soil and restore the royal dignity of our kingdom!",
+      "menuText": "\"Sons and daughters of Rizia! We march to reclaim what was stolen and restore the honor of our ancestors!\"",
       "conditions": "",
-      "userScript": "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 1;",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Revanchist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;",
       "outgoing": [
         11
       ],
@@ -129,13 +119,11 @@
       "actorId": 10,
       "speaker": "Narrator",
       "title": "Speech_Revanchist_Reaction",
-      "dialogueText": "A thunderous roar erupted from the square. Thousands of voices echoed your cry, throwing hats into the air as the royal guards stood at rigid salute. Beside you, Lucita's eyes flashed with fierce Azaro pride.",
+      "dialogueText": "A thunderous roar erupted from the crowd, bayonets flashing in the sun as royal guards raised their rifles in salute. Patriotic cheers echoed down the avenues of Porte Drazon.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
-      "outgoing": [
-        40
-      ],
+      "outgoing": [],
       "isPlayer": false,
       "isModInjected": true,
       "isModEdited": true,
@@ -145,11 +133,11 @@
       "id": 20,
       "actorId": 95,
       "speaker": "Player_Romus",
-      "title": "Speech_Liberating",
-      "dialogueText": "Sons and daughters of Rizia! We take up arms not for conquest or imperial pride, but to deliver our brothers and sisters in Zille from lawless oppression. The Crown will never abandon its people, no matter how high the wall or how bitter the struggle. Stand steadfast with our soldiers as they bring peace and justice to our southern border!",
-      "menuText": "\"Sons and daughters of Rizia! We take up the sword not for vanity or conquest, but to deliver our brothers and sisters in Zille from oppression!\"",
+      "title": "Speech_Liberation",
+      "dialogueText": "People of Rizia! We march not out of hatred, but out of sacred love for our brothers and sisters in Zille who have endured Smolak's secret police and broken promises. We go to bring them home to their true kingdom!",
+      "menuText": "\"We come not as conquerors, but as liberators to free our brothers and sisters from Smolak's tyranny!\"",
       "conditions": "",
-      "userScript": "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 1;",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Liberation\"; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;",
       "outgoing": [
         21
       ],
@@ -162,14 +150,12 @@
       "id": 21,
       "actorId": 10,
       "speaker": "Narrator",
-      "title": "Speech_Liberating_Reaction",
-      "dialogueText": "Solemn, deeply emotional cheers swept through the crowd. In the front rows, veteran soldiers bowed their heads with quiet reverence while young citizens waved royal pennants in solidarity.",
+      "title": "Speech_Liberation_Reaction",
+      "dialogueText": "Tears flowed freely among the elder citizens in the crowd, and chants of 'Long live King Romus!' resonated throughout the ancient plaza.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
-      "outgoing": [
-        40
-      ],
+      "outgoing": [],
       "isPlayer": false,
       "isModInjected": true,
       "isModEdited": true,
@@ -180,10 +166,10 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Speech_Legalist",
-      "dialogueText": "People of Rizia. Three decades ago, a treaty was signed in solemn faith. That lease has reached its lawful conclusion. When a foreign ruler refuses to honor his signature and threatens our peace, a kingdom must defend its sovereignty. We march not in malice, but to uphold the law of nations and restore our lawful territory.",
-      "menuText": "\"People of Rizia. Thirty years ago, a treaty was signed in good faith. That lease has expired. We are merely executing the lawful rights of our sovereign realm.\"",
+      "dialogueText": "Citizens of Rizia and observers across Merkopa. Rizia is a realm of honor and constitutional order. The 1927 lease has expired. In reclaiming Zille, we enforce the sacred rule of law that Wiktor Smolak has trampled underfoot!",
+      "menuText": "\"The 1927 agreement has expired. We uphold international law where Wehlen has trampled it!\"",
       "conditions": "",
-      "userScript": "Variable[\"RiziaDLC.Resources_Authority\"] = Variable[\"RiziaDLC.Resources_Authority\"] + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = Variable[\"RiziaDLC.Country_PublicOpinion\"] + 1;",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Legalist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;",
       "outgoing": [
         31
       ],
@@ -197,28 +183,28 @@
       "actorId": 10,
       "speaker": "Narrator",
       "title": "Speech_Legalist_Reaction",
-      "dialogueText": "A wave of measured, respectful applause rippled across the square. The aristocrats and delegates in attendance nodded in firm agreement; the Crown was acting with unassailable dignity.",
+      "dialogueText": "Foreign correspondents frantically scribbled notes, while the crowd applauded with deep, dignified respect for the Crown's measured authority.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
-      "outgoing": [
-        40
-      ],
+      "outgoing": [],
       "isPlayer": false,
       "isModInjected": true,
       "isModEdited": true,
       "isRoot": false
     },
     {
-      "id": 40,
-      "actorId": 68,
-      "speaker": "Hugo Toras",
-      "title": "Balcony_Conclusion",
-      "dialogueText": "As the cheers continued to echo across the palace grounds, Hugo stepped beside you, bowing his head respectfully. \"The nation is behind you, Your Majesty. Now our divisions in Brenas must deliver the promise.\"",
+      "id": 102,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Balcony_Whisper",
+      "dialogueText": "Laurento inclined his head beside you as the roar of the crowd swelled. \"Both the realm and the ambassadors in Kyrute are listening, Your Majesty.\"",
       "menuText": "",
-      "conditions": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
       "userScript": "",
-      "outgoing": [],
+      "outgoing": [
+        3
+      ],
       "isPlayer": false,
       "isModInjected": true,
       "isModEdited": true,

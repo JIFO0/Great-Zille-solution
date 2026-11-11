@@ -122,6 +122,7 @@ namespace GreatZilleSolution
             }
 
             int active = ZilleMapLayoutManager.ApplyOperationVariant(variant);
+            ZilleWarTable.NotifyVariantChanged();
             ZilleWarTable.RequestApply();
             ZilleWarTable.RequestBoardRefresh();
             MelonLogger.Msg($"[WAR ENGINE] Set operation variant to {variant}: {active} active provinces.");
@@ -158,12 +159,12 @@ namespace GreatZilleSolution
                 // If Lespia pact was accepted, Pales war is called off!
                 if (IsLespiaPactAccepted) return false;
 
-                bool palesPrep = DialogueHelper.GetBoolVariable("Diplomacy_Pales_PrepareForWar");
-                bool palesWar = DialogueHelper.GetBoolVariable("Diplomacy_Pales_DeclareWar");
-                bool palesActive = DialogueHelper.GetBoolVariable("Pales_War");
-                bool palesIntervention = DialogueHelper.GetBoolVariable("Pales_War_Played");
+                bool palesPrep = DialogueHelper.GetBoolVariable("RiziaDLC.Diplomacy_Pales_PrepareForWar");
+                bool palesWar = DialogueHelper.GetBoolVariable("RiziaDLC.Diplomacy_Pales_DeclareWar");
+                bool palesActive = DialogueHelper.GetBoolVariable("RiziaDLC.Pales_War");
+                bool palesAtWar = DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Pales_AtWar");
 
-                return palesPrep || palesWar || palesActive || palesIntervention;
+                return palesPrep || palesWar || palesActive || palesAtWar;
             }
             catch
             {
@@ -189,39 +190,46 @@ namespace GreatZilleSolution
                 MelonLogger.Msg("============================================================");
 
                 // Instantly sever all Wehlen trade & energy commitments
-                DialogueHelper.SetVariable("Diplomacy_Wehlen_Trade", false);
-                DialogueHelper.SetVariable("EnergyCommitment_Wehlen_Failed", true);
-                DialogueHelper.SetVariable("Diplomacy_Wehlen_Hostile", true);
+                DialogueHelper.SetVariable("RiziaDLC.Policy_Diplomacy_TradeDeal_Wehlen", false);
+                DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Wehlen_Hostile", true);
+                DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Wehlen_AtWar", true);
+                DialogueHelper.SetVariable("Zille_War_Active", true);
 
                 // Malenyevist / Eastern relations drop
-                DialogueHelper.SetVariable("Diplomacy_Valgsland_Alliance", false);
-                DialogueHelper.SetVariable("CountryRelation_Valgsland_Hostile", true);
-                DialogueHelper.SetVariable("Diplomacy_Morella_NegotiatingPower", -2);
+                DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Valgsland_Hostile", true);
+                int morellaPower = DialogueHelper.GetIntVariable("RiziaDLC.Diplomacy_Morella_NegotiatingPower");
+                DialogueHelper.SetVariable("RiziaDLC.Diplomacy_Morella_NegotiatingPower", morellaPower - 2);
 
-                // Capitalist / Western relations rise
-                DialogueHelper.SetVariable("CountryRelation_Lespia_Friendly", true);
-                DialogueHelper.SetVariable("Diplomacy_Arcasia_Military_Infl", 2);
-                DialogueHelper.SetVariable("Diplomacy_Lespia_WehlenHelp", true);
+                // Capitalist / Western relations rise (unless at war with Pales)
+                if (!IsTwoFrontWarThreat())
+                {
+                    DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Lespia_Friendly", true);
+                    DialogueHelper.SetVariable("RiziaDLC.Diplomacy_Lespia_WehlenHelp", true);
+                }
 
                 // Check Sordland (Anton Rayne) status regarding Bear Trap
-                bool sordlandBearTrap = DialogueHelper.GetBoolVariable("Diplomacy_Sordland_BearTrap");
+                bool sordlandBearTrap = DialogueHelper.GetBoolVariable("BaseGame.Wehlen_JointOperation") ||
+                                        DialogueHelper.GetBoolVariable("BaseGame.Policy_Diplomacy_Wehlen_JointOperation");
                 if (sordlandBearTrap)
                 {
-                    DialogueHelper.SetVariable("CountryRelation_Sordland_Strained", true);
+                    DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Sordland_Unfriendly", true);
                     MelonLogger.Msg("[GEOPOLITICS] Sordland participated in Bear Trap: Diplomatic friction with Rizia over Wehlen attack.");
                 }
                 else
                 {
-                    DialogueHelper.SetVariable("CountryRelation_Sordland_Friendly", true);
+                    DialogueHelper.SetVariable("RiziaDLC.CountryRelation_Sordland_Friendly", true);
                     MelonLogger.Msg("[GEOPOLITICS] Sordland rejected Bear Trap: Anton Rayne remains open to diplomatic channels.");
                 }
 
                 // Check Derdia Hybrid War Support
-                bool derdiaFriendly = DialogueHelper.GetBoolVariable("Deal_Derdia") || DialogueHelper.GetBoolVariable("CountryRelation_Derdia_Friendly");
+                bool derdiaFriendly = DialogueHelper.GetBoolVariable("RiziaDLC.Policy_Diplomacy_TradeDeal_Derdia") ||
+                                      DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Friendly") ||
+                                      DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Allied");
                 if (derdiaFriendly)
                 {
                     IsDerdiaHybridSupportActive = true;
                     DialogueHelper.SetVariable("Zille_Derdia_HybridWarfare", true);
+                    DialogueHelper.SetVariable("Zille_DerdiaHybridActive", true);
                     MelonLogger.Msg("[GEOPOLITICS] Derdia hybrid warfare active: Holy irregulars deployed behind Wehzek lines!");
                 }
 
@@ -279,6 +287,29 @@ namespace GreatZilleSolution
             catch (Exception ex)
             {
                 MelonLogger.Warning($"Failed to sync Zille variables to Lua: {ex.Message}");
+            }
+        }
+
+        public static void SyncFromLua()
+        {
+            try
+            {
+                string route = DialogueHelper.GetStringVariable("Zille_Logistics_Route");
+                if (string.IsNullOrEmpty(route)) route = DialogueHelper.GetStringVariable("Zille_Logistics_House");
+                if (!string.IsNullOrEmpty(route)) LogisticsRoute = route;
+
+                if (DialogueHelper.GetBoolVariable("Zille_Rumburg_Munitions")) IsRumburgMunitionsActive = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Lespia_Intel")) IsLespiaIntelActive = true;
+                if (DialogueHelper.GetBoolVariable("Zille_LespiaPactAccepted")) IsLespiaPactAccepted = true;
+                if (DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive")) IsDerdiaHybridSupportActive = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Independent_Buffer")) IsIndependentZilleAgreed = true;
+
+                int outVal = DialogueHelper.GetIntVariable("Zille_War_Outcome");
+                if (outVal >= 1 && outVal <= 5) Outcome = (ZilleWarOutcome)outVal;
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"Failed to sync Zille variables from Lua: {ex.Message}");
             }
         }
     }

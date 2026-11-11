@@ -106,7 +106,14 @@ namespace GreatZilleSolution
         {
             try
             {
-                return DialogueLua.GetVariable(name).asString ?? "";
+                var v = DialogueLua.GetVariable(name);
+                if (v != null && !string.IsNullOrEmpty(v.asString)) return v.asString;
+                if (!name.StartsWith("RiziaDLC.", StringComparison.OrdinalIgnoreCase))
+                {
+                    var v2 = DialogueLua.GetVariable("RiziaDLC." + name);
+                    if (v2 != null && !string.IsNullOrEmpty(v2.asString)) return v2.asString;
+                }
+                return v != null ? (v.asString ?? "") : "";
             }
             catch
             {

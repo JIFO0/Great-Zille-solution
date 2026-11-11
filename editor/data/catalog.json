@@ -18571,7 +18571,7 @@
     "folder": "Turn_01",
     "turn": "Tura 01",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 1: Royal Council Briefing (Added directive to prepare armed operation to reclaim Zille)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn1_Council_Choice, Zille_Turn1_Council_Reply",
     "actors": [
       "Elena Werner",
       "Hugo Toras",
@@ -18896,7 +18896,7 @@
     "folder": "Turn_01",
     "turn": "Tura 01",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 1: Military & Security Meeting (Added war planning directive for Lucita's War Council)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn1_Military_Choice, Zille_Turn1_Military_Reply",
     "actors": [
       "Elena Werner",
       "Hugo Toras",
@@ -18992,7 +18992,7 @@
     "folder": "Turn_02",
     "turn": "Tura 02",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 2: Diplomatic Briefing (Added formal military ultimatum to Wehlen)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_War_Ultimatum_Choice, Zille_War_Ultimatum_Reply",
     "actors": [
       "Elena Werner",
       "Hugo Toras",
@@ -19147,7 +19147,7 @@
     "folder": "Turn_02",
     "turn": "Tura 02",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 2: Friendship Day in Zille (Added direct confrontation and military warning to Smolak)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Smolak_FaceToFace_Choice, Zille_Smolak_FaceToFace_Reply",
     "actors": [
       "Narrator",
       "Player_Romus",
@@ -19489,7 +19489,7 @@
     "folder": "Turn_03",
     "turn": "Tura 03",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 3: Security Debriefing (Added combat mobilization order for III Corps in Brenas)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn3_Mobilize_Choice, Zille_Turn3_Mobilize_Reply",
     "actors": [
       "Hugo Toras",
       "Laurento Esquibel",
@@ -20060,7 +20060,7 @@
     "folder": "Turn_04",
     "turn": "Tura 04",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 4: Council Debate on Pales (Added risk assessment and two-front war warning)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn4_TwoFront_Warning, Zille_Turn4_TwoFront_Reply",
     "actors": [
       "Elena Werner",
       "Hugo Toras",
@@ -20137,7 +20137,7 @@
     "folder": "Turn_04",
     "turn": "Tura 04",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 4: Call with Patricio Alvarez (Added Lespia pact negotiations and AN leverage)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn4_Alvarez_Leverage, Zille_Turn4_Alvarez_Reply",
     "actors": [
       "Laurento Esquibel",
       "Narrator",
@@ -29025,7 +29025,7 @@
     "folder": "Turn_08",
     "turn": "Tura 08",
     "modStatus": "MODEDIT",
-    "modNote": "Turn 8: Zille Return Negotiations (Added rejection of rigged referendum and invasion order)",
+    "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn8_WarUltimatum_Choice, Zille_Turn8_WarUltimatum_Reply",
     "actors": [
       "Narrator",
       "Player_Romus",
@@ -36103,22 +36103,51 @@
     "modStatus": "MODNEW",
     "modNote": "Royal War Council Briefing",
     "actors": [
+      "Angelica Sazon",
+      "Carlos Robles Azaro",
+      "Hugo Toras",
+      "Laurento Esquibel",
+      "Lucita Azaro",
       "Narrator",
       "Player_Romus",
-      "Lucita Azaro",
-      "Hugo Toras"
+      "Sal Ignacius",
+      "Taddeus Azaro",
+      "Titus Gordion"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Angelica_Arrested",
+      "RiziaDLC.Angelica_Executed",
+      "RiziaDLC.Council_GrandVizier_Angelica",
+      "RiziaDLC.Council_GrandVizier_Sal",
+      "RiziaDLC.Country_HouseAzaro_Enemy",
+      "RiziaDLC.Country_HouseToras_Enemy",
+      "RiziaDLC.Diplomacy_Pales_DeclareWar",
+      "RiziaDLC.Hugo_Arrested",
+      "RiziaDLC.Hugo_Executed",
+      "RiziaDLC.Hugo_Resigned",
+      "RiziaDLC.Lucita_Arrested",
+      "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Lucita_Married",
+      "RiziaDLC.Lucita_RomanceHappened",
+      "RiziaDLC.Pales_War",
+      "RiziaDLC.Relations_Lucita_Romance",
+      "RiziaDLC.Sal_Arrested",
+      "RiziaDLC.Sal_Executed",
+      "RiziaDLC.Taddeus_Arrested",
+      "RiziaDLC.Taddeus_Executed",
+      "RiziaDLC.Titus_Arrested",
+      "RiziaDLC.Titus_Executed",
+      "RiziaDLC.Turn06_Council_LucitaOffended"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "Zille_War_Active",
+      "Zille_War_PlanType",
+      "Zille_War_Postpone",
+      "Zille_War_RomulusPlan",
+      "Zille_War_StaffPlan"
     ],
-    "choicesCount": 12,
-    "entriesCount": 47
+    "choicesCount": 8,
+    "entriesCount": 42
   },
   {
     "id": 9989,
@@ -36130,22 +36159,23 @@
     "modStatus": "MODNEW",
     "modNote": "Balcony Address to the Nation",
     "actors": [
+      "Hugo Toras",
+      "Laurento Esquibel",
       "Narrator",
-      "Player_Romus",
-      "Lucita Azaro",
-      "Hugo Toras"
+      "Player_Romus"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Hugo_Arrested",
+      "RiziaDLC.Hugo_Executed",
+      "RiziaDLC.Hugo_Resigned"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "RiziaDLC.Country_PublicOpinion",
+      "RiziaDLC.Resources_Authority",
+      "Zille_Speech_Tone"
     ],
     "choicesCount": 3,
-    "entriesCount": 12
+    "entriesCount": 11
   },
   {
     "id": 9990,
@@ -36157,22 +36187,45 @@
     "modStatus": "MODNEW",
     "modNote": "Logistics Dispute: Azaro vs Sazon",
     "actors": [
+      "Angelica Sazon",
+      "Carlos Robles Azaro",
+      "Elena Werner",
+      "Hugo Toras",
+      "Laurento Esquibel",
+      "Leona Sazon",
+      "Lucita Azaro",
+      "Manus Sazon",
       "Narrator",
       "Player_Romus",
-      "Lucita Azaro",
-      "Hugo Toras"
+      "Taddeus Azaro"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Angelica_Arrested",
+      "RiziaDLC.Angelica_Executed",
+      "RiziaDLC.Hugo_Arrested",
+      "RiziaDLC.Hugo_Executed",
+      "RiziaDLC.Hugo_Resigned",
+      "RiziaDLC.Lucita_Arrested",
+      "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Manus_Arrested",
+      "RiziaDLC.Manus_DiesInWar",
+      "RiziaDLC.Manus_EarlyExile",
+      "RiziaDLC.Manus_Executed",
+      "RiziaDLC.Manus_Gone",
+      "RiziaDLC.Relations_HouseSazon_AngelicaPardoned",
+      "RiziaDLC.Taddeus_Arrested",
+      "RiziaDLC.Taddeus_Executed"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "RiziaDLC.Country_HouseAzaro",
+      "RiziaDLC.Country_HouseSazon",
+      "RiziaDLC.Resources_Budget",
+      "RiziaDLC.Resources_Energy",
+      "Zille_Logistics_House",
+      "Zille_Logistics_Route"
     ],
     "choicesCount": 3,
-    "entriesCount": 19
+    "entriesCount": 38
   },
   {
     "id": 9991,
@@ -36184,22 +36237,27 @@
     "modStatus": "MODNEW",
     "modNote": "Intelligence Briefing & Diplomatic Cables",
     "actors": [
-      "Narrator",
-      "Player_Romus",
+      "Carlos Robles Azaro",
+      "Hugo Toras",
+      "Laurento Esquibel",
       "Lucita Azaro",
-      "Hugo Toras"
+      "Narrator",
+      "Player_Romus"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Hugo_Arrested",
+      "RiziaDLC.Hugo_Executed",
+      "RiziaDLC.Hugo_Resigned",
+      "RiziaDLC.Lucita_Arrested",
+      "RiziaDLC.Lucita_Executed",
+      "Zille_War_Outcome"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "Zille_Parley_Ready",
+      "Zille_Parley_Uncompromising"
     ],
-    "choicesCount": 10,
-    "entriesCount": 35
+    "choicesCount": 3,
+    "entriesCount": 12
   },
   {
     "id": 9992,
@@ -36213,20 +36271,25 @@
     "actors": [
       "Narrator",
       "Player_Romus",
-      "Lucita Azaro",
-      "Hugo Toras"
+      "Wiktor Smolak"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Lucita_Arrested",
+      "RiziaDLC.Lucita_Executed",
+      "Zille_War_Outcome"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "Brenas_Lost_To_Wehlen",
+      "Grodzizg_FreeCity",
+      "RiziaDLC.Resources_Budget",
+      "RiziaDLC.Resources_Energy",
+      "RiziaDLC.ZilleReferendum_Lost",
+      "RiziaDLC.ZilleReturn_Success",
+      "Zille_Independent_Buffer",
+      "Zille_War_Outcome"
     ],
-    "choicesCount": 5,
-    "entriesCount": 21
+    "choicesCount": 11,
+    "entriesCount": 30
   },
   {
     "id": 9993,
@@ -36238,21 +36301,35 @@
     "modStatus": "MODNEW",
     "modNote": "Peace Treaty of Zille (5 Articles)",
     "actors": [
-      "Narrator",
-      "Player_Romus",
+      "Carlos Robles Azaro",
+      "Hugo Toras",
+      "Laurento Esquibel",
       "Lucita Azaro",
-      "Hugo Toras"
+      "Narrator",
+      "Player_Romus"
     ],
     "readVariables": [
-      "RiziaDLC.Resources_Budget",
-      "RiziaDLC.Resources_Energy"
+      "RiziaDLC.Hugo_Arrested",
+      "RiziaDLC.Hugo_Executed",
+      "RiziaDLC.Hugo_Resigned",
+      "RiziaDLC.Lucita_Arrested",
+      "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Taddeus_Arrested",
+      "RiziaDLC.Taddeus_Executed",
+      "Zille_Independent_Buffer",
+      "Zille_War_Outcome"
     ],
     "writtenVariables": [
-      "Zille_War_Alfa",
-      "Zille_War_Beta",
-      "Zille_War_Postpone"
+      "Brenas_Lost_To_Wehlen",
+      "Grodzizg_FreeCity",
+      "RiziaDLC.Azaro_HasPowerToCoup",
+      "RiziaDLC.MapLayer_Zille_Brenas",
+      "RiziaDLC.ZilleReferendum_Lost",
+      "RiziaDLC.ZilleReturn_Success",
+      "RiziaDLC.Zille_PromisedToHouseToras",
+      "Zille_Independent_Buffer"
     ],
-    "choicesCount": 20,
-    "entriesCount": 58
+    "choicesCount": 5,
+    "entriesCount": 19
   }
 ]

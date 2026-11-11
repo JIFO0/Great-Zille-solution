@@ -145,8 +145,8 @@ namespace GreatZilleSolution
                     {
                         try { if (System.IO.File.Exists(flag1)) System.IO.File.Delete(flag1); } catch { }
                         try { if (System.IO.File.Exists(flag2)) System.IO.File.Delete(flag2); } catch { }
-                        Log.Msg("[AUTOTEST] run_test.flag detected! Starting automated test coroutine...");
-                        MelonCoroutines.Start(RunAutomatedCampaignTestCoroutine());
+                        Log.Msg("[AUTOTEST] run_test.flag detected! Starting comprehensive ZillePlaytest suite...");
+                        MelonCoroutines.Start(ZillePlaytest.RunFullSuiteCoroutine());
                     }
                 }
             }

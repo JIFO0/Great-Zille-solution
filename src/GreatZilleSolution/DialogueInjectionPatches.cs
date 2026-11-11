@@ -372,7 +372,7 @@ namespace GreatZilleSolution
                     }
 
                     try { mgr.ResetTokenMovements(); } catch { }
-                    try { mgr.ResetPlayerTokens(); } catch { }
+                    // NEVER call ResetPlayerTokens() here as it erases the player's board units!
                     var tokens = mgr.instantiatedWarTokens;
                     if (tokens != null)
                     {
@@ -394,6 +394,11 @@ namespace GreatZilleSolution
                 ZilleWarTable.UnlockAllTiles();
                 ZilleWarTable.RefreshAllTokenStatusEffects();
                 ZilleWarTable.RequestBoardRefresh();
+                var hud = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
+                if (hud != null && ZilleWarTable.ScenarioStarted)
+                {
+                    try { hud.SetInteractable(true); } catch { }
+                }
             }
             catch (Exception ex)
             {
@@ -717,11 +722,23 @@ namespace GreatZilleSolution
             return true;
         }
 
-        public static bool OnWarHUDButtonClickPrefix()
+        public static bool OnWarHUDButtonClickPrefix(WarHUDPanel __instance)
         {
+            if (!ZilleWarTable.ScenarioStarted && (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled))
+            {
+                // Operation Start button during deployment phase: bypass vanilla frontline border count lock
+                MelonLogger.Msg("[ZTABLE] Native Operation Start HUD button clicked -> starting Zille scenario!");
+                ZilleWarTable.StartScenario();
+                if (__instance != null)
+                {
+                    try { __instance.Setup(WarHUDPanel.WarHUDButtonState.EndTurn); } catch { }
+                    try { __instance.SetInteractable(true); } catch { }
+                    try { __instance.Show(); } catch { }
+                }
+                return false;
+            }
             if (!ZilleWarTable.ScenarioStarted)
             {
-                // Operation Start button during deployment phase
                 return true;
             }
 
@@ -742,6 +759,17 @@ namespace GreatZilleSolution
                 flow.currentActionPoints = 0;
             }
             // Do not set MarkEnemyTurnStarted here — vanilla OnButtonClick calls EndWarTurn() which sets it in EndWarTurnPrefix
+            return true;
+        }
+
+        public static bool ScreenBorderMovementPrefix()
+        {
+            if (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled)
+            {
+                if (!Application.isFocused) return false;
+                var mp = Input.mousePosition;
+                if (mp.x <= 1f && mp.y <= 1f) return false;
+            }
             return true;
         }
 
@@ -868,8 +896,50 @@ namespace GreatZilleSolution
         {
             if (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille && ZilleWarTable.ScenarioStarted)
             {
+                ZilleWarTable.CleanupDeadStatusEffectIcons();
                 ZilleWarTable.RefreshAllTokenStatusEffects();
             }
+        }
+
+        public static void WarTokenKillPrefix(WarToken __instance)
+        {
+            if (__instance == null) return;
+            try
+            {
+                if (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled)
+                {
+                    var panel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                    if (panel != null) panel.RemoveAllForToken(__instance);
+                }
+            }
+            catch { }
+        }
+
+        public static void WarTokenKillPostfix(WarToken __instance)
+        {
+            try
+            {
+                if (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled)
+                {
+                    ZilleWarTable.CleanupDeadStatusEffectIcons(__instance);
+                }
+            }
+            catch { }
+        }
+
+        public static void DestroyTokenPrefix(WarToken token)
+        {
+            if (token == null) return;
+            try
+            {
+                if (WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled)
+                {
+                    var panel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                    if (panel != null) panel.RemoveAllForToken(token);
+                    ZilleWarTable.CleanupDeadStatusEffectIcons(token);
+                }
+            }
+            catch { }
         }
 
         public static void TemplateWarTokenCityStatsSetupPostfix(TemplateWarTokenCityStats __instance, WarToken warToken)
@@ -1171,6 +1241,16 @@ namespace GreatZilleSolution
                 var removeAllEff = AccessTools.Method(typeof(WarTokenStatusEffectsPanel), nameof(WarTokenStatusEffectsPanel.RemoveAllInstances));
                 if (removeAllEff != null)
                     harmony.Patch(removeAllEff, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BattleSettledStatusEffectsPostfix))));
+                var warTokenKill = AccessTools.Method(typeof(WarToken), nameof(WarToken.Kill));
+                if (warTokenKill != null)
+                {
+                    harmony.Patch(warTokenKill,
+                        prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(WarTokenKillPrefix))),
+                        postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(WarTokenKillPostfix))));
+                }
+                var destroyToken = AccessTools.Method(typeof(WarTokenManager), nameof(WarTokenManager.DestroyToken), new Type[] { typeof(WarToken) });
+                if (destroyToken != null)
+                    harmony.Patch(destroyToken, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(DestroyTokenPrefix))));
 
                 // Lock End Turn when enemy is moving or acting (Issue #4)
                 var endWarTurn = AccessTools.Method(typeof(WarFlowManager), nameof(WarFlowManager.EndWarTurn));
@@ -1182,6 +1262,9 @@ namespace GreatZilleSolution
                 var hudEndTurn = AccessTools.Method(typeof(WarHUDPanel), "OnEndTurn");
                 if (hudEndTurn != null)
                     harmony.Patch(hudEndTurn, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnWarHUDScriptEndTurnPrefix))));
+                var screenBorderMove = AccessTools.Method(typeof(MapScroller), "ScreenBorderMovement");
+                if (screenBorderMove != null)
+                    harmony.Patch(screenBorderMove, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ScreenBorderMovementPrefix))));
 
                 // Phase 0 -> Phase I (Issue #7)
                 var turnPanelSetup = AccessTools.Method(typeof(WarTurnPanel), nameof(WarTurnPanel.Setup), new Type[] { typeof(string), typeof(int) });
@@ -1672,21 +1755,41 @@ namespace GreatZilleSolution
                 string title = e.DestinationEntry.Title ?? "";
                 string menuText = e.DestinationEntry.MenuText ?? "";
 
-                // Check for war initiation via native Royal War Council Briefing or vanilla choice
-                if (script.Contains("Choice_Romulus_Sword") || title.Contains("Choice_Romulus_Sword") || menuText.Contains("Righteous Sword"))
+                // 1. Operational doctrine / war initiation choices
+                if (title == "Choice_Golden_Sword" || script.Contains("Choice_Romulus_Sword") || title.Contains("Choice_Romulus_Sword") || menuText.Contains("Righteous Sword") || menuText.Contains("Operation Golden Sword"))
                 {
-                    MelonLogger.Msg("[WAR COUNCIL] Plan Sword chosen by player! Initializing Sword variant.");
+                    MelonLogger.Msg("[WAR COUNCIL] Operation Golden Sword chosen by player! Initializing Sword variant.");
+                    ZilleCampaignState.PlanType = ZillePlanType.Romulus;
+                    ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Sword;
                     ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanSword);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
-                else if (script.Contains("Choice_Romulus_Ark") || title.Contains("Choice_Romulus_Ark") || menuText.Contains("Plan Romulus: Ark"))
+                else if (title == "Choice_Golden_Ark" || script.Contains("Choice_Romulus_Ark") || title.Contains("Choice_Romulus_Ark") || menuText.Contains("Plan Romulus: Ark") || menuText.Contains("Operation Golden Ark"))
                 {
                     var variant = ZilleCampaignState.IsDerdiaHybridSupportActive ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
-                    MelonLogger.Msg($"[WAR COUNCIL] Plan Ark chosen by player! Initializing variant {variant}.");
+                    MelonLogger.Msg($"[WAR COUNCIL] Operation Golden Ark chosen by player! Initializing variant {variant}.");
+                    ZilleCampaignState.PlanType = ZillePlanType.Romulus;
+                    ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Ark;
                     ZilleCampaignState.SetOperationVariant(variant);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
+                }
+                else if (title == "Authorize_Staff_Hawk" || title == "Choice_Staff_Hawk")
+                {
+                    WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Hawk);
+                }
+                else if (title == "Authorize_Staff_Sword" || title == "Choice_Staff_Sword")
+                {
+                    WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Sword);
+                }
+                else if (title == "Authorize_Staff_Ark" || title == "Choice_Staff_Ark")
+                {
+                    WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Ark);
+                }
+                else if (title == "Authorize_Staff_Spear" || title == "Choice_Staff_Spear")
+                {
+                    WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Spear);
                 }
                 else if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Plan_Alpha") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
                 {
@@ -1707,6 +1810,80 @@ namespace GreatZilleSolution
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Postponing Zille invasion as requested by player.");
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = false;
+                }
+                // 2. Logistics dispute choices
+                else if (title == "Choice_Sazon_Route")
+                {
+                    ZilleCampaignState.LogisticsRoute = "Sazon";
+                }
+                else if (title == "Choice_Azaro_Route")
+                {
+                    ZilleCampaignState.LogisticsRoute = "Azaro";
+                }
+                else if (title == "Choice_Compromise_Route")
+                {
+                    ZilleCampaignState.LogisticsRoute = "Compromise";
+                }
+                // 3. Diplomatic pacts (Derdia, Lespia, Rumburg)
+                else if (title == "Accept_Holy_Coalition" || title == "Counter_Pragmatic_Derdia")
+                {
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                }
+                else if (title == "Reject_Derdia_Demands")
+                {
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = false;
+                }
+                else if (title == "Accept_Alvarez_Pact" || title == "Hard_Bargain_Alvarez")
+                {
+                    ZilleCampaignState.IsLespiaPactAccepted = true;
+                    ZilleCampaignState.IsLespiaIntelActive = true;
+                }
+                else if (title == "Reject_Alvarez_Greed")
+                {
+                    ZilleCampaignState.IsLespiaPactAccepted = false;
+                    ZilleCampaignState.IsLespiaIntelActive = false;
+                }
+                else if (title == "Pledge_GRACE_Solidarity" || title == "Grateful_Sovereign")
+                {
+                    ZilleCampaignState.IsRumburgMunitionsActive = true;
+                }
+                // 4. Phase II launch & Parley / Treaty outcomes
+                else if (title == "Order_Phase2_Launch")
+                {
+                    ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
+                    ZilleCampaignState.CurrentPhaseNumber = 2;
+                }
+                else if (title == "Accept_Decisive_Surrender" || title == "Sign_Decisive_Victory")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.DecisiveVictory;
+                    ZilleCampaignState.IsIndependentZilleAgreed = false;
+                }
+                else if (title == "Demand_Overwhelming_Triumph" || title == "Sign_Overwhelming_Triumph")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.OverwhelmingTriumph;
+                    ZilleCampaignState.IsIndependentZilleAgreed = false;
+                }
+                else if (title == "Accept_Independent_Buffer" || title == "Sign_Independent_Buffer")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.BloodyStalemate;
+                    ZilleCampaignState.IsIndependentZilleAgreed = true;
+                }
+                else if (title == "Reject_Buffer_Ceasefire" || title == "Accept_Tactical_Defeat" || title == "Sign_Tactical_Defeat")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.TacticalDefeat;
+                    ZilleCampaignState.IsIndependentZilleAgreed = false;
+                }
+                else if (title == "Accept_Total_Fiasco" || title == "Sign_Total_Fiasco")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.TotalFiasco;
+                    ZilleCampaignState.IsBrenasLost = true;
+                    ZilleCampaignState.IsIndependentZilleAgreed = false;
+                }
+                // 5. Vanilla conversation war posture injections
+                else if (title.Contains("Zille_Turn3_Bombing_WarOption") || title.Contains("Zille_Turn8_War_Ultimatum"))
+                {
+                    MelonLogger.Msg("[DIPLOMACY] Player chose immediate military escalation over Zille!");
+                    ZilleCampaignState.MilitarySentimentLevel = 3;
                 }
                 else if (title.Contains("Zille_War_Ultimatum") || title.Contains("Zille_Smolak_FaceToFace"))
                 {

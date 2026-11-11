@@ -19420,8 +19420,8 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Zille_Turn8_WarUltimatum_Choice",
-      "dialogueText": "Enough of your extortion, Smolak! The lease has expired. We will not entertain a rigged referendum. The Royal Army is advancing!",
-      "menuText": "\"Enough of your extortion, Smolak! The lease has expired. We will not entertain a rigged referendum. The Royal Army is advancing!\"",
+      "dialogueText": "Enough of your extortion, Smolak! The 1927 agreement expired years ago. We will not entertain a rigged referendum. The Royal Army is advancing!",
+      "menuText": "\"Enough of your extortion, Smolak! The 1927 agreement expired years ago. We will not entertain a rigged referendum. The Royal Army is advancing!\"",
       "conditions": "",
       "userScript": "Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Referendum_Broken\"] = true;",
       "outgoing": [
