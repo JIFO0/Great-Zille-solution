@@ -376,9 +376,14 @@ namespace GreatZilleSolution
                     MelonLogger.Msg("[WAR ENGINE] Added 'A royal briefing before the invasion of Zille' to EntityDataManager.AllConversationsData!");
                 }
 
-                // Register all 6 custom Great Zille scenes in EntityDataManager
+                // Register all custom Great Zille scenes in EntityDataManager
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPlanning", "Turn_Zille_WarPlanning", "Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", "Zille/WarPlanning");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarBalconySpeech", "Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "Zille/WarBalconySpeech");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "Zille/WarLogisticsDispute");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_MaveNortusHQ", "Turn_Zille_MaveNortusHQ", "Frontline Headquarters: The Battle for Zille", "Mayor's Hall, Mave Nortus", "Zille/MaveNortusHQ");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaTalks", "Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "Zille/DerdiaTalks");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_LespiaTalks", "Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "Zille/LespiaTalks");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_RumburgTalks", "Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "Zille/RumburgTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/PreNegotiationsBriefing");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarSmolakParley", "Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "Zille/SmolakFinalParley");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/PeaceTreaty");
@@ -1098,6 +1103,120 @@ namespace GreatZilleSolution
             }
         }
 
+                public static bool TriggerConversation(string nameInDb, string dialogueTitle, Action onFinish = null)
+        {
+            try
+            {
+                ZilleDialogueSystem.EnsureAllConversationsRegistered();
+                var convPanel = Panels.Instance?.ConversationPanel ?? UnityEngine.Object.FindObjectOfType<ConversationPanel>();
+                if (convPanel == null)
+                {
+                    var allPanels = Resources.FindObjectsOfTypeAll<ConversationPanel>();
+                    if (allPanels != null && allPanels.Length > 0) convPanel = allPanels[0];
+                }
+
+                if (convPanel != null)
+                {
+                    Panels.Instance?.TokenInteractionPanel?.Hide();
+                    Panels.Instance?.HideAllRightPanels();
+                    Panels.Instance?.HideAllCenterPanels();
+                    Managers.Instance?.GameFlowManager?.OnStoryFragmentStart();
+
+                    convPanel.isWarConversation = false;
+                    convPanel.isMinimizable = false;
+                    convPanel.gameObject.SetActive(true);
+                    if (convPanel.inputBlockerPanel != null)
+                    {
+                        convPanel.inputBlockerPanel.gameObject.SetActive(true);
+                    }
+
+                    ConversationData cd = null;
+                    var convList = EntityDataManager.AllConversationsData ?? EntityDataManager.ConversationsData;
+                    if (convList != null)
+                    {
+                        for (int i = 0; i < convList.Count; i++)
+                        {
+                            var c = convList[i];
+                            if (c != null && (c.NameInDatabase == nameInDb || c.ConversationProperties?.Dialogue == dialogueTitle))
+                            {
+                                cd = c;
+                                break;
+                            }
+                        }
+                    }
+
+                    System.Action finishAction = () => {
+                        try
+                        {
+                            var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
+                            if (gfm != null && cd != null)
+                            {
+                                gfm.FinishStoryFragment(cd, null);
+                            }
+                            Panels.Instance?.ShowHUD();
+                            onFinish?.Invoke();
+                        }
+                        catch (Exception ex)
+                        {
+                            MelonLogger.Warning($"[WAR ENGINE] OnFinish conversation error: {ex.Message}");
+                        }
+                    };
+
+                    if (cd != null)
+                    {
+                        convPanel.Setup(cd, finishAction, false);
+                    }
+                    else
+                    {
+                        convPanel.ForceStartConversation(dialogueTitle);
+                    }
+
+                    if (!DialogueManager.isConversationActive)
+                    {
+                        DialogueManager.StartConversation(dialogueTitle);
+                    }
+
+                    convPanel.Show();
+                    MelonLogger.Msg($"[WAR ENGINE] Triggered conversation '{dialogueTitle}' ({nameInDb})!");
+                    return true;
+                }
+                else
+                {
+                    DialogueManager.StartConversation(dialogueTitle);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[WAR ENGINE] TriggerConversation failed for {dialogueTitle}: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static void TriggerMaveNortusHQ()
+        {
+            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map to open Mave Nortus Field HQ...");
+            ReturnToCivilianMap();
+            TriggerConversation("Turn_Zille_MaveNortusHQ", "Zille/MaveNortusHQ", () => {
+                MelonLogger.Msg("[WAR ENGINE] Mave Nortus Field HQ concluded! Phase II unlocked.");
+                ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
+                ZilleCampaignState.CurrentPhaseNumber = 2;
+                ScheduleWarTheatreTransition();
+            });
+        }
+
+        public static void TriggerSmolakParley()
+        {
+            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map for Wartime Peace Parley with Wiktor Smolak...");
+            ReturnToCivilianMap();
+            TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/SmolakFinalParley", () => {
+                MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
+                TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/PeaceTreaty", () => {
+                    MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
+                });
+            });
+        }
+
         // ================= SCHEDULED THEATRE TRANSITION =================
 
         public static void ScheduleWarTheatreTransition()
@@ -1556,11 +1675,13 @@ namespace GreatZilleSolution
                 var turnPanel = Panels.Instance?.WarTurnPanel;
                 if (turnPanel != null && turnPanel.titleText != null)
                 {
-                    var txt = turnPanel.titleText.text;
-                    if (!string.IsNullOrEmpty(txt) && txt.Contains("Phase 0"))
-                    {
-                        turnPanel.titleText.text = txt.Replace("Phase 0", "Phase I");
-                    }
+                    string opName = "Operation: Golden Sword";
+                    if (ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.GoldenArk) opName = "Operation: Golden Ark";
+                    else if (ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.TotalRepayment) opName = "Operation: Total Repayment";
+                    else if (ZilleCampaignState.PlanType == ZillePlanType.Staff) opName = "Operation: " + ZilleCampaignState.StaffPlan;
+
+                    string phaseStr = ZilleCampaignState.CurrentPhaseNumber == 2 ? "Phase II" : "Phase I";
+                    turnPanel.titleText.text = $"{opName} - {phaseStr}";
                 }
 
                 if (ZilleWarTable.EditMode)

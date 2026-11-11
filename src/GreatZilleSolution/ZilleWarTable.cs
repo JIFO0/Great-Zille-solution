@@ -4430,6 +4430,9 @@ namespace GreatZilleSolution
         /// <summary>
         /// Evaluates current city control across Brenas, Zille, and Wehlen to compute the 5 war outcomes.
         /// </summary>
+        /// <summary>
+        /// Evaluates current city control across Brenas, Zille, and Wehlen to compute the 5 war outcomes.
+        /// </summary>
         public static ZilleWarOutcome EvaluateTableOutcome(out string summary)
         {
             var cfg = ZilleMapLayoutManager.CurrentConfig;
@@ -4483,6 +4486,21 @@ namespace GreatZilleSolution
 
             int brenasLost = Math.Max(0, brenasTotal - brenasHeld);
 
+            // Record captured state in campaign
+            ZilleCampaignState.ZilleCityCaptured = zilleCityHeld;
+            if (ZilleCampaignState.CurrentPhaseNumber == 1)
+                ZilleCampaignState.Phase1CitiesCaptured = zilleHeld;
+            else
+                ZilleCampaignState.Phase2CitiesCaptured = zilleHeld;
+
+            try
+            {
+                DialogueHelper.SetVariable("Zille_Cities_Held", zilleHeld);
+                DialogueHelper.SetVariable("Zille_Brenas_Lost", brenasLost);
+                DialogueHelper.SetVariable("Zille_City_Held", zilleCityHeld);
+            }
+            catch { }
+
             // 1. Total Fiasco: Enemy captured >= 2 Brenas cities
             if (brenasLost >= 2)
             {
@@ -4490,29 +4508,29 @@ namespace GreatZilleSolution
                 return ZilleWarOutcome.TotalFiasco;
             }
 
-            // 2. Tactical Defeat: Brenas held, but zero gains in Wehlen/Zille, or 1 Brenas city lost without gains
+            // 2. Overwhelming Triumph: Zille City held, at least 3 Zille cities held, Brenas secure, plus deep Wehlen target captured!
+            if (brenasLost == 0 && zilleCityHeld && zilleHeld >= 3 && wehlenDeepHeld >= 1)
+            {
+                summary = $"Overwhelming Triumph: Zille liberated + deep Wehlen target captured ({zilleHeld}/4 Zille cities, {wehlenDeepHeld} deep targets)!";
+                return ZilleWarOutcome.OverwhelmingTriumph;
+            }
+
+            // 3. Decisive Victory: Zille City held, at least 3 Zille cities held (majority, at most 1 minor city left), Brenas secure
+            if (brenasLost == 0 && zilleCityHeld && zilleHeld >= 3)
+            {
+                summary = $"Decisive Victory: Zille reclaimed ({zilleHeld}/4 cities held including Zille City)!";
+                return ZilleWarOutcome.DecisiveVictory;
+            }
+
+            // 4. Tactical Defeat: Brenas held, but zero gains in Wehlen/Zille, or 1 Brenas city lost without gains
             if ((brenasLost == 0 && zilleHeld == 0 && wehlenDeepHeld == 0) || (brenasLost == 1 && zilleHeld == 0 && wehlenDeepHeld == 0))
             {
                 summary = $"Tactical Defeat: Zero territorial gains achieved in Zille (Status Quo failure).";
                 return ZilleWarOutcome.TacticalDefeat;
             }
 
-            // 5. Overwhelming Triumph: All 4 Zille cities held + deep Wehlen target, Brenas fully secure
-            if (brenasLost == 0 && zilleHeld >= 4 && wehlenDeepHeld >= 1)
-            {
-                summary = $"Overwhelming Triumph: All Zille cities liberated + deep Wehlen target captured!";
-                return ZilleWarOutcome.OverwhelmingTriumph;
-            }
-
-            // 4. Decisive Victory: All 4 Zille cities held, Brenas secure
-            if (brenasLost == 0 && zilleHeld >= 4)
-            {
-                summary = $"Decisive Victory: Entire Zille peninsula liberated!";
-                return ZilleWarOutcome.DecisiveVictory;
-            }
-
-            // 3. Bloody Stalemate: Partial gains (1-3 cities) or territorial exchange
-            summary = $"Bloody Stalemate: Partial capture ({zilleHeld}/4 Zille cities, Brenas lost: {brenasLost}). Neutral buffer possible.";
+            // 5. Bloody Stalemate: Partial gains (1-2 cities, or Zille City not held)
+            summary = $"Bloody Stalemate: Partial capture ({zilleHeld}/4 Zille cities, Zille City held: {zilleCityHeld}, Brenas lost: {brenasLost}).";
             return ZilleWarOutcome.BloodyStalemate;
         }
 
@@ -4526,24 +4544,56 @@ namespace GreatZilleSolution
             if (cfg?.Tiles == null) return;
 
             var outcome = EvaluateTableOutcome(out string summary);
-            if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph || force)
-            {
-                if (!force && outcome != ZilleWarOutcome.DecisiveVictory && outcome != ZilleWarOutcome.OverwhelmingTriumph && outcome != ZilleWarOutcome.TotalFiasco)
-                    return;
 
-                _victoryShown = true;
-                MelonLogger.Msg($"[ZTABLE] Hex Campaign outcome evaluated: Outcome: {outcome} ({summary})");
-                try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
-                try { DialogueHelper.ShowAlert($"Zille Operation: {summary}"); } catch { }
-            }
-            else if (outcome == ZilleWarOutcome.TotalFiasco)
+            // Total Fiasco: Brenas collapsed
+            if (outcome == ZilleWarOutcome.TotalFiasco)
             {
                 _victoryShown = true;
                 MelonLogger.Error($"[ZTABLE] Hex Campaign Collapse detected! Outcome: {outcome} ({summary})");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
                 try { DialogueHelper.ShowAlert($"Catastrophic Defeat: {summary}"); } catch { }
+                try { WarOperationZilleManager.TriggerSmolakParley(); } catch { }
+                return;
+            }
+
+            // Phase 1 handling
+            if (ZilleCampaignState.CurrentPhaseNumber == 1)
+            {
+                if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
+                {
+                    _victoryShown = true;
+                    MelonLogger.Msg($"[ZTABLE] Early Decisive Victory achieved in Phase I! Outcome: {outcome} ({summary})");
+                    try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
+                    try { DialogueHelper.ShowAlert($"Decisive Victory: {summary}"); } catch { }
+                }
+                else if (force)
+                {
+                    // Phase I ended with partial gains -> Advance to Phase II via Mave Nortus Field HQ!
+                    MelonLogger.Msg($"[ZTABLE] Phase I complete ({summary}). Transitioning to Mave Nortus Frontline HQ...");
+                    try { DialogueHelper.ShowAlert("Phase I Complete: Convening at Mave Nortus HQ..."); } catch { }
+                    try { WarOperationZilleManager.TriggerMaveNortusHQ(); } catch { }
+                }
+                return;
+            }
+
+            // Phase 2 handling
+            if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
+            {
+                _victoryShown = true;
+                MelonLogger.Msg($"[ZTABLE] Hex Campaign Victory achieved! Outcome: {outcome} ({summary})");
+                try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
+                try { DialogueHelper.ShowAlert($"Zille Operation Victory: {summary}"); } catch { }
+            }
+            else if (force)
+            {
+                _victoryShown = true;
+                MelonLogger.Msg($"[ZTABLE] Phase II concluded without full victory. Outcome: {outcome} ({summary}). Initiating peace parley...");
+                try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
+                try { DialogueHelper.ShowAlert($"Armistice Talks: {summary}"); } catch { }
+                try { WarOperationZilleManager.TriggerSmolakParley(); } catch { }
             }
         }
+
         private static bool _unitChromeLogged;
         private static WarToken _statsToken;
         private static WarToken _iconToken;

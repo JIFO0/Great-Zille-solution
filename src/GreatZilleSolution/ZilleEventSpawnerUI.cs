@@ -134,7 +134,19 @@ namespace GreatZilleSolution
         {
             MelonLogger.Msg("[EVENT SPAWNER] Building event spawner catalog...");
 
-            // Mod events are loaded dynamically from masterDatabase and game data
+                        // 1. Mod events registered prominently at the top
+            AddModNewEvent("Turn_Zille_WarPlanning", "Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarBriefing", "A Royal Briefing Before the Invasion of Zille", "Council Chambers, Palas Rezna", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "MODNEW");
+            AddModNewEvent("Turn_Zille_MaveNortusHQ", "Frontline Headquarters: The Battle for Zille (Mave Nortus)", "Mayor's Hall, Mave Nortus", "MODNEW");
+            AddModNewEvent("Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "MODNEW");
+            AddModNewEvent("Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "MODNEW");
+            AddModNewEvent("Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "MODNEW");
+            AddModNewEvent("Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "MODNEW");
+
 
             // 3. Scan EntityDataManager.AllConversationsData
             try
