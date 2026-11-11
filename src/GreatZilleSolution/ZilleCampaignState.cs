@@ -26,6 +26,15 @@ namespace GreatZilleSolution
         Ark       // Plan Romulusa: Wehlen + Brenas + Pas Graniczny Zille + Morza
     }
 
+    public enum ZilleOperationVariant
+    {
+        PlanArk,
+        PlanSword,
+        PlanArkDerdia,
+        TotalRepaymentDerdia,
+        TotalRepaymentNoDerdia
+    }
+
     public enum ZilleWarOutcome
     {
         None = 0,
@@ -70,10 +79,49 @@ namespace GreatZilleSolution
         public static ZillePlanType PlanType { get; set; } = ZillePlanType.None;
         public static ZilleStaffPlan StaffPlan { get; set; } = ZilleStaffPlan.None;
         public static ZilleRomulusPlan RomulusPlan { get; set; } = ZilleRomulusPlan.None;
+        public static ZilleOperationVariant CurrentVariant { get; set; } = ZilleOperationVariant.PlanSword;
         public static ZilleWarOutcome Outcome { get; set; } = ZilleWarOutcome.None;
         public static bool IsIndependentZilleAgreed { get; set; } = false;
         public static int CurrentPhaseNumber { get; set; } = 1;
         public static int StaffVictoryPoints { get; set; } = 0;
+
+        public static void SetOperationVariant(ZilleOperationVariant variant)
+        {
+            CurrentVariant = variant;
+            switch (variant)
+            {
+                case ZilleOperationVariant.PlanArk:
+                    RomulusPlan = ZilleRomulusPlan.Ark;
+                    CurrentPhase = ZilleOperationPhase.Phase1;
+                    CurrentPhaseNumber = 1;
+                    break;
+                case ZilleOperationVariant.PlanSword:
+                    RomulusPlan = ZilleRomulusPlan.Sword;
+                    CurrentPhase = ZilleOperationPhase.Phase1;
+                    CurrentPhaseNumber = 1;
+                    break;
+                case ZilleOperationVariant.PlanArkDerdia:
+                    RomulusPlan = ZilleRomulusPlan.Ark;
+                    CurrentPhase = ZilleOperationPhase.Phase1;
+                    CurrentPhaseNumber = 1;
+                    IsDerdiaHybridSupportActive = true;
+                    break;
+                case ZilleOperationVariant.TotalRepaymentDerdia:
+                    CurrentPhase = ZilleOperationPhase.Phase2;
+                    CurrentPhaseNumber = 2;
+                    IsDerdiaHybridSupportActive = true;
+                    break;
+                case ZilleOperationVariant.TotalRepaymentNoDerdia:
+                    CurrentPhase = ZilleOperationPhase.Phase2;
+                    CurrentPhaseNumber = 2;
+                    break;
+            }
+
+            int active = ZilleMapLayoutManager.ApplyOperationVariant(variant);
+            ZilleWarTable.RequestApply();
+            ZilleWarTable.RequestBoardRefresh();
+            MelonLogger.Msg($"[WAR ENGINE] Set operation variant to {variant}: {active} active provinces.");
+        }
 
         public static bool IsNavalBlockadeActive { get; set; } = false;
         public static bool IsLespiaPactAccepted { get; set; } = false;

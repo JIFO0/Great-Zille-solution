@@ -1,25 +1,27 @@
 using System;
-using System.IO;
-using System.Drawing;
+using System.Linq;
+using AsmResolver.DotNet;
+using AsmResolver.DotNet.Signatures;
 
 class Program
 {
     static void Main(string[] args)
     {
-        string path = @"H:\SteamLibrary\steamapps\common\Suzerain\Mods\GreatZilleAssets\ZilleTile_1.png";
-        if (!File.Exists(path))
+        string path = @"H:\SteamLibrary\steamapps\common\Suzerain\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll";
+        var module = ModuleDefinition.FromFile(path);
+        
+        var panelType = module.TopLevelTypes.FirstOrDefault(x => x.Name == "WarDeploymentPanel");
+        if (panelType != null)
         {
-            Console.WriteLine("File not found: " + path);
-            return;
-        }
-
-        using (var bmp = new Bitmap(path))
-        {
-            Console.WriteLine($"Image size: {bmp.Width}x{bmp.Height}, PixelFormat: {bmp.PixelFormat}");
-            var center = bmp.GetPixel(bmp.Width / 2, bmp.Height / 2);
-            Console.WriteLine($"Center pixel: R={center.R}, G={center.G}, B={center.B}, A={center.A}");
-            var corner = bmp.GetPixel(0, 0);
-            Console.WriteLine($"Corner pixel: R={corner.R}, G={corner.G}, B={corner.B}, A={corner.A}");
+            var setupMethod = panelType.Methods.FirstOrDefault(m => m.Name == "Setup");
+            if (setupMethod != null && setupMethod.CilMethodBody != null)
+            {
+                Console.WriteLine("=== WarDeploymentPanel.Setup CIL ===");
+                foreach (var instr in setupMethod.CilMethodBody.Instructions)
+                {
+                    Console.WriteLine($"  {instr.OpCode} {instr.Operand}");
+                }
+            }
         }
     }
 }

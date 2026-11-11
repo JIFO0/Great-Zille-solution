@@ -2200,47 +2200,64 @@ namespace GreatZilleSolution
             if (CurrentConfig?.Tiles == null) return 0;
             try
             {
-                string jsonPath = Path.Combine(Directory.GetCurrentDirectory(), "maps", "zille", "v14", "regions", "operation_regions_v14.json");
-                if (!File.Exists(jsonPath))
+                string[] candidates = new string[]
                 {
-                    jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mods", "GreatZilleAssets", "operation_regions_v14.json");
-                }
-                if (!File.Exists(jsonPath))
+                    Path.Combine(_primaryAssetsDir, "operation_regions_v14.json"),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Mods", "GreatZilleAssets", "operation_regions_v14.json"),
+                    Path.Combine(Directory.GetCurrentDirectory(), "assets", "operation_regions_v14.json"),
+                    Path.Combine(Directory.GetCurrentDirectory(), "maps", "zille", "v14", "regions", "operation_regions_v14.json"),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "operation_regions_v14.json")
+                };
+
+                string jsonPath = null;
+                for (int i = 0; i < candidates.Length; i++)
                 {
-                    MelonLogger.Warning("[ZilleMap] operation_regions_v14.json not found, using full layout.");
-                    return CurrentConfig.Tiles.Count;
+                    if (!string.IsNullOrEmpty(candidates[i]) && File.Exists(candidates[i]))
+                    {
+                        jsonPath = candidates[i];
+                        break;
+                    }
                 }
 
-                var root = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(jsonPath));
-                if (!root.TryGetProperty("scenarios", out var scens) || !scens.TryGetProperty(scenarioKey, out var scen))
+                HashSet<string> activeSet = null;
+
+                if (jsonPath != null)
                 {
-                    MelonLogger.Warning($"[ZilleMap] Scenario '{scenarioKey}' not found in operation_regions_v14.json.");
-                    return CurrentConfig.Tiles.Count;
+                    var root = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(jsonPath));
+                    if (root.TryGetProperty("scenarios", out var scens) && scens.TryGetProperty(scenarioKey, out var scen))
+                    {
+                        string phaseKey = phase <= 1 ? "phase1" : "phase2";
+                        if (scen.TryGetProperty(phaseKey, out var phObj) && phObj.TryGetProperty("active_region_ids", out var activeArr))
+                        {
+                            activeSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                            foreach (var el in activeArr.EnumerateArray())
+                            {
+                                string id = el.GetString();
+                                if (!string.IsNullOrEmpty(id)) activeSet.Add(id);
+                            }
+                        }
+                    }
                 }
 
-                string phaseKey = phase <= 1 ? "phase1" : "phase2";
-                if (!scen.TryGetProperty(phaseKey, out var phObj) || !phObj.TryGetProperty("active_region_ids", out var activeArr))
+                // If file or scenario was missing, fallback using deterministic v14 rules
+                if (activeSet == null)
                 {
-                    MelonLogger.Warning($"[ZilleMap] Phase '{phaseKey}' not found in scenario '{scenarioKey}'.");
-                    return CurrentConfig.Tiles.Count;
-                }
-
-                var activeSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var el in activeArr.EnumerateArray())
-                {
-                    string id = el.GetString();
-                    if (!string.IsNullOrEmpty(id)) activeSet.Add(id);
+                    activeSet = BuildFallbackActiveSet(scenarioKey, phase);
                 }
 
                 int activeCount = 0;
                 foreach (var t in CurrentConfig.Tiles)
                 {
-                    bool isActive = activeSet.Contains(t.Id) || activeSet.Contains("ZilleTile_" + t.TileNumber) || activeSet.Contains("ZilleTile_" + t.Id);
+                    bool isActive = activeSet.Contains(t.Id)
+                        || activeSet.Contains("ZilleTile_" + t.TileNumber)
+                        || activeSet.Contains("ZilleTile_" + t.Id)
+                        || activeSet.Contains("Tile_" + t.TileNumber);
+
                     t.IsDisabled = !isActive;
                     if (isActive) activeCount++;
                 }
 
-                MelonLogger.Msg($"[ZilleMap] Applied region filter for {scenarioKey}.{phaseKey}: {activeCount} active tiles out of {CurrentConfig.Tiles.Count}.");
+                MelonLogger.Msg($"[ZilleMap] Applied region filter for {scenarioKey}.phase{phase}: {activeCount} active tiles out of {CurrentConfig.Tiles.Count}.");
                 return activeCount;
             }
             catch (Exception ex)
@@ -2248,6 +2265,78 @@ namespace GreatZilleSolution
                 MelonLogger.Warning($"[ZilleMap] ApplyOperationRegionsFilter error: {ex.Message}");
                 return CurrentConfig.Tiles.Count;
             }
+        }
+
+        public static int ApplyOperationVariant(ZilleOperationVariant variant)
+        {
+            switch (variant)
+            {
+                case ZilleOperationVariant.PlanArk:
+                    return ApplyOperationRegionsFilter("ark", 1);
+                case ZilleOperationVariant.PlanSword:
+                    return ApplyOperationRegionsFilter("sword", 1);
+                case ZilleOperationVariant.PlanArkDerdia:
+                    return ApplyOperationRegionsFilter("ark_derdia", 1);
+                case ZilleOperationVariant.TotalRepaymentDerdia:
+                    return ApplyOperationRegionsFilter("ark_derdia", 2);
+                case ZilleOperationVariant.TotalRepaymentNoDerdia:
+                    return ApplyOperationRegionsFilter("ark", 2);
+                default:
+                    return CurrentConfig?.Tiles?.Count ?? 0;
+            }
+        }
+
+        private static HashSet<string> BuildFallbackActiveSet(string scenarioKey, int phase)
+        {
+            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            if (CurrentConfig?.Tiles == null) return set;
+
+            bool isPhase2 = phase > 1;
+            bool isDerdia = scenarioKey.Contains("derdia");
+            bool isSword = scenarioKey == "sword";
+
+            var swordPhase1ExcludedSeas = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "S1", "S2", "S3", "S27", "S33", "S34", "S38", "S39", "S40", "S53"
+            };
+
+            var arkPhase1ZilleBand = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "20", "26", "33", "36", "37", "39", "104", "108", "114", "117", "118"
+            };
+
+            foreach (var t in CurrentConfig.Tiles)
+            {
+                string num = t.TileNumber ?? "";
+                bool sea = t.IsSea || num.StartsWith("S", StringComparison.OrdinalIgnoreCase);
+                string reg = t.Region ?? "";
+
+                if (isPhase2)
+                {
+                    // Phase 2: Total Repayment (entire map, with or without Derdia)
+                    if (reg == "Derdia" && !isDerdia) continue;
+                    set.Add(t.Id);
+                    set.Add("ZilleTile_" + num);
+                }
+                else if (isSword)
+                {
+                    // Plan Sword Phase 1: Zille 60 + Brenas 29 + Rotsla 96 + 47 seas (all except 10)
+                    if (reg == "Derdia") continue;
+                    if (reg == "Wehlen" && num != "96") continue;
+                    if (sea && swordPhase1ExcludedSeas.Contains(num)) continue;
+                    set.Add(t.Id);
+                    set.Add("ZilleTile_" + num);
+                }
+                else
+                {
+                    // Plan Ark Phase 1: Wehlen 33 + Brenas 29 + 11 Zille border tiles + all 57 seas (+ Derdia 7 if Ark Derdia)
+                    if (reg == "Derdia" && !isDerdia) continue;
+                    if (reg == "Zille" && !arkPhase1ZilleBand.Contains(num)) continue;
+                    set.Add(t.Id);
+                    set.Add("ZilleTile_" + num);
+                }
+            }
+            return set;
         }
 
 

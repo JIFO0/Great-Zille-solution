@@ -173,9 +173,19 @@ namespace GreatZilleSolution
             if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return true;
 
             // Only allow live battles to resolve during enemy phase, block player actions during enemy turn
-            if (ZilleWarTable.IsEnemyTurnActive())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
             {
                 return __instance is WarTile wt && ZilleWarTable.BattleMayResolve(wt);
+            }
+
+            // If player has 0 action points during active war gameplay and deployment is not open, block actions
+            if (ZilleWarTable.ScenarioStarted && !DeploymentPanelShowing())
+            {
+                var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+                if (flow != null && flow.GetCurrentActionPoints() <= 0)
+                {
+                    return false;
+                }
             }
 
             if (__instance is WarTile wtCommit)
@@ -321,6 +331,25 @@ namespace GreatZilleSolution
 
         private static int _pointsGrantedForTurn = int.MinValue;
 
+        public static bool ResetTokenMovementsPrefix(WarTokenManager __instance)
+        {
+            if (__instance == null || __instance.instantiatedWarTokens == null) return false;
+            try
+            {
+                var list = __instance.instantiatedWarTokens;
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    var tok = list[i];
+                    if (tok == null || tok.Pointer == IntPtr.Zero || tok.gameObject == null || tok.IsDead())
+                    {
+                        list.RemoveAt(i);
+                    }
+                }
+            }
+            catch { }
+            return true;
+        }
+
         /// <summary>PlayerTurn is the return from the enemy phase. The phase flag has to be down or the next hold commits nothing.</summary>
         public static void PlayerTurnPostfix(WarFlowManager __instance)
         {
@@ -329,13 +358,23 @@ namespace GreatZilleSolution
             {
                 __instance.isDisplayingEnemyMoves = false;
                 int turn = __instance.currentWarTurn;
-                int want = Math.Max(3, __instance.ActionPointsPerTurn > 0 ? __instance.ActionPointsPerTurn : 3);
+                int want = Math.Max(3, __instance.ActionPointsPerTurn > 0 ? __instance.ActionPointsPerTurn : 5);
                 __instance.currentActionPoints = want;
                 var mgr = UnityEngine.Object.FindObjectOfType<WarTokenManager>();
-                if (mgr != null)
+                if (mgr != null && mgr.instantiatedWarTokens != null)
                 {
-                    mgr.ResetTokenMovements();
-                    mgr.ResetPlayerTokens();
+                    var list = mgr.instantiatedWarTokens;
+                    for (int i = list.Count - 1; i >= 0; i--)
+                    {
+                        var tok = list[i];
+                        if (tok == null || tok.Pointer == IntPtr.Zero || tok.gameObject == null || tok.IsDead())
+                        {
+                            list.RemoveAt(i);
+                        }
+                    }
+
+                    try { mgr.ResetTokenMovements(); } catch { }
+                    try { mgr.ResetPlayerTokens(); } catch { }
                     var tokens = mgr.instantiatedWarTokens;
                     if (tokens != null)
                     {
@@ -347,15 +386,16 @@ namespace GreatZilleSolution
                             {
                                 if (t.IsMovementLocked())
                                 {
-                                    t.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                                    try { t.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
                                 }
                             }
                         }
                     }
-                    mgr.SetAllTokenActions();
+                    try { mgr.SetAllTokenActions(); } catch { }
                 }
                 ZilleWarTable.UnlockAllTiles();
                 ZilleWarTable.RefreshAllTokenStatusEffects();
+                ZilleWarTable.RequestBoardRefresh();
             }
             catch (Exception ex)
             {
@@ -653,17 +693,23 @@ namespace GreatZilleSolution
 
         public static bool EndWarTurnPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
             {
                 MelonLogger.Msg("[ZTABLE] End turn blocked: enemy turn is active.");
                 return false;
+            }
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null)
+            {
+                flow.currentActionPoints = 0;
             }
             return true;
         }
 
         public static bool OnWarHUDButtonClickPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
             {
                 return false;
             }
@@ -672,9 +718,15 @@ namespace GreatZilleSolution
 
         public static bool OnWarHUDScriptEndTurnPrefix()
         {
-            if (ZilleWarTable.IsEnemyTurnActive())
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
             {
                 return false;
+            }
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            if (flow != null)
+            {
+                flow.currentActionPoints = 0;
             }
             return true;
         }
@@ -1049,6 +1101,12 @@ namespace GreatZilleSolution
                 var playerTurn = AccessTools.Method(typeof(WarFlowManager), "PlayerTurn");
                 if (playerTurn != null)
                     harmony.Patch(playerTurn, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerTurnPostfix))));
+                var resetTokens = AccessTools.Method(typeof(WarTokenManager), nameof(WarTokenManager.ResetTokenMovements));
+                if (resetTokens != null)
+                {
+                    harmony.Patch(resetTokens, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ResetTokenMovementsPrefix))));
+                    MelonLogger.Msg("[Great Zille] Protected WarTokenManager.ResetTokenMovements from null/dead tokens.");
+                }
                 var enemyBehaviour = AccessTools.Method(typeof(WarTokenManager), "EnemyTokenBehaviourCoroutine");
                 if (enemyBehaviour != null)
                     harmony.Patch(enemyBehaviour, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EnemyBehaviourPrefix))));
@@ -1167,11 +1225,116 @@ namespace GreatZilleSolution
                     harmony.Patch(namePanelSetupMethod, postfix: new HarmonyMethod(postfix));
                     MelonLogger.Msg("[Great Zille] Successfully hooked TokenNamePanel.Setup!");
                 }
+
+                // 5. WarTokenManager.AddEnemyTokenAction (Enemy Turn Limiter & Frontline Objective Focus)
+                var addEnemyActionMethod = AccessTools.Method(
+                    typeof(WarTokenManager),
+                    nameof(WarTokenManager.AddEnemyTokenAction),
+                    new Type[] { typeof(WarToken), typeof(WarToken.TokenAction) }
+                );
+                if (addEnemyActionMethod != null)
+                {
+                    var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(AddEnemyTokenActionPrefix));
+                    harmony.Patch(addEnemyActionMethod, prefix: new HarmonyMethod(prefix));
+                    MelonLogger.Msg("[Great Zille] Successfully hooked WarTokenManager.AddEnemyTokenAction (Enemy turn limiter active)!");
+                }
             }
             catch (Exception ex)
             {
                 MelonLogger.Error($"[Great Zille] Manual patch registration error: {ex.Message}");
             }
+        }
+
+        private static int _enemyActionsThisTurn = 0;
+        private static int _lastEnemyActionTurn = -1;
+
+        public static bool AddEnemyTokenActionPrefix(WarToken token, WarToken.TokenAction action)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return true;
+            if (token == null || action == null) return true;
+
+            var flow = UnityEngine.Object.FindObjectOfType<WarFlowManager>();
+            int curTurn = flow != null ? flow.currentWarTurn : 0;
+            if (curTurn != _lastEnemyActionTurn)
+            {
+                _lastEnemyActionTurn = curTurn;
+                _enemyActionsThisTurn = 0;
+            }
+
+            // High-priority combat and retreat actions are always allowed
+            try
+            {
+                if (token.GetRemainingOrganization() <= 0) return true;
+            }
+            catch { }
+
+            var aType = action.actionType;
+            if (aType == WarToken.TokenActionType.SupportAttacker ||
+                aType == WarToken.TokenActionType.SupportDefender ||
+                aType == WarToken.TokenActionType.SupportLandBattleAttackerFromSea ||
+                aType == WarToken.TokenActionType.SupportLandBattleDefenderFromSea ||
+                aType == WarToken.TokenActionType.Fortify)
+            {
+                _enemyActionsThisTurn++;
+                return true;
+            }
+
+            // Pales campaign pacing: enemy takes 5 to 7 actions per turn total
+            if (_enemyActionsThisTurn >= 6)
+            {
+                return false; // Discard excess actions beyond budget
+            }
+
+            var targetTile = action.tile;
+            if (targetTile != null)
+            {
+                // NEVER allow enemy to simple Move directly onto an existing player token without battle!
+                try
+                {
+                    var occ = targetTile.GetCurrentToken();
+                    if (occ != null && occ.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
+                    {
+                        if (aType == WarToken.TokenActionType.Move) return false;
+                    }
+                }
+                catch { }
+
+                // Frontline relevance: only move if current tile or target tile touches player territory or border
+                try
+                {
+                    var curTile = token.GetCurrentWarTile();
+                    if (!IsNearFrontline(curTile) && !IsNearFrontline(targetTile))
+                    {
+                        return false; // Rear garrisons hold position
+                    }
+                }
+                catch { }
+            }
+
+            _enemyActionsThisTurn++;
+            return true;
+        }
+
+        private static bool IsNearFrontline(WarTile wt)
+        {
+            if (wt == null) return false;
+            var td = ZilleWarTable.TileDataOf(wt);
+            if (td == null) return false;
+            if (td.Allegiance == "Rizia" || td.IsBorder) return true;
+            var adj = wt.adjacentWarTiles;
+            if (adj != null)
+            {
+                for (int i = 0; i < adj.Count; i++)
+                {
+                    var nb = adj[i];
+                    if (nb == null) continue;
+                    var ntd = ZilleWarTable.TileDataOf(nb);
+                    if (ntd != null && (ntd.Allegiance == "Rizia" || ntd.IsBorder)) return true;
+                    var tok = nb.GetCurrentToken();
+                    if (tok != null && tok.GetTokenAllegiance() == WarToken.WarAllegiance.Player) return true;
+                }
+            }
+            return false;
         }
 
         public static void TokenNamePanelSetupPostfix(TokenNamePanel __instance, Token token)
@@ -1457,15 +1620,33 @@ namespace GreatZilleSolution
                 string menuText = e.DestinationEntry.MenuText ?? "";
 
                 // Check for war initiation via native Royal War Council Briefing or vanilla choice
-                if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Plan_Alpha") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
+                if (script.Contains("Choice_Romulus_Sword") || title.Contains("Choice_Romulus_Sword") || menuText.Contains("Righteous Sword"))
+                {
+                    MelonLogger.Msg("[WAR COUNCIL] Plan Sword chosen by player! Initializing Sword variant.");
+                    ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanSword);
+                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
+                }
+                else if (script.Contains("Choice_Romulus_Ark") || title.Contains("Choice_Romulus_Ark") || menuText.Contains("Plan Romulus: Ark"))
+                {
+                    var variant = ZilleCampaignState.IsDerdiaHybridSupportActive ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
+                    MelonLogger.Msg($"[WAR COUNCIL] Plan Ark chosen by player! Initializing variant {variant}.");
+                    ZilleCampaignState.SetOperationVariant(variant);
+                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
+                }
+                else if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Plan_Alpha") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Plan Alpha chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
+                    ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanSword);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
                 else if (script.Contains("Zille_War_Beta") || title.Contains("Choice_Plan_Beta") || title.Contains("Choice_Beta") || menuText.Contains("Plan Beta"))
                 {
-                    MelonLogger.Msg("[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Will spawn Zille war event token after briefing.");
+                    var variant = ZilleCampaignState.IsDerdiaHybridSupportActive ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
+                    MelonLogger.Msg($"[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Initializing variant {variant}.");
+                    ZilleCampaignState.SetOperationVariant(variant);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }

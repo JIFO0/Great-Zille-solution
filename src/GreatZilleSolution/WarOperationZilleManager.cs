@@ -1211,6 +1211,7 @@ namespace GreatZilleSolution
                 {
                     for (int i = 0; i < config.Tiles.Count; i++)
                     {
+                        if (config.Tiles[i].IsDisabled) continue;
                         zilleOpData.includedTileNames.Add(ZilleMapLayoutManager.GameTileName(config.Tiles[i].Id));
                     }
                 }
@@ -1233,6 +1234,7 @@ namespace GreatZilleSolution
                     for (int i = 0; i < config.Tiles.Count; i++)
                     {
                         var src = config.Tiles[i];
+                        if (src.IsDisabled) continue;
                         var wtd = new WarTileData();
                         ZilleWarTable.FillWarTileData(src, wtd);
                         if (string.IsNullOrEmpty(wtd.tileName))

@@ -76,21 +76,50 @@ namespace GreatZilleSolution
 
         private void DrawWindow(int id)
         {
-            if (GUI.Button(new Rect(8, 26, 168, 26), _tab == 0 ? "[ Provinces ]" : "Provinces")) _tab = 0;
-            if (GUI.Button(new Rect(182, 26, 168, 26), _tab == 1 ? "[ Units ]" : "Units")) _tab = 1;
-            if (GUI.Button(new Rect(356, 26, 174, 26), _tab == 2 ? "[ Reinforcements ]" : "Reinforcements")) _tab = 2;
+            // 5 Operation Variants selector bar
+            GUI.Label(new Rect(8, 22, 60, 20), "<b>Variant:</b>");
+            var curVar = ZilleCampaignState.CurrentVariant;
+            if (GUI.Button(new Rect(65, 20, 75, 22), curVar == ZilleOperationVariant.PlanArk ? "<b>[Ark]</b>" : "Ark"))
+            {
+                ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanArk);
+                _status = "Operation Variant: Plan Ark (130 provinces).";
+            }
+            if (GUI.Button(new Rect(145, 20, 80, 22), curVar == ZilleOperationVariant.PlanSword ? "<b>[Sword]</b>" : "Sword"))
+            {
+                ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanSword);
+                _status = "Operation Variant: Plan Sword (137 provinces).";
+            }
+            if (GUI.Button(new Rect(230, 20, 85, 22), curVar == ZilleOperationVariant.PlanArkDerdia ? "<b>[Ark (D)]</b>" : "Ark (D)"))
+            {
+                ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanArkDerdia);
+                _status = "Operation Variant: Plan Ark (Derdia) (137 provinces).";
+            }
+            if (GUI.Button(new Rect(320, 20, 105, 22), curVar == ZilleOperationVariant.TotalRepaymentDerdia ? "<b>[Repay (D)]</b>" : "Repay (D)"))
+            {
+                ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.TotalRepaymentDerdia);
+                _status = "Operation Variant: Total Repayment (Derdia) (186 provinces).";
+            }
+            if (GUI.Button(new Rect(430, 20, 102, 22), curVar == ZilleOperationVariant.TotalRepaymentNoDerdia ? "<b>[Repay]</b>" : "Repay"))
+            {
+                ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.TotalRepaymentNoDerdia);
+                _status = "Operation Variant: Total Repayment (bez Derdii) (179 provinces).";
+            }
+
+            if (GUI.Button(new Rect(8, 46, 168, 24), _tab == 0 ? "[ Provinces ]" : "Provinces")) _tab = 0;
+            if (GUI.Button(new Rect(182, 46, 168, 24), _tab == 1 ? "[ Units ]" : "Units")) _tab = 1;
+            if (GUI.Button(new Rect(356, 46, 174, 24), _tab == 2 ? "[ Reinforcements ]" : "Reinforcements")) _tab = 2;
 
             float contentH = _tab == 0 ? 980f : (_tab == 1 ? 860f : 980f);
             var orders = Orders();
             contentH += orders.Count * 26f;
-            _scroll = GUI.BeginScrollView(new Rect(8, 58, 524, 640), _scroll, new Rect(0, 0, 500, contentH));
+            _scroll = GUI.BeginScrollView(new Rect(8, 74, 524, 624), _scroll, new Rect(0, 0, 500, contentH));
             if (_tab == 0) DrawProvinces();
             else if (_tab == 1) DrawUnits();
             else DrawReinforcements();
             GUI.EndScrollView();
 
             GUI.Label(new Rect(10, 704, 520, 36), "<size=11><color=#d6d3c4>" + _status + "</color></size>");
-            GUI.DragWindow(new Rect(0, 0, 540, 24));
+            GUI.DragWindow(new Rect(0, 0, 540, 20));
         }
 
         private void DrawProvinces()
