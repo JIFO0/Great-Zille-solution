@@ -9,6 +9,7 @@
   "modNote": "Odprawa Wywiadu i Telefony Dyplomatyczne",
   "actors": [
     "Carlos Robles Azaro",
+    "Elena Werner",
     "Hugo Toras",
     "Laurento Esquibel",
     "Lucita Azaro",
@@ -21,14 +22,23 @@
     "RiziaDLC.Hugo_Resigned",
     "RiziaDLC.Lucita_Arrested",
     "RiziaDLC.Lucita_Executed",
+    "RiziaDLC.Resources_Budget",
+    "RiziaDLC.Resources_Military_Equipment",
+    "Zille_Leverage",
+    "Zille_PreNeg_CheckedLedger",
+    "Zille_PreNeg_CheckedLeverage",
     "Zille_War_Outcome"
   ],
   "writtenVariables": [
+    "Zille_Leverage",
     "Zille_Parley_Ready",
-    "Zille_Parley_Uncompromising"
+    "Zille_Parley_Uncompromising",
+    "Zille_PreNeg_CheckedLedger",
+    "Zille_PreNeg_CheckedLeverage",
+    "Zille_Smolak_Pressure"
   ],
-  "choicesCount": 3,
-  "entriesCount": 12,
+  "choicesCount": 5,
+  "entriesCount": 18,
   "entries": [
     {
       "id": 0,
@@ -52,7 +62,7 @@
       "actorId": 10,
       "speaker": "Narrator",
       "title": "PreNeg_Intro_1",
-      "dialogueText": "The heavy guns had fallen eerily silent along the smoke-shrouded Zille frontier and across the waters of the Gulf of Moridia. In the War Room, courier dispatches lay piled beside urgent telegrams from Konstantium. Wiktor Smolak had dispatched an envoy under a white flag proposing an immediate face-to-face parley.",
+      "dialogueText": "The heavy artillery had fallen eerily silent along the smoke-shrouded Zille frontier and across the Gulf of Moridia. Beside the battle maps in Palas Rezna lay urgent telegrams from Konstantium. Wiktor Smolak had dispatched an envoy under white flags proposing a face-to-face parley.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
@@ -70,12 +80,13 @@
       "actorId": 73,
       "speaker": "Lucita Azaro",
       "title": "Lucita_PreNeg_Report",
-      "dialogueText": "Your Majesty. Fighting has paused along the front. Both armies have expended immense ammunition reserves, and Smolak's envoy awaits your answer at the neutral border pavilion.",
+      "dialogueText": "Your Majesty. A temporary ceasefire holds across Zille. Both armies have expended immense shells, and Smolak's delegation awaits at the neutral pavilion overlooking the peninsula.",
       "menuText": "",
       "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
       "userScript": "",
       "outgoing": [
-        3
+        3,
+        103
       ],
       "isPlayer": false,
       "isModInjected": true,
@@ -86,10 +97,10 @@
       "id": 3,
       "actorId": 70,
       "speaker": "Laurento Esquibel",
-      "title": "Laurento_PreNeg_Warning",
-      "dialogueText": "The Alliance of Nations has issued an urgent ceasefire appeal, Your Majesty. Both superpowers are watching closely. What we win at the table now depends entirely on the ground our troops hold.",
+      "title": "Laurento_PreNeg_HighLeverage",
+      "dialogueText": "The Alliance of Nations watches closely, Your Majesty—and thanks to the evidence, treaties, and diplomatic groundwork you assembled throughout this crisis, you enter that pavilion holding genuine leverage over Smolak.",
       "menuText": "",
-      "conditions": "",
+      "conditions": "(Variable[\"Zille_Leverage\"] or 0) >= 4",
       "userScript": "",
       "outgoing": [
         4,
@@ -105,7 +116,7 @@
       "actorId": 68,
       "speaker": "Hugo Toras",
       "title": "Hugo_PreNeg_Counsel",
-      "dialogueText": "Romus... Remember who Smolak is. He is a cornered fox who shifts between jester and butcher in a heartbeat. Guard the dignity of House Toras, whatever terms lie ahead.",
+      "dialogueText": "Romus... Smolak shifts between buffoon and butcher in a heartbeat. Guard the dignity of House Toras, and never let him think our depots or treasury are weaker than they are.",
       "menuText": "",
       "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
       "userScript": "",
@@ -122,13 +133,50 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Romus_PreNeg_Prompt",
-      "dialogueText": "I looked across the map showing the final positions of our divisions from Brenas to the Gulf. The hour had come to face Wiktor Smolak in person.",
+      "dialogueText": "I studied the final map positions, our separate casualty ledgers, and my leather briefcase before setting out for the border pavilion.",
       "menuText": "",
       "conditions": "",
       "userScript": "",
       "outgoing": [
+        11,
+        12,
         20,
         21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 11,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "PreNeg_Check_Ledger",
+      "dialogueText": "Give me the exact numbers: how do our Zille losses compare separately from Pales, and can our treasury and arsenals back an ultimatum if Smolak walks out?",
+      "menuText": "\"Brief me on our exact Zille losses, any Pales drain, and whether our depots could sustain renewed fighting.\"",
+      "conditions": "Variable[\"Zille_PreNeg_CheckedLedger\"] ~= true",
+      "userScript": "Variable[\"Zille_PreNeg_CheckedLedger\"] = true;",
+      "outgoing": [
+        111,
+        112
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 12,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "PreNeg_Check_Leverage",
+      "dialogueText": "List every piece of leverage we hold against Wiktor Smolak right now—treaties, intelligence dossiers, foreign pacts, and blockades.",
+      "menuText": "\"List every diplomatic card we hold against Smolak inside that briefcase.\"",
+      "conditions": "Variable[\"Zille_PreNeg_CheckedLeverage\"] ~= true",
+      "userScript": "Variable[\"Zille_PreNeg_CheckedLeverage\"] = true;",
+      "outgoing": [
+        121
       ],
       "isPlayer": true,
       "isModInjected": true,
@@ -140,8 +188,8 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Choice_Parley_Strength",
-      "dialogueText": "Prepare the royal armored motorcade. Assemble our escort and forward commanders. I will meet Smolak at the border pavilion and settle this face to face.",
-      "menuText": "\"Prepare the royal motorcade. I will meet Smolak and negotiate under the royal standard.\"",
+      "dialogueText": "Prepare the royal armored motorcade. I will meet Smolak under the royal standard and dictate or bargain cleanly.",
+      "menuText": "\"Prepare the royal motorcade. I will meet Smolak and play our cards face to face.\"",
       "conditions": "",
       "userScript": "Variable[\"Zille_Parley_Ready\"] = true;",
       "outgoing": [
@@ -158,10 +206,10 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Choice_Unconditional_Surrender",
-      "dialogueText": "Inform Smolak that if he tries to stall or play games at the pavilion, our batteries and ships will reopen fire within the hour. Let us go settle Zille's fate.",
-      "menuText": "\"Tell Smolak our guns are still loaded—if he stalls, the bombardment resumes!\"",
-      "conditions": "(Variable[\"Zille_War_Outcome\"] or 0) >= 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0",
-      "userScript": "Variable[\"Zille_Parley_Ready\"] = true; Variable[\"Zille_Parley_Uncompromising\"] = true;",
+      "dialogueText": "Inform Smolak that if he stalls in that pavilion, our batteries and ships reopen fire within the hour. We bargain from unmistakable steel.",
+      "menuText": "\"Tell Smolak our guns stay loaded—with full depots behind us, stalling means renewed bombardment!\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) >= 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_Leverage\"] or 0) >= 2 and (Variable[\"Zille_Leverage\"] or 0) < 4)",
+      "userScript": "Variable[\"Zille_Parley_Ready\"] = true; Variable[\"Zille_Parley_Uncompromising\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
       "outgoing": [
         22,
         122
@@ -176,7 +224,7 @@
       "actorId": 73,
       "speaker": "Lucita Azaro",
       "title": "Ack_PreNeg_Lucita",
-      "dialogueText": "Lucita strapped on her sidearm and saluted with iron resolve. \"The royal escort is mounted, Your Majesty. Let us bring this to an end.\"",
+      "dialogueText": "Lucita strapped on her sidearm and saluted with iron resolve. \"The royal escort is mounted, Your Majesty. Let us bring Zille home.\"",
       "menuText": "",
       "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
       "userScript": "",
@@ -191,12 +239,31 @@
       "actorId": 88,
       "speaker": "Carlos Robles Azaro",
       "title": "Carlos_PreNeg_Report",
-      "dialogueText": "Your Majesty. A temporary ceasefire holds along the front lines. Both sides are exhausted of shells and fuel, and Smolak's envoy awaits our response at the neutral border pavilion.",
+      "dialogueText": "Your Majesty. Both fronts stand in a fragile truce. Our generals tally our exact Zille losses separately from any eastern Pales casualties as Smolak awaits your arrival at the pavilion.",
       "menuText": "",
       "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
       "userScript": "",
       "outgoing": [
-        3
+        3,
+        103
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 103,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_PreNeg_LowLeverage",
+      "dialogueText": "The Alliance of Nations presses for settlement, Your Majesty. Because our diplomatic leverage remains limited, what you salvage or dictate across that table will depend almost entirely on what our soldiers presently hold on the ground.",
+      "menuText": "",
+      "conditions": "not ((Variable[\"Zille_Leverage\"] or 0) >= 4)",
+      "userScript": "",
+      "outgoing": [
+        4,
+        104
       ],
       "isPlayer": false,
       "isModInjected": true,
@@ -208,9 +275,60 @@
       "actorId": 70,
       "speaker": "Laurento Esquibel",
       "title": "Laurento_PreNeg_NoHugo",
-      "dialogueText": "Remember Smolak's nature, Your Majesty—he will alternate between clownish charm and sudden threats. Keep a cool head when you sit across from him.",
+      "dialogueText": "Remember Smolak's nature, Your Majesty—he alternates between clownish jokes and vicious blackmail. Keep your cards close to your chest.",
       "menuText": "",
       "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 111,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Ack_PreNeg_Strong",
+      "dialogueText": "\"Our separate Zille casualty ledger stays manageable, and with over 1,000 weapons in stock and healthy treasury reserves, Smolak knows we are not bluffing if talks collapse.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1",
+      "userScript": "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 112,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Ack_PreNeg_Thin",
+      "dialogueText": "\"Keep a calm face in the pavilion, Your Majesty: whether from fierce Zille attrition, Pales draining our reserves, or depots sitting under 1,000 weapons, renewed all-out combat would strain our treasury severely. Use diplomacy and leverage ruthlessly.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 or (Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 121,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_PreNeg_Leverage",
+      "dialogueText": "\"Your case rests on the lapsed 1927 agreement, any Zille bombing intelligence you preserved, naval pressure across the Gulf of Moridia, and whatever pacts you sealed with Naeal, Perla, or Thornbourgh. Strike him with whichever weakness cuts deepest first.\"",
+      "menuText": "",
+      "conditions": "",
       "userScript": "",
       "outgoing": [
         10

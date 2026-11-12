@@ -19423,7 +19423,7 @@
       "dialogueText": "Enough of your extortion, Smolak! The 1927 agreement expired years ago. We will not entertain a rigged referendum. The Royal Army is advancing!",
       "menuText": "\"Enough of your extortion, Smolak! The 1927 agreement expired years ago. We will not entertain a rigged referendum. The Royal Army is advancing!\"",
       "conditions": "",
-      "userScript": "Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Referendum_Broken\"] = true;",
+      "userScript": "Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Referendum_Broken\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
       "outgoing": [
         99802
       ],

@@ -7852,7 +7852,7 @@
       "dialogueText": "Smolak arranged this bombing to fabricate an excuse to steal Zille! Order the III Corps in Brenas onto full combat footing immediately!",
       "menuText": "\"Smolak arranged this bombing to fabricate an excuse to steal Zille! Order the III Corps in Brenas onto full combat footing immediately!\"",
       "conditions": "",
-      "userScript": "Variable[\"Zille_EarlyWar_Triggered\"] = true; Variable[\"Zille_War_Alfa\"] = true;",
+      "userScript": "Variable[\"Zille_EarlyWar_Triggered\"] = true; Variable[\"Zille_War_Alfa\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
       "outgoing": [
         99302
       ],

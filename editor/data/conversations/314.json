@@ -9192,7 +9192,7 @@
       "dialogueText": "Patricio, Smolak is your biggest headache in South Merkopa. If Rizia is to humble him, Lespia must provide intelligence and diplomatic cover at the AN.",
       "menuText": "\"Patricio, Smolak is your biggest headache in South Merkopa. If Rizia is to humble him, Lespia must provide intelligence and diplomatic cover at the AN.\"",
       "conditions": "",
-      "userScript": "Variable[\"Zille_LespiaPact_Signed\"] = true;",
+      "userScript": "Variable[\"Zille_LespiaPact_Signed\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
       "outgoing": [
         99402
       ],

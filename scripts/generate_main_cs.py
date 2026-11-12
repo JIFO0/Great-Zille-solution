@@ -317,23 +317,35 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99101;
-            int replyId = 99102;
+            int replyRichId = 99102;
+            int replyTightId = 99103;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, HugoId, "Zille_Turn1_Council_Choice",
                 "Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency-including force if Smolak reneges.",
                 "\\\"Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency-including force if Smolak reneges.\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_Military_Posture\\\"] = 1; Variable[\\\"Zille_MilitarySentiment\\\"] = 1;");
+            SetEntryScript(choice, "Variable[\\\"Zille_Military_Posture\\\"] = 1; Variable[\\\"Zille_MilitarySentiment\\\"] = 1; Variable[\\\"Zille_War_Readiness\\\"] = (Variable[\\\"Zille_War_Readiness\\\"] or 0) + 1; Variable[\\\"Zille_Smolak_Pressure\\\"] = (Variable[\\\"Zille_Smolak_Pressure\\\"] or 0) + 1;");
 
-            var reply = CreateEntry(conv.id, replyId, HugoId, RomusId, "Hugo_Turn1_Zille_Response",
-                "\\\"A resolute sentiment, Your Majesty,\\\" Hugo inclined his head slowly. \\\"The Crown cannot appear weak before Wehlen. Yet taking back Zille by the sword would invite international outcry. Let us pray it does not come to bloodshed.\\\"");
+            var replyRich = CreateEntry(conv.id, replyRichId, HugoId, RomusId, "Hugo_Turn1_Zille_Response_Funded",
+                "\\\"A resolute sentiment, Your Majesty,\\\" Hugo inclined his head slowly. \\\"With our treasury presently holding healthy reserves, discreet contingency planning will not alarm the markets—though taking Zille by the sword would still invite AN outcry.\\\"");
+            SetEntryCondition(replyRich, "(Variable[\\\"RiziaDLC.Resources_Budget\\\"] or 0) >= 4");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyTight = CreateEntry(conv.id, replyTightId, HugoId, RomusId, "Hugo_Turn1_Zille_Response_Tight",
+                "\\\"A resolute sentiment, Your Majesty,\\\" Hugo inclined his head with a worried crease above his brow. \\\"Yet with our royal coffers already strained, mobilizing for war would demand ruthless fiscal discipline before a single shot is fired.\\\"");
+            SetEntryCondition(replyTight, "(Variable[\\\"RiziaDLC.Resources_Budget\\\"] or 0) < 4");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyRichId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyTightId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyRich.outgoingLinks.Add(CreateLink(conv.id, replyRichId, nextId));
+                replyTight.outgoingLinks.Add(CreateLink(conv.id, replyTightId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyRich);
+            conv.dialogueEntries.Add(replyTight);
             return true;
         }
 
@@ -348,23 +360,36 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99111;
-            int replyId = 99112;
+            int replyArmedId = 99112;
+            int replyLowId = 99113;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, LucitaId, "Zille_Turn1_Lucita_BorderChoice",
-                "Councilor Azaro, review our garrisons along the Brenas frontier. If diplomacy breaks down, the army must be ready to march on Zille.",
-                "\\\"Councilor Azaro, review our garrisons along the Brenas frontier. If diplomacy breaks down, the army must be ready to march on Zille.\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_StaffPlanning_Started\\\"] = true; Variable[\\\"Zille_MilitarySentiment\\\"] = 2;");
+                "Councilor Azaro, review our garrisons along the Brenas frontier and audit our armories. If diplomacy fails, the army must be ready to march on Zille.",
+                "\\\"Councilor Azaro, review our garrisons along the Brenas frontier and audit our armories. If diplomacy fails, the army must be ready to march on Zille.\\\"");
+            SetEntryScript(choice, "Variable[\\\"Zille_StaffPlanning_Started\\\"] = true; Variable[\\\"Zille_MilitarySentiment\\\"] = 2; Variable[\\\"Zille_War_Readiness\\\"] = (Variable[\\\"Zille_War_Readiness\\\"] or 0) + 1;");
 
-            var reply = CreateEntry(conv.id, replyId, LucitaId, RomusId, "Lucita_Turn1_Border_Response",
-                "\\\"Understood, Your Majesty!\\\" Lucita's eyes flashed with fierce enthusiasm. \\\"The Azaro divisions in Brenas will begin covert topographical surveys of the border approaches and Wehzek forward positions immediately.\\\"");
+            var replyArmed = CreateEntry(conv.id, replyArmedId, LucitaId, RomusId, "Lucita_Turn1_Border_Armed",
+                "\\\"Understood, Your Majesty!\\\" Lucita's eyes flashed with fierce enthusiasm. \\\"With over a thousand reserve weapons already stacked in the royal arsenals, House Azaro can begin covert topographical surveys of the Brenas-Zille frontier and Wehzek positions immediately.\\\"");
+            SetEntryCondition(replyArmed, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) >= 1000");
+            SetEntryScript(replyArmed, "Variable[\\\"Zille_War_Readiness\\\"] = (Variable[\\\"Zille_War_Readiness\\\"] or 0) + 1;");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyLow = CreateEntry(conv.id, replyLowId, LucitaId, RomusId, "Lucita_Turn1_Border_LowEquip",
+                "\\\"At once, Your Majesty,\\\" Lucita saluted, though her jaw tightened. \\\"We will map the Brenas-Zille approaches quietly, yet I must be candid: our depots hold under a thousand reserve rifles. Without serious arms procurement or domestic factories, our brigades cannot sustain an offensive.\\\"");
+            SetEntryCondition(replyLow, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) < 1000");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyArmedId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyLowId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyArmed.outgoingLinks.Add(CreateLink(conv.id, replyArmedId, nextId));
+                replyLow.outgoingLinks.Add(CreateLink(conv.id, replyLowId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyArmed);
+            conv.dialogueEntries.Add(replyLow);
             return true;
         }
 
@@ -382,12 +407,12 @@ namespace GreatZilleSolution
             int replyId = 99122;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, LaurentoId, "Zille_Turn2_Diplomacy_Ultimatum",
-                "Smolak should be reminded that the 1927 lease has an expiration date, not a renegotiation clause. Rizia will take back what is hers.",
-                "\\\"Smolak should be reminded that the 1927 lease has an expiration date, not a renegotiation clause. Rizia will take back what is hers.\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_Diplomatic_Firmness\\\"] = 2;");
+                "Smolak should be reminded that the 1927 agreement has an expiration date, not a renegotiation clause. Rizia will assert her lawful sovereignty.",
+                "\\\"Smolak should be reminded that the 1927 agreement has an expiration date, not a renegotiation clause. Rizia will assert her lawful sovereignty.\\\"");
+            SetEntryScript(choice, "Variable[\\\"Zille_Diplomatic_Firmness\\\"] = 2; Variable[\\\"Zille_AN_Legitimacy\\\"] = (Variable[\\\"Zille_AN_Legitimacy\\\"] or 0) + 2; Variable[\\\"Zille_Leverage\\\"] = (Variable[\\\"Zille_Leverage\\\"] or 0) + 1;");
 
             var reply = CreateEntry(conv.id, replyId, LaurentoId, RomusId, "Laurento_Turn2_Ultimatum_Response",
-                "\\\"A firm stance, Your Majesty. I will draft a memorandum emphasizing our sovereign legal rights under the 1927 treaty.\\\"");
+                "\\\"A legally unassailable posture, Your Majesty. Putting the 1927 expiration clauses on the official diplomatic record strengthens our standing before the Alliance of Nations in Konstantium, Kyrute.\\\"");
 
             choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
             int nextId = FindConvergenceTarget(conv, parent);
@@ -411,23 +436,36 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99131;
-            int replyId = 99132;
+            int replyStrongId = 99132;
+            int replyWeakId = 99133;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, SmolakId, "Zille_Turn2_Smolak_Confrontation",
-                "Enjoy your parade, President Smolak. When the 1927 lease expires, Rizian flags will fly above this city-one way or another.",
-                "\\\"Enjoy your parade, President Smolak. When the 1927 lease expires, Rizian flags will fly above this city-one way or another.\\\"");
-            SetEntryScript(choice, "Variable[\\\"Smolak_Zille_Threatened\\\"] = true;");
+                "Enjoy your parade, President Smolak. When the 1927 agreement expires, Rizian flags will fly above this city-one way or another.",
+                "\\\"Enjoy your parade, President Smolak. When the 1927 agreement expires, Rizian flags will fly above this city-one way or another.\\\"");
+            SetEntryScript(choice, "Variable[\\\"Smolak_Zille_Threatened\\\"] = true; Variable[\\\"Zille_Smolak_Pressure\\\"] = (Variable[\\\"Zille_Smolak_Pressure\\\"] or 0) + 2;");
 
-            var reply = CreateEntry(conv.id, replyId, SmolakId, RomusId, "Smolak_Turn2_Confrontation_Response",
-                "Smolak's smile froze for a fraction of a second before he let out a harsh, barking laugh. \\\"Bold words, King Romus! But remember: flags require soldiers to raise them, and soldiers bleed very easily on these coastal hills.\\\"");
+            var replyStrong = CreateEntry(conv.id, replyStrongId, SmolakId, RomusId, "Smolak_Turn2_Confrontation_Strong",
+                "Smolak's smile twitched as his gaze flicked to the Golden Guard escorting you. \\\"Careful, King Romus. I hear your arsenals are filling up in Porte Drazon—but taking these coastal hills against dug-in veterans would still cost you dearly.\\\"");
+            SetEntryCondition(replyStrong, "Variable[\\\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\\\"] == true or Variable[\\\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\\\"] == true or (Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) >= 1000");
+            SetEntryScript(replyStrong, "Variable[\\\"Zille_Leverage\\\"] = (Variable[\\\"Zille_Leverage\\\"] or 0) + 1;");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyWeak = CreateEntry(conv.id, replyWeakId, SmolakId, RomusId, "Smolak_Turn2_Confrontation_Weak",
+                "Smolak let out a barking, mocking laugh. \\\"Bold words from a monarch whose warehouses can barely equip a parade! Before threatening Wehlen, Romus, count how many rifles you actually have in Porte Drazon!\\\"");
+            SetEntryCondition(replyWeak, "Variable[\\\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\\\"] ~= true and Variable[\\\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\\\"] ~= true and (Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) < 1000");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyStrongId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyWeakId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyStrong.outgoingLinks.Add(CreateLink(conv.id, replyStrongId, nextId));
+                replyWeak.outgoingLinks.Add(CreateLink(conv.id, replyWeakId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyStrong);
+            conv.dialogueEntries.Add(replyWeak);
             return true;
         }
 
@@ -442,23 +480,35 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99141;
-            int replyId = 99142;
+            int replyLucitaId = 99142;
+            int replyTitusId = 99143;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, LucitaId, "Zille_Turn3_Bombing_WarOption",
                 "This bombing is a blatant provocation by Wehlen. Order the Third and Fourth Corps to advance across the border immediately!",
                 "\\\"This bombing is a blatant Wehzek provocation! Order our divisions to cross the border and reclaim Zille immediately!\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_War_EarlyLaunch\\\"] = true;");
+            SetEntryScript(choice, "Variable[\\\"Zille_War_EarlyLaunch\\\"] = true; Variable[\\\"Zille_Smolak_Pressure\\\"] = (Variable[\\\"Zille_Smolak_Pressure\\\"] or 0) + 1;");
 
-            var reply = CreateEntry(conv.id, replyId, LucitaId, RomusId, "Lucita_Turn3_EarlyWar_Response",
-                "\\\"Your Majesty, launching an unprepared offensive without securing our supply lines or international backing would be catastrophic! Smolak's garrisons are dug in behind fortified border redoubts and coastal bunkers!\\\"");
+            var replyLucita = CreateEntry(conv.id, replyLucitaId, LucitaId, RomusId, "Lucita_Turn3_EarlyWar_Response",
+                "\\\"Your Majesty, launching an unprepared offensive right now—before securing fuel corridors, munitions, and diplomatic cover—would invite slaughter against Valdez's coastal redoubts! Let us prepare properly first.\\\"");
+            SetEntryCondition(replyLucita, "Variable[\\\"RiziaDLC.Lucita_Arrested\\\"] ~= true and Variable[\\\"RiziaDLC.Lucita_Executed\\\"] ~= true");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyTitus = CreateEntry(conv.id, replyTitusId, TitusId, RomusId, "Titus_Turn3_EarlyWar_Response",
+                "\\\"Your Majesty, with all due duty—marching across the frontier before the General Staff completes supply staging and arsenal readiness would waste our men in uncoordinated assaults.\\\"");
+            SetEntryCondition(replyTitus, "Variable[\\\"RiziaDLC.Lucita_Arrested\\\"] == true or Variable[\\\"RiziaDLC.Lucita_Executed\\\"] == true");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyLucitaId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyTitusId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyLucita.outgoingLinks.Add(CreateLink(conv.id, replyLucitaId, nextId));
+                replyTitus.outgoingLinks.Add(CreateLink(conv.id, replyTitusId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyLucita);
+            conv.dialogueEntries.Add(replyTitus);
             return true;
         }
 
@@ -473,23 +523,36 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99151;
-            int replyId = 99152;
+            int replyNormalId = 99152;
+            int replyBlackmailId = 99153;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, AlvarezId, "Zille_Turn4_Alvarez_AntiSmolakChoice",
                 "Patricio, Wehlen is a rogue regime threatening regional commerce. If Rizia must take action in Zille, can we count on Lespian intelligence?",
                 "\\\"Patricio, Wehlen is a rogue regime threatening regional commerce. If Rizia must take action in Zille, can we count on Lespian intelligence?\\\"");
-            SetEntryScript(choice, "Variable[\\\"Lespia_Zille_Intelligence_Asked\\\"] = true;");
+            SetEntryScript(choice, "Variable[\\\"Lespia_Zille_Intelligence_Asked\\\"] = true; Variable[\\\"Zille_Leverage\\\"] = (Variable[\\\"Zille_Leverage\\\"] or 0) + 1;");
 
-            var reply = CreateEntry(conv.id, replyId, AlvarezId, RomusId, "Alvarez_Turn4_AntiSmolak_Response",
-                "Alvarez chuckled over the static of the line. \\\"Smolak is a nuisance, Romus, but intelligence isn't free. Help Lespia in the MITZ negotiations, and maybe our reconnaissance planes will happen to photograph Valdez's bunker network for you.\\\"");
+            var replyNormal = CreateEntry(conv.id, replyNormalId, AlvarezId, RomusId, "Alvarez_Turn4_AntiSmolak_Response",
+                "Alvarez chuckled over the static of the line. \\\"Smolak is a nuisance, Romus, but intelligence isn't free. Help Lespia in the MITZ talks, and maybe our reconnaissance planes will happen to photograph Valdez's bunker network for you.\\\"");
+            SetEntryCondition(replyNormal, "Variable[\\\"RiziaDLC.Zille_Discovered_LespianInvolvement\\\"] ~= true and Variable[\\\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\\\"] ~= true");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyBlackmail = CreateEntry(conv.id, replyBlackmailId, AlvarezId, RomusId, "Alvarez_Turn4_Blackmail_Response",
+                "Alvarez went quiet for a beat before clearing his throat. \\\"Ah... considering the delicate intelligence files resting in your Golden Guard's safe regarding Zille, Romus, I suppose Lespian reconnaissance could look the other way and share Wehlen's coordinates.\\\"");
+            SetEntryCondition(replyBlackmail, "Variable[\\\"RiziaDLC.Zille_Discovered_LespianInvolvement\\\"] == true or Variable[\\\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\\\"] == true");
+            SetEntryScript(replyBlackmail, "Variable[\\\"Zille_Leverage\\\"] = (Variable[\\\"Zille_Leverage\\\"] or 0) + 2; Variable[\\\"Zille_Lespia_Intel\\\"] = true;");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyNormalId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyBlackmailId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyNormal.outgoingLinks.Add(CreateLink(conv.id, replyNormalId, nextId));
+                replyBlackmail.outgoingLinks.Add(CreateLink(conv.id, replyBlackmailId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyNormal);
+            conv.dialogueEntries.Add(replyBlackmail);
             return true;
         }
 
@@ -504,23 +567,35 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99161;
-            int replyId = 99162;
+            int replyLowId = 99162;
+            int replyReadyId = 99163;
 
-            var choice = CreateEntry(conv.id, choiceId, RomusId, HugoId, "Zille_Turn4_Council_TwoFrontWarning",
-                "We must not overcommit in Pales. Zille remains our sovereign territory, and Smolak will exploit any sign of overextension.",
-                "\\\"We must not overcommit in Pales. Zille remains our sovereign territory, and Smolak will exploit any sign of overextension.\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_Priority_Over_Pales\\\"] = true;");
+            var choice = CreateEntry(conv.id, choiceId, RomusId, ElenaId, "Zille_Turn4_Council_TwoFrontWarning",
+                "We must audit our reserves carefully before escalating in Pales. Zille remains our sovereign territory, and Smolak will exploit any overextension.",
+                "\\\"We must audit our reserves carefully before escalating in Pales. Zille remains our sovereign territory, and Smolak will exploit any overextension.\\\"");
+            SetEntryScript(choice, "Variable[\\\"Zille_Priority_Over_Pales\\\"] = true; Variable[\\\"Zille_War_Readiness\\\"] = (Variable[\\\"Zille_War_Readiness\\\"] or 0) + 1;");
 
-            var reply = CreateEntry(conv.id, replyId, HugoId, RomusId, "Hugo_Turn4_TwoFront_Response",
-                "\\\"Wise counsel, Romus. A two-front confrontation against both Pales and Wehlen would bleed our kingdom dry. We must choose our battles with care.\\\"");
+            var replyLow = CreateEntry(conv.id, replyLowId, ElenaId, RomusId, "Elena_Turn4_TwoFront_LowStock",
+                "\\\"For Dast's sake, Your Majesty, you are entirely right! With under a thousand reserve weapons or tight energy cushions, fighting on both Pales' eastern frontier and Zille would hemorrhage our treasury and stall every tank.\\\"");
+            SetEntryCondition(replyLow, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) < 1000 or (Variable[\\\"RiziaDLC.Resources_Energy\\\"] or 0) <= 3");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyReady = CreateEntry(conv.id, replyReadyId, ElenaId, RomusId, "Elena_Turn4_TwoFront_Equipped",
+                "\\\"A sound check, Your Majesty. Even though our warehouses hold over a thousand weapons and adequate energy for one campaign, splitting divisions between Pales and Zille would still double our wartime budget burn.\\\"");
+            SetEntryCondition(replyReady, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) >= 1000 and (Variable[\\\"RiziaDLC.Resources_Energy\\\"] or 0) > 3");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyLowId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyReadyId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyLow.outgoingLinks.Add(CreateLink(conv.id, replyLowId, nextId));
+                replyReady.outgoingLinks.Add(CreateLink(conv.id, replyReadyId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyLow);
+            conv.dialogueEntries.Add(replyReady);
             return true;
         }
 
@@ -536,23 +611,36 @@ namespace GreatZilleSolution
             if (parent == null) return false;
 
             int choiceId = 99171;
-            int replyId = 99172;
+            int replyLeverId = 99172;
+            int replyBluffId = 99173;
 
             var choice = CreateEntry(conv.id, choiceId, RomusId, SmolakId, "Zille_Turn8_War_Ultimatum",
-                "Enough of your extortion, Smolak! The 1927 lease has expired. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!",
-                "\\\"Enough of your extortion, Smolak! The 1927 lease has expired. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!\\\"");
-            SetEntryScript(choice, "Variable[\\\"Zille_War_UltimatumGiven\\\"] = true; Variable[\\\"Zille_War_Active\\\"] = true; Variable[\\\"Zille_War_Mobilization\\\"] = true;");
+                "Enough of your extortion, Smolak! The 1927 agreement expired years ago. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!",
+                "\\\"Enough of your extortion, Smolak! The 1927 agreement expired years ago. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!\\\"");
+            SetEntryScript(choice, "Variable[\\\"Zille_War_UltimatumGiven\\\"] = true; Variable[\\\"Zille_War_Active\\\"] = true; Variable[\\\"Zille_War_Mobilization\\\"] = true; Variable[\\\"Zille_Smolak_Pressure\\\"] = (Variable[\\\"Zille_Smolak_Pressure\\\"] or 0) + 2;");
 
-            var reply = CreateEntry(conv.id, replyId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Response",
-                "Smolak's face darkened, veins bulging along his neck as he slammed his fist onto the cabin table. \\\"You dare threaten Wehlen aboard my own airship?! Go on then, King Romus! Send your spoiled nobles and shiny tanks! General Valdez will bury them in the mud of Zille!\\\"");
+            var replyLever = CreateEntry(conv.id, replyLeverId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Shaken",
+                "Smolak's face darkened as he gripped the table inside the airship cabin, his eyes darting to the thick dossier in your hand. \\\"So you're actually ready to bleed for it, Romus? Go ahead then—send your well-armed nobles! General Valdez will fight you for every hillside!\\\"");
+            SetEntryCondition(replyLever, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) >= 1000 or Variable[\\\"RiziaDLC.Wehlen_Zille_SharedEvidence\\\"] == true or (Variable[\\\"Zille_Leverage\\\"] or 0) >= 2");
+            SetEntryScript(replyLever, "Variable[\\\"Zille_Leverage\\\"] = (Variable[\\\"Zille_Leverage\\\"] or 0) + 1;");
 
-            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            var replyBluff = CreateEntry(conv.id, replyBluffId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Bluff",
+                "Smolak slammed his glass down and barked a harsh laugh inside the airship gondola. \\\"Threats with half-empty depots and no real leverage? Send your shiny parade brigades if you dare, King Romus—Valdez will bury them in the mud of Zille!\\\"");
+            SetEntryCondition(replyBluff, "(Variable[\\\"RiziaDLC.Resources_Military_Equipment\\\"] or 0) < 1000 and Variable[\\\"RiziaDLC.Wehlen_Zille_SharedEvidence\\\"] ~= true and (Variable[\\\"Zille_Leverage\\\"] or 0) < 2");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyLeverId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyBluffId));
             int nextId = FindConvergenceTarget(conv, parent);
-            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+            if (nextId >= 0)
+            {
+                replyLever.outgoingLinks.Add(CreateLink(conv.id, replyLeverId, nextId));
+                replyBluff.outgoingLinks.Add(CreateLink(conv.id, replyBluffId, nextId));
+            }
 
             parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
             conv.dialogueEntries.Add(choice);
-            conv.dialogueEntries.Add(reply);
+            conv.dialogueEntries.Add(replyLever);
+            conv.dialogueEntries.Add(replyBluff);
             return true;
         }
 

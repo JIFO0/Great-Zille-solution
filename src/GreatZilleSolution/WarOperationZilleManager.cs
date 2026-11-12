@@ -28,6 +28,22 @@ namespace GreatZilleSolution
         public static bool PendingZilleTokenSpawnAfterBriefing { get; set; } = false;
 
         private static GameObject _spawnedZilleWarToken = null;
+        private static GameObject _spawnedMaveNortusToken = null;
+        private static bool _pendingPhase2TokenSpawn = false;
+        private static float _phase2TokenSpawnAt = 0f;
+        private static int _phase2MapStepsSeen = 0;
+
+        public static GameObject SpawnedMaveNortusToken => _spawnedMaveNortusToken;
+        public static bool PendingPhase2TokenSpawn => _pendingPhase2TokenSpawn;
+
+        public static string GetOperationDisplayName()
+        {
+            bool isArk = (ZilleCampaignState.PlanType == ZillePlanType.Romulus && ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.Ark)
+                      || (ZilleCampaignState.PlanType == ZillePlanType.Staff && ZilleCampaignState.StaffPlan == ZilleStaffPlan.Ark)
+                      || ZilleCampaignState.CurrentVariant == ZilleOperationVariant.PlanArk
+                      || ZilleCampaignState.CurrentVariant == ZilleOperationVariant.PlanArkDerdia;
+            return isArk ? "Operation: Golden Ark" : "Operation: Righteous Sword";
+        }
         private static Texture _originalPalesTexture = null;
         private static readonly List<Vector3> _originalTilePositions = new List<Vector3>();
         private static readonly List<Vector3> _originalTileScales = new List<Vector3>();
@@ -125,7 +141,9 @@ namespace GreatZilleSolution
 
         public static ZilleWarOutcome ResolveStaffPhase(ZilleStaffPlan plan, int phase)
         {
+            ZilleCampaignState.SyncFromLua();
             int score = 0;
+            int equipBonus = 0;
             try
             {
                 int pp = DialogueHelper.GetIntVariable("Country_Military_PowerProjection");
@@ -133,12 +151,22 @@ namespace GreatZilleSolution
                 int energy = DialogueHelper.GetIntVariable("Resources_Energy");
 
                 score += pp;
-                score += Math.Min(3, equipment / 2);
+                // Vanilla Rizia military equipment scale: <500 critical deficit, <1000 low, 1000-2499 adequate, 2500-4999 strong, >=5000 overflowing
+                if (equipment >= 5000) equipBonus = 4;
+                else if (equipment >= 2500) equipBonus = 3;
+                else if (equipment >= 1000) equipBonus = 2;
+                else if (equipment >= 500) equipBonus = 0;
+                else equipBonus = -2;
+                score += equipBonus;
+
+                if (energy <= 1) score -= 2;
+                else if (energy >= 5) score += 1;
 
                 switch (plan)
                 {
                     case ZilleStaffPlan.Hawk:
-                        if (DialogueHelper.GetBoolVariable("Policy_RD_Order_BomberPlaneFactory_Completed")) score += 2;
+                        if (DialogueHelper.GetBoolVariable("Policy_RD_Order_BomberPlaneFactory_Completed")
+                            || DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Bomber_Total") >= 1) score += 2;
                         if (energy >= 3) score += 1;
                         break;
                     case ZilleStaffPlan.Sword:
@@ -150,10 +178,12 @@ namespace GreatZilleSolution
                                   + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Flagship_Total")
                                   + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Submarine_Total");
                         if (fleet >= 2) score += 2;
+                        else score -= 3; // Attempting maritime envelopment without a fleet carries steep penalties
                         if (ZilleCampaignState.IsNavalBlockadeActive) score += 1;
                         break;
                     case ZilleStaffPlan.Spear:
-                        if (DialogueHelper.GetBoolVariable("Policy_Order_GoldenGuard_Expanded")) score += 2;
+                        if (DialogueHelper.GetBoolVariable("Policy_Order_GoldenGuard_Expanded")
+                            || DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_GoldenGuard_Total") >= 1) score += 2;
                         if (DialogueHelper.GetBoolVariable("Policy_RD_Order_BuildMaveNortusIntelHub_Completed")) score += 1;
                         break;
                 }
@@ -163,8 +193,13 @@ namespace GreatZilleSolution
                 if (string.IsNullOrEmpty(logistics)) logistics = DialogueHelper.GetStringVariable("Zille_War_Logistics");
                 if (logistics == "Sazon" || logistics == "Azaro" || logistics == "Compromise") score += 1;
 
-                if (ZilleCampaignState.IsLespiaPactAccepted) score += 2;
+                if (ZilleCampaignState.IsLespiaPactAccepted || ZilleCampaignState.IsLespiaIntelActive) score += 2;
                 if (ZilleCampaignState.IsDerdiaHybridSupportActive) score += 1;
+                if (ZilleCampaignState.IsRumburgMunitionsActive) score += 1;
+
+                // Micro-effects accumulated across dialogues contribute directly to operational planning
+                score += Math.Max(-2, Math.Min(4, ZilleCampaignState.WarReadinessScore / 2));
+                score += Math.Max(-2, Math.Min(3, ZilleCampaignState.LeverageScore / 3));
 
                 if (ZilleCampaignState.IsTwoFrontWarThreat()) score -= 3;
             }
@@ -183,6 +218,18 @@ namespace GreatZilleSolution
             else if (totalVp <= 10) outcome = ZilleWarOutcome.BloodyStalemate;
             else if (totalVp <= 14) outcome = ZilleWarOutcome.DecisiveVictory;
             else outcome = ZilleWarOutcome.OverwhelmingTriumph;
+
+            // Record isolated Zille staff casualties without touching Pales ledgers
+            int estPlayerLost = outcome == ZilleWarOutcome.OverwhelmingTriumph ? 1
+                              : outcome == ZilleWarOutcome.DecisiveVictory ? 2
+                              : outcome == ZilleWarOutcome.BloodyStalemate ? 3
+                              : outcome == ZilleWarOutcome.TacticalDefeat ? 4 : 6;
+            if (equipBonus < 0) estPlayerLost += 1;
+            if (ZilleCampaignState.IsTwoFrontWarThreat()) estPlayerLost += 1;
+            int estEnemyLost = outcome == ZilleWarOutcome.OverwhelmingTriumph ? 6
+                             : outcome == ZilleWarOutcome.DecisiveVictory ? 5
+                             : outcome == ZilleWarOutcome.BloodyStalemate ? 3 : 1;
+            ZilleCampaignState.RecordZilleLosses(phase, estPlayerLost, estEnemyLost);
 
             return outcome;
         }
@@ -391,6 +438,10 @@ namespace GreatZilleSolution
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/WarPreNegotiationsBriefing");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarSmolakParley", "Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "Zille/WarSmolakFinalParley");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/WarPeaceTreaty");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_HomeFrontCrisis", "Turn_Zille_HomeFrontCrisis", "Wartime Home Front: Energy & AN Pressure", "Cabinet Room, Palas Rezna", "Zille/HomeFrontCrisis");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_ZilleLiberation", "Turn_Zille_ZilleLiberation", "Homecoming in Zille City: The Harbor Quarter", "Zille City Harbor", "Zille/ZilleLiberation");
+
+                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
 
                 // 3. Register WarFragmentData for Zille invasion in EntityDataManager
                 var allWarList = EntityDataManager.AllWarFragmentsData ?? GetEntityBackingList<WarFragmentData>("warFragmentData");
@@ -694,6 +745,298 @@ namespace GreatZilleSolution
             }
         }
 
+        public static void SuppressZilleWarEventToken()
+        {
+            try
+            {
+                if (_spawnedZilleWarToken == null)
+                    _spawnedZilleWarToken = GameObject.Find("InvasionOfZille Event Variant");
+                if (_spawnedZilleWarToken != null && _spawnedZilleWarToken.activeSelf)
+                {
+                    _spawnedZilleWarToken.SetActive(false);
+                    var rends = _spawnedZilleWarToken.GetComponentsInChildren<Renderer>(true);
+                    for (int r = 0; r < rends.Length; r++)
+                        if (rends[r] != null) rends[r].enabled = false;
+                    MelonLogger.Msg("[WAR ENGINE] Hid completed Phase I InvasionOfZille event token.");
+                }
+                var zShadow = GameObject.Find("InvasionOfZille Shadow");
+                if (zShadow != null && zShadow.activeSelf) zShadow.SetActive(false);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[WAR ENGINE] SuppressZilleWarEventToken: " + ex.Message);
+            }
+        }
+
+        public static void SuppressMaveNortusHQEventToken()
+        {
+            try
+            {
+                if (_spawnedMaveNortusToken == null)
+                    _spawnedMaveNortusToken = GameObject.Find("MaveNortusHQ Event Variant");
+                if (_spawnedMaveNortusToken != null && _spawnedMaveNortusToken.activeSelf)
+                {
+                    _spawnedMaveNortusToken.SetActive(false);
+                    var rends = _spawnedMaveNortusToken.GetComponentsInChildren<Renderer>(true);
+                    for (int r = 0; r < rends.Length; r++)
+                        if (rends[r] != null) rends[r].enabled = false;
+                    MelonLogger.Msg("[WAR ENGINE] Hid Mave Nortus Field HQ event token.");
+                }
+                var mShadow = GameObject.Find("MaveNortusHQ Shadow");
+                if (mShadow != null && mShadow.activeSelf) mShadow.SetActive(false);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[WAR ENGINE] SuppressMaveNortusHQEventToken: " + ex.Message);
+            }
+        }
+
+        public static bool SpawnMaveNortusHQEventToken()
+        {
+            RegisterNativeZilleEntities();
+            SuppressPalesWarMarker();
+            SuppressZilleWarEventToken();
+
+            try
+            {
+                // Register MapTokenData for Mave Nortus HQ if absent
+                var allTokenList = GetEntityBackingList<MapTokenData>("mapTokensData") ?? EntityDataManager.MapTokensData;
+                MapTokenData maveMtd = null;
+                if (allTokenList != null)
+                {
+                    for (int i = 0; i < allTokenList.Count; i++)
+                    {
+                        var t = allTokenList[i];
+                        if (t != null && t.NameInDatabase == "Rizia_Event_MaveNortusHQ")
+                        {
+                            maveMtd = t;
+                            break;
+                        }
+                    }
+                    if (maveMtd == null)
+                    {
+                        maveMtd = new MapTokenData();
+                        maveMtd.Id = "Rizia_Event_MaveNortusHQ";
+                        maveMtd.NameInDatabase = "Rizia_Event_MaveNortusHQ";
+                        maveMtd.Path = "Rizia/Tokens";
+                        maveMtd.IsWIP = false;
+                        maveMtd.Notes = "";
+                        maveMtd.MapTokenProperties = new MapTokenProperties();
+                        maveMtd.MapTokenProperties.Title = "Mave Nortus Field HQ";
+                        maveMtd.MapTokenProperties.Subtitle = "Post-Phase I Council";
+                        maveMtd.MapTokenProperties.ImagePath = "";
+                        maveMtd.MapTokenProperties.SoundEffect = "";
+                        maveMtd.MapTokenProperties.Type = "Event";
+                        maveMtd.MapTokenProperties.IsTokenEnabled = true;
+                        maveMtd.StatusEffectsProperties = new StatusEffectsProperties();
+                        maveMtd.StatusEffectsProperties.HasNewStatusEffect = false;
+                        maveMtd.StatusEffectsProperties.StatusEffects = new Il2CppSystem.Collections.Generic.List<string>();
+                        maveMtd.StatusEffectsProperties.ConditionalStatusEffectGroups = new Il2CppSystem.Collections.Generic.List<string>();
+                        maveMtd.DescriptionProperties = new DescriptionProperties();
+                        maveMtd.DescriptionProperties.Description = "Frontline Headquarters at Mave Nortus following Phase I.";
+                        maveMtd.AppBundleProperties = CreateRiziaBundleProps();
+                        allTokenList.Add(maveMtd);
+                    }
+                }
+
+                var maveCity = FindCityToken("mave") ?? FindCityToken("nortus") ?? FindCityToken("bronaz");
+                Vector3 mavePos = maveCity != null
+                    ? maveCity.transform.position + new Vector3(0.03f, 0f, -0.02f)
+                    : BorderEventPosition() + new Vector3(-0.04f, 0f, -0.06f);
+
+                if (_spawnedMaveNortusToken == null)
+                {
+                    _spawnedMaveNortusToken = GameObject.Find("MaveNortusHQ Event Variant");
+                    if (_spawnedMaveNortusToken == null)
+                    {
+                        var allObjs = Resources.FindObjectsOfTypeAll<GameObject>();
+                        for (int i = 0; i < allObjs.Length; i++)
+                        {
+                            if (allObjs[i] != null && allObjs[i].name == "MaveNortusHQ Event Variant")
+                            {
+                                _spawnedMaveNortusToken = allObjs[i];
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (_spawnedMaveNortusToken == null)
+                {
+                    GameObject template = _spawnedZilleWarToken ?? GameObject.Find("InvasionOfPales Event Variant");
+                    if (template == null)
+                    {
+                        var allObjs = Resources.FindObjectsOfTypeAll<GameObject>();
+                        for (int i = 0; i < allObjs.Length; i++)
+                        {
+                            if (allObjs[i] != null && (allObjs[i].name == "InvasionOfPales Event Variant" || allObjs[i].name == "InvasionOfZille Event Variant"))
+                            {
+                                template = allObjs[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    if (template != null)
+                    {
+                        Transform parent = template.transform.parent;
+                        _spawnedMaveNortusToken = UnityEngine.Object.Instantiate(template, parent);
+                        _spawnedMaveNortusToken.name = "MaveNortusHQ Event Variant";
+                        _spawnedMaveNortusToken.transform.position = mavePos;
+                        _spawnedMaveNortusToken.transform.rotation = template.transform.rotation;
+                        _spawnedMaveNortusToken.transform.localScale = template.transform.localScale;
+                        _spawnedMaveNortusToken.layer = template.layer;
+                        var allTrans = _spawnedMaveNortusToken.GetComponentsInChildren<Transform>(true);
+                        for (int i = 0; i < allTrans.Length; i++)
+                        {
+                            if (allTrans[i] != null) allTrans[i].gameObject.layer = template.layer;
+                        }
+                    }
+                }
+
+                if (_spawnedMaveNortusToken != null)
+                {
+                    _spawnedMaveNortusToken.transform.position = mavePos;
+                    _spawnedMaveNortusToken.SetActive(true);
+                    MatchTokenHeight(_spawnedMaveNortusToken, maveCity ?? _borderAnchor);
+
+                    var tok = _spawnedMaveNortusToken.GetComponent<Token>();
+                    if (tok != null)
+                    {
+                        tok.tokenDataEntityName = "Rizia_Event_MaveNortusHQ";
+                        tok.tokenType = Token.TokenType.Event;
+                        if (maveMtd != null) tok.tokenData = maveMtd;
+                        tok.gameObject.SetActive(true);
+                        tok.Setup();
+                        if (Managers.Instance?.Tokens != null && !Managers.Instance.Tokens.Contains(tok))
+                            Managers.Instance.Tokens.Add(tok);
+                    }
+
+                    var rends = _spawnedMaveNortusToken.GetComponentsInChildren<Renderer>(true);
+                    for (int r = 0; r < rends.Length; r++)
+                    {
+                        if (rends[r] != null)
+                        {
+                            rends[r].enabled = true;
+                            rends[r].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                            rends[r].receiveShadows = true;
+                        }
+                    }
+
+                    MelonLogger.Msg($"[WAR ENGINE] Spawned Mave Nortus Field HQ event token at {mavePos} (city ref: {maveCity?.name ?? "fallback"}).");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] SpawnMaveNortusHQEventToken error: {ex.Message}");
+            }
+            return false;
+        }
+
+        public static void PreparePostPhase1CivilianEvents()
+        {
+            if (CurrentTheatre != ActiveWarTheatre.Civilian) return;
+            SuppressPalesWarMarker();
+
+            if (ZilleCampaignState.Phase1Finished && !ZilleCampaignState.MaveNortusHQCompleted)
+            {
+                SuppressZilleWarEventToken();
+                if (_spawnedMaveNortusToken == null || !_spawnedMaveNortusToken.activeInHierarchy)
+                {
+                    SpawnMaveNortusHQEventToken();
+                }
+            }
+            else if (ZilleCampaignState.MaveNortusHQCompleted && !ZilleCampaignState.Phase2EventUnlocked)
+            {
+                SuppressZilleWarEventToken();
+                SuppressMaveNortusHQEventToken();
+            }
+            else if (ZilleCampaignState.CurrentPhaseNumber == 2 && ZilleCampaignState.Phase2EventUnlocked)
+            {
+                SuppressMaveNortusHQEventToken();
+                if (_spawnedZilleWarToken == null || !_spawnedZilleWarToken.activeInHierarchy)
+                {
+                    SpawnZilleWarEventToken();
+                }
+            }
+        }
+
+        public static void NotifyCivilianStepProgressed()
+        {
+            if (!_pendingPhase2TokenSpawn) return;
+            _phase2MapStepsSeen++;
+            if (_phase2MapStepsSeen >= 1 && CurrentTheatre == ActiveWarTheatre.Civilian)
+            {
+                SpawnPhase2WarEventTokenNow();
+            }
+        }
+
+        public static void SpawnPhase2WarEventTokenNow()
+        {
+            _pendingPhase2TokenSpawn = false;
+            ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
+            ZilleCampaignState.CurrentPhaseNumber = 2;
+            ZilleCampaignState.Phase2EventUnlocked = true;
+            ZilleCampaignState.SyncToLua();
+
+            SuppressMaveNortusHQEventToken();
+
+            // Refresh titles & re-arm WarFragment_Zille_1_1 so Token.Setup keeps the Phase II event alive!
+            string opTitle = $"{GetOperationDisplayName()} - Phase II";
+            try
+            {
+                var allWar = GetEntityBackingList<WarFragmentData>("warFragmentsData") ?? EntityDataManager.AllWarFragmentsData;
+                if (allWar != null)
+                {
+                    for (int i = 0; i < allWar.Count; i++)
+                    {
+                        var wfd = allWar[i];
+                        if (wfd != null && wfd.NameInDatabase == "WarFragment_Zille_1_1")
+                        {
+                            if (wfd.WarFragmentProperties != null)
+                            {
+                                wfd.WarFragmentProperties.HubWarFragmentTitle = opTitle;
+                                wfd.WarFragmentProperties.HubWarFragmentSubtitle = "Phase II Offensive";
+                            }
+                            if (wfd.StoryFragmentProperties != null)
+                            {
+                                wfd.StoryFragmentProperties.IsDone = false;
+                            }
+                            var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
+                            if (gfm != null)
+                            {
+                                var enabledFrags = gfm.GetEnabledNotDoneStoryFragments();
+                                if (enabledFrags != null && !enabledFrags.Contains(wfd))
+                                    enabledFrags.Add(wfd);
+                                if (gfm.enabledNotDoneStoryFragments != null && !gfm.enabledNotDoneStoryFragments.Contains(wfd))
+                                    gfm.enabledNotDoneStoryFragments.Add(wfd);
+                            }
+                            break;
+                        }
+                    }
+                }
+                var allOps = GetEntityBackingList<OperationData>("operationData") ?? EntityDataManager.OperationData;
+                if (allOps != null)
+                {
+                    for (int i = 0; i < allOps.Count; i++)
+                    {
+                        var op = allOps[i];
+                        if (op != null && (op.NameInDatabase == "Operation_Zille_1" || op.Id == "Operation_Zille_1") && op.OperationProperties != null)
+                        {
+                            op.OperationProperties.IsFinished = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            SpawnZilleWarEventToken();
+            DialogueHelper.ShowAlert($"[Zille] Regrouping complete! {opTitle} is now open on the Zille border.");
+            MelonLogger.Msg($"[WAR ENGINE] Phase II event spawned at BorderEventPosition ({opTitle}).");
+        }
+
         public static bool SpawnZilleWarEventToken()
         {
             RegisterNativeZilleEntities();
@@ -838,27 +1181,38 @@ namespace GreatZilleSolution
                         if (zilleMtd != null) tok.tokenData = zilleMtd;
                         tok.gameObject.SetActive(true);
                         tok.Setup();
+                        // Token.Setup() may deactivate tokens if story fragments were marked done; keep active for Phase II
+                        if (!tok.gameObject.activeSelf) tok.gameObject.SetActive(true);
+                        tok.enabled = true;
 
                         if (Managers.Instance?.Tokens != null && !Managers.Instance.Tokens.Contains(tok))
                         {
                             Managers.Instance.Tokens.Add(tok);
                         }
-
                     }
+                    _spawnedZilleWarToken.SetActive(true);
+
+                    // Ensure parent shadow and root active
+                    var zShadow = GameObject.Find("InvasionOfZille Shadow");
+                    if (zShadow != null) zShadow.SetActive(true);
 
                     var zRends = _spawnedZilleWarToken.GetComponentsInChildren<Renderer>(true);
                     for (int r = 0; r < zRends.Length; r++)
                     {
                         if (zRends[r] != null)
                         {
+                            zRends[r].gameObject.SetActive(true);
                             zRends[r].enabled = true;
                             zRends[r].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
                             zRends[r].receiveShadows = true;
                         }
                     }
                     SuppressPalesWarMarker();
+                    MelonLogger.Msg($"[WAR ENGINE] SpawnZilleWarEventToken final state: self={_spawnedZilleWarToken.activeSelf}, hier={_spawnedZilleWarToken.activeInHierarchy}, parent={_spawnedZilleWarToken.transform.parent?.name}:{_spawnedZilleWarToken.transform.parent?.gameObject.activeInHierarchy}, pos={_spawnedZilleWarToken.transform.position}");
 
-                    DialogueHelper.ShowAlert("[Zille] War token and Operation Righteous Sword Phase I are active in Zille.");
+                    string opName = GetOperationDisplayName();
+                    string phaseTag = ZilleCampaignState.CurrentPhaseNumber == 2 ? "Phase II" : "Phase I";
+                    DialogueHelper.ShowAlert($"[Zille] {opName} ({phaseTag}) event is now active at the Zille border.");
                     return true;
                 }
 
@@ -1002,7 +1356,43 @@ namespace GreatZilleSolution
 
         public static void UpdateEventTokenInteractions()
         {
-            // Native EventSystem & Suzerain TokenManager handle hover, click, and tooltips via MapTokenData.
+            if (CurrentTheatre != ActiveWarTheatre.Civilian) return;
+
+            // Delayed Phase II spawn ("kilka kroków dalej" after Mave Nortus HQ regrouping)
+            if (_pendingPhase2TokenSpawn && !DialogueManager.isConversationActive)
+            {
+                var convPanel = Panels.Instance != null ? Panels.Instance.ConversationPanel : null;
+                bool convOpen = convPanel != null && convPanel.gameObject.activeInHierarchy;
+                if (!convOpen && Time.unscaledTime >= _phase2TokenSpawnAt)
+                {
+                    SpawnPhase2WarEventTokenNow();
+                    return;
+                }
+            }
+
+            // Keep post-Phase I event visibility consistent after civilian base map finishes reloading
+            if (ZilleCampaignState.Phase1Finished && ZilleCampaignState.CurrentPhaseNumber == 1 && !ZilleCampaignState.MaveNortusHQCompleted)
+            {
+                if (_spawnedZilleWarToken != null && _spawnedZilleWarToken.activeSelf)
+                    SuppressZilleWarEventToken();
+                if ((_spawnedMaveNortusToken == null || !_spawnedMaveNortusToken.activeSelf) && Time.frameCount % 30 == 0)
+                    SpawnMaveNortusHQEventToken();
+            }
+            else if (ZilleCampaignState.CurrentPhaseNumber == 2 && ZilleCampaignState.Phase2EventUnlocked && !_pendingPhase2TokenSpawn)
+            {
+                if (_spawnedZilleWarToken == null)
+                {
+                    if (Time.frameCount % 20 == 0) SpawnZilleWarEventToken();
+                }
+                else if (!_spawnedZilleWarToken.activeSelf)
+                {
+                    _spawnedZilleWarToken.SetActive(true);
+                    var tok = _spawnedZilleWarToken.GetComponent<Token>();
+                    if (tok != null) tok.enabled = true;
+                    var zShadow = GameObject.Find("InvasionOfZille Shadow");
+                    if (zShadow != null && !zShadow.activeSelf) zShadow.SetActive(true);
+                }
+            }
         }
 
         // ================= NATIVE DIALOGUE ENGINE INJECTION =================
@@ -1133,6 +1523,10 @@ namespace GreatZilleSolution
                     System.Action onFinish = () => {
                         try
                         {
+                            if (convPanel.inputBlockerPanel != null)
+                            {
+                                convPanel.inputBlockerPanel.gameObject.SetActive(false);
+                            }
                             var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
                             if (gfm != null && cd != null)
                             {
@@ -1188,6 +1582,13 @@ namespace GreatZilleSolution
                     }
 
                     convPanel.Show();
+                    if (!DialogueManager.isConversationActive)
+                    {
+                        MelonLogger.Warning("[WAR ENGINE] Briefing conversation did not remain active; cleaning up to prevent black screen.");
+                        convPanel.Hide();
+                        onFinish();
+                        return false;
+                    }
                     MelonLogger.Msg("[WAR ENGINE] Native ConversationPanel opened for Zille War Council!");
                     return true;
                 }
@@ -1210,6 +1611,8 @@ namespace GreatZilleSolution
             try
             {
                 ZilleDialogueSystem.EnsureAllConversationsRegistered();
+                ZilleCampaignState.SyncFromLua();
+                ZilleCampaignState.SyncToLua();
                 var convPanel = Panels.Instance?.ConversationPanel ?? UnityEngine.Object.FindObjectOfType<ConversationPanel>();
                 if (convPanel == null)
                 {
@@ -1250,11 +1653,26 @@ namespace GreatZilleSolution
                     System.Action finishAction = () => {
                         try
                         {
+                            if (convPanel.inputBlockerPanel != null)
+                            {
+                                convPanel.inputBlockerPanel.gameObject.SetActive(false);
+                            }
                             var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
                             if (gfm != null && cd != null)
                             {
                                 gfm.FinishStoryFragment(cd, null);
                             }
+                            if (nameInDb == "Turn_Zille_DerdiaTalks") DialogueHelper.SetVariable("Zille_DerdiaTalks_Done", true);
+                            else if (nameInDb == "Turn_Zille_LespiaTalks") DialogueHelper.SetVariable("Zille_LespiaTalks_Done", true);
+                            else if (nameInDb == "Turn_Zille_RumburgTalks") DialogueHelper.SetVariable("Zille_RumburgTalks_Done", true);
+                            else if (nameInDb == "Turn_Zille_WarBalconySpeech") DialogueHelper.SetVariable("Zille_BalconySpeech_Done", true);
+                            else if (nameInDb == "Turn_Zille_HomeFrontCrisis") DialogueHelper.SetVariable("Zille_HomeFrontCrisis_Done", true);
+                            else if (nameInDb == "Turn_Zille_ZilleLiberation") DialogueHelper.SetVariable("Zille_Liberation_Done", true);
+                            else if (nameInDb == "Turn_Zille_WarSmolakFinalParley") DialogueHelper.SetVariable("Zille_Rep_ParleyDone", true);
+                            else if (nameInDb == "Turn_Zille_WarPeaceTreaty") DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
+
+                            ZilleCampaignState.SyncFromLua();
+                            ZilleReportsAndSituations.EnsureRegisteredAndSynced();
                             Panels.Instance?.ShowHUD();
                             onFinish?.Invoke();
                         }
@@ -1304,6 +1722,13 @@ namespace GreatZilleSolution
                     }
 
                     convPanel.Show();
+                    if (!DialogueManager.isConversationActive)
+                    {
+                        MelonLogger.Warning($"[WAR ENGINE] Conversation '{dialogueTitle}' did not remain active; cleaning up to prevent black screen.");
+                        convPanel.Hide();
+                        finishAction();
+                        return false;
+                    }
                     MelonLogger.Msg($"[WAR ENGINE] Triggered conversation '{dialogueTitle}' ({nameInDb})!");
                     return true;
                 }
@@ -1322,25 +1747,45 @@ namespace GreatZilleSolution
 
         public static void TriggerMaveNortusHQ()
         {
-            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map to open Mave Nortus Field HQ...");
-            ReturnToCivilianMap();
+            MelonLogger.Msg("[WAR ENGINE] Opening Mave Nortus Field HQ debrief...");
+            if (CurrentTheatre != ActiveWarTheatre.Civilian)
+            {
+                ReturnToCivilianMap();
+            }
+            ZilleCampaignState.SyncToLua();
             TriggerConversation("Turn_Zille_MaveNortusHQ", "Zille/MaveNortusHQ", () => {
-                MelonLogger.Msg("[WAR ENGINE] Mave Nortus Field HQ concluded! Phase II unlocked.");
+                MelonLogger.Msg("[WAR ENGINE] Mave Nortus Field HQ concluded! Scheduling Phase II staging event at border.");
+                ZilleCampaignState.MaveNortusHQCompleted = true;
+                ZilleCampaignState.MaveNortusHQAvailable = false;
                 ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
                 ZilleCampaignState.CurrentPhaseNumber = 2;
-                ScheduleWarTheatreTransition();
+                ZilleCampaignState.Phase2EventUnlocked = false;
+                ZilleCampaignState.SyncToLua();
+                SuppressMaveNortusHQEventToken();
+
+                _pendingPhase2TokenSpawn = true;
+                _phase2MapStepsSeen = 0;
+                _phase2TokenSpawnAt = Time.unscaledTime + 6.0f;
+                DialogueHelper.ShowAlert($"[Mave Nortus HQ] Divisions are regrouping. {GetOperationDisplayName()} - Phase II will deploy shortly at the Zille border.");
             });
         }
 
         public static void TriggerSmolakParley()
         {
-            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map for Wartime Peace Parley with Wiktor Smolak...");
+            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map for Pre-Negotiations Briefing & Parley with Wiktor Smolak...");
             ReturnToCivilianMap();
             ZilleCampaignState.SyncToLua();
-            TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
-                MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
-                TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
-                    MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
+            TriggerConversation("Turn_Zille_WarPreNegotiationsBriefing", "Zille/WarPreNegotiationsBriefing", () => {
+                MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
+                TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
+                    MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
+                    TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
+                        MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
+                        if (ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
+                        {
+                            TriggerConversation("Turn_Zille_ZilleLiberation", "Zille/ZilleLiberation");
+                        }
+                    });
                 });
             });
         }
@@ -1676,6 +2121,9 @@ namespace GreatZilleSolution
 
             try
             {
+                ZilleWarTable.SnapshotPreZilleMilitaryLedger();
+                ZilleCampaignState.SnapshotPalesCasualtiesBeforeZilleTable();
+                ZilleCampaignState.SyncToLua();
                 CurrentTheatre = ActiveWarTheatre.Zille;
                 _tilesConfiguredForZille = false;
 
@@ -1929,6 +2377,8 @@ namespace GreatZilleSolution
         public static void ReturnToCivilianMap()
         {
             MelonLogger.Msg("[WAR ENGINE] Returning to civilian map...");
+            ZilleCampaignState.RestorePalesCasualtiesAfterZilleTable();
+            ZilleCampaignState.SyncToLua();
             CurrentTheatre = ActiveWarTheatre.Civilian;
             _tilesConfiguredForZille = false;
             _deploymentOpened = false;
@@ -1951,6 +2401,8 @@ namespace GreatZilleSolution
                 try { Panels.Instance?.WarActionHoverPanel?.Hide(); } catch { }
                 try { Panels.Instance?.WarTokenSelectionPanel?.Hide(); } catch { }
                 try { Panels.Instance?.WarDeploymentPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarPlayerActionsPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarBattlePanel?.HideAllBattles(); } catch { }
                 try { Panels.Instance?.ContinueButtonPanel?.Hide(); } catch { }
                 try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllInstances(); } catch { }
 
@@ -1975,6 +2427,7 @@ namespace GreatZilleSolution
 
                 // Put the live war table back to vanilla Pales (per-renderer material instances are dropped, tiles restored).
                 ZilleWarTable.SkinEnabled = false;
+                ZilleWarTable.ResetPreZilleMilitaryLedger();
                 ZilleWarTable.Restore();
 
                 // Re-enable the Pales operations that SetupCustomZilleOperation switched off, and forget our cached operation
@@ -1988,6 +2441,7 @@ namespace GreatZilleSolution
                     mapManager.LoadMap(MapConfiguration.MapType.Base);
                 }
 
+                PreparePostPhase1CivilianEvents();
                 DialogueHelper.ShowAlert("[Zille] Powrot do mapy cywilnej.");
             }
             catch (Exception ex)
@@ -2004,7 +2458,15 @@ namespace GreatZilleSolution
             {
                 ZilleWarTable.CheckCityVictory(true);
                 ReturnToCivilianMap();
-                MelonCoroutines.Start(ShowConclusionReportCoroutine());
+                bool isPhase1Transition = ZilleCampaignState.CurrentPhaseNumber == 1
+                    && ZilleCampaignState.Phase1Finished
+                    && ZilleCampaignState.Outcome != ZilleWarOutcome.DecisiveVictory
+                    && ZilleCampaignState.Outcome != ZilleWarOutcome.OverwhelmingTriumph
+                    && ZilleCampaignState.Outcome != ZilleWarOutcome.TotalFiasco;
+                if (!isPhase1Transition)
+                {
+                    MelonCoroutines.Start(ShowConclusionReportCoroutine());
+                }
             }
             catch (Exception ex)
             {
@@ -2019,13 +2481,32 @@ namespace GreatZilleSolution
             var outcome = ZilleCampaignState.Outcome;
             bool won = outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph;
 
-            string title = won
-                ? "Operation: Righteous Sword - Victory"
-                : "Operation: Righteous Sword - Campaign Conclusion";
+            int citiesHeld = DialogueHelper.GetIntVariable("Zille_Cities_Held");
+            int brenasLost = DialogueHelper.GetIntVariable("Zille_Brenas_Lost");
+            int zPlayerLost = ZilleCampaignState.ZillePlayerUnitsLostTotal;
+            int zEnemyLost = ZilleCampaignState.ZilleEnemyUnitsLostTotal;
+            int zCasualties = ZilleCampaignState.ZilleManpowerCasualties;
+            int pPlayerLost = ZilleCampaignState.PalesPlayerUnitsLost;
+            int pEnemyLost = ZilleCampaignState.PalesEnemyUnitsLost;
+            bool palesRelevant = DialogueHelper.GetBoolVariable("Zille_Fighting_Pales");
 
-            string desc = won
-                ? "The Rizian Armed Forces have successfully liberated the territory of Zille! Wehzek garrisons have retreated beyond the border, and royal administration has been re-established over all key districts."
-                : "The military operations in Zille have concluded without full territorial control. Casualties and logistics have forced an operational pause, leaving the border contested.";
+            string opName = GetOperationDisplayName();
+            string title = won
+                ? $"{opName} - Victory"
+                : $"{opName} - Campaign Conclusion";
+
+            string baseSummary = won
+                ? $"The Rizian Armed Forces have liberated {citiesHeld}/4 cities in Zille{(ZilleCampaignState.ZilleCityCaptured ? " including Zille City" : "")}, with Wehzek garrisons retreating across the Gulf of Moridia and the frontier."
+                : brenasLost > 0
+                    ? $"Severe setback in the southern campaign: {brenasLost} Brenas cities fell under enemy pressure while only {citiesHeld}/4 Zille targets were secured."
+                    : $"The military operations in Zille concluded without decisive control ({citiesHeld}/4 cities held). Exhaustion and logistics forced an operational pause.";
+
+            string zilleLedger = $"\n\n[ZILLE FRONT CASUALTY LEDGER]\n- Royal Brigades Lost (Phase I / II): {ZilleCampaignState.ZillePlayerUnitsLostPhase1} / {ZilleCampaignState.ZillePlayerUnitsLostPhase2} (Total: {zPlayerLost} units, ~{zCasualties:N0} casualties)\n- Wehzek Brigades Destroyed: {zEnemyLost} units";
+            string palesLedger = palesRelevant
+                ? $"\n\n[SEPARATE PALES FRONT LEDGER]\n- Eastern Front Losses (Pales): {pPlayerLost} Royal units lost | {pEnemyLost} Palesian units destroyed\n(Tracked strictly separately from the Zille theater.)"
+                : "";
+
+            string desc = baseSummary + zilleLedger + palesLedger;
 
             try
             {

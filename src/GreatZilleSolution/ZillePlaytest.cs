@@ -58,6 +58,58 @@ namespace GreatZilleSolution
             }
         }
 
+        private static void LogInteractionPanelDump(string tag, TokenInteractionPanel tip)
+        {
+            if (tip == null) { MelonLogger.Msg($"[PANEL DUMP] ({tag}) tip=null"); return; }
+            Vector2 pr = tip.panelRect != null ? tip.panelRect.sizeDelta : Vector2.zero;
+            Vector2 cr = tip.choicesContainerRect != null ? tip.choicesContainerRect.sizeDelta : Vector2.zero;
+            bool ca = tip.choicesContainerRect != null && tip.choicesContainerRect.gameObject.activeInHierarchy;
+            Vector2 ch = tip.contentHolder != null ? tip.contentHolder.sizeDelta : Vector2.zero;
+            bool cha = tip.contentHolder != null && tip.contentHolder.gameObject.activeInHierarchy;
+            int cnt = tip.instantiatedInteractionButtons != null ? tip.instantiatedInteractionButtons.Count : -1;
+            MelonLogger.Msg($"[PANEL DUMP] ({tag}) panelSize=({pr.x:0},{pr.y:0}) choicesActive={ca} choicesSize=({cr.x:0},{cr.y:0}) contentActive={cha} contentSize=({ch.x:0},{ch.y:0}) btnCount={cnt}");
+            if (tip.instantiatedInteractionButtons != null)
+            {
+                for (int i = 0; i < tip.instantiatedInteractionButtons.Count; i++)
+                {
+                    var b = tip.instantiatedInteractionButtons[i];
+                    if (b == null) continue;
+                    var rt = b.GetComponent<RectTransform>();
+                    Vector2 bs = rt != null ? rt.sizeDelta : Vector2.zero;
+                    Vector3 bpos = rt != null ? rt.localPosition : Vector3.zero;
+                    Vector3 bsc = rt != null ? rt.localScale : Vector3.zero;
+                    float ba = b.canvasGroup != null ? b.canvasGroup.alpha : -1f;
+                    MelonLogger.Msg($"[PANEL DUMP] ({tag}) btn[{i}] name={b.name} active={b.gameObject.activeInHierarchy} alpha={ba:0.0} size=({bs.x:0},{bs.y:0}) pos=({bpos.x:0},{bpos.y:0}) scale=({bsc.x:0.0},{bsc.y:0.0}) title='{b.titleText?.text}'");
+                }
+            }
+        }
+
+        private static IEnumerator SaveUiShotCoroutine(string name)
+        {
+            yield return new WaitForEndOfFrame();
+            try
+            {
+                if (!Directory.Exists(ScreenshotDir)) Directory.CreateDirectory(ScreenshotDir);
+                string path = Path.Combine(ScreenshotDir, name);
+                int w = Screen.width > 0 ? Screen.width : 1920;
+                int h = Screen.height > 0 ? Screen.height : 1080;
+                var tex = new Texture2D(w, h, TextureFormat.RGB24, false);
+                tex.ReadPixels(new Rect(0, 0, w, h), 0, 0);
+                tex.Apply();
+                byte[] bytes = ImageConversion.EncodeToPNG(tex);
+                UnityEngine.Object.Destroy(tex);
+                if (bytes != null)
+                {
+                    File.WriteAllBytes(path, bytes);
+                    MelonLogger.Msg($"[PLAYTEST UI-SHOT] Saved full screen + UI {path} ({w}x{h}, {bytes.Length} bytes)");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[PLAYTEST UI-SHOT] Failed {name}: {ex.Message}");
+            }
+        }
+
         private static int CountActiveWarTiles()
         {
             var tiles = UnityEngine.Object.FindObjectsOfType<WarTile>();
@@ -96,18 +148,142 @@ namespace GreatZilleSolution
             MelonLogger.Msg($"[PLAYTEST TOTALS] ({tag}) Lua Toras={toras}(dead={torasDead}), Azaro={azaro}, Sazon={sazon}, Inf={inf}");
         }
 
+        private static bool _battleShotTaken = false;
+
+        private static bool _cityAnimTested = false;
+
+        private static void AuditBattleOutlines(string tag)
+        {
+            try
+            {
+                ZilleWarTable.SyncBattleMovementLocks();
+                ZilleWarTable.SyncBattleStatsUI();
+
+                var bm = ZilleWarTable.BattleMgr();
+                var battles = bm != null ? bm.GetCurrentBattles() : null;
+                if (battles == null || battles.Count == 0) return;
+                int liveCount = 0;
+                for (int i = 0; i < battles.Count; i++)
+                {
+                    var b = battles[i];
+                    if (b == null || b.isBattleOver) continue;
+                    liveCount++;
+                    var at = b.attacker != null ? b.attacker.GetCurrentWarTile() : null;
+                    var dt = b.defender != null ? b.defender.GetCurrentWarTile() : null;
+                    foreach (var t in new[] { at, dt })
+                    {
+                        if (t == null) continue;
+                        var r = t.GetWarTileRenderer();
+                        var m = r != null ? r.material : null;
+                        float outOn = m != null && m.HasProperty("_Outline_Toggle") ? m.GetFloat("_Outline_Toggle") : -1f;
+                        Color outCol = m != null && m.HasProperty("_Outline_Colour") ? m.GetColor("_Outline_Colour") : Color.clear;
+                        MelonLogger.Msg($"[PLAYTEST BATTLE OUTLINE] ({tag}) tile={t.name} outlineOn={outOn} outlineColor=({outCol.r:0.00},{outCol.g:0.00},{outCol.b:0.00},{outCol.a:0.00})");
+                    }
+
+                    // Verify attacker, defender, and all supporters have MovementLocked & CanMove == false
+                    void CheckLock(WarToken tok, string role)
+                    {
+                        if (tok == null || tok.IsDead() || ZilleWarTable.IsCityToken(tok)) return;
+                        bool locked = tok.IsMovementLocked();
+                        bool canMove = at != null ? tok.CanMove(at) : false;
+                        MelonLogger.Msg($"[PLAYTEST LOCK] ({tag}) role={role} unit={tok.name} IsMovementLocked={locked} CanMove={canMove}");
+                    }
+                    CheckLock(b.attacker, "attacker");
+                    CheckLock(b.defender, "defender");
+                    if (b.attackersSupporters != null)
+                        for (int s = 0; s < b.attackersSupporters.Count; s++) CheckLock(b.attackersSupporters[s], $"atkSup{s}");
+                    if (b.defendersSupporters != null)
+                        for (int s = 0; s < b.defendersSupporters.Count; s++) CheckLock(b.defendersSupporters[s], $"defSup{s}");
+                }
+
+                // Audit WarBattlePanel / TemplateBattle UI visibility
+                var wbPanel = Panels.Instance != null ? Panels.Instance.WarBattlePanel : UnityEngine.Object.FindObjectOfType<WarBattlePanel>();
+                if (wbPanel != null)
+                {
+                    var inst = wbPanel.instantiatedBattles;
+                    int tbCount = inst != null ? inst.Count : 0;
+                    MelonLogger.Msg($"[PLAYTEST BATTLE-UI] ({tag}) panelActive={wbPanel.gameObject.activeInHierarchy} instCount={tbCount} liveBattles={liveCount}");
+                    if (inst != null)
+                    {
+                        for (int j = 0; j < inst.Count; j++)
+                        {
+                            var tb = inst[j];
+                            if (tb == null || tb.currentBattle == null || tb.currentBattle.isBattleOver) continue;
+                            Vector2 ap = tb.panelRect != null ? tb.panelRect.anchoredPosition : Vector2.zero;
+                            float al = tb.canvasGroup != null ? tb.canvasGroup.alpha : -1f;
+                            string pAtk = tb.playerAttackText != null ? tb.playerAttackText.text : "?";
+                            string pDef = tb.playerDefenceText != null ? tb.playerDefenceText.text : "?";
+                            string eAtk = tb.enemyAttackText != null ? tb.enemyAttackText.text : "?";
+                            string eDef = tb.enemyDefenceText != null ? tb.enemyDefenceText.text : "?";
+                            MelonLogger.Msg($"[PLAYTEST BATTLE-UI] ({tag}) tb[{j}] active={tb.gameObject.activeInHierarchy} pos=({ap.x:0.0},{ap.y:0.0}) alpha={al:0.00} P({pAtk}/{pDef}) vs E({eAtk}/{eDef})");
+                        }
+                    }
+                }
+
+                // Verify city tokens suppress attack animations cleanly once per run
+                if (!_cityAnimTested)
+                {
+                    var allTok = SnapshotLivingTokens();
+                    for (int k = 0; k < allTok.Count; k++)
+                    {
+                        if (ZilleWarTable.IsCityToken(allTok[k]))
+                        {
+                            _cityAnimTested = true;
+                            bool cbFired = false;
+                            allTok[k].PlayTokenAnimation(WarToken.TokenAnimationType.DealDamage, new System.Action(() => { cbFired = true; }));
+                            MelonLogger.Msg($"[PLAYTEST CITY ANIM] Tested DealDamage on {allTok[k].name}: cbFired={cbFired}");
+                            break;
+                        }
+                    }
+                }
+
+                if (liveCount > 0 && !_battleShotTaken)
+                {
+                    _battleShotTaken = true;
+                    SaveShot($"pt_battle_outlines_{tag}.png");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[PLAYTEST BATTLE OUTLINE] error: " + ex.Message);
+            }
+        }
+
         private static void AuditUnitCounts()
         {
             string activeSave = "(unknown)";
+            int saveTurn = -1;
+            string saveVars = null;
             try
             {
-                var pm = UnityEngine.Object.FindObjectOfType<PersistenceManager>();
-                if (pm != null) activeSave = pm.ToString();
+                var pm = PersistenceManager.Instance ?? UnityEngine.Object.FindObjectOfType<PersistenceManager>();
+                if (pm != null && pm.activeSaveFile != null)
+                {
+                    var sd = pm.activeSaveFile.saveData;
+                    activeSave = $"file={pm.activeSaveFile.fileName}, type={sd?.saveFileType}, sdName={sd?.saveFileName}";
+                    saveTurn = sd != null ? sd.turnNo : -1;
+                    saveVars = sd != null ? sd.variables : null;
+                }
             }
             catch { }
             int turnNo = 0;
             try { turnNo = DialogueLua.GetVariable("RiziaDLC.Turn").asInt; } catch { }
-            MelonLogger.Msg($"[PLAYTEST UNITS] --- Auditing save='{activeSave}', RiziaDLC.Turn={turnNo}, Lua variables & WarUnitTypeData ---");
+            MelonLogger.Msg($"[PLAYTEST UNITS] --- Auditing save=[{activeSave}], saveTurn={saveTurn}, RiziaDLC.Turn={turnNo}, Lua variables & WarUnitTypeData ---");
+            if (!string.IsNullOrEmpty(saveVars))
+            {
+                var matches = System.Text.RegularExpressions.Regex.Matches(saveVars, @"RiziaDLC\.Army_Unit_[A-Za-z0-9_]+""\]=[^,;\s]+");
+                var sbSave = new StringBuilder();
+                foreach (System.Text.RegularExpressions.Match m in matches)
+                {
+                    if (m.Value.Contains("_Total") || m.Value.Contains("_Deployed") || m.Value.Contains("_Dead") || m.Value.Contains("_OnMission"))
+                        sbSave.Append(m.Value).Append(" | ");
+                }
+                MelonLogger.Msg($"[PLAYTEST SAVE_VARS] {sbSave}");
+            }
+            else
+            {
+                MelonLogger.Warning("[PLAYTEST SAVE_VARS] activeSaveFile.saveData.variables is null/empty!");
+            }
             string[] vars = {
                 "RiziaDLC.Army_Unit_Infantry_Total", "RiziaDLC.Army_Unit_Infantry_Dead", "RiziaDLC.Army_Unit_Infantry_OnMission",
                 "RiziaDLC.Army_Unit_Support_Total", "RiziaDLC.Army_Unit_Tank_Total", "RiziaDLC.Army_Unit_Mountaineer_Total",
@@ -268,6 +444,7 @@ namespace GreatZilleSolution
 
         public static IEnumerator RunFullSuiteCoroutine()
         {
+            Application.runInBackground = true;
             MelonLogger.Msg("=================================================");
             MelonLogger.Msg("[PLAYTEST] Starting comprehensive Zille playtest suite!");
             MelonLogger.Msg("=================================================");
@@ -305,6 +482,27 @@ namespace GreatZilleSolution
                 yield return new WaitForSeconds(3.0f);
             }
 
+            // Log Lua & save state BEFORE touching Zille entities or entering War Theatre
+            try
+            {
+                int preInf = DialogueLua.GetVariable("RiziaDLC.Army_Unit_Infantry_Total").asInt;
+                int preTor = DialogueLua.GetVariable("RiziaDLC.Army_Unit_Toras_Total").asInt;
+                int preAuth = DialogueLua.GetVariable("RiziaDLC.Resources_Authority").asInt;
+                int preBudg = DialogueLua.GetVariable("RiziaDLC.Resources_Budget").asInt;
+                int luaCount = 0;
+                try { luaCount = Lua.Run("local n=0; for k,v in pairs(Variable) do n=n+1 end; return n").asInt; } catch { }
+                var pm0 = PersistenceManager.Instance;
+                MelonLogger.Msg($"[PLAYTEST PRE-WAR] save={pm0?.activeSaveFile?.fileName} turn={pm0?.activeSaveFile?.saveData?.turnNo} luaKeys={luaCount} Inf={preInf} Toras={preTor} Auth={preAuth} Budg={preBudg}");
+                var utds = Resources.FindObjectsOfTypeAll<WarUnitTypeData>();
+                if (utds != null)
+                {
+                    for (int i = 0; i < utds.Length; i++)
+                        if (utds[i] != null && utds[i].name == "LandUnit_Infantry")
+                            MelonLogger.Msg($"[PLAYTEST PRE-WAR] LandUnit_Infantry UTD before war: total={utds[i].UnitTotalCount} dead={utds[i].UnitDeadCount} dep={utds[i].UnitDeployedCount} miss={utds[i].UnitOnMissionCount}");
+                }
+            }
+            catch (Exception ex) { MelonLogger.Warning("[PLAYTEST PRE-WAR] " + ex.Message); }
+
             // 2. On Rizia civilian map: spawn Zille event token, CLICK IT, then click Operation button to enter map!
             MelonLogger.Msg("[PLAYTEST] Step 1: Spawning Zille war event token on civilian map...");
             bool spawned = WarOperationZilleManager.SpawnZilleWarEventToken();
@@ -326,7 +524,8 @@ namespace GreatZilleSolution
                     tip.Show();
                 }
                 yield return new WaitForSeconds(0.8f);
-                SaveShot("pt_01_civilian_event_panel.png");
+                LogInteractionPanelDump("pt_01", tip);
+                yield return SaveUiShotCoroutine("pt_01_civilian_event_panel.png");
                 yield return new WaitForSeconds(0.3f);
 
                 bool clickedOpBtn = false;
@@ -426,6 +625,104 @@ namespace GreatZilleSolution
             yield return PlayTurnsCoroutine("Sword", 3, testNoRetreatKill: true);
             LogUnitTotals("Sword_After3Turns");
             SaveShot("pt_05_sword_after3turns.png");
+
+            // Also test support locking if a battle is still active
+            try
+            {
+                var bmLock = ZilleWarTable.BattleMgr();
+                var curBattles = bmLock != null ? bmLock.GetCurrentBattles() : null;
+                if (curBattles != null && curBattles.Count > 0)
+                {
+                    var b0 = curBattles[0];
+                    if (b0 != null && !b0.isBattleOver)
+                    {
+                        var liv = SnapshotLivingTokens();
+                        for (int li = 0; li < liv.Count; li++)
+                        {
+                            var cand = liv[li];
+                            if (cand == null || ZilleWarTable.IsCityToken(cand) || ZilleWarTable.IsTokenEngagedInBattle(cand)) continue;
+                            if (cand.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
+                            {
+                                bmLock.SupportAttacker(b0, cand, false);
+                                MelonLogger.Msg($"[PLAYTEST SUPPORTER] Added {cand.name} -> IsEngaged={ZilleWarTable.IsTokenEngagedInBattle(cand)}, IsMovementLocked={cand.IsMovementLocked()}, CanMove={(b0.defender?.GetCurrentWarTile() != null ? cand.CanMove(b0.defender.GetCurrentWarTile()) : false)}");
+                                AuditBattleOutlines("Sword_SupportTest");
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MelonLogger.Warning("[PLAYTEST SUPPORTER] " + ex.Message); }
+            yield return SaveUiShotCoroutine("pt_battle_ui_with_canvas.png");
+
+            // Verify Post-Phase I -> Mave Nortus HQ event -> MaveNortusHQ sequential conv -> delayed Phase II event!
+            MelonLogger.Msg("[PLAYTEST] === VERIFYING POST-PHASE I -> MAVE NORTUS HQ -> PHASE II LIFECYCLE ===");
+            ZilleCampaignState.RecordZilleLosses(1, 3, 5); // Simulate moderate own (2-4) + high enemy (5+) losses
+            ZilleWarTable.CheckCityVictory(true);
+            WarOperationZilleManager.ReturnToCivilianMap();
+            yield return new WaitForSeconds(1.8f);
+            WarOperationZilleManager.PreparePostPhase1CivilianEvents();
+            yield return new WaitForSeconds(0.5f);
+
+            bool p1Hidden = WarOperationZilleManager.SpawnedZilleWarToken == null || !WarOperationZilleManager.SpawnedZilleWarToken.activeInHierarchy;
+            bool maveActive = WarOperationZilleManager.SpawnedMaveNortusToken != null && WarOperationZilleManager.SpawnedMaveNortusToken.activeInHierarchy;
+            MelonLogger.Msg($"[PLAYTEST POST-P1] Phase1EventHidden={p1Hidden}, MaveNortusEventActive={maveActive}, Zille_Fighting_Pales={DialogueHelper.GetBoolVariable("Zille_Fighting_Pales")}");
+            try
+            {
+                var tmP1 = Managers.Instance?.TokenManager ?? UnityEngine.Object.FindObjectOfType<TokenManager>();
+                var mTok = WarOperationZilleManager.SpawnedMaveNortusToken?.GetComponent<Token>();
+                if (tmP1 != null && mTok != null) tmP1.SelectToken(mTok);
+            }
+            catch { }
+            yield return new WaitForSeconds(0.4f);
+            yield return SaveUiShotCoroutine("pt_05b_mave_nortus_event.png");
+
+            // Check Turn_Zille_MaveNortusHQ dialogue structure & open it briefly
+            var db = DialogueManager.masterDatabase;
+            var hqConv = db != null ? db.GetConversation("Zille/MaveNortusHQ") : null;
+            int palesMentionsInNonPalesNodes = 0;
+            bool hasTaddeusSimNode = false;
+            if (hqConv != null && hqConv.dialogueEntries != null)
+            {
+                for (int di = 0; di < hqConv.dialogueEntries.Count; di++)
+                {
+                    var de = hqConv.dialogueEntries[di];
+                    if (de == null) continue;
+                    string txt = (de.DialogueText ?? "") + " " + (de.MenuText ?? "");
+                    if (de.Title == "OwnLoss_Taddeus_Moderate") hasTaddeusSimNode = true;
+                    if (txt.IndexOf("Pales", StringComparison.OrdinalIgnoreCase) >= 0 && de.Title != "OwnLoss_TwoFront_PalesAddendum")
+                        palesMentionsInNonPalesNodes++;
+                }
+            }
+            MelonLogger.Msg($"[PLAYTEST HQ CONV] found={hqConv != null}, entries={(hqConv?.dialogueEntries?.Count ?? 0)}, hasTaddeusSimNode={hasTaddeusSimNode}, strayPalesMentions={palesMentionsInNonPalesNodes}");
+            WarOperationZilleManager.TriggerMaveNortusHQ();
+            yield return new WaitForSeconds(1.0f);
+            yield return SaveUiShotCoroutine("pt_05c_mave_nortus_hq_open.png");
+            try { Panels.Instance?.ConversationPanel?.Hide(); } catch { }
+            DialogueManager.StopConversation();
+            WarOperationZilleManager.SpawnPhase2WarEventTokenNow();
+            yield return new WaitForSeconds(0.8f);
+            var p2Go = WarOperationZilleManager.SpawnedZilleWarToken;
+            bool p2Active = p2Go != null && p2Go.activeInHierarchy;
+            bool maveHiddenAfter = WarOperationZilleManager.SpawnedMaveNortusToken == null || !WarOperationZilleManager.SpawnedMaveNortusToken.activeInHierarchy;
+            try
+            {
+                var tmP2 = Managers.Instance?.TokenManager ?? UnityEngine.Object.FindObjectOfType<TokenManager>();
+                var p2Tok = p2Go?.GetComponent<Token>();
+                if (tmP2 != null && p2Tok != null) tmP2.SelectToken(p2Tok);
+                var tipP2 = Panels.Instance?.TokenInteractionPanel;
+                if (tipP2 != null && p2Tok != null)
+                {
+                    tipP2.gameObject.SetActive(true);
+                    tipP2.Setup(p2Tok);
+                    tipP2.Show();
+                }
+            }
+            catch { }
+            yield return new WaitForSeconds(0.4f);
+            LogInteractionPanelDump("pt_05d", Panels.Instance?.TokenInteractionPanel);
+            MelonLogger.Msg($"[PLAYTEST PHASE2 EVENT] Phase2EventActiveAtBorder={p2Active} (self={p2Go?.activeSelf}, parent={p2Go?.transform?.parent?.name}:{p2Go?.transform?.parent?.gameObject?.activeInHierarchy}), MaveNortusEventHiddenAfter={maveHiddenAfter}, Phase={ZilleCampaignState.CurrentPhaseNumber}");
+            yield return SaveUiShotCoroutine("pt_05d_phase2_event.png");
 
             // 6. Test Phase 2: Repay (D) (TotalRepaymentDerdia) from civilian return or re-entry
             MelonLogger.Msg("[PLAYTEST] === SCENARIO B: TotalRepaymentDerdia / Repay (D) (3 turns) ===");
@@ -616,7 +913,11 @@ namespace GreatZilleSolution
                             var bm = ZilleWarTable.BattleMgr();
                             if (bm != null)
                             {
-                                try { bm.StartBattle(tok, occ, true); actionsDone++; }
+                                try
+                                {
+                                    bm.StartBattle(tok, occ, true);
+                                    actionsDone++;
+                                }
                                 catch (Exception ex) { MelonLogger.Warning("[PLAYTEST ACTION] StartBattle: " + ex.Message); }
                             }
                         }
@@ -627,6 +928,7 @@ namespace GreatZilleSolution
                             catch (Exception ex) { MelonLogger.Warning("[PLAYTEST ACTION] Move: " + ex.Message); }
                         }
                         yield return new WaitForSeconds(0.8f);
+                        AuditBattleOutlines($"{label}_T{turnIdx}_act{actionsDone}");
                     }
                 }
 

@@ -11,7 +11,11 @@ namespace GreatZilleSolution
     {
         // =========================================================================
         // SCENE 1: Turn_Zille_WarPlanning (ID 9987) - WAR PLANNING SESSION
-        // Hugo Toras, Lucita Azaro, Elena Werner, Laurento Esquibel, Titus Gordion.
+        // Multi-round analytical session:
+        // - Arsenal audit (<500 / 500-999 / 1000-2499 / >=2500 weapons)
+        // - Army / Tank / Fleet / Bomber force checks
+        // - Treasury & Energy condition branches + emergency procurement option
+        // - Intelligence dossier & micro-effects building Zille_Leverage / Readiness
         // =========================================================================
         public static void RegisterWarPlanning(DialogueDatabase db)
         {
@@ -32,7 +36,24 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Planning_Atmosphere",
-                "Outside the council chamber windows, gray rain lashed against the stone spires of Palas Rezna. An emergency war map of the Brenas-Zille peninsula and the Gulf of Moridia lay unfurled across the mahogany table, weighed down by heavy bronze candleholders. The ministers took their seats in somber silence, the gravity of the hour hanging heavy in the air.", 2);
+                "Gray rain lashed against the stone spires of Palas Rezna as you walked the echoing colonnade toward the Council Chamber. Inside, an emergency war map of the Brenas-Zille peninsula and the Gulf of Moridia lay unfurled across the mahogany table, weighed down by heavy bronze candleholders and thick equipment ledgers.", -1);
+
+            AddChoice(conv, 401, NarratorId, "Planning_Stimulus_Storm",
+                "Pause for a heartbeat by the rain-streaked lancet window to watch the squall sweep across the Gulf.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "Planning_Stimulus_Coffee",
+                "Take a steaming porcelain cup of dark Rizian roast from the steward as the Golden Guards open the oak doors.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "Planning_Entry_Storm",
+                "Whitecaps churned beyond the breakwater of Porte Drazon—a fitting omen for the storm about to break over Zille. As you stepped inside, the council rose as one.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "Planning_Entry_Coffee",
+                "The bitter warmth of the roast steadied you against the chill of the stone halls. As you stepped inside, the council rose beside the map table.", -1);
+
+            AddLink(conv, 1, 401);
+            AddLink(conv, 1, 402);
 
             AddLine(conv, 2, HugoId, RomusId, "Hugo_Planning_Open",
                 "Your Majesty... We have convened the Crown Council under extraordinary circumstances. Smolak's continued defiance and the escalating tensions in Zille have brought our kingdom to a decisive crossroads.", 3,
@@ -46,41 +67,42 @@ namespace GreatZilleSolution
                 "Your Majesty. In the Grand Vizier's absence, we have convened an emergency council. Smolak's continued defiance in Zille has brought our kingdom to a decisive crossroads.", 3,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
-            var e1 = conv.GetDialogueEntry(1);
-            e1.outgoingLinks.Clear();
-            e1.outgoingLinks.Add(CreateLink(conv.id, 1, 2));
-            e1.outgoingLinks.Add(CreateLink(conv.id, 1, 102));
-            e1.outgoingLinks.Add(CreateLink(conv.id, 1, 103));
+            AddLink(conv, 404, 2);
+            AddLink(conv, 404, 102);
+            AddLink(conv, 404, 103);
+            AddLink(conv, 405, 2);
+            AddLink(conv, 405, 102);
+            AddLink(conv, 405, 103);
 
             var stanceHub = AddLine(conv, 3, RomusId, HugoId, "Romus_Planning_Posture_Prompt",
-                "I looked at the gathered faces of my council, each waiting for their King to establish the direction of the realm.");
+                "I looked across the gathered faces of my council, measuring both their counsel and the actual state of the kingdom's arsenals.");
 
             stanceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Decisive force
             stanceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11)); // Pragmatic caution
             stanceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12)); // Sovereign legalism
 
             AddChoice(conv, 10, HugoId, "Posture_Force",
-                "\"Over twenty-five years of national humiliation ends here. It is time the Crown plans the military reclamation of Zille.\"",
-                "Over twenty-five years of national humiliation ends here. Smolak will not return our territory through words. It is time the Crown plans the military reclamation of Zille by force of arms.", -1,
-                "Variable[\"Zille_Planning_Stance\"] = \"Force\";");
+                "\"Over twenty-five years of separation ends here. Prepare the Royal Army to reclaim Zille by arms.\"",
+                "Over twenty-five years of separation ends here. Smolak will not surrender our province through parchment alone. Prepare the Royal Army for the reclamation of Zille.", -1,
+                "Variable[\"Zille_Planning_Stance\"] = \"Force\"; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             AddChoice(conv, 11, HugoId, "Posture_Pragmatic",
-                "\"We must weigh our capabilities soberly. Can the Kingdom truly bear the burden of a war against Wehlen?\"",
-                "We must weigh our capabilities soberly. Can our treasury, our military, and our people truly bear the burden of a war against Wehlen? I need honest counsel, not bravado.", -1,
-                "Variable[\"Zille_Planning_Stance\"] = \"Cautious\";");
+                "\"Spare me slogans. Audit our weapons, coffers, and fuel before we risk a war with Wehlen.\"",
+                "Spare me slogans and bravado. Give me a ruthless audit of our weapons depots, treasury, energy reserves, and diplomatic standing before we commit our kingdom to war.", -1,
+                "Variable[\"Zille_Planning_Stance\"] = \"Cautious\"; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddChoice(conv, 12, HugoId, "Posture_Legal",
-                "\"The 1927 agreement has expired. Wehlen's presence is an unlawful occupation. We will uphold our sovereign right.\"",
-                "The 1927 agreement has expired. Wehlen's continued presence is an unlawful foreign occupation. If Smolak refuses to withdraw, we have every legal and sovereign right to expel his garrisons.", -1,
-                "Variable[\"Zille_Planning_Stance\"] = \"Legal\";");
+                "\"The 1927 agreement has expired. Rizia will enforce lawful sovereignty against an illegal occupation.\"",
+                "The 1927 agreement has expired. Wehlen's continued garrisoning of Zille is an unlawful foreign occupation, and we will press our full legal claim before the world.", -1,
+                "Variable[\"Zille_Planning_Stance\"] = \"Legal\"; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2;");
 
-            // Post-stance reaction: Hugo if free, else Laurento
+            // Dynastic Counsel: Hugo if free, else Laurento
             AddLine(conv, 20, HugoId, RomusId, "Hugo_Dynastic_Warning",
-                "Romus... As your uncle and your Grand Vizier, I must urge profound care. Your father, King Valero, leased Zille to quell internal turmoil when the throne itself was shaking. If we march across that frontier and stumble, the divine authority of House Toras will suffer a blow from which it may never recover.", -1,
+                "Romus... As your uncle and Grand Vizier, remember the weight of history. King Valero signed the 1927 agreement to quell internal upheaval when the throne itself shook. If our divisions stumble across the Brenas-Zille frontier, the prestige of House Toras will take decades to mend.", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 120, LaurentoId, RomusId, "Laurento_Dynastic_Warning",
-                "Your Majesty, I must urge profound care. King Valero signed the 1927 agreement under immense pressure; if our armies march across the Brenas-Zille frontier and stumble, the Crown's prestige across South Merkopa will suffer grievously.", -1,
+                "Your Majesty, King Valero signed the 1927 agreement under immense domestic strain; if our armies march across the Brenas-Zille frontier and falter, the Crown's standing across Merkopa will suffer grievously.", -1,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
             foreach (int cid in new[] { 10, 11, 12 })
@@ -89,20 +111,17 @@ namespace GreatZilleSolution
                 AddLink(conv, cid, 120);
             }
 
-            // Military appraisal: Lucita if free, else Taddeus or Carlos
+            // Military appraisal + situational force & equipment check
             AddLine(conv, 21, LucitaId, RomusId, "Lucita_Military_Appraisal_1",
-                "With respect, inaction is far more dangerous, Your Majesty. General Valdez commands four Wehzek brigades on the peninsula: an armored detachment at the central rail hub of Wiktrany, two dug-in infantry brigades around Zille City itself, and a garrison guarding the northern port of Munat.", 22,
+                "Inaction carries its own poison, Your Majesty. General Valdez holds four Wehzek brigades across the peninsula: armor at the rail hub of Wiktrany, two infantry brigades entrenched around Zille City, and a coastal garrison at Munat—all dependent on sea convoys across the Gulf of Moridia.", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
-            AddLine(conv, 22, LucitaId, RomusId, "Lucita_Military_Appraisal_2",
-                "Valdez's men are largely conscripts, supplied by sea across the Gulf of Moridia and demoralized by Smolak's erratic purges. The Azaro divisions and the Royal Army possess superior mechanized armor and professional training. If we strike swiftly before Wehzek warships and transports reinforce Munat, his outer line will collapse like dry timber.", 23);
-
             AddLine(conv, 121, TaddeusId, RomusId, "Taddeus_Military_Appraisal",
-                "Inaction is far more dangerous, Your Majesty. General Valdez commands four Wehzek brigades across the peninsula—concentrated at Wiktrany, Zille City, and the port of Munat—supplied by sea across the Gulf of Moridia. If our divisions strike decisively before Wehlen ships reinforcements through the Strait of Kreleck, his perimeter will break.", 23,
+                "Inaction is the greater peril, Your Majesty. Valdez holds four Wehzek brigades across Wiktrany, Zille City, and Munat, resupplied across the Gulf of Moridia. If we sever his sea lanes and strike hard through Wiktrany, his outer perimeter will crack.", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
             AddLine(conv, 122, CarlosId, RomusId, "Carlos_Military_Appraisal",
-                "With respect, Your Majesty, inaction invites further humiliation. General Valdez holds four Wehzek brigades between Wiktrany, Zille City, and the port of Munat, relying on sea convoys across the Gulf of Moridia. Strike decisively before reinforcements land, and his perimeter will crack.", 23,
+                "General Valdez commands four Wehzek brigades between Wiktrany, Zille City, and Munat, Your Majesty, supplied across the Gulf of Moridia. Strike decisively before Wehlen reinforces by sea, and his line will buckle.", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and (Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
 
             foreach (int prev in new[] { 20, 120 })
@@ -112,98 +131,236 @@ namespace GreatZilleSolution
                 AddLink(conv, prev, 122);
             }
 
-            AddLine(conv, 23, ElenaId, RomusId, "Elena_Economic_Reality",
-                "Courage does not buy diesel, Your Majesty. Our royal treasury cannot afford wishful thinking. A mobile offensive consumes petroleum and replacement munitions at an exorbitant burn rate. If the operation drags into a protracted siege, we face staggering deficits and domestic inflation.", 24);
+            // Situational Arsenal & Force Assessment (MECE over Equipment: >=2500 / 1000-2499 / 500-999 / <500)
+            AddLine(conv, 210, NarratorId, RomusId, "Arsenal_Appraisal_Overflow",
+                "Your Chief Quartermaster opened the thick green ordinance ledger and tapped the figures with quiet confidence. \"Over 2,500 units of military equipment fill the royal arsenals—more than enough rifles, machine guns, and shells to sustain continuous high-intensity assaults.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 2500",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
-            AddLine(conv, 24, LaurentoId, RomusId, "Laurento_International_Horizon",
-                "The diplomatic battleground is equally hazardous, Your Majesty. Chancellor Hegel of Valgsland and United Contana will condemn our offensive as monarchist aggression. However, because the 1927 lease has unambiguously lapsed, Prime Minister Alvarez of Lespia and the ATO powers will hesitate to intervene against us if we present the campaign as a swift, localized restoration of sovereign order.", -1);
+            AddLine(conv, 211, NarratorId, RomusId, "Arsenal_Appraisal_Adequate",
+                "The ordinance ledger showed between 1,000 and 2,500 units of reserve weapons in our depots. \"Enough to fully equip a determined campaign across Zille, Your Majesty,\" your quartermaster noted, \"provided we avoid reckless attrition.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 2500",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
+            AddLine(conv, 212, NarratorId, RomusId, "Arsenal_Appraisal_Low",
+                "The quartermaster frowned at the thin columns in the ledger. \"Our reserve depots hold fewer than 1,000 weapons, Your Majesty—between five hundred and a thousand rifles and artillery pieces. We can open an offensive, yet prolonged combat will strain replacements unless we buy or forge more arms.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 500 and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000");
+
+            AddLine(conv, 213, NarratorId, RomusId, "Arsenal_Appraisal_Critical",
+                "A grim hush fell as the quartermaster laid bare the numbers: fewer than 500 weapons remain in strategic storage. \"Your Majesty, marching on Zille with near-empty racks risks exhausting ammunition before our brigades even reach Wiktrany!\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 500",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) - 1;");
+
+            foreach (int prev in new[] { 21, 121, 122 })
+            {
+                AddLink(conv, prev, 210);
+                AddLink(conv, prev, 211);
+                AddLink(conv, prev, 212);
+                AddLink(conv, prev, 213);
+            }
+
+            // Elena Budget & Energy Assessment (MECE)
+            AddLine(conv, 230, ElenaId, RomusId, "Elena_Audit_Rich",
+                "Elena Werner reviewed her ledger with rare composure. \"For Dast's sake, at least we do not march as paupers: our treasury holds ample reserves and healthy funding buffers. Even so, heavy mechanized warfare burns diesel and shells ruthlessly, so keep supply corridors disciplined.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 6 and (Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
+
+            AddLine(conv, 231, ElenaId, RomusId, "Elena_Audit_Mid",
+                "Elena tapped her pen against the ledger. \"Courage does not buy fuel, Your Majesty. Our budget can finance a sharp, localized campaign if we do not let it rot into an endless siege along the northern marshes.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 2 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 6 and (Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
+
+            AddLine(conv, 232, ElenaId, RomusId, "Elena_Audit_TightOrTwoFront",
+                "Elena's voice sharpened into urgent alarm. \"For Dast's sake, look at the exchequer! Between stretched treasury reserves, tight fuel margins, and the burden of confronting Pales on the eastern frontier, reckless spending in Zille could push Rizia into wartime rationing and inflation!\"", -1,
+                "((Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 2) or ((Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true))");
+
+            foreach (int aId in new[] { 210, 211, 212, 213 })
+            {
+                AddLink(conv, aId, 230);
+                AddLink(conv, aId, 231);
+                AddLink(conv, aId, 232);
+            }
+
+            // Laurento International Horizon (Two-Front + Bombing Evidence awareness)
+            AddLine(conv, 240, LaurentoId, RomusId, "Laurento_Horizon_Standard",
+                "Internationally, Chancellor Hegel and United Contana will denounce us at the AN in Konstantium, Kyrute. Yet because the 1927 agreement undeniably lapsed, Prime Minister Alvarez in Perla and the ATO bloc will hesitate to rescue Smolak if we strike quickly and legally.", -1,
+                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
+
+            AddLine(conv, 241, LaurentoId, RomusId, "Laurento_Horizon_TwoFront",
+                "Diplomatically, we are walking on razor wire, Your Majesty. With hostilities active against Pales, Lespia is already furious with us. Opening a second war in Zille will invite simultaneous hostility from both ATO and the Malenyevist bloc unless we divide our rivals swiftly.", -1,
+                "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)");
+
+            foreach (int eId in new[] { 230, 231, 232 })
+            {
+                AddLink(conv, eId, 240);
+                AddLink(conv, eId, 241);
+            }
+
+            // Titus security note
             AddLine(conv, 25, TitusId, RomusId, "Titus_Security_Estela",
-                "Internal security must not be overlooked, Your Majesty. Su Omina and ATA networks inside Zille are ready to disrupt Wehzek communications. Furthermore, the Golden Guard has prepared elite detachments to secure Queen Mother Estela's childhood family home in Zille's harbor district the moment our spearheads enter the city.", 30,
+                "Internally, Su Omina and ATA cells inside Zille stand ready to disrupt Wehzek telegraphs. Moreover, the Golden Guard has assigned elite teams to safeguard Queen Mother Estela's modest childhood fishing-district home in Zille the moment our columns enter the city.", 30,
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             AddLine(conv, 125, NarratorId, RomusId, "Security_NoTitus",
-                "Military intelligence officers quietly noted that pro-Rizian networks inside Zille stood ready to disrupt Wehzek communications, and vanguard units had orders to protect Queen Mother Estela's old family neighborhood in the harbor district.", 30,
+                "Military intelligence confirmed that loyalist cells inside Zille were poised to sabotage Wehzek signals, and vanguard units carried strict orders to protect Queen Mother Estela's old harbor neighborhood.", 30,
                 "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
 
-            AddLink(conv, 24, 25);
-            AddLink(conv, 24, 125);
+            foreach (int lId in new[] { 240, 241 })
+            {
+                AddLink(conv, lId, 25);
+                AddLink(conv, lId, 125);
+            }
 
-            var inquiryHub = AddLine(conv, 30, NarratorId, RomusId, "Planning_Inquiry_Hub",
-                "The room grew quiet as the advisors awaited your direction. Several strategic questions demanded clarification before a mobilization decree could be issued.");
+            // Sequential Topic 1: Military & Arsenal Readiness (zero hub loop!)
+            var inquiryHub = AddLine(conv, 30, NarratorId, RomusId, "Planning_Topic1_Military",
+                "The map table hummed with quiet anticipation. Turning first to the military balance, you weighed whether to press your commanders on armor and naval escorts or address any depot shortfalls.");
 
-            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 31)); // Question Military
-            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 32)); // Question Elena
-            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 33)); // Question Laurento
-            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 34)); // Question Security
-            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Conclude planning
+            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 31));  // Terrain & Force readiness (tanks, ships, planes)
+            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 391)); // Emergency Arms Purchase (conditional: Budget>=1 & Low Equip)
+            inquiryHub.outgoingLinks.Add(CreateLink(conv.id, 30, 305)); // Proceed to Economic & Fuel Audit
 
-            AddChoice(conv, 31, LucitaId, "Inquire_Lucita",
-                "\"What terrain obstacles must our armored divisions overcome in Zille?\"",
-                "Detail the terrain obstacles our mechanized units must overcome between Brenas and Zille. Where will Valdez make his stand?", -1);
+            AddChoice(conv, 31, LucitaId, "Inquire_Lucita_Forces",
+                "\"Give me a hard count of our armor, fleet, and air power against Valdez's brigades.\"",
+                "Forget broad optimism—assess our terrain obstacles and give me an honest count of our armor, warships, and air support against Valdez.", -1,
+                "Variable[\"Zille_Plan_CheckedForces\"] = true;");
 
-            AddLine(conv, 35, LucitaId, RomusId, "Answer_Lucita",
-                "The central approach crosses the coastal lowlands and marshlands surrounding Wiktrany. If we punch through the central highway junction, we sever Valdez's lateral communications between Nanta and Zille City, while the Royal Navy contests his supply ships in the Gulf of Moridia. If heavy rains flood the marshes, however, our tanks will need solid logistics out of Brenas.", 30,
-                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+            AddLine(conv, 35, LucitaId, RomusId, "Answer_Force_Strong",
+                "\"Our mechanized spearhead has strong tank support and the Royal Navy out of Monqiz can contest the Gulf of Moridia cleanly. Once we punch through the coastal marshes around Wiktrany, Valdez cannot contain an amphibious or armored envelopment.\"", 310,
+                "((Variable[\"RiziaDLC.Army_Unit_Tank_Total\"] or 0) >= 2) or ((Variable[\"Zille_Fleet_Total\"] or 0) >= 2)",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
-            AddLine(conv, 135, CarlosId, RomusId, "Answer_Carlos_Terrain",
-                "The approach from Brenas leads through coastal hills and marshlands around Wiktrany, Your Majesty. Seizing that central road junction splits Valdez's garrisons, while our warships cut his sea lanes across the Gulf of Moridia. Heavy rains can bog down armor in the lowlands, so supply from Brenas will be decisive.", 30,
-                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+            AddLine(conv, 135, CarlosId, RomusId, "Answer_Force_Lean",
+                "\"I will be blunt, Your Majesty: with limited heavy armor or naval escort hulls currently operational, an ambitious amphibious crossing would risk disaster. We must rely on disciplined infantry advances through Wiktrany's marshes and careful artillery concentration.\"", 310,
+                "((Variable[\"RiziaDLC.Army_Unit_Tank_Total\"] or 0) < 2) and ((Variable[\"Zille_Fleet_Total\"] or 0) < 2)");
 
             AddLink(conv, 31, 35);
             AddLink(conv, 31, 135);
 
-            AddChoice(conv, 32, ElenaId, "Inquire_Elena",
-                "\"Elena, what financial reserves can we mobilize without bankrupting social programs?\"",
-                "Elena, what financial reserves can we tap without crippling municipal budgets and domestic welfare?", 36);
+            // Emergency Arms Procurement (-1 Budget -> +500 Weapons & +2 Readiness)
+            AddChoice(conv, 391, ElenaId, "Order_Emergency_Arms_Procurement",
+                "\"Release 1 Budget immediately to procure 500 emergency rifles and artillery shells before mobilization!\"",
+                "Our depots cannot stay below a thousand weapons. Release emergency royal funds immediately to purchase 500 reserve arms and shells before we summon the houses!", 392,
+                "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 500; Variable[\"Zille_Emergency_Arms_Bought\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 and Variable[\"Zille_Emergency_Arms_Bought\"] ~= true");
 
-            AddLine(conv, 36, ElenaId, RomusId, "Answer_Elena",
-                "If we issue royal war bonds and secure foreign energy credits, we can absorb the initial shocks. But the logistics framework is paramount-supplying the army locally out of Brenas granaries and coastal convoys will conserve gold, whereas shipping everything by rail from Montaklar will burn through our strategic oil reserves.", 30);
+            AddLine(conv, 392, ElenaId, RomusId, "Ack_Emergency_Arms",
+                "Elena frowned briefly at the sudden expenditure, then stamped the requisition warrant. \"An expensive rush order, Your Majesty, yet wise: five hundred crates of rifles and shells are rolling toward Brenas depots tonight.\"", 310);
 
-            AddChoice(conv, 33, LaurentoId, "Inquire_Laurento",
-                "\"Laurento, can we secure a veto or friendly neutrality in the Alliance of Nations?\"",
-                "Laurento, can we secure a veto or friendly neutrality from the major powers in the Alliance of Nations?", 37);
+            AddChoice(conv, 305, ElenaId, "Proceed_To_Econ",
+                "\"Our force posture is clear. Move to our treasury and energy grid.\"",
+                "Our military posture is clear enough. Turn to our treasury and energy reserves, Elena.", 310);
+
+            // Sequential Topic 2: Treasury, Energy & Intelligence Dossier
+            var topic2Hub = AddLine(conv, 310, NarratorId, RomusId, "Planning_Topic2_EconIntel",
+                "Turning from the brass unit markers to the green ledgers, you weighed the kingdom's fuel resilience and intelligence cards.");
+
+            topic2Hub.outgoingLinks.Add(CreateLink(conv.id, 310, 32));
+            topic2Hub.outgoingLinks.Add(CreateLink(conv.id, 310, 393));
+            topic2Hub.outgoingLinks.Add(CreateLink(conv.id, 310, 315));
+
+            AddChoice(conv, 32, ElenaId, "Inquire_Elena_Reserves",
+                "\"Elena, detail the exact cost to our treasury and energy grid once Wehlen oil stops flowing.\"",
+                "Elena, calculate the exact damage to our treasury and energy grid once Smolak cuts off Wehlen crude oil deliveries.", -1,
+                "Variable[\"Zille_Plan_CheckedEcon\"] = true;");
+
+            AddLine(conv, 36, ElenaId, RomusId, "Answer_Elena_EnergyOK",
+                "\"Losing Wehlen crude will tighten our grid noticeably, yet with our current energy buffer we can fuel initial mechanized columns if we pair Brenas granaries with coastal convoys instead of burning diesel on long rail hauls.\"", 320,
+                "not ((Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2)",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLine(conv, 136, ElenaId, RomusId, "Answer_Elena_EnergyLow",
+                "\"Frankly, Your Majesty, our energy buffer is already dangerously thin. Once Wehlen cuts the pipelines, armored offensives and naval patrols will face acute rationing unless we secure emergency energy supplies or pick the fuel-sparing Sazon route.\"", 320,
+                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2");
+
+            AddLink(conv, 32, 36);
+            AddLink(conv, 32, 136);
+
+            // Compile Bombing Evidence Dossier for Leverage
+            AddChoice(conv, 393, LaurentoId, "Compile_Bombing_Dossier",
+                "\"Bind our Zille bombing intelligence into a sealed dossier—we will hold it over Wehlen and Lespia alike.\"",
+                "Laurento, bind every intelligence report we possess from the Zille bombing into a sealed royal dossier. We will use that truth as leverage at both Perla and Wraclawitz.", 394,
+                "Variable[\"Zille_Dossier_Compiled\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
+                "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) and Variable[\"Zille_Dossier_Compiled\"] ~= true");
+
+            AddLine(conv, 394, LaurentoId, RomusId, "Ack_Compile_Dossier",
+                "Laurento slipped the black-bound folder into his briefcase with a razor-sharp smile. \"A formidable diplomatic weapon, Your Majesty. Neither Alvarez nor Smolak will bluff cleanly once they see this seal.\"", 320);
+
+            AddChoice(conv, 315, LaurentoId, "Proceed_To_Diplomacy",
+                "\"The ledgers are noted. Let us review foreign reactions and our Zille underground.\"",
+                "The economic picture is clear. Let us turn to foreign reactions and our loyalists inside Zille.", 320);
+
+            // Sequential Topic 3: Foreign Powers & Zille Underground
+            var topic3Hub = AddLine(conv, 320, NarratorId, RomusId, "Planning_Topic3_DiploSecurity",
+                "Finally, you looked to Laurento and your security chief before closing the session.");
+
+            topic3Hub.outgoingLinks.Add(CreateLink(conv.id, 320, 33));
+            topic3Hub.outgoingLinks.Add(CreateLink(conv.id, 320, 34));
+            topic3Hub.outgoingLinks.Add(CreateLink(conv.id, 320, 325));
+
+            AddChoice(conv, 33, LaurentoId, "Inquire_Laurento_Powers",
+                "\"How will Rumburg, Lespia, Derdia, and Valgsland react when we move?\"",
+                "Map out the diplomatic chessboard: where do Rumburg, Lespia, Derdia, and Valgsland stand if we cross the frontier?", 37,
+                "Variable[\"Zille_Plan_CheckedDiplo\"] = true;");
 
             AddLine(conv, 37, LaurentoId, RomusId, "Answer_Laurento",
-                "Queen Beatrice of Rumburg will stand firmly with us in the AN, provided we maintain GRACE solidarity. Prime Minister Alvarez can be persuaded through economic incentives to keep Lespia's radar and reconnaissance active for our benefit. Smolak will find himself isolated across the sea if we strike decisively.", 30);
+                "\"Your sister-in-law Queen Beatrice in Thornbourgh can shield us at the AN and send heavy 152mm shells if we keep faith with GRACE. Prime Minister Alvarez in Perla despises Smolak enough to sell aerial reconnaissance—unless we are fighting Pales. And Supreme Wiseman Azmal at Naeal will raid Wehlen's southern land frontier if we protect Golcondist pilgrims.\"", 330,
+                "",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
-            AddChoice(conv, 34, TitusId, "Inquire_Titus",
-                "\"How confident are we in protecting Queen Estela's childhood home and civilian loyalists?\"",
-                "How confident are you that our vanguard can shield Queen Mother Estela's childhood home in Zille and protect civilian loyalists?", -1);
+            AddChoice(conv, 34, TitusId, "Inquire_Titus_Underground",
+                "\"Can Su Omina, ATA, and our guardsmen protect Queen Estela's home and Rizian civilians?\"",
+                "How reliable are our loyalist cells inside Zille, and can our vanguard shield Queen Mother Estela's childhood home?", -1,
+                "Variable[\"Zille_Plan_CheckedSecurity\"] = true;");
 
             AddLine(conv, 38, TitusId, RomusId, "Answer_Titus",
-                "Completely confident, Your Majesty. My finest Golden Guard detachment is briefed and ready to ride or drop with the very vanguard of the advance. No harm will come to the Queen Mother's old neighborhood or her late family's home.", 30,
-                "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
+                "\"ATA organizers and Su Omina scouts already watch Valdez's supply piers, Your Majesty. My Golden Guardsmen will drop or ride into the harbor district first to secure the Queen Mother's childhood family house.\"", 330,
+                "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true",
+                "Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 138, CarlosId, RomusId, "Answer_Security_NoTitus",
-                "Our forward reconnaissance battalions have standing orders to cordon off the harbor district around Queen Mother Estela's childhood home the moment we enter Zille City, Your Majesty.", 30,
+                "\"Our reconnaissance detachments carry strict orders to protect Zille's loyalist neighborhoods and the Queen Mother's childhood family home in the harbor quarter, Your Majesty.\"", 330,
                 "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
 
             AddLink(conv, 34, 38);
             AddLink(conv, 34, 138);
 
+            AddChoice(conv, 325, HugoId, "Proceed_To_Conclude",
+                "\"We have heard enough. Let us issue our final planning directive.\"",
+                "We have weighed every angle. Let us issue our final directive and adjourn.", 330);
+
+            var concludeHub = AddLine(conv, 330, NarratorId, RomusId, "Planning_Conclude_Prompt",
+                "The candles burned low over the Brenas-Zille map. How do you summon Houses Azaro and Sazon to the coming Logistics Summit?");
+
+            concludeHub.outgoingLinks.Add(CreateLink(conv.id, 330, 40));
+            concludeHub.outgoingLinks.Add(CreateLink(conv.id, 330, 400));
+
             AddChoice(conv, 40, HugoId, "Conclude_Planning",
-                "\"The decision is made. Prepare the kingdom for war. Convene the Logistics Summit in Brenas.\"",
-                "The decision is made. The Crown resolves on the military reclamation of Zille. Draft the preliminary deployment orders and convene the provincial lords and military command for the Logistics Summit. We will resolve our supply lines once and for all.", -1,
+                "\"Summon the noble houses openly: the Crown demands unity for the Logistics Summit.\"",
+                "The strategic blueprint is set. Draft the preliminary deployment directives and summon Houses Azaro and Sazon to settle our supply corridors in Brenas.", -1,
                 "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3;");
 
+            AddChoice(conv, 400, HugoId, "Conclude_Planning_Discreet",
+                "\"Summon Azaro and Sazon discreetly under cover of a royal trade audit so Smolak stays blind.\"",
+                "The blueprint is set. Summon Houses Azaro and Sazon under cover of a routine Brenas trade and rail audit so Wehlen's spies suspect nothing until we are ready.", -1,
+                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
             AddLine(conv, 41, HugoId, RomusId, "Hugo_Planning_Close",
-                "\"As your sovereign will decrees, Your Majesty. May Saint Wruhec guide our banners and preserve our realm.\"", -1,
+                "\"As your sovereign will decrees, Your Majesty. May Saint Wruhec guide our banners and preserve Rizia.\"", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 141, LaurentoId, RomusId, "Laurento_Planning_Close",
-                "\"Your sovereign will is clear, Your Majesty. The ministry will ready all diplomatic dispatches for the coming storm.\"", -1,
+                "\"Your sovereign will is clear, Your Majesty. The foreign ministry will prepare every dispatch for the coming storm.\"", -1,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
             AddLink(conv, 40, 41);
             AddLink(conv, 40, 141);
+            AddLink(conv, 400, 41);
+            AddLink(conv, 400, 141);
 
             AddLine(conv, 42, LucitaId, RomusId, "Lucita_Planning_Close",
-                "Lucita snapped to attention and saluted crisply. \"The General Staff will initiate immediate preparations. The road to Zille begins now, Your Majesty.\"", -1,
+                "Lucita snapped to attention and saluted crisply. \"The General Staff begins staging at once. Next we break the supply deadlock with House Sazon, Your Majesty.\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 142, CarlosId, RomusId, "Carlos_Planning_Close",
-                "General Carlos Azaro saluted sharply. \"The General Staff will initiate immediate preparations. Our divisions will be ready, Your Majesty.\"", -1,
+                "General Carlos Azaro saluted sharply. \"Staging directives go out tonight, Your Majesty. We await your verdict on the Brenas supply corridors.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             foreach (int prev in new[] { 41, 141 })
@@ -218,8 +375,12 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 2: Turn_Zille_WarLogisticsDispute (ID 9990) - LOGISTICS DISPUTE
-        // Handles Angelica exiled/pardoned/arrested, Manus exiled/arrested/Vina,
-        // Leona Sazon fallback, Lucita/Taddeus arrested/hostile, Hugo absent.
+        // Fixed:
+        // - Feasibility checks for Budget>=1 (Sazon) vs Credit fallback (<1 Budget)
+        // - Feasibility checks for Energy>=1 (Azaro) vs Civilian Rationing fallback (<1 Energy)
+        // - Authority>=1 check for Royal Compromise
+        // - Fixed missing 33 -> 134 link when Angelica free & Manus gone
+        // - Inquiry round + micro-effects for Zille_War_Readiness / AN_Legitimacy
         // =========================================================================
         public static void RegisterWarLogisticsDispute(DialogueDatabase db)
         {
@@ -238,53 +399,72 @@ namespace GreatZilleSolution
             entry0.isRoot = true;
             conv.dialogueEntries.Add(entry0);
 
-            // Intro variants based on who is physically present
             AddLine(conv, 1, NarratorId, RomusId, "Logistics_Intro_BothSazon",
-                "The atmosphere inside the State Dining Hall of Palas Rezna crackled with noble animosity. Servants had cleared the banquet tables for logistical ledgers, railway maps, and provincial supply manifests. On one side sat House Azaro's commanders in crisp uniform; on the other sat Duchess Angelica Sazon and Manus Sazon in dark Brenas velvet.", -1,
+                "The State Dining Hall of Palas Rezna crackled with noble animosity. Banquet tables had been cleared for logistical ledgers, railway maps, and coastal shipping manifests. Opposite House Azaro's uniformed generals sat Duchess Angelica Sazon and Manus Sazon in dark Brenas velvet.", -1,
                 "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddLine(conv, 101, NarratorId, RomusId, "Logistics_Intro_ManusOnly",
-                "The State Dining Hall of Palas Rezna was tense with quiet hostility. Logistical ledgers and railway maps covered the long oak table. Facing House Azaro's uniformed generals sat Manus Sazon alone—his mother, Duchess Angelica, still absent from the court.", -1,
+                "The State Dining Hall of Palas Rezna was tense with quiet hostility. Opposite House Azaro's officers sat Manus Sazon alone—his mother, Duchess Angelica, absent from the court.", -1,
                 "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddLine(conv, 102, NarratorId, RomusId, "Logistics_Intro_AngelicaOnly",
-                "The State Dining Hall of Palas Rezna crackled with aristocratic tension. Across the ledger-strewn table from House Azaro's officers sat Duchess Angelica Sazon alone, representing Brenas in the absence of her son Manus.", -1,
+                "The State Dining Hall of Palas Rezna crackled with aristocratic tension. Across the ledger-strewn table from House Azaro's officers sat Duchess Angelica Sazon alone, representing Brenas in Manus's absence.", -1,
                 "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
             AddLine(conv, 103, NarratorId, RomusId, "Logistics_Intro_LeonaOnly",
-                "The State Dining Hall of Palas Rezna was frigid with mutual suspicion. With both Angelica and Manus Sazon absent from the court, Countess Leona Sazon of Sallabes had been summoned to represent the mercantile houses of Brenas opposite House Azaro's officers.", -1,
+                "The State Dining Hall of Palas Rezna was frigid with mutual suspicion. With both Angelica and Manus Sazon absent, Countess Leona Sazon of Sallabes represented the mercantile houses of Brenas opposite House Azaro's officers.", -1,
                 "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
             foreach (int iId in new[] { 1, 101, 102, 103 })
             {
                 AddLink(conv, 0, iId);
-                AddLink(conv, iId, 2);
-                AddLink(conv, iId, 104);
+                AddLink(conv, iId, 401);
+                AddLink(conv, iId, 402);
             }
 
-            // Azaro Opener (Taddeus if free, else Carlos)
+            AddChoice(conv, 401, NarratorId, "Logistics_Stimulus_Ring",
+                "Rap your royal signet ring once against the heavy oak doorframe to cut through the bickering.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "Logistics_Stimulus_Silence",
+                "Walk quietly to the head of the table and take your seat without a word, letting their voices die out.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "Logistics_Entry_Ring",
+                "The sharp crack of gold on oak echoed beneath the chandeliers. Chairs scraped back as both noble houses snapped to attention.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "Logistics_Entry_Silence",
+                "One by one, the generals and merchants caught sight of you and fell silent, though the glare across the mahogany remained venomous.", -1);
+
+            foreach (int ent in new[] { 404, 405 })
+            {
+                AddLink(conv, ent, 2);
+                AddLink(conv, ent, 104);
+            }
+
+            // Azaro Opener
             AddLine(conv, 2, TaddeusId, RomusId, "Taddeus_Logistics_Opener",
-                "Your Majesty! The General Staff cannot conduct an offensive while our fuel convoys are held up at civilian toll gates and local rail switches in Brenas! Speed is everything in modern mechanized war. We demand unconditional military requisition authority over all rail lines, fuel depots, and granaries across Brenas!", -1,
+                "Duke Taddeus Azaro slammed his fist beside the coastal highway map. \"Your Majesty, an armored spearhead cannot crawl behind civilian freight timetables! House Azaro demands full military requisition authority over every rail switch, fuel depot, and granary in Brenas!\"", -1,
                 "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
             AddLine(conv, 104, CarlosId, RomusId, "Carlos_Logistics_Opener",
                 "Your Majesty. The General Staff cannot maintain offensive tempo while fuel convoys wait behind civilian freight and local rail switches in Brenas. We require full military requisition authority over the province's rail lines, fuel tanks, and grain depots.", -1,
                 "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
 
-            // Sazon Rebuttal (Angelica -> Manus -> Leona)
+            // Sazon Rebuttal
             AddLine(conv, 3, AngelicaId, RomusId, "Angelica_Furious_Rebuttal",
-                "Duchess Angelica straightened with icy noble disdain, slamming a jeweled ring against the table. \"Brenas is not an occupied province for Montaklar's generals to pillage! It is the historical breadbasket of Rizia and the homeland of Queen Mother Estela!\"", 4,
+                "Duchess Angelica straightened with icy disdain, rapping a jeweled ring against the oak table. \"Brenas is not an occupied fief for Montaklar's generals to pillage! It is the breadbasket of Rizia and Queen Mother Estela's home province!\"", 4,
                 "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true");
 
             AddLine(conv, 4, AngelicaId, RomusId, "Angelica_Furious_Rebuttal_2",
-                "\"Your requisition officers are already impounding trucks, seizing livestock, and threatening our mayors. If you bleed our farms dry to feed your iron tanks, winter starvation and strikes will paralyze our towns before our forces even take Wiktrany!\"", -1);
+                "\"Your quartermasters are already impounding civilian trucks and threatening our mayors. Strip Brenas bare to feed your tanks, and winter strikes and bread riots will paralyze our towns before your spearheads even reach Wiktrany!\"", -1);
 
             AddLine(conv, 5, ManusId, RomusId, "Manus_Passionate_Proposal",
-                "Your Majesty, House Sazon does not wish to see our army fail—quite the contrary. Our merchant syndicates, coastal freighters, and provincial granaries have managed Brenas logistics for centuries. Entrust rear supply to our provincial guilds, and every battalion will be fed and fueled without martial extortion.", 6,
+                "Your Majesty, House Sazon wishes to see our soldiers return victorious—not starved by chaos at their backs. Our merchant syndicates, coastal freighters, and provincial granaries have kept Brenas running for generations. Let our guilds organize rear logistics cleanly without martial extortion.", 6,
                 "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddLine(conv, 105, LeonaId, RomusId, "Leona_Sazon_Proposal",
-                "Countess Leona Sazon adjusted her sable stole coolly. \"Brenas is not a conquered fief for Montaklar's quartermasters to strip bare, Your Majesty. Our merchant guilds and coastal shipping syndicates can supply the army cleanly through our granaries and ports without provoking bread riots in Sallabes and Mave Nortus.\"", 6,
+                "Countess Leona Sazon adjusted her sable stole coolly. \"Brenas is not a conquered province for Montaklar to strip bare, Your Majesty. Our merchant guilds and coastal shipping syndicates can supply the front cleanly through our granaries and ports without provoking bread riots in Sallabes and Mave Nortus.\"", 6,
                 "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
             foreach (int oId in new[] { 2, 104 })
@@ -293,91 +473,151 @@ namespace GreatZilleSolution
                 AddLink(conv, oId, 5);
                 AddLink(conv, oId, 105);
             }
-            AddLink(conv, 4, 5);
-            AddLink(conv, 4, 6); // if Manus is gone, Angelica goes straight to line 6
 
-            // Military counter (Lucita if free, else Carlos)
+            AddLine(conv, 107, NarratorId, RomusId, "Angelica_ManusGone_Bridge",
+                "With Manus absent from the hall, the silence after Angelica's outburst lingered heavy over the table.", -1,
+                "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
+
+            var e4 = conv.GetDialogueEntry(4);
+            e4.outgoingLinks.Clear();
+            e4.outgoingLinks.Add(CreateLink(conv.id, 4, 5));
+            e4.outgoingLinks.Add(CreateLink(conv.id, 4, 107));
+
+            // Military counter
             AddLine(conv, 6, LucitaId, RomusId, "Lucita_Military_Counter",
-                "Councilor Azaro leaned forward, her gaze razor-sharp. \"With all due respect to House Sazon, guild bureaucracy moves at the pace of an ox cart. If my armored spearheads stall in the mud outside Wiktrany waiting for merchant manifests, General Valdez will bring down Wehzek heavy artillery and slaughter our men!\"", 7,
+                "Councilor Azaro leaned forward, her gaze razor-sharp. \"Guild committees move at the speed of an ox cart! If my armored brigades run dry of diesel and 105mm shells outside Wiktrany waiting for merchant manifests, General Valdez will dismantle them piecemeal!\"", 7,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 106, CarlosId, RomusId, "Carlos_Military_Counter",
-                "General Carlos Azaro tapped his leather portfolio flatly. \"Merchant committees move at the speed of paperwork, Your Majesty. If our forward brigades run dry of diesel and 105mm shells outside Wiktrany, General Valdez will dismantle them piecemeal.\"", 7,
+                "General Carlos Azaro tapped his leather portfolio flatly. \"Merchant committees move at the pace of paperwork, Your Majesty. If our forward brigades run dry of diesel and 105mm shells outside Wiktrany, Valdez will tear them apart.\"", 7,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLink(conv, 5, 6);
             AddLink(conv, 5, 106);
             AddLink(conv, 105, 6);
             AddLink(conv, 105, 106);
-
-            // If Angelica spoke, go to Manus (5) when free, else via bridge node (107) directly to Lucita/Carlos
-            var e4 = conv.GetDialogueEntry(4);
-            e4.outgoingLinks.Clear();
-            e4.outgoingLinks.Add(CreateLink(conv.id, 4, 5));
-            e4.outgoingLinks.Add(CreateLink(conv.id, 4, 107));
-            AddLine(conv, 107, NarratorId, RomusId, "Angelica_ManusGone_Bridge",
-                "With Manus no longer in the chamber, the silence after Angelica's outburst lingered heavy over the table.", -1,
-                "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
             AddLink(conv, 107, 6);
             AddLink(conv, 107, 106);
 
+            // Elena state-aware ledger audit
             AddLine(conv, 7, ElenaId, RomusId, "Elena_Ledger_Audit",
-                "Elena Werner adjusted her spectacles and tapped her pen against her leather ledger. \"For Dast's sake, look at the arithmetic rather than your family heraldry! The Azaro centralized rail plan guarantees rapid delivery of shells, but hauling everything from Montaklar by heavy train burns immense quantities of refined fuel (-1 Energy) and strains the provincial grid.\"", 8);
+                "Elena Werner adjusted her spectacles and tapped her fountain pen. \"Look at the arithmetic instead of family crests! The Azaro centralized rail plan guarantees rapid ammunition flow, yet running nonstop heavy trains from Montaklar drains refined fuel (-1 Energy) and stresses civilian lines.\"", 8);
 
             AddLine(conv, 8, ElenaId, RomusId, "Elena_Ledger_Audit_2",
-                "\"The Sazon syndicate plan utilizes Brenas granaries, regional rail spurs, and coastal barges along the gulf. It conserves our fuel and stiffens provincial defense in Brenas, though compensating the merchant syndicates requires direct subsidies from our royal treasury (-1 Budget).\"", -1);
+                "\"The Sazon syndicate plan uses Brenas granaries and coastal freighters along the Gulf of Moridia, sparing our fuel—but paying the guilds fair transit fees requires direct treasury outlays (-1 Budget). Imposing a joint Crown board avoids favoring either house, though it demands firm royal authority.\"", -1);
 
             AddLine(conv, 9, HugoId, RomusId, "Hugo_Unity_Plea",
-                "Hugo Toras shook his head gravely. \"Romus, a kingdom divided against itself will fall before Wiktor Smolak. House Toras, House Azaro, and House Sazon have preserved this realm for centuries. You must bridge this divide.\"", 10,
+                "Hugo Toras shook his head gravely. \"Romus, a kingdom divided against itself will crack before Wiktor Smolak. Weigh both our coffers and our fuel reserves before decreeing your settlement.\"", 10,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 109, LaurentoId, RomusId, "Laurento_Unity_Plea",
-                "Laurento Esquibel folded his hands gravely. \"Your Majesty, Smolak is watching for any fissure between our noble houses. Choose the supply structure that keeps both the army and the realm intact.\"", 10,
+                "Laurento folded his hands gravely. \"Smolak hopes to see our noble houses quarrel while his trenches deepen, Your Majesty. Match the logistics structure to what our treasury and energy grid can actually sustain.\"", 10,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
             AddLink(conv, 8, 9);
             AddLink(conv, 8, 109);
 
-            var disputeHub = AddLine(conv, 10, NarratorId, RomusId, "Dispute_Hub_Prompt",
-                "The entire council fell silent, waiting for your judgment. The fate of the southern supply corridor rested in your hands.");
+            var disputeInquiry = AddLine(conv, 10, NarratorId, RomusId, "Dispute_Inquiry_Prompt",
+                "Before decreeing who controls Brenas's supply artery, you weighed whether to press Elena on raw treasury margins or test the military's rail-and-port contingency.");
 
-            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20)); // Choose House Sazon
-            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 10, 30)); // Choose House Azaro
-            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 10, 40)); // Royal Compromise
+            disputeInquiry.outgoingLinks.Add(CreateLink(conv.id, 10, 11));
+            disputeInquiry.outgoingLinks.Add(CreateLink(conv.id, 10, 12));
+            disputeInquiry.outgoingLinks.Add(CreateLink(conv.id, 10, 13));
 
+            // Analytical interrogation nodes (all advance cleanly to verdict node 15!)
+            AddChoice(conv, 11, ElenaId, "Inquire_Logistics_Numbers",
+                "\"Elena, can our treasury, energy grid, and arsenals actually handle what these houses propose?\"",
+                "Elena, give me the unvarnished figures right now: what does our current budget, energy, and equipment inventory dictate?", -1,
+                "Variable[\"Zille_Logistics_Audited\"] = true;");
+
+            AddLine(conv, 111, ElenaId, RomusId, "Answer_Logistics_StrongReserves",
+                "\"With healthy budget and energy cushions on our books, Your Majesty, you actually enjoy genuine freedom of choice—either subsidies for Sazon freighters or Azaro fuel prioritization are feasible without breaking the home front.\"", 15,
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLine(conv, 112, ElenaId, RomusId, "Answer_Logistics_Strained",
+                "\"Honestly, Your Majesty, one or more columns on our ledger sit near zero! If treasury cash is empty, Sazon's syndicates will demand Crown customs pledges costing authority; if energy is exhausted, Azaro trains will force ruthless civilian rationing.\"", 15,
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1 or (Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLink(conv, 11, 111);
+            AddLink(conv, 11, 112);
+
+            AddChoice(conv, 12, LucitaId, "Inquire_Logistics_CrossExamine",
+                "\"Wait—what happens to civilian ports and Pales transit if military requisition goes wrong?\"",
+                "Wait: if enemy shells hit our marshaling yards or if Pales ties down rail rolling stock, how does each plan avoid collapse?", -1,
+                "Variable[\"Zille_Logistics_Examined\"] = true;");
+
+            AddLine(conv, 120, LucitaId, RomusId, "Answer_CrossExamine_SazonAzaro",
+                "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"—so long as military ammunition cars always hold right-of-way over commercial cargo.\"", 15,
+                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+
+            AddLine(conv, 122, CarlosId, RomusId, "Answer_CrossExamine_Carlos",
+                "\"Decentralized coastal barges protect us against bombed rail bridges, Your Majesty, provided military ammunition trains always hold priority signals.\"", 15,
+                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+
+            AddLink(conv, 12, 120);
+            AddLink(conv, 12, 122);
+
+            AddChoice(conv, 13, HugoId, "Skip_Logistics_Inquiry",
+                "\"Both houses have made their case. Hear the Crown's decree.\"",
+                "I have heard enough from both sides. Now hear the Crown's logistical decree.", 15);
+
+            var disputeHub = AddLine(conv, 15, NarratorId, RomusId, "Dispute_Hub_Prompt",
+                "The entire council fell silent, awaiting your verdict. The supply artery of the southern campaign hung in the balance.");
+
+            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 15, 20));  // Sazon Paid Subsidies (Budget >= 1)
+            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 15, 200)); // Sazon Debt Charter (Budget < 1)
+            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 15, 30));  // Azaro Paid Fuel (Energy >= 1)
+            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 15, 300)); // Azaro Civilian Rationing (Energy < 1)
+            disputeHub.outgoingLinks.Add(CreateLink(conv.id, 15, 40));  // Royal Compromise (Authority >= 1)
+
+            // Option A1: Sazon Funded (requires Budget >= 1)
             AddChoice(conv, 20, ManusId, "Choice_Sazon_Route",
-                "\"House Sazon will manage the supply lines. Rely on Brenas granaries, coastal convoys, and local syndicates.\"",
-                "We cannot break the back of Brenas to win a military campaign. House Sazon will oversee rear supply and transit. Utilize your guild networks, coastal freighters, and granaries to keep our army fed and our people secure.", -1,
-                "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1;");
+                "\"House Sazon will manage logistics (-1 Budget). Use Brenas granaries and coastal freighters.\"",
+                "We will not crush Brenas to win a war. Release 1 Budget in subsidies so House Sazon's merchant guilds and coastal freighters keep the army supplied and Brenas's cities protected.", -1,
+                "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
+
+            // Option A2: Sazon Debt Charter (fallback when Budget < 1)
+            AddChoice(conv, 200, ManusId, "Choice_Sazon_Debt_Route",
+                "\"Our coffers are bare—charter House Sazon on bonded port-customs IOUs (-1 Authority).\"",
+                "Our royal treasury has no spare gold today, yet we still entrust rear supply to House Sazon under bonded port-customs IOUs guaranteed by the Crown.", -1,
+                "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1");
 
             AddLine(conv, 21, ManusId, RomusId, "Ack_Sazon_Manus",
-                "\"Thank you, Your Majesty!\" Manus bowed with genuine reverence. \"House Sazon will mobilize our finest grain syndicates and coastal barges. The people of Brenas will know their King protects them.\"", -1,
+                "\"Thank you, Your Majesty!\" Manus bowed with genuine reverence. \"House Sazon will mobilize our finest grain syndicates and coastal freighters across the gulf. Brenas will stand firm behind our soldiers.\"", -1,
                 "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddLine(conv, 121, LeonaId, RomusId, "Ack_Sazon_Leona",
-                "Countess Leona inclined her head with poised gratitude. \"A prudent decree, Your Majesty. Our Brenas syndicates will keep the front provisioned without bleeding the countryside dry.\"", -1,
+                "Countess Leona inclined her head with poised gratitude. \"A prudent decree, Your Majesty. Our Brenas syndicates will keep the front supplied without bleeding the towns dry.\"", -1,
                 "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true) and (Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true)");
 
             AddLine(conv, 22, AngelicaId, RomusId, "Ack_Sazon_Angelica",
-                "Duchess Angelica tilted her chin proudly. \"A wise and sovereign decree, Your Majesty. Brenas will stand as a steadfast bastion at your rear, and our western coastal ports will remain open for your fleet.\"", -1,
+                "Duchess Angelica lifted her chin proudly. \"A sovereign judgment worthy of Porte Drazon, Your Majesty. Brenas will stand as an unbreakable bastion at your rear.\"", -1,
                 "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true");
 
             AddLine(conv, 23, TaddeusId, RomusId, "Ack_Sazon_Taddeus",
-                "Duke Taddeus scowled, tossing his gloves onto the mahogany table with visible disgust. \"I only hope, Your Majesty, that when Valdez's tanks counter-attack, your merchant syndicates can fire wheat bushels instead of armor-piercing shells.\"", -1,
+                "Duke Taddeus tossed his gloves onto the oak table with visible disgust. \"Pray, Your Majesty, that when Valdez's tanks counter-attack, merchant freighters deliver shells as promptly as they deliver tax exemptions.\"", -1,
                 "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
             AddLine(conv, 24, LucitaId, RomusId, "Ack_Sazon_Lucita",
-                "Lucita remained disciplined, though her jaw was clenched tight. \"The General Staff will adapt our operational timetable to the guild schedules, Your Majesty. We will hold Brenas at all costs.\"", -1,
+                "Lucita remained disciplined, though her jaw tightened. \"The General Staff will adapt our convoy timetables to the guilds, Your Majesty. We will hold the frontier.\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 124, CarlosId, RomusId, "Ack_Sazon_Carlos",
-                "General Carlos Azaro exhaled slowly, snapping his ledger shut. \"Very well, Your Majesty. We will adjust our convoy timetables accordingly.\"", -1,
+                "General Carlos Azaro exhaled slowly, snapping his ledger shut. \"Very well, Your Majesty. We will adjust our staging timetables to the guild schedules.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
-            // Wire Sazon ack chain cleanly
-            AddLink(conv, 20, 21);
-            AddLink(conv, 20, 22);
-            AddLink(conv, 20, 121);
+            foreach (int src in new[] { 20, 200 })
+            {
+                AddLink(conv, src, 21);
+                AddLink(conv, src, 22);
+                AddLink(conv, src, 121);
+            }
             AddLink(conv, 21, 22);
             AddLink(conv, 21, 23);
             AddLink(conv, 21, 24);
@@ -391,38 +631,49 @@ namespace GreatZilleSolution
             AddLink(conv, 23, 24);
             AddLink(conv, 23, 124);
 
-            // Azaro choice
+            // Option B1: Azaro Paid Fuel (requires Energy >= 1)
             AddChoice(conv, 30, LucitaId, "Choice_Azaro_Route",
-                "\"Military necessity is absolute. Grant House Azaro full requisition powers to unleash a mechanized offensive.\"",
-                "Military necessity takes absolute priority. Grant the General Staff and House Azaro full requisition authority over the southern rail network and fuel depots. We need maximum attack tempo to crush Valdez before he can entrench.", -1,
-                "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2;");
+                "\"Military necessity rules: grant House Azaro full rail and depot requisition (-1 Energy).\"",
+                "Military necessity takes absolute priority. Grant House Azaro full requisition powers over Brenas's rail corridors and allocate 1 Energy to fuel an overwhelming mechanized thrust.", -1,
+                "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
+                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1");
+
+            // Option B2: Azaro Civilian Rationing (fallback when Energy < 1)
+            AddChoice(conv, 300, LucitaId, "Choice_Azaro_Rationing",
+                "\"Our energy grid is empty—order forced civilian fuel rationing so Azaro's tanks roll (-1 Authority).\"",
+                "Our strategic energy reserve is exhausted, yet the spearheads must move. Impose emergency civilian fuel rationing in Brenas and hand rail priority to House Azaro.", -1,
+                "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1");
 
             AddLine(conv, 31, LucitaId, RomusId, "Ack_Azaro_Lucita",
-                "Lucita saluted crisply, her eyes shining with decisive pride. \"A command worthy of a warrior king, Your Majesty! Our mechanized spearheads will receive every shell and barrel of fuel without hesitation. We will shatter Valdez's lines!\"", -1,
+                "Lucita saluted crisply, her eyes shining with decisive pride. \"A command worthy of a warrior king, Your Majesty! Our mechanized spearheads will not lack for shells or diesel. We will shatter Valdez's lines!\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 131, CarlosId, RomusId, "Ack_Azaro_Carlos",
-                "General Carlos Azaro gave a crisp nod. \"Understood, Your Majesty. Our armored spearheads will not lack for fuel or shells.\"", -1,
+                "General Carlos Azaro gave a crisp nod. \"Understood, Your Majesty. Our armored spearheads will roll at full combat tempo.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLine(conv, 32, TaddeusId, RomusId, "Ack_Azaro_Taddeus",
-                "\"Montaklar's divisions are at your service, Your Majesty!\" Taddeus declared firmly. \"Our armored columns will drive straight through Wiktrany!\"", -1,
+                "\"Montaklar's divisions stand ready, Your Majesty!\" Taddeus declared firmly. \"Our armored columns will smash straight through Wiktrany!\"", -1,
                 "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
             AddLine(conv, 33, AngelicaId, RomusId, "Ack_Azaro_Angelica",
-                "Duchess Angelica rose from her chair, her eyes burning with icy indignation. \"The Crown may take its fuel, Your Majesty. But remember this day when our farmers curse the name of Montaklar in the winter breadlines.\"", -1,
+                "Duchess Angelica rose from her chair, her eyes burning with icy indignation. \"The Crown may seize its trains, Your Majesty. Remember this day when Brenas freezes in winter queues.\"", -1,
                 "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true");
 
             AddLine(conv, 34, ManusId, RomusId, "Ack_Azaro_Manus",
-                "Manus bowed his head solemnly. \"We will do our best to keep civil order in Brenas, Your Majesty. May your victory be swift enough to justify the burden our people must bear.\"", -1,
+                "Manus bowed his head solemnly. \"We will strive to hold civil order in Brenas, Your Majesty. Let your victory be swift enough to justify this hardship.\"", -1,
                 "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddLine(conv, 134, LeonaId, RomusId, "Ack_Azaro_Leona",
-                "Countess Leona rose stiffly. \"The Crown shall have its trains, Your Majesty. I pray our towns survive the winter.\"", -1,
+                "Countess Leona rose stiffly. \"The Crown shall have its trains, Your Majesty. I pray our towns endure the winter.\"", -1,
                 "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
-            AddLink(conv, 30, 31);
-            AddLink(conv, 30, 131);
+            foreach (int src in new[] { 30, 300 })
+            {
+                AddLink(conv, src, 31);
+                AddLink(conv, src, 131);
+            }
             AddLink(conv, 31, 32);
             AddLink(conv, 31, 33);
             AddLink(conv, 31, 34);
@@ -434,27 +685,30 @@ namespace GreatZilleSolution
             AddLink(conv, 32, 33);
             AddLink(conv, 32, 34);
             AddLink(conv, 32, 134);
+            // Fixed: route Angelica (33) cleanly whether Manus is present (34) OR gone (134)!
             AddLink(conv, 33, 34);
+            AddLink(conv, 33, 134);
 
-            // Compromise choice
+            // Option C: Royal Compromise (requires Authority >= 1)
             AddChoice(conv, 40, ElenaId, "Choice_Compromise_Route",
-                "\"Neither house will dictate terms. Elena Werner will lead a Joint Logistical Board balancing both needs.\"",
-                "Neither house will dictate terms unilaterally. Minister Elena Werner will chair a joint royal logistical board. Priority rail corridors will be reserved for military munitions, while Sazon guilds will oversee food procurement and local depot distribution.", 41,
-                "Variable[\"Zille_Logistics_Route\"] = \"Compromise\"; Variable[\"Zille_Logistics_House\"] = \"Compromise\"; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1;");
+                "\"Impose a Joint Logistical Board under Elena Werner (-1 Authority). Neither house dominates.\"",
+                "Neither house will dictate to the Crown. I expend royal authority to establish a Joint Logistical Board under Minister Elena Werner—guaranteeing priority munitions rails while Sazon syndicates protect civilian granaries and coastal barges.", 41,
+                "Variable[\"Zille_Logistics_Route\"] = \"Compromise\"; Variable[\"Zille_Logistics_House\"] = \"Compromise\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Authority\"] or 0) >= 1");
 
             AddLine(conv, 41, ElenaId, RomusId, "Ack_Compromise_Elena",
-                "Elena smiled faintly, adjusting her glasses. \"A thoroughly pragmatic compromise, Your Majesty. It prevents military paralysis while guarding the Crown against corrupt provincial price-gouging. I will assume personal oversight of the board immediately.\"", -1);
+                "Elena inclined her head with crisp efficiency. \"A balanced solution, Your Majesty. Both fuel and grain supplies will be strictly audited against hoarding or rail bottlenecks.\"", -1);
 
             AddLine(conv, 42, HugoId, RomusId, "Ack_Compromise_Hugo",
-                "\"Well reasoned, Romus. Unity between our noble houses is the bedrock upon which our dynasty stands. Glovurius axa Rizia!\"", -1,
+                "\"Well reasoned, Romus. Unity between our noble houses is the bedrock of the realm. Glovurius axa Rizia!\"", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 43, LucitaId, RomusId, "Ack_Compromise_Lucita",
-                "Lucita nodded with measured professional respect. \"The military accepts this structure, Your Majesty. We will coordinate our convoy schedules directly with Minister Werner's office.\"", -1,
+                "Lucita nodded with measured professional respect. \"The military accepts this structure, Your Majesty. Our quartermasters will report directly to Minister Werner.\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 143, CarlosId, RomusId, "Ack_Compromise_Carlos",
-                "General Carlos Azaro inclined his head. \"An orderly compromise, Your Majesty. Our quartermasters will coordinate directly with Minister Werner.\"", -1,
+                "General Carlos Azaro inclined his head. \"An orderly compromise, Your Majesty. Our staff will coordinate directly with Minister Werner.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLink(conv, 41, 42);
@@ -469,8 +723,8 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 3: Turn_Zille_WarBriefing (ID 9988) - ROYAL WAR COUNCIL BRIEFING
-        // Runtime Lua conditions for Lucita (married/romance/hostile/arrested),
-        // Hugo (free/hostile/absent), Titus (free/absent), and Two-Front War!
+        // Adds Naval Blockade preparation check (Fleet>=2 & Energy>=1),
+        // Arsenal & Fleet status briefings, Staff Plan feasibility gating, and micro-effects.
         // =========================================================================
         public static void RegisterWarCouncilBriefing(DialogueDatabase db)
         {
@@ -493,17 +747,33 @@ namespace GreatZilleSolution
             AddLine(conv, 1, NarratorId, RomusId, "Briefing_Atmosphere",
                 "Midnight in the War Room of Palas Rezna. Heavy rain beat rhythmically against the stone walls, while inside the air hung thick with coffee, parchment, and gun oil. Across the tactical table lay the relief map of the Zille peninsula, the Strait of Kreleck, and the Gulf of Moridia, brass markers tracking every Wehzek garrison and naval patrol.", -1);
 
-            // Hugo / Grand Vizier opening
+            AddChoice(conv, 401, NarratorId, "Briefing_Stimulus_Map",
+                "Step up to the mahogany table and trace a finger along the brass relief of the Strait of Kreleck.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "Briefing_Stimulus_Coffee",
+                "Pour a small cup of black coffee from the silver urn and nod to the map orderlies.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "Briefing_Entry_Map",
+                "The painted sea lanes felt cool under your fingertips—a narrow strip of water separating Zille's occupied piers from Wehlen's mainland supply bases.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "Briefing_Entry_Coffee",
+                "The dark roast cut through the midnight fatigue. Around the table, your ministers and commanders straightened as you set the porcelain saucer down.", -1);
+
+            AddLink(conv, 1, 401);
+            AddLink(conv, 1, 402);
+
             AddLine(conv, 2, HugoId, RomusId, "Hugo_Briefing_Open",
-                "Your Majesty... The hour has arrived. Years of diplomatic patience have run dry. In a few hours, the world will awaken to news that Rizia has drawn the sword to reclaim its stolen province.", -1,
+                "Your Majesty... The hour has arrived. Years of diplomatic patience have run dry. Before dawn, the world will learn that Rizia has drawn the sword to reclaim Zille.", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] ~= true");
 
             AddLine(conv, 102, HugoId, RomusId, "Hugo_Briefing_Open_Hostile",
-                "Your Majesty. Despite the bitter rift between us, I cannot ignore the duty of my office: in a few hours, Rizia goes to war for Zille. May God shield the realm from the consequences.", -1,
+                "Your Majesty. Despite the bitter rift between us, I cannot ignore the duty of my office: before dawn, Rizia goes to war for Zille. May God shield the realm from the consequences.", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] == true");
 
             AddLine(conv, 103, AngelicaId, RomusId, "Angelica_Vizier_Briefing_Open",
-                "Your Majesty. As Grand Vizier, I have reviewed the final mobilization decrees. In a few hours, Rizia moves to reclaim Zille—and with it, the historic wholeness of Brenas.", -1,
+                "Your Majesty. As Grand Vizier, I have reviewed the final mobilization decrees. Before dawn, Rizia moves to reclaim Zille—and with it, the historic wholeness of Brenas.", -1,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true");
 
             AddLine(conv, 104, SalId, RomusId, "Sal_Vizier_Briefing_Open",
@@ -516,36 +786,36 @@ namespace GreatZilleSolution
 
             foreach (int hId in new[] { 2, 102, 103, 104, 105 })
             {
-                AddLink(conv, 1, hId);
+                AddLink(conv, 404, hId);
+                AddLink(conv, 405, hId);
             }
 
-            // War Councilor opening: Lucita (Married / Romance / Hostile / Normal) OR Taddeus / Carlos if Lucita arrested
             AddLine(conv, 3, NarratorId, RomusId, "Lucita_Narration_Married",
                 "Lucita stood at the head of the map table, her field marshal's baton resting across the Brenas frontier. When your eyes met, her severe military demeanor softened with quiet warmth before she addressed the assembly.", 4,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] == true");
             AddLine(conv, 4, LucitaId, RomusId, "Lucita_Open_Married",
-                "My King... and my husband. All divisions are deployed at their staging posts. The soldiers have their rations, their ammunition, and the blessing of the sanctuaries. High command awaits your operational doctrine.", -1);
+                "My King... and my husband. All divisions are deployed at their staging posts. High command awaits your operational doctrine.", -1);
 
             AddLine(conv, 113, NarratorId, RomusId, "Lucita_Narration_Romance",
                 "Lucita looked up from the coastal approaches, her dark eyes flashing with unmistakable warmth before snapping back to disciplined military bearing.", 114,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and (Variable[\"RiziaDLC.Lucita_RomanceHappened\"] == true or (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) > 0)");
             AddLine(conv, 114, LucitaId, RomusId, "Lucita_Open_Romance",
-                "Your Majesty... Romus. The army is prepared. Our officers stand by their radios along the Brenas frontier and at Monqiz naval base. Operational command is yours to dictate.", -1);
+                "Your Majesty... Romus. Our officers stand by their radios along the Brenas frontier and at Monqiz naval base. Operational command is yours to dictate.", -1);
 
             AddLine(conv, 115, LucitaId, RomusId, "Lucita_Open_Hostile",
-                "Your Majesty. Whatever grievances stand between the Crown and House Azaro, our officers know their duty. The divisions are in position along the Brenas line; give your orders.", -1,
+                "Your Majesty. Whatever grievances stand between the Crown and House Azaro, our officers know their duty. Give your orders.", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and Variable[\"RiziaDLC.Lucita_RomanceHappened\"] ~= true and (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) <= 0 and (Variable[\"RiziaDLC.Country_HouseAzaro_Enemy\"] == true or Variable[\"RiziaDLC.Turn06_Council_LucitaOffended\"] == true)");
 
             AddLine(conv, 116, LucitaId, RomusId, "Lucita_Open_Standard",
-                "Your Majesty. All divisions of the Royal Army and provincial levies have assumed combat positions along the demarcation line, and the Royal Navy stands fueled at Monqiz. We await your final operational authorization.", -1,
+                "Your Majesty. All divisions of the Royal Army and provincial levies have assumed combat positions along the demarcation line, and the Royal Navy stands ready at Monqiz. We await your final authorization.", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and Variable[\"RiziaDLC.Lucita_RomanceHappened\"] ~= true and (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) <= 0 and Variable[\"RiziaDLC.Country_HouseAzaro_Enemy\"] ~= true and Variable[\"RiziaDLC.Turn06_Council_LucitaOffended\"] ~= true");
 
             AddLine(conv, 117, TaddeusId, RomusId, "Taddeus_Open_LucitaGone",
-                "Duke Taddeus Azaro stood stiffly beside the relief map, his jaw tight with lingering bitterness over his daughter's fate. \"Your Majesty. The divisions are assembled along the Brenas line and the fleet is ready at Monqiz. Specify the doctrine.\"", -1,
+                "Duke Taddeus Azaro stood stiffly beside the relief map, his jaw tight with lingering bitterness over his daughter's fate. \"Your Majesty. The divisions are assembled along the Brenas line and the fleet stands at Monqiz. Specify the doctrine.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
             AddLine(conv, 118, CarlosId, RomusId, "Carlos_Open_LucitaGone",
-                "General Carlos Azaro stepped forward in Lucita's stead, his expression unreadable and strictly professional. \"Your Majesty. The General Staff has completed deployment along the Brenas border and at Monqiz. We await your operational orders.\"", -1,
+                "General Carlos Azaro stepped forward in Lucita's stead, his expression strictly professional. \"Your Majesty. The General Staff has completed deployment along the Brenas border and at Monqiz. We await your operational orders.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and (Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
 
             foreach (int hId in new[] { 2, 102, 103, 104, 105 })
@@ -558,14 +828,14 @@ namespace GreatZilleSolution
                 AddLink(conv, hId, 118);
             }
 
-            // Laurento note (+ Two-Front War warning if Pales war is active!)
+            // Laurento Diplomacy + Two-Front check
             AddLine(conv, 5, LaurentoId, RomusId, "Laurento_Briefing_Note",
-                "Our diplomatic memorandums have been pre-scheduled for dispatch to the Alliance of Nations in Konstantium, Kyrute the moment our first units advance. We are framing this strictly as the lawful expiration of the 1927 lease and the restoration of Rizian sovereignty.", -1,
-                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true)");
+                "Our diplomatic memorandums are pre-scheduled for the Alliance of Nations in Konstantium, Kyrute—framing this strictly as enforcing the lapsed 1927 treaty.", -1,
+                "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
 
             AddLine(conv, 1051, LaurentoId, RomusId, "Laurento_Briefing_TwoFront",
-                "I must warn you gravely, Your Majesty: with our forces already engaged against Pales, opening a second war against Wehlen will alarm both superpowers and stretch our diplomatic shield in Kyrute to the breaking point.", -1,
-                "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true)");
+                "I must warn you gravely, Your Majesty: with our forces already fighting Pales on the eastern frontier, opening a second war against Wehlen will alarm both ATO and the Malenyevist bloc in Kyrute.", -1,
+                "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)");
 
             foreach (int prev in new[] { 4, 114, 115, 116, 117, 118 })
             {
@@ -573,13 +843,13 @@ namespace GreatZilleSolution
                 AddLink(conv, prev, 1051);
             }
 
-            // Titus security note
+            // Operational Capability Check (Weapons >=1000 vs <1000 & Fleet >=2 vs <2)
             AddLine(conv, 6, TitusId, RomusId, "Titus_Briefing_Note",
-                "The Golden Guard has deployed vanguard security teams along the advance routes, Your Majesty. Our scouts confirm that General Valdez's garrison in Zille City has not yet detected our mechanized assembly.", 10,
+                "The Golden Guard has deployed vanguard security teams along the advance routes, Your Majesty. Valdez's garrison in Zille City has not yet detected our main mechanized assembly.", -1,
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             AddLine(conv, 106, CarlosId, RomusId, "Carlos_Security_NoTitus",
-                "Forward military intelligence confirms that General Valdez's coastal and border outposts have not yet detected our main concentration, Your Majesty.", 10,
+                "Forward military intelligence confirms that General Valdez's coastal and border outposts have not yet detected our main concentration, Your Majesty.", -1,
                 "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
 
             foreach (int prev in new[] { 5, 1051 })
@@ -588,33 +858,91 @@ namespace GreatZilleSolution
                 AddLink(conv, prev, 106);
             }
 
-            var commandHub = AddLine(conv, 10, NarratorId, RomusId, "Command_Hub_Prompt",
-                "Across the mahogany table, the operational map awaited your royal seal. You could personally take command at the War Table—directing Operation Golden Sword into the Zille peninsula or Operation Golden Ark across the Gulf of Moridia into mainland Wehlen—or delegate field execution to the General Staff under one of four doctrines.");
+            AddLine(conv, 7, NarratorId, RomusId, "Briefing_Arsenal_Fleet_Good",
+                "Quartermasters reported over 1,000 reserve weapons ready for immediate frontline replacement, while naval signals from Monqiz confirmed strong warship squadrons poised to contest the Gulf of Moridia.", 10,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"Zille_Fleet_Total\"] or 0) >= 2",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
-            commandHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20)); // Romus: Operation Golden Sword
-            commandHub.outgoingLinks.Add(CreateLink(conv.id, 10, 30)); // Romus: Operation Golden Ark
-            commandHub.outgoingLinks.Add(CreateLink(conv.id, 10, 40)); // Staff Officers Command
-            commandHub.outgoingLinks.Add(CreateLink(conv.id, 10, 50)); // Postpone
+            AddLine(conv, 107, NarratorId, RomusId, "Briefing_Arsenal_Good_Fleet_Weak",
+                "Quartermasters confirmed over 1,000 reserve weapons stacked in Brenas, yet the Admiralty warned that fewer than two operational capital ships or destroyer groups stand ready at Monqiz—making distant sea landings perilous.", 10,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"Zille_Fleet_Total\"] or 0) < 2");
 
+            AddLine(conv, 108, NarratorId, RomusId, "Briefing_Arsenal_Low_Warn",
+                "The logistics officer lowered his voice uneasily: with fewer than 1,000 reserve weapons in the royal depots, prolonged frontal battles will rapidly exhaust our ammunition reserves unless foreign munitions arrive.", 10,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000");
+
+            foreach (int prev in new[] { 6, 106 })
+            {
+                AddLink(conv, prev, 7);
+                AddLink(conv, prev, 107);
+                AddLink(conv, prev, 108);
+            }
+
+            var prepHub = AddLine(conv, 10, NarratorId, RomusId, "Briefing_PreOffensive_Prompt",
+                "Before issuing your command doctrine, you could dispatch last-hour naval or diplomatic opening moves ahead of dawn.");
+
+            prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 14)); // Both Naval Blockade + AN Legal Dispatch (if Fleet>=2 & Energy>=1)
+            prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 15)); // Naval Blockade only (if Fleet>=2 & Energy>=1)
+            prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 17)); // AN Legal Dispatch only
+            prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 180)); // Proceed directly to Command Doctrine
+
+            AddChoice(conv, 14, LaurentoId, "Choice_Blockade_And_AN",
+                "\"Seal the Strait of Kreleck (-1 Energy) AND circulate our 1927 treaty dossier in Konstantium before dawn!\"",
+                "Sortie our squadrons from Monqiz to blockade the Gulf of Moridia and Strait of Kreleck, and have our Konstantium envoy distribute the 1927 treaty breach dossier before the first barrage!", 16,
+                "Variable[\"Zille_NavalBlockadeActive\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"Zille_AN_PreBrief_Sent\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1");
+
+            // Pre-battle preparatory action: Naval Blockade across Gulf of Moridia
+            AddChoice(conv, 15, LaurentoId, "Choice_Naval_Blockade",
+                "\"Seal the Gulf of Moridia! Dispatch our warships to blockade Valdez's supply convoys (-1 Energy).\"",
+                "Before our infantry moves a meter, sortie our squadrons from Monqiz to blockade the Gulf of Moridia and Strait of Kreleck, choking Valdez's sea supply lines from mainland Wehlen!", 16,
+                "Variable[\"Zille_NavalBlockadeActive\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1");
+
+            AddLine(conv, 16, NarratorId, RomusId, "Ack_Naval_Blockade",
+                "Admiralty telegraphs clattered instantly. Within twenty minutes, Monqiz confirmed destroyer flotillas and patrol craft steaming out to seal the Strait of Kreleck against Wehzek cargo steamers.", 19);
+
+            AddChoice(conv, 17, LaurentoId, "Choice_AN_Legal_Dispatch",
+                "\"Instruct our Konstantium envoy to circulate the 1927 treaty breach dossier before dawn.\"",
+                "Have our ambassadors in Konstantium distribute the legal memorandum on Wehlen's 1927 treaty breach and bombing evidence to every delegation before the first artillery barrage begins.", 18,
+                "Variable[\"Zille_AN_PreBrief_Sent\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+
+            AddLine(conv, 18, LaurentoId, RomusId, "Ack_AN_Legal_Dispatch",
+                "Laurento nodded with sharp approval. \"Encrypted diplomatic bags are moving to Kyrute immediately, Your Majesty. Smolak will lose the propaganda battle before dawn.\"", 19);
+
+            AddChoice(conv, 180, LucitaId, "Choice_Skip_PreMeasures",
+                "\"Keep radio silence—move straight to choosing our operational command doctrine.\"",
+                "Maintain strict operational silence until the first guns speak. Let us choose our command doctrine now.", 19);
+
+            var commandHub = AddLine(conv, 19, NarratorId, RomusId, "Command_Hub_Prompt",
+                "Across the mahogany table, the operational map awaited your royal seal. How will Rizia command the liberation of Zille?");
+
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 20)); // Romus: Operation Golden Sword
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 30)); // Romus: Operation Golden Ark (Fleet >= 2)
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 35)); // Romus: Operation Golden Ark Reckless (Fleet < 2 warning)
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 40)); // Staff Officers Command
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 50)); // Postpone
+
+            // Operation Golden Sword
             AddChoice(conv, 20, LucitaId, "Choice_Golden_Sword",
-                "\"I will take personal command at the War Table: Authorize Operation Golden Sword Phase I.\"",
-                "I will command this campaign myself. Authorize Operation Golden Sword Phase I. We will launch a massive armored spearhead across the Brenas-Zille frontier through Wiktrany, smashing Valdez's center and driving directly onto Zille City and Munat.", -1,
-                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenSword\"; Variable[\"Zille_War_Active\"] = true;");
+                "\"I will command at the War Table: Authorize Operation Golden Sword Phase I.\"",
+                "I will command this campaign myself. Authorize Operation Golden Sword Phase I. Launch our armored spearheads across the Brenas-Zille frontier through Wiktrany toward Zille City and Munat.", -1,
+                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenSword\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 21, LucitaId, RomusId, "Ack_Golden_Sword_Lucita",
-                "\"A glorious doctrine, Your Majesty!\" Lucita's eyes burned with martial pride. \"Our heavy tanks and mechanized infantry will punch straight through their fortified junctions. The War Table is illuminated and awaiting your strategic deployment for Phase I!\"", -1,
+                "\"A glorious doctrine, Your Majesty!\" Lucita's eyes burned with martial pride. \"Our heavy tanks and mechanized brigades will punch straight through Wiktrany. The War Table awaits your deployment for Phase I!\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 121, CarlosId, RomusId, "Ack_Golden_Sword_Carlos",
-                "General Carlos Azaro saluted crisply. \"The armored spearheads are fueled and poised on the Brenas frontier. The War Table awaits your deployment for Phase I, Your Majesty.\"", -1,
+                "General Carlos Azaro saluted crisply. \"The armored spearheads are poised on the Brenas frontier. The War Table awaits your deployment for Phase I, Your Majesty.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLine(conv, 22, HugoId, RomusId, "Ack_Golden_Sword_Hugo",
-                "\"May Saint Wruhec watch over our soldiers, Romus. Lead our kingdom to triumph. Glovurius axa Rizia!\"", -1,
+                "\"May Saint Wruhec watch over our soldiers, Romus. Glovurius axa Rizia!\"", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 122, LaurentoId, RomusId, "Ack_Golden_Sword_NoHugo",
-                "\"Godspeed to our armies, Your Majesty. Our envoys stand ready to announce Rizia's rightful reclamation.\"", -1,
+                "\"Godspeed to our armies, Your Majesty. Our envoys stand ready to defend Rizia's sovereign action.\"", -1,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
             AddLink(conv, 20, 21);
@@ -624,43 +952,57 @@ namespace GreatZilleSolution
             AddLink(conv, 121, 22);
             AddLink(conv, 121, 122);
 
+            // Operation Golden Ark (Fleet >= 2)
             AddChoice(conv, 30, LucitaId, "Choice_Golden_Ark",
-                "\"I will take personal command at the War Table: Authorize Operation Golden Ark Phase I.\"",
-                "I will lead our forces personally. Authorize Operation Golden Ark Phase I. While our border divisions pin down Zille's southern frontier, the Royal Navy will cross the Gulf of Moridia and Strait of Kreleck to land our marines directly on mainland Wehlen—striking Kratsna, Rotsla, and Grodzizg to sever Zille from behind!", -1,
-                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true;");
+                "\"I will command at the War Table: Authorize Operation Golden Ark Phase I (Amphibious Envelopment).\"",
+                "I will lead our forces personally. Authorize Operation Golden Ark Phase I. While border forces pin down Zille's front, our fleet will cross the Gulf of Moridia to strike mainland Wehlen at Kratsna, Rotsla, and Grodzizg!", -1,
+                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2");
+
+            // Operation Golden Ark (Fleet < 2 warning variant!)
+            AddChoice(conv, 35, LucitaId, "Choice_Golden_Ark_WeakFleet",
+                "\"[RISKY — Weak Navy] Authorize Operation Golden Ark anyway across the Gulf of Moridia!\"",
+                "Despite the Admiralty's warnings about our thin naval escorts, I authorize Operation Golden Ark! Load the transports and cross the Gulf of Moridia to sever Wehlen from behind!", -1,
+                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) - 2;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) < 2");
 
             AddLine(conv, 31, LucitaId, RomusId, "Ack_Golden_Ark_Lucita",
-                "\"An audacious maritime envelopment!\" Lucita smiled fiercely. \"Smolak expects us to bleed against his trenches in Zille—landing across the sea in mainland Wehlen will sever his convoys at the source. The War Table is configured and waiting for Phase I!\"", -1,
+                "\"An audacious maritime stroke!\" Lucita studied the sea lanes intensely. \"Landing across the Gulf of Moridia on mainland Wehlen will shock Smolak's command at its core. The War Table awaits your deployment for Phase I!\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 131, CarlosId, RomusId, "Ack_Golden_Ark_Carlos",
-                "General Carlos Azaro studied the sea lanes approvingly. \"A bold naval stroke across the Gulf of Moridia, Your Majesty. Our landing craft and border screening brigades await your deployment at the War Table.\"", -1,
+                "General Carlos Azaro studied the sea lanes carefully. \"Our amphibious brigades and border screening battalions await your deployment at the War Table, Your Majesty.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLine(conv, 32, LaurentoId, RomusId, "Ack_Golden_Ark_Laurento",
-                "\"Be warned, Your Majesty: striking mainland Wehlen directly across the sea will provoke Chancellor Hegel and Valgsland fiercely, so speed at sea will be everything. Godspeed to our fleet.\"", -1);
+                "\"Be warned, Your Majesty: striking mainland Wehlen directly across the sea will provoke Valgsland fiercely, so speed at sea will be everything. Godspeed to our fleet.\"", -1);
 
-            AddLink(conv, 30, 31);
-            AddLink(conv, 30, 131);
+            foreach (int src in new[] { 30, 35 })
+            {
+                AddLink(conv, src, 31);
+                AddLink(conv, src, 131);
+            }
             AddLink(conv, 31, 32);
             AddLink(conv, 131, 32);
 
+            // Staff Command
             AddChoice(conv, 40, NarratorId, "Choice_Staff_Command",
                 "\"The General Staff will direct the campaign. Present the four staff doctrines for execution.\"",
                 "The General Staff will direct the field execution of this war. Present your four strategic doctrines for royal selection.", 41,
                 "Variable[\"Zille_War_PlanType\"] = \"Staff\";");
 
             var staffHub = AddLine(conv, 41, NarratorId, RomusId, "Staff_Doctrine_Presentation",
-                "The General Staff laid out four strategic doctrines across the map:\n\n  Plan Hawk: Heavy aerial strikes and artillery barrages shatter Valdez's command network before infantry advances.\n  Plan Sword: An aggressive armored charge led by House Azaro heavy divisions pushing through Wiktrany.\n  Plan Ark: A methodical naval blockade and amphibious encirclement across the Gulf of Moridia, starving Zille's sea supply lines.\n  Plan Spear: A covert night decapitation strike by elite commandos against Valdez's headquarters.\n\nWhich staff doctrine do you authorize?");
+                "The General Staff laid out four strategic doctrines across the map:\n\n  Plan Hawk: Heavy aerial strikes and artillery barrages shatter Valdez's command network (best with Bomber Wings & >=3 Energy).\n  Plan Sword: Aggressive armored charge through Wiktrany (best with >=2 Tank brigades & loyal House Azaro).\n  Plan Ark: Naval blockade and sea envelopment across the Gulf of Moridia (requires >=2 Warships/Submarines/Flagship).\n  Plan Spear: Covert night decapitation strike against Valdez's HQ (best with expanded Golden Guard / Intel Hub).\n\nWhich staff doctrine do you authorize?");
 
-            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 42)); // Plan Hawk
-            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 43)); // Plan Sword
-            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 44)); // Plan Ark
-            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 45)); // Plan Spear
+            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 42));  // Plan Hawk
+            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 43));  // Plan Sword
+            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 44));  // Plan Ark (Fleet >= 2)
+            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 440)); // Plan Ark Reckless (Fleet < 2)
+            staffHub.outgoingLinks.Add(CreateLink(conv.id, 41, 45));  // Plan Spear
 
             AddChoice(conv, 42, LucitaId, "Authorize_Staff_Hawk",
                 "\"Authorize Plan Hawk: Shatter their forward redoubts with air and artillery power.\"",
-                "I authorize Plan Hawk. Bring down our bomber wings and heavy artillery. Flatten their defensive works before our ground units advance.", -1,
+                "I authorize Plan Hawk. Bring down our bomber wings and heavy artillery to flatten their defensive works before our infantry advances.", -1,
                 "Variable[\"Zille_War_StaffPlan\"] = \"Hawk\"; Variable[\"Zille_War_Active\"] = true;");
 
             AddChoice(conv, 43, LucitaId, "Authorize_Staff_Sword",
@@ -671,22 +1013,29 @@ namespace GreatZilleSolution
             AddChoice(conv, 44, LucitaId, "Authorize_Staff_Ark",
                 "\"Authorize Plan Ark: Execute a disciplined maritime blockade and sea encirclement.\"",
                 "I authorize Plan Ark. The Royal Navy will seal the Gulf of Moridia and Strait of Kreleck, cutting off Valdez's sea supply lines.", -1,
-                "Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true;");
+                "Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2");
+
+            AddChoice(conv, 440, LucitaId, "Authorize_Staff_Ark_WeakFleet",
+                "\"[RISKY — Few Warships] Authorize Plan Ark anyway: improvise a coastal blockade.\"",
+                "Our fleet at Monqiz is small, yet order Plan Ark nonetheless—harass their coastal freighters with everything that floats!", -1,
+                "Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) - 2;",
+                "(Variable[\"Zille_Fleet_Total\"] or 0) < 2");
 
             AddChoice(conv, 45, TitusId, "Authorize_Staff_Spear",
                 "\"Authorize Plan Spear: Deploy elite commandos and guardsmen to decapitate Valdez's command.\"",
-                "I authorize Plan Spear. Send our finest operatives into Zille tonight to sever Valdez's communications and capture his staff before the main assault begins.", -1,
+                "I authorize Plan Spear. Send our finest operatives into Zille tonight to sever Valdez's communications and capture his staff before dawn.", -1,
                 "Variable[\"Zille_War_StaffPlan\"] = \"Spear\"; Variable[\"Zille_War_Active\"] = true;");
 
             AddLine(conv, 46, LucitaId, RomusId, "Ack_Staff_Lucita",
-                "\"The orders are dispatched, Your Majesty! The General Staff has initiated the offensive. Our officers will report battle progress as the front develops!\"", -1,
+                "\"The orders are dispatched, Your Majesty! The General Staff has launched the offensive and will report front-line progress.\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 146, CarlosId, RomusId, "Ack_Staff_Carlos",
-                "\"The orders are dispatched, Your Majesty. The General Staff has launched the offensive and will report front-line progress.\"", -1,
+                "\"The orders are dispatched, Your Majesty. The General Staff has initiated the offensive.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
-            foreach (int chId in new[] { 42, 43, 44 })
+            foreach (int chId in new[] { 42, 43, 44, 440 })
             {
                 AddLink(conv, chId, 46);
                 AddLink(conv, chId, 146);
@@ -697,19 +1046,19 @@ namespace GreatZilleSolution
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             AddLine(conv, 147, CarlosId, RomusId, "Ack_Staff_Spear_NoTitus",
-                "\"Our special commando detachments are already slipping across the frontier under darkness, Your Majesty. Valdez's command post will be blind before dawn.\"", -1,
+                "\"Our special commando detachments are already slipping across the frontier under darkness, Your Majesty. Valdez's headquarters will be blind before dawn.\"", -1,
                 "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
 
             AddLink(conv, 45, 47);
             AddLink(conv, 45, 147);
 
             AddChoice(conv, 50, HugoId, "Choice_Postpone_War",
-                "\"Hold the offensive for now. Keep our divisions at maximum readiness along the border.\"",
+                "\"Hold the offensive for now. Maintain maximum combat readiness along the border.\"",
                 "Hold the offensive for now. Keep our divisions at maximum combat readiness along the frontier, but do not cross until I give the royal command.", -1,
                 "Variable[\"Zille_War_Postpone\"] = true;");
 
             AddLine(conv, 51, HugoId, RomusId, "Ack_Postpone_Hugo",
-                "\"A prudent and measured decision, Your Majesty. The General Staff will maintain full combat readiness along the frontier until you decide the hour is right.\"", -1,
+                "\"A prudent and measured decision, Your Majesty. The General Staff will maintain full readiness along the frontier.\"", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 151, LaurentoId, RomusId, "Ack_Postpone_NoHugo",
@@ -725,13 +1074,22 @@ namespace GreatZilleSolution
 
         // =========================================================================
         // SCENE 4: Turn_Zille_MaveNortusHQ (ID 9994) - FRONTLINE HEADQUARTERS
-        // Fixed: No rivers, no desert, Mayor via NarratorId (not Carlos ID 88!),
-        // Conditional Foreign Aid & Two-Front War & Lucita/Taddeus arrest variants.
+        // Sequential, topic-to-topic regrouping council (zero hub loop!):
+        // 1. Arrival & active regrouping after Phase I
+        // 2. Plan-specific (SWORD vs ARK) realistic city assessment
+        // 3. Enemy casualties (main success metric) + Own casualties (0-1, 2-4 Taddeus sim remark, 5+)
+        //    (NO Pales mention unless Zille_Fighting_Pales == true!)
+        // 4. Stockpile/Foreign aid & regrouping posture choice
+        // 5. Mave Nortus refugee relief decision
+        // 6. Phase II directive & closure (Phase II event unlocks shortly after at border)
         // =========================================================================
         public static void RegisterMaveNortusHQ(DialogueDatabase db)
         {
-            if (db.GetConversation("Turn_Zille_MaveNortusHQ") != null && db.GetConversation("Zille/MaveNortusHQ") != null)
-                return;
+            var existingConv = db.GetConversation("Zille/MaveNortusHQ") ?? db.GetConversation("Turn_Zille_MaveNortusHQ");
+            if (existingConv != null)
+            {
+                db.conversations.Remove(existingConv);
+            }
 
             var conv = new Conversation();
             conv.id = ConvId_MaveNortusHQ;
@@ -746,151 +1104,338 @@ namespace GreatZilleSolution
             entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
             conv.dialogueEntries.Add(entry0);
 
+            // Beat 1: Arrival & Regrouping Atmosphere
             AddLine(conv, 1, NarratorId, RomusId, "MaveNortus_Arrival",
-                "Your armored convoy rumbled through the muddy, rain-slicked streets of Mave Nortus. In the distance across the northern hills, the rhythmic thud of heavy artillery rolled like continuous thunder, rattling the windowpanes of the stone Brenas houses. Sandbag bunkers lined the crossroads, and wounded soldiers resting on canvas stretchers outside the town sanctuary looked up with weary reverence as the royal standard fluttered past.", -1);
+                "Your armored convoy rolled through rain-lashed Mave Nortus. Along the rail sidings, soot-stained howitzers were uncoupling for barrel inspection while weary Phase I regiments rotated off the forward roads to rearm and regroup before the second wave. Outside the Mayor's Hall, a mud-spattered dispatch rider dismounted from his smoking motorcycle, clutching a canvas map case.", -1);
+
+            AddChoice(conv, 401, NarratorId, "MaveNortus_Stimulus_Rider",
+                "Pause on the stone steps to thank the exhausted dispatch rider and inspect the muddy road column.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "MaveNortus_Stimulus_Hall",
+                "Pull your greatcoat collar tighter against the drizzle and stride straight through the oak doors.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "MaveNortus_Entry_Rider",
+                "The young corporal's eyes widened through the road grime as he snapped a shaky salute. Beside the sandbags, artillerymen loading shells onto handcarts paused to cheer softly as you passed inside.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "MaveNortus_Entry_Hall",
+                "The heavy oak doors swung shut behind you, trading the clatter of iron treads and rain for the smell of wet wool, coal smoke, and fresh ink.", -1);
+
+            AddLink(conv, 1, 401);
+            AddLink(conv, 1, 402);
 
             AddLine(conv, 2, NarratorId, RomusId, "MaveNortus_Office_Entry",
-                "Inside the town hall, municipal tax ledgers had been shoved aside to make room for battlefield telegraphs and grease-pencil maps spread across the Mayor's oak desk. Duke Taddeus Azaro stood with his uniform jacket unbuttoned, pointing a scarred finger at the coastal highways, while Councilor Lucita Azaro reviewed incoming courier dispatches.", 3,
+                "Inside the Mayor's Hall, ledgers had been swept onto the floor beneath grease-marked operational charts. Duke Taddeus Azaro traced the shifting front line while Councilor Lucita Azaro sorted fresh courier dispatches.", 3,
                 "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 102, NarratorId, RomusId, "MaveNortus_Office_Carlos",
-                "Inside the town hall, municipal tax ledgers had been shoved aside for battlefield telegraphs and grease-pencil maps spread across the Mayor's oak desk. General Carlos Azaro leaned over the coastal highways, conferring briskly with staff officers.", 103,
+                "Inside the Mayor's Hall, ledgers lay stacked beside field telegraphs and grease-marked charts. General Carlos Azaro leaned over the table, coordinating the regrouping of forward brigades.", 103,
                 "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true) or (Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
-            AddLink(conv, 1, 2);
-            AddLink(conv, 1, 102);
+            AddLink(conv, 404, 2);
+            AddLink(conv, 404, 102);
+            AddLink(conv, 405, 2);
+            AddLink(conv, 405, 102);
 
             AddLine(conv, 3, TaddeusId, RomusId, "Taddeus_HQ_Greeting",
-                "Your Majesty! It is an honor to have our King at the front lines. The men took heart the moment the royal motorcade entered Mave Nortus.", 4);
+                "\"Your Majesty! Having the Crown at our regrouping depot has steadied every battalion coming off the line. The first strike is concluded—now we catch our breath and prepare the finishing blow.\"", -1);
 
             AddLine(conv, 103, CarlosId, RomusId, "Carlos_HQ_Greeting",
-                "Your Majesty. Word of your arrival at Mave Nortus has already lifted the spirits of the forward brigades.", -1);
+                "\"Your Majesty. The first blow has landed and our columns are pulling back to reorganize along the Mave Nortus railheads before Phase II.\"", -1);
 
-            AddLine(conv, 4, LucitaId, RomusId, "Lucita_HQ_Debrief_1",
-                "Phase I of our operation has concluded, Your Majesty. General Valdez fought fiercely along the fortified border earthworks and coastal approaches, yet our forward brigades have secured crucial staging positions.", 5);
+            // Beat 2: Plan-Aware Realistic Territorial Assessment (SWORD vs ARK)
+            int leadSpeaker = LucitaId; // Conditionals handle unavailable portraits smoothly in text
+            // SWORD variants
+            AddLine(conv, 210, leadSpeaker, RomusId, "Assess_Sword_ZilleCity",
+                "\"Operation Righteous Sword's opening salvo shattered expectations along the coast—our spearheads actually fought their way into Zille City itself in Phase I! Our regrouping divisions only need to clear lingering border pockets in Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"Zille_Cap_ZilleCity\"] == true");
 
-            AddLine(conv, 5, LucitaId, RomusId, "Lucita_HQ_Debrief_2",
-                "Still, the campaign is only half won. Valdez has consolidated his surviving armor and veterans into a hardened defensive ring around Zille City, the northern coast, and the sea approaches across the Gulf of Moridia. We must launch Phase II to break his spine.", 6);
+            AddLine(conv, 211, leadSpeaker, RomusId, "Assess_Sword_Wiktrany",
+                "\"Because assaulting Zille City head-on is like chewing iron, taking even a single fortified town in Phase I was the real measure—and our coastal push wrested Wiktrany from Valdez's garrison. Holding Wiktrany gives our regrouping corps a dry port and flank anchor for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Wiktrany\"] == true");
 
-            AddLine(conv, 104, TaddeusId, RomusId, "Taddeus_HQ_Debrief_NoLucita",
-                "Phase I is complete, Your Majesty. Valdez contested every kilometer of the coastal highways, and though our forces secured key positions, he has dug his remaining armor into an inner ring around Zille City and the Gulf ports. Phase II must decide it.", 6,
-                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
+            AddLine(conv, 212, leadSpeaker, RomusId, "Assess_Sword_Munat",
+                "\"Storming Zille City straight off the march was always near-impossible, yet our southern thrust drove Valdez out of Munat! Securing Munat breaks the southern hinge and gives our regrouping artillery hard ground within range of Zille City for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Wiktrany\"] ~= true and Variable[\"Zille_Cap_Munat\"] == true");
 
-            AddLine(conv, 105, CarlosId, RomusId, "Carlos_HQ_Debrief_BothGone",
-                "Phase I is complete, Your Majesty. Valdez's surviving brigades have fallen back into fortified rings around Zille City and his northern supply ports. We need your Phase II directives to finish the campaign.", 6,
-                "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
+            AddLine(conv, 213, leadSpeaker, RomusId, "Assess_Sword_Nanta",
+                "\"Zille City's inner ring remains forbidding, yet our northern push seized Nanta in the opening blow! Cutting that coastal spur means Valdez cannot easily reinforce Zille City while we regroup for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Wiktrany\"] ~= true and Variable[\"Zille_Cap_Munat\"] ~= true and Variable[\"Zille_Cap_Nanta\"] == true");
 
-            AddLink(conv, 103, 4);
-            AddLink(conv, 103, 104);
-            AddLink(conv, 103, 105);
-            SetEntryCondition(conv.GetDialogueEntry(4), "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
-            SetEntryCondition(conv.GetDialogueEntry(104), "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
-            SetEntryCondition(conv.GetDialogueEntry(105), "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and (Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
+            AddLine(conv, 214, leadSpeaker, RomusId, "Assess_Sword_Rotsla",
+                "\"Though Zille City's citadel stood firm, our right-flank spearhead cracked Rotsla in the opening days. One captured bastion gives our regrouping columns a secure eastern hinge before we pivot onto the peninsula.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Wiktrany\"] ~= true and Variable[\"Zille_Cap_Munat\"] ~= true and Variable[\"Zille_Cap_Nanta\"] ~= true and Variable[\"Zille_Cap_Rotsla\"] == true");
 
-            AddLine(conv, 6, NarratorId, RomusId, "Mayor_HQ_Report",
-                "The Mayor of Mave Nortus stepped forward nervously, wiping rain and sweat from his brow. \"Your Majesty, over four thousand Rizian refugees have fled south from Zille in the last forty-eight hours. Smolak's retreating officers torched grain silos behind them. Our town is straining to house and feed them, and medical supplies are running thin.\"", 10);
+            AddLine(conv, 215, leadSpeaker, RomusId, "Assess_Sword_None",
+                "\"We battered Valdez's outer trench belts across the border, yet no walled town fell during Phase I—Zille City and its sister strongpoints held behind concrete. Regrouping must mass heavier siege fire before we strike again.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and (Variable[\"Zille_Cap_Count\"] or 0) <= 0");
 
-            var hqHub = AddLine(conv, 10, NarratorId, RomusId, "HQ_Hub_Prompt",
-                "Distant artillery rumbled once more, sending a fine dust of plaster drifting down from the ceiling. You studied the situational map, ready to question your commanders.");
+            // ARK variants
+            AddLine(conv, 220, leadSpeaker, RomusId, "Assess_Ark_ZilleCity",
+                "\"Operation Golden Ark defied every staff timetable: even while sweeping the outer approaches, our vanguard punched into Zille City itself before Phase I ended! Now our regrouping forces need only seal the remaining approaches.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"Zille_Cap_ZilleCity\"] == true");
 
-            hqHub.outgoingLinks.Add(CreateLink(conv.id, 10, 11)); // Foreign Aid Audit
-            hqHub.outgoingLinks.Add(CreateLink(conv.id, 10, 12)); // Casualties & Morale
-            hqHub.outgoingLinks.Add(CreateLink(conv.id, 10, 13)); // Refugee Relief Order
-            hqHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20)); // Launch Phase II Orders
+            AddLine(conv, 221, leadSpeaker, RomusId, "Assess_Ark_Kratsna",
+                "\"With Zille City heavily garrisoned, taking even one major inland junction was Phase I's true prize—and Golden Ark's flank sweep seized Kratsna! Holding Kratsna snaps Valdez's interior logistics as our columns regroup for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Kratsna\"] == true");
 
-            AddChoice(conv, 11, NarratorId, "Inquire_ForeignAid",
-                "\"What reports do we have on foreign assistance and allied support?\"",
-                "What reports do we have regarding foreign assistance? Has our international diplomacy yielded tangible aid on the battlefield?", -1);
+            AddLine(conv, 222, leadSpeaker, RomusId, "Assess_Ark_Grodzizg",
+                "\"Taking Zille City in one rush was never realistic against dug-in Wehzek armor—instead, our deep flank tore Grodzizg right out of Wehlen's interior belt! Losing Grodzizg leaves Valdez scrambling while we regroup for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Kratsna\"] ~= true and Variable[\"Zille_Cap_Grodzizg\"] == true");
 
-            // 8 mutually exclusive Foreign Aid outcomes
-            AddLine(conv, 140, NarratorId, RomusId, "Answer_ForeignAid_None",
-                "Your staff officers exchanged grim glances. \"No foreign power has committed direct aid to our campaign, Your Majesty. Rizia stands entirely on its own steel, treasury, and courage.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
-            AddLine(conv, 141, NarratorId, RomusId, "Answer_ForeignAid_Lespia",
-                "\"High-resolution aerial reconnaissance supplied by Lespia has pinpointed Valdez's camouflaged artillery bunkers behind the Wiktrany lowlands,\" your intelligence officer reported. \"Our gunners are already using the coordinates.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
-            AddLine(conv, 142, NarratorId, RomusId, "Answer_ForeignAid_Rumburg",
-                "\"Three freight trains carrying 152mm heavy artillery shells from Rumburg arrived in the Brenas depot this morning,\" your quartermaster reported. \"Our batteries are well stocked for Phase II.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
-            AddLine(conv, 143, NarratorId, RomusId, "Answer_ForeignAid_Derdia",
-                "\"In the east, Derdian irregulars have raided Wehlen's mainland border depots,\" your intelligence officer reported. \"Valdez has been forced to divert troops away from our front.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] == true");
-            AddLine(conv, 144, NarratorId, RomusId, "Answer_ForeignAid_LespiaRumburg",
-                "\"Lespian aerial reconnaissance has mapped Valdez's bunkers behind the Wiktrany lowlands, and three trainloads of heavy 152mm shells from Rumburg arrived in the Brenas depot this morning.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
-            AddLine(conv, 145, NarratorId, RomusId, "Answer_ForeignAid_LespiaDerdia",
-                "\"Lespian reconnaissance flights have exposed Valdez's hidden batteries, while Derdian irregular raids on Wehlen's southern border have forced him to pull reserves off our front.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] == true");
-            AddLine(conv, 146, NarratorId, RomusId, "Answer_ForeignAid_RumburgDerdia",
-                "\"Three freight trains of Rumburgian 152mm shells arrived in Brenas this morning, and Derdian irregulars raiding Wehlen's mainland frontier have pinned down an entire enemy regiment.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] == true");
-            AddLine(conv, 147, NarratorId, RomusId, "Answer_ForeignAid_All",
-                "\"Very tangible, Your Majesty: Lespian reconnaissance photos have revealed Valdez's camouflaged bunkers, three trainloads of Rumburgian 152mm shells arrived in Brenas this morning, and Derdian irregulars raiding Wehlen's border depots have pinned down enemy reserves.\"", 10,
-                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] == true");
+            AddLine(conv, 223, leadSpeaker, RomusId, "Assess_Ark_Isor",
+                "\"Zille City's fortress belt kept us out, yet our flank thrust captured Isor along the border road. Even one captured town turns Phase I into a clear springboard as we rearm for Phase II.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Kratsna\"] ~= true and Variable[\"Zille_Cap_Grodzizg\"] ~= true and Variable[\"Zille_Cap_Isor\"] == true");
 
-            for (int aidId = 140; aidId <= 147; aidId++)
+            AddLine(conv, 224, leadSpeaker, RomusId, "Assess_Ark_PeninsulaTown",
+                "\"Although Zille City's central redoubt and the deeper Wehlen cities still fly Smolak's banner, our opening sweep cleared a forward town on the peninsula—a vital jumping-off anchor as our regiments regroup.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"Zille_Cap_ZilleCity\"] ~= true and Variable[\"Zille_Cap_Kratsna\"] ~= true and Variable[\"Zille_Cap_Grodzizg\"] ~= true and Variable[\"Zille_Cap_Isor\"] ~= true and (Variable[\"Zille_Cap_Count\"] or 0) >= 1");
+
+            AddLine(conv, 225, leadSpeaker, RomusId, "Assess_Ark_None",
+                "\"Golden Ark forced Valdez to stretch his screen across rugged passes, though neither Kratsna nor the Zille cities dropped in Phase I. Our regrouping must concentrate armor where his flank finally snaps.\"", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and (Variable[\"Zille_Cap_Count\"] or 0) <= 0");
+
+            foreach (int greet in new[] { 3, 103 })
             {
-                AddLink(conv, 11, aidId);
+                foreach (int assessId in new[] { 210, 211, 212, 213, 214, 215, 220, 221, 222, 223, 224, 225 })
+                {
+                    AddLink(conv, greet, assessId);
+                }
             }
 
-            AddChoice(conv, 12, TaddeusId, "Inquire_Casualties",
-                "\"How heavy are our casualties, and how is the fighting spirit of our soldiers?\"",
-                "Give me a frank assessment of our losses. How are our men holding up against Wehlen's counter-attacks?", -1);
+            // Player advances seamlessly from territorial reality -> attrition ledger
+            AddChoice(conv, 301, RomusId, "Prompt_Transition_EnemyToll",
+                "\"Ground won matters, yet attrition decides wars. How badly did we bleed Valdez's army—and what did it cost us?\"",
+                "Map pins are only half the truth. Did our first strike break Valdez's fighting formations, and what butcher's bill did our own brigades pay?", -1);
 
-            AddLine(conv, 15, TaddeusId, RomusId, "Answer_Casualties",
-                "We took shrapnel losses storming the forward trenches and coastal approaches, Your Majesty, but our field hospitals have performed miracles. Morale is soaring—the men know they are liberating Rizian soil, not bleeding for some distant foreign border. They are eager to finish the job.", 10,
-                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and (Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true)");
+            AddChoice(conv, 302, RomusId, "Prompt_Transition_StaffToll",
+                "\"Keep the foothold secure while we regroup. Now give me the honest casualty figures—Wehlen's first, then ours.\"",
+                "Hold what our forward brigades bled for while they rearm. Now lay out the casualty tally—enemy losses first, then our own.", -1);
 
-            AddLine(conv, 115, TaddeusId, RomusId, "Answer_Casualties_TwoFront",
-                "Our field hospitals are strained to breaking, Your Majesty. With divisions tied down against Pales on the eastern frontier while we assault Wehlen here, ammunition and replacements are stretched thin. The men fight bravely, but we cannot afford a prolonged stalemate.", 10,
-                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and (Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true)");
+            foreach (int assessId in new[] { 210, 211, 212, 213, 214, 215, 220, 221, 222, 223, 224, 225 })
+            {
+                AddLink(conv, assessId, 301);
+                AddLink(conv, assessId, 302);
+            }
 
-            AddLine(conv, 116, CarlosId, RomusId, "Answer_Casualties_Carlos",
-                "Losses were sharp along the coastal fortifications, Your Majesty, yet morale remains resolute. Our soldiers know they are fighting to reclaim Rizian soil and will see Phase II through.", 10,
-                "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)");
+            // Beat 3A: Enemy Casualties FIRST (Main Satisfaction Driver for High Command)
+            AddLine(conv, 230, NarratorId, RomusId, "EnemyLoss_High",
+                "Your commanders' eyes lit up as intelligence laid the enemy battle sheet on the oak table. \"Five or more Wehzek brigades completely shattered in a single opening phase, Your Majesty!\" Taddeus struck his palm onto the map. \"Valdez's mobile reserves are crippled—Smolak cannot replace armor that fast before Phase II!\"", -1,
+                "(Variable[\"Zille_Phase1_EnemyDead\"] or 0) >= 5",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
-            AddLink(conv, 12, 15);
-            AddLink(conv, 12, 115);
-            AddLink(conv, 12, 116);
+            AddLine(conv, 231, NarratorId, RomusId, "EnemyLoss_Medium",
+                "A satisfied murmur circled the command table as the Wehzek toll was read aloud. \"Two to four intact Wehzek formations eliminated outright,\" your operations chief noted briskly. \"Every enemy battery knocked out in Phase I clears the road for our regrouping regiments in Phase II.\"", -1,
+                "(Variable[\"Zille_Phase1_EnemyDead\"] or 0) >= 2 and (Variable[\"Zille_Phase1_EnemyDead\"] or 0) <= 4");
 
-            AddChoice(conv, 13, NarratorId, "Order_Refugee_Aid",
-                "\"Mayor, the Crown will fund emergency medical aid and provisions for every refugee.\"",
-                "Mayor, the Crown will immediately release emergency funds and grain from the royal reserves for every refugee arriving in Mave Nortus. No Rizian fleeing Smolak will be neglected.", 16,
-                "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"Zille_Refugee_Aid_Granted\"] = true;",
-                "Variable[\"Zille_Refugee_Aid_Granted\"] ~= true");
+            AddLine(conv, 232, NarratorId, RomusId, "EnemyLoss_Low",
+                "The mood over the enemy ledger grew taut and businesslike. \"Wehzek casualties stayed light—at most one shattered brigade,\" your intelligence officer admitted. \"Valdez conserved his strength behind concrete, meaning Phase II will face stubborn, mostly intact defenders.\"", -1,
+                "(Variable[\"Zille_Phase1_EnemyDead\"] or 0) <= 1");
 
-            AddLine(conv, 16, NarratorId, RomusId, "Ack_Refugee_Aid",
-                "Tears welled in the Mayor of Mave Nortus's eyes as he pressed his hand over his heart. \"God bless Your Majesty! The people of Brenas and Zille will never forget your royal mercy!\"", 10);
+            foreach (int c in new[] { 301, 302 })
+            {
+                AddLink(conv, c, 230);
+                AddLink(conv, c, 231);
+                AddLink(conv, c, 232);
+            }
 
-            AddChoice(conv, 20, NarratorId, "Order_Phase2_Launch",
-                "\"The time has come. Issue the battle orders for Phase II: Break their inner ring and liberate Zille!\"",
-                "The time has come. Valdez will find no respite. Issue the battle orders for Phase II immediately. Concentrate our artillery, deploy our fresh reserves, and break their final line!", -1,
-                "Variable[\"Zille_War_Phase\"] = 2;");
+            // Beat 3B: Own Casualties Tiers (0-1 Light, 2-4 Moderate w/ Taddeus Simulation Remark, 5+ Heavy) - NO PALES MENTION!
+            AddLine(conv, 240, TaddeusId, RomusId, "OwnLoss_Taddeus_Light",
+                "\"And our own butcher's bill remained remarkably light, Your Majesty—at most one destroyed brigade across all of Phase I. Aid stations cleared cleanly, and the regiments regrouping in Mave Nortus still have full bayonet strength.\"", -1,
+                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) <= 1");
+
+            AddLine(conv, 241, CarlosId, RomusId, "OwnLoss_Carlos_Light",
+                "\"On our own ledger, Your Majesty, Phase I cost us at most a single lost brigade. Hospitals are manageable and replacement morale across Mave Nortus remains high.\"", -1,
+                "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true) and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) <= 1");
+
+            AddLine(conv, 242, TaddeusId, RomusId, "OwnLoss_Taddeus_Moderate",
+                "Taddeus looked down at the Rizian casualty column, steady and unsentimental. \"Our own losses stand at moderate attrition—two to four shattered brigades breaking Valdez's forward wall. Painful to read, Your Majesty, yes. Yet during our pre-war staff simulations we projected three to four lost units in the opening echelon. Those numbers match our mathematical expectations—our core striking power is completely intact.\"", -1,
+                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) >= 2 and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) <= 4");
+
+            AddLine(conv, 243, CarlosId, RomusId, "OwnLoss_Carlos_Moderate",
+                "\"Our Phase I ledger shows moderate brigade losses—between two and four destroyed units along the fortified frontier,\" Carlos reported evenly. \"Just as Duke Taddeus's General Staff war-games predicted beforehand, breaching a fortified border exacts that toll. Losses remain well inside operational expectations.\"", -1,
+                "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true) and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) >= 2 and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) <= 4");
+
+            AddLine(conv, 244, TaddeusId, RomusId, "OwnLoss_Taddeus_Heavy",
+                "Taddeus's jaw tightened over the final column. \"I will not flatter you, Your Majesty: we suffered heavy losses—five or more brigades shattered in Phase I. That runs darker than our staff tables allowed. While the army regroups right now, we must weld battered companies into consolidated battlegroups and rely on concentrated artillery before committing Phase II.\"", -1,
+                "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) >= 5");
+
+            AddLine(conv, 245, CarlosId, RomusId, "OwnLoss_Carlos_Heavy",
+                "\"I must report heavy Phase I losses, Your Majesty—five or more brigades knocked out of action,\" Carlos stated grimly. \"We are amalgamating depleted battalions during this regrouping window so Phase II leans on gunnery rather than costly infantry rushes.\"", -1,
+                "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true) and (Variable[\"Zille_Phase1_PlayerDead\"] or 0) >= 5");
+
+            foreach (int el in new[] { 230, 231, 232 })
+            {
+                foreach (int ol in new[] { 240, 241, 242, 243, 244, 245 })
+                {
+                    AddLink(conv, el, ol);
+                }
+            }
+
+            // Optional conditional Pales addendum - ONLY shown when actually fighting Pales!
+            AddLine(conv, 249, CarlosId, RomusId, "OwnLoss_TwoFront_PalesAddendum",
+                "\"What complicates replacements most is our parallel fighting against Pales on the eastern border—every shell train and surgical unit now splits between two active wars.\"", -1,
+                "Variable[\"Zille_Fighting_Pales\"] == true");
+
+            // Beat 4: Logistics, Foreign Support & Regrouping Tactic (flowing smoothly from casualties!)
+            AddLine(conv, 250, NarratorId, RomusId, "Logistics_WellStocked",
+                "A rail quartermaster unrolled the Brenas depot manifest beside the map. \"Over a thousand reserve rifles, spare gun barrels, and full diesel drums stand parked on Mave Nortus sidings, Your Majesty—mechanized spearheads can regroup cleanly for Phase II.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and not ((Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2)",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLine(conv, 251, NarratorId, RomusId, "Logistics_Strained",
+                "A rail quartermaster pointed soberly to thin depot figures. \"Between shell expenditure and low fuel reserves—our stockpiles sit under a thousand reserve arms or thin diesel rations—our regrouping batteries must conserve heavy fire strictly for decisive Phase II breakthroughs.\"", -1,
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 or (Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2");
+
+            // Connect Own Losses -> (optional Pales line OR straight to Logistics)
+            foreach (int ol in new[] { 240, 241, 242, 243, 244, 245 })
+            {
+                AddLink(conv, ol, 249);
+                AddLink(conv, ol, 250);
+                AddLink(conv, ol, 251);
+            }
+            AddLink(conv, 249, 250);
+            AddLink(conv, 249, 251);
+
+            // Foreign Aid flavor transition (accurate per active partner -> moves forward cleanly)
+            AddLine(conv, 280, NarratorId, RomusId, "ForeignAid_Lespia",
+                "Intelligence officers laid high-resolution Lespian reconnaissance photos across the map, marking Valdez's camouflaged reserve bunkers before Phase II begins.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+            AddLine(conv, 281, NarratorId, RomusId, "ForeignAid_Rumburg",
+                "Rumburgian heavy 152mm shell trains pulling into Brenas yards have already doubled the ammunition allotment waiting for Phase II batteries.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] ~= true",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+            AddLine(conv, 282, NarratorId, RomusId, "ForeignAid_Derdia",
+                "Meanwhile, Derdian raiders striking Wehlen's eastern supply dumps continue forcing Valdez to siphon brigades away from our front as we regroup.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] == true",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+            AddLine(conv, 283, NarratorId, RomusId, "ForeignAid_LespiaRumburg",
+                "Both Lespian aerial photos pinpointing Valdez's bunkers and Rumburgian heavy shell trains rolling into Brenas now feed directly into our Phase II fire plans.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] ~= true",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+            AddLine(conv, 284, NarratorId, RomusId, "ForeignAid_LespiaDerdia",
+                "Lespian recon flights have mapped Valdez's camouflaged batteries while Derdian irregulars keep pinning Wehzek reserves far to the east.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] == true",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+            AddLine(conv, 285, NarratorId, RomusId, "ForeignAid_RumburgDerdia",
+                "Rumburgian 152mm shell trains stacking Brenas depots and Derdian raids on Wehlen's frontier have both eased pressure while our columns regroup.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] == true",
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+            AddLine(conv, 286, NarratorId, RomusId, "ForeignAid_All",
+                "Allied support is telling: Lespian recon photos expose Valdez's bunkers, Rumburgian heavy shells fill Brenas depots, and Derdian raids tie down Wehzek reserves.", 258,
+                "Variable[\"Zille_Lespia_Intel\"] == true and Variable[\"Zille_Rumburg_Munitions\"] == true and Variable[\"Zille_DerdiaHybridActive\"] == true",
+                "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLine(conv, 256, NarratorId, RomusId, "ForeignAid_Integrated_None",
+                "\"No foreign power is fighting this war for us,\" Lucita noted crisply, tapping the brass compasses back into place. \"Every shell moving up to the line comes from Rizian foundries.\"", 258,
+                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
+
+            foreach (int aidOut in new[] { 256, 280, 281, 282, 283, 284, 285, 286 })
+            {
+                AddLink(conv, 250, aidOut);
+                AddLink(conv, 251, aidOut);
+            }
+
+            // Regrouping Tactic Choice (interesting frontline commander friction -> moves forward!)
+            AddLine(conv, 258, NarratorId, RomusId, "Regroup_Friction_Prompt",
+                "Before turning to civilian matters, a sharp dispute broke out over how to spend the next forty-eight hours of regrouping: rest battered veterans behind Mave Nortus, or keep night raiding teams probing Valdez's repair crews?");
+
+            AddChoice(conv, 310, RomusId, "Regroup_RestRefit",
+                "\"Give our battered spearheads full rest, hot rations, and fresh replacements before Phase II moves.\"",
+                "Pull our exhausted spearheads clear of night skirmishing—give them hot rations, replacement crews, and clean guns before Phase II jumps off.", -1,
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddChoice(conv, 311, RomusId, "Regroup_NightRaids",
+                "\"Rotate the main columns back, but keep light rangers harassing Valdez's sappers every night!\"",
+                "Reorganize the heavy regiments cleanly, yet send sapper patrols every night so Valdez's engineers cannot rebuild a single trench before Phase II!", -1,
+                "Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+
+            AddLink(conv, 258, 310);
+            AddLink(conv, 258, 311);
+
+            // Beat 5: Mayor of Mave Nortus enters with Refugee Crisis
+            var refugeeNode = AddLine(conv, 260, NarratorId, RomusId, "Mayor_HQ_Report",
+                "At that moment the Mayor of Mave Nortus was ushered in, mud-caked coat steaming by the stove. \"Begging pardon, Your Majesty—over four thousand Rizian civilians have poured south from Zille ahead of Smolak's retreating demolition teams. Our schoolhouses and chapels are overflowing without grain or medicine.\"");
+
+            AddLink(conv, 310, 260);
+            AddLink(conv, 311, 260);
+
+            AddChoice(conv, 320, RomusId, "Order_Refugee_Aid",
+                "\"Mayor, release 1 Budget from the Crown chest for emergency grain, coal, and field clinics.\"",
+                "The Crown immediately opens 1 Budget for grain, coal, and medical supplies. No Rizian driven out by Smolak will freeze outside our own headquarters.", 265,
+                "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"Zille_Refugee_Aid_Granted\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
+
+            AddLine(conv, 265, NarratorId, RomusId, "Ack_Refugee_Aid",
+                "Tears welled in the Mayor's eyes as he bowed deeply. \"Every family along this road will bless the Crown tonight, Your Majesty.\"", 270);
+
+            AddChoice(conv, 321, RomusId, "Order_Refugee_Rations",
+                "\"Open army supply wagons to shelter and feed them using emergency royal mandates (-1 Authority).\"",
+                "Our treasury cannot spare loose gold right now, Mayor, yet quartermasters will share military blankets, field bread, and requisitioned halls with every refugee family.", 266,
+                "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"Zille_Refugee_Aid_Granted\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1");
+
+            AddLine(conv, 266, NarratorId, RomusId, "Ack_Refugee_Rations",
+                "The Mayor pressed his cap to his chest. \"Sharing the soldiers' own bread with fleeing citizens will never be forgotten.\"", 270);
+
+            AddChoice(conv, 322, RomusId, "Order_Refugee_PriorityAmmo",
+                "\"Every railcar must carry Phase II ammunition first—house them under municipal watch for now.\"",
+                "Keep the rail sidings clear for Phase II artillery trains first, Mayor. Quarter the refugees in municipal halls until our second offensive secures Zille.", 267,
+                "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+
+            AddLine(conv, 267, NarratorId, RomusId, "Ack_Refugee_MilitaryPriority",
+                "The Mayor swallowed hard and nodded slowly, hurrying out to organize volunteers as artillery caissons rattled past the window.", 270);
+
+            refugeeNode.outgoingLinks.Add(CreateLink(conv.id, 260, 320));
+            refugeeNode.outgoingLinks.Add(CreateLink(conv.id, 260, 321));
+            refugeeNode.outgoingLinks.Add(CreateLink(conv.id, 260, 322));
+
+            // Beat 6: Seal Phase II Regrouping Directive (No immediate war-table teleport!)
+            var phase2Prompt = AddLine(conv, 270, NarratorId, RomusId, "HQ_Phase2_Directive_Prompt",
+                "The lamps burned low across the command map. Across the border, regrouped divisions were already rolling up toward their Phase II staging lines. Your generals stood at attention for your strategic doctrine before jumping off.");
+
+            phase2Prompt.outgoingLinks.Add(CreateLink(conv.id, 270, 20));
+            phase2Prompt.outgoingLinks.Add(CreateLink(conv.id, 270, 25));
+
+            AddChoice(conv, 20, RomusId, "Order_Phase2_Launch",
+                "\"Phase II Doctrine: Relentless Breakthrough—finish regrouping and shatter Valdez's inner ring!\"",
+                "Finish ammunition distribution tonight. Once our regrouped spearheads form at the border, smash straight through Valdez's final fortifications so Smolak feels the tremors in Wraclawitz!", -1,
+                "Variable[\"Zille_War_Phase\"] = 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
+
+            AddChoice(conv, 25, RomusId, "Order_Phase2_Controlled",
+                "\"Phase II Doctrine: Disciplined Envelopment—surround Zille City and compel surrender with minimal civilian harm.\"",
+                "Complete our regrouping along the border approaches, then execute a disciplined Phase II envelopment—cut Zille City off cleanly while sparing civilian quarters.", -1,
+                "Variable[\"Zille_War_Phase\"] = 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 21, LucitaId, RomusId, "Ack_Phase2_Lucita",
-                "Lucita smiled with fierce, cold resolution, snapping her field baton onto Zille City. \"The orders are dispatched, Your Majesty! Our armor will lead the assault at dawn. We will deliver Zille back into your royal hands!\"", -1,
+                "Lucita snapped her field baton onto Zille City with fierce focus. \"Regrouping orders are on the wire, Your Majesty! Once the columns finish staging along the frontier, Phase II will open at the Zille border!\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 121, CarlosId, RomusId, "Ack_Phase2_Carlos",
-                "General Carlos Azaro saluted sharply. \"The Phase II directives are on the wire, Your Majesty. All brigades move at dawn.\"", -1,
+                "General Carlos Azaro saluted sharply. \"Directives dispatched, Your Majesty. As soon as our regrouping echelons reach the Zille frontier, Phase II will begin.\"", -1,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             AddLine(conv, 22, TaddeusId, RomusId, "Ack_Phase2_Taddeus",
-                "Taddeus drew his saber and held it aloft in solemn tribute. \"For King and Kingdom! Glovurius axa Rizia! Forward to victory!\"", -1,
+                "Taddeus raised his steel-hilted saber cleanly. \"To the staging lines, then—for King and Kingdom! Glovurius axa Rizia!\"", -1,
                 "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true");
 
-            AddLink(conv, 20, 21);
-            AddLink(conv, 20, 121);
+            foreach (int p2 in new[] { 20, 25 })
+            {
+                AddLink(conv, p2, 21);
+                AddLink(conv, p2, 121);
+            }
             AddLink(conv, 21, 22);
             AddLink(conv, 121, 22);
 
             AddConversationWithAlias(db, conv, "Zille/MaveNortusHQ", "Turn_Zille_MaveNortusHQ");
-            MelonLogger.Msg("[ZILLE DIALOGUE] Injected Mave Nortus Field HQ (ID 9994) into masterDatabase!");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Injected sequential Mave Nortus Field HQ (ID 9994) into masterDatabase!");
         }
 
         // =========================================================================
         // SCENE 5: Turn_Zille_WarBalconySpeech (ID 9989) - WAR PROCLAMATION SPEECH
-        // Fixed: 1927 agreement, Hugo absent variant, Lucita absent awareness.
+        // Two-stage proclamation: Doctrinal theme + Closing Commitment (micro-effects!)
         // =========================================================================
         public static void RegisterWarBalconySpeech(DialogueDatabase db)
         {
@@ -911,49 +1456,101 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Balcony_Intro_1",
-                "The grand double doors of the Palas Rezna balcony swung open to the roar of over forty thousand citizens packed shoulder to shoulder in the Royal Plaza. Banners of House Toras, Azaro, and Sazon fluttered in the sea breeze. Below, brass microphones were wired to radio broadcasting trucks transmitting your voice to every household across Rizia.", -1);
+                "Behind the heavy crimson velvet curtains of Palas Rezna, the muffled roar of forty thousand citizens packed across the Royal Plaza vibrated through the floorboards. Banners of House Toras, Azaro, and Sazon snapped in the salt breeze outside while technicians checked the brass radio microphones carrying your words to every household in Rizia.", -1);
+
+            AddChoice(conv, 401, NarratorId, "Balcony_Stimulus_Curtain",
+                "Part the crimson velvet an inch to look out over the sea of banners before stepping into the sun.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "Balcony_Stimulus_Sash",
+                "Adjust the golden royal sash across your uniform and test the microphone switch with a quiet tap.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "Balcony_Entry_Plaza",
+                "From Porte Drazon's harbor boulevard to the palace gates, the plaza was a living ocean of gold and crimson. As the grand double doors swung wide, the crowd erupted.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "Balcony_Entry_Mic",
+                "The brass microphone hummed live across the kingdom's airwaves. As the grand double doors swung wide, a wall of cheering washed over the stone balustrade.", -1);
+
+            AddLink(conv, 1, 401);
+            AddLink(conv, 1, 402);
 
             AddLine(conv, 2, HugoId, RomusId, "Hugo_Balcony_Whisper",
-                "Hugo leaned in, his voice barely audible beneath the roar of the crowd. \"The whole kingdom listens, Romus. Give them words worthy of a king.\"", 3,
+                "Hugo leaned in, his voice barely audible beneath the roar. \"Both the realm and foreign embassies hear every syllable, Romus. Choose your message with care.\"", 3,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
 
             AddLine(conv, 102, LaurentoId, RomusId, "Laurento_Balcony_Whisper",
-                "Laurento inclined his head beside you as the roar of the crowd swelled. \"Both the realm and the ambassadors in Kyrute are listening, Your Majesty.\"", 3,
+                "Laurento inclined his head beside you. \"Both our citizens and the ambassadors in Konstantium, Kyrute are listening to every word, Your Majesty.\"", 3,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
-            AddLink(conv, 1, 2);
-            AddLink(conv, 1, 102);
+            AddLink(conv, 404, 2);
+            AddLink(conv, 404, 102);
+            AddLink(conv, 405, 2);
+            AddLink(conv, 405, 102);
 
             var speechHub = AddLine(conv, 3, NarratorId, RomusId, "Speech_Doctrine_Prompt",
-                "You stepped forward to the stone balustrade, raising your sovereign hand. A profound hush fell over the ocean of citizens.");
+                "You stepped up to the stone balustrade and raised your hand. A profound hush settled over the plaza.");
 
             speechHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Revanchist Might
             speechHub.outgoingLinks.Add(CreateLink(conv.id, 3, 20)); // Liberating the Oppressed
             speechHub.outgoingLinks.Add(CreateLink(conv.id, 3, 30)); // Sovereign Legalism
 
             AddChoice(conv, 10, HugoId, "Speech_Revanchist",
-                "\"Sons and daughters of Rizia! We march to reclaim what was stolen and restore the honor of our ancestors!\"",
-                "Sons and daughters of Rizia! For over twenty-five years, our kingdom has borne the sting of separation in silence. But House Toras does not bow to tyrants! Today, the Royal Army marches to reclaim our sovereign soil and restore the royal dignity of our kingdom!", 11,
-                "Variable[\"Zille_Speech_Tone\"] = \"Revanchist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+                "\"Sons and daughters of Rizia! We march to restore the honor and steel of our ancestors!\"",
+                "Sons and daughters of Rizia! For over twenty-five years, our kingdom bore separation in silence. But House Toras does not bow to dictators! Today our armies march to reclaim our soil by royal steel!", 11,
+                "Variable[\"Zille_Speech_Tone\"] = \"Revanchist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) - 1;");
 
             AddLine(conv, 11, NarratorId, RomusId, "Speech_Revanchist_Reaction",
-                "A thunderous roar erupted from the crowd, bayonets flashing in the sun as royal guards raised their rifles in salute. Patriotic cheers echoed down the avenues of Porte Drazon.", -1);
+                "A thunderous roar erupted from the square, bayonets flashing in the sun as guardsmen snapped to salute—while foreign press attachés scribbled furiously about Rizian saber-rattling.", 40);
 
             AddChoice(conv, 20, HugoId, "Speech_Liberation",
-                "\"We come not as conquerors, but as liberators to free our brothers and sisters from Smolak's tyranny!\"",
-                "People of Rizia! We march not out of hatred, but out of sacred love for our brothers and sisters in Zille who have endured Smolak's secret police and broken promises. We go to bring them home to their true kingdom!", 21,
-                "Variable[\"Zille_Speech_Tone\"] = \"Liberation\"; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
+                "\"We march not as conquerors, but to bring our brothers and sisters in Zille safely home!\"",
+                "People of Rizia! We march not out of hatred, but out of sacred love for our brothers and sisters in Zille who endured Smolak's secret police and broken promises. Today we bring them home!", 21,
+                "Variable[\"Zille_Speech_Tone\"] = \"Liberation\"; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 21, NarratorId, RomusId, "Speech_Liberation_Reaction",
-                "Tears flowed freely among the elder citizens in the crowd, and chants of 'Long live King Romus!' resonated throughout the ancient plaza.", -1);
+                "Tears flowed among the elders in the plaza, and chants of 'Long live King Romus!' rolled down the avenues toward the harbor.", 40);
 
             AddChoice(conv, 30, HugoId, "Speech_Legalist",
-                "\"The 1927 agreement has expired. We uphold international law where Wehlen has trampled it!\"",
-                "Citizens of Rizia and observers across Merkopa. Rizia is a realm of honor and constitutional order. The 1927 lease has expired. In reclaiming Zille, we enforce the sacred rule of law that Wiktor Smolak has trampled underfoot!", 31,
-                "Variable[\"Zille_Speech_Tone\"] = \"Legalist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+                "\"The 1927 agreement has expired. We enforce international law where Smolak trampled it!\"",
+                "Citizens of Rizia and observers across Merkopa: Rizia is a realm of honor and law. The 1927 treaty has expired, and in reclaiming Zille we uphold the sacred legal order Wiktor Smolak trampled underfoot!", 31,
+                "Variable[\"Zille_Speech_Tone\"] = \"Legalist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 31, NarratorId, RomusId, "Speech_Legalist_Reaction",
-                "Foreign correspondents frantically scribbled notes, while the crowd applauded with deep, dignified respect for the Crown's measured authority.", -1);
+                "Foreign correspondents nodded in sober respect as applause rolled across the square in dignified cadence.", 40);
+
+            // Second Stage: Final Pledge from the Balcony
+            var closingHub = AddLine(conv, 40, NarratorId, RomusId, "Speech_Closing_Hub",
+                "As the first ovation ebbed, the eyes of soldiers, merchants, and diplomatic envoys alike remained fixed upon the royal balustrade. You prepared your closing vow.");
+
+            closingHub.outgoingLinks.Add(CreateLink(conv.id, 40, 41)); // Vow protection of Wehzek & Rizian civilians
+            closingHub.outgoingLinks.Add(CreateLink(conv.id, 40, 42)); // Rally the armed forces & munitions production
+            closingHub.outgoingLinks.Add(CreateLink(conv.id, 40, 43)); // Cite bombing atrocities publicly (if dossier exists!)
+
+            AddChoice(conv, 41, HugoId, "Closing_Civilian_Charter",
+                "\"I pledge before God: Rizian, Bludish, and peaceful Wehzek residents in Zille shall know law, not vengeance!\"",
+                "Hear this royal vow: every Rizian, Bludish, and law-abiding Wehzek resident inside Zille will be shielded by our courts. We bring lawful peace, never blind reprisal! Glovurius axa Rizia!", 51,
+                "Variable[\"Zille_BalconySpeech_Done\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
+
+            AddChoice(conv, 42, HugoId, "Closing_Soldier_Pride",
+                "\"Stand behind our divisions, fuel our depots, and victory will be ours! Glovurius axa Rizia!\"",
+                "Let every foundry, farm, and port stand beside the soldiers marching across our border tonight! Together, Rizia is invincible! Glovurius axa Rizia!", 52,
+                "Variable[\"Zille_BalconySpeech_Done\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
+
+            AddChoice(conv, 43, LaurentoId, "Closing_Expose_Terror",
+                "\"The world has seen Smolak's bombings and blackmail in Zille—we end his terror forever!\"",
+                "For years our people endured Smolak's fabricated terror and extortion in Zille. Our evidence lies on the record, and our answer flies on the wind! Glovurius axa Rizia!", 53,
+                "Variable[\"Zille_BalconySpeech_Done\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+                "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true)");
+
+            AddLine(conv, 51, LaurentoId, RomusId, "Ack_Closing_Charter",
+                "Laurento exhaled in quiet admiration as you stepped back through the gilded doors. \"That civilian pledge just disarmed half our critics in Konstantium, Your Majesty.\"", -1);
+
+            AddLine(conv, 52, NarratorId, RomusId, "Ack_Closing_Workers",
+                "The plaza thundered with cheers that shook the tall palace glass. Workers, noble retainers, and guardsmen roared as one voice.", -1);
+
+            AddLine(conv, 53, HugoId, RomusId, "Ack_Closing_Expose",
+                "Foreign reporters sprinted for the telephone booths across the square as Smolak's culpability became tomorrow's headline across Merkopa.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/WarBalconySpeech", "Turn_Zille_WarBalconySpeech");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected War Balcony Proclamation (ID 9989) into masterDatabase!");

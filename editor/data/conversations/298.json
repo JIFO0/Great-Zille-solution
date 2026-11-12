@@ -4836,7 +4836,7 @@
       "dialogueText": "This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the 1927 agreement expires, our tanks will remove you.",
       "menuText": "\"This is Rizian soil, Wiktor. If you do not leave Zille voluntarily when the 1927 agreement expires, our tanks will remove you.\"",
       "conditions": "",
-      "userScript": "Variable[\"Zille_Smolak_Threatened\"] = true;",
+      "userScript": "Variable[\"Zille_Smolak_Threatened\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
       "outgoing": [
         99204
       ],

@@ -4531,10 +4531,10 @@
       "actorId": 95,
       "speaker": "Player_Romus",
       "title": "Zille_Turn1_Council_Choice",
-      "dialogueText": "Zille must return to our kingdom when the lease expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.",
-      "menuText": "\"Zille must return to our kingdom when the lease expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.\"",
+      "dialogueText": "Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.",
+      "menuText": "\"Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.\"",
       "conditions": "",
-      "userScript": "",
+      "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
       "outgoing": [
         99102
       ],

@@ -61,6 +61,7 @@ namespace GreatZilleSolution
         private static bool _loggedApplied = false;
         private static string _lastDeployKey = "none";
         private static int _lastSelectedTokenId = 0;
+        private static string _lastBattleSig = "";
         private static bool _boardRefreshRequested = false;
         private static bool _variantDirty = false;
 
@@ -110,6 +111,7 @@ namespace GreatZilleSolution
                     _chromeTries = 0;
                     _planes.Clear(); _tiles.Clear(); _liveTileMap.Clear(); _loggedApplied = false; _citySpawned.Clear();
                     _propsNudged = false; _propHolds.Clear(); _enlarged.Clear(); _tokenScale.Clear(); _zonePushed.Clear(); _roadsSig = null; _deploymentReady = false; _tilesAdopted = false; _raycastLayer = int.MinValue; _garrisonsPlaced = false; _framed = false; _frontFilled = false; _poolReady = false; _pointsGranted = false; _bannerCleared = false; _palesColorsRead = false; _colorAttempted = false; _tileMgr = null; _tokenMgr = null; _flowMgr = null; _battleMgr = null; _cachedWarCam = null; _liveTiles = null; _clutterHidden = false; _peaksDone = false; _captionCache.Clear(); _nextCaptionScan = 0f; _rayInput = false; _lit = null; _hoverHitLogged = false; _victoryShown = false; _enemySince = 0f; _lastEnemyActivity = 0f; _lastActionTurn = -1;
+                    ResetBattleStatusTracking();
                     PurgeStaleWarManagerEntries(destroyAllTokens: false);
                     MelonLogger.Msg($"[ZTABLE] War map instance found: '{_root.name}' (id {_root.gameObject.GetInstanceID()}), applying Zille skin...");
                 }
@@ -152,10 +154,12 @@ namespace GreatZilleSolution
                     string depKey = dep ? DeployPaintKey() : "none";
                     var sel = SelectedUnit();
                     int selId = sel != null ? sel.GetInstanceID() : 0;
-                    if (depKey != _lastDeployKey || selId != _lastSelectedTokenId || _boardRefreshRequested)
+                    string battleSig = BattlePaintSig();
+                    if (depKey != _lastDeployKey || selId != _lastSelectedTokenId || battleSig != _lastBattleSig || _boardRefreshRequested)
                     {
                         _lastDeployKey = depKey;
                         _lastSelectedTokenId = selId;
+                        _lastBattleSig = battleSig;
                         _boardRefreshRequested = false;
                         RefreshBoard();
                     }
@@ -1224,6 +1228,7 @@ namespace GreatZilleSolution
                 {
                     CleanupDeadStatusEffectIcons();
                 }
+                if (destroyAllTokens) ResetBattleStatusTracking();
 
                 if (purgedTokens > 0)
                     MelonLogger.Msg($"[ZTABLE] Purged {purgedTokens} stale/previous-session WarTokens from WarTokenManager.");
@@ -1322,6 +1327,50 @@ namespace GreatZilleSolution
         private static bool _deploymentReady;
         public static bool ScenarioStarted { get; set; }
 
+        private static readonly HashSet<int> _phaseStartPlayerIds = new HashSet<int>();
+        private static readonly HashSet<int> _phaseStartEnemyIds = new HashSet<int>();
+
+        private static void SnapshotPhaseStartTokens()
+        {
+            _phaseStartPlayerIds.Clear();
+            _phaseStartEnemyIds.Clear();
+            var mgr = TokenMgr() ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+            var list = mgr != null ? mgr.GetWarTokens() : null;
+            if (list == null) return;
+            for (int i = 0; i < list.Count; i++)
+            {
+                var tok = list[i];
+                if (tok == null || tok.Pointer == IntPtr.Zero || tok.IsDead() || IsCityToken(tok)) continue;
+                int id = tok.GetInstanceID();
+                var alleg = tok.GetTokenAllegiance();
+                if (alleg == WarToken.WarAllegiance.Player) _phaseStartPlayerIds.Add(id);
+                else if (alleg == WarToken.WarAllegiance.Enemy) _phaseStartEnemyIds.Add(id);
+            }
+            MelonLogger.Msg($"[ZTABLE] Snapshotted phase start tokens: Player={_phaseStartPlayerIds.Count}, Enemy={_phaseStartEnemyIds.Count}");
+        }
+
+        public static void CaptureZillePhaseCasualties()
+        {
+            if (_phaseStartPlayerIds.Count == 0 && _phaseStartEnemyIds.Count == 0) return;
+            var mgr = TokenMgr() ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+            var aliveIds = new HashSet<int>();
+            var list = mgr != null ? mgr.GetWarTokens() : null;
+            if (list != null)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var tok = list[i];
+                    if (tok == null || tok.Pointer == IntPtr.Zero || tok.IsDead()) continue;
+                    aliveIds.Add(tok.GetInstanceID());
+                }
+            }
+            int pLost = 0;
+            foreach (int id in _phaseStartPlayerIds) if (!aliveIds.Contains(id)) pLost++;
+            int eLost = 0;
+            foreach (int id in _phaseStartEnemyIds) if (!aliveIds.Contains(id)) eLost++;
+            ZilleCampaignState.RecordZilleLosses(ZilleCampaignState.CurrentPhaseNumber, pLost, eLost);
+        }
+
         /// <summary>The Pales Start button calls OnInitialDeploymentFinished. After that, deployment rules stop.</summary>
         public static void MarkOperationBegun()
         {
@@ -1336,6 +1385,7 @@ namespace GreatZilleSolution
                 if (_tokenMgr != null) _tokenMgr.SetAllTokenActions();
             }
             catch { }
+            SnapshotPhaseStartTokens();
             RefreshBoard();
         }
 
@@ -1527,15 +1577,15 @@ namespace GreatZilleSolution
                     {
                         if (_washBattle.Ok)
                         {
-                            _washBattle.Tile = new Color(_washBattle.Tile.r, _washBattle.Tile.g, _washBattle.Tile.b, 0.10f);
-                            _washBattle.Gradient = new Color(_washBattle.Gradient.r, _washBattle.Gradient.g, _washBattle.Gradient.b, 0.12f);
+                            _washBattle.Tile = new Color(_washBattle.Tile.r, _washBattle.Tile.g, _washBattle.Tile.b, Mathf.Max(_washBattle.Tile.a, 0.28f));
+                            _washBattle.Gradient = new Color(_washBattle.Gradient.r, _washBattle.Gradient.g, _washBattle.Gradient.b, Mathf.Max(_washBattle.Gradient.a, 0.35f));
                         }
                         if (_edgeBattle.Ok)
                         {
-                            _edgeBattle.Color = new Color(_edgeBattle.Color.r, _edgeBattle.Color.g, _edgeBattle.Color.b, 0.35f);
-                            _edgeBattle.Pulse = false;
-                            _edgeBattle.Gradient = false;
+                            _edgeBattle.Color = new Color(_edgeBattle.Color.r, _edgeBattle.Color.g, _edgeBattle.Color.b, Mathf.Max(_edgeBattle.Color.a, 1.0f));
+                            _edgeBattle.On = true;
                         }
+                        MelonLogger.Msg($"[ZTABLE] Edge colors cached: battle=({_edgeBattle.Color.r:0.00},{_edgeBattle.Color.g:0.00},{_edgeBattle.Color.b:0.00},{_edgeBattle.Color.a:0.00},pulse={_edgeBattle.Pulse},grad={_edgeBattle.Gradient}) move=({_edgeMove.Color.r:0.00},{_edgeMove.Color.g:0.00},{_edgeMove.Color.b:0.00},{_edgeMove.Color.a:0.00},pulse={_edgeMove.Pulse},grad={_edgeMove.Gradient})");
                         if (_washEnemy.Ok)
                         {
                             _washEnemy.Tile = new Color(_washEnemy.Tile.r, _washEnemy.Tile.g, _washEnemy.Tile.b, 0.20f);
@@ -1662,14 +1712,10 @@ namespace GreatZilleSolution
             else if (fighting)
             {
                 wash = _washBattle;
-                wash.Tile = new Color(wash.Tile.r, wash.Tile.g, wash.Tile.b, 0.10f);
-                wash.Gradient = new Color(wash.Gradient.r, wash.Gradient.g, wash.Gradient.b, 0.12f);
                 if (_edgeBattle.Ok)
                 {
                     edge = _edgeBattle;
-                    edge.Color = new Color(edge.Color.r, edge.Color.g, edge.Color.b, 0.35f);
-                    edge.Pulse = false;
-                    edge.Gradient = false;
+                    edge.Color = new Color(edge.Color.r, edge.Color.g, edge.Color.b, Mathf.Max(edge.Color.a, 1.0f));
                     edge.On = true;
                 }
             }
@@ -1909,13 +1955,63 @@ namespace GreatZilleSolution
         /// <summary>Supporters sit next to a fight. Only the attacker and the defender turn the province red, and only while both are still in it.</summary>
         private static bool IsMainFight(WarTile wt)
         {
+            if (wt == null) return false;
             try
             {
-                var battle = wt != null ? wt.GetCurrentBattle() : null;
-                if (!BattleLive(battle)) return false;
-                return battle.IsTileMainBelligerentTile(wt);
+                var battle = wt.GetCurrentBattle();
+                if (BattleLive(battle) && (battle.IsTileMainBelligerentTile(wt)
+                    || (battle.attacker != null && !battle.attacker.IsDead() && battle.attacker.GetCurrentWarTile() == wt)
+                    || (battle.defender != null && !battle.defender.IsDead() && battle.defender.GetCurrentWarTile() == wt)))
+                    return true;
+
+                var tok = wt.GetCurrentToken();
+                if (tok != null && !tok.IsDead())
+                {
+                    var tb = tok.GetCurrentBattle();
+                    if (BattleLive(tb) && (tb.IsTileMainBelligerentTile(wt)
+                        || (tb.attacker != null && !tb.attacker.IsDead() && tb.attacker.GetCurrentWarTile() == wt)
+                        || (tb.defender != null && !tb.defender.IsDead() && tb.defender.GetCurrentWarTile() == wt)))
+                        return true;
+                }
+
+                var bm = BattleMgr();
+                var battles = bm != null ? bm.GetCurrentBattles() : null;
+                if (battles != null)
+                {
+                    for (int i = 0; i < battles.Count; i++)
+                    {
+                        var b = battles[i];
+                        if (!BattleLive(b)) continue;
+                        if (b.IsTileMainBelligerentTile(wt)
+                            || (b.attacker != null && !b.attacker.IsDead() && b.attacker.GetCurrentWarTile() == wt)
+                            || (b.defender != null && !b.defender.IsDead() && b.defender.GetCurrentWarTile() == wt))
+                            return true;
+                    }
+                }
+                return false;
             }
             catch { return false; }
+        }
+
+        private static string BattlePaintSig()
+        {
+            try
+            {
+                var bm = BattleMgr();
+                var battles = bm != null ? bm.GetCurrentBattles() : null;
+                if (battles == null || battles.Count == 0) return "";
+                var sb = new System.Text.StringBuilder();
+                for (int i = 0; i < battles.Count; i++)
+                {
+                    var b = battles[i];
+                    if (!BattleLive(b)) continue;
+                    var at = b.attacker != null ? b.attacker.GetCurrentWarTile() : null;
+                    var dt = b.defender != null ? b.defender.GetCurrentWarTile() : null;
+                    sb.Append(at != null ? at.GetInstanceID() : 0).Append(':').Append(dt != null ? dt.GetInstanceID() : 0).Append(';');
+                }
+                return sb.ToString();
+            }
+            catch { return ""; }
         }
 
         /// <summary>A fight is live until vanilla marks isBattleOver true.</summary>
@@ -2483,6 +2579,45 @@ namespace GreatZilleSolution
             }
         }
 
+        public struct UnitLedgerSnapshot
+        {
+            public bool Active;
+            public WarUnitTypeData Unit;
+            public int Total, Deployed, Dead, OnMission;
+        }
+
+        public static UnitLedgerSnapshot CaptureEnemyLedger(WarUnitTypeData ut, WarToken.WarAllegiance allegiance)
+        {
+            if (ut == null || allegiance != WarToken.WarAllegiance.Enemy) return default;
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !SkinEnabled) return default;
+            try
+            {
+                return new UnitLedgerSnapshot
+                {
+                    Active = true,
+                    Unit = ut,
+                    Total = ut.UnitTotalCount,
+                    Deployed = ut.UnitDeployedCount,
+                    Dead = ut.UnitDeadCount,
+                    OnMission = ut.UnitOnMissionCount
+                };
+            }
+            catch { return default; }
+        }
+
+        public static void RestoreEnemyLedger(UnitLedgerSnapshot snap)
+        {
+            if (!snap.Active || snap.Unit == null) return;
+            try
+            {
+                if (snap.Unit.UnitTotalCount != snap.Total) snap.Unit.UnitTotalCount = snap.Total;
+                if (snap.Unit.UnitDeployedCount != snap.Deployed) snap.Unit.UnitDeployedCount = snap.Deployed;
+                if (snap.Unit.UnitDeadCount != snap.Dead) snap.Unit.UnitDeadCount = snap.Dead;
+                if (snap.Unit.UnitOnMissionCount != snap.OnMission) snap.Unit.UnitOnMissionCount = snap.OnMission;
+            }
+            catch { }
+        }
+
         public static string PlaceUnit(ZilleTileData tile, WarUnitTypeData ut, bool enemy)
         {
             if (tile == null || ut == null) return "Wybierz region i jednostke.";
@@ -2495,10 +2630,10 @@ namespace GreatZilleSolution
             {
                 if (wt != null)
                 {
-                    int pool = enemy ? ut.UnitDeployedCount : 0;
+                    var snap = enemy ? CaptureEnemyLedger(ut, WarToken.WarAllegiance.Enemy) : default;
                     RunScripted(() => mgr.DeployToken(ut, wt, alleg));
-                    // Enemy garrisons share the unit asset with the player's pool. Put the count back.
-                    if (enemy) ut.UnitDeployedCount = pool;
+                    // Enemy garrisons share the unit asset with the player's pool. Put every ledger counter back.
+                    RestoreEnemyLedger(snap);
                     return $"Postawiono ({side}): {UnitLabel(ut)} na {tile.Name}.";
                 }
             }
@@ -3192,6 +3327,15 @@ namespace GreatZilleSolution
                     var mgr = TileMgr();
                     if (mgr != null && tile != null)
                         try { mgr.SetHoveredWarTile(tile); } catch { }
+                    var hoverBattle = BattleOn(tile);
+                    try
+                    {
+                        var bm = BattleMgr();
+                        if (bm != null) bm.SetHoveredBattle(hoverBattle);
+                    }
+                    catch { }
+                    if (hoverBattle != null)
+                        SyncBattleStatsUI(hoverBattle);
                     PresentUnitChrome();
                 }
                 _lit = next;
@@ -4142,6 +4286,7 @@ namespace GreatZilleSolution
                         }
                     }
 
+                    OnBeginPlayerHalfTurn();
                     try { _tokenMgr.ResetTokenMovements(); } catch { }
                     // NEVER call ResetPlayerTokens() here as it erases the player's board units!
                     var tokens = _tokenMgr.instantiatedWarTokens;
@@ -4153,7 +4298,7 @@ namespace GreatZilleSolution
                             if (t == null || t.IsDead()) continue;
                             if (t.GetTokenAllegiance() == WarToken.WarAllegiance.Player)
                             {
-                                if (t.IsMovementLocked())
+                                if (t.IsMovementLocked() && !IsDepletedProtectionActive(t) && !t.IsOrganizationDepleted())
                                 {
                                     try { t.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
                                 }
@@ -4265,10 +4410,210 @@ namespace GreatZilleSolution
             for (int i = 0; i < doomed.Count; i++) FinishBattle(doomed[i]);
         }
 
+        private static int _turnEpoch = 0;
+        private static bool _inEnemyHalfTurn = false;
+        private static int _bypassDepletedGuardDepth = 0;
+        private static readonly Dictionary<int, int> _depletedExpiresEpoch = new Dictionary<int, int>();
+        private static readonly Dictionary<long, bool> _battleTurnWinners = new Dictionary<long, bool>();
+        private static readonly HashSet<long> _settledBattles = new HashSet<long>();
+
+        public static bool IsBypassingDepletedGuard => _bypassDepletedGuardDepth > 0;
+
+        public static void ResetBattleStatusTracking()
+        {
+            _turnEpoch = 0;
+            _inEnemyHalfTurn = false;
+            _bypassDepletedGuardDepth = 0;
+            _depletedExpiresEpoch.Clear();
+            _battleTurnWinners.Clear();
+            _settledBattles.Clear();
+        }
+
+        public static void OnBeginEnemyHalfTurn()
+        {
+            if (!_inEnemyHalfTurn)
+            {
+                _inEnemyHalfTurn = true;
+                _turnEpoch++;
+                ExpireFinishedDepletedStatuses();
+            }
+        }
+
+        public static void OnBeginPlayerHalfTurn()
+        {
+            if (_inEnemyHalfTurn)
+            {
+                _inEnemyHalfTurn = false;
+                _turnEpoch++;
+                ExpireFinishedDepletedStatuses();
+            }
+        }
+
+        public static void RegisterDepletedToken(WarToken tok)
+        {
+            if (tok == null || IsBypassingDepletedGuard) return;
+            try
+            {
+                if (tok.IsDead() || IsCityToken(tok)) return;
+                int id = tok.GetInstanceID();
+                // Lasts 1 full turn (2 half-turns: current + next opposing/own turn) before recovery
+                int expiresAt = _turnEpoch + 2;
+                if (!_depletedExpiresEpoch.TryGetValue(id, out int cur) || cur < expiresAt)
+                {
+                    _depletedExpiresEpoch[id] = expiresAt;
+                    MelonLogger.Msg($"[ZTABLE] DepletedOrganization active on {tok.name} until epoch {expiresAt} (cur={_turnEpoch}).");
+                }
+            }
+            catch { }
+        }
+
+        public static bool IsDepletedProtectionActive(WarToken tok)
+        {
+            if (IsBypassingDepletedGuard || tok == null) return false;
+            try
+            {
+                if (tok.IsDead() || IsCityToken(tok)) return false;
+                if (_depletedExpiresEpoch.TryGetValue(tok.GetInstanceID(), out int exp))
+                    return _turnEpoch < exp;
+            }
+            catch { }
+            return false;
+        }
+
+        public static void ClearDepletedStatus(WarToken tok, bool ensureMinOrg)
+        {
+            if (tok == null) return;
+            _bypassDepletedGuardDepth++;
+            try
+            {
+                int id = tok.GetInstanceID();
+                _depletedExpiresEpoch.Remove(id);
+                if (!tok.IsDead())
+                {
+                    try { tok.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
+                    try { tok.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
+                    if (ensureMinOrg && tok.GetRemainingOrganization() <= 0)
+                    {
+                        try { tok.remainingOrganization = 1; } catch { }
+                        if (tok.GetRemainingOrganization() <= 0)
+                        {
+                            try { tok.HealDamage(1); } catch { }
+                        }
+                    }
+                }
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.Remove(tok, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
+            }
+            catch { }
+            finally
+            {
+                _bypassDepletedGuardDepth--;
+            }
+        }
+
+        public static void ExpireFinishedDepletedStatuses()
+        {
+            if (_depletedExpiresEpoch.Count == 0) return;
+            try
+            {
+                var mgr = _tokenMgr ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = mgr != null ? mgr.instantiatedWarTokens : null;
+                var byId = new Dictionary<int, WarToken>();
+                if (tokens != null)
+                {
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                        var t = tokens[i];
+                        if (t != null && t.Pointer != IntPtr.Zero && !t.IsDead())
+                            byId[t.GetInstanceID()] = t;
+                    }
+                }
+
+                var toExpire = new List<int>();
+                var toDrop = new List<int>();
+                foreach (var kv in _depletedExpiresEpoch)
+                {
+                    if (!byId.TryGetValue(kv.Key, out var tok) || tok == null)
+                    {
+                        toDrop.Add(kv.Key);
+                        continue;
+                    }
+                    if (_turnEpoch >= kv.Value)
+                        toExpire.Add(kv.Key);
+                }
+
+                for (int i = 0; i < toDrop.Count; i++)
+                    _depletedExpiresEpoch.Remove(toDrop[i]);
+
+                for (int i = 0; i < toExpire.Count; i++)
+                {
+                    if (byId.TryGetValue(toExpire[i], out var tok) && tok != null)
+                    {
+                        ClearDepletedStatus(tok, ensureMinOrg: true);
+                        MelonLogger.Msg($"[ZTABLE] Cleared DepletedOrganization after 1 turn on {tok.name} (epoch={_turnEpoch}).");
+                    }
+                }
+            }
+            catch { }
+        }
+
+        public static void RecordBattleTurnResult(WarBattleManager bm, WarBattleManager.WarBattle battle)
+        {
+            if (battle == null) return;
+            try
+            {
+                var res = bm != null ? bm.GetBattleTurnResult(battle) : null;
+                if (res != null)
+                {
+                    _battleTurnWinners[battle.Pointer.ToInt64()] = res.isAttackerWinner;
+                    WarToken winner = res.isAttackerWinner ? battle.attacker : battle.defender;
+                    if (winner != null && !winner.IsDead())
+                    {
+                        if (winner.IsOrganizationDepleted() || IsOverrun(winner))
+                            ClearDepletedStatus(winner, ensureMinOrg: true);
+                    }
+                }
+            }
+            catch { }
+        }
+
+        public static bool IsBattleWinner(WarToken tok)
+        {
+            if (tok == null || tok.IsDead()) return false;
+            try
+            {
+                WarBattleManager.WarBattle b = null;
+                try { b = tok.GetCurrentBattle(); } catch { }
+                if (b == null)
+                {
+                    var bm = BattleMgr();
+                    var cur = bm != null ? bm.GetCurrentBattles() : null;
+                    if (cur != null)
+                    {
+                        for (int i = 0; i < cur.Count; i++)
+                        {
+                            var cb = cur[i];
+                            if (cb != null && (cb.attacker == tok || cb.defender == tok)) { b = cb; break; }
+                        }
+                    }
+                }
+                if (b == null) return false;
+                bool atkWon = AttackerWon(b);
+                if (b.attacker == tok && atkWon && (b.defender == null || b.defender.IsDead() || b.defender.IsOrganizationDepleted() || tok.GetRemainingOrganization() > 0))
+                    return true;
+                if (b.defender == tok && !atkWon && (b.attacker == null || b.attacker.IsDead() || b.attacker.IsOrganizationDepleted() || tok.GetRemainingOrganization() > 0))
+                    return true;
+            }
+            catch { }
+            return false;
+        }
+
         /// <summary>The fight is over. Vanilla has animated the retreat and advance; synchronize the conquered province.</summary>
         public static void FinishBattle(WarBattleManager.WarBattle battle)
         {
             if (battle == null) return;
+            long bKey = battle.Pointer.ToInt64();
+            if (!_settledBattles.Add(bKey)) return;
+
             WarTile atkSource = null;
             try { if (battle.attacker != null) atkSource = battle.attacker.GetCurrentWarTile(); } catch { }
             WarTile defSource = null;
@@ -4280,7 +4625,7 @@ namespace GreatZilleSolution
             try { AdvanceAttacker(battle); }
             catch (Exception ex) { MelonLogger.Warning("[ZTABLE] battle advance: " + ex.GetBaseException().Message); }
             ClearBattle(battle);
-            try { _battleContestedTiles.Remove(battle.Pointer.ToInt64()); } catch { }
+            try { _battleContestedTiles.Remove(bKey); } catch { }
 
             if (atkSource != null) { UnlockTile(atkSource); RepaintTile(atkSource); }
             if (defSource != null) { UnlockTile(defSource); RepaintTile(defSource); }
@@ -4358,13 +4703,26 @@ namespace GreatZilleSolution
                 }
             }
 
-            if (!AttackerWon(battle))
+            bool atkWon = AttackerWon(battle);
+            WarToken winner = atkWon ? atk : def;
+            WarToken loser = atkWon ? def : atk;
+
+            // A unit that WON a battle must NEVER receive DepletedOrganization!
+            if (winner != null && !winner.IsDead())
+            {
+                if (winner.IsOrganizationDepleted() || IsOverrun(winner))
+                    ClearDepletedStatus(winner, ensureMinOrg: true);
+            }
+
+            if (!atkWon)
             {
                 MelonLogger.Msg("[ZTABLE] Attacker lost the battle: " + (atk != null ? atk.name : "null"));
-                if (atk != null && !atk.IsDead() && atk.gameObject != null && atk.gameObject.activeInHierarchy)
+                if (atk != null && !atk.IsDead() && atk.gameObject != null && atk.gameObject.activeInHierarchy
+                    && (atk.IsOrganizationDepleted() || atk.GetRemainingOrganization() <= 0))
                 {
                     atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
                     atk.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                    RegisterDepletedToken(atk);
                     try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(atk, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
                 }
                 return;
@@ -4380,7 +4738,10 @@ namespace GreatZilleSolution
                 def.SetTokenAllegiance(newAlleg);
                 var cityUt = def.GetWarUnitTypeData();
                 if (cityUt != null) def.remainingOrganization = cityUt.organization;
-                def.RemoveAllTokenStatusEffect();
+                ClearDepletedStatus(def, ensureMinOrg: true);
+                _bypassDepletedGuardDepth++;
+                try { def.RemoveAllTokenStatusEffect(); }
+                finally { _bypassDepletedGuardDepth--; }
 
                 if (contestedTile != null)
                 {
@@ -4398,13 +4759,15 @@ namespace GreatZilleSolution
                 return;
             }
 
-            // Attacker won non-city battle! Defeated defender gains overrun status (if alive after retreat)
-            if (def != null && !def.IsDead() && def.gameObject != null && def.gameObject.activeInHierarchy && def.GetCurrentWarTile() != null)
+            // Attacker won non-city battle! Only mark truly depleted defeated defender (org <= 0) as overrun for 1 turn
+            if (loser != null && !loser.IsDead() && loser.gameObject != null && loser.gameObject.activeInHierarchy
+                && loser.GetCurrentWarTile() != null && (loser.IsOrganizationDepleted() || loser.GetRemainingOrganization() <= 0))
             {
-                def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
-                def.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
-                try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(def, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
-                MelonLogger.Msg("[ZTABLE] Defeated defender marked as overrun: " + def.name);
+                loser.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.DepletedOrganization);
+                loser.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked);
+                RegisterDepletedToken(loser);
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.Add(loser, WarToken.WarTokenStatusEffectType.DepletedOrganization); } catch { }
+                MelonLogger.Msg("[ZTABLE] Defeated defender marked as overrun (1 turn): " + loser.name);
             }
 
             if (contestedTile == null) return;
@@ -4495,13 +4858,17 @@ namespace GreatZilleSolution
                 }
             }
             catch { }
+            if (_battleTurnWinners.TryGetValue(battle.Pointer.ToInt64(), out bool recordedWin))
+                return recordedWin;
+            var def = battle.defender;
+            var atk = battle.attacker;
+            bool defOut = def == null || def.IsDead() || def.IsOrganizationDepleted() || def.GetRemainingOrganization() <= 0;
+            bool atkOut = atk == null || atk.IsDead() || atk.IsOrganizationDepleted() || atk.GetRemainingOrganization() <= 0;
+            if (defOut && !atkOut) return true;
+            if (atkOut && !defOut) return false;
             if (battle.totalAttack != battle.totalDefence)
                 return battle.totalAttack > battle.totalDefence;
-            var def = battle.defender;
-            if (def == null || def.IsDead() || def.IsOrganizationDepleted()) return true;
-            var atk = battle.attacker;
-            if (atk == null || atk.IsDead() || atk.IsOrganizationDepleted()) return false;
-            return false;
+            return defOut;
         }
 
         private static void ClearBattle(WarBattleManager.WarBattle battle)
@@ -4811,10 +5178,10 @@ namespace GreatZilleSolution
                         continue;
                     }
 
-                    // Also strip DepletedOrganization icon if the living unit recovered organization
+                    // Also strip DepletedOrganization icon ONLY if protection has expired and the living unit recovered organization
                     try
                     {
-                        if (!tok.IsOrganizationDepleted() && !IsOverrun(tok))
+                        if (!IsDepletedProtectionActive(tok) && !tok.IsOrganizationDepleted() && !IsOverrun(tok))
                         {
                             panel.Remove(tok, WarToken.WarTokenStatusEffectType.DepletedOrganization);
                         }
@@ -4975,6 +5342,7 @@ namespace GreatZilleSolution
         private static void GrayUnavailableAbilities()
         {
             if (!ScenarioStarted) return;
+            SyncBattleStatsUI();
             try
             {
                 var panel = Panels.Instance != null ? Panels.Instance.WarPlayerActionsPanel : null;
@@ -5195,6 +5563,8 @@ namespace GreatZilleSolution
             int zilleTotal = 0, zilleHeld = 0;
             int wehlenDeepHeld = 0;
             bool zilleCityHeld = false;
+            bool wiktranyHeld = false, munatHeld = false, nantaHeld = false;
+            bool rotslaHeld = false, grodzizgHeld = false, kratsnaHeld = false, isorHeld = false;
 
             for (int i = 0; i < cfg.Tiles.Count; i++)
             {
@@ -5224,12 +5594,22 @@ namespace GreatZilleSolution
                     {
                         zilleHeld++;
                         if (name == "Zille City") zilleCityHeld = true;
+                        else if (name == "Wiktrany") wiktranyHeld = true;
+                        else if (name == "Munat") munatHeld = true;
+                        else if (name == "Nanta") nantaHeld = true;
                     }
                 }
-                // Deep Wehlen cities
-                else if (name == "Grodzizg" || name == "Kratsna" || name == "Rotsla")
+                // Deep Wehlen / Frontier cities
+                else if (name == "Grodzizg" || name == "Kratsna" || name == "Rotsla" || name == "Isor")
                 {
-                    if (heldByPlayer) wehlenDeepHeld++;
+                    if (heldByPlayer)
+                    {
+                        wehlenDeepHeld++;
+                        if (name == "Grodzizg") grodzizgHeld = true;
+                        else if (name == "Kratsna") kratsnaHeld = true;
+                        else if (name == "Rotsla") rotslaHeld = true;
+                        else if (name == "Isor") isorHeld = true;
+                    }
                 }
             }
 
@@ -5237,16 +5617,26 @@ namespace GreatZilleSolution
 
             // Record captured state in campaign
             ZilleCampaignState.ZilleCityCaptured = zilleCityHeld;
+            ZilleCampaignState.CapZilleCity = zilleCityHeld;
+            ZilleCampaignState.CapWiktrany = wiktranyHeld;
+            ZilleCampaignState.CapMunat = munatHeld;
+            ZilleCampaignState.CapNanta = nantaHeld;
+            ZilleCampaignState.CapRotsla = rotslaHeld;
+            ZilleCampaignState.CapGrodzizg = grodzizgHeld;
+            ZilleCampaignState.CapKratsna = kratsnaHeld;
+            ZilleCampaignState.CapIsor = isorHeld;
+            ZilleCampaignState.CapTotalCount = zilleHeld + wehlenDeepHeld;
             if (ZilleCampaignState.CurrentPhaseNumber == 1)
-                ZilleCampaignState.Phase1CitiesCaptured = zilleHeld;
+                ZilleCampaignState.Phase1CitiesCaptured = zilleHeld + wehlenDeepHeld;
             else
-                ZilleCampaignState.Phase2CitiesCaptured = zilleHeld;
+                ZilleCampaignState.Phase2CitiesCaptured = zilleHeld + wehlenDeepHeld;
 
             try
             {
                 DialogueHelper.SetVariable("Zille_Cities_Held", zilleHeld);
                 DialogueHelper.SetVariable("Zille_Brenas_Lost", brenasLost);
                 DialogueHelper.SetVariable("Zille_City_Held", zilleCityHeld);
+                ZilleCampaignState.SyncToLua();
             }
             catch { }
 
@@ -5297,6 +5687,7 @@ namespace GreatZilleSolution
             // Total Fiasco: Brenas collapsed
             if (outcome == ZilleWarOutcome.TotalFiasco)
             {
+                CaptureZillePhaseCasualties();
                 _victoryShown = true;
                 MelonLogger.Error($"[ZTABLE] Hex Campaign Collapse detected! Outcome: {outcome} ({summary})");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
@@ -5310,6 +5701,7 @@ namespace GreatZilleSolution
             {
                 if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
                 {
+                    CaptureZillePhaseCasualties();
                     _victoryShown = true;
                     MelonLogger.Msg($"[ZTABLE] Early Decisive Victory achieved in Phase I! Outcome: {outcome} ({summary})");
                     try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
@@ -5317,12 +5709,17 @@ namespace GreatZilleSolution
                 }
                 else if (force)
                 {
-                    // Phase I ended with partial gains -> Advance to Phase II via Mave Nortus Field HQ!
-                    MelonLogger.Msg($"[ZTABLE] Phase I complete ({summary}). Transitioning to Mave Nortus Frontline HQ...");
+                    // Phase I ended -> save board, mark Phase 1 complete, and transition civilian map to Mave Nortus Field HQ!
+                    CaptureZillePhaseCasualties();
+                    MelonLogger.Msg($"[ZTABLE] Phase I complete ({summary}). Preparing Mave Nortus Field HQ event...");
                     SavePhaseBoardState();
                     ZilleCampaignState.Phase1Finished = true;
-                    try { DialogueHelper.ShowAlert("Phase I Complete: Convening at Mave Nortus HQ..."); } catch { }
-                    try { WarOperationZilleManager.TriggerMaveNortusHQ(); } catch { }
+                    ZilleCampaignState.MaveNortusHQAvailable = true;
+                    ZilleCampaignState.MaveNortusHQCompleted = false;
+                    ZilleCampaignState.Phase2EventUnlocked = false;
+                    ZilleCampaignState.SyncToLua();
+                    try { DialogueHelper.ShowAlert("Phase I Complete: Phase II briefings await at Mave Nortus Field HQ."); } catch { }
+                    try { WarOperationZilleManager.PreparePostPhase1CivilianEvents(); } catch { }
                 }
                 return;
             }
@@ -5330,6 +5727,7 @@ namespace GreatZilleSolution
             // Phase 2 handling
             if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
             {
+                CaptureZillePhaseCasualties();
                 _victoryShown = true;
                 MelonLogger.Msg($"[ZTABLE] Hex Campaign Victory achieved! Outcome: {outcome} ({summary})");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
@@ -5337,6 +5735,7 @@ namespace GreatZilleSolution
             }
             else if (force)
             {
+                CaptureZillePhaseCasualties();
                 _victoryShown = true;
                 MelonLogger.Msg($"[ZTABLE] Phase II concluded without full victory. Outcome: {outcome} ({summary}). Initiating peace parley...");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
@@ -5489,6 +5888,302 @@ namespace GreatZilleSolution
             }
         }
 
+        private static readonly HashSet<int> _battleLockedIds = new HashSet<int>();
+        private static float _nextBattleUiSync;
+        private static int _lastLoggedBattleCount = -1;
+
+        /// <summary>True when a mobile unit is currently attacking, defending, or supporting inside an active battle.</summary>
+        public static bool IsTokenEngagedInBattle(WarToken tok, out bool isSupporter)
+        {
+            isSupporter = false;
+            if (tok == null || tok.IsDead() || IsCityToken(tok)) return false;
+            try
+            {
+                var cb = tok.GetCurrentBattle();
+                if (cb != null && !cb.isBattleOver && BattleLive(cb))
+                {
+                    if (cb.attackersSupporters != null && cb.attackersSupporters.Contains(tok)) isSupporter = true;
+                    if (cb.defendersSupporters != null && cb.defendersSupporters.Contains(tok)) isSupporter = true;
+                    return true;
+                }
+            }
+            catch { }
+
+            var bm = BattleMgr();
+            var battles = bm != null ? bm.GetCurrentBattles() : null;
+            if (battles == null) return false;
+            for (int i = 0; i < battles.Count; i++)
+            {
+                var b = battles[i];
+                if (b == null || b.isBattleOver || !BattleLive(b)) continue;
+                if (b.attacker == tok || b.defender == tok) return true;
+                if (b.attackersSupporters != null && b.attackersSupporters.Contains(tok)) { isSupporter = true; return true; }
+                if (b.defendersSupporters != null && b.defendersSupporters.Contains(tok)) { isSupporter = true; return true; }
+            }
+            return false;
+        }
+
+        public static bool IsTokenEngagedInBattle(WarToken tok) => IsTokenEngagedInBattle(tok, out _);
+
+        /// <summary>Ensures every active attacker, defender, and supporter carries the MovementLocked status tag while its battle is live.</summary>
+        public static void SyncBattleMovementLocks()
+        {
+            try
+            {
+                var bm = BattleMgr();
+                var battles = bm != null ? bm.GetCurrentBattles() : null;
+                var liveTokens = new Dictionary<int, WarToken>();
+
+                if (battles != null)
+                {
+                    for (int i = 0; i < battles.Count; i++)
+                    {
+                        var b = battles[i];
+                        if (b == null || b.isBattleOver || !BattleLive(b)) continue;
+                        void Collect(WarToken t)
+                        {
+                            if (t == null || t.IsDead() || IsCityToken(t)) return;
+                            liveTokens[t.GetInstanceID()] = t;
+                        }
+                        Collect(b.attacker);
+                        Collect(b.defender);
+                        if (b.attackersSupporters != null)
+                            for (int s = 0; s < b.attackersSupporters.Count; s++) Collect(b.attackersSupporters[s]);
+                        if (b.defendersSupporters != null)
+                            for (int s = 0; s < b.defendersSupporters.Count; s++) Collect(b.defendersSupporters[s]);
+                    }
+                }
+
+                var effPanel = Panels.Instance != null ? Panels.Instance.WarTokenStatusEffectsPanel : null;
+                foreach (var kv in liveTokens)
+                {
+                    var tok = kv.Value;
+                    _battleLockedIds.Add(kv.Key);
+                    bool hasEff = false;
+                    try { hasEff = tok.IsMovementLocked(); } catch { }
+                    if (!hasEff)
+                    {
+                        try { tok.AddTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
+                    }
+                    try { effPanel?.Add(tok, WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
+                }
+
+                if (_battleLockedIds.Count > 0)
+                {
+                    var allTokens = UnityEngine.Object.FindObjectsOfType<WarToken>();
+                    var removeIds = new List<int>();
+                    foreach (int id in _battleLockedIds)
+                    {
+                        if (liveTokens.ContainsKey(id)) continue;
+                        removeIds.Add(id);
+                        if (allTokens != null)
+                        {
+                            for (int i = 0; i < allTokens.Length; i++)
+                            {
+                                var tok = allTokens[i];
+                                if (tok != null && tok.GetInstanceID() == id && !tok.IsDead()
+                                    && !IsDepletedProtectionActive(tok) && !tok.IsOrganizationDepleted())
+                                {
+                                    try { tok.RemoveTokenStatusEffect(WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
+                                    try { effPanel?.Remove(tok, WarToken.WarTokenStatusEffectType.MovementLocked); } catch { }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < removeIds.Count; i++) _battleLockedIds.Remove(removeIds[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE] SyncBattleMovementLocks: " + ex.Message);
+            }
+        }
+
+        public static void ClearBattleMovementLockTracking()
+        {
+            _battleLockedIds.Clear();
+        }
+
+        /// <summary>Ensures WarBattlePanel and its TemplateBattle both-sides stats widget stay populated, updated, and positioned on screen for every active battle.</summary>
+        public static void SyncBattleStatsUI(WarBattleManager.WarBattle hoveredBattle = null)
+        {
+            if (!ScenarioStarted || EditMode) return;
+            if (hoveredBattle == null && Time.unscaledTime < _nextBattleUiSync) return;
+            _nextBattleUiSync = Time.unscaledTime + 0.15f;
+
+            try
+            {
+                var bm = BattleMgr();
+                var battles = bm != null ? bm.GetCurrentBattles() : null;
+                var panel = Panels.Instance != null ? Panels.Instance.WarBattlePanel : UnityEngine.Object.FindObjectOfType<WarBattlePanel>();
+                if (panel == null) return;
+
+                int liveCount = 0;
+                if (battles != null)
+                {
+                    for (int i = 0; i < battles.Count; i++)
+                    {
+                        var b = battles[i];
+                        if (b != null && !b.isBattleOver && BattleLive(b)) liveCount++;
+                    }
+                }
+
+                if (liveCount == 0)
+                {
+                    if (_lastLoggedBattleCount != 0)
+                    {
+                        _lastLoggedBattleCount = 0;
+                        try { panel.HideAllBattles(); } catch { }
+                    }
+                    return;
+                }
+
+                if (!panel.gameObject.activeSelf) panel.gameObject.SetActive(true);
+                if (panel.container != null && !panel.container.gameObject.activeSelf) panel.container.gameObject.SetActive(true);
+
+                var inst = panel.instantiatedBattles;
+                static bool SameBattle(WarBattleManager.WarBattle a, WarBattleManager.WarBattle b)
+                {
+                    if (a == null || b == null) return false;
+                    if (a.Pointer == b.Pointer) return true;
+                    return a.attacker == b.attacker && a.defender == b.defender;
+                }
+
+                // Prune duplicate or dead TemplateBattle widgets first
+                if (inst != null)
+                {
+                    var seen = new List<WarBattleManager.WarBattle>();
+                    var toRemove = new List<TemplateBattle>();
+                    for (int j = 0; j < inst.Count; j++)
+                    {
+                        var tb = inst[j];
+                        if (tb == null || tb.currentBattle == null || tb.currentBattle.isBattleOver || !BattleLive(tb.currentBattle))
+                        {
+                            if (tb != null) toRemove.Add(tb);
+                            continue;
+                        }
+                        bool dup = false;
+                        for (int k = 0; k < seen.Count; k++)
+                        {
+                            if (SameBattle(seen[k], tb.currentBattle)) { dup = true; break; }
+                        }
+                        if (dup) toRemove.Add(tb);
+                        else seen.Add(tb.currentBattle);
+                    }
+                    for (int j = 0; j < toRemove.Count; j++)
+                    {
+                        try { panel.RemoveBattle(toRemove[j]); } catch { }
+                    }
+                }
+
+                for (int i = 0; i < battles.Count; i++)
+                {
+                    var b = battles[i];
+                    if (b == null || b.isBattleOver || !BattleLive(b)) continue;
+
+                    bool exists = false;
+                    inst = panel.instantiatedBattles;
+                    if (inst != null)
+                    {
+                        for (int j = 0; j < inst.Count; j++)
+                        {
+                            var tb = inst[j];
+                            if (tb != null && SameBattle(tb.currentBattle, b))
+                            {
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!exists)
+                    {
+                        try { panel.Setup(b); } catch (Exception ex) { MelonLogger.Warning("[ZTABLE BATTLE-UI] Setup: " + ex.Message); }
+                    }
+                }
+
+                try { bm.UpdateAllBattleStats(); } catch { }
+                try { panel.UpdateAllBattles(battles); } catch { }
+
+                if (hoveredBattle != null && !hoveredBattle.isBattleOver && BattleLive(hoveredBattle))
+                {
+                    try { panel.ShowBattle(hoveredBattle); } catch { }
+                }
+
+                // Ensure every live TemplateBattle instance actually renders over its contested tile
+                inst = panel.instantiatedBattles;
+                Camera cam = WarCamera();
+                if (inst != null)
+                {
+                    for (int j = 0; j < inst.Count; j++)
+                    {
+                        var tb = inst[j];
+                        if (tb == null || tb.currentBattle == null || tb.currentBattle.isBattleOver || !BattleLive(tb.currentBattle)) continue;
+                        if (!tb.gameObject.activeSelf) tb.gameObject.SetActive(true);
+                        try { tb.Setup(tb.currentBattle); } catch { }
+                        try { tb.Show(); } catch { }
+                        try
+                        {
+                            if (tb.canvasGroup != null && tb.canvasGroup.alpha < 0.99f)
+                                tb.canvasGroup.alpha = 1f;
+                        }
+                        catch { }
+
+                        if (cam != null && tb.panelRect != null && tb.canvasRect != null)
+                        {
+                            Vector3 worldPos = tb.currentBattle.defender != null ? tb.currentBattle.defender.transform.position
+                                             : (tb.currentBattle.attacker != null ? tb.currentBattle.attacker.transform.position : Vector3.zero);
+                            if (bm != null)
+                            {
+                                try
+                                {
+                                    var cpos = bm.GetBattleCenterPosition(tb.currentBattle);
+                                    if (cpos != Vector3.zero) worldPos = cpos;
+                                }
+                                catch { }
+                            }
+                            if (worldPos != Vector3.zero)
+                            {
+                                Vector3 sp = cam.WorldToScreenPoint(worldPos + new Vector3(0f, 0.035f, 0f));
+                                if (sp.z > 0.01f)
+                                {
+                                    var parentCanvas = tb.GetComponentInParent<Canvas>();
+                                    Camera uiCam = parentCanvas != null && parentCanvas.renderMode != RenderMode.ScreenSpaceOverlay ? parentCanvas.worldCamera : null;
+                                    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(tb.canvasRect, new Vector2(sp.x, sp.y), uiCam, out Vector2 lp))
+                                    {
+                                        tb.panelRect.anchoredPosition = lp;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (_lastLoggedBattleCount != liveCount)
+                {
+                    _lastLoggedBattleCount = liveCount;
+                    int tbCount = inst != null ? inst.Count : 0;
+                    string sampleInfo = "none";
+                    if (inst != null && inst.Count > 0 && inst[0] != null)
+                    {
+                        var first = inst[0];
+                        Vector2 ap = first.panelRect != null ? first.panelRect.anchoredPosition : Vector2.zero;
+                        Vector2 sd = first.panelRect != null ? first.panelRect.sizeDelta : Vector2.zero;
+                        Vector3 sc = first.panelRect != null ? first.panelRect.localScale : Vector3.zero;
+                        float al = first.canvasGroup != null ? first.canvasGroup.alpha : -1f;
+                        var pCanvas = panel.GetComponentInParent<Canvas>();
+                        string cMode = pCanvas != null ? pCanvas.renderMode.ToString() : "null";
+                        sampleInfo = $"active={first.gameObject.activeInHierarchy}, canvas={cMode}, pos=({ap.x:0.0},{ap.y:0.0}), size=({sd.x:0},{sd.y:0}), scale=({sc.x:0.0},{sc.y:0.0}), alpha={al:0.00}, atk={first.currentBattle?.totalAttack}, def={first.currentBattle?.totalDefence}";
+                    }
+                    MelonLogger.Msg($"[ZTABLE BATTLE-UI] liveBattles={liveCount}, panelActive={panel.gameObject.activeInHierarchy}, templateCount={tbCount}, first=[{sampleInfo}]");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning("[ZTABLE BATTLE-UI] SyncBattleStatsUI: " + ex.Message);
+            }
+        }
+
         /// <summary>The hover and the click both come from the raycaster's input subscription, which only starts with the war fragment.</summary>
         private static void WakeTileRaycaster()
         {
@@ -5623,21 +6318,99 @@ namespace GreatZilleSolution
             return u.UnitTotalCount;
         }
 
-        /// <summary>Ensures player unit pool strictly reflects state military recruitment ledger without fake boosts or non-deployable cards.</summary>
+        private struct PreZilleLedgerEntry
+        {
+            public int Avail;
+            public int Deployed;
+        }
+
+        private static readonly Dictionary<string, PreZilleLedgerEntry> _preZilleLedger = new Dictionary<string, PreZilleLedgerEntry>();
+        private static bool _hasPreZilleLedger = false;
+
+        /// <summary>Captures Rizia's reserve & Pales-deployed unit counts BEFORE entering the Zille table or queuing Wehlen tokens.</summary>
+        public static void SnapshotPreZilleMilitaryLedger()
+        {
+            if (_hasPreZilleLedger) return;
+            var all = Resources.FindObjectsOfTypeAll<WarUnitTypeData>();
+            if (all == null || all.Length == 0) return;
+
+            _preZilleLedger.Clear();
+            var sb = new System.Text.StringBuilder();
+            for (int i = 0; i < all.Length; i++)
+            {
+                var u = all[i];
+                if (!IsPlayerSideUnitIncludingAir(u) || string.IsNullOrEmpty(u.name)) continue;
+                int avail = Math.Max(0, ResolveStateMilitaryCount(u));
+                int dep = Math.Max(0, u.UnitDeployedCount);
+                _preZilleLedger[u.name] = new PreZilleLedgerEntry { Avail = avail, Deployed = dep };
+                if (avail > 0 || dep > 0)
+                    sb.Append($"{u.name}={avail}(dep={dep}) ");
+            }
+            _hasPreZilleLedger = true;
+            MelonLogger.Msg($"[ZTABLE] Snapshotted pre-Zille Rizia arsenal: {sb}");
+        }
+
+        public static void ResetPreZilleMilitaryLedger()
+        {
+            _hasPreZilleLedger = false;
+            _preZilleLedger.Clear();
+        }
+
+        /// <summary>Ensures player unit pool strictly reflects state military recruitment ledger (minus units already deployed here or in Pales).</summary>
         public static void EnsurePlayerPool()
         {
             var all = Resources.FindObjectsOfTypeAll<WarUnitTypeData>();
             if (all == null || all.Length == 0) return;
 
+            // Count living non-city player units already placed on the live Zille board right now
+            var boardDeployed = new Dictionary<string, int>();
+            try
+            {
+                var tm = TokenMgr() ?? UnityEngine.Object.FindObjectOfType<WarTokenManager>();
+                var tokens = tm != null ? tm.GetWarTokens() : null;
+                if (tokens != null)
+                {
+                    for (int i = 0; i < tokens.Count; i++)
+                    {
+                        var tok = tokens[i];
+                        if (tok == null || tok.IsDead() || IsCityToken(tok)) continue;
+                        if (tok.GetTokenAllegiance() != WarToken.WarAllegiance.Player) continue;
+                        var ut = tok.GetWarUnitTypeData();
+                        if (ut == null || string.IsNullOrEmpty(ut.name)) continue;
+                        boardDeployed.TryGetValue(ut.name, out int cur);
+                        boardDeployed[ut.name] = cur + 1;
+                    }
+                }
+            }
+            catch { }
+
+            MelonLogger.Msg($"[ZTABLE] EnsurePlayerPool entry: hasPreLedger={_hasPreZilleLedger}, Lua Inf={DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Infantry_Total")}, Budg={DialogueHelper.GetIntVariable("RiziaDLC.Resources_Budget")}");
+
             for (int i = 0; i < all.Length; i++)
             {
                 var u = all[i];
                 if (!IsPlayerSideUnitIncludingAir(u)) continue;
+                int rawUtTotal = u.UnitTotalCount;
+                int rawUtDead = u.UnitDeadCount;
+                int rawUtDep = u.UnitDeployedCount;
+                int rawUtMiss = u.UnitOnMissionCount;
 
-                u.UnitDeployedCount = 0;
-                int exactCount = Math.Max(0, ResolveStateMilitaryCount(u));
-                u.UnitTotalCount = exactCount;
-                MelonLogger.Msg($"[ZTABLE] State ledger '{u.name}' ({u.UnitName}) align={u.unitAlignment}: count={u.UnitTotalCount}");
+                int onZilleBoard = 0;
+                if (!string.IsNullOrEmpty(u.name)) boardDeployed.TryGetValue(u.name, out onZilleBoard);
+
+                int baseAvail = Math.Max(0, ResolveStateMilitaryCount(u));
+                int baseDep = Math.Max(0, rawUtDep);
+                if (_hasPreZilleLedger && !string.IsNullOrEmpty(u.name) && _preZilleLedger.TryGetValue(u.name, out var snap))
+                {
+                    baseAvail = snap.Avail;
+                    baseDep = snap.Deployed;
+                }
+
+                int exactCount = Math.Max(0, baseAvail - onZilleBoard);
+                int exactDep = Math.Max(0, baseDep + onZilleBoard);
+                if (u.UnitTotalCount != exactCount) u.UnitTotalCount = exactCount;
+                if (u.UnitDeployedCount != exactDep) u.UnitDeployedCount = exactDep;
+                MelonLogger.Msg($"[ZTABLE] State ledger '{u.name}' ({u.UnitName}) align={u.unitAlignment}: avail={u.UnitTotalCount} (saveBase={baseAvail}, palesDep={baseDep}, zilleBoard={onZilleBoard}, rawTotal={rawUtTotal}, dead={rawUtDead}, miss={rawUtMiss})");
             }
 
             // Rebuild WarDeploymentPanel.availableDeploymentUnits cleanly from state inventory

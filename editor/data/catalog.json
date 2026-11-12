@@ -36119,6 +36119,7 @@
       "RiziaDLC.Angelica_Executed",
       "RiziaDLC.Council_GrandVizier_Angelica",
       "RiziaDLC.Council_GrandVizier_Sal",
+      "RiziaDLC.CountryRelation_Pales_AtWar",
       "RiziaDLC.Country_HouseAzaro_Enemy",
       "RiziaDLC.Country_HouseToras_Enemy",
       "RiziaDLC.Diplomacy_Pales_DeclareWar",
@@ -36131,23 +36132,35 @@
       "RiziaDLC.Lucita_RomanceHappened",
       "RiziaDLC.Pales_War",
       "RiziaDLC.Relations_Lucita_Romance",
+      "RiziaDLC.Resources_Energy",
+      "RiziaDLC.Resources_Military_Equipment",
       "RiziaDLC.Sal_Arrested",
       "RiziaDLC.Sal_Executed",
       "RiziaDLC.Taddeus_Arrested",
       "RiziaDLC.Taddeus_Executed",
       "RiziaDLC.Titus_Arrested",
       "RiziaDLC.Titus_Executed",
-      "RiziaDLC.Turn06_Council_LucitaOffended"
+      "RiziaDLC.Turn06_Council_LucitaOffended",
+      "Zille_AN_PreBrief_Sent",
+      "Zille_Fleet_Total",
+      "Zille_NavalBlockadeActive"
     ],
     "writtenVariables": [
+      "RiziaDLC.Resources_Energy",
+      "Zille_AN_Legitimacy",
+      "Zille_AN_PreBrief_Sent",
+      "Zille_Leverage",
+      "Zille_NavalBlockadeActive",
+      "Zille_Smolak_Pressure",
       "Zille_War_Active",
       "Zille_War_PlanType",
       "Zille_War_Postpone",
+      "Zille_War_Readiness",
       "Zille_War_RomulusPlan",
       "Zille_War_StaffPlan"
     ],
-    "choicesCount": 8,
-    "entriesCount": 42
+    "choicesCount": 12,
+    "entriesCount": 51
   },
   {
     "id": 9989,
@@ -36167,15 +36180,22 @@
     "readVariables": [
       "RiziaDLC.Hugo_Arrested",
       "RiziaDLC.Hugo_Executed",
-      "RiziaDLC.Hugo_Resigned"
+      "RiziaDLC.Hugo_Resigned",
+      "RiziaDLC.Wehlen_Zille_SharedEvidence",
+      "RiziaDLC.Zille_Discovered_LespianInvolvement",
+      "RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty"
     ],
     "writtenVariables": [
       "RiziaDLC.Country_PublicOpinion",
       "RiziaDLC.Resources_Authority",
-      "Zille_Speech_Tone"
+      "Zille_AN_Legitimacy",
+      "Zille_Leverage",
+      "Zille_Smolak_Pressure",
+      "Zille_Speech_Tone",
+      "Zille_War_Readiness"
     ],
-    "choicesCount": 3,
-    "entriesCount": 11
+    "choicesCount": 6,
+    "entriesCount": 18
   },
   {
     "id": 9990,
@@ -36213,19 +36233,31 @@
       "RiziaDLC.Manus_Executed",
       "RiziaDLC.Manus_Gone",
       "RiziaDLC.Relations_HouseSazon_AngelicaPardoned",
+      "RiziaDLC.Resources_Authority",
+      "RiziaDLC.Resources_Budget",
+      "RiziaDLC.Resources_Energy",
       "RiziaDLC.Taddeus_Arrested",
-      "RiziaDLC.Taddeus_Executed"
+      "RiziaDLC.Taddeus_Executed",
+      "Zille_Logistics_Audited",
+      "Zille_Logistics_Examined"
     ],
     "writtenVariables": [
       "RiziaDLC.Country_HouseAzaro",
       "RiziaDLC.Country_HouseSazon",
+      "RiziaDLC.Country_PublicOpinion",
+      "RiziaDLC.Resources_Authority",
       "RiziaDLC.Resources_Budget",
       "RiziaDLC.Resources_Energy",
+      "Zille_AN_Legitimacy",
+      "Zille_Leverage",
+      "Zille_Logistics_Audited",
+      "Zille_Logistics_Examined",
       "Zille_Logistics_House",
-      "Zille_Logistics_Route"
+      "Zille_Logistics_Route",
+      "Zille_War_Readiness"
     ],
-    "choicesCount": 3,
-    "entriesCount": 38
+    "choicesCount": 7,
+    "entriesCount": 46
   },
   {
     "id": 9991,
@@ -36238,6 +36270,7 @@
     "modNote": "Intelligence Briefing & Diplomatic Cables",
     "actors": [
       "Carlos Robles Azaro",
+      "Elena Werner",
       "Hugo Toras",
       "Laurento Esquibel",
       "Lucita Azaro",
@@ -36250,14 +36283,23 @@
       "RiziaDLC.Hugo_Resigned",
       "RiziaDLC.Lucita_Arrested",
       "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Resources_Budget",
+      "RiziaDLC.Resources_Military_Equipment",
+      "Zille_Leverage",
+      "Zille_PreNeg_CheckedLedger",
+      "Zille_PreNeg_CheckedLeverage",
       "Zille_War_Outcome"
     ],
     "writtenVariables": [
+      "Zille_Leverage",
       "Zille_Parley_Ready",
-      "Zille_Parley_Uncompromising"
+      "Zille_Parley_Uncompromising",
+      "Zille_PreNeg_CheckedLedger",
+      "Zille_PreNeg_CheckedLeverage",
+      "Zille_Smolak_Pressure"
     ],
-    "choicesCount": 3,
-    "entriesCount": 12
+    "choicesCount": 5,
+    "entriesCount": 18
   },
   {
     "id": 9992,
@@ -36276,6 +36318,20 @@
     "readVariables": [
       "RiziaDLC.Lucita_Arrested",
       "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Resources_Budget",
+      "RiziaDLC.Resources_Military_Equipment",
+      "RiziaDLC.Wehlen_Zille_SharedEvidence",
+      "RiziaDLC.Zille_Discovered_LespianInvolvement",
+      "RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty",
+      "Zille_AN_Legitimacy",
+      "Zille_DerdiaHybridActive",
+      "Zille_Leverage",
+      "Zille_NavalBlockadeActive",
+      "Zille_Parley_UsedArsenal",
+      "Zille_Parley_UsedDossier",
+      "Zille_Parley_UsedEncircle",
+      "Zille_Stale_PressedLaw",
+      "Zille_Stale_PressedSteel",
       "Zille_War_Outcome"
     ],
     "writtenVariables": [
@@ -36285,11 +36341,22 @@
       "RiziaDLC.Resources_Energy",
       "RiziaDLC.ZilleReferendum_Lost",
       "RiziaDLC.ZilleReturn_Success",
+      "Zille_AN_Legitimacy",
+      "Zille_Brenas_Saved_By_Leverage",
       "Zille_Independent_Buffer",
+      "Zille_Leverage",
+      "Zille_Leverage_Triumph",
+      "Zille_Parley_UsedArsenal",
+      "Zille_Parley_UsedDossier",
+      "Zille_Parley_UsedEncircle",
+      "Zille_Reparations_Won",
+      "Zille_Smolak_Pressure",
+      "Zille_Stale_PressedLaw",
+      "Zille_Stale_PressedSteel",
       "Zille_War_Outcome"
     ],
-    "choicesCount": 11,
-    "entriesCount": 30
+    "choicesCount": 19,
+    "entriesCount": 46
   },
   {
     "id": 9993,
@@ -36309,14 +36376,20 @@
       "Player_Romus"
     ],
     "readVariables": [
+      "RiziaDLC.CountryRelation_Pales_AtWar",
+      "RiziaDLC.Diplomacy_Pales_DeclareWar",
       "RiziaDLC.Hugo_Arrested",
       "RiziaDLC.Hugo_Executed",
       "RiziaDLC.Hugo_Resigned",
       "RiziaDLC.Lucita_Arrested",
       "RiziaDLC.Lucita_Executed",
+      "RiziaDLC.Pales_War",
       "RiziaDLC.Taddeus_Arrested",
       "RiziaDLC.Taddeus_Executed",
+      "Zille_AN_Legitimacy",
       "Zille_Independent_Buffer",
+      "Zille_Pales_TotalPlayerDead",
+      "Zille_Reparations_Won",
       "Zille_War_Outcome"
     ],
     "writtenVariables": [
@@ -36329,7 +36402,7 @@
       "RiziaDLC.Zille_PromisedToHouseToras",
       "Zille_Independent_Buffer"
     ],
-    "choicesCount": 5,
-    "entriesCount": 19
+    "choicesCount": 6,
+    "entriesCount": 23
   }
 ]

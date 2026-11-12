@@ -70,32 +70,18 @@ namespace GreatZilleSolution
                     }
                 }
 
-                if (convPanel != null && cd != null)
+                if (cd != null)
                 {
-                    Panels.Instance?.HideAllRightPanels();
-                    Panels.Instance?.HideAllCenterPanels();
-                    Managers.Instance?.GameFlowManager?.OnStoryFragmentStart();
-
-                    convPanel.isWarConversation = false;
-                    convPanel.isMinimizable = false;
-                    convPanel.gameObject.SetActive(true);
-                    if (convPanel.inputBlockerPanel != null) convPanel.inputBlockerPanel.gameObject.SetActive(true);
-
-                    convPanel.Setup(cd, (Action)(() => {
-                        try
-                        {
-                            var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
-                            if (gfm != null && cd != null) gfm.FinishStoryFragment(cd, null);
-                            Panels.Instance?.ShowHUD();
-                        }
-                        catch { }
-                    }), false);
-
-                    DialogueHelper.ShowAlert($"[Event] Started: {DisplayTitle}");
-                    return;
+                    string dialogueTitle = cd.ConversationProperties?.Dialogue;
+                    if (string.IsNullOrEmpty(dialogueTitle)) dialogueTitle = ConvIdOrName;
+                    if (WarOperationZilleManager.TriggerConversation(ConvIdOrName, dialogueTitle))
+                    {
+                        DialogueHelper.ShowAlert($"[Event] Started: {DisplayTitle}");
+                        return;
+                    }
                 }
 
-                // Fallback: Start directly via PixelCrushers DialogueManager
+                // Fallback: Start directly via PixelCrushers DialogueManager without locking inputBlockerPanel
                 Panels.Instance?.HideAllRightPanels();
                 Panels.Instance?.HideAllCenterPanels();
                 DialogueManager.StartConversation(ConvIdOrName);
@@ -146,6 +132,8 @@ namespace GreatZilleSolution
             AddModNewEvent("Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "MODNEW");
             AddModNewEvent("Turn_Zille_WarSmolakFinalParley", "Frontline Parley with Wiktor Smolak", "Neutral Military Pavilion, Zille Border", "MODNEW");
             AddModNewEvent("Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "MODNEW");
+            AddModNewEvent("Turn_Zille_HomeFrontCrisis", "Wartime Home Front: Energy & AN Pressure", "Cabinet Room, Palas Rezna", "MODNEW");
+            AddModNewEvent("Turn_Zille_ZilleLiberation", "Homecoming in Zille City: The Harbor Quarter", "Zille City Harbor", "MODNEW");
 
 
             // 3. Scan EntityDataManager.AllConversationsData

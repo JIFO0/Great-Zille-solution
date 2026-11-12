@@ -8687,7 +8687,7 @@
       "dialogueText": "Councilor Azaro, I want the General Staff to begin drawing up contingency operational dossiers for the liberation of Zille.",
       "menuText": "\"Councilor Azaro, I want the General Staff to begin drawing up contingency operational dossiers for the liberation of Zille.\"",
       "conditions": "",
-      "userScript": "Variable[\"Zille_Staff_Planning\"] = true;",
+      "userScript": "Variable[\"Zille_Staff_Planning\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
       "outgoing": [
         99104
       ],
