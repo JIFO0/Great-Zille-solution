@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="suzerain">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great Zille Narrative Studio</title>
+  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP TELEMETRY HUD NAVBAR -->
+  <header class="top-hud">
+    <div class="hud-left">
+      <div class="jifocc-crest">
+        <div class="crest-icon-wrap">
+          <!-- Hexagon Command Circuit SVG -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+        <div class="jifocc-title">
+          <h1>JIFOCC // GREAT_ZILLE <span class="badge-ver">v0.4.9</span></h1>
+        </div>
+      </div>
+
+      <div class="telemetry-status-pills">
+        <div class="tel-pill">
+          <div class="status-dot"></div>
+          <span>SYS: ONLINE</span>
+        </div>
+        <div class="tel-pill">
+          <span>PORT: 5050</span>
+        </div>
+        <div class="tel-pill">
+          <span>TARGET: SUZERAIN_MODS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CATEGORY TABS (NO EMOJIS - SVG ICONS) -->
+    <nav class="hud-center">
+      <button class="hud-tab active" data-tab="conversations" onclick="switchMainTab('conversations')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>DIALOGUES (<span id="count-conversations">0</span>)</span>
+      </button>
+
+      <button class="hud-tab" data-tab="decisions" onclick="switchMainTab('decisions')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        <span>DECISIONS (<span id="count-decisions">0</span>)</span>
+      </button>
+
+      <button class="hud-tab" data-tab="reports" onclick="switchMainTab('reports')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>REPORTS (<span id="count-reports">0</span>)</span>
+      </button>
+
+      <button class="hud-tab" data-tab="situations" onclick="switchMainTab('situations')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>SITUATIONS (<span id="count-situations">0</span>)</span>
+      </button>
+    </nav>
+
+    <!-- RIGHT HUD ACTIONS -->
+    <div class="hud-right">
+      <button class="btn-hud btn-hud-theme" id="btn-lang-toggle" onclick="toggleLanguage()" title="Switch Language (EN / PL)">
+        <span id="lang-toggle-label">LANG: EN</span>
+      </button>
+
+      <button class="btn-hud btn-hud-theme" id="btn-theme-toggle" onclick="toggleTheme()" title="Switch Editor Theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span id="theme-toggle-label">THEME: SUZERAIN</span>
+      </button>
+
+      <button class="btn-hud btn-hud-purple" onclick="openTagManagerModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>TAGS (<span id="count-tags">0</span>)</span>
+      </button>
+
+      <button class="btn-hud btn-hud-theme" onclick="openSettingsModal()" title="Ustaw lokalizację Suzeraina i dekompiluj dane gry">
+        <span>⚙️ SUZERAIN &amp; DEKOMPILATOR</span>
+      </button>
+
+      <button class="btn-hud btn-hud-deploy" onclick="deployModToGame()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>SYNC WITH GAME</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN SPLIT VIEW -->
+  <main class="main-view">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-controls">
+        <!-- SEARCH -->
+        <div class="search-field">
+          <input type="text" id="global-search-input" placeholder="SEARCH BY CONTENT, TITLE OR ID..." oninput="handleSearchInput()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+
+        <!-- TAG FILTER -->
+        <div class="tag-filter-row">
+          <select id="sidebar-tag-filter" class="tag-select" onchange="handleTagFilterChange()">
+            <option value="">All tags (Prerequisites)...</option>
+          </select>
+          <button class="btn-tag-add" onclick="openCreateTagModal()" title="Define a new condition tag">+ TAG</button>
+        </div>
+
+        <!-- FILTER CHIPS -->
+        <div class="filter-buttons">
+          <button class="f-btn active" data-filter="all" onclick="setFilter('all')">ALL</button>
+          <button class="f-btn f-modnew" data-filter="MODNEW" onclick="setFilter('MODNEW')">MODNEW</button>
+          <button class="f-btn f-modedit" data-filter="MODEDIT" onclick="setFilter('MODEDIT')">MODEDIT</button>
+          <button class="f-btn" data-filter="Rizia" onclick="setFilter('Rizia')">RIZIA</button>
+          <button class="f-btn" data-filter="Sordland" onclick="setFilter('Sordland')">SORDLAND</button>
+        </div>
+      </div>
+
+      <!-- SIDEBAR ITEMS LIST -->
+      <div class="sidebar-list" id="sidebar-items-list">
+        <!-- Rendered by app.js -->
+      </div>
+    </aside>
+
+    <!-- RIGHT WORKSPACE -->
+    <section class="workspace" id="main-workspace">
+      
+      <!-- WORKSPACE HEADER BAR -->
+      <div class="workspace-header" id="workspace-header" style="display: none;">
+        <div class="header-meta">
+          <div class="header-title-bar">
+            <h2 id="active-item-title">-</h2>
+            <span id="active-item-badge" class="badge"></span>
+          </div>
+          <div class="header-sub-data">
+            <span>ID: <b id="active-item-id">-</b></span>
+            <span>SEKTOR: <b id="active-item-turn">-</b></span>
+            <span>WĘZŁY: <b id="active-item-nodes-count">-</b></span>
+            <span>CHOICES: <b id="active-item-choices-count">-</b></span>
+            <span id="active-item-note" style="color: var(--neon-cyan);"></span>
+          </div>
+        </div>
+
+        <div class="workspace-actions">
+          <!-- VIEW MODE TOGGLE (FLOW TREE VS CARD LIST) -->
+          <div class="view-mode-toggle" id="view-mode-toggle">
+            <button class="view-btn active" id="btn-view-tree" onclick="setViewMode('tree')" title="Widok Drzewa Przepływu (Hierarchical Branching Flow)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="9" y="15" width="6" height="6" rx="1"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/><line x1="12" y1="15" x2="12" y2="12"/></svg>
+              <span>TREE</span>
+            </button>
+            <button class="view-btn" id="btn-view-list" onclick="setViewMode('list')" title="Widok Pełnej Listy Kart (List View)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              <span>LIST</span>
+            </button>
+          </div>
+
+          <!-- SHOW ONLY MODIFIED LINES FILTER -->
+          <button class="btn-toggle-modonly" id="btn-toggle-modonly" onclick="toggleModOnlyFilter()" title="Pokaż wyłącznie kwestie wstrzyknięte lub zmodyfikowane przez mod">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            <span>ONLY MOD LINES</span>
+          </button>
+
+          <!-- ACTIONS -->
+          <button class="btn-act" id="btn-add-line" onclick="addNewDialogueNode(false)" style="display: none;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ LINE</span>
+          </button>
+          <button class="btn-act" id="btn-add-choice" onclick="addNewDialogueNode(true)" style="display: none;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ CHOICE</span>
+          </button>
+          <button class="btn-act" id="btn-add-option" onclick="addNewDecisionOption()" style="display: none;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ OPTION</span>
+          </button>
+          <button class="btn-act btn-save-master" onclick="saveCurrentItem()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            <span>SAVE (CTRL+S)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- WORKSPACE CONTENT CONTAINER -->
+      <div class="workspace-content" id="workspace-content">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- QUICK NODE INSPECTOR DRAWER (SLIDES IN ON TREE NODE CLICK) -->
+  <div class="node-inspector-drawer" id="node-inspector-drawer">
+    <div class="drawer-header">
+      <span style="font-family: var(--font-serif); font-size: 12px; font-weight: 700; color: var(--suz-gold-bright, var(--neon-cyan)); letter-spacing: 0.05em;">DIALOGUE NODE INSPECTOR</span>
+      <button class="tree-ctrl-btn" onclick="closeInspectorDrawer()" title="Hide Inspector & Deselect Node" style="width: auto; padding: 0 8px; gap: 4px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawer-body-content">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- MODAL: TAG / PREREQUISITE MANAGER -->
+  <div class="modal-shield" id="tag-manager-modal">
+    <div class="modal-box" style="width: 720px;">
+      <div class="modal-box-header">
+        <h3>KATALOG TAGOW & PREREQUISITES</h3>
+        <button class="tree-ctrl-btn" onclick="closeModal('tag-manager-modal')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-box-body">
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="tag-search-box" class="node-input-txt" placeholder="Filtruj 12,840+ zmiennych gry..." oninput="filterTagManagerList()">
+          <button class="btn-tag-add" onclick="openCreateTagModal()">+ NEW TAG</button>
+        </div>
+        <div style="max-height: 380px; overflow-y: auto; border: 1px solid var(--border-dim); border-radius: 4px; padding: 8px; background: var(--bg-deep);" id="tag-manager-list">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-box-footer">
+        <button class="btn-act" onclick="closeModal('tag-manager-modal')">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CREATE NEW PREREQUISITE TAG -->
+  <div class="modal-shield" id="create-tag-modal">
+    <div class="modal-box">
+      <div class="modal-box-header">
+        <h3>DEFINICJA NOWEGO TAGU WARUNKU</h3>
+        <button class="tree-ctrl-btn" onclick="closeModal('create-tag-modal')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-box-body">
+        <div>
+          <label class="field-label">Nazwa Zmiennej (Variable Identifier):</label>
+          <input type="text" id="new-tag-name" class="node-input-txt code-field" placeholder="np. Zille_Smolak_Convinced">
+        </div>
+        <div>
+          <label class="field-label">Typ Zmiennej (Data Type):</label>
+          <select id="new-tag-type" class="node-input-txt">
+            <option value="Boolean">Boolean (Prawda / Falsz)</option>
+            <option value="Integer">Integer (Liczba calkowita)</option>
+            <option value="Text">Text (Lancuch znakow)</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Wartosc Poczatkowa (Initial Value):</label>
+          <input type="text" id="new-tag-default" class="node-input-txt code-field" value="False">
+        </div>
+        <div>
+          <label class="field-label">Variable Category:</label>
+          <input type="text" id="new-tag-category" class="node-input-txt" value="Great Zille Mod">
+        </div>
+        <div>
+          <label class="field-label">Narrative Purpose Description:</label>
+          <textarea id="new-tag-desc" class="node-text-area" style="min-height: 50px;" placeholder="Do czego sluzy ta flaga..."></textarea>
+        </div>
+      </div>
+      <div class="modal-box-footer">
+        <button class="btn-act" onclick="closeModal('create-tag-modal')">CANCEL</button>
+        <button class="btn-act btn-save-master" onclick="submitNewTag()">CREATE & SAVE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: INSERT PREREQUISITE PICKER -->
+  <div class="modal-shield" id="insert-tag-modal">
+    <div class="modal-box" style="width: 600px;">
+      <div class="modal-box-header">
+        <h3>SELECT VARIABLE / PREREQUISITE TAG</h3>
+        <button class="tree-ctrl-btn" onclick="closeModal('insert-tag-modal')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-box-body">
+        <input type="text" id="picker-tag-search" class="node-input-txt" placeholder="Search variable (e.g. Resources_Budget, Zille_War...)" oninput="filterTagPickerList()">
+        <div style="max-height: 350px; overflow-y: auto; border: 1px solid var(--border-dim); border-radius: 4px; padding: 6px; background: var(--bg-deep); display: flex; flex-direction: column; gap: 4px;" id="picker-tag-list">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-box-footer">
+        <button class="btn-act" onclick="closeModal('insert-tag-modal')">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS & DECOMPILER MODAL -->
+  <div class="modal-backdrop" id="settings-modal" style="display: none;">
+    <div class="modal-box" style="max-width: 620px;">
+      <div class="modal-box-header">
+        <h3>⚙️ Lokalizacja Suzeraina &amp; Dekompilator</h3>
+        <button class="modal-close-btn" onclick="closeModal('settings-modal')">×</button>
+      </div>
+      <div class="modal-box-body">
+        <div class="form-group">
+          <label for="suzerain-path-input">Ścieżka do folderu gry Suzerain:</label>
+          <input type="text" id="suzerain-path-input" class="form-input" placeholder="C:\Program Files (x86)\Steam\steamapps\common\Suzerain" style="width: 100%; padding: 8px; margin-top: 6px;">
+          <small style="opacity: 0.75; display: block; margin-top: 4px;">Używana do synchronizacji mod_dialogue_overrides.json oraz dekompilacji danych gry.</small>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button class="btn-act btn-act-primary" onclick="saveSuzerainPath()">💾 Zapisz ścieżkę</button>
+          <button class="btn-act" id="btn-run-decompile" onclick="runDecompiler()">📦 Dekompiluj dane z gry (UnityPy)</button>
+        </div>
+        <pre id="decompile-output" style="margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.35); border-radius: 6px; max-height: 180px; overflow-y: auto; font-size: 12px; display: none;"></pre>
+      </div>
+      <div class="modal-box-footer">
+        <button class="btn-act" onclick="closeModal('settings-modal')">ZAMKNIJ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST SHELF -->
+  <div class="toast-shelf" id="toast-shelf"></div>
+
+  <!-- SCRIPT ENGINE -->
+  <script src="app.js?v=9"></script>
+</body>
+</html>

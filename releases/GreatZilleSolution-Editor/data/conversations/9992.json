@@ -1,0 +1,842 @@
+{
+  "id": 9992,
+  "title": "Turn_Zille_WarSmolakFinalParley",
+  "description": "Pojedynek ze Smolakiem w Namiocie Polowym",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Pojedynek ze Smolakiem w Namiocie Polowym",
+  "actors": [
+    "Narrator",
+    "Player_Romus",
+    "Wiktor Smolak"
+  ],
+  "readVariables": [
+    "RiziaDLC.Lucita_Arrested",
+    "RiziaDLC.Lucita_Executed",
+    "RiziaDLC.Resources_Budget",
+    "RiziaDLC.Resources_Military_Equipment",
+    "RiziaDLC.Wehlen_Zille_SharedEvidence",
+    "RiziaDLC.Zille_Discovered_LespianInvolvement",
+    "RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty",
+    "Zille_AN_Legitimacy",
+    "Zille_DerdiaHybridActive",
+    "Zille_Leverage",
+    "Zille_NavalBlockadeActive",
+    "Zille_Parley_UsedArsenal",
+    "Zille_Parley_UsedDossier",
+    "Zille_Parley_UsedEncircle",
+    "Zille_Stale_PressedLaw",
+    "Zille_Stale_PressedSteel",
+    "Zille_War_Outcome"
+  ],
+  "writtenVariables": [
+    "Brenas_Lost_To_Wehlen",
+    "Grodzizg_FreeCity",
+    "RiziaDLC.Resources_Budget",
+    "RiziaDLC.Resources_Energy",
+    "RiziaDLC.ZilleReferendum_Lost",
+    "RiziaDLC.ZilleReturn_Success",
+    "Zille_AN_Legitimacy",
+    "Zille_Brenas_Saved_By_Leverage",
+    "Zille_Independent_Buffer",
+    "Zille_Leverage",
+    "Zille_Leverage_Triumph",
+    "Zille_Parley_UsedArsenal",
+    "Zille_Parley_UsedDossier",
+    "Zille_Parley_UsedEncircle",
+    "Zille_Reparations_Won",
+    "Zille_Smolak_Pressure",
+    "Zille_Stale_PressedLaw",
+    "Zille_Stale_PressedSteel",
+    "Zille_War_Outcome"
+  ],
+  "choicesCount": 19,
+  "entriesCount": 46,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Smolak_Parley_Intro",
+      "dialogueText": "The neutral pavilion stood on a muddy rise between the forward trenches, draped in white flags snapping in the salt breeze off the Gulf of Moridia. Outside, Golden Guards in gold-trimmed greatcoats stood eye-to-eye with Wehzek guardsmen holding submachine guns. Inside, Wiktor Smolak sat slumped in a folding chair, pouring bitter black tea into a tin cup, a half-smoked cigarette dangling from his lips.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Parley_Greeting",
+      "dialogueText": "Look who finally arrived! The great King Romus of Rizia in the flesh. Tell me, Your Majesty... Care for some tea? Wehzek chicory blend. Tastes like gunpowder and wet mud, yet it keeps a man awake while the guns bark.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Romus_Parley_Posture_Prompt",
+      "dialogueText": "I sat across the scarred folding table, facing the bloodshot, calculating eyes of the Wehzek dictator.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Posture_Victor",
+      "dialogueText": "Your garrisons are shattered and your sea lanes across the Gulf are contested, Smolak. We are not here to drink tea—we are here to settle the evacuation of Zille.",
+      "menuText": "\"Your garrisons are broken, Smolak. Evacuate Zille today and let us settle the peace.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Posture_Stalemate",
+      "dialogueText": "Both our nations have bled enough along the hills of Zille. Before the Alliance of Nations chains us both, put your real terms on this table.",
+      "menuText": "\"Both armies have bled into this mud. Let us test what terms each side can still defend.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "",
+      "outgoing": [
+        200
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Posture_Defiant",
+      "dialogueText": "You tore up the 1927 treaty and thought you could extort House Toras forever. Every Wehzek soldier lost on this peninsula is on your head.",
+      "menuText": "\"You tore up the 1927 agreement and gambled on terror. Now Rizia settles the account.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "",
+      "outgoing": [
+        100
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Posture_Defeated",
+      "dialogueText": "Fortune favored your trenches on the field, Wiktor. Spare me your jokes and put your terms on the table so we may halt the slaughter.",
+      "menuText": "\"Our offensive stalled, Wiktor. Speak plainly and put your price on the table.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 2 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "",
+      "outgoing": [
+        300
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 100,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Defeated_Rant",
+      "dialogueText": "Smolak ground his cigarette under his boot heel, his jaw twitching. \"Don't get drunk on victory, King Romus! Valdez blundered, sure—but I still have battalions in Wraclawitz, Contana whispering in Kyrute, and stubborn pride! I'll hand back Zille if you let my surviving boys sail home untouched—not one copper of reparations!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        101
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 101,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Victory_Leverage_Duel_Hub",
+      "dialogueText": "Smolak was testing your nerve—trying to evacuate his beaten army without paying a cent for the ruin in Zille. You could press a concrete advantage from your dossier first, or move straight to dictating final terms.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        103,
+        105,
+        107,
+        102
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 102,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Victory_Terms_Prompt",
+      "dialogueText": "Smolak leaned over the scarred table—cornered, bruised, yet bargaining furiously for what remained of Wehlen.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        110,
+        115,
+        120
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 103,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Vic_Duel_Dossier",
+      "dialogueText": "No indemnities? Open your eyes, Wiktor: my briefcase holds verified dossiers on the Zille bombing. Pay for the silos and bridges your officers burned, or I distribute this file across Konstantium tonight!",
+      "menuText": "\"[DOSSIER] Pay reparations, or we publish your Zille bombing complicity to every ambassador in Kyrute!\"",
+      "conditions": "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) and Variable[\"Zille_Parley_UsedDossier\"] ~= true",
+      "userScript": "Variable[\"Zille_Parley_UsedDossier\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
+      "outgoing": [
+        104
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 104,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Vic_Dossier",
+      "dialogueText": "Smolak's eye twitched violently as you tapped the sealed black folder. \"You smug little vulture...\" he hissed softly, lowering his bluff by a notch.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        102
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 105,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Vic_Duel_Arsenal",
+      "dialogueText": "Bluff somewhere else, Smolak! Our quartermasters still hold over a thousand fresh weapons in Brenas and coin in our treasury. Say the word and our brigades embark right behind your retreating transports!",
+      "menuText": "\"[ARSENAL >=1,000] Our depots hold over a thousand fresh arms and full war coffers—we can keep pushing!\"",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and Variable[\"Zille_Parley_UsedArsenal\"] ~= true",
+      "userScript": "Variable[\"Zille_Parley_UsedArsenal\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+      "outgoing": [
+        106
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 106,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Vic_Arsenal",
+      "dialogueText": "Smolak glanced nervously toward the telegraph orderly outside the canvas flap. \"Keep your tanks anchored in Zille, Romus—nobody wants a march on Wraclawitz!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        102
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 107,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Vic_Duel_BlockadeDerdia",
+      "dialogueText": "Your 'sail home untouched' assumes our fleet opens the Strait of Kreleck—and while Derdian raiders tear up your mainland roads, you cannot buy another week!",
+      "menuText": "\"[ENCIRCLEMENT] Our ships choke the Gulf and Derdian raids burn your southern depots—you have no retreat!\"",
+      "conditions": "(Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true) and Variable[\"Zille_Parley_UsedEncircle\"] ~= true",
+      "userScript": "Variable[\"Zille_Parley_UsedEncircle\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
+      "outgoing": [
+        108
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 108,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Vic_Encircle",
+      "dialogueText": "Smolak swallowed hard, ash falling from his cigarette onto his tunic. \"Alright, alright, King—you've got me boxed in! What is your price?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        102
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 110,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Accept_Decisive_Surrender",
+      "dialogueText": "Zille returns unconditionally to the Crown of Rizia today. Your surviving troops may board transports across the Gulf of Moridia under white flags—never to return.",
+      "menuText": "\"Zille returns unconditionally to Rizia. Your surviving troops may evacuate across the Gulf.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true;",
+      "outgoing": [
+        111
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 111,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Signs_Decisive",
+      "dialogueText": "Smolak snatched the pen and scrawled his signature with vicious strokes. \"Done! Pack up, boys, we're sailing home! Enjoy your oilfields and your headaches, Romus!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 115,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Demand_Leveraged_Reparations",
+      "dialogueText": "You lack the cards to refuse, Smolak. Sign the unconditional return of Zille AND two million in gold reconstruction credits plus emergency crude deliveries—or our press and our fleet bury you tonight!",
+      "menuText": "\"[LEVERAGE] Return Zille AND pay war reparations (+2 Budget, +2 Energy) for the ruin you left!\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 3",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Reparations_Won\"] = true; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 2; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 2;",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 116,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Signs_Reparations",
+      "dialogueText": "Smolak cursed viciously under his breath, glaring as if he wished his fountain pen were a dagger—then signed every schedule of gold and fuel deliveries. \"You squeezed every last drop, Romus! Take Zille and your blood money!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 120,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Demand_Overwhelming_Triumph",
+      "dialogueText": "Our forward divisions already sit inside mainland Wehlen. Cede Zille unconditionally, pay massive gold and fuel indemnities, demilitarize your southern coast, and grant Free City autonomy to Grodzizg—or our armor pushes to Wraclawitz!",
+      "menuText": "\"[TOTAL TRIUMPH] Cede Zille, pay massive indemnities (+4 Budget, +3 Energy), and free Grodzizg!\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 5 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 5; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 4; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 3;",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 121,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Signs_Overwhelming",
+      "dialogueText": "Smolak turned chalk-white as he stared at the map pins deep inside Wehlen. \"You're an absolute shark, Romus... Damn you, I'll sign! Just halt your tanks and keep Wraclawitz out of this!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 200,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Stalemate_Opening",
+      "dialogueText": "Smolak blew gray smoke toward the canvas roof. \"Neither of us can break the other cheaply, Romus. Your tanks stalled on Zille City's ring, and my boys can't crack Brenas. We can keep feeding men into artillery until Kyrute chains us both... or hear my compromise: a demilitarized Independent Buffer State in Zille!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 201,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Stalemate_Leverage_Hub",
+      "dialogueText": "Smolak watched your eyes like a card shark staking his final chip. If you have accumulated enough leverage—from bombing dossiers, full arsenals, naval blockade, or AN legitimacy—you might break this deadlock and force Zille back even without a total breakthrough.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        204,
+        206,
+        202,
+        203
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 202,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Stalemate_Hub_Lucita",
+      "dialogueText": "Lucita frowned beside you, awaiting your final call on whether to compromise, force victory through sheer leverage, or freeze the front.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        215,
+        210,
+        220
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 203,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Stalemate_Hub_NoLucita",
+      "dialogueText": "Your staff officers stood silent as Smolak awaited your final verdict on the stalemate.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        215,
+        210,
+        220
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 204,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Stalemate_Press_Evidence",
+      "dialogueText": "Don't lecture me about neutral states, Wiktor! The 1927 lease expired legally, the world knows about your terror tactics, and AN sanctions will strangle Wraclawitz long before our treasury breaks!",
+      "menuText": "\"Drop the 'neutral republic' farce! Our 1927 treaty rights and bombing dossier bury you at the AN!\"",
+      "conditions": "(((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or (Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) and Variable[\"Zille_Stale_PressedLaw\"] ~= true",
+      "userScript": "Variable[\"Zille_Stale_PressedLaw\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
+      "outgoing": [
+        205
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 205,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Stale_Evidence",
+      "dialogueText": "Smolak's smirk cracked slightly as he rubbed his temple. \"Lawyers and files... Fine, Romus, you've got teeth in Konstantium. What else do you think you have?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 206,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Stalemate_Press_Steel",
+      "dialogueText": "Your trenches in Zille are running dry while our depots hold over a thousand reserve weapons and our ships/allies choke your resupply! You will break first in a war of attrition, Wiktor!",
+      "menuText": "\"Look at our Brenas depots and the Gulf—over a thousand spare arms while Valdez's convoys starve!\"",
+      "conditions": "((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true)) and Variable[\"Zille_Stale_PressedSteel\"] ~= true",
+      "userScript": "Variable[\"Zille_Stale_PressedSteel\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+      "outgoing": [
+        207
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 207,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Stale_Steel",
+      "dialogueText": "Smolak stubbed out his cigarette roughly, eyes darting to the map pins along the Strait of Kreleck. \"Damn your navy and damn your warehouses...\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 210,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Accept_Independent_Buffer",
+      "dialogueText": "An Independent Neutral Zille. It ends the bloodshed, frees Zille from your grip, and separates our armies under AN oversight. I accept.",
+      "menuText": "\"Agreed. Establish the Independent Neutral State of Zille under international charter.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 3; Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;",
+      "outgoing": [
+        211
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 211,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Buffer_Signed",
+      "dialogueText": "Smolak smiled with shrewd relief, clinking his tin cup against the table. \"A statesman's compromise, Romus. Let the clerks in Konstantium draft the charters.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 215,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Force_Zille_Return_Leverage",
+      "dialogueText": "Enough games, Wiktor. Between our 1927 treaty standing, our reserves, and the stranglehold closing around Wehlen, you cannot hold Zille another month. Sign the Restoration of Zille and pull your men across the Gulf—before you lose Wraclawitz too!",
+      "menuText": "\"[MASTER LEVERAGE] No buffer state—your position is untenable! Return Zille to Rizia NOW!\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 5",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Zille_Leverage_Triumph\"] = true;",
+      "outgoing": [
+        216
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 216,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Folded_Leverage",
+      "dialogueText": "Silence stretched for ten suffocating seconds inside the tent. Smolak stared at your face, then down at his cold tea, then suddenly slammed the pen into the parchment. \"You cold, calculating devil... You didn't win it cleanly on the hills, Romus, yet you boxed me in everywhere else! Take Zille back and choke on it!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 220,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Reject_Buffer_Ceasefire",
+      "dialogueText": "I will never sign away our sovereignty to an artificial buffer state. We freeze the frontlines under an armed ceasefire—this reckoning is merely postponed.",
+      "menuText": "\"Never. Zille is Rizian or nothing—we freeze the frontlines under an armed ceasefire.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;",
+      "outgoing": [
+        221
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 221,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Ceasefire_Signed",
+      "dialogueText": "Smolak snorted, tossing his butt into the mud. \"Suit yourself, King. An armed truce it is.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 300,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Victorious_Mock",
+      "dialogueText": "Smolak leaned back with a predatory grin, spreading his arms wide. \"How fast royal pride melts when the guns fall quiet, eh, Romus? General Valdez shattered your offensive!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        301,
+        302
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 301,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_TacticalDefeat_Terms",
+      "dialogueText": "\"You bled for zero ground gained! Withdraw behind the Brenas line, drop all claim to Zille, and swallow an armistice while my mood stays generous.\"",
+      "menuText": "",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 2 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "",
+      "outgoing": [
+        310,
+        320,
+        305
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 302,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Fiasco_Terms",
+      "dialogueText": "\"My armored columns sit inside Brenas right now, 'Your Majesty'! Sign over southern Brenas to Wraclawitz, or I let my tanks roll toward Porte Drazon!\"",
+      "menuText": "",
+      "conditions": "Variable[\"Zille_War_Outcome\"] == 1",
+      "userScript": "",
+      "outgoing": [
+        320,
+        305
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 305,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Salvage_Brenas_Leverage",
+      "dialogueText": "Hold your horses, Wiktor! Your forward columns are overextended, we hold bombing dossiers, and if you annex a single Rizian town in Brenas, Rumburg and the AN will crush Wehlen! Take 2 Budget in gold and keep your army strictly behind the pre-war border!",
+      "menuText": "\"[LEVERAGE SALVAGE] Take 2 Budget and drop claims on Zille—but AN pressure & our dossier bar you from Brenas!\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 4 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 2",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Brenas_Lost_To_Wehlen\"] = false; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 2; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true; Variable[\"Zille_Brenas_Saved_By_Leverage\"] = true;",
+      "outgoing": [
+        306
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 306,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Ack_Salvage_Brenas",
+      "dialogueText": "Smolak froze halfway through his laughter, calculating rapidly behind narrowed eyes. \"Damn those Thornbourgh sharks... and damn your pocketbook. Fine, King—two million in gold, keep your Brenas towns, and crawl back south with nothing!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 310,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Accept_Tactical_Defeat",
+      "dialogueText": "To spare our kingdom further ruin, Rizia accepts an armistice along the pre-war frontier and suspends claims over Zille. Do not mistake restraint for final submission.",
+      "menuText": "\"We withdraw behind the Brenas frontier and sign the bitter armistice.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 2 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true;",
+      "outgoing": [
+        311
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 311,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Signs_TacticalDefeat",
+      "dialogueText": "Smolak cackled softly, signing with an exaggerated flourish. \"Enjoy explaining this triumph to your noble houses, Romus!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 320,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Accept_Total_Fiasco",
+      "dialogueText": "To save the capital and our citizens from destruction, I sign this bitter surrender. Withdraw from the approaches to Porte Drazon.",
+      "menuText": "\"Sign the humiliating surrender of southern Brenas to save Porte Drazon.\"",
+      "conditions": "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)",
+      "userScript": "Variable[\"Zille_War_Outcome\"] = 1; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true;",
+      "outgoing": [
+        321
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 321,
+      "actorId": 77,
+      "speaker": "Wiktor Smolak",
+      "title": "Smolak_Signs_Fiasco",
+      "dialogueText": "Smolak laughed uproariously, slapping the table. \"History will remember today, King Romus! Your father gave me Zille; you just handed me Brenas! Good luck surviving your own generals tonight!\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

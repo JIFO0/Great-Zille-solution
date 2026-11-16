@@ -10,11 +10,12 @@ namespace GreatZilleSolution
     public static partial class ZilleDialogueSystem
     {
         // =========================================================================
-        // SCENE 6: Turn_Zille_DerdiaTalks (ID 9995) - TALKS WITH DERDIA
+        // SCENE 6: Turn_Zille_DerdiaTalks (ID 9995) - LONG PRE-VISIT TALKS (TURN 5+)
         // Features:
-        // - Supreme Wiseman Jorga Azmal (Silver Garrison outside Naeal)
-        // - Grand Wiseman Sal Ignacius (Six Stars medallion) + Hugo/Laurento/Titus/Carlos fallbacks
-        // - Checks pilgrim ban status, Derdia hostility, equipment >= 1000 & budget >= 2!
+        // - Distinct Peace vs Active Early War openings
+        // - Multi-topic hub: Yol-Qerzan sabotage dossier, Golcondist pilgrims (vanilla vars),
+        //   blocked energy pipeline & Wehlen's frontier intimidation
+        // - Sharing sabotage evidence unlocks the warm State Visit to Derdia!
         // =========================================================================
         public static void RegisterDerdiaTalks(DialogueDatabase db)
         {
@@ -35,197 +36,177 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Derdia_Intro_1",
-                "You stepped into the private royal telecommunications chamber beneath Palas Rezna, where the air hung thick with sandalwood, frankincense, and ozone from the humming vacuum tubes. On the walnut table sat a carafe of chilled rosewater beside the gilded cipher receiver. Through the static from the Silver Garrison outside Naeal, the low unison chant of Golcondist guardsmen echoed faintly.", -1);
+                "I stepped into the private royal telecommunications chamber beneath Palas Rezna, where the air hung thick with sandalwood, frankincense, and ozone from the humming vacuum tubes. On the walnut table lay our intelligence dossier on the Yol-Qerzan explosions beside the gilded cipher receiver.", -1);
 
             AddChoice(conv, 401, NarratorId, "Derdia_Stimulus_Rosewater",
                 "Pour a small glass of rosewater and let the cipher clerk finish tuning the Naeal frequency.",
                 "", 404, "");
 
             AddChoice(conv, 402, NarratorId, "Derdia_Stimulus_Headset",
-                "Lift the heavy brass receiver immediately, cutting through the static with royal impatience.",
+                "Lift the heavy brass receiver immediately, cutting through the static with royal urgency.",
                 "", 405, "");
 
-            AddChoice(conv, 403, NarratorId, "Derdia_Stimulus_Medallion",
-                "Study the Six Stars crest inlaid on the console while waiting for Supreme Wiseman Azmal.",
-                "", 404, "");
-
             AddLine(conv, 404, NarratorId, RomusId, "Derdia_Entry_Calm",
-                "The rosewater cooled your throat as the green signal lamp steadied. A moment later, Supreme Wiseman Jorga Azmal's gravelly baritone rolled across the mountain wire.", -1);
+                "The rosewater cooled my throat as the green signal lamp steadied. A moment later, Supreme Wiseman Jorga Azmal's gravelly baritone rolled across the mountain wire.", -1);
 
             AddLine(conv, 405, NarratorId, RomusId, "Derdia_Entry_Brisk",
-                "The brass earpiece was cool against your temple; the cipher clerk flinched slightly and snapped the final toggle. Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
+                "The brass earpiece was cool against my temple; the cipher clerk snapped the final toggle, and Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
 
             AddLink(conv, 1, 401);
             AddLink(conv, 1, 402);
-            AddLink(conv, 1, 403);
 
-            AddLine(conv, 2, AzmalId, RomusId, "Azmal_Opening_Greeting",
-                "May God's light guide you, Your Majesty. The mountain winds carry whispers of iron and smoke rising along Wehlen's borders. You prepare to strike the butcher of Wraclawitz, do you not?", 3,
-                "Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] ~= true");
+            // Opening 1: War ALREADY active (Early War Turn 3/4)
+            AddLine(conv, 103, AzmalId, RomusId, "Azmal_Opening_WarActive",
+                "Halaita, King Romus. Even behind our mountain passes we hear the thunder of your artillery along the Zille frontier. Wraclawitz already bleeds on your western border—yet my own northern outposts near Yol still smolder from cowardice in the dark. Speak plainly.", 3,
+                "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_War_EarlyLaunch\"] == true");
 
+            // Opening 2: Peace, Hostile vanilla relations
             AddLine(conv, 102, AzmalId, RomusId, "Azmal_Opening_Hostile",
-                "I am surprised the King of Rizia dares summon the Silver Garrison after all the insults our faithful suffered, Your Majesty. Yet even an estranged neighbor becomes useful when Wiktor Smolak stands across the border. Speak quickly.", 3,
-                "Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] == true");
+                "I am surprised the King of Rizia calls the Silver Garrison after the coldness our faithful endured at your borders. Yet dark storms gather over Yol and Grodzizg alike. Speak, Your Majesty.", 3,
+                "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] == true");
 
-            AddLink(conv, 404, 2);
+            // Opening 3: Peace, Normal/Friendly relations
+            AddLine(conv, 2, AzmalId, RomusId, "Azmal_Opening_Greeting",
+                "May God's light guide you, Your Majesty. The mountain winds carry smoke from both Zille and our own northern passes near Yol. What brings Porte Drazon onto the Silver Garrison line?", 3,
+                "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] ~= true");
+
+            AddLink(conv, 404, 103);
             AddLink(conv, 404, 102);
-            AddLink(conv, 405, 2);
+            AddLink(conv, 404, 2);
+            AddLink(conv, 405, 103);
             AddLink(conv, 405, 102);
+            AddLink(conv, 405, 2);
 
             var azmalHub = AddLine(conv, 3, RomusId, AzmalId, "Romus_Azmal_Open_Prompt",
-                "I leaned toward the gilded receiver, weighing faith, border strategy, and Rizia's own laws.");
+                "I leaned toward the gilded receiver, knowing Azmal respects sovereignty and truth far more than transactional haggling.");
 
             azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
             azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
             azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 12));
 
-            AddChoice(conv, 10, AzmalId, "Choice_Faith_Justice",
-                "\"Smolak has persecuted Bludish and Golcondist believers alike. Justice demands action.\"",
-                "Smolak has trampled sacred law and butchered believers across Wehlen and Zille for far too long. Justice demands that the sword be drawn against him.", 20,
-                "Variable[\"Derdia_Romus_Faithful\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+            AddChoice(conv, 10, AzmalId, "Choice_Sabotage_Solidarity",
+                "\"We intercepted intelligence on the Yol-Qerzan explosions—Smolak's sappers are targeting Derdia directly.\"",
+                "I did not call to bargain for mercenaries, Supreme Wiseman. I called because Rizian intelligence uncovered who bombed your pumping station and Silver Garrison depots near Yol.", 20,
+                "Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"Derdia_Romus_Faithful\"] = true; Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] or 0) + 1;",
+                "Variable[\"Zille_Derdia_SabotageEvidence\"] == true");
 
-            AddChoice(conv, 11, AzmalId, "Choice_Military_Pragmatism",
-                "\"Wehlen shares its land border with you and its sea approaches with us. Strike together, and Smolak splits in two.\"",
-                "Wehlen borders Derdia by land while Rizia attacks across the Brenas frontier and the Gulf of Moridia. Strike Wehlen's southern depots simultaneously, and Smolak's army cracks under two fronts.", 20,
-                "Variable[\"Derdia_Romus_Pragmatic\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+            AddChoice(conv, 11, AzmalId, "Choice_Sabotage_Warn",
+                "\"Those explosions on your northern passes bear Wraclawitz's military signature, not Golcondist smugglers.\"",
+                "Supreme Wiseman, the demolitions along your Yol and Qerzan passes were no work of mountain bandits. Smolak is testing your defenses and intimidating your energy projects.", 20,
+                "Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"Derdia_Romus_Pragmatic\"] = true;");
 
             AddChoice(conv, 12, AzmalId, "Choice_Question_Motives",
-                "\"What concrete price does the Silver Garrison set for raiding Wehlen's rear?\"",
-                "Speak plainly, Supreme Wiseman: what does Derdia demand in return for opening a second front on Wehlen's southern frontier?", 20,
+                "\"Wehlen threatens both our borders. Let us discuss what Derdia needs to stand firmly beside Rizia.\"",
+                "Speak plainly, Supreme Wiseman: Wehlen's regime destabilizes every neighbor it touches. What would unite Derdia and Rizia against Smolak?", 20,
                 "Variable[\"Derdia_Romus_Cautious\"] = true;");
 
-            AddLine(conv, 20, AzmalId, RomusId, "Azmal_Theological_Stakes",
-                "Know this, Your Majesty: Smolak's regime has hounded Golcondists through the mountains for decades, while Rizia's own border laws long barred our pilgrims from the Archsanctuary of Plavo and the shrines of our shared Nurist heritage.", -1);
+            AddLine(conv, 20, AzmalId, RomusId, "Azmal_Sabotage_Reaction",
+                "Silence hung across the wire for three long heartbeats before Azmal's voice dropped into a fierce, controlled rumble. \"So Wraclawitz's viper dares strike our own pumping stations while blaming the faithful... Tell me everything your eyes have seen, King Romus.\"", -1);
 
-            AddLine(conv, 21, AzmalId, RomusId, "Azmal_Offer_Proposal",
-                "Open Rizia's borders to Golcondist pilgrims and guarantee their worship at Plavo and liberated Zille—OR furnish our irregulars with real mountain rifles or gold to wage war! In return, three thousand Golcondist irregulars will cross into southern Wehlen, burning depots and tying down Valdez's reserves.", -1,
-                "Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] ~= true");
-
-            AddLine(conv, 121, AzmalId, RomusId, "Azmal_Offer_Proposal_AlreadyAllowed",
-                "You already showed rare goodwill in opening your border to our pilgrims, Your Majesty. Reaffirm their sanctuary at Plavo and liberated Zille—or arm our scouts—and three thousand Golcondist irregulars will raid Wehlen's mainland border depots before dawn.", -1,
-                "Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] == true");
+            // Multi-topic deep discussion hub (visited flags!)
+            var topicHub = AddLine(conv, 21, NarratorId, RomusId, "Derdia_Topic_Hub",
+                "The tension on the line had shifted from cold protocol to urgent strategic inquiry. Several threads lay open between us.");
 
             AddLink(conv, 20, 21);
-            AddLink(conv, 20, 121);
+            topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 22)); // Topic 1: Sabotage details & evidence
+            topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 23)); // Topic 2: Religion & Pilgrim ban (vanilla vars!)
+            topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 24)); // Topic 3: Pipeline & Economy
+            topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 25)); // Topic 4: Active War / Southern Corridor concept
+            topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 30)); // Proceed to Verdict / Invitation
 
-            AddLine(conv, 22, SalId, RomusId, "Sal_Ignacius_Warning",
-                "Grand Wiseman Sal Ignacius leaned forward, his fingers tightening around his golden Six Stars medallion. \"Your Majesty, granting formal privileges to Golcondist pilgrims will deeply unsettle orthodox Wruhecist clerics—unless you satisfy Azmal with cold coin or surplus steel instead of religious concessions!\"", -1,
-                "Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true");
+            AddChoice(conv, 22, AzmalId, "Derdia_Topic_SabotageDetails",
+                "\"Lay out our full intelligence on the Yol-Qerzan sabotage and Wehzek troop movements near Grodzizg.\"",
+                "Our officers traced Wraclawitz ordnance lot numbers and sapper radio traffic back to barracks in Grodzizg. Smolak wants to cripple your southern pipeline before it ever competes with his crude.", 122,
+                "Variable[\"Zille_DerdiaTalks_DiscussedSabotage\"] = true; Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "Variable[\"Zille_DerdiaTalks_DiscussedSabotage\"] ~= true");
 
-            AddLine(conv, 122, HugoId, RomusId, "Hugo_Clergy_Warning_NoSal",
-                "Hugo murmured beside you with furrowed brow. \"Be cautious, Romus. Opening our sanctuaries to Derdian Golcondists will incense the orthodox clergy—weigh whether surplus rifles or treasury gold wouldn't buy his raiders more cleanly.\"", -1,
-                "(Variable[\"RiziaDLC.Sal_Arrested\"] == true or Variable[\"RiziaDLC.Sal_Executed\"] == true) and Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
+            AddLine(conv, 122, AzmalId, RomusId, "Azmal_Reply_SabotageDetails",
+                "\"He fears an independent Derdian corridor that bypasses his tollgates,\" Azmal growled. \"And by sending your dossier without demanding a ransom first, Your Majesty, you have shown greater honor than any envoy in a decade.\"", 21);
 
-            AddLine(conv, 123, LaurentoId, RomusId, "Laurento_Clergy_Warning_Fallback",
-                "Laurento whispered discreetly, \"Bear in mind, Your Majesty, that religious concessions to Derdia will draw sharp criticism from traditionalists unless we trade purely in weapons or subsidies.\"", -1,
-                "(Variable[\"RiziaDLC.Sal_Arrested\"] == true or Variable[\"RiziaDLC.Sal_Executed\"] == true) and (Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
+            AddChoice(conv, 23, AzmalId, "Derdia_Topic_Pilgrims",
+                "\"Speak on our religious laws and the status of Golcondist pilgrims traveling toward Plavo.\"",
+                "I know our kingdoms have been estranged over border laws and Golcondist pilgrims seeking Plavo. Where do matters stand in your eyes today?", 123,
+                "Variable[\"Zille_DerdiaTalks_DiscussedFaith\"] = true;",
+                "Variable[\"Zille_DerdiaTalks_DiscussedFaith\"] ~= true");
 
-            foreach (int pId in new[] { 21, 121 })
-            {
-                AddLink(conv, pId, 22);
-                AddLink(conv, pId, 122);
-                AddLink(conv, pId, 123);
-            }
+            AddLine(conv, 123, AzmalId, RomusId, "Azmal_Reply_Pilgrims_Open",
+                "\"You showed wisdom in lifting harsh barriers against our pilgrims, Your Majesty,\" Azmal replied evenly. \"That goodwill is remembered in every prayer house of Naeal—and makes brotherhood against Wehlen natural.\"", 21,
+                "Variable[\"RiziaDLC.DerdianBan\"] ~= true and Variable[\"RiziaDLC.DerdianBorderBan\"] ~= true");
 
-            AddLine(conv, 23, TitusId, RomusId, "Titus_Tactical_Perspective",
-                "Titus Gordion stepped forward respectfully. \"Militarily, Your Majesty, Derdian raids across Wehlen's southern land border force General Valdez to divert brigades away from Zille. Just confirm we actually hold surplus arms or gold before promising material aid.\"", 24,
-                "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
+            AddLine(conv, 124, AzmalId, RomusId, "Azmal_Reply_Pilgrims_Banned",
+                "\"Your border restrictions on our pilgrims still wound the faithful,\" Azmal admitted candidly, \"yet even Grand Wiseman Sal knows Smolak's persecution of believers in Wehlen is a far darker sin. Ease our travelers' passage when we meet in person, and the Silver Garrison will remember.\"", 21,
+                "Variable[\"RiziaDLC.DerdianBan\"] == true or Variable[\"RiziaDLC.DerdianBorderBan\"] == true");
 
-            AddLine(conv, 124, CarlosId, RomusId, "Carlos_Tactical_Perspective",
-                "General Carlos Azaro nodded curtly. \"Militarily, Derdian raids on Wehlen's southern frontier depots will pin down brigades Smolak would otherwise ship to Zille.\"", 24,
-                "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
+            AddLink(conv, 23, 123);
+            AddLink(conv, 23, 124);
 
-            foreach (int wId in new[] { 22, 122, 123 })
-            {
-                AddLink(conv, wId, 23);
-                AddLink(conv, wId, 124);
-            }
+            AddChoice(conv, 24, AzmalId, "Derdia_Topic_Pipeline",
+                "\"Rizia could help finance Derdia's stalled energy pipeline—connecting your fields directly to southern ports.\"",
+                "If Wehlen cuts off our northern crude—or tries to strangle yours—a direct Derdia-Rizia pipeline would enrich both our treasuries and break Smolak's monopoly.", 125,
+                "Variable[\"Zille_DerdiaTalks_DiscussedEcon\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "Variable[\"Zille_DerdiaTalks_DiscussedEcon\"] ~= true");
 
-            var probePrompt = AddLine(conv, 24, NarratorId, RomusId, "Derdia_Probe_Prompt",
-                "Before naming your price, you weighed whether to press Azmal on where his mountain fighters would actually strike.");
+            AddLine(conv, 125, AzmalId, RomusId, "Azmal_Reply_Pipeline",
+                "\"Derdia has the reserves and the will, Your Majesty, yet lacked the capital to lay steel across the southern ridges,\" Azmal answered thoughtfully. \"If Rizia truly seeks a strategic partner rather than a pawn, that pipeline could bind our realms for a generation.\"", 21);
 
-            probePrompt.outgoingLinks.Add(CreateLink(conv.id, 24, 35));
-            probePrompt.outgoingLinks.Add(CreateLink(conv.id, 24, 37));
+            AddChoice(conv, 25, AzmalId, "Derdia_Topic_Corridor",
+                "\"If Rizia confronts Wehlen militarily, would Derdia ever consider opening a southern corridor for our forces?\"",
+                "Be candid with me, Supreme Wiseman: if Smolak forces war—or while our guns are already engaged—could Rizian divisions ever stage through your northern frontier?", 126,
+                "Variable[\"Zille_DerdiaTalks_DiscussedWar\"] = true;",
+                "Variable[\"Zille_DerdiaTalks_DiscussedWar\"] ~= true");
 
-            AddChoice(conv, 35, AzmalId, "Probe_Derdia_Operations",
-                "\"Supreme Wiseman, specify exactly which Wehzek corridors your fighters can hit.\"",
-                "Before I commit my word or my depots, Supreme Wiseman: specify exactly where your raiders will strike in southern Wehlen.", 36,
-                "Variable[\"Derdia_Probed\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+            AddLine(conv, 126, AzmalId, RomusId, "Azmal_Reply_Corridor",
+                "\"Opening Derdian soil to a foreign army is no decree signed over a crackling telephone wire, King Romus,\" Azmal said firmly. \"Yet Smolak's saboteurs already violated our peace. Come to the Silver Garrison in person—look me in the eye, and we shall weigh an alliance worthy of both crowns.\"", 21);
 
-            AddLine(conv, 36, AzmalId, RomusId, "Ack_Probe_Derdia",
-                "\"We control the mountain passes north of Naeal,\" Azmal answered smoothly. \"My irregulars will ambush supply trains moving from Wraclawitz toward Grodzizg and Rotsla—forcing Smolak to garrison his interior roads instead of reinforcing Zille.\"", 30);
+            AddChoice(conv, 30, AzmalId, "Derdia_Proceed_Verdict",
+                "\"Let us settle our immediate next step between Porte Drazon and Naeal.\"",
+                "Our positions are clear, Supreme Wiseman. Let us decide how Rizia and Derdia move forward from this hour.", 31);
 
-            AddChoice(conv, 37, AzmalId, "Skip_Probe_Derdia",
-                "\"Your word on the raid strength suffices. Let us settle the terms of our pact.\"",
-                "Keep your operational routes guarded over open wire, Supreme Wiseman. Let us settle the terms between Rizia and Derdia directly.", 30);
+            var pactHub = AddLine(conv, 31, NarratorId, RomusId, "Derdia_Pact_Hub_Prompt",
+                "Azmal awaited my proposal across the quiet hum of the cipher line.");
 
-            var pactHub = AddLine(conv, 30, NarratorId, RomusId, "Derdia_Pact_Hub_Prompt",
-                "Supreme Wiseman Azmal awaited your verdict on the transceiver, the distant unison chants of the Silver Garrison audible across the line.");
+            pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 40)); // Accept Invitation to State Visit (if IncidentShared)
+            pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 45)); // Active War urgent raids + State Visit invitation
+            pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 50)); // Pragmatic border raids only (Budget/Arms)
+            pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 60)); // Reject / Keep distance
 
-            pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Accept Holy Coalition (religious pledge)
-            pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 45)); // Supply 500 Surplus Rifles (requires Equipment >= 1000!)
-            pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 48)); // War Chest Subsidy (requires Budget >= 2!)
-            pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Pragmatic civil protection
-            pactHub.outgoingLinks.Add(CreateLink(conv.id, 30, 60)); // Reject
+            AddChoice(conv, 40, AzmalId, "Derdia_Accept_StateVisit",
+                "\"Prepare the Silver Garrison—I will fly to Derdia personally to seal our alliance and pipeline accord.\"",
+                "Then we shall not settle great affairs over static. Prepare the Silver Garrison, Supreme Wiseman—I will come to Derdia personally to forge our alliance.", 41,
+                "Variable[\"Zille_Derdia_StateVisitUnlocked\"] = true; Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true");
 
-            AddChoice(conv, 40, AzmalId, "Accept_Holy_Coalition",
-                "\"I pledge by Saint Wruhec: Golcondist pilgrims shall have safe passage to Plavo and liberated Zille.\"",
-                "I pledge by my royal honor: Rizia's borders stay open to Golcondist pilgrims, and they shall worship safely at Plavo and liberated Zille. Unleash your irregulars against Wehlen!", 41,
-                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.Decision_Turn03_GolcondistPilgrims_AllowPassage\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Derdia_NegotiatingPower\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
+            AddLine(conv, 41, AzmalId, RomusId, "Ack_Derdia_StateVisit",
+                "Azmal's voice boomed warmly across the wire. \"Halaita! You will be received with full royal honor at the Silver Garrison, brother. Together we will give Wiktor Smolak an answer he cannot ignore.\"", -1);
 
-            AddLine(conv, 41, AzmalId, RomusId, "Ack_Holy_Coalition",
-                "Azmal's voice boomed with solemn fervor. \"Halaita! Let the tyrant's chains shatter! My fighters cross Wehlen's border before dawn. May God shield your armies, Your Majesty.\"", -1);
+            AddChoice(conv, 45, AzmalId, "Derdia_WarActive_VisitAndRaids",
+                "\"Our armies are already fighting Smolak! Launch border raids now and receive me at Silver Garrison to open the southern corridor!\"",
+                "Our divisions are already locked in combat with Wehlen! Unleash your Disciples against his southern supply lines tonight, and receive me in Derdia to seal the full corridor and pipeline pact!", 46,
+                "Variable[\"Zille_Derdia_StateVisitUnlocked\"] = true; Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+                "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_War_EarlyLaunch\"] == true");
 
-            AddLine(conv, 42, SalId, RomusId, "Sal_Derdia_Grumble",
-                "Grand Wiseman Sal murmured a quiet prayer, fingers brushing his Six Stars medallion. \"May Saint Wruhec forgive this concession for the kingdom's peace...\"", -1,
-                "Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true");
+            AddLine(conv, 46, AzmalId, RomusId, "Ack_Derdia_WarActive",
+                "\"By dawn, three thousand Disciples will burn Wehlen's southern depots to avenge Yol!\" Azmal thundered. \"Fly to the Silver Garrison as soon as your generals hold the line—our gates stand open to King Romus!\"", -1);
 
-            AddLink(conv, 41, 42);
-
-            // Option 45: Surplus Arms Transfer (ONLY if Equipment >= 1000!)
-            AddChoice(conv, 45, AzmalId, "Deal_Derdia_Weapons",
-                "\"No religious concessions—instead, Rizia will ship 500 surplus rifles for your mountain scouts.\"",
-                "Rizia will not alter her sanctuary statutes, yet our arsenals hold abundant surplus steel. Take 500 crates of Rizian rifles and demolish Wehlen's southern rail lines!", 46,
-                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) - 500; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+            AddChoice(conv, 50, AzmalId, "Deal_Derdia_Weapons",
+                "\"No royal visit yet—accept 500 surplus rifles for your border guards to contain Wehlen's saboteurs.\"",
+                "Urgent affairs keep me in Porte Drazon, yet Rizia will ship 500 crates of surplus rifles immediately to fortify your Yol-Qerzan passes against Smolak.", 51,
+                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) - 500; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000");
 
-            AddLine(conv, 46, AzmalId, RomusId, "Ack_Derdia_Weapons",
-                "Azmal paused, clearly impressed by the cold pragmatism. \"Good steel speaks louder than parchment promises, King Romus. Deliver those rifles to the border pass, and Wehlen's southern garrisons will burn tonight!\"", -1);
-
-            AddLine(conv, 47, SalId, RomusId, "Sal_Relieved_Weapons",
-                "Grand Wiseman Sal exhaled a sigh of profound relief. \"Steel instead of sanctuary decrees... A wise sovereign balance, Your Majesty.\"", -1,
-                "Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true");
-
-            AddLink(conv, 46, 47);
-
-            // Option 48: Gold War Subsidy (ONLY if Budget >= 2!)
-            AddChoice(conv, 48, AzmalId, "Deal_Derdia_Budget",
-                "\"Leave Wruhecist law intact—accept 2 Budget in gold bullion to equip your irregulars.\"",
-                "Rizian religious law remains sovereign, yet our royal treasury will transfer 2 Budget in gold coin to finance your southern border raids against Smolak.", 49,
-                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 2; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
-                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 2");
-
-            AddLine(conv, 49, AzmalId, RomusId, "Ack_Derdia_Budget",
-                "\"War requires coin as much as prayer,\" Azmal intoned smoothly. \"Your gold arms the faithful along Wehlen's border tonight, Your Majesty.\"", -1);
-
-            AddChoice(conv, 50, AzmalId, "Counter_Pragmatic_Derdia",
-                "\"I guarantee safe civil border transit, but no special sanctuary charters or material aid.\"",
-                "I guarantee safe transit and civil protection for Derdian travelers across our borders, but I will not alter our Wruhecist sanctuary laws or drain our depots. Let us strike Smolak as sovereign partners.", 51,
-                "Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
-
-            AddLine(conv, 51, AzmalId, RomusId, "Ack_Pragmatic_Derdia",
-                "Azmal exhaled slowly. \"You bargain with the caution of a king rather than a prophet, Romus. Yet our hatred for Smolak outweighs our disappointment. Our scouts will still raid his southern depots—remember our pilgrims once Zille is yours.\"", -1);
+            AddLine(conv, 51, AzmalId, RomusId, "Ack_Derdia_Weapons",
+                "\"Good steel speaks clearly on a mountain pass, Your Majesty,\" Azmal replied with measured respect. \"Our scouts will harrying Wehlen's southern roads if war breaks out—though our full corridor remains closed until we speak face to face.\"", -1);
 
             AddChoice(conv, 60, AzmalId, "Reject_Derdia_Demands",
-                "\"Rizia governs its faith and steel without foreign conditions. Keep your raiders behind your border.\"",
-                "Rizia answers to Saint Wruhec and the Crown alone. Keep your fighters in Derdia, Supreme Wiseman.", 61,
+                "\"Rizia has shared what we know. Beyond that, each realm must guard its own frontier.\"",
+                "I have shared what intelligence honor required, Supreme Wiseman. Beyond that, Rizia will fight its own battles.", 61,
                 "Variable[\"Zille_DerdiaHybridActive\"] = false; Variable[\"RiziaDLC.CountryRelation_Derdia_Unfriendly\"] = true;");
 
             AddLine(conv, 61, AzmalId, RomusId, "Ack_Reject_Derdia",
-                "Static hissed fiercely as Azmal's voice turned frigid. \"Then face Smolak's guns alone, King of Rizia! Do not call Naeal when your campaign stalls.\" The line went dead.", -1);
+                "Static hissed across the wire as Azmal's tone cooled. \"Then may God guard both our borders separately, Your Majesty.\" The line clicked silent.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaTalks", "Turn_Zille_DerdiaTalks");
-            MelonLogger.Msg("[ZILLE DIALOGUE] Injected Derdia Talks (ID 9995) into masterDatabase!");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Injected expanded Derdia Talks (ID 9995) into masterDatabase!");
         }
 
         // =========================================================================
@@ -465,7 +446,7 @@ namespace GreatZilleSolution
                 "Variable[\"Rumburg_Romus_Proud\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 20, BeatriceId, RomusId, "Beatrice_Imperial_Offer",
-                "Spoken like a true king, Romus. Thornbourgh will not watch quietly while republican rabble mocks a sister monarchy. Rumburg can route freight trains carrying 152mm heavy artillery munitions and surplus rifles directly toward Brenas, and our envoy in Konstantium will fight Contanan sanctions.", -1);
+                "Spoken like a true king, Romus. Thornbourgh will not watch quietly while republican rabble mocks a sister monarchy. Rumburg can dispatch GRACE maritime freighters carrying 152mm heavy artillery munitions and surplus rifles through the Antacean sea lanes straight to Monqiz and Sallabes, while our envoy in Konstantium fights Contanan sanctions.", -1);
 
             AddLine(conv, 21, BeatriceId, RomusId, "Beatrice_AN_Pledge",
                 "One expectation remains: Rizia must remain a proud pillar of GRACE, keeping Arcasian and Lespian profiteers from dictating Porte Drazon's policy.", -1,
@@ -506,24 +487,24 @@ namespace GreatZilleSolution
             responseHub.outgoingLinks.Add(CreateLink(conv.id, 30, 50)); // Pragmatic royal thanks (+400 Equip)
 
             AddChoice(conv, 40, BeatriceId, "Pledge_GRACE_Solidarity",
-                "\"House Toras pledges steadfast solidarity to GRACE (+600 Military Equipment, AN cover).\"",
+                "\"House Toras pledges steadfast solidarity to GRACE in exchange for munitions and AN cover.\"",
                 "House Toras pledges steadfast solidarity to GRACE and our royal kinship, Beatrice. For Lena's memory and our sister crowns, accept my bond!", 41,
                 "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Allied\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 600; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 41, BeatriceId, RomusId, "Ack_Beatrice_Pledge",
-                "Beatrice smiled with imperious satisfaction. \"Splendid, Romus. Three full trains of 152mm shells and six hundred crates of reserve armaments depart for Brenas tonight. Claim what is yours.\"", -1);
+                "Beatrice smiled with imperious satisfaction. \"Splendid, Romus. Three GRACE cargo steamers loaded with 152mm shells and six hundred crates of reserve armaments weigh anchor for Monqiz tonight. Claim what is yours.\"", -1);
 
             AddChoice(conv, 45, BeatriceId, "Purchase_Rumburg_Expansion",
-                "\"We back GRACE—and pay 1 Budget upfront for double rail consignments (+1,000 Military Equipment)!\"",
-                "In addition to GRACE solidarity, our treasury releases 1 Budget upfront to double the heavy shell and rifle shipments bound for Brenas immediately!", 46,
+                "\"We back GRACE—and release treasury gold upfront for double maritime ordnance shipments!\"",
+                "In addition to GRACE solidarity, our treasury releases funds upfront to double the heavy shell and rifle shipments bound for Monqiz immediately!", 46,
                 "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.CountryRelation_Rumburg_Allied\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 1000; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
 
             AddLine(conv, 46, BeatriceId, RomusId, "Ack_Beatrice_Expanded",
-                "\"Prompt payment and royal resolve—my favorite virtues in a brother-in-law!\" Beatrice replied warmly. \"Six heavy ordnance trains roll south tonight. Smolak's trenches won't survive them.\"", -1);
+                "\"Prompt payment and royal resolve—my favorite virtues in a brother-in-law!\" Beatrice replied warmly. \"Six heavy ordnance ships steam south tonight. Smolak's trenches won't survive them.\"", -1);
 
             AddChoice(conv, 50, BeatriceId, "Grateful_Sovereign",
-                "\"We accept your munitions with royal gratitude without binding military pledges (+400 Equipment).\"",
+                "\"We accept your munitions with royal gratitude without binding military pledges.\"",
                 "We accept your heavy shells and goodwill with deep gratitude, Beatrice, while keeping Rizia's strategic commitments flexible.", 51,
                 "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Friendly\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 400; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
@@ -604,19 +585,21 @@ namespace GreatZilleSolution
 
             preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 11)); // Review separate Zille vs Pales losses & armory stamina
             preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 12)); // Review Leverage cards in briefcase
+            preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 13)); // Depart to motorcade
 
             AddChoice(conv, 11, ElenaId, "PreNeg_Check_Ledger",
                 "\"Elena, brief me on our exact Zille losses, any Pales drain, and whether our depots could sustain renewed fighting.\"",
                 "Give me the exact numbers before we depart: how do our Zille losses compare separately from Pales, and can our treasury and arsenals back an ultimatum if Smolak walks out?", -1,
-                "Variable[\"Zille_PreNeg_CheckedLedger\"] = true;");
+                "Variable[\"Zille_PreNeg_CheckedLedger\"] = true;",
+                "Variable[\"Zille_PreNeg_CheckedLedger\"] ~= true");
 
             AddLine(conv, 111, ElenaId, RomusId, "Ack_PreNeg_Strong",
-                "\"Our separate Zille casualty ledger stays manageable, and with over 1,000 weapons in stock and healthy treasury reserves, Smolak knows we are not bluffing if talks collapse.\"", 15,
+                "\"Our separate Zille casualty ledger stays manageable, and with over 1,000 weapons in stock and healthy treasury reserves, Smolak knows we are not bluffing if talks collapse.\"", 10,
                 "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1",
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 112, ElenaId, RomusId, "Ack_PreNeg_Thin",
-                "\"Keep a calm face in the pavilion, Your Majesty: whether from fierce Zille attrition, Pales draining our reserves, or depots sitting under 1,000 weapons, renewed all-out combat would strain our treasury severely. Use diplomacy and leverage ruthlessly.\"", 15,
+                "\"Keep a calm face in the pavilion, Your Majesty: whether from fierce Zille attrition, Pales draining our reserves, or depots sitting under 1,000 weapons, renewed all-out combat would strain our treasury severely. Use diplomacy and leverage ruthlessly.\"", 10,
                 "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 or (Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1");
 
             AddLink(conv, 11, 111);
@@ -625,10 +608,15 @@ namespace GreatZilleSolution
             AddChoice(conv, 12, LaurentoId, "PreNeg_Check_Leverage",
                 "\"Laurento, list every diplomatic card we hold against Smolak inside that briefcase.\"",
                 "Before we board the motorcade, list every piece of leverage we hold against Wiktor Smolak right now—treaties, intelligence dossiers, foreign pacts, and blockades.", 121,
-                "Variable[\"Zille_PreNeg_CheckedLeverage\"] = true;");
+                "Variable[\"Zille_PreNeg_CheckedLeverage\"] = true;",
+                "Variable[\"Zille_PreNeg_CheckedLeverage\"] ~= true");
 
             AddLine(conv, 121, LaurentoId, RomusId, "Ack_PreNeg_Leverage",
-                "\"Your case rests on the lapsed 1927 agreement, any Zille bombing intelligence you preserved, naval pressure across the Gulf of Moridia, and whatever pacts you sealed with Naeal, Perla, or Thornbourgh. Strike him with whichever weakness cuts deepest first.\"", 15);
+                "\"Your case rests on the lapsed 1927 agreement, any Zille bombing intelligence you preserved, naval pressure across the Gulf of Moridia, and whatever pacts you sealed with Naeal, Perla, or Thornbourgh. Strike him with whichever weakness cuts deepest first.\"", 10);
+
+            AddChoice(conv, 13, LaurentoId, "PreNeg_Board_Motorcade",
+                "\"Enough briefings. Let us board the armored motorcade and face Smolak.\"",
+                "The picture is clear. Let us board the motorcade and settle this face to face.", 15);
 
             // En route in the Royal Armored Motorcade
             var motorcadeNode = AddLine(conv, 15, NarratorId, RomusId, "PreNeg_Motorcade_Travel",

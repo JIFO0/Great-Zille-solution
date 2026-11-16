@@ -432,7 +432,9 @@ namespace GreatZilleSolution
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarBalconySpeech", "Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "Zille/WarBalconySpeech");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "Zille/WarLogisticsDispute");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_MaveNortusHQ", "Turn_Zille_MaveNortusHQ", "Frontline Headquarters: The Battle for Zille", "Mayor's Hall, Mave Nortus", "Zille/MaveNortusHQ");
-                RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaTalks", "Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "Zille/DerdiaTalks");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaInvestigation", "Turn_Zille_DerdiaInvestigation", "Derdia-Wehlen Border: Sabotage Inquiry", "Golden Guard Briefing Room", "Zille/DerdiaInvestigation");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaTalks", "Turn_Zille_DerdiaTalks", "Derdian Mission: The Yol-Qerzan Sabotage", "Telecommunications Chamber, Palas Rezna", "Zille/DerdiaTalks");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaStateVisit", "Turn_Zille_DerdiaStateVisit", "State Visit to Derdia: Silver Garrison", "Silver Garrison, Naeal", "Zille/DerdiaStateVisit");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_LespiaTalks", "Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "Zille/LespiaTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_RumburgTalks", "Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "Zille/RumburgTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPreNegotiations", "Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "Zille/WarPreNegotiationsBriefing");
@@ -930,6 +932,127 @@ namespace GreatZilleSolution
             catch (Exception ex)
             {
                 MelonLogger.Warning($"[WAR ENGINE] SpawnMaveNortusHQEventToken error: {ex.Message}");
+            }
+            return false;
+        }
+
+        private static GameObject _spawnedDerdiaVisitToken = null;
+
+        public static void SuppressDerdiaVisitEventToken()
+        {
+            try
+            {
+                if (_spawnedDerdiaVisitToken == null)
+                    _spawnedDerdiaVisitToken = GameObject.Find("DerdiaVisit Event Variant");
+                if (_spawnedDerdiaVisitToken != null && _spawnedDerdiaVisitToken.activeSelf)
+                {
+                    _spawnedDerdiaVisitToken.SetActive(false);
+                }
+            }
+            catch { }
+        }
+
+        public static bool SpawnDerdiaVisitEventToken()
+        {
+            try
+            {
+                if (CurrentTheatre != ActiveWarTheatre.Civilian) return false;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone") || ZilleCampaignState.IsDerdiaStateVisitDone)
+                    return false;
+
+                var allTokenList = GetEntityBackingList<MapTokenData>("mapTokensData") ?? EntityDataManager.MapTokensData;
+                MapTokenData derdiaMtd = null;
+                if (allTokenList != null)
+                {
+                    for (int i = 0; i < allTokenList.Count; i++)
+                    {
+                        var t = allTokenList[i];
+                        if (t != null && t.NameInDatabase == "Rizia_Event_DerdiaVisit") { derdiaMtd = t; break; }
+                    }
+                    if (derdiaMtd == null)
+                    {
+                        derdiaMtd = new MapTokenData();
+                        derdiaMtd.Id = "Rizia_Event_DerdiaVisit";
+                        derdiaMtd.NameInDatabase = "Rizia_Event_DerdiaVisit";
+                        derdiaMtd.Path = "Rizia/MapTokens/Events";
+                        derdiaMtd.IsWIP = false;
+                        derdiaMtd.Notes = "";
+                        derdiaMtd.MapTokenProperties = new MapTokenProperties();
+                        derdiaMtd.MapTokenProperties.Title = "State Visit: Derdia";
+                        derdiaMtd.MapTokenProperties.Subtitle = "Silver Garrison Alliance Talks";
+                        derdiaMtd.MapTokenProperties.ImagePath = "";
+                        derdiaMtd.MapTokenProperties.SoundEffect = "";
+                        derdiaMtd.MapTokenProperties.Type = "Event";
+                        derdiaMtd.MapTokenProperties.IsTokenEnabled = true;
+                        derdiaMtd.AppBundleProperties = CreateRiziaBundleProps();
+                        allTokenList.Add(derdiaMtd);
+                    }
+                }
+
+                // Position near northern/western border toward Derdia (near Naeal / Zille border)
+                var derdiaRef = FindCityToken("derdia") ?? FindCityToken("naeal") ?? FindCityToken("yol") ?? FindCityToken("mave") ?? _borderAnchor;
+                Vector3 visitPos = derdiaRef != null
+                    ? derdiaRef.transform.position + new Vector3(-0.08f, 0f, 0.08f)
+                    : BorderEventPosition() + new Vector3(-0.12f, 0f, 0.12f);
+
+                if (_spawnedDerdiaVisitToken == null)
+                    _spawnedDerdiaVisitToken = GameObject.Find("DerdiaVisit Event Variant");
+                if (_spawnedDerdiaVisitToken == null)
+                {
+                    GameObject template = _spawnedZilleWarToken ?? GameObject.Find("InvasionOfPales Event Variant");
+                    if (template == null)
+                    {
+                        var allObjs = Resources.FindObjectsOfTypeAll<GameObject>();
+                        for (int i = 0; i < allObjs.Length; i++)
+                        {
+                            if (allObjs[i] != null && allObjs[i].name == "InvasionOfPales Event Variant")
+                            {
+                                template = allObjs[i];
+                                break;
+                            }
+                        }
+                    }
+                    if (template != null)
+                    {
+                        Transform parent = template.transform.parent;
+                        _spawnedDerdiaVisitToken = UnityEngine.Object.Instantiate(template, parent);
+                        _spawnedDerdiaVisitToken.name = "DerdiaVisit Event Variant";
+                        _spawnedDerdiaVisitToken.transform.position = visitPos;
+                        _spawnedDerdiaVisitToken.transform.rotation = template.transform.rotation;
+                        _spawnedDerdiaVisitToken.transform.localScale = template.transform.localScale;
+                        _spawnedDerdiaVisitToken.layer = template.layer;
+                        var allTrans = _spawnedDerdiaVisitToken.GetComponentsInChildren<Transform>(true);
+                        for (int i = 0; i < allTrans.Length; i++)
+                            if (allTrans[i] != null) allTrans[i].gameObject.SetActive(true);
+                    }
+                }
+
+                if (_spawnedDerdiaVisitToken != null)
+                {
+                    _spawnedDerdiaVisitToken.transform.position = visitPos;
+                    _spawnedDerdiaVisitToken.SetActive(true);
+                    MatchTokenHeight(_spawnedDerdiaVisitToken, derdiaRef ?? _borderAnchor);
+                    var tok = _spawnedDerdiaVisitToken.GetComponent<Token>();
+                    if (tok != null)
+                    {
+                        tok.enabled = true;
+                        tok.tokenDataEntityName = "Rizia_Event_DerdiaVisit";
+                        if (derdiaMtd != null) tok.tokenData = derdiaMtd;
+                        tok.Setup();
+                        if (Managers.Instance?.Tokens != null && !Managers.Instance.Tokens.Contains(tok))
+                            Managers.Instance.Tokens.Add(tok);
+                    }
+                    var rends = _spawnedDerdiaVisitToken.GetComponentsInChildren<Renderer>(true);
+                    for (int r = 0; r < rends.Length; r++)
+                        if (rends[r] != null) rends[r].enabled = true;
+
+                    MelonLogger.Msg($"[WAR ENGINE] Spawned Derdia State Visit event token at {visitPos}.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] SpawnDerdiaVisitEventToken error: {ex.Message}");
             }
             return false;
         }
@@ -1662,7 +1785,25 @@ namespace GreatZilleSolution
                             {
                                 gfm.FinishStoryFragment(cd, null);
                             }
-                            if (nameInDb == "Turn_Zille_DerdiaTalks") DialogueHelper.SetVariable("Zille_DerdiaTalks_Done", true);
+                            if (nameInDb == "Turn_Zille_DerdiaInvestigation")
+                            {
+                                DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                                DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", true);
+                            }
+                            else if (nameInDb == "Turn_Zille_DerdiaTalks")
+                            {
+                                DialogueHelper.SetVariable("Zille_DerdiaTalks_Done", true);
+                                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked"))
+                                {
+                                    SpawnDerdiaVisitEventToken();
+                                }
+                            }
+                            else if (nameInDb == "Turn_Zille_DerdiaStateVisit")
+                            {
+                                DialogueHelper.SetVariable("Zille_Derdia_StateVisitDone", true);
+                                ZilleCampaignState.IsDerdiaStateVisitDone = true;
+                                SuppressDerdiaVisitEventToken();
+                            }
                             else if (nameInDb == "Turn_Zille_LespiaTalks") DialogueHelper.SetVariable("Zille_LespiaTalks_Done", true);
                             else if (nameInDb == "Turn_Zille_RumburgTalks") DialogueHelper.SetVariable("Zille_RumburgTalks_Done", true);
                             else if (nameInDb == "Turn_Zille_WarBalconySpeech") DialogueHelper.SetVariable("Zille_BalconySpeech_Done", true);

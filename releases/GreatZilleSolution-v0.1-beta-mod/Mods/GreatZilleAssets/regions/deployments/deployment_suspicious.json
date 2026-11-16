@@ -1,0 +1,373 @@
+{
+ "variant": "suspicious",
+ "side": "Wehlen",
+ "description": "Suspicious. Both defence lines are manned: the border (heavy forts west, light forts east) and the inner line Marenta - north of Nanta (21, 17, 13, 8, 97). On the first line next to Zille City stand 2 tanks (Pomara Northwest 36, Pomara West 117). Zille City (a city, so no unit on it) is ringed by infantry and mechanized (\"motorized\" = mechanized_infantry) units in its neighbour provinces 30, 31, 38, 116 plus the border units on 36, 117, 39. Around Wiktrany stands a reserve (tanks 112-25, mechanized 24-106, paratroopers 113). Port Rotsla island (96) has infantry. On the Derdian border a screen stands on the southern front (infantry 122, 88, militia 93, 95, mountain infantry 119 behind). The navy is bigger, the flagship is in Zille Bay (S52), and two blocking lines stop a Rizian advance past Nanta and Munat: S25-S22-S18-S21 right in front of the Rizian east seas, then S17-S20-S12-S11-S16-S7 around Munat; the west coast is screened by S55-S54-S51.",
+ "unit_types": {
+  "infantry": "piechota",
+  "mountain_infantry": "piechota górska",
+  "tanks": "czołgi",
+  "mechanized_infantry": "piechota zmechanizowana (also \"motorized\"/zmotoryzowana)",
+  "militia": "milicja (militia)",
+  "paratroopers": "spadochroniarze",
+  "submarine": "łódź podwodna",
+  "destroyer": "niszczyciel",
+  "flagship": "flagship / okręt flagowy (max 1)"
+ },
+ "rules": "max 1 unit per province; no unit on city provinces (ZilleTile_2, ZilleTile_9, ZilleTile_11, ZilleTile_23, ZilleTile_28, ZilleTile_35, ZilleTile_51, ZilleTile_71, ZilleTile_94, ZilleTile_129); units only on Wehlen-owned land (Zille + Wehlen) and on sea provinces; none on the Rizia ship-placement seas ZilleTile_S26, ZilleTile_S30, ZilleTile_S31, ZilleTile_S32, ZilleTile_S37, ZilleTile_S56, ZilleTile_S57; exactly 1 flagship",
+ "summary": {
+  "totals_by_type": {
+   "infantry": 18,
+   "mountain_infantry": 5,
+   "tanks": 7,
+   "mechanized_infantry": 8,
+   "militia": 10,
+   "paratroopers": 1,
+   "submarine": 7,
+   "destroyer": 9,
+   "flagship": 1
+  },
+  "land_units": 49,
+  "naval_units": 17,
+  "units_by_region": {
+   "Zille": 30,
+   "Wehlen": 19,
+   "Sea": 17
+  },
+  "max_units_per_province": 1,
+  "units_on_cities": 0,
+  "free_land_provinces": 37,
+  "free_sea_provinces": 33
+ },
+ "deployment": [
+  {
+   "province_id": "ZilleTile_3",
+   "province_name": "Manes Riuz",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_8",
+   "province_name": "Nanta West",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_13",
+   "province_name": "Lenta North",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_17",
+   "province_name": "Lenta Northwest",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_19",
+   "province_name": "Venna Northwest",
+   "unit_type": "mountain_infantry"
+  },
+  {
+   "province_id": "ZilleTile_20",
+   "province_name": "Venna",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_21",
+   "province_name": "Ardo",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_24",
+   "province_name": "Cala Vessa East",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_25",
+   "province_name": "Wiktrany East",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_26",
+   "province_name": "Ossa East",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_30",
+   "province_name": "Ondaro Southeast",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_31",
+   "province_name": "Zille North",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_32",
+   "province_name": "Wiktrany Southeast",
+   "unit_type": "mountain_infantry"
+  },
+  {
+   "province_id": "ZilleTile_33",
+   "province_name": "Dapalle West",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_36",
+   "province_name": "Pomara Northwest",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_37",
+   "province_name": "Pomara North",
+   "unit_type": "mountain_infantry"
+  },
+  {
+   "province_id": "ZilleTile_38",
+   "province_name": "Rivamare",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_39",
+   "province_name": "Celle Vaz North",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_69",
+   "province_name": "Kessin",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_70",
+   "province_name": "Kessin East",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_72",
+   "province_name": "Kreleck Islands",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_74",
+   "province_name": "Dornatz",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_75",
+   "province_name": "Shwinouz",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_76",
+   "province_name": "Sulkov",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_77",
+   "province_name": "Harlitz",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_78",
+   "province_name": "Witsima",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_82",
+   "province_name": "Leburk",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_86",
+   "province_name": "Warno",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_87",
+   "province_name": "Ustkov",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_88",
+   "province_name": "Czerna",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_91",
+   "province_name": "Stegnn",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_92",
+   "province_name": "Kolobrzezg",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_93",
+   "province_name": "Kalischt",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_95",
+   "province_name": "Artsnan",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_96",
+   "province_name": "Rotsla",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_97",
+   "province_name": "Nanta Northwest",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_99",
+   "province_name": "Corvis South",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_100",
+   "province_name": "Quella Highlands",
+   "unit_type": "mountain_infantry"
+  },
+  {
+   "province_id": "ZilleTile_104",
+   "province_name": "Venna East",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_106",
+   "province_name": "Ossa Northwest",
+   "unit_type": "mechanized_infantry"
+  },
+  {
+   "province_id": "ZilleTile_108",
+   "province_name": "Venna Southwest",
+   "unit_type": "militia"
+  },
+  {
+   "province_id": "ZilleTile_112",
+   "province_name": "Ondaro Hills",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_113",
+   "province_name": "Portoserra Southeast",
+   "unit_type": "paratroopers"
+  },
+  {
+   "province_id": "ZilleTile_114",
+   "province_name": "Dapalle Northwest",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_116",
+   "province_name": "Vela Nova Southeast",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_117",
+   "province_name": "Pomara West",
+   "unit_type": "tanks"
+  },
+  {
+   "province_id": "ZilleTile_118",
+   "province_name": "Praia Velha",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_119",
+   "province_name": "Gnyezno",
+   "unit_type": "mountain_infantry"
+  },
+  {
+   "province_id": "ZilleTile_122",
+   "province_name": "Bydgoszt",
+   "unit_type": "infantry"
+  },
+  {
+   "province_id": "ZilleTile_S1",
+   "province_name": "Kreleck Sound",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S7",
+   "province_name": "Munat Narrows",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S11",
+   "province_name": "Manes Riuz Sound",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S12",
+   "province_name": "Munat Deep",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S16",
+   "province_name": "Munat Shoals",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S17",
+   "province_name": "Tirsa Roads",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S18",
+   "province_name": "Tirsa Reach",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S20",
+   "province_name": "Nanta Waters",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S21",
+   "province_name": "Tirsa Bight",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S22",
+   "province_name": "Tirsa Narrows",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S25",
+   "province_name": "Tirsa Banks",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S29",
+   "province_name": "Isor Waters",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S35",
+   "province_name": "Walsholm Reach",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S51",
+   "province_name": "Azzurra Waters",
+   "unit_type": "destroyer"
+  },
+  {
+   "province_id": "ZilleTile_S52",
+   "province_name": "Zille Bay",
+   "unit_type": "flagship"
+  },
+  {
+   "province_id": "ZilleTile_S54",
+   "province_name": "Santa Calla Banks",
+   "unit_type": "submarine"
+  },
+  {
+   "province_id": "ZilleTile_S55",
+   "province_name": "Praia Velha Roads",
+   "unit_type": "destroyer"
+  }
+ ]
+}

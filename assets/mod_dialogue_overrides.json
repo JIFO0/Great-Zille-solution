@@ -1,7 +1,558 @@
 {
   "version": "1.0",
-  "lastModified": "2026-11-11 19:46:00",
-  "conversations": [],
+  "lastModified": "2026-11-16 19:49:51",
+  "conversations": [
+    {
+      "id": 9990,
+      "title": "Turn_Zille_WarLogisticsDispute",
+      "entries": [
+        {
+          "id": 0,
+          "actorId": 95,
+          "dialogueText": "",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            1,
+            101,
+            102,
+            103
+          ]
+        },
+        {
+          "id": 1,
+          "actorId": 10,
+          "dialogueText": "The State Dining Hall of Palas Rezna crackled with noble animosity. Banquet tables had been cleared for logistical ledgers, railway maps, and coastal shipping manifests. Opposite House Azaro's uniformed generals sat Duchess Angelica Sazon and Manus Sazon in dark Brenas velvet.",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            2,
+            104
+          ]
+        },
+        {
+          "id": 2,
+          "actorId": 83,
+          "dialogueText": "Duke Taddeus Azaro slammed his fist beside the coastal highway map. \"Your Majesty, an armored spearhead cannot crawl behind civilian freight timetables! House Azaro demands full military requisition authority over every rail switch, fuel depot, and granary in Brenas!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            3,
+            5,
+            105
+          ]
+        },
+        {
+          "id": 3,
+          "actorId": 98,
+          "dialogueText": "Duchess Angelica straightened with icy disdain, rapping a jeweled ring against the oak table. \"Brenas is not an occupied fief for Montaklar's generals to pillage! It is the breadbasket of Rizia and Queen Mother Estela's home province!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            4
+          ]
+        },
+        {
+          "id": 4,
+          "actorId": 98,
+          "dialogueText": "\"Your quartermasters are already impounding civilian trucks and threatening our mayors. Strip Brenas bare to feed your tanks, and winter strikes and bread riots will paralyze our towns before your spearheads even reach Wiktrany!\"",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            5,
+            107
+          ]
+        },
+        {
+          "id": 5,
+          "actorId": 75,
+          "dialogueText": "Your Majesty, House Sazon wishes to see our soldiers return victorious—not starved by chaos at their backs. Our merchant syndicates, coastal freighters, and provincial granaries have kept Brenas running for generations. Let our guilds organize rear logistics cleanly without martial extortion.",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            6,
+            106
+          ]
+        },
+        {
+          "id": 6,
+          "actorId": 73,
+          "dialogueText": "Councilor Azaro leaned forward, her gaze razor-sharp. \"Guild committees move at the speed of an ox cart! If my armored brigades run dry of diesel and 105mm shells outside Wiktrany waiting for merchant manifests, General Valdez will dismantle them piecemeal!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            7
+          ]
+        },
+        {
+          "id": 7,
+          "actorId": 80,
+          "dialogueText": "Elena Werner adjusted her spectacles and tapped her fountain pen. \"Look at the arithmetic instead of family crests! The Azaro centralized rail plan guarantees rapid ammunition flow, yet running nonstop heavy trains from Montaklar drains refined fuel (-1 Energy) and stresses civilian lines.\"",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            8
+          ]
+        },
+        {
+          "id": 8,
+          "actorId": 80,
+          "dialogueText": "\"The Sazon syndicate plan uses Brenas granaries and coastal freighters along the Gulf of Moridia, sparing our fuel—but paying the guilds fair transit fees requires direct treasury outlays (-1 Budget). Imposing a joint Crown board avoids favoring either house, though it demands firm royal authority.\"",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            9,
+            109
+          ]
+        },
+        {
+          "id": 9,
+          "actorId": 68,
+          "dialogueText": "Hugo Toras shook his head gravely. \"Romus, a kingdom divided against itself will crack before Wiktor Smolak. Weigh both our coffers and our fuel reserves before decreeing your settlement.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 10,
+          "actorId": 10,
+          "dialogueText": "The entire council fell silent, awaiting your verdict. The supply artery of the southern campaign hung in the balance.",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            11,
+            12,
+            20,
+            200,
+            30,
+            300,
+            40
+          ]
+        },
+        {
+          "id": 11,
+          "actorId": 95,
+          "dialogueText": "Elena, give me the unvarnished figures right now: what does our current budget, energy, and equipment inventory dictate?",
+          "menuText": "\"Elena, can our treasury, energy grid, and arsenals actually handle what these houses propose?\"",
+          "conditions": "Variable[\"Zille_Logistics_Audited\"] ~= true",
+          "userScript": "Variable[\"Zille_Logistics_Audited\"] = true;",
+          "outgoing": [
+            111,
+            112
+          ]
+        },
+        {
+          "id": 12,
+          "actorId": 95,
+          "dialogueText": "Wait: if enemy shells hit our marshaling yards or if Pales ties down rail rolling stock, how does each plan avoid collapse?",
+          "menuText": "\"Wait—what happens to civilian ports and Pales transit if military requisition goes wrong?\"",
+          "conditions": "Variable[\"Zille_Logistics_Examined\"] ~= true",
+          "userScript": "Variable[\"Zille_Logistics_Examined\"] = true;",
+          "outgoing": [
+            120,
+            122
+          ]
+        },
+        {
+          "id": 20,
+          "actorId": 95,
+          "dialogueText": "We will not crush Brenas to win a war. Release 1 Budget in subsidies so House Sazon's merchant guilds and coastal freighters keep the army supplied and Brenas's cities protected.",
+          "menuText": "\"House Sazon will manage logistics (-1 Budget). Use Brenas granaries and coastal freighters.\"",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1",
+          "userScript": "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
+          "outgoing": [
+            21,
+            22,
+            121
+          ]
+        },
+        {
+          "id": 21,
+          "actorId": 75,
+          "dialogueText": "\"Thank you, Your Majesty!\" Manus bowed with genuine reverence. \"House Sazon will mobilize our finest grain syndicates and coastal freighters across the gulf. Brenas will stand firm behind our soldiers.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            22,
+            23,
+            24,
+            124
+          ]
+        },
+        {
+          "id": 22,
+          "actorId": 98,
+          "dialogueText": "Duchess Angelica lifted her chin proudly. \"A sovereign judgment worthy of Porte Drazon, Your Majesty. Brenas will stand as an unbreakable bastion at your rear.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            23,
+            24,
+            124
+          ]
+        },
+        {
+          "id": 23,
+          "actorId": 83,
+          "dialogueText": "Duke Taddeus tossed his gloves onto the oak table with visible disgust. \"Pray, Your Majesty, that when Valdez's tanks counter-attack, merchant freighters deliver shells as promptly as they deliver tax exemptions.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            24,
+            124
+          ]
+        },
+        {
+          "id": 24,
+          "actorId": 73,
+          "dialogueText": "Lucita remained disciplined, though her jaw tightened. \"The General Staff will adapt our convoy timetables to the guilds, Your Majesty. We will hold the frontier.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 30,
+          "actorId": 95,
+          "dialogueText": "Military necessity takes absolute priority. Grant House Azaro full requisition powers over Brenas's rail corridors and allocate 1 Energy to fuel an overwhelming mechanized thrust.",
+          "menuText": "\"Military necessity rules: grant House Azaro full rail and depot requisition (-1 Energy).\"",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1",
+          "userScript": "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
+          "outgoing": [
+            31,
+            131
+          ]
+        },
+        {
+          "id": 31,
+          "actorId": 73,
+          "dialogueText": "Lucita saluted crisply, her eyes shining with decisive pride. \"A command worthy of a warrior king, Your Majesty! Our mechanized spearheads will not lack for shells or diesel. We will shatter Valdez's lines!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            32,
+            33,
+            34,
+            134
+          ]
+        },
+        {
+          "id": 32,
+          "actorId": 83,
+          "dialogueText": "\"Montaklar's divisions stand ready, Your Majesty!\" Taddeus declared firmly. \"Our armored columns will smash straight through Wiktrany!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            33,
+            34,
+            134
+          ]
+        },
+        {
+          "id": 33,
+          "actorId": 98,
+          "dialogueText": "Duchess Angelica rose from her chair, her eyes burning with icy indignation. \"The Crown may seize its trains, Your Majesty. Remember this day when Brenas freezes in winter queues.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            34,
+            134
+          ]
+        },
+        {
+          "id": 34,
+          "actorId": 75,
+          "dialogueText": "Manus bowed his head solemnly. \"We will strive to hold civil order in Brenas, Your Majesty. Let your victory be swift enough to justify this hardship.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 40,
+          "actorId": 95,
+          "dialogueText": "Neither house will dictate to the Crown. I expend royal authority to establish a Joint Logistical Board under Minister Elena Werner—guaranteeing priority munitions rails while Sazon syndicates protect civilian granaries and coastal barges.",
+          "menuText": "\"Impose a Joint Logistical Board under Elena Werner (-1 Authority). Neither house dominates.\"",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Authority\"] or 0) >= 1",
+          "userScript": "Variable[\"Zille_Logistics_Route\"] = \"Compromise\"; Variable[\"Zille_Logistics_House\"] = \"Compromise\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+          "outgoing": [
+            41
+          ]
+        },
+        {
+          "id": 41,
+          "actorId": 80,
+          "dialogueText": "Elena inclined her head with crisp efficiency. \"A balanced solution, Your Majesty. Both fuel and grain supplies will be strictly audited against hoarding or rail bottlenecks.\"",
+          "menuText": "",
+          "conditions": "",
+          "userScript": "",
+          "outgoing": [
+            42,
+            43,
+            143
+          ]
+        },
+        {
+          "id": 42,
+          "actorId": 68,
+          "dialogueText": "\"Well reasoned, Romus. Unity between our noble houses is the bedrock of the realm. Glovurius axa Rizia!\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            43,
+            143
+          ]
+        },
+        {
+          "id": 43,
+          "actorId": 73,
+          "dialogueText": "Lucita nodded with measured professional respect. \"The military accepts this structure, Your Majesty. Our quartermasters will report directly to Minister Werner.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 101,
+          "actorId": 10,
+          "dialogueText": "The State Dining Hall of Palas Rezna was tense with quiet hostility. Opposite House Azaro's officers sat Manus Sazon alone—his mother, Duchess Angelica, absent from the court.",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true",
+          "userScript": "",
+          "outgoing": [
+            2,
+            104
+          ]
+        },
+        {
+          "id": 102,
+          "actorId": 10,
+          "dialogueText": "The State Dining Hall of Palas Rezna crackled with aristocratic tension. Across the ledger-strewn table from House Azaro's officers sat Duchess Angelica Sazon alone, representing Brenas in Manus's absence.",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            2,
+            104
+          ]
+        },
+        {
+          "id": 103,
+          "actorId": 10,
+          "dialogueText": "The State Dining Hall of Palas Rezna was frigid with mutual suspicion. With both Angelica and Manus Sazon absent, Countess Leona Sazon of Sallabes represented the mercantile houses of Brenas opposite House Azaro's officers.",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            2,
+            104
+          ]
+        },
+        {
+          "id": 104,
+          "actorId": 88,
+          "dialogueText": "Your Majesty. The General Staff cannot maintain offensive tempo while fuel convoys wait behind civilian freight and local rail switches in Brenas. We require full military requisition authority over the province's rail lines, fuel tanks, and grain depots.",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            3,
+            5,
+            105
+          ]
+        },
+        {
+          "id": 105,
+          "actorId": 72,
+          "dialogueText": "Countess Leona Sazon adjusted her sable stole coolly. \"Brenas is not a conquered province for Montaklar to strip bare, Your Majesty. Our merchant guilds and coastal shipping syndicates can supply the front cleanly through our granaries and ports without provoking bread riots in Sallabes and Mave Nortus.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            6,
+            106
+          ]
+        },
+        {
+          "id": 106,
+          "actorId": 88,
+          "dialogueText": "General Carlos Azaro tapped his leather portfolio flatly. \"Merchant committees move at the pace of paperwork, Your Majesty. If our forward brigades run dry of diesel and 105mm shells outside Wiktrany, Valdez will tear them apart.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            7
+          ]
+        },
+        {
+          "id": 107,
+          "actorId": 10,
+          "dialogueText": "With Manus absent from the hall, the silence after Angelica's outburst lingered heavy over the table.",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            6,
+            106
+          ]
+        },
+        {
+          "id": 109,
+          "actorId": 70,
+          "dialogueText": "Laurento folded his hands gravely. \"Smolak hopes to see our noble houses quarrel while his trenches deepen, Your Majesty. Match the logistics structure to what our treasury and energy grid can actually sustain.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 111,
+          "actorId": 80,
+          "dialogueText": "\"With healthy budget and energy cushions on our books, Your Majesty, you actually enjoy genuine freedom of choice—either subsidies for Sazon freighters or Azaro fuel prioritization are feasible without breaking the home front.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1",
+          "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 112,
+          "actorId": 80,
+          "dialogueText": "\"Honestly, Your Majesty, one or more columns on our ledger sit near zero! If treasury cash is empty, Sazon's syndicates will demand Crown customs pledges costing authority; if energy is exhausted, Azaro trains will force ruthless civilian rationing.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1 or (Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1",
+          "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 120,
+          "actorId": 73,
+          "dialogueText": "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"so long as military ammunition cars always hold right-of-way over commercial cargo.\"",
+          "menuText": "",
+          "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+          "userScript": "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 121,
+          "actorId": 72,
+          "dialogueText": "Countess Leona inclined her head with poised gratitude. \"A prudent decree, Your Majesty. Our Brenas syndicates will keep the front supplied without bleeding the towns dry.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true) and (Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            23,
+            24,
+            124
+          ]
+        },
+        {
+          "id": 122,
+          "actorId": 88,
+          "dialogueText": "\"Decentralized coastal barges protect us against bombed rail bridges, Your Majesty, provided military ammunition trains always hold priority signals.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+          "userScript": "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+          "outgoing": [
+            10
+          ]
+        },
+        {
+          "id": 124,
+          "actorId": 88,
+          "dialogueText": "General Carlos Azaro exhaled slowly, snapping his ledger shut. \"Very well, Your Majesty. We will adjust our staging timetables to the guild schedules.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 131,
+          "actorId": 88,
+          "dialogueText": "General Carlos Azaro gave a crisp nod. \"Understood, Your Majesty. Our armored spearheads will roll at full combat tempo.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": [
+            32,
+            33,
+            34,
+            134
+          ]
+        },
+        {
+          "id": 134,
+          "actorId": 72,
+          "dialogueText": "Countess Leona rose stiffly. \"The Crown shall have its trains, Your Majesty. I pray our towns endure the winter.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Relations_HouseSazon_AngelicaPardoned\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 143,
+          "actorId": 88,
+          "dialogueText": "General Carlos Azaro inclined his head. \"An orderly compromise, Your Majesty. Our staff will coordinate directly with Minister Werner.\"",
+          "menuText": "",
+          "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+          "userScript": "",
+          "outgoing": []
+        },
+        {
+          "id": 200,
+          "actorId": 95,
+          "dialogueText": "Our royal treasury has no spare gold today, yet we still entrust rear supply to House Sazon under bonded port-customs IOUs guaranteed by the Crown.",
+          "menuText": "\"Our coffers are bare—charter House Sazon on bonded port-customs IOUs (-1 Authority).\"",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1",
+          "userScript": "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1;",
+          "outgoing": [
+            21,
+            22,
+            121
+          ]
+        },
+        {
+          "id": 300,
+          "actorId": 95,
+          "dialogueText": "Our strategic energy reserve is exhausted, yet the spearheads must move. Impose emergency civilian fuel rationing in Brenas and hand rail priority to House Azaro.",
+          "menuText": "\"Our energy grid is empty—order forced civilian fuel rationing so Azaro's tanks roll (-1 Authority).\"",
+          "conditions": "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1",
+          "userScript": "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+          "outgoing": [
+            31,
+            131
+          ]
+        }
+      ]
+    }
+  ],
   "decisions": [],
   "reports": [],
   "situations": [],

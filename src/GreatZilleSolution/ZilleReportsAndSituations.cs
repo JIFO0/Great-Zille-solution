@@ -186,6 +186,21 @@ namespace GreatZilleSolution
                 "Golcondist irregulars from the Silver Garrison are raiding Wehlen's southern supply roads, forcing General Valdez to divert brigades away from Zille.",
                 "Military", "Medium", "Zille_DerdiaHybridActive");
 
+            AddOrUpdateSituation(sits, "Sit_Derdia_BorderSabotage",
+                "Derdia-Wehlen Border Sabotage",
+                "Mysterious explosions along the mountain passes near Yol and Qerzan have damaged Derdian pumping stations and Silver Garrison depots, prompting Wehzek troop build-ups near Grodzizg.",
+                "Diplomacy", "Medium", "Zille_Derdia_SabotageSignals");
+
+            AddOrUpdateSituation(sits, "Sit_Derdia_Corridor_Pact",
+                "Derdian Southern War Corridor",
+                "Under the Silver Garrison Accord, Supreme Wiseman Azmal has opened Derdia's northern frontier near Yol and Qerzan as a staging corridor for Rizian divisions.",
+                "Military", "Low", "Zille_DerdiaPact_Signed");
+
+            AddOrUpdateSituation(sits, "Sit_Derdia_Pipeline_Corridor",
+                "Derdia-Rizia Southern Energy Pipeline",
+                "Jointly financed energy infrastructure bypassing Wehlen delivers steady crude and transit dividends to Rizia's war economy.",
+                "Economy", "Low", "Zille_Derdia_PipelineInvested");
+
             AddOrUpdateSituation(sits, "Sit_Zille_Lespia_Recon",
                 "ATO Aerial Reconnaissance",
                 "High-altitude Lespian reconnaissance flights are feeding real-time coordinates of Wehzek bunkers and artillery batteries to the General Staff.",
@@ -316,6 +331,21 @@ namespace GreatZilleSolution
                 "Rizian envoys in Konstantium have distributed formal legal proof of Wehlen's expired 1927 lease to Alliance of Nations delegations.",
                 "Zille_AN_PreBrief_Sent");
 
+            AddOrUpdateReport(reps, "Rep_Derdia_Sabotage_Turn3",
+                "Intelligence Alert: Explosions on the Derdia-Wehlen Border",
+                "Reports from the mountain passes near Yol and Qerzan indicate coordinated sabotage against a Derdian pipeline pumping station and Silver Garrison supply dumps. Wraclawitz blames smugglers, though the demolitions bear military signatures.",
+                "Zille_Derdia_SabotageSignals", 3);
+
+            AddOrUpdateReport(reps, "Rep_Derdia_Investigation_Turn4",
+                "Border Dossier: Wehzek Sabotage Confirmed",
+                "Rizian intelligence officers investigating the Yol-Qerzan frontier recovered military-grade detonators and encrypted supply orders linking the border sabotage directly to Wehlen's interior security apparatus.",
+                "Zille_Derdia_InvestigationDone", 4);
+
+            AddOrUpdateReport(reps, "Rep_Derdia_StateVisit_Pact",
+                "Silver Garrison: Rizian-Derdian Alliance Sealed",
+                "During King Romus's warm diplomatic reception in Derdia, Supreme Wiseman Azmal authorized a joint defensive corridor for Rizian forces and a lucrative southern energy pipeline.",
+                "Zille_DerdiaPact_Signed", 6);
+
             AddOrUpdateReport(reps, "Rep_Zille_Derdia_Accord",
                 "Naeal Dispatch: Derdian Border Raids",
                 "Supreme Wiseman Jorga Azmal has committed three thousand Golcondist irregulars to raid Wehlen's southern supply depots, pinning down Wehzek reserves.",
@@ -395,6 +425,77 @@ namespace GreatZilleSolution
                 "General Staff: Two-Front Casualty Audit",
                 "Separate operational ledgers track Zille front casualties independently from ongoing eastern engagements against Pales.",
                 "Zille_Fighting_Pales");
+
+            // Additional Vanilla-Style Reports for Decisions, Early/Late Escalation, & Derdia Pipeline
+            AddOrUpdateReport(reps, "Rep_Derdia_Sabotage_Ignored",
+                "Internal Security: Yol-Qerzan Inquiry Declined",
+                "By royal instruction, Internal Security declined to investigate the Derdia-Wehlen border blasts, leaving Naeal to confront Wraclawitz alone.",
+                "Zille_Derdia_InvestigationIgnored", 4, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Derdia_WehzekIntel_Used",
+                "Internal Security: Migrant Informant Network",
+                "Discreet questioning among Rizia's naturalized Wehzek residents yielded corroborating intelligence on Wraclawitz sapper units near Yol, though quiet unease has spread through migrant quarters.",
+                "Zille_WehzekCitizens_Exploited", 4, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Derdia_University_Study",
+                "Romus Toras University: Forensic Frontier Study",
+                "Scholars and engineering faculty at Romus Toras University published an independent forensic reconstruction tracing the Yol-Qerzan pipeline demolitions to regular Wehzek ordnance.",
+                "Zille_Derdia_UniversityStudy", 4, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Derdia_Pipeline_Operational",
+                "Ministry of Energy: Southern Pipeline Charter",
+                "Joint Rizian-Derdian engineering teams broke ground on the southern pipeline corridor bypassing Wehlen, stabilizing Rizia's crude supply and securing coastal transit dividends.",
+                "Zille_Derdia_PipelineInvested", 6, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Derdia_Missile_Battery",
+                "General Staff: Derdian Missile Cooperation",
+                "Derdian ballistic rocketeers positioned along the northern mountain passes are coordinating targeting corridors with Rizian artillery observers.",
+                "Zille_Derdia_MissilesAgreed", 6, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Brenas_Vigilance_GG",
+                "Mave Nortus: Golden Guard Rail Checkpoints",
+                "Golden Guard detachments established fortified inspection checkpoints at Mave Nortus rail sidings, intercepting suspicious courier traffic from across the frontier.",
+                "Zille_Dec_BrenasVigilance_GG", 5, "Rizia_City_MaveNortus");
+
+            AddOrUpdateReport(reps, "Rep_Brenas_Vigilance_Militia",
+                "Mave Nortus: Loyalist Frontier Watches",
+                "Armed Su Omina and ATA volunteers now patrol the river crossings north of Mave Nortus, deterring Wehzek probes while drawing sharp remarks from foreign envoys.",
+                "Zille_Dec_BrenasVigilance_Militia", 5, "Rizia_City_MaveNortus");
+
+            AddOrUpdateReport(reps, "Rep_Brenas_Vigilance_Quiet",
+                "Mave Nortus: Routine Customs Inspections",
+                "Provincial customs officers quietly stepped up freight checks along the Brenas border without disturbing local grain markets.",
+                "Zille_Dec_BrenasVigilance_Quiet", 5, "Rizia_City_MaveNortus");
+
+            AddOrUpdateReport(reps, "Rep_Kyrute_Press_Brief",
+                "Foreign Ministry: 1927 Expiration Brief Published",
+                "Konstantium newspapers published Rizia's bound legal dossier on the lapsed 1927 Zille treaty and frontier sabotage, putting Wehlen's delegation on the defensive.",
+                "Zille_Dec_LegalBrief_Press", 6, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Wraclawitz_Backchannel",
+                "Foreign Ministry: Sealed Ultimatum Delivered",
+                "A royal diplomatic courier placed Rizia's red-lined sovereignty terms directly onto President Smolak's desk in Wraclawitz.",
+                "Zille_Dec_LegalBrief_Ultimatum", 6, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Gulf_Navy_Escorts",
+                "Admiralty: Sallabes Convoy Escorts Active",
+                "Destroyer patrols out of Monqiz are escorting Rizian merchant tankers past the Strait of Kreleck, forcing Wehzek gunboats to withdraw.",
+                "Zille_Dec_GulfEscorts_Navy", 7, "Rizia_City_Sallabes");
+
+            AddOrUpdateReport(reps, "Rep_Gulf_Merchant_Insurance",
+                "Sallabes Guildhall: Crown Maritime Guarantees",
+                "Treasury war-risk insurance kept Sallabes shipping houses operating across the Gulf of Moridia despite Wehzek harassment.",
+                "Zille_Dec_GulfEscorts_Insure", 7, "Rizia_City_Sallabes");
+
+            AddOrUpdateReport(reps, "Rep_MaveNortus_Displaced_Relief",
+                "Mave Nortus: Displaced Families Sheltered",
+                "Royal grain depots and field clinics opened across northern Brenas for families fleeing Zille, earning formal commendation from Alliance of Nations observers.",
+                "Zille_Dec_Displaced_Relief", 7, "Rizia_City_MaveNortus");
+
+            AddOrUpdateReport(reps, "Rep_Zille_EarlyEscalation",
+                "Crown Council: Early Frontier Escalation",
+                "Following the Zille Friendship Day bombing, King Romus authorized immediate military escalation rather than waiting for the scheduled referendum.",
+                "Zille_War_EarlyLaunch", 3, "Rizia_City_PorteDrazon");
         }
 
         public static void SyncVariables()
@@ -435,6 +536,11 @@ namespace GreatZilleSolution
             DialogueHelper.SetVariable("Zille_Sit_OutcomeArmistice", outcome == 2 && !ZilleCampaignState.IsIndependentZilleAgreed);
 
             // Report triggers
+            int currentTurn = ZilleCampaignState.GetCurrentTurn();
+            if (currentTurn >= 3 || warActive)
+            {
+                DialogueHelper.SetVariable("Zille_Derdia_SabotageSignals", true);
+            }
             DialogueHelper.SetVariable("Zille_Rep_Phase1Done", ZilleCampaignState.Phase1Finished);
             DialogueHelper.SetVariable("Zille_Rep_Phase2Done", ZilleCampaignState.Outcome != ZilleWarOutcome.None || ZilleCampaignState.CurrentPhase == ZilleOperationPhase.Completed_Outcome);
             DialogueHelper.SetVariable("Zille_Rep_DerdiaRejected", DialogueHelper.GetBoolVariable("Zille_DerdiaTalks_Done") && !ZilleCampaignState.IsDerdiaHybridSupportActive && !DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive"));

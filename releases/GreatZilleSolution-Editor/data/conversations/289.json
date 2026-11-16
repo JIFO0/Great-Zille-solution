@@ -1,0 +1,4562 @@
+{
+  "id": 289,
+  "title": "Rizia/Turn 1/EnT_CouncilBriefing",
+  "description": "MUSIC: Neutral",
+  "pack": "Rizia",
+  "folder": "Turn_01",
+  "turn": "Tura 01",
+  "modStatus": "MODEDIT",
+  "modNote": "Wstrzyknięto kwestie modowe: Zille_Turn1_Council_Choice, Zille_Turn1_Council_Reply",
+  "actors": [
+    "Elena Werner",
+    "Hugo Toras",
+    "Laurento Esquibel",
+    "Lucita Azaro",
+    "Manus Sazon",
+    "Narrator",
+    "Player_Romus",
+    "Player_Romus_Italic",
+    "Princess Vina"
+  ],
+  "readVariables": [
+    "RiziaDLC.Decision_Turn01_CoronationParty_Large",
+    "RiziaDLC.Decision_Turn01_CoronationParty_Medium",
+    "RiziaDLC.Focus_Economy_Diversification",
+    "RiziaDLC.Focus_Economy_Mixed",
+    "RiziaDLC.Prologue_FalloutWithDad",
+    "RiziaDLC.Prologue_JoinedMilitary",
+    "RiziaDLC.Prologue_Monqiz_Rebuild",
+    "RiziaDLC.Prologue_StayedOnCouncil",
+    "RiziaDLC.Turn01_WineWithHugo",
+    "RiziaDLC.Vina_OnCouncil"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.Enable_Policy_RD_Economy_PublicRailTransportSubsidies",
+    "RiziaDLC.Enable_Policy_RD_Economy_PublicSeaTransportSubsidies",
+    "RiziaDLC.Enable_Policy_RD_Economy_PublicTransportInfraInvestment",
+    "RiziaDLC.Enable_Policy_RD_Welfare_IncreasedWelfareFunding",
+    "RiziaDLC.Enable_Policy_RD_Welfare_NaturalizationForForeigners",
+    "RiziaDLC.PersonalValue_FunnyKing",
+    "RiziaDLC.PersonalValue_Tyrant",
+    "RiziaDLC.Relations_Manus_IgnoreFirstMeeting",
+    "RiziaDLC.Relations_Manus_ThreatenFirstMeeting",
+    "RiziaDLCSupport.News_Turn01_RH_Celebrations_Large",
+    "RiziaDLCSupport.News_Turn01_RH_Celebrations_Medium",
+    "RiziaDLCSupport.News_Turn01_RH_Celebrations_Small",
+    "RiziaDLCSupport.News_Turn01_RH_ConsecrationOfKing",
+    "RiziaDLCSupport.Reports_Turn01_Plavo_ConsecrationOfKingFest",
+    "RiziaDLCSupport.Reports_Turn01_Topes_UnveilingLegacyOfRezenid"
+  ],
+  "choicesCount": 56,
+  "entriesCount": 294,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 1,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 1,
+      "actorId": 2,
+      "speaker": "INPUT",
+      "title": "input",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        285
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 2,
+      "actorId": 2,
+      "speaker": "OUTPUT",
+      "title": "output",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 3,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Hugo, Your Grace. Your shirt's but...\"",
+      "dialogueText": "\"Hugo, Your Grace. Your shirt's buttoned wrong.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 4,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My uncle looked chastised.\"",
+      "dialogueText": "My uncle looked chastised.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        50
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 5,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Welcome to the council, Duchess.\"\"",
+      "dialogueText": "\"Welcome to the council, Duchess.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        171
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 6,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The Princess is part of this court...\"",
+      "dialogueText": "\"The Princess is part of this court now. I advise you to be more respectful.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        7
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 7,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Apologies to you both. I meant no...\"",
+      "dialogueText": "\"Apologies to you both. I meant no disrespect at all.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 8,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She gave Vina a broad smile.\"",
+      "dialogueText": "She gave Vina a broad smile.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 9,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"Please don't mind me, Duchess Azar...\"",
+      "dialogueText": "\"Please don't mind me, Duchess Azaro. I'm only here as an observer.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        17
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 10,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Thank you all for joining us. I'm...\"",
+      "dialogueText": "\"Thank you all for joining us. I'm pleased to have the entire council here for this first meeting.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        211
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 11,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        12,
+        13
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 12,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true",
+      "userScript": "",
+      "outgoing": [
+        57
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 13,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_JoinedMilitary == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        175
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 14,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Your Majesty. It is a pleasure and...\"",
+      "dialogueText": "\"Your Majesty. It is a pleasure and an honor to be in this room with you once more.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        207
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 15,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I must say it makes me proud to se...\"",
+      "dialogueText": "\"I must say it makes me proud to see you in that seat. Between your time on this council and the fine work you did in Valenqiris, I can't think of a better man for the position.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        37,
+        36,
+        43
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 16,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Your Majesty. It is a pleasure and...\"",
+      "dialogueText": "\"Your Majesty. It is a pleasure and an honor to serve on your council.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        209
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 17,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita's eyes darted to the door.\"",
+      "dialogueText": "Lucita's eyes darted to the door.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 18,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"The King and his direct successor...\"",
+      "dialogueText": "\"The King and his direct successor spending so much time in the same room... I hope the Golden Guard knows what's at stake in keeping these chambers secure.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 19,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Monqiz_Rebuild == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        20,
+        21
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 20,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Monqiz_Rebuild == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Monqiz_Rebuild\"] == true",
+      "userScript": "",
+      "outgoing": [
+        15
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 21,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Monqiz_Rebuild == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Monqiz_Rebuild\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        26
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 22,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Monqiz_Rebuild == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        23,
+        24
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 23,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_Monqiz_Rebuild == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_Monqiz_Rebuild\"] == true",
+      "userScript": "",
+      "outgoing": [
+        25
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 24,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_Monqiz_Rebuild == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_Monqiz_Rebuild\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        34
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 25,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Your reputation precedes you, Your...\"",
+      "dialogueText": "\"Your reputation precedes you, Your Majesty. I've heard marvelous things about the work you did in Valenqiris.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36,
+        35,
+        43
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 26,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I must say it makes me proud to se...\"",
+      "dialogueText": "\"I must say it makes me proud to see you in that seat. If you show the same devotion as you did on King Valero's council, you'll make a fine ruler.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        37,
+        36,
+        35,
+        43
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 27,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"I wouldn't go that far. But I do h...\"",
+      "dialogueText": "\"I wouldn't go that far. But I do hope you'll tell me about your time in Queen Lyza's court one day.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        47
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 28,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Vina blushed.\"",
+      "dialogueText": "Vina blushed.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        27
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 29,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        30,
+        31
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 30,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"]",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 31,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"]) == false",
+      "userScript": "",
+      "outgoing": [
+        191
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 32,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Elena looked fondly at Vina.\"",
+      "dialogueText": "Elena looked fondly at Vina.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        33
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 33,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I'm pleased to see the young heire...\"",
+      "dialogueText": "\"I'm pleased to see the young heiress here as well. A new Lyza the Great in the making.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        28
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 34,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Yes, welcome, Your Majesty. If you...\"",
+      "dialogueText": "\"Yes, welcome, Your Majesty. If you're half the young man your father made you out to be, you'll make a fine king.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        36,
+        35,
+        43,
+        38
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 35,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Thank you, Ms. Werner and Mr. Esqu...\"",
+      "dialogueText": "\"Thank you, Ms. Werner and Mr. Esquibel. I look forward to working with you.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        215
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 36,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't need your approval, Ms. We...\"",
+      "dialogueText": "\"I don't need your approval, Ms. Werner. If anything, you're the one who should be seeking mine.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        44
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 37,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"This formality doesn't suit any of...\"",
+      "dialogueText": "\"This formality doesn't suit any of us. Elena, Laurento, it's great to see you both again.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 38,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FalloutWithDad == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        39,
+        40
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 39,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FalloutWithDad == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_FalloutWithDad\"] == true",
+      "userScript": "",
+      "outgoing": [
+        42
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 40,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_FalloutWithDad == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_FalloutWithDad\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 41,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"Protocol is protocol, Your Majesty...\"",
+      "dialogueText": "\"Protocol is protocol, Your Majesty. Even if we've both known you since you were in diapers.'",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 42,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I doubt my father ever praised me...\"",
+      "dialogueText": "\"I doubt my father ever praised me so highly. But thank you.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        276
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 43,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"No need for flattery. With your ye...\"",
+      "dialogueText": "\"No need for flattery. With your years of experience, I'm the one who should be bowing down to you both.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        46
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 44,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Of-- of course. I misspoke. Forgiv...\"",
+      "dialogueText": "\"Of-- of course. I misspoke. Forgive me.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        278
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 45,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"She's right. Fix your shirt, Hugo.\"\"",
+      "dialogueText": "\"She's right. Fix your shirt, Hugo.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        58
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 46,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"That's far too kind of you, Your M...\"",
+      "dialogueText": "\"That's far too kind of you, Your Majesty. But I hope we old-timers can be of some assistance to you.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 47,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I'd love to. There are just a few...\"",
+      "dialogueText": "\"I'd love to. There are just a few updates I've got to share with your father first.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        210
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 48,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She put on a pair of half-moon glas...\"",
+      "dialogueText": "She put on a pair of half-moon glasses, then reached down into her purse, pulled out a thick, leather-bound ledger and flipped it open.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 49,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Oh, hello, Princess Vina. Your Maj...\"",
+      "dialogueText": "\"Oh, hello, Princess Vina. Your Majesty, may I ask what your daughter is doing here?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        271,
+        274,
+        55,
+        6
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 50,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        51,
+        52
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 51,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        49
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 52,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        54,
+        56,
+        5,
+        45
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 53,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Please accept House Azaro's formal...\"",
+      "dialogueText": "\"Please accept House Azaro's formal congratulations on your coronation, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        253
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 54,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I raised my hand in a salute. Lucit...\"",
+      "dialogueText": "I raised my hand in a salute. Lucita smiled in approval.",
+      "menuText": "Salute her.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        167
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 55,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Ask her yourself, Duchess Azaro.\"\"",
+      "dialogueText": "\"Ask her yourself, Duchess Azaro.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        59
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 56,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"House Toras accepts your congratul...\"",
+      "dialogueText": "\"House Toras accepts your congratulations.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        174
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 57,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"My father always spoke highly of y...\"",
+      "dialogueText": "\"My father always spoke highly of you, Your Majesty. I wish he was the one greeting you today.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        176
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 58,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Hugo hastily rebuttoned his shirt.\"",
+      "dialogueText": "Hugo hastily rebuttoned his shirt.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 59,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Oh, excuse me. What brings you to...\"",
+      "dialogueText": "\"Oh, excuse me. What brings you to these chambers, Your Highness?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 60,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"As if on cue, I heard the voices of...\"",
+      "dialogueText": "As if on cue, I heard the voices of Elena Werner and Laurento Esquibel, my treasurer and the councilor of foreign affairs.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        61
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 61,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"For Dast's sake, Laurento, you don...\"",
+      "dialogueText": "\"For Dast's sake, Laurento, you don't need to hold the door open for me every single time. I'm not as fragile as I look.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        62
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 62,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"I keep telling you, how could I al...\"",
+      "dialogueText": "\"I keep telling you, how could I allow a door to close on such a gorgeous face?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        64
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 63,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I remembered their flirtatious rout...\"",
+      "dialogueText": "I remembered their flirtatious routine from my days on my father's council. Nobody knew whether the two of them had actually had an affair.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        190
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 64,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        65,
+        66
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 65,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        63
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 66,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_StayedOnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        67
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 67,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"As the two senior councilors steppe...\"",
+      "dialogueText": "As the two senior councilors stepped in, they immediately dropped the flirtatious routine and assumed a look of deference.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        208
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 68,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"It was late afternoon when Vina and...\"",
+      "dialogueText": "It was late afternoon when Vina and I headed back to the chambers for the first council meeting.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        73
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 69,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        70,
+        71
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 70,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        68
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 71,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        72
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 72,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"It was late afternoon when I headed...\"",
+      "dialogueText": "It was late afternoon when I headed back to the chambers for the first council meeting.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        73
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 73,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_WineWithHugo == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        74,
+        75
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 74,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_WineWithHugo == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Turn01_WineWithHugo\"] == true",
+      "userScript": "",
+      "outgoing": [
+        76
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 75,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Turn01_WineWithHugo == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Turn01_WineWithHugo\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        78
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 76,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The day was sweltering, and a linge...\"",
+      "dialogueText": "The day was sweltering, and a lingering haze from the wine we’d shared before lunch clouded my mind.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        77
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 77,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I was about to be inundated with up...\"",
+      "dialogueText": "I was about to be inundated with updates and reports from my councilors -- I only hoped I could keep it all straight.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        80
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 78,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The day was sweltering, and the mor...\"",
+      "dialogueText": "The day was sweltering, and the morning meeting had left me drained. I was glad I’d turned down Hugo’s offer of wine.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        80
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 79,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"As we made our way through the pala...\"",
+      "dialogueText": "As we made our way through the palace gardens, an unsettling sense of being watched crept over me.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        281
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 80,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        81,
+        82
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 81,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        79
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 82,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        83
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 83,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"As I crossed the palace gardens, I...\"",
+      "dialogueText": "As I crossed the palace gardens, I had the feeling I was being watched.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        282
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 84,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His face matched the photograph Hug...\"",
+      "dialogueText": "His face matched the photograph Hugo had shown me that morning.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        86,
+        88,
+        87
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 85,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His face matched the photograph Hug...\"",
+      "dialogueText": "His face matched the photograph Hugo had shown me that morning.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        86,
+        88,
+        87
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 86,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Duke Sazon, I presume?\"\"",
+      "dialogueText": "\"Duke Sazon, I presume?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        91
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 87,
+      "actorId": 93,
+      "speaker": "Player_Romus_Italic",
+      "title": "Player_Romus_Italic: \"I ignored Manus Sazon and continued...\"",
+      "dialogueText": "I ignored Manus Sazon and continued towards the council chambers.",
+      "menuText": "Ignore him and keep walking.",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        192
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 88,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"What are you doing here? Explain y...\"",
+      "dialogueText": "\"What are you doing here? Explain yourself.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        90
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 89,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"Pardon me, Your Majesty.\"\"",
+      "dialogueText": "\"Pardon me, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        93
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 90,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The man's face flushed. He looked d...\"",
+      "dialogueText": "The man's face flushed. He looked down at the ground.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        89
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 91,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He smiled nervously.\"",
+      "dialogueText": "He smiled nervously.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        92
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 92,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I hold no land, Your Majesty. But...\"",
+      "dialogueText": "\"I hold no land, Your Majesty. But you may use the title if you wish.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        112,
+        113,
+        114,
+        252
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 93,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I suppose you already know who I a...\"",
+      "dialogueText": "\"I suppose you already know who I am.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        251,
+        109,
+        110,
+        111
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 94,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"I think he wanted to talk to you,...\"",
+      "dialogueText": "\"I think he wanted to talk to you, Father.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        98,
+        99,
+        100,
+        102
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 95,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        96,
+        97
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 96,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        94
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 97,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        106
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 98,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't talk to traitors.\"\"",
+      "dialogueText": "\"I don't talk to traitors.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        105
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 99,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Then he should request a formal au...\"",
+      "dialogueText": "\"Then he should request a formal audience with me like everyone else.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        105
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 100,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I don't have time. It's not kingly...\"",
+      "dialogueText": "\"I don't have time. It's not kingly to be late, right?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        105
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 101,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm still a little drunk. I didn't...\"",
+      "dialogueText": "\"I'm still a little drunk. I didn't want to embarrass myself.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        105
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 102,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_WineWithHugo == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        103,
+        104
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 103,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Turn01_WineWithHugo == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Turn01_WineWithHugo\"] == true",
+      "userScript": "",
+      "outgoing": [
+        101
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 104,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Turn01_WineWithHugo == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Turn01_WineWithHugo\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 105,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We kept walking. Oddly enough, I st...\"",
+      "dialogueText": "We kept walking. Oddly enough, I still felt like someone had their eyes on us.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        216
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 106,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Even after I passed him, the sensat...\"",
+      "dialogueText": "Even after I passed him, the sensation that someone was watching me continued.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 107,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We entered the chambers, where Hugo...\"",
+      "dialogueText": "We entered the chambers, where Hugo was already waiting for us. No sooner had we sat down than a brief rap came at the door.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        163
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 108,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I entered the chambers, where Hugo...\"",
+      "dialogueText": "I entered the chambers, where Hugo was already waiting for me. No sooner had I sat down than a brief rap came on the door.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        163
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 109,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The son of a traitor.\"\"",
+      "dialogueText": "\"The son of a traitor.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        117
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 110,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"The man who would topple the monar...\"",
+      "dialogueText": "\"The man who would topple the monarchy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        115
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 111,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Yes. It's brave of you to approach...\"",
+      "dialogueText": "\"Yes. It's brave of you to approach me.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 112,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You're the traitor's son.\"\"",
+      "dialogueText": "\"You're the traitor's son.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        117
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 113,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"So you're the man who would topple...\"",
+      "dialogueText": "\"So you're the man who would topple the monarchy.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        115
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 114,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's brave of you to approach me.\"\"",
+      "dialogueText": "\"It's brave of you to approach me.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 115,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His fingers almost unconsciously be...\"",
+      "dialogueText": "His fingers almost unconsciously began loosening his tie.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        119
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 116,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He tugged at his suit lapel.\"",
+      "dialogueText": "He tugged at his suit lapel.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 117,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His fingers almost unconsciously be...\"",
+      "dialogueText": "His fingers almost unconsciously began loosening his tie.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        120
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 118,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I wanted to introduce myself befor...\"",
+      "dialogueText": "\"I wanted to introduce myself before our first official meeting.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        121
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 119,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I don't know what you've heard. Bu...\"",
+      "dialogueText": "\"I don't know what you've heard. But I assure you that's not my aim.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 120,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I-- well, in a nutshell, yes.\"\"",
+      "dialogueText": "\"I-- well, in a nutshell, yes.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        118
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 121,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I may be the leader of the opposit...\"",
+      "dialogueText": "\"I may be the leader of the opposition, but I'm not your enemy. If you and I establish a dialogue, I believe we can work wonders for this country.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        122
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 122,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        123,
+        124
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 123,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        125
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 124,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        149
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 125,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Vina gave him an encouraging smile.\"",
+      "dialogueText": "Vina gave him an encouraging smile.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        126
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 126,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"How lovely of you to say that. I'm...\"",
+      "dialogueText": "\"How lovely of you to say that. I'm Vina Toras, by the way.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        127
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 127,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He resisted the urge to laugh.\"",
+      "dialogueText": "He resisted the urge to laugh.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        128
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 128,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I know. A pleasure to make your ac...\"",
+      "dialogueText": "\"I know. A pleasure to make your acquaintance.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        132,
+        129,
+        130,
+        131
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 129,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I wish we could stay and talk, but...\"",
+      "dialogueText": "\"I wish we could stay and talk, but the Princess and I must be going. Until next time.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        135
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 130,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't speak to him, Vina. We're go...\"",
+      "dialogueText": "\"Don't speak to him, Vina. We're going to be late.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        140
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 131,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"You are to stay away from me, Mr....\"",
+      "dialogueText": "\"You are to stay away from me, Mr. Sazon. And even further away from my daughter.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        194
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 132,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm not uninterested in your propo...\"",
+      "dialogueText": "\"I'm not uninterested in your proposition. But you'll have to request a formal audience with me like everyone else.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        137
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 133,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His face went pale.\"",
+      "dialogueText": "His face went pale.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        134
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 134,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I-- I'm sorry, Your Majesty. I won...\"",
+      "dialogueText": "\"I-- I'm sorry, Your Majesty. I won't trouble you again.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        141
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 135,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I look forward to it, Your Majesty...\"",
+      "dialogueText": "\"I look forward to it, Your Majesty. Your Highness.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        136
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 136,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Vina waved as we walked away.\"",
+      "dialogueText": "Vina waved as we walked away.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        146
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 137,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I understand. Looking forward to i...\"",
+      "dialogueText": "\"I understand. Looking forward to it, Your Majesty. Your Highness.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        136
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 138,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"But--\"\"",
+      "dialogueText": "\"But--\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        139
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 139,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"That's perfectly fine. I hope to s...\"",
+      "dialogueText": "\"That's perfectly fine. I hope to speak again when it's more convenient, Your Majesty. Your Highness.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        141
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 140,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Vina's face fell.\"",
+      "dialogueText": "Vina's face fell.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        138
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 141,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He rushed away. Vina watched him go...\"",
+      "dialogueText": "He rushed away. Vina watched him go, disappointed.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        142
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 142,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"He was only trying to be nice.\"\"",
+      "dialogueText": "\"He was only trying to be nice.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        143,
+        144,
+        145
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 143,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Nice, my foot. That man has all ki...\"",
+      "dialogueText": "\"Nice, my foot. That man has all kinds of ulterior motives.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 144,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I mean it, Vina. I don't want you...\"",
+      "dialogueText": "\"I mean it, Vina. I don't want you talking to him.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 145,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"He shouldn't be cornering the King...\"",
+      "dialogueText": "\"He shouldn't be cornering the King of Rizia on his way to an important meeting. The kid needs to learn decorum.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 146,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"He seems nice.\"\"",
+      "dialogueText": "\"He seems nice.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        148,
+        147,
+        143
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 147,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't get too smitten. He's the op...\"",
+      "dialogueText": "\"Don't get too smitten. He's the opposition, after all.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 148,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"He's friendlier than I expected. I...\"",
+      "dialogueText": "\"He's friendlier than I expected. I could imagine working together.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        195
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 149,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He looked at me expectantly.\"",
+      "dialogueText": "He looked at me expectantly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        153,
+        150,
+        151,
+        152
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 150,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I wish I could stay and talk, but...\"",
+      "dialogueText": "\"I wish I could stay and talk, but I must be going. Until next time.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        156
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 151,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm not interested. If you'll excu...\"",
+      "dialogueText": "\"I'm not interested. If you'll excuse me, I'm going to be late.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        159
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 152,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Don't approach me outside of work...\"",
+      "dialogueText": "\"Don't approach me outside of work again, Mr. Sazon. This is my only warning.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        193
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 153,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm not un-interested. But you'll...\"",
+      "dialogueText": "\"I'm not un-interested. But you'll have to request a formal audience with me like everyone else.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        158
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 154,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"His face went pale.\"",
+      "dialogueText": "His face went pale.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        155
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 155,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I-- I'm sorry, Your Majesty. I won...\"",
+      "dialogueText": "\"I-- I'm sorry, Your Majesty. I won't trouble you again.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        160
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 156,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I look forward to it, Your Majesty.\"\"",
+      "dialogueText": "\"I look forward to it, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        157
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 157,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He gave a small wave as he walked a...\"",
+      "dialogueText": "He gave a small wave as he walked away.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        196
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 158,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"I understand. Looking forward to i...\"",
+      "dialogueText": "\"I understand. Looking forward to it, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        157
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 159,
+      "actorId": 75,
+      "speaker": "Manus Sazon",
+      "title": "Manus Sazon: \"\"That's perfectly fine. I hope to s...\"",
+      "dialogueText": "\"That's perfectly fine. I hope to speak again when it's more convenient, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        160
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 160,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He rushed away.\"",
+      "dialogueText": "He rushed away.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        196
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 161,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I continued towards the council cha...\"",
+      "dialogueText": "I continued towards the council chambers. Oddly enough, I still felt like someone had their eyes on me.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        217
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 162,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"We continued towards the council ch...\"",
+      "dialogueText": "We continued towards the council chambers. Oddly enough, I still felt like someone had their eyes on us.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        216
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 163,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Without waiting for an answer, Luci...\"",
+      "dialogueText": "Without waiting for an answer, Lucita Azaro rushed in.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        164
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 164,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The new war and security councilor...\"",
+      "dialogueText": "The new war and security councilor was younger than I'd imagined. She carried herself with a mix of regal elegance and soldierly authority.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        165
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 165,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Gentlemen. Pardon my interruption.\"\"",
+      "dialogueText": "\"Gentlemen. Pardon my interruption.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        166
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 166,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She bowed towards me.\"",
+      "dialogueText": "She bowed towards me.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 167,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        168,
+        169
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 168,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_JoinedMilitary == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true",
+      "userScript": "",
+      "outgoing": [
+        170
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 169,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_JoinedMilitary == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_JoinedMilitary\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        206
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 170,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"A military man. How could I forget?\"\"",
+      "dialogueText": "\"A military man. How could I forget?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        57
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 171,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        172,
+        173
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 172,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 173,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 174,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I'm sorry I couldn't make it to th...\"",
+      "dialogueText": "\"I'm sorry I couldn't make it to the coronation. I heard everything ran smoothly.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        171
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 175,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"General Taddeus sends his regards....\"",
+      "dialogueText": "\"General Taddeus sends his regards. Or he would if he were capable of speaking in full sentences.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        177
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 176,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"He sends his regards. Or he would...\"",
+      "dialogueText": "\"He sends his regards. Or he would if he were capable of speaking in full sentences.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        179
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 177,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She was trying to be flippant, but...\"",
+      "dialogueText": "She was trying to be flippant, but I could sense emotion behind her words.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        181,
+        182,
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 178,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I know the General. He's got some...\"",
+      "dialogueText": "\"I know the General. He's got some fight left in him yet.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        183
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 179,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She was trying to be flippant, but...\"",
+      "dialogueText": "She was trying to be flippant, but I could sense emotion behind her words.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        178,
+        181,
+        182,
+        180
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 180,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"This must be a difficult time for...\"",
+      "dialogueText": "\"This must be a difficult time for you. Let me know if there's anything I can do.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        188
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 181,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"No time for pleasantries. Where ar...\"",
+      "dialogueText": "\"No time for pleasantries. Where are the others?\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        185
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 182,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I hope he heals swiftly. I was cou...\"",
+      "dialogueText": "\"I hope he heals swiftly. I was counting on his expertise as a councilor.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        184
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 183,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Lucita smiled with pride.\"",
+      "dialogueText": "Lucita smiled with pride.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        186
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 184,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"She frowned briefly.\"",
+      "dialogueText": "She frowned briefly.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        187
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 185,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Two of them were right behind me o...\"",
+      "dialogueText": "\"Two of them were right behind me on the stairs.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        60
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 186,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"The others should be right behind...\"",
+      "dialogueText": "\"The others should be right behind me.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        60
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 187,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I'll do my best to serve in his st...\"",
+      "dialogueText": "\"I'll do my best to serve in his stead.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        186
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 188,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"The corners of her mouth twitched d...\"",
+      "dialogueText": "The corners of her mouth twitched downward.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        189
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 189,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I'm not a porcelain doll, Your Maj...\"",
+      "dialogueText": "\"I'm not a porcelain doll, Your Majesty. My ability to perform my duties is in no way compromised.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        186
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 190,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"On seeing me, they dropped the act...\"",
+      "dialogueText": "On seeing me, they dropped the act and assumed a look of deference. Laurento smoothly removed his fedora, revealing a well-oiled mane of gray hair.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        14
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 191,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Once all the councilors were seated...\"",
+      "dialogueText": "Once all the councilors were seated, Hugo began.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 192,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Manus_IgnoreFirstMeeting = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Manus_IgnoreFirstMeeting\"] = true;",
+      "outgoing": [
+        95
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 193,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Manus_ThreatenFirstMeeting = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Manus_ThreatenFirstMeeting\"] = true;",
+      "outgoing": [
+        154
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 194,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Relations_Manus_ThreatenFirstMeeting = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Relations_Manus_ThreatenFirstMeeting\"] = true;",
+      "outgoing": [
+        133
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 195,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RemoveConversant(\"Manus Sazon\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "RemoveConversant(\"Manus Sazon\");\n;",
+      "outgoing": [
+        162
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 196,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RemoveConversant(\"Manus Sazon\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "RemoveConversant(\"Manus Sazon\");\n;",
+      "outgoing": [
+        161
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 197,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn01_RH_Celebrations_Large = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn01_RH_Celebrations_Large\"] = true;",
+      "outgoing": [
+        255
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 198,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Decision_Turn01_CoronationParty_Large == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        199,
+        200
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 199,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Decision_Turn01_CoronationParty_Large == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Decision_Turn01_CoronationParty_Large\"] == true",
+      "userScript": "",
+      "outgoing": [
+        197
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 200,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Decision_Turn01_CoronationParty_Large == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Decision_Turn01_CoronationParty_Large\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        201
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 201,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Decision_Turn01_CoronationParty_Medium == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        202,
+        203
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 202,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Decision_Turn01_CoronationParty_Medium == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Decision_Turn01_CoronationParty_Medium\"] == true",
+      "userScript": "",
+      "outgoing": [
+        204
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 203,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Decision_Turn01_CoronationParty_Medium == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Decision_Turn01_CoronationParty_Medium\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        205
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 204,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn01_RH_Celebrations_Medium = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn01_RH_Celebrations_Medium\"] = true;",
+      "outgoing": [
+        255
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 205,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn01_RH_Celebrations_Small = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn01_RH_Celebrations_Small\"] = true;",
+      "outgoing": [
+        255
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 206,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Your form is slightly off. But an...\"",
+      "dialogueText": "\"Your form is slightly off. But an admirable effort.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 207,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Elena nodded. Her businesslike deme...\"",
+      "dialogueText": "Elena nodded. Her businesslike demeanor briefly softened as she looked at me.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        19
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 208,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Laurento smoothly removed his fedor...\"",
+      "dialogueText": "Laurento smoothly removed his fedora, revealing a well-oiled mane of gray hair.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        16
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 209,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Elena nodded briskly. Despite her g...\"",
+      "dialogueText": "Elena nodded briskly. Despite her grandmotherly appearance, her demeanor was all business.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        22
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 210,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Once all the councilors were seated...\"",
+      "dialogueText": "Once all the councilors were seated, Hugo began.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 211,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Well -- not the entire council. Th...\"",
+      "dialogueText": "\"Well -- not the entire council. The Grand Wiseman is in Plavo, preparing for the upcoming religious ceremony with His Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        212
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 212,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"But he needn't involve himself in...\"",
+      "dialogueText": "\"But he needn't involve himself in earthly concerns like our royal treasury.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        213
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 213,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"He smiled to himself, then gestured...\"",
+      "dialogueText": "He smiled to himself, then gestured to Elena.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        214
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 214,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"No, indeed. That's for me to worry...\"",
+      "dialogueText": "\"No, indeed. That's for me to worry about.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        48
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 215,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"And work we will. We have so much...\"",
+      "dialogueText": "\"And work we will. We have so much ahead of us.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 216,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I looked back for just long enough...\"",
+      "dialogueText": "I looked back for just long enough to see a flash of gold. Titus. Of course.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        107
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 217,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I looked back for just long enough...\"",
+      "dialogueText": "I looked back for just long enough to see a flash of gold. Titus. Of course.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        108
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 218,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Frankly, I'm glad to see you takin...\"",
+      "dialogueText": "\"Frankly, I'm glad to see you taking such an interest in our financials.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        219
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 219,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Between myself and the House of De...\"",
+      "dialogueText": "\"Between myself and the House of Delegates, we were able to keep everything running smoothly in the absence of clear guidance from your father.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        220
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 220,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"But with a king of your caliber at...\"",
+      "dialogueText": "\"But with a king of your caliber at the helm, there's no telling how high we can soar.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        221,
+        222,
+        227
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 221,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"History shall know me as Romus the...\"",
+      "dialogueText": "\"History shall know me as Romus the Fiscally Responsible.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        225
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 222,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Your hard work during my father's...\"",
+      "dialogueText": "\"Your hard work during my father's decline is to be commended.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        226
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 223,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Please leave my father out of this...\"",
+      "dialogueText": "\"Please leave my father out of this. I'd prefer to be judged on my own merits, not compared to him.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        231
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 224,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Do not speak ill of His Majesty. H...\"",
+      "dialogueText": "\"Do not speak ill of His Majesty. He did the best he could in the face of his many enemies.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        230
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 225,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Very catchy, Your Majesty.\"\"",
+      "dialogueText": "\"Very catchy, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        280
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 226,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Thank you. It was indeed quite the...\"",
+      "dialogueText": "\"Thank you. It was indeed quite the stressful time for everyone.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        232
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 227,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FalloutWithDad == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        228,
+        229
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 228,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_FalloutWithDad == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_FalloutWithDad\"] == true",
+      "userScript": "",
+      "outgoing": [
+        223
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 229,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_FalloutWithDad == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_FalloutWithDad\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        224
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 230,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"That is undoubtedly true, Your Maj...\"",
+      "dialogueText": "\"That is undoubtedly true, Your Majesty. I'm sorry.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        232
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 231,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Understandable, Your Majesty. I'm...\"",
+      "dialogueText": "\"Understandable, Your Majesty. I'm sorry.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        232
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 232,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I think that's enough for today. B...\"",
+      "dialogueText": "\"I think that's enough for today. But we will have to come to a decision regarding our resources.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        286
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 233,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Gold and energy exports have gotte...\"",
+      "dialogueText": "\"Gold and energy exports have gotten us to where we are today, but if we are to stay relevant and protect our economy from global fluctuations, we need to diversify. I suspect you agree.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        234
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 234,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I'll let you think about it, Your...\"",
+      "dialogueText": "\"I'll let you think about it, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        235
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 235,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Thank you, Ms. Werner. This was in...\"",
+      "dialogueText": "\"Thank you, Ms. Werner. This was indeed enlightening.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        237
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 236,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"A pleasure to share these chambers...\"",
+      "dialogueText": "\"A pleasure to share these chambers with you once more, King Romus.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        241
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 237,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        238,
+        239
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 238,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        236
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 239,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_StayedOnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        240
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 240,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento Esquibel: \"\"A pleasure to finally share these...\"",
+      "dialogueText": "\"A pleasure to finally share these chambers with you, King Romus.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        241
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 241,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"Yes. I'm looking forward to our up...\"",
+      "dialogueText": "\"Yes. I'm looking forward to our upcoming security briefing.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        243
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 242,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"My councilors left. I sat for a few...\"",
+      "dialogueText": "My councilors left. I sat for a few more minutes, reflecting on what Elena and the others had said.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        256
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 243,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        244,
+        245
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 244,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Vina_OnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Vina_OnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        246
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 245,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Vina_OnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Vina_OnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        242
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 246,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"And congratulations on surviving y...\"",
+      "dialogueText": "\"And congratulations on surviving your first council meeting, Your Highness.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        247
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 247,
+      "actorId": 79,
+      "speaker": "Princess Vina",
+      "title": "Vina Toras: \"\"I found it fascinating, Your Grace.\"\"",
+      "dialogueText": "\"I found it fascinating, Your Grace.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        249
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 248,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "End();",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "End();\n;",
+      "outgoing": [
+        2
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 249,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"They smiled at each other, not alto...\"",
+      "dialogueText": "They smiled at each other, not altogether sincerely.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        242
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 250,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "PlayLoopedMusic(\"R_UpInTheAir\", \"R_UpInTheAir_Loop\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "PlayLoopedMusic(\"R_UpInTheAir\",\"R_UpInTheAir_Loop\");\n;",
+      "outgoing": [
+        69
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 251,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Of course, Duke Sazon.\"\"",
+      "dialogueText": "\"Of course, Duke Sazon.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 252,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"It's good to see you here in Porte...\"",
+      "dialogueText": "\"It's good to see you here in Porte Drazon.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        116
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 253,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"I motioned for her to stand. Her ey...\"",
+      "dialogueText": "I motioned for her to stand. Her eye was fixated on my uncle's shirt as she raised herself.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 254,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.Reports_Turn01_Topes_UnveilingLegacyOfRezenid = true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.Reports_Turn01_Topes_UnveilingLegacyOfRezenid\"] = true;",
+      "outgoing": [
+        198
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 255,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLCSupport.News_Turn01_RH_ConsecrationOfKing = true; RiziaDLCSupport.Reports_Turn01_Plavo_ConsecrationOfKingFest = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLCSupport.News_Turn01_RH_ConsecrationOfKing\"] = true;\nVariable[\"RiziaDLCSupport.Reports_Turn01_Plavo_ConsecrationOfKingFest\"] = true;\n;",
+      "outgoing": [
+        248
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 256,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Enable_Policy_RD_Economy_PublicTransportInfraInvestment = true;\nRiziaDLC.Enable_Policy_RD_Economy_PublicSeaTransportSubsidies = true;\nRiziaDLC.Enable_Policy_RD_Economy_PublicRailTransportSubsidies = true;\nRiziaDLC.Enable_Policy_RD_Welfare_NaturalizationForForeigners = true;\nRiziaDLC.Enable_Policy_RD_Welfare_IncreasedWelfareFunding = true;",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.Enable_Policy_RD_Economy_PublicTransportInfraInvestment\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Economy_PublicSeaTransportSubsidies\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Economy_PublicRailTransportSubsidies\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Welfare_NaturalizationForForeigners\"] = true;\nVariable[\"RiziaDLC.Enable_Policy_RD_Welfare_IncreasedWelfareFunding\"] = true;\n;",
+      "outgoing": [
+        254
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 257,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Secondly, there's the matter of li...\"",
+      "dialogueText": "\"Secondly, there's the matter of living standards. Improving the quality of life for our citizens naturally leads to higher administrative expenditures.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        258
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 258,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Thirdly, if you do decide to liste...\"",
+      "dialogueText": "\"Thirdly, if you do decide to listen to Duchess Azaro and expand our defense capabilities, keep in mind that the cost of upkeep for our armed forces will rise accordingly.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        259
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 259,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Lastly, energy management poses it...\"",
+      "dialogueText": "\"Lastly, energy management poses its own challenges. As we approach the limits of our grid's capacity, we may incur additional storage costs.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        263,
+        264,
+        265,
+        266
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 260,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"The first point to consider is ind...\"",
+      "dialogueText": "\"The first point to consider is industrial growth. I am all for expanding production and construction, but we should make sure we have the energy to keep our facilities humming.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        257
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 261,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"I'd like to discuss several econom...\"",
+      "dialogueText": "\"I'd like to discuss several economic considerations. We should anticipate potential expenses arising from our impending fiscal policies.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        267,
+        269,
+        268
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 262,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Elena glanced down at her notes, he...\"",
+      "dialogueText": "Elena glanced down at her notes, her expression contemplative.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        261
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 263,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"This information is invaluable, El...\"",
+      "dialogueText": "\"This information is invaluable, Elena. I appreciate your insights.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        218
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 264,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That'll be a long way off in the f...\"",
+      "dialogueText": "\"That'll be a long way off in the future. I have more pressing worries at the moment.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        218
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 265,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I have full confidence in your abi...\"",
+      "dialogueText": "\"I have full confidence in your ability to handle these matters.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        218
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 266,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"That's very good to know. I'll mak...\"",
+      "dialogueText": "\"That's very good to know. I'll make my decisions accordingly.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        218
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 267,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"Please elaborate.\"\"",
+      "dialogueText": "\"Please elaborate.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        260
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 268,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"We've covered enough ground for to...\"",
+      "dialogueText": "\"We've covered enough ground for today. Let's adjourn the meeting soon.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        279
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 269,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"I'm accustomed to handling unexpec...\"",
+      "dialogueText": "\"I'm accustomed to handling unexpected challenges. A detailed explanation isn't necessary.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        279
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 270,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"She's here to learn from the King,...\"",
+      "dialogueText": "\"She's here to learn from the King, as I learned from my father.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        9
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 271,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        272,
+        273
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 272,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Prologue_StayedOnCouncil == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true",
+      "userScript": "",
+      "outgoing": [
+        270
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 273,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Prologue_StayedOnCouncil == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Prologue_StayedOnCouncil\"] == true) == false",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 274,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Player_Romus: \"\"She's here to receive tutelage fro...\"",
+      "dialogueText": "\"She's here to receive tutelage from the best minds this kingdom has to offer. Yours included.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        275
+      ],
+      "isPlayer": true,
+      "isRoot": 0
+    },
+    {
+      "id": 275,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita Azaro: \"\"I'm flattered.\"\"",
+      "dialogueText": "\"I'm flattered.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        8
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 276,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"They looked at each other.\"",
+      "dialogueText": "They looked at each other.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        277
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 277,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"You are most welcome.\"\"",
+      "dialogueText": "\"You are most welcome.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 278,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_Tyrant += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_Tyrant\"] = Variable[\"RiziaDLC.PersonalValue_Tyrant\"] + 1;",
+      "outgoing": [
+        29
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 279,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"Very well. It seems like you've go...\"",
+      "dialogueText": "\"Very well. It seems like you've got a good grasp on our financials.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        219
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 280,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.PersonalValue_FunnyKing += 1",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "Variable[\"RiziaDLC.PersonalValue_FunnyKing\"] = Variable[\"RiziaDLC.PersonalValue_FunnyKing\"] + 1;",
+      "outgoing": [
+        232
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 281,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Then, suddenly, I caught sight of a...\"",
+      "dialogueText": "Then, suddenly, I caught sight of a young man standing by the path.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        84
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 282,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Narrator: \"Then, suddenly, I caught sight of a...\"",
+      "dialogueText": "Then, suddenly, I caught sight of a young man standing by the path.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        85
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 283,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo Toras: \"\"Thank you anyway, Ms. Werner. I'll...\"",
+      "dialogueText": "\"Thank you anyway, Ms. Werner. I'll be sure to deliver your reports to His Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        237
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 284,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "Briefing Skipped",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        283
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 285,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "SetRichPresence(\"Presiding over their first council as King\", \"Council Chambers\", \"Porte Drazon\");",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "SetRichPresence(\"Presiding over their first council as King\",\"Council Chambers\",\"Porte Drazon\");\n;",
+      "outgoing": [
+        250
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 286,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Focus_Economy_Diversification == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        287,
+        288
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 287,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Focus_Economy_Diversification == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Focus_Economy_Diversification\"] == true",
+      "userScript": "",
+      "outgoing": [
+        233
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 288,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Focus_Economy_Diversification == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Focus_Economy_Diversification\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        289
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 289,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Focus_Economy_Mixed == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        290,
+        291
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 290,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "RiziaDLC.Focus_Economy_Mixed == true",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Focus_Economy_Mixed\"] == true",
+      "userScript": "",
+      "outgoing": [
+        292
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 291,
+      "actorId": 2,
+      "speaker": "Paskal Beniwoll",
+      "title": "!(RiziaDLC.Focus_Economy_Mixed == true)",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Focus_Economy_Mixed\"] == true) == false",
+      "userScript": "",
+      "outgoing": [
+        293
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 292,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"While gold and energy exports rema...\"",
+      "dialogueText": "\"While gold and energy exports remain the backbone of our economy, supplementing them with other industries will make us more robust and less vulnerable to global fluctuations. I suspect you agree.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        234
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 293,
+      "actorId": 80,
+      "speaker": "Elena Werner",
+      "title": "Elena Werner: \"\"If gold and energy exports are to...\"",
+      "dialogueText": "\"If gold and energy exports are to remain the backbone of our economy, we need to focus on finding new sources. Of course, we could also try to develop other industries.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        234
+      ],
+      "isPlayer": false,
+      "isRoot": 0
+    },
+    {
+      "id": 99101,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Zille_Turn1_Council_Choice",
+      "dialogueText": "Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.",
+      "menuText": "\"Zille must return to our kingdom when the 1927 agreement expires. I expect the Council to prepare for any contingency—including force if Smolak reneges.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+      "outgoing": [
+        99102
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Militarna deklaracja Romusa na naradzie królewskiej w Turze 1"
+    },
+    {
+      "id": 99102,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Zille_Turn1_Council_Reply",
+      "dialogueText": "Your Majesty... the recovery of Zille is close to all our hearts, but the Alliance of Nations holds treaties sacred. Let us pray it does not come to open war.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "modNote": "Odpowiedź Wielkiego Wezyra Hugo Torasa"
+    }
+  ]
+}

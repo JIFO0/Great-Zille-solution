@@ -164,8 +164,41 @@ namespace GreatZilleSolution
         public static bool IsNavalBlockadeActive { get; set; } = false;
         public static bool IsLespiaPactAccepted { get; set; } = false;
         public static bool IsDerdiaHybridSupportActive { get; set; } = false;
+        public static bool HasDerdiaSabotageEvidence { get; set; } = false;
+        public static bool IsDerdiaIncidentShared { get; set; } = false;
+        public static bool IsDerdiaPactSigned { get; set; } = false;
+        public static bool IsDerdiaPipelineInvested { get; set; } = false;
+        public static bool IsDerdiaMissilesAgreed { get; set; } = false;
+        public static bool IsDerdiaStateVisitDone { get; set; } = false;
         public static bool IsMotherCaptured { get; set; } = false;
         public static bool IsBrenasLost { get; set; } = false;
+
+        /// <summary>Returns the current Rizia turn number (1-11), or 0 if unavailable.</summary>
+        public static int GetCurrentTurn()
+        {
+            try
+            {
+                int t = DialogueHelper.GetIntVariable("RiziaDLC.Turn");
+                if (t > 0) return t;
+                var pm = Il2Cpp.PersistenceManager.Instance;
+                var sd = pm?.activeSaveFile?.saveData;
+                if (sd != null && sd.turnNo > 0) return sd.turnNo;
+            }
+            catch { }
+            return 0;
+        }
+
+        /// <summary>True if Rizia has a strong baseline with Derdia to consider southern corridor talks.</summary>
+        public static bool HasGoodDerdiaBasis()
+        {
+            return DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Friendly")
+                || DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Allied")
+                || DialogueHelper.GetBoolVariable("RiziaDLC.Policy_Diplomacy_TradeDeal_Derdia")
+                || DialogueHelper.GetIntVariable("RiziaDLC.Diplomacy_Derdia_NegotiatingPower") >= 2
+                || HasDerdiaSabotageEvidence
+                || IsDerdiaIncidentShared
+                || IsDerdiaPactSigned;
+        }
 
         // Economic Impact Trackers
         public static int GoldBudgetDrainPerTurn { get; set; } = 0;
@@ -348,16 +381,15 @@ namespace GreatZilleSolution
                     MelonLogger.Msg("[GEOPOLITICS] Sordland rejected Bear Trap: Anton Rayne remains open to diplomatic channels.");
                 }
 
-                // Check Derdia Hybrid War Support
-                bool derdiaFriendly = DialogueHelper.GetBoolVariable("RiziaDLC.Policy_Diplomacy_TradeDeal_Derdia") ||
-                                      DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Friendly") ||
-                                      DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Derdia_Allied");
-                if (derdiaFriendly)
+                // Check Derdia Hybrid War & Southern Corridor Support (earned via Derdia Talks / State Visit)
+                if (IsDerdiaHybridSupportActive || IsDerdiaPactSigned
+                    || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")
+                    || DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive"))
                 {
                     IsDerdiaHybridSupportActive = true;
                     DialogueHelper.SetVariable("Zille_Derdia_HybridWarfare", true);
                     DialogueHelper.SetVariable("Zille_DerdiaHybridActive", true);
-                    MelonLogger.Msg("[GEOPOLITICS] Derdia hybrid warfare active: Holy irregulars deployed behind Wehzek lines!");
+                    MelonLogger.Msg("[GEOPOLITICS] Derdia alliance active: Golcondist irregulars & corridor support mobilized!");
                 }
 
                 // Economic fallout: Energy and Gold calculation
@@ -376,6 +408,14 @@ namespace GreatZilleSolution
                 else
                 {
                     GoldBudgetDrainPerTurn = 2;
+                }
+
+                if (IsDerdiaPipelineInvested || DialogueHelper.GetBoolVariable("Zille_Derdia_PipelineInvested"))
+                {
+                    IsDerdiaPipelineInvested = true;
+                    EnergyDeficitPerTurn = Math.Max(0, EnergyDeficitPerTurn - 2);
+                    GoldBudgetDrainPerTurn = Math.Max(1, GoldBudgetDrainPerTurn - 1);
+                    MelonLogger.Msg("[GEOPOLITICS] Derdia-Rizia Southern Pipeline offsets Wehzek crude cutoff and adds transit dividends!");
                 }
 
                 DialogueHelper.SetVariable("Economy_Gold_Drain", GoldBudgetDrainPerTurn);
@@ -433,6 +473,13 @@ namespace GreatZilleSolution
                 DialogueHelper.SetVariable("Zille_NavalBlockadeActive", IsNavalBlockadeActive);
                 DialogueHelper.SetVariable("Zille_LespiaPactAccepted", IsLespiaPactAccepted);
                 DialogueHelper.SetVariable("Zille_DerdiaHybridActive", IsDerdiaHybridSupportActive);
+                DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", HasDerdiaSabotageEvidence);
+                DialogueHelper.SetVariable("Zille_Derdia_IncidentShared", IsDerdiaIncidentShared);
+                DialogueHelper.SetVariable("Zille_DerdiaPact_Signed", IsDerdiaPactSigned);
+                DialogueHelper.SetVariable("Zille_Derdia_PipelineInvested", IsDerdiaPipelineInvested);
+                DialogueHelper.SetVariable("Zille_Derdia_MissilesAgreed", IsDerdiaMissilesAgreed);
+                DialogueHelper.SetVariable("Zille_Derdia_StateVisitDone", IsDerdiaStateVisitDone);
+                DialogueHelper.SetVariable("Zille_Derdia_GoodBasis", HasGoodDerdiaBasis());
                 DialogueHelper.SetVariable("Zille_MotherCaptured", IsMotherCaptured);
                 DialogueHelper.SetVariable("Zille_BrenasLost", IsBrenasLost);
 
@@ -478,6 +525,12 @@ namespace GreatZilleSolution
                 if (DialogueHelper.GetBoolVariable("Zille_Lespia_Intel")) IsLespiaIntelActive = true;
                 if (DialogueHelper.GetBoolVariable("Zille_LespiaPactAccepted")) IsLespiaPactAccepted = true;
                 if (DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive")) IsDerdiaHybridSupportActive = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_SabotageEvidence")) HasDerdiaSabotageEvidence = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_IncidentShared")) IsDerdiaIncidentShared = true;
+                if (DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")) IsDerdiaPactSigned = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_PipelineInvested")) IsDerdiaPipelineInvested = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_MissilesAgreed")) IsDerdiaMissilesAgreed = true;
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")) IsDerdiaStateVisitDone = true;
                 if (DialogueHelper.GetBoolVariable("Zille_Independent_Buffer")) IsIndependentZilleAgreed = true;
 
                 int outVal = DialogueHelper.GetIntVariable("Zille_War_Outcome");

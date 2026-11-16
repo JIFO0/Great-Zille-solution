@@ -1,0 +1,205 @@
+variant,province_id,province_name,type,region,defense_line,unit_type
+minimal,ZilleTile_20,Venna,land,Zille,border_east,militia
+minimal,ZilleTile_24,Cala Vessa East,land,Zille,,mechanized_infantry
+minimal,ZilleTile_26,Ossa East,land,Zille,border_east,infantry
+minimal,ZilleTile_31,Zille North,land,Zille,,tanks
+minimal,ZilleTile_33,Dapalle West,land,Zille,border_east,militia
+minimal,ZilleTile_36,Pomara Northwest,land,Zille,border_west,infantry
+minimal,ZilleTile_37,Pomara North,land,Zille,border_west,militia
+minimal,ZilleTile_39,Celle Vaz North,land,Zille,border_west,infantry
+minimal,ZilleTile_68,Zicek,land,Wehlen,,infantry
+minimal,ZilleTile_69,Kessin,land,Wehlen,,infantry
+minimal,ZilleTile_70,Kessin East,land,Wehlen,,paratroopers
+minimal,ZilleTile_72,Kreleck Islands,land,Wehlen,,militia
+minimal,ZilleTile_73,Opolje,land,Wehlen,,infantry
+minimal,ZilleTile_74,Dornatz,land,Wehlen,,tanks
+minimal,ZilleTile_75,Shwinouz,land,Wehlen,,mechanized_infantry
+minimal,ZilleTile_76,Sulkov,land,Wehlen,,tanks
+minimal,ZilleTile_77,Harlitz,land,Wehlen,,infantry
+minimal,ZilleTile_78,Witsima,land,Wehlen,,mechanized_infantry
+minimal,ZilleTile_79,Wizen,land,Wehlen,,infantry
+minimal,ZilleTile_80,Witsima Southwest,land,Wehlen,,mountain_infantry
+minimal,ZilleTile_81,Torunz,land,Wehlen,,infantry
+minimal,ZilleTile_82,Leburk,land,Wehlen,,tanks
+minimal,ZilleTile_83,Vernen,land,Wehlen,,infantry
+minimal,ZilleTile_85,Kastza North,land,Wehlen,,mountain_infantry
+minimal,ZilleTile_86,Warno,land,Wehlen,,infantry
+minimal,ZilleTile_87,Ustkov,land,Wehlen,,tanks
+minimal,ZilleTile_88,Czerna,land,Wehlen,,militia
+minimal,ZilleTile_89,Brannitz,land,Wehlen,,infantry
+minimal,ZilleTile_90,Kastza,land,Wehlen,,mechanized_infantry
+minimal,ZilleTile_91,Stegnn,land,Wehlen,,mechanized_infantry
+minimal,ZilleTile_92,Kolobrzezg,land,Wehlen,,infantry
+minimal,ZilleTile_93,Kalischt,land,Wehlen,,militia
+minimal,ZilleTile_95,Artsnan,land,Wehlen,,militia
+minimal,ZilleTile_98,Quella Southeast,land,Zille,,mechanized_infantry
+minimal,ZilleTile_99,Corvis South,land,Zille,,mechanized_infantry
+minimal,ZilleTile_100,Quella Highlands,land,Zille,,mountain_infantry
+minimal,ZilleTile_104,Venna East,land,Zille,border_east,infantry
+minimal,ZilleTile_108,Venna Southwest,land,Zille,border_east,militia
+minimal,ZilleTile_110,Ardo Southeast,land,Zille,,mechanized_infantry
+minimal,ZilleTile_113,Portoserra Southeast,land,Zille,,tanks
+minimal,ZilleTile_114,Dapalle Northwest,land,Zille,border_east,infantry
+minimal,ZilleTile_117,Pomara West,land,Zille,border_west,militia
+minimal,ZilleTile_118,Praia Velha,land,Zille,border_west,infantry
+minimal,ZilleTile_119,Gnyezno,land,Wehlen,,infantry
+minimal,ZilleTile_121,Plotzk,land,Wehlen,,infantry
+minimal,ZilleTile_122,Bydgoszt,land,Wehlen,,militia
+minimal,ZilleTile_S1,Kreleck Sound,sea,Sea,,flagship
+minimal,ZilleTile_S2,Kratsna Waters,sea,Sea,,destroyer
+minimal,ZilleTile_S12,Munat Deep,sea,Sea,,destroyer
+minimal,ZilleTile_S16,Munat Shoals,sea,Sea,,submarine
+minimal,ZilleTile_S18,Tirsa Reach,sea,Sea,,destroyer
+minimal,ZilleTile_S22,Tirsa Narrows,sea,Sea,,submarine
+minimal,ZilleTile_S25,Tirsa Banks,sea,Sea,,destroyer
+minimal,ZilleTile_S29,Isor Waters,sea,Sea,,destroyer
+minimal,ZilleTile_S35,Walsholm Reach,sea,Sea,,submarine
+minimal,ZilleTile_S54,Santa Calla Banks,sea,Sea,,submarine
+minimal,ZilleTile_S55,Praia Velha Roads,sea,Sea,,destroyer
+suspicious,ZilleTile_3,Manes Riuz,land,Zille,,militia
+suspicious,ZilleTile_8,Nanta West,land,Zille,north_line,militia
+suspicious,ZilleTile_13,Lenta North,land,Zille,north_line,infantry
+suspicious,ZilleTile_17,Lenta Northwest,land,Zille,north_line,militia
+suspicious,ZilleTile_19,Venna Northwest,land,Zille,,mountain_infantry
+suspicious,ZilleTile_20,Venna,land,Zille,border_east,infantry
+suspicious,ZilleTile_21,Ardo,land,Zille,north_line,infantry
+suspicious,ZilleTile_24,Cala Vessa East,land,Zille,,mechanized_infantry
+suspicious,ZilleTile_25,Wiktrany East,land,Zille,,tanks
+suspicious,ZilleTile_26,Ossa East,land,Zille,border_east,infantry
+suspicious,ZilleTile_30,Ondaro Southeast,land,Zille,,mechanized_infantry
+suspicious,ZilleTile_31,Zille North,land,Zille,,infantry
+suspicious,ZilleTile_32,Wiktrany Southeast,land,Zille,,mountain_infantry
+suspicious,ZilleTile_33,Dapalle West,land,Zille,border_east,militia
+suspicious,ZilleTile_36,Pomara Northwest,land,Zille,border_west,tanks
+suspicious,ZilleTile_37,Pomara North,land,Zille,border_west,mountain_infantry
+suspicious,ZilleTile_38,Rivamare,land,Zille,,mechanized_infantry
+suspicious,ZilleTile_39,Celle Vaz North,land,Zille,border_west,infantry
+suspicious,ZilleTile_69,Kessin,land,Wehlen,,militia
+suspicious,ZilleTile_70,Kessin East,land,Wehlen,,infantry
+suspicious,ZilleTile_72,Kreleck Islands,land,Wehlen,,militia
+suspicious,ZilleTile_74,Dornatz,land,Wehlen,,tanks
+suspicious,ZilleTile_75,Shwinouz,land,Wehlen,,mechanized_infantry
+suspicious,ZilleTile_76,Sulkov,land,Wehlen,,tanks
+suspicious,ZilleTile_77,Harlitz,land,Wehlen,,infantry
+suspicious,ZilleTile_78,Witsima,land,Wehlen,,mechanized_infantry
+suspicious,ZilleTile_82,Leburk,land,Wehlen,,infantry
+suspicious,ZilleTile_86,Warno,land,Wehlen,,tanks
+suspicious,ZilleTile_87,Ustkov,land,Wehlen,,infantry
+suspicious,ZilleTile_88,Czerna,land,Wehlen,,infantry
+suspicious,ZilleTile_91,Stegnn,land,Wehlen,,mechanized_infantry
+suspicious,ZilleTile_92,Kolobrzezg,land,Wehlen,,militia
+suspicious,ZilleTile_93,Kalischt,land,Wehlen,,militia
+suspicious,ZilleTile_95,Artsnan,land,Wehlen,,militia
+suspicious,ZilleTile_96,Rotsla,land,Wehlen,,infantry
+suspicious,ZilleTile_97,Nanta Northwest,land,Zille,north_line,infantry
+suspicious,ZilleTile_99,Corvis South,land,Zille,,mechanized_infantry
+suspicious,ZilleTile_100,Quella Highlands,land,Zille,,mountain_infantry
+suspicious,ZilleTile_104,Venna East,land,Zille,border_east,infantry
+suspicious,ZilleTile_106,Ossa Northwest,land,Zille,,mechanized_infantry
+suspicious,ZilleTile_108,Venna Southwest,land,Zille,border_east,militia
+suspicious,ZilleTile_112,Ondaro Hills,land,Zille,,tanks
+suspicious,ZilleTile_113,Portoserra Southeast,land,Zille,,paratroopers
+suspicious,ZilleTile_114,Dapalle Northwest,land,Zille,border_east,infantry
+suspicious,ZilleTile_116,Vela Nova Southeast,land,Zille,,infantry
+suspicious,ZilleTile_117,Pomara West,land,Zille,border_west,tanks
+suspicious,ZilleTile_118,Praia Velha,land,Zille,border_west,infantry
+suspicious,ZilleTile_119,Gnyezno,land,Wehlen,,mountain_infantry
+suspicious,ZilleTile_122,Bydgoszt,land,Wehlen,,infantry
+suspicious,ZilleTile_S1,Kreleck Sound,sea,Sea,,destroyer
+suspicious,ZilleTile_S7,Munat Narrows,sea,Sea,,submarine
+suspicious,ZilleTile_S11,Manes Riuz Sound,sea,Sea,,submarine
+suspicious,ZilleTile_S12,Munat Deep,sea,Sea,,destroyer
+suspicious,ZilleTile_S16,Munat Shoals,sea,Sea,,destroyer
+suspicious,ZilleTile_S17,Tirsa Roads,sea,Sea,,submarine
+suspicious,ZilleTile_S18,Tirsa Reach,sea,Sea,,submarine
+suspicious,ZilleTile_S20,Nanta Waters,sea,Sea,,destroyer
+suspicious,ZilleTile_S21,Tirsa Bight,sea,Sea,,submarine
+suspicious,ZilleTile_S22,Tirsa Narrows,sea,Sea,,destroyer
+suspicious,ZilleTile_S25,Tirsa Banks,sea,Sea,,destroyer
+suspicious,ZilleTile_S29,Isor Waters,sea,Sea,,destroyer
+suspicious,ZilleTile_S35,Walsholm Reach,sea,Sea,,submarine
+suspicious,ZilleTile_S51,Azzurra Waters,sea,Sea,,destroyer
+suspicious,ZilleTile_S52,Zille Bay,sea,Sea,,flagship
+suspicious,ZilleTile_S54,Santa Calla Banks,sea,Sea,,submarine
+suspicious,ZilleTile_S55,Praia Velha Roads,sea,Sea,,destroyer
+prepared,ZilleTile_5,Tirsa,land,Zille,,infantry
+prepared,ZilleTile_8,Nanta West,land,Zille,north_line,militia
+prepared,ZilleTile_13,Lenta North,land,Zille,north_line,infantry
+prepared,ZilleTile_14,Nanta Southwest,land,Zille,,infantry
+prepared,ZilleTile_15,Mave Nortus Northwest,land,Zille,,mechanized_infantry
+prepared,ZilleTile_17,Lenta Northwest,land,Zille,north_line,militia
+prepared,ZilleTile_18,Lenta,land,Zille,,infantry
+prepared,ZilleTile_19,Venna Northwest,land,Zille,,mountain_infantry
+prepared,ZilleTile_20,Venna,land,Zille,border_east,tanks
+prepared,ZilleTile_21,Ardo,land,Zille,north_line,infantry
+prepared,ZilleTile_22,Ossa North,land,Zille,,mountain_infantry
+prepared,ZilleTile_24,Cala Vessa East,land,Zille,,militia
+prepared,ZilleTile_25,Wiktrany East,land,Zille,,mechanized_infantry
+prepared,ZilleTile_26,Ossa East,land,Zille,border_east,mechanized_infantry
+prepared,ZilleTile_27,Sabbiano,land,Zille,,militia
+prepared,ZilleTile_29,Ossa South,land,Zille,,mechanized_infantry
+prepared,ZilleTile_30,Ondaro Southeast,land,Zille,,paratroopers
+prepared,ZilleTile_31,Zille North,land,Zille,,tanks
+prepared,ZilleTile_32,Wiktrany Southeast,land,Zille,,mountain_infantry
+prepared,ZilleTile_33,Dapalle West,land,Zille,border_east,tanks
+prepared,ZilleTile_34,Vela Nova,land,Zille,,militia
+prepared,ZilleTile_36,Pomara Northwest,land,Zille,border_west,mechanized_infantry
+prepared,ZilleTile_37,Pomara North,land,Zille,border_west,mountain_infantry
+prepared,ZilleTile_38,Rivamare,land,Zille,,tanks
+prepared,ZilleTile_39,Celle Vaz North,land,Zille,border_west,tanks
+prepared,ZilleTile_70,Kessin East,land,Wehlen,,militia
+prepared,ZilleTile_72,Kreleck Islands,land,Wehlen,,militia
+prepared,ZilleTile_75,Shwinouz,land,Wehlen,,militia
+prepared,ZilleTile_82,Leburk,land,Wehlen,,infantry
+prepared,ZilleTile_84,Vernen South,land,Wehlen,,infantry
+prepared,ZilleTile_88,Czerna,land,Wehlen,,mountain_infantry
+prepared,ZilleTile_89,Brannitz,land,Wehlen,,mechanized_infantry
+prepared,ZilleTile_91,Stegnn,land,Wehlen,,infantry
+prepared,ZilleTile_93,Kalischt,land,Wehlen,,mountain_infantry
+prepared,ZilleTile_95,Artsnan,land,Wehlen,,infantry
+prepared,ZilleTile_96,Rotsla,land,Wehlen,,infantry
+prepared,ZilleTile_97,Nanta Northwest,land,Zille,north_line,infantry
+prepared,ZilleTile_99,Corvis South,land,Zille,,militia
+prepared,ZilleTile_100,Quella Highlands,land,Zille,,mountain_infantry
+prepared,ZilleTile_101,Nanta Southeast,land,Zille,,militia
+prepared,ZilleTile_102,Venna North,land,Zille,,mechanized_infantry
+prepared,ZilleTile_103,Lenta East,land,Zille,,mountain_infantry
+prepared,ZilleTile_104,Venna East,land,Zille,border_east,tanks
+prepared,ZilleTile_106,Ossa Northwest,land,Zille,,infantry
+prepared,ZilleTile_107,Ossa Northeast,land,Zille,,infantry
+prepared,ZilleTile_108,Venna Southwest,land,Zille,border_east,infantry
+prepared,ZilleTile_109,Portoserra,land,Zille,,infantry
+prepared,ZilleTile_110,Ardo Southeast,land,Zille,,tanks
+prepared,ZilleTile_111,Ossa,land,Zille,,mechanized_infantry
+prepared,ZilleTile_112,Ondaro Hills,land,Zille,,infantry
+prepared,ZilleTile_113,Portoserra Southeast,land,Zille,,infantry
+prepared,ZilleTile_114,Dapalle Northwest,land,Zille,border_east,tanks
+prepared,ZilleTile_115,Azzurra,land,Zille,,militia
+prepared,ZilleTile_116,Vela Nova Southeast,land,Zille,,paratroopers
+prepared,ZilleTile_117,Pomara West,land,Zille,border_west,tanks
+prepared,ZilleTile_118,Praia Velha,land,Zille,border_west,mechanized_infantry
+prepared,ZilleTile_119,Gnyezno,land,Wehlen,,mountain_infantry
+prepared,ZilleTile_120,Ostrelow,land,Wehlen,,militia
+prepared,ZilleTile_121,Plotzk,land,Wehlen,,mechanized_infantry
+prepared,ZilleTile_122,Bydgoszt,land,Wehlen,,infantry
+prepared,ZilleTile_S1,Kreleck Sound,sea,Sea,,submarine
+prepared,ZilleTile_S7,Munat Narrows,sea,Sea,,submarine
+prepared,ZilleTile_S11,Manes Riuz Sound,sea,Sea,,submarine
+prepared,ZilleTile_S12,Munat Deep,sea,Sea,,destroyer
+prepared,ZilleTile_S16,Munat Shoals,sea,Sea,,destroyer
+prepared,ZilleTile_S17,Tirsa Roads,sea,Sea,,destroyer
+prepared,ZilleTile_S18,Tirsa Reach,sea,Sea,,submarine
+prepared,ZilleTile_S20,Nanta Waters,sea,Sea,,destroyer
+prepared,ZilleTile_S21,Tirsa Bight,sea,Sea,,submarine
+prepared,ZilleTile_S22,Tirsa Narrows,sea,Sea,,destroyer
+prepared,ZilleTile_S25,Tirsa Banks,sea,Sea,,destroyer
+prepared,ZilleTile_S29,Isor Waters,sea,Sea,,destroyer
+prepared,ZilleTile_S35,Walsholm Reach,sea,Sea,,submarine
+prepared,ZilleTile_S36,Lido Isora Waters,sea,Sea,,destroyer
+prepared,ZilleTile_S44,Marenta Waters,sea,Sea,,submarine
+prepared,ZilleTile_S48,Bellacosta Roads,sea,Sea,,destroyer
+prepared,ZilleTile_S50,Capo Lisso Roads,sea,Sea,,submarine
+prepared,ZilleTile_S51,Azzurra Waters,sea,Sea,,submarine
+prepared,ZilleTile_S52,Zille Bay,sea,Sea,,flagship
+prepared,ZilleTile_S54,Santa Calla Banks,sea,Sea,,destroyer
+prepared,ZilleTile_S55,Praia Velha Roads,sea,Sea,,destroyer

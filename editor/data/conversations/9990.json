@@ -730,7 +730,7 @@
       "actorId": 73,
       "speaker": "Lucita Azaro",
       "title": "Answer_CrossExamine_SazonAzaro",
-      "dialogueText": "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"—so long as military ammunition cars always hold right-of-way over commercial cargo.\"",
+      "dialogueText": "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"so long as military ammunition cars always hold right-of-way over commercial cargo.\"",
       "menuText": "",
       "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
       "userScript": "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",

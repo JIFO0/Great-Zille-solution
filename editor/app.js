@@ -4,6 +4,58 @@
  * Zero Emojis - Pure SVG & Vector Telemetry
  */
 
+function initTheme() {
+  const saved = localStorage.getItem('gz_editor_theme') || 'suzerain';
+  applyTheme(saved);
+}
+
+function applyTheme(theme) {
+  if (theme === 'telemetry') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'suzerain');
+  }
+  const label = document.getElementById('theme-toggle-label');
+  if (label) {
+    label.textContent = theme === 'telemetry' ? 'THEME: TELEMETRY' : 'THEME: SUZERAIN';
+  }
+  localStorage.setItem('gz_editor_theme', theme);
+}
+
+function toggleTheme() {
+  const current = localStorage.getItem('gz_editor_theme') || 'suzerain';
+  const next = current === 'suzerain' ? 'telemetry' : 'suzerain';
+  applyTheme(next);
+}
+window.toggleTheme = toggleTheme;
+
+function initLanguage() {
+  const saved = localStorage.getItem('gz_editor_lang') || 'en';
+  applyLanguage(saved);
+}
+
+function applyLanguage(lang) {
+  document.documentElement.setAttribute('lang', lang);
+  const label = document.getElementById('lang-toggle-label');
+  if (label) {
+    label.textContent = lang === 'pl' ? 'LANG: PL' : 'LANG: EN';
+  }
+  localStorage.setItem('gz_editor_lang', lang);
+}
+
+function toggleLanguage() {
+  const current = localStorage.getItem('gz_editor_lang') || 'en';
+  const next = current === 'en' ? 'pl' : 'en';
+  applyLanguage(next);
+  showToast(next === 'en' ? 'Language set to English' : 'Język zmieniony na Polski', 'success');
+}
+window.toggleLanguage = toggleLanguage;
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initLanguage();
+});
+
 let appState = {
   currentTab: 'conversations', // conversations, decisions, reports, situations
   activeFilter: 'all',        // all, MODNEW, MODEDIT, Rizia, Sordland
@@ -86,10 +138,10 @@ async function initApp() {
       selectItem(defaultItem);
     }
 
-    showToast('Baza danych Suzerain załadowana pomyślnie!', 'success');
+    showToast('Suzerain database loaded successfully!', 'success');
   } catch (err) {
-    console.error('Błąd inicjalizacji:', err);
-    showToast('Błąd ładowania danych: ' + err.message, 'error');
+    console.error('Initialization error:', err);
+    showToast('Data loading error: ' + err.message, 'error');
   }
 }
 
@@ -249,9 +301,9 @@ function renderSidebarList() {
     let badgeHtml = '';
     if (it.modStatus === 'MODNEW') badgeHtml = '<span class="badge badge-modnew">MODNEW</span>';
     else if (it.modStatus === 'MODEDIT') badgeHtml = '<span class="badge badge-modedit">MODEDIT</span>';
-    else badgeHtml = '<span class="badge badge-vanilla">GRA</span>';
+    else badgeHtml = '<span class="badge badge-vanilla">GAME</span>';
 
-    const snippet = it.description || it.modNote || (it.entriesCount ? `${it.entriesCount} węzłów dialogu` : '');
+    const snippet = it.description || it.modNote || (it.entriesCount ? `${it.entriesCount} dialogue nodes` : '');
     const turnText = it.turn ? `${it.turn}` : (it.pack || '');
 
     return `
@@ -370,14 +422,14 @@ function renderConversationWorkspace(conv) {
 // ================= INTERACTIVE BRANCHING FLOW TREE ENGINE =================
 
 const SCENARIO_THEMES = [
-  { id: 'ALFA',    color: '#00f0ff', glow: 'rgba(0, 240, 255, 0.4)',  badge: 'SCENARIUSZ_1', label: 'Ścieżka 1' },
-  { id: 'BETA',    color: '#ffb700', glow: 'rgba(255, 183, 0, 0.4)',  badge: 'SCENARIUSZ_2', label: 'Ścieżka 2' },
-  { id: 'GAMMA',   color: '#00ff88', glow: 'rgba(0, 255, 136, 0.4)', badge: 'SCENARIUSZ_3', label: 'Ścieżka 3' },
-  { id: 'DELTA',   color: '#b026ff', glow: 'rgba(176, 38, 255, 0.4)', badge: 'SCENARIUSZ_4', label: 'Ścieżka 4' },
-  { id: 'EPSILON', color: '#ff3366', glow: 'rgba(255, 51, 102, 0.4)', badge: 'SCENARIUSZ_5', label: 'Ścieżka 5' },
-  { id: 'ZETA',    color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.4)', badge: 'SCENARIUSZ_6', label: 'Ścieżka 6' },
-  { id: 'ETA',     color: '#fb923c', glow: 'rgba(251, 146, 60, 0.4)', badge: 'SCENARIUSZ_7', label: 'Ścieżka 7' },
-  { id: 'THETA',   color: '#e879f9', glow: 'rgba(232, 121, 249, 0.4)', badge: 'SCENARIUSZ_8', label: 'Ścieżka 8' }
+  { id: 'ALFA',    color: '#c4a661', glow: 'none', badge: 'SCENARIO_1', label: 'Path 1' },
+  { id: 'BETA',    color: '#c9903e', glow: 'none', badge: 'SCENARIO_2', label: 'Path 2' },
+  { id: 'GAMMA',   color: '#6b946b', glow: 'none', badge: 'SCENARIO_3', label: 'Path 3' },
+  { id: 'DELTA',   color: '#8c6d46', glow: 'none', badge: 'SCENARIO_4', label: 'Path 4' },
+  { id: 'EPSILON', color: '#9e3f3f', glow: 'none', badge: 'SCENARIO_5', label: 'Path 5' },
+  { id: 'ZETA',    color: '#567d8c', glow: 'none', badge: 'SCENARIO_6', label: 'Path 6' },
+  { id: 'ETA',     color: '#b07648', glow: 'none', badge: 'SCENARIO_7', label: 'Path 7' },
+  { id: 'THETA',   color: '#8a687c', glow: 'none', badge: 'SCENARIO_8', label: 'Path 8' }
 ];
 
 let currentGraphTopology = {
@@ -486,35 +538,35 @@ function renderFlowTreeView(container, conv, entries) {
   hudControls.className = 'tree-hud-controls';
   hudControls.innerHTML = `
     <div class="tree-orient-toggle-group">
-      <button class="tree-orient-btn ${isHorizontal ? 'active' : ''}" onclick="setTreeOrientation('horizontal')" title="Układ Poziomy: Tory równoległych scenariuszy biegnące poziomo od lewej do prawej">
+      <button class="tree-orient-btn ${isHorizontal ? 'active' : ''}" onclick="setTreeOrientation('horizontal')" title="Horizontal Layout: Parallel scenario lanes from left to right">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-        <span>TORY LTR</span>
+        <span>LANES LTR</span>
       </button>
-      <button class="tree-orient-btn ${!isHorizontal ? 'active' : ''}" onclick="setTreeOrientation('vertical')" title="Układ Pionowy: Drzewo decyzyjne z kolumnami opcji opadającymi z góry na dół">
+      <button class="tree-orient-btn ${!isHorizontal ? 'active' : ''}" onclick="setTreeOrientation('vertical')" title="Vertical Layout: Decision tree from top to bottom">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="4" x2="6" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="18" y1="4" x2="18" y2="20"/></svg>
-        <span>DRZEWO TTB</span>
+        <span>TREE TTB</span>
       </button>
     </div>
 
-    <button class="tree-home-btn" onclick="frameTreeToStart()" title="Wyśrodkuj kamerę na początku drzewa (Home)">
+    <button class="tree-home-btn" onclick="frameTreeToStart()" title="Center camera on tree start (Home)">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span>START</span>
     </button>
 
-    <button class="tree-jump-btn" onclick="jumpToFirstBranch()" title="Skocz do pierwszego rozgałęzienia wyborów fabularnych">
+    <button class="tree-jump-btn" onclick="jumpToFirstBranch()" title="Jump to first story branch">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
-      <span>SKOCZ DO WYBORU</span>
+      <span>JUMP TO CHOICE</span>
     </button>
 
-    <div class="tree-search-wrap" title="Wyszukaj kwestię w bieżącej scenie (ID, rozmówca, słowo kluczowe)">
-      <input type="text" class="tree-search-input" placeholder="Szukaj w scenie..." oninput="searchNodeInScene(this.value)">
+    <div class="tree-search-wrap" title="Search lines in current scene (ID, speaker, keyword)">
+      <input type="text" class="tree-search-input" placeholder="Search in scene..." oninput="searchNodeInScene(this.value)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </div>
 
-    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(1.15)" title="Powiększ (lub rolka myszy)">+</button>
-    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(0.85)" title="Pomniejsz (lub rolka myszy)">-</button>
-    <div class="zoom-telemetry-pill" id="tree-zoom-val" onclick="resetTreeZoom()" title="Kliknij aby zresetować do 100%">100%</div>
-    <button class="tree-ctrl-btn" onclick="fitTreeToView()" title="Dopasuj całe drzewo do ekranu" style="width: auto; padding: 0 8px; font-family: var(--font-mono); font-size: 10px;">FIT</button>
+    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(1.15)" title="Zoom in (or mouse wheel)">+</button>
+    <button class="tree-ctrl-btn" onclick="zoomTreeAtPoint(0.85)" title="Zoom out (or mouse wheel)">-</button>
+    <div class="zoom-telemetry-pill" id="tree-zoom-val" onclick="resetTreeZoom()" title="Click to reset to 100%">100%</div>
+    <button class="tree-ctrl-btn" onclick="fitTreeToView()" title="Fit entire tree to screen" style="width: auto; padding: 0 8px; font-family: var(--font-mono); font-size: 10px;">FIT</button>
   `;
   treeContainer.appendChild(hudControls);
 
@@ -530,16 +582,16 @@ function renderFlowTreeView(container, conv, entries) {
   const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
   let markersHtml = `
     <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#00f0ff"/>
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c4a661"/>
     </marker>
     <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#ffb700"/>
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c9903e"/>
     </marker>
     <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#b026ff"/>
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#8c6d46"/>
     </marker>
     <marker id="arrow-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#4a402d"/>
     </marker>
   `;
   SCENARIO_THEMES.forEach((thm, idx) => {
@@ -608,7 +660,7 @@ function renderFlowTreeView(container, conv, entries) {
       }
     }
 
-    const snippet = e.dialogueText || e.menuText || (e.title === 'START' ? 'PUNKT STARTOWY SCENY' : 'Węzeł logiki');
+    const snippet = e.dialogueText || e.menuText || (e.title === 'START' ? 'SCENE START NODE' : 'Logic node');
     const speakerDisplay = isPlayer ? 'Player_Romus' : (e.speaker || `Actor_${e.actorId}`);
 
     let modBadge = '';
@@ -624,7 +676,7 @@ function renderFlowTreeView(container, conv, entries) {
 
     let condPill = '';
     if (e.conditions && e.conditions.trim()) {
-      condPill = `<span class="tree-cond-pill" title="Warunek: ${escapeHtml(e.conditions)}">WAR: ${escapeHtml(e.conditions.slice(0, 18))}</span>`;
+      condPill = `<span class="tree-cond-pill" title="Condition: ${escapeHtml(e.conditions)}">WAR: ${escapeHtml(e.conditions.slice(0, 18))}</span>`;
     }
 
     let scriptPill = '';
@@ -644,7 +696,7 @@ function renderFlowTreeView(container, conv, entries) {
       ${(condPill || scriptPill) ? `<div style="display:flex; gap:4px; margin-top:4px;">${condPill}${scriptPill}</div>` : ''}
       <div class="tree-card-footer">
         <span>${isPlayer ? 'WYBOR GRACZA' : (isHub ? 'WSPOLNY HUB' : 'DIALOG')}</span>
-        <span>${(e.outgoing || []).length} ROZGAŁĘZIEŃ</span>
+        <span>${(e.outgoing || []).length} BRANCHES</span>
       </div>
     `;
 
@@ -1271,7 +1323,7 @@ function openNodeInspector(entryId) {
   document.getElementById('drawer-body-content').innerHTML = `
     <div>
       <div class="field-label">
-        <span>WEZEL ID [${entry.id}] // MOWCA:</span>
+        <span>NODE ID [${entry.id}] // SPEAKER:</span>
       </div>
       <select class="node-input-txt" onchange="updateNodeSpeaker(${entry.id}, this.value)">
         ${renderActorOptions(entry.actorId)}
@@ -1281,23 +1333,23 @@ function openNodeInspector(entryId) {
     <div>
       <label style="display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; cursor: pointer;">
         <input type="checkbox" ${isPlayer ? 'checked' : ''} onchange="toggleNodePlayerChoice(${entry.id}, this.checked)">
-        <span>WYBOR GRACZA (PLAYER_CHOICE)</span>
+        <span>PLAYER CHOICE (PLAYER_CHOICE)</span>
       </label>
     </div>
 
     <div>
-      <label class="field-label">WYPOWIEDZ POSTACI (DIALOGUE_TEXT):</label>
+      <label class="field-label">CHARACTER LINE (DIALOGUE_TEXT):</label>
       <textarea class="node-text-area" oninput="updateNodeField(${entry.id}, 'dialogueText', this.value); refreshTreeCardSnippet(${entry.id});">${escapeHtml(entry.dialogueText || '')}</textarea>
     </div>
 
     <div style="display: ${isPlayer ? 'block' : 'none'};" id="drawer-menu-wrap-${entry.id}">
-      <label class="field-label">TEKST OPCJI W MENU GRACZA (MENU_TEXT):</label>
-      <input type="text" class="node-input-txt" value="${escapeHtml(entry.menuText || '')}" oninput="updateNodeField(${entry.id}, 'menuText', this.value); refreshTreeCardSnippet(${entry.id});" placeholder="np. &quot;Zille musi wrocic do Krolestwa.&quot;">
+      <label class="field-label">PLAYER MENU OPTION (MENU_TEXT):</label>
+      <input type="text" class="node-input-txt" value="${escapeHtml(entry.menuText || '')}" oninput="updateNodeField(${entry.id}, 'menuText', this.value); refreshTreeCardSnippet(${entry.id});" placeholder="e.g. &quot;Zille must return to the Kingdom.&quot;">
     </div>
 
     <div>
       <div class="field-label">
-        <span>WARUNEK (PREREQUISITE / CONDITION):</span>
+        <span>CONDITION (PREREQUISITE / CONDITION):</span>
       </div>
       <div style="display:flex; gap:6px;">
         <input type="text" id="drawer-cond-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.conditions || '')}" oninput="updateNodeField(${entry.id}, 'conditions', this.value)">
@@ -1307,7 +1359,7 @@ function openNodeInspector(entryId) {
 
     <div>
       <div class="field-label">
-        <span>SKUTEK SKRYPTOWY (USERSCRIPT):</span>
+        <span>SCRIPT EFFECT (USERSCRIPT):</span>
       </div>
       <div style="display:flex; gap:6px;">
         <input type="text" id="drawer-script-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.userScript || '')}" oninput="updateNodeField(${entry.id}, 'userScript', this.value)">
@@ -1316,13 +1368,13 @@ function openNodeInspector(entryId) {
     </div>
 
     <div>
-      <div class="field-label">KOLEJNE WEZLY (OUTGOING_LINKS):</div>
-      <input type="text" class="node-input-txt code-field" value="${(entry.outgoing || []).join(', ')}" onchange="updateNodeOutgoingLinks(${entry.id}, this.value)" placeholder="np. 20, 21, 22">
+      <div class="field-label">NEXT NODES (OUTGOING_LINKS):</div>
+      <input type="text" class="node-input-txt code-field" value="${(entry.outgoing || []).join(', ')}" onchange="updateNodeOutgoingLinks(${entry.id}, this.value)" placeholder="e.g. 20, 21, 22">
     </div>
 
     <div style="display:flex; justify-content:space-between; margin-top:14px; padding-top:12px; border-top:1px solid var(--border-dim);">
-      <button class="btn-act" onclick="deleteDialogueNode(${entry.id})" style="border-color: var(--neon-crimson); color: var(--neon-crimson);">USUN WEZEL</button>
-      <button class="btn-act btn-save-master" onclick="saveCurrentItem()">ZAPISZ (CTRL+S)</button>
+      <button class="btn-act" onclick="deleteDialogueNode(${entry.id})" style="border-color: var(--neon-crimson); color: var(--neon-crimson);">DELETE NODE</button>
+      <button class="btn-act btn-save-master" onclick="saveCurrentItem()">SAVE (CTRL+S)</button>
     </div>
   `;
 }
@@ -1379,7 +1431,7 @@ function renderCardListView(container, conv, entries) {
     }
 
     const outgoingLinksHtml = (entry.outgoing || []).map(destId => `
-      <span class="link-pill" onclick="scrollToNode(${destId})" title="Przejdź do [#${destId}]">
+      <span class="link-pill" onclick="scrollToNode(${destId})" title="Jump to [#${destId}]">
         ${ICONS.link} [${destId}]
       </span>
     `).join(' ');
@@ -1400,46 +1452,46 @@ function renderCardListView(container, conv, entries) {
             </label>
           </div>
           <div>
-            <button class="tree-ctrl-btn" onclick="deleteDialogueNode(${entry.id})" title="Usuń węzeł">${ICONS.trash}</button>
+            <button class="tree-ctrl-btn" onclick="deleteDialogueNode(${entry.id})" title="Delete node">${ICONS.trash}</button>
           </div>
         </div>
 
         <div>
-          <label class="field-label">WYPOWIEDZ POSTACI (DIALOGUE_TEXT):</label>
+          <label class="field-label">CHARACTER LINE (DIALOGUE_TEXT):</label>
           <textarea class="node-text-area" oninput="updateNodeField(${entry.id}, 'dialogueText', this.value)">${escapeHtml(entry.dialogueText || '')}</textarea>
         </div>
 
         <div style="display: ${isPlayer ? 'block' : 'none'};" id="menu-text-wrap-${entry.id}">
-          <label class="field-label">TEKST OPCJI W MENU GRACZA (MENU_TEXT):</label>
-          <input type="text" class="node-input-txt" value="${escapeHtml(entry.menuText || '')}" oninput="updateNodeField(${entry.id}, 'menuText', this.value)" placeholder="np. &quot;Zille musi wrocic do Krolestwa.&quot;">
+          <label class="field-label">PLAYER MENU OPTION (MENU_TEXT):</label>
+          <input type="text" class="node-input-txt" value="${escapeHtml(entry.menuText || '')}" oninput="updateNodeField(${entry.id}, 'menuText', this.value)" placeholder="e.g. &quot;Zille must return to the Kingdom.&quot;">
         </div>
 
         <div>
           <div class="field-label">
-            <span>WARUNEK ODBLOKOWANIA (PREREQUISITE / CONDITIONS):</span>
+            <span>UNLOCK CONDITION (PREREQUISITE / CONDITIONS):</span>
           </div>
           <div style="display: flex; gap: 6px;">
-            <input type="text" id="cond-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.conditions || '')}" oninput="updateNodeField(${entry.id}, 'conditions', this.value)" placeholder="np. Variable['RiziaDLC.Resources_Budget'] >= 2">
+            <input type="text" id="cond-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.conditions || '')}" oninput="updateNodeField(${entry.id}, 'conditions', this.value)" placeholder="e.g. Variable['RiziaDLC.Resources_Budget'] >= 2">
             <button class="btn-tag-insert" onclick="openTagPicker('cond-input-${entry.id}', ${entry.id}, 'conditions')">TAG</button>
           </div>
         </div>
 
         <div>
           <div class="field-label">
-            <span>SKUTEK SKRYPTOWY (USERSCRIPT):</span>
+            <span>SCRIPT EFFECT (USERSCRIPT):</span>
           </div>
           <div style="display: flex; gap: 6px;">
-            <input type="text" id="script-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.userScript || '')}" oninput="updateNodeField(${entry.id}, 'userScript', this.value)" placeholder="np. Variable['Zille_War_Alfa'] = true;">
+            <input type="text" id="script-input-${entry.id}" class="node-input-txt code-field" value="${escapeHtml(entry.userScript || '')}" oninput="updateNodeField(${entry.id}, 'userScript', this.value)" placeholder="e.g. Variable['Zille_War_Alfa'] = true;">
             <button class="btn-tag-insert" onclick="openTagPicker('script-input-${entry.id}', ${entry.id}, 'userScript')">VAR</button>
           </div>
         </div>
 
         <div class="outgoing-nav-row">
-          <span>KOLEJNE WEZLY:</span>
+          <span>NEXT NODES:</span>
           <div style="display: flex; gap: 4px; flex-wrap: wrap;">
             ${outgoingLinksHtml || '<span style="color: var(--text-dim); font-size: 10px;">[KONIEC SCIEZKI]</span>'}
           </div>
-          <input type="text" style="width: 130px; margin-left: auto;" class="node-input-txt code-field" value="${(entry.outgoing || []).join(', ')}" onchange="updateNodeOutgoingLinks(${entry.id}, this.value)" placeholder="np. 20, 21">
+          <input type="text" style="width: 130px; margin-left: auto;" class="node-input-txt code-field" value="${(entry.outgoing || []).join(', ')}" onchange="updateNodeOutgoingLinks(${entry.id}, this.value)" placeholder="e.g. 20, 21">
         </div>
       </div>
     `;
@@ -1594,17 +1646,17 @@ function renderDecisionWorkspace(dec) {
   const optionsHtml = (appState.activeItemFull.options || []).map((opt, idx) => `
     <div style="background:var(--bg-deep); border:1px solid var(--border-dim); border-radius:4px; padding:12px; display:flex; flex-direction:column; gap:8px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--neon-amber);">OPCJA #${idx + 1}</span>
+        <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--neon-amber);">OPTION #${idx + 1}</span>
         <button class="tree-ctrl-btn" onclick="deleteDecisionOption(${idx})">${ICONS.trash}</button>
       </div>
 
       <div>
-        <label class="field-label">TRESC PRZYCISKU DECYZJI:</label>
+        <label class="field-label">DECISION BUTTON TEXT:</label>
         <input type="text" class="node-input-txt" value="${escapeHtml(opt.text || '')}" oninput="updateDecisionOption(${idx}, 'text', this.value)">
       </div>
 
       <div>
-        <div class="field-label">WARUNEK ODBLOKOWANIA (CONDITION):</div>
+        <div class="field-label">UNLOCK CONDITION (CONDITION):</div>
         <div style="display:flex; gap:6px;">
           <input type="text" id="dec-opt-cond-${idx}" class="node-input-txt code-field" value="${escapeHtml(opt.condition || '')}" oninput="updateDecisionOption(${idx}, 'condition', this.value)">
           <button class="btn-tag-insert" onclick="openTagPicker('dec-opt-cond-${idx}', null, null, (tag) => { updateDecisionOption(${idx}, 'condition', tag); })">TAG</button>
@@ -1612,7 +1664,7 @@ function renderDecisionWorkspace(dec) {
       </div>
 
       <div>
-        <div class="field-label">SKUTEK / INSTRUKCJA (INSTRUCTION):</div>
+        <div class="field-label">EFFECT / INSTRUCTION:</div>
         <textarea class="node-text-area code-field" style="min-height:45px;" oninput="updateDecisionOption(${idx}, 'instruction', this.value)">${escapeHtml(opt.instruction || '')}</textarea>
       </div>
     </div>
@@ -1621,17 +1673,17 @@ function renderDecisionWorkspace(dec) {
   container.innerHTML = `
     <div class="list-view-container">
       <div class="pane-block">
-        <div class="pane-title">PARAMETRY DECYZJI</div>
+        <div class="pane-title">DECISION PARAMETERS</div>
         <div>
-          <label class="field-label">TYTUL DECYZJI:</label>
+          <label class="field-label">DECISION TITLE:</label>
           <input type="text" class="node-input-txt" value="${escapeHtml(dec.title || '')}" oninput="appState.activeItemFull.title = this.value">
         </div>
         <div>
-          <label class="field-label">OPIS FABULARNY:</label>
+          <label class="field-label">NARRATIVE DESCRIPTION:</label>
           <textarea class="node-text-area" style="min-height:80px;" oninput="appState.activeItemFull.description = this.value">${escapeHtml(dec.description || '')}</textarea>
         </div>
         <div>
-          <div class="field-label">WARUNEK POJAWIENIA SIE (STORY_FRAGMENT_CONDITION):</div>
+          <div class="field-label">APPEARANCE CONDITION (STORY_FRAGMENT_CONDITION):</div>
           <div style="display:flex; gap:6px;">
             <input type="text" id="dec-main-cond" class="node-input-txt code-field" value="${escapeHtml(dec.condition || '')}" oninput="appState.activeItemFull.condition = this.value">
             <button class="btn-tag-insert" onclick="openTagPicker('dec-main-cond', null, null, (tag) => { appState.activeItemFull.condition = tag; document.getElementById('dec-main-cond').value = tag; })">TAG</button>
@@ -1641,8 +1693,8 @@ function renderDecisionWorkspace(dec) {
 
       <div class="pane-block">
         <div class="pane-title">
-          <span>WARIANTY WYBORU (OPTIONS)</span>
-          <button class="btn-act" onclick="addNewDecisionOption()">+ OPCJA</button>
+          <span>CHOICE OPTIONS</span>
+          <button class="btn-act" onclick="addNewDecisionOption()">+ OPTION</button>
         </div>
         <div style="display:flex; flex-direction:column; gap:10px;">
           ${optionsHtml || '<p style="color:var(--text-dim); font-family:var(--font-mono); font-size:11px;">BRAK OPCJI</p>'}
@@ -1678,21 +1730,21 @@ function renderReportWorkspace(rep) {
   container.innerHTML = `
     <div class="list-view-container">
       <div class="pane-block">
-        <div class="pane-title">EDYCJA RAPORTU SZTABOWEGO / PRASOWEGO</div>
+        <div class="pane-title">STAFF / PRESS REPORT EDITOR</div>
         <div>
-          <label class="field-label">TYTUL RAPORTU:</label>
+          <label class="field-label">REPORT TITLE:</label>
           <input type="text" class="node-input-txt" value="${escapeHtml(rep.title || '')}" oninput="appState.activeItemFull.title = this.value">
         </div>
         <div>
-          <label class="field-label">TRESC RAPORTU:</label>
+          <label class="field-label">REPORT CONTENT:</label>
           <textarea class="node-text-area" style="min-height:100px;" oninput="appState.activeItemFull.description = this.value">${escapeHtml(rep.description || '')}</textarea>
         </div>
         <div>
-          <label class="field-label">TURA GRY:</label>
+          <label class="field-label">GAME TURN:</label>
           <input type="number" class="node-input-txt" style="width:100px;" value="${rep.turn || -1}" oninput="appState.activeItemFull.turn = parseInt(this.value)">
         </div>
         <div>
-          <div class="field-label">ZMIENNA AKTYWUJACA (IS_ENABLED_VARIABLE):</div>
+          <div class="field-label">ACTIVATING VARIABLE (IS_ENABLED_VARIABLE):</div>
           <div style="display:flex; gap:6px;">
             <input type="text" id="rep-cond-input" class="node-input-txt code-field" value="${escapeHtml(rep.condition || '')}" oninput="appState.activeItemFull.condition = this.value">
             <button class="btn-tag-insert" onclick="openTagPicker('rep-cond-input', null, null, (tag) => { appState.activeItemFull.condition = tag; document.getElementById('rep-cond-input').value = tag; })">TAG</button>
@@ -1710,33 +1762,33 @@ function renderSituationWorkspace(sit) {
   container.innerHTML = `
     <div class="list-view-container">
       <div class="pane-block">
-        <div class="pane-title">EDYCJA SYTUACJI KRAJU // MODYFIKATORA</div>
+        <div class="pane-title">COUNTRY SITUATION // MODIFIER EDITOR</div>
         <div>
-          <label class="field-label">TYTUL SYTUACJI:</label>
+          <label class="field-label">SITUATION TITLE:</label>
           <input type="text" class="node-input-txt" value="${escapeHtml(sit.title || '')}" oninput="appState.activeItemFull.title = this.value">
         </div>
         <div>
-          <label class="field-label">OPIS WPLYWU NA PAŃSTWO:</label>
+          <label class="field-label">NATIONAL IMPACT DESCRIPTION:</label>
           <textarea class="node-text-area" style="min-height:80px;" oninput="appState.activeItemFull.description = this.value">${escapeHtml(sit.description || '')}</textarea>
         </div>
         <div style="display:flex; gap:12px;">
           <div style="flex:1;">
-            <label class="field-label">DOTKLIWOSC (SEVERITY):</label>
+            <label class="field-label">SEVERITY:</label>
             <select class="node-input-txt" onchange="appState.activeItemFull.severity = this.value">
               <option value="VeryGood" ${sit.severity === 'VeryGood' ? 'selected' : ''}>VeryGood (Bardzo Dobra)</option>
               <option value="Good" ${sit.severity === 'Good' ? 'selected' : ''}>Good (Dobra)</option>
-              <option value="Medium" ${sit.severity === 'Medium' ? 'selected' : ''}>Medium (Neutralna)</option>
+              <option value="Medium" ${sit.severity === 'Medium' ? 'selected' : ''}>Medium (Neutral)</option>
               <option value="Bad" ${sit.severity === 'Bad' ? 'selected' : ''}>Bad (Zla)</option>
               <option value="VeryBad" ${sit.severity === 'VeryBad' ? 'selected' : ''}>VeryBad (Krytyczna)</option>
             </select>
           </div>
           <div style="flex:1;">
-            <label class="field-label">KATEGORIA:</label>
+            <label class="field-label">CATEGORY:</label>
             <input type="text" class="node-input-txt" value="${escapeHtml(sit.category || '')}" oninput="appState.activeItemFull.category = this.value">
           </div>
         </div>
         <div>
-          <div class="field-label">ZMIENNA AKTYWUJACA (IS_ENABLED_VARIABLE):</div>
+          <div class="field-label">ACTIVATING VARIABLE (IS_ENABLED_VARIABLE):</div>
           <div style="display:flex; gap:6px;">
             <input type="text" id="sit-cond-input" class="node-input-txt code-field" value="${escapeHtml(sit.condition || '')}" oninput="appState.activeItemFull.condition = this.value">
             <button class="btn-tag-insert" onclick="openTagPicker('sit-cond-input', null, null, (tag) => { appState.activeItemFull.condition = tag; document.getElementById('sit-cond-input').value = tag; })">TAG</button>
@@ -1789,7 +1841,7 @@ async function deployModToGame() {
     const res = await fetch('/api/deploy', { method: 'POST' });
     const data = await res.json();
     if (data.success && data.syncedToGame) {
-      showToast('Wszystkie nadpisania pomyślnie wdrożone do katalogu gry!', 'success');
+      showToast('All overrides successfully deployed to game directory!', 'success');
     } else {
       showToast('Zsynchronizowano pliki lokalne moda.', 'info');
     }
@@ -1960,4 +2012,71 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+
+// ============================================================================
+// SETTINGS & DECOMPILER
+// ============================================================================
+async function openSettingsModal() {
+  const modal = document.getElementById('settings-modal');
+  const input = document.getElementById('suzerain-path-input');
+  const out = document.getElementById('decompile-output');
+  if (out) out.style.display = 'none';
+  try {
+    const res = await fetch('/api/config');
+    const cfg = await res.json();
+    if (input && cfg.suzerain_path) input.value = cfg.suzerain_path;
+  } catch (e) {
+    console.error('Failed to load config:', e);
+  }
+  if (modal) modal.style.display = 'flex';
+}
+
+async function saveSuzerainPath() {
+  const input = document.getElementById('suzerain-path-input');
+  const path = input ? input.value.trim() : '';
+  try {
+    const res = await fetch('/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ suzerain_path: path })
+    });
+    const data = await res.json();
+    if (data.status === 'ok') {
+      if (typeof showToast === 'function') showToast('Zapisano ścieżkę Suzeraina!', 'success');
+    } else {
+      alert('Błąd zapisu: ' + (data.message || 'Nieznany błąd'));
+    }
+  } catch (e) {
+    alert('Błąd połączenia z serwerem: ' + e);
+  }
+}
+
+async function runDecompiler() {
+  const input = document.getElementById('suzerain-path-input');
+  const btn = document.getElementById('btn-run-decompile');
+  const out = document.getElementById('decompile-output');
+  const path = input ? input.value.trim() : '';
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Dekompilacja trwa...'; }
+  if (out) { out.style.display = 'block'; out.textContent = 'Uruchamianie dekompilatora UnityPy...'; }
+  try {
+    await saveSuzerainPath();
+    const res = await fetch('/api/decompile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ suzerain_path: path })
+    });
+    const data = await res.json();
+    if (out) out.textContent = data.output || data.message || JSON.stringify(data);
+    if (data.status === 'ok') {
+      if (typeof showToast === 'function') showToast('Dekompilacja zakończona! Odśwież stronę.', 'success');
+    } else {
+      if (typeof showToast === 'function') showToast('Błąd dekompilacji!', 'error');
+    }
+  } catch (e) {
+    if (out) out.textContent = 'Błąd: ' + e;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '📦 Dekompiluj dane z gry (UnityPy)'; }
+  }
 }

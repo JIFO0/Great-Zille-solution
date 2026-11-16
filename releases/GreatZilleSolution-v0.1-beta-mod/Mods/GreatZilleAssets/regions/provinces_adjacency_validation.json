@@ -1,0 +1,339 @@
+{
+ "provinces": 186,
+ "land": 129,
+ "sea": 57,
+ "edges": 496,
+ "edge_types": {
+  "sea": 111,
+  "land": 303,
+  "coastal": 79,
+  "strait": 3
+ },
+ "road_links": 52,
+ "road_links_main": 18,
+ "road_links_secondary": 34,
+ "minor_road_only_links": 40,
+ "rail_links": 15,
+ "min_neighbours": 2,
+ "max_neighbours": 8,
+ "provinces_without_neighbours": [
+  "ZilleTile_129"
+ ],
+ "impassable": [
+  "ZilleTile_129"
+ ],
+ "impassable_links_dropped": [
+  [
+   "ZilleTile_127",
+   "ZilleTile_129"
+  ],
+  [
+   "ZilleTile_128",
+   "ZilleTile_129"
+  ],
+  [
+   "ZilleTile_129",
+   "ZilleTile_S38"
+  ],
+  [
+   "ZilleTile_95",
+   "ZilleTile_129"
+  ]
+ ],
+ "symmetric": true,
+ "connected_components_all": 2,
+ "connected_components_passable": 1,
+ "derdia_wehlen_links": [
+  [
+   "ZilleTile_122",
+   "ZilleTile_124"
+  ],
+  [
+   "ZilleTile_122",
+   "ZilleTile_126"
+  ],
+  [
+   "ZilleTile_88",
+   "ZilleTile_128"
+  ],
+  [
+   "ZilleTile_93",
+   "ZilleTile_126"
+  ],
+  [
+   "ZilleTile_95",
+   "ZilleTile_128"
+  ]
+ ],
+ "derdia_internal_links": [
+  [
+   "ZilleTile_123",
+   "ZilleTile_124"
+  ],
+  [
+   "ZilleTile_123",
+   "ZilleTile_125"
+  ],
+  [
+   "ZilleTile_124",
+   "ZilleTile_125"
+  ],
+  [
+   "ZilleTile_124",
+   "ZilleTile_126"
+  ],
+  [
+   "ZilleTile_125",
+   "ZilleTile_126"
+  ],
+  [
+   "ZilleTile_125",
+   "ZilleTile_127"
+  ],
+  [
+   "ZilleTile_126",
+   "ZilleTile_127"
+  ],
+  [
+   "ZilleTile_126",
+   "ZilleTile_128"
+  ],
+  [
+   "ZilleTile_127",
+   "ZilleTile_128"
+  ]
+ ],
+ "rotsla_96_neighbours": [
+  [
+   "ZilleTile_S27",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S28",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S34",
+   "coastal"
+  ],
+  [
+   "ZilleTile_S35",
+   "coastal"
+  ]
+ ],
+ "rotsla_sea_only": true,
+ "land_components_with_straits": [
+  [
+   89,
+   [
+    "ZilleTile_1",
+    "ZilleTile_2",
+    "ZilleTile_3",
+    "ZilleTile_4"
+   ]
+  ],
+  [
+   38,
+   [
+    "ZilleTile_68",
+    "ZilleTile_69",
+    "ZilleTile_70",
+    "ZilleTile_71"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_129"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_96"
+   ]
+  ]
+ ],
+ "land_components_without_straits": [
+  [
+   88,
+   [
+    "ZilleTile_1",
+    "ZilleTile_2",
+    "ZilleTile_4",
+    "ZilleTile_5"
+   ]
+  ],
+  [
+   37,
+   [
+    "ZilleTile_68",
+    "ZilleTile_69",
+    "ZilleTile_70",
+    "ZilleTile_71"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_129"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_72"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_96"
+   ]
+  ],
+  [
+   1,
+   [
+    "ZilleTile_3"
+   ]
+  ]
+ ],
+ "sea_components": [
+  [
+   57,
+   [
+    "ZilleTile_S1",
+    "ZilleTile_S2",
+    "ZilleTile_S3",
+    "ZilleTile_S4"
+   ]
+  ]
+ ],
+ "coastal_land_provinces": 42,
+ "manual_links": [
+  [
+   "ZilleTile_5",
+   "ZilleTile_9",
+   "owner request (kept from v12): Tirsa Northwest <-> Nanta"
+  ],
+  [
+   "ZilleTile_38",
+   "ZilleTile_115",
+   "across the narrow Zille Bay inlet (S52): Azzurra (Azzurra shore) <-> Rivamare (Rivamare shore), as v12 34<->38"
+  ]
+ ],
+ "straits": [
+  [
+   "ZilleTile_2",
+   "ZilleTile_3",
+   "Munat",
+   "Manes Riuz",
+   396
+  ],
+  [
+   "ZilleTile_3",
+   "ZilleTile_5",
+   "Manes Riuz",
+   "Tirsa",
+   357
+  ],
+  [
+   "ZilleTile_72",
+   "ZilleTile_75",
+   "Kreleck Islands",
+   "Shwinouz",
+   245
+  ]
+ ],
+ "short_borders_to_review": [
+  [
+   "ZilleTile_S12",
+   "ZilleTile_S20",
+   "sea",
+   84
+  ],
+  [
+   "ZilleTile_19",
+   "ZilleTile_108",
+   "land",
+   88
+  ],
+  [
+   "ZilleTile_16",
+   "ZilleTile_98",
+   "land",
+   92
+  ],
+  [
+   "ZilleTile_21",
+   "ZilleTile_110",
+   "land",
+   100
+  ],
+  [
+   "ZilleTile_27",
+   "ZilleTile_109",
+   "land",
+   108
+  ],
+  [
+   "ZilleTile_37",
+   "ZilleTile_50",
+   "land",
+   108
+  ],
+  [
+   "ZilleTile_S1",
+   "ZilleTile_S8",
+   "sea",
+   116
+  ],
+  [
+   "ZilleTile_18",
+   "ZilleTile_22",
+   "land",
+   116
+  ],
+  [
+   "ZilleTile_94",
+   "ZilleTile_S39",
+   "coastal",
+   128
+  ],
+  [
+   "ZilleTile_104",
+   "ZilleTile_S30",
+   "coastal",
+   128
+  ],
+  [
+   "ZilleTile_14",
+   "ZilleTile_101",
+   "land",
+   132
+  ]
+ ],
+ "main_secondary_road_crossings_without_edge": [
+  [
+   "ZilleTile_127",
+   "ZilleTile_129",
+   [
+    "road_yol_muardien"
+   ]
+  ],
+  [
+   "ZilleTile_128",
+   "ZilleTile_129",
+   [
+    "road_yol_golcondra"
+   ]
+  ]
+ ],
+ "rule": {
+  "method": "gap-voronoi shared edge",
+  "gap_reach": 95,
+  "min_shared_border": 80,
+  "review_below": 140,
+  "road_link": "main or secondary road line crosses from one province cell into the other (sampled every 2 map px on the gap-Voronoi raster)"
+ }
+}

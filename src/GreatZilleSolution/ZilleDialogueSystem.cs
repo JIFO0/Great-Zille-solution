@@ -44,6 +44,8 @@ namespace GreatZilleSolution
         public const int ConvId_DerdiaTalks = 9995;
         public const int ConvId_LespiaTalks = 9996;
         public const int ConvId_RumburgTalks = 9997;
+        public const int ConvId_DerdiaInvestigation = 10001;
+        public const int ConvId_DerdiaStateVisit = 10002;
 
         private static bool _conversationsRegistered = false;
 
@@ -58,6 +60,8 @@ namespace GreatZilleSolution
                     db.GetConversation("Turn_Zille_WarBriefing") != null &&
                     db.GetConversation("Turn_Zille_MaveNortusHQ") != null &&
                     db.GetConversation("Turn_Zille_DerdiaTalks") != null &&
+                    db.GetConversation("Turn_Zille_DerdiaInvestigation") != null &&
+                    db.GetConversation("Turn_Zille_DerdiaStateVisit") != null &&
                     db.GetConversation("Turn_Zille_LespiaTalks") != null &&
                     db.GetConversation("Turn_Zille_RumburgTalks") != null &&
                     db.GetConversation("Turn_Zille_WarLogisticsDispute") != null &&
@@ -67,14 +71,16 @@ namespace GreatZilleSolution
                     return;
                 }
 
-                MelonLogger.Msg("[ZILLE DIALOGUE] Registering all 13 Great Zille narrative scenes into masterDatabase...");
+                MelonLogger.Msg("[ZILLE DIALOGUE] Registering all 15 Great Zille narrative scenes into masterDatabase...");
 
                 RegisterWarPlanning(db);
                 RegisterWarLogisticsDispute(db);
                 RegisterWarCouncilBriefing(db);
                 RegisterWarBalconySpeech(db);
                 RegisterMaveNortusHQ(db);
+                RegisterDerdiaInvestigation(db);
                 RegisterDerdiaTalks(db);
+                RegisterDerdiaStateVisit(db);
                 RegisterLespiaTalks(db);
                 RegisterRumburgTalks(db);
                 RegisterWarPreNegotiationsBriefing(db);
@@ -85,7 +91,7 @@ namespace GreatZilleSolution
 
                 _conversationsRegistered = true;
                 DialogueOverrideManager.ApplyAllOverrides();
-                MelonLogger.Msg("[ZILLE DIALOGUE] All 13 custom scenes successfully registered into masterDatabase!");
+                MelonLogger.Msg("[ZILLE DIALOGUE] All 15 custom scenes successfully registered into masterDatabase!");
             }
             catch (Exception ex)
             {
@@ -510,6 +516,37 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(choice);
             conv.dialogueEntries.Add(replyLucita);
             conv.dialogueEntries.Add(replyTitus);
+
+            // Also inject Turn 3 Derdia-Wehlen border sabotage signal inquiry
+            int derdiaChoiceId = 99144;
+            int derdiaReplyTitusId = 99145;
+            int derdiaReplyCarlosId = 99146;
+
+            var derdiaChoice = CreateEntry(conv.id, derdiaChoiceId, RomusId, TitusId, "Zille_Turn3_DerdiaSabotageSignal",
+                "\"Before we react only to Zille—what were those explosions reported along the Derdia-Wehlen frontier near Yol last night?\"",
+                "\"Before we react only to Zille—what were those mysterious explosions reported along the Derdia-Wehlen border near Yol last night?\"");
+            SetEntryScript(derdiaChoice, "Variable[\"Zille_Derdia_SabotageSignals\"] = true;");
+
+            var derdiaReplyTitus = CreateEntry(conv.id, derdiaReplyTitusId, TitusId, RomusId, "Titus_Turn3_DerdiaSabotage_Reply",
+                "\"A curious coincidence, Your Majesty,\" Titus answered grimly. \"While Zille burned, saboteurs struck a Derdian pipeline pumping station and Silver Garrison supply dumps near Yol and Qerzan. Wraclawitz blames BFF smugglers, yet the timing smells of Wehzek diversion. Our agents can investigate properly next turn.\"");
+            SetEntryCondition(derdiaReplyTitus, "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
+
+            var derdiaReplyCarlos = CreateEntry(conv.id, derdiaReplyCarlosId, CarlosId, RomusId, "Carlos_Turn3_DerdiaSabotage_Reply",
+                "\"Military dispatches noted twin explosions along the Yol-Qerzan passes last night, Your Majesty—targeting Derdian pipeline pumps and Silver Garrison depots. Smolak blames smugglers, though our intelligence officers suspect Wehzek saboteurs.\"");
+            SetEntryCondition(derdiaReplyCarlos, "Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true");
+
+            derdiaChoice.outgoingLinks.Add(CreateLink(conv.id, derdiaChoiceId, derdiaReplyTitusId));
+            derdiaChoice.outgoingLinks.Add(CreateLink(conv.id, derdiaChoiceId, derdiaReplyCarlosId));
+            if (nextId >= 0)
+            {
+                derdiaReplyTitus.outgoingLinks.Add(CreateLink(conv.id, derdiaReplyTitusId, nextId));
+                derdiaReplyCarlos.outgoingLinks.Add(CreateLink(conv.id, derdiaReplyCarlosId, nextId));
+            }
+
+            parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, derdiaChoiceId));
+            conv.dialogueEntries.Add(derdiaChoice);
+            conv.dialogueEntries.Add(derdiaReplyTitus);
+            conv.dialogueEntries.Add(derdiaReplyCarlos);
             return true;
         }
 

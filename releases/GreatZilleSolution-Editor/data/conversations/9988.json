@@ -1,0 +1,982 @@
+{
+  "id": 9988,
+  "title": "Turn_Zille_WarBriefing",
+  "description": "Królewska Narada Wojenna w Palas Rezna",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Królewska Narada Wojenna w Palas Rezna",
+  "actors": [
+    "Angelica Sazon",
+    "Carlos Robles Azaro",
+    "Hugo Toras",
+    "Laurento Esquibel",
+    "Lucita Azaro",
+    "Narrator",
+    "Player_Romus",
+    "Sal Ignacius",
+    "Taddeus Azaro",
+    "Titus Gordion"
+  ],
+  "readVariables": [
+    "RiziaDLC.Angelica_Arrested",
+    "RiziaDLC.Angelica_Executed",
+    "RiziaDLC.Council_GrandVizier_Angelica",
+    "RiziaDLC.Council_GrandVizier_Sal",
+    "RiziaDLC.CountryRelation_Pales_AtWar",
+    "RiziaDLC.Country_HouseAzaro_Enemy",
+    "RiziaDLC.Country_HouseToras_Enemy",
+    "RiziaDLC.Diplomacy_Pales_DeclareWar",
+    "RiziaDLC.Hugo_Arrested",
+    "RiziaDLC.Hugo_Executed",
+    "RiziaDLC.Hugo_Resigned",
+    "RiziaDLC.Lucita_Arrested",
+    "RiziaDLC.Lucita_Executed",
+    "RiziaDLC.Lucita_Married",
+    "RiziaDLC.Lucita_RomanceHappened",
+    "RiziaDLC.Pales_War",
+    "RiziaDLC.Relations_Lucita_Romance",
+    "RiziaDLC.Resources_Energy",
+    "RiziaDLC.Resources_Military_Equipment",
+    "RiziaDLC.Sal_Arrested",
+    "RiziaDLC.Sal_Executed",
+    "RiziaDLC.Taddeus_Arrested",
+    "RiziaDLC.Taddeus_Executed",
+    "RiziaDLC.Titus_Arrested",
+    "RiziaDLC.Titus_Executed",
+    "RiziaDLC.Turn06_Council_LucitaOffended",
+    "Zille_AN_PreBrief_Sent",
+    "Zille_Fleet_Total",
+    "Zille_NavalBlockadeActive"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.Resources_Energy",
+    "Zille_AN_Legitimacy",
+    "Zille_AN_PreBrief_Sent",
+    "Zille_Leverage",
+    "Zille_NavalBlockadeActive",
+    "Zille_Smolak_Pressure",
+    "Zille_War_Active",
+    "Zille_War_PlanType",
+    "Zille_War_Postpone",
+    "Zille_War_Readiness",
+    "Zille_War_RomulusPlan",
+    "Zille_War_StaffPlan"
+  ],
+  "choicesCount": 12,
+  "entriesCount": 51,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Briefing_Atmosphere",
+      "dialogueText": "Midnight in the War Room of Palas Rezna. Heavy rain beat rhythmically against the stone walls, while inside the air hung thick with coffee, parchment, and gun oil. Across the tactical table lay the relief map of the Zille peninsula, the Strait of Kreleck, and the Gulf of Moridia, brass markers tracking every Wehzek garrison and naval patrol.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2,
+        102,
+        103,
+        104,
+        105
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Briefing_Open",
+      "dialogueText": "Your Majesty... The hour has arrived. Years of diplomatic patience have run dry. Before dawn, the world will learn that Rizia has drawn the sword to reclaim Zille.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        3,
+        113,
+        115,
+        116,
+        117,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Lucita_Narration_Married",
+      "dialogueText": "Lucita stood at the head of the map table, her field marshal's baton resting across the Brenas frontier. When your eyes met, her severe military demeanor softened with quiet warmth before she addressed the assembly.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] == true",
+      "userScript": "",
+      "outgoing": [
+        4
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 4,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Open_Married",
+      "dialogueText": "My King... and my husband. All divisions are deployed at their staging posts. High command awaits your operational doctrine.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 5,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Briefing_Note",
+      "dialogueText": "Our diplomatic memorandums are pre-scheduled for the Alliance of Nations in Konstantium, Kyrute—framing this strictly as enforcing the lapsed 1927 treaty.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)",
+      "userScript": "",
+      "outgoing": [
+        6,
+        106
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 6,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Titus_Briefing_Note",
+      "dialogueText": "The Golden Guard has deployed vanguard security teams along the advance routes, Your Majesty. Valdez's garrison in Zille City has not yet detected our main mechanized assembly.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        7,
+        107,
+        108
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 7,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Briefing_Arsenal_Fleet_Good",
+      "dialogueText": "Quartermasters reported over 1,000 reserve weapons ready for immediate frontline replacement, while naval signals from Monqiz confirmed strong warship squadrons poised to contest the Gulf of Moridia.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"Zille_Fleet_Total\"] or 0) >= 2",
+      "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Command_Hub_Prompt",
+      "dialogueText": "Across the mahogany table, the operational map awaited your royal seal. Before choosing your command doctrine, you could still order last-hour preparatory measures if our resources permitted.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        15,
+        17,
+        20,
+        30,
+        35,
+        40,
+        50
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 15,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Naval_Blockade",
+      "dialogueText": "Before our infantry moves a meter, sortie our squadrons from Monqiz to blockade the Gulf of Moridia and Strait of Kreleck, choking Valdez's sea supply lines from mainland Wehlen!",
+      "menuText": "\"First, seal the Gulf of Moridia! Dispatch our warships to blockade Valdez's supply convoys (-1 Energy).\"",
+      "conditions": "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1 and Variable[\"Zille_NavalBlockadeActive\"] ~= true",
+      "userScript": "Variable[\"Zille_NavalBlockadeActive\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+      "outgoing": [
+        16
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 16,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Ack_Naval_Blockade",
+      "dialogueText": "Admiralty telegraphs clattered instantly. Within twenty minutes, Monqiz confirmed destroyer flotillas and patrol craft steaming out to seal the Strait of Kreleck against Wehzek cargo steamers.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 17,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_AN_Legal_Dispatch",
+      "dialogueText": "Have our ambassadors in Konstantium distribute the legal memorandum on Wehlen's 1927 treaty breach and bombing evidence to every delegation before the first artillery barrage begins.",
+      "menuText": "\"Instruct our Konstantium envoy to circulate the 1927 treaty breach dossier before dawn.\"",
+      "conditions": "Variable[\"Zille_AN_PreBrief_Sent\"] ~= true",
+      "userScript": "Variable[\"Zille_AN_PreBrief_Sent\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+      "outgoing": [
+        18
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 18,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_AN_Legal_Dispatch",
+      "dialogueText": "Laurento nodded with sharp approval. \"Encrypted diplomatic bags are moving to Kyrute immediately, Your Majesty. Smolak will lose the propaganda battle before dawn.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Golden_Sword",
+      "dialogueText": "I will command this campaign myself. Authorize Operation Golden Sword Phase I. Launch our armored spearheads across the Brenas-Zille frontier through Wiktrany toward Zille City and Munat.",
+      "menuText": "\"I will command at the War Table: Authorize Operation Golden Sword Phase I.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenSword\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+      "outgoing": [
+        21,
+        121
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Golden_Sword_Lucita",
+      "dialogueText": "\"A glorious doctrine, Your Majesty!\" Lucita's eyes burned with martial pride. \"Our heavy tanks and mechanized brigades will punch straight through Wiktrany. The War Table awaits your deployment for Phase I!\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        22,
+        122
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 22,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Golden_Sword_Hugo",
+      "dialogueText": "\"May Saint Wruhec watch over our soldiers, Romus. Glovurius axa Rizia!\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Golden_Ark",
+      "dialogueText": "I will lead our forces personally. Authorize Operation Golden Ark Phase I. While border forces pin down Zille's front, our fleet will cross the Gulf of Moridia to strike mainland Wehlen at Kratsna, Rotsla, and Grodzizg!",
+      "menuText": "\"I will command at the War Table: Authorize Operation Golden Ark Phase I (Amphibious Envelopment).\"",
+      "conditions": "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+      "outgoing": [
+        31,
+        131
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 31,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Golden_Ark_Lucita",
+      "dialogueText": "\"An audacious maritime stroke!\" Lucita studied the sea lanes intensely. \"Landing across the Gulf of Moridia on mainland Wehlen will shock Smolak's command at its core. The War Table awaits your deployment for Phase I!\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 32,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Golden_Ark_Laurento",
+      "dialogueText": "\"Be warned, Your Majesty: striking mainland Wehlen directly across the sea will provoke Valgsland fiercely, so speed at sea will be everything. Godspeed to our fleet.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 35,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Golden_Ark_WeakFleet",
+      "dialogueText": "Despite the Admiralty's warnings about our thin naval escorts, I authorize Operation Golden Ark! Load the transports and cross the Gulf of Moridia to sever Wehlen from behind!",
+      "menuText": "\"[RISKY — Weak Navy] Authorize Operation Golden Ark anyway across the Gulf of Moridia!\"",
+      "conditions": "(Variable[\"Zille_Fleet_Total\"] or 0) < 2",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) - 2;",
+      "outgoing": [
+        31,
+        131
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Staff_Command",
+      "dialogueText": "The General Staff will direct the field execution of this war. Present your four strategic doctrines for royal selection.",
+      "menuText": "\"The General Staff will direct the campaign. Present the four staff doctrines for execution.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_PlanType\"] = \"Staff\";",
+      "outgoing": [
+        41
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 41,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Staff_Doctrine_Presentation",
+      "dialogueText": "The General Staff laid out four strategic doctrines across the map:\n\n  Plan Hawk: Heavy aerial strikes and artillery barrages shatter Valdez's command network (best with Bomber Wings & >=3 Energy).\n  Plan Sword: Aggressive armored charge through Wiktrany (best with >=2 Tank brigades & loyal House Azaro).\n  Plan Ark: Naval blockade and sea envelopment across the Gulf of Moridia (requires >=2 Warships/Submarines/Flagship).\n  Plan Spear: Covert night decapitation strike against Valdez's HQ (best with expanded Golden Guard / Intel Hub).\n\nWhich staff doctrine do you authorize?",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        42,
+        43,
+        44,
+        440,
+        45
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 42,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Authorize_Staff_Hawk",
+      "dialogueText": "I authorize Plan Hawk. Bring down our bomber wings and heavy artillery to flatten their defensive works before our infantry advances.",
+      "menuText": "\"Authorize Plan Hawk: Shatter their forward redoubts with air and artillery power.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_StaffPlan\"] = \"Hawk\"; Variable[\"Zille_War_Active\"] = true;",
+      "outgoing": [
+        46,
+        146
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 43,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Authorize_Staff_Sword",
+      "dialogueText": "I authorize Plan Sword. Mass our armor and let the Azaro divisions spearhead the breakthrough into Wiktrany.",
+      "menuText": "\"Authorize Plan Sword: Unleash our armored divisions in a central breakthrough.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_StaffPlan\"] = \"Sword\"; Variable[\"Zille_War_Active\"] = true;",
+      "outgoing": [
+        46,
+        146
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 44,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Authorize_Staff_Ark",
+      "dialogueText": "I authorize Plan Ark. The Royal Navy will seal the Gulf of Moridia and Strait of Kreleck, cutting off Valdez's sea supply lines.",
+      "menuText": "\"Authorize Plan Ark: Execute a disciplined maritime blockade and sea encirclement.\"",
+      "conditions": "(Variable[\"Zille_Fleet_Total\"] or 0) >= 2",
+      "userScript": "Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true;",
+      "outgoing": [
+        46,
+        146
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 45,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Authorize_Staff_Spear",
+      "dialogueText": "I authorize Plan Spear. Send our finest operatives into Zille tonight to sever Valdez's communications and capture his staff before dawn.",
+      "menuText": "\"Authorize Plan Spear: Deploy elite commandos and guardsmen to decapitate Valdez's command.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_StaffPlan\"] = \"Spear\"; Variable[\"Zille_War_Active\"] = true;",
+      "outgoing": [
+        47,
+        147
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 46,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Ack_Staff_Lucita",
+      "dialogueText": "\"The orders are dispatched, Your Majesty! The General Staff has launched the offensive and will report front-line progress.\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 47,
+      "actorId": 81,
+      "speaker": "Titus Gordion",
+      "title": "Ack_Staff_Titus",
+      "dialogueText": "\"My guardsmen are already moving under cover of darkness, Your Majesty,\" Titus said quietly, his hand resting firmly over his service sidearm. \"Smolak's officers will wake up in chains.\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 50,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Choice_Postpone_War",
+      "dialogueText": "Hold the offensive for now. Keep our divisions at maximum combat readiness along the frontier, but do not cross until I give the royal command.",
+      "menuText": "\"Hold the offensive for now. Maintain maximum combat readiness along the border.\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Postpone\"] = true;",
+      "outgoing": [
+        51,
+        151
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 51,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Postpone_Hugo",
+      "dialogueText": "\"A prudent and measured decision, Your Majesty. The General Staff will maintain full readiness along the frontier.\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 102,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Briefing_Open_Hostile",
+      "dialogueText": "Your Majesty. Despite the bitter rift between us, I cannot ignore the duty of my office: before dawn, Rizia goes to war for Zille. May God shield the realm from the consequences.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] == true",
+      "userScript": "",
+      "outgoing": [
+        3,
+        113,
+        115,
+        116,
+        117,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 103,
+      "actorId": 98,
+      "speaker": "Angelica Sazon",
+      "title": "Angelica_Vizier_Briefing_Open",
+      "dialogueText": "Your Majesty. As Grand Vizier, I have reviewed the final mobilization decrees. Before dawn, Rizia moves to reclaim Zille—and with it, the historic wholeness of Brenas.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        3,
+        113,
+        115,
+        116,
+        117,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 104,
+      "actorId": 87,
+      "speaker": "Sal Ignacius",
+      "title": "Sal_Vizier_Briefing_Open",
+      "dialogueText": "Your Majesty. As Grand Vizier, I pray Saint Wruhec blesses this righteous endeavor. Before dawn, our armies move to restore Zille to the anointed Crown.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] ~= true and Variable[\"RiziaDLC.Council_GrandVizier_Sal\"] == true and Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        3,
+        113,
+        115,
+        116,
+        117,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 105,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Briefing_Open_NoHugo",
+      "dialogueText": "Your Majesty. All ministerial seals are prepared. Within hours, Rizia's armed forces will move to enforce the expiration of the 1927 treaty.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and not ((Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true) and not ((Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] ~= true and Variable[\"RiziaDLC.Council_GrandVizier_Sal\"] == true and Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true)",
+      "userScript": "",
+      "outgoing": [
+        3,
+        113,
+        115,
+        116,
+        117,
+        118
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 106,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Carlos_Security_NoTitus",
+      "dialogueText": "Forward military intelligence confirms that General Valdez's coastal and border outposts have not yet detected our main concentration, Your Majesty.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        7,
+        107,
+        108
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 107,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Briefing_Arsenal_Good_Fleet_Weak",
+      "dialogueText": "Quartermasters confirmed over 1,000 reserve weapons stacked in Brenas, yet the Admiralty warned that fewer than two operational capital ships or destroyer groups stand ready at Monqiz—making distant sea landings perilous.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"Zille_Fleet_Total\"] or 0) < 2",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 108,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Briefing_Arsenal_Low_Warn",
+      "dialogueText": "The logistics officer lowered his voice uneasily: with fewer than 1,000 reserve weapons in the royal depots, prolonged frontal battles will rapidly exhaust our ammunition reserves unless foreign munitions arrive.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000",
+      "userScript": "",
+      "outgoing": [
+        10
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 113,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Lucita_Narration_Romance",
+      "dialogueText": "Lucita looked up from the coastal approaches, her dark eyes flashing with unmistakable warmth before snapping back to disciplined military bearing.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and (Variable[\"RiziaDLC.Lucita_RomanceHappened\"] == true or (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) > 0)",
+      "userScript": "",
+      "outgoing": [
+        114
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 114,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Open_Romance",
+      "dialogueText": "Your Majesty... Romus. Our officers stand by their radios along the Brenas frontier and at Monqiz naval base. Operational command is yours to dictate.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 115,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Open_Hostile",
+      "dialogueText": "Your Majesty. Whatever grievances stand between the Crown and House Azaro, our officers know their duty. Give your orders.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and Variable[\"RiziaDLC.Lucita_RomanceHappened\"] ~= true and (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) <= 0 and (Variable[\"RiziaDLC.Country_HouseAzaro_Enemy\"] == true or Variable[\"RiziaDLC.Turn06_Council_LucitaOffended\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 116,
+      "actorId": 73,
+      "speaker": "Lucita Azaro",
+      "title": "Lucita_Open_Standard",
+      "dialogueText": "Your Majesty. All divisions of the Royal Army and provincial levies have assumed combat positions along the demarcation line, and the Royal Navy stands ready at Monqiz. We await your final authorization.",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"RiziaDLC.Lucita_Married\"] ~= true and Variable[\"RiziaDLC.Lucita_RomanceHappened\"] ~= true and (Variable[\"RiziaDLC.Relations_Lucita_Romance\"] or 0) <= 0 and Variable[\"RiziaDLC.Country_HouseAzaro_Enemy\"] ~= true and Variable[\"RiziaDLC.Turn06_Council_LucitaOffended\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 117,
+      "actorId": 83,
+      "speaker": "Taddeus Azaro",
+      "title": "Taddeus_Open_LucitaGone",
+      "dialogueText": "Duke Taddeus Azaro stood stiffly beside the relief map, his jaw tight with lingering bitterness over his daughter's fate. \"Your Majesty. The divisions are assembled along the Brenas line and the fleet stands at Monqiz. Specify the doctrine.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and Variable[\"RiziaDLC.Taddeus_Arrested\"] ~= true and Variable[\"RiziaDLC.Taddeus_Executed\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 118,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Carlos_Open_LucitaGone",
+      "dialogueText": "General Carlos Azaro stepped forward in Lucita's stead, his expression strictly professional. \"Your Majesty. The General Staff has completed deployment along the Brenas border and at Monqiz. We await your operational orders.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and (Variable[\"RiziaDLC.Taddeus_Arrested\"] == true or Variable[\"RiziaDLC.Taddeus_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        5,
+        1051
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 121,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Ack_Golden_Sword_Carlos",
+      "dialogueText": "General Carlos Azaro saluted crisply. \"The armored spearheads are poised on the Brenas frontier. The War Table awaits your deployment for Phase I, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        22,
+        122
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 122,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Golden_Sword_NoHugo",
+      "dialogueText": "\"Godspeed to our armies, Your Majesty. Our envoys stand ready to defend Rizia's sovereign action.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 131,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Ack_Golden_Ark_Carlos",
+      "dialogueText": "General Carlos Azaro studied the sea lanes carefully. \"Our amphibious brigades and border screening battalions await your deployment at the War Table, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        32
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 146,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Ack_Staff_Carlos",
+      "dialogueText": "\"The orders are dispatched, Your Majesty. The General Staff has initiated the offensive.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 147,
+      "actorId": 88,
+      "speaker": "Carlos Robles Azaro",
+      "title": "Ack_Staff_Spear_NoTitus",
+      "dialogueText": "\"Our special commando detachments are already slipping across the frontier under darkness, Your Majesty. Valdez's headquarters will be blind before dawn.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 151,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Postpone_NoHugo",
+      "dialogueText": "\"A measured decision, Your Majesty. Our diplomatic channels remain open while the armed forces hold their positions.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 440,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Authorize_Staff_Ark_WeakFleet",
+      "dialogueText": "Our fleet at Monqiz is small, yet order Plan Ark nonetheless—harass their coastal freighters with everything that floats!",
+      "menuText": "\"[RISKY — Few Warships] Authorize Plan Ark anyway: improvise a coastal blockade.\"",
+      "conditions": "(Variable[\"Zille_Fleet_Total\"] or 0) < 2",
+      "userScript": "Variable[\"Zille_War_StaffPlan\"] = \"Ark\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) - 2;",
+      "outgoing": [
+        46,
+        146
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 1051,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Briefing_TwoFront",
+      "dialogueText": "I must warn you gravely, Your Majesty: with our forces already fighting Pales on the eastern frontier, opening a second war against Wehlen will alarm both ATO and the Malenyevist bloc in Kyrute.",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        6,
+        106
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

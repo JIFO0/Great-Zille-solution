@@ -61,36 +61,43 @@ namespace GreatZilleSolution
 
             AddLine(conv, 102, ElenaId, RomusId, "Elena_HomeFront_SteadyEnergy",
                 "\"Your Majesty, though Wehlen severed our northern crude contracts, our pre-war reserves are holding—yet speculative hoarding in Porte Drazon and Valenqiris is driving prices upward unless the Crown sets clear rules.\"", -1,
-                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) > 3");
+                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) > 3 and Variable[\"Zille_Derdia_PipelineInvested\"] ~= true");
+
+            AddLine(conv, 103, ElenaId, RomusId, "Elena_HomeFront_DerdiaPipeline",
+                "\"Your Majesty, Wehlen's crude embargo would have crippled our grid by now—were it not for the southern Derdian pipeline delivering steady fuel and transit revenues into our ports. Still, speculators in Porte Drazon require a firm hand.\"", -1,
+                "Variable[\"Zille_Derdia_PipelineInvested\"] == true");
 
             AddLink(conv, 404, 2);
             AddLink(conv, 404, 102);
+            AddLink(conv, 404, 103);
             AddLink(conv, 405, 2);
             AddLink(conv, 405, 102);
+            AddLink(conv, 405, 103);
 
             var econPrompt = AddLine(conv, 10, NarratorId, RomusId, "HomeFront_Econ_Prompt",
                 "Elena held her pen poised over the wartime rationing decree, awaiting your direction.");
 
             AddLink(conv, 2, 10);
             AddLink(conv, 102, 10);
+            AddLink(conv, 103, 10);
 
             econPrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 11));
             econPrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 12));
             econPrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 13));
 
             AddChoice(conv, 11, ElenaId, "HomeFront_Subsidize_Fuel",
-                "\"Release 1 Budget from the treasury to subsidize civilian heating oil and bakery deliveries (+1 Public Opinion, +1 Energy).\"",
-                "We will not let ordinary families freeze while our armies fight for Zille. Release 1 Budget to stabilize civilian fuel and bread transport.", 20,
+                "\"Release treasury funds to subsidize civilian heating oil and bakery deliveries.\"",
+                "We will not let ordinary families freeze while our armies fight for Zille. Release royal funds to stabilize civilian fuel and bread transport.", 20,
                 "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
 
             AddChoice(conv, 12, ElenaId, "HomeFront_Industrial_Rationing",
-                "\"Enforce strict wartime rationing on luxury estates and non-essential motors (-1 Public Opinion, +2 Energy).\"",
+                "\"Enforce strict wartime rationing on luxury estates and non-essential motors.\"",
                 "Every drop of diesel belongs to the front and essential farms. Impose strict rationing on private estates and pleasure vehicles immediately.", 20,
                 "Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddChoice(conv, 13, ElenaId, "HomeFront_Price_Controls",
-                "\"Freeze wholesale fuel prices by royal decree and audit speculators in Porte Drazon (-1 Authority, +1 Readiness).\"",
+                "\"Freeze wholesale fuel prices by royal decree and audit speculators in Porte Drazon.\"",
                 "Freeze wholesale fuel prices by royal decree and send treasury auditors into the port warehouses to break hoarding.", 20,
                 "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
@@ -174,11 +181,11 @@ namespace GreatZilleSolution
 
             AddLine(conv, 2, EstelaId, RomusId, "Estela_Homecoming_Line",
                 "Queen Mother Estela stood beside the weathered blue door of her father's old house, her gloved hand trembling slightly against the doorframe as tears shone in her eyes. \"Romus... Look at the harbor bell tower. I never thought I would hear it ring under our flag again. Your father carried that regret to his grave—and you washed it away.\"", -1,
-                "Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
 
             AddLine(conv, 102, VinaId, RomusId, "Vina_Homecoming_Line",
                 "Princess Vina looked out over the sunlit fishing boats bobbing in the harbor. \"Father... This city feels older and braver than all the marble halls of Porte Drazon. People here waited twenty-five years for this morning.\"", -1,
-                "Variable[\"RiziaDLC.Estela_Dead\"] == true");
+                "(Variable[\"QueenMother_Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_Dead\"] == true)");
 
             AddLink(conv, 404, 2);
             AddLink(conv, 404, 102);
@@ -187,7 +194,7 @@ namespace GreatZilleSolution
 
             AddLine(conv, 3, VinaId, RomusId, "Vina_Harbor_Reflection",
                 "Vina slipped her arm through yours quietly. \"We have Zille back, Father—now the world will judge how House Toras governs it.\"", 10,
-                "Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
 
             AddLink(conv, 2, 3);
             AddLink(conv, 102, 10);
@@ -221,6 +228,7 @@ namespace GreatZilleSolution
 
             adminPrompt.outgoingLinks.Add(CreateLink(conv.id, 20, 21));
             adminPrompt.outgoingLinks.Add(CreateLink(conv.id, 20, 22));
+            adminPrompt.outgoingLinks.Add(CreateLink(conv.id, 20, 122));
 
             AddChoice(conv, 21, HugoId, "Liberation_Admin_RoyalCharter",
                 "\"Place Zille under a special Royal Reconstruction Charter reporting directly to the Crown.\"",
@@ -230,18 +238,27 @@ namespace GreatZilleSolution
             AddChoice(conv, 22, ManusId, "Liberation_Admin_Brenas",
                 "\"Restore Zille immediately to the provincial administration of House Sazon and Brenas.\"",
                 "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial representation and House Sazon's civil charter.", 30,
-                "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;");
+                "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;",
+                "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
+
+            AddChoice(conv, 122, LeonaId, "Liberation_Admin_Brenas_NoManus",
+                "\"Restore Zille immediately to the provincial administration of Brenas.\"",
+                "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial administration.", 30,
+                "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;",
+                "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
             AddLine(conv, 30, EstelaId, RomusId, "Estela_Liberation_Close",
                 "As the harbor bells chimed noon across Zille Bay, Queen Mother Estela smiled through her tears. \"Long live the King. Welcome home, Zille.\"", -1,
-                "Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
 
             AddLine(conv, 130, NarratorId, RomusId, "Liberation_Close_Fallback",
                 "As the harbor bells chimed noon across Zille Bay, the gold-and-crimson banner of House Toras climbed the flagpole above the town hall to thunderous cheers.", -1,
-                "Variable[\"RiziaDLC.Estela_Dead\"] == true");
+                "(Variable[\"QueenMother_Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_Dead\"] == true)");
 
             AddLink(conv, 21, 130);
             AddLink(conv, 22, 130);
+            AddLink(conv, 122, 30);
+            AddLink(conv, 122, 130);
 
             AddConversationWithAlias(db, conv, "Zille/ZilleLiberation", "Turn_Zille_ZilleLiberation");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Zille Liberation Homecoming (ID 9999) into masterDatabase!");

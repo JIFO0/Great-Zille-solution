@@ -1,0 +1,342 @@
+{
+  "id": 9989,
+  "title": "Turn_Zille_WarBalconySpeech",
+  "description": "Przemówienie z Balkonu do Narodu",
+  "pack": "Rizia",
+  "folder": "War_Operation",
+  "turn": "Operacja Wojenna Zille (Mod)",
+  "modStatus": "MODNEW",
+  "modNote": "Przemówienie z Balkonu do Narodu",
+  "actors": [
+    "Hugo Toras",
+    "Laurento Esquibel",
+    "Narrator",
+    "Player_Romus"
+  ],
+  "readVariables": [
+    "RiziaDLC.Hugo_Arrested",
+    "RiziaDLC.Hugo_Executed",
+    "RiziaDLC.Hugo_Resigned",
+    "RiziaDLC.Wehlen_Zille_SharedEvidence",
+    "RiziaDLC.Zille_Discovered_LespianInvolvement",
+    "RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty"
+  ],
+  "writtenVariables": [
+    "RiziaDLC.Country_PublicOpinion",
+    "RiziaDLC.Resources_Authority",
+    "Zille_AN_Legitimacy",
+    "Zille_Leverage",
+    "Zille_Smolak_Pressure",
+    "Zille_Speech_Tone",
+    "Zille_War_Readiness"
+  ],
+  "choicesCount": 6,
+  "entriesCount": 18,
+  "entries": [
+    {
+      "id": 0,
+      "actorId": 95,
+      "speaker": "START",
+      "title": "START",
+      "dialogueText": "",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        1
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": true
+    },
+    {
+      "id": 1,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Balcony_Intro_1",
+      "dialogueText": "The grand double doors of the Palas Rezna balcony swung open to the roar of over forty thousand citizens packed across the Royal Plaza. Banners of House Toras, Azaro, and Sazon fluttered in the sea breeze above brass radio microphones carrying your words to every household in Rizia.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        2,
+        102
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 2,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Hugo_Balcony_Whisper",
+      "dialogueText": "Hugo leaned in, his voice barely audible beneath the roar. \"Both the realm and foreign embassies hear every syllable, Romus. Choose your message with care.\"",
+      "menuText": "",
+      "conditions": "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 3,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Speech_Doctrine_Prompt",
+      "dialogueText": "You stepped up to the stone balustrade and raised your hand. A profound hush settled over the plaza.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        10,
+        20,
+        30
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 10,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Speech_Revanchist",
+      "dialogueText": "Sons and daughters of Rizia! For over twenty-five years, our kingdom bore separation in silence. But House Toras does not bow to dictators! Today our armies march to reclaim our soil by royal steel!",
+      "menuText": "\"Sons and daughters of Rizia! We march to restore the honor and steel of our ancestors!\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Revanchist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) - 1;",
+      "outgoing": [
+        11
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 11,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Speech_Revanchist_Reaction",
+      "dialogueText": "A thunderous roar erupted from the square, bayonets flashing in the sun as guardsmen snapped to salute—while foreign press attachés scribbled furiously about Rizian saber-rattling.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 20,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Speech_Liberation",
+      "dialogueText": "People of Rizia! We march not out of hatred, but out of sacred love for our brothers and sisters in Zille who endured Smolak's secret police and broken promises. Today we bring them home!",
+      "menuText": "\"We march not as conquerors, but to bring our brothers and sisters in Zille safely home!\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Liberation\"; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+      "outgoing": [
+        21
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 21,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Speech_Liberation_Reaction",
+      "dialogueText": "Tears flowed among the elders in the plaza, and chants of 'Long live King Romus!' rolled down the avenues toward the harbor.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 30,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Speech_Legalist",
+      "dialogueText": "Citizens of Rizia and observers across Merkopa: Rizia is a realm of honor and law. The 1927 treaty has expired, and in reclaiming Zille we uphold the sacred legal order Wiktor Smolak trampled underfoot!",
+      "menuText": "\"The 1927 agreement has expired. We enforce international law where Smolak trampled it!\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_Speech_Tone\"] = \"Legalist\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+      "outgoing": [
+        31
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 31,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Speech_Legalist_Reaction",
+      "dialogueText": "Foreign correspondents nodded in sober respect as applause rolled across the square in dignified cadence.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        40
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 40,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Speech_Closing_Hub",
+      "dialogueText": "As the first ovation ebbed, the eyes of soldiers, merchants, and diplomatic envoys alike remained fixed upon the royal balustrade. You prepared your closing vow.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [
+        41,
+        42,
+        43
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 41,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Closing_Civilian_Charter",
+      "dialogueText": "Hear this royal vow: every Rizian, Bludish, and law-abiding Wehzek resident inside Zille will be shielded by our courts. We bring lawful peace, never blind reprisal! Glovurius axa Rizia!",
+      "menuText": "\"I pledge before God: Rizian, Bludish, and peaceful Wehzek residents in Zille shall know law, not vengeance!\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+      "outgoing": [
+        51
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 42,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Closing_Soldier_Pride",
+      "dialogueText": "Let every foundry, farm, and port stand beside the soldiers marching across our border tonight! Together, Rizia is invincible! Glovurius axa Rizia!",
+      "menuText": "\"Stand behind our divisions, fuel our depots, and victory will be ours! Glovurius axa Rizia!\"",
+      "conditions": "",
+      "userScript": "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+      "outgoing": [
+        52
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 43,
+      "actorId": 95,
+      "speaker": "Player_Romus",
+      "title": "Closing_Expose_Terror",
+      "dialogueText": "For years our people endured Smolak's fabricated terror and extortion in Zille. Our evidence lies on the record, and our answer flies on the wind! Glovurius axa Rizia!",
+      "menuText": "\"The world has seen Smolak's bombings and blackmail in Zille—we end his terror forever!\"",
+      "conditions": "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true)",
+      "userScript": "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
+      "outgoing": [
+        53
+      ],
+      "isPlayer": true,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 51,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Ack_Closing_Charter",
+      "dialogueText": "Laurento exhaled in quiet admiration as you stepped back through the gilded doors. \"That civilian pledge just disarmed half our critics in Konstantium, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 52,
+      "actorId": 10,
+      "speaker": "Narrator",
+      "title": "Ack_Closing_Workers",
+      "dialogueText": "The plaza thundered with cheers that shook the tall palace glass. Workers, noble retainers, and guardsmen roared as one voice.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 53,
+      "actorId": 68,
+      "speaker": "Hugo Toras",
+      "title": "Ack_Closing_Expose",
+      "dialogueText": "Foreign reporters sprinted for the telephone booths across the square as Smolak's culpability became tomorrow's headline across Merkopa.",
+      "menuText": "",
+      "conditions": "",
+      "userScript": "",
+      "outgoing": [],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    },
+    {
+      "id": 102,
+      "actorId": 70,
+      "speaker": "Laurento Esquibel",
+      "title": "Laurento_Balcony_Whisper",
+      "dialogueText": "Laurento inclined his head beside you. \"Both our citizens and the ambassadors in Konstantium, Kyrute are listening to every word, Your Majesty.\"",
+      "menuText": "",
+      "conditions": "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)",
+      "userScript": "",
+      "outgoing": [
+        3
+      ],
+      "isPlayer": false,
+      "isModInjected": true,
+      "isModEdited": true,
+      "isRoot": false
+    }
+  ]
+}

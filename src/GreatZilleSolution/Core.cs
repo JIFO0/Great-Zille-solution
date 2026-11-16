@@ -39,6 +39,7 @@ namespace GreatZilleSolution
         private ZilleEventSpawnerUI _spawnerUI;
 
         private bool _dockExpanded = true;
+        private bool _forceShowDock = false;
         private float _nextFlagCheck = 0f;
 
 
@@ -117,6 +118,15 @@ namespace GreatZilleSolution
 
                 DialogueInjectionPatches.InjectWarOptionsIntoVanillaConversations();
                 DialogueOverrideManager.ApplyAllOverrides();
+                ZilleDecisions.EnsureRegistered();
+                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
+
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked")
+                    && !DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")
+                    && !ZilleCampaignState.IsDerdiaStateVisitDone)
+                {
+                    WarOperationZilleManager.SpawnDerdiaVisitEventToken();
+                }
 
             }
 
@@ -240,9 +250,33 @@ namespace GreatZilleSolution
 
                     {
 
-                        ZilleProfiler.ForceReport();
+                        bool ctrl = (Event.current.modifiers & EventModifiers.Control) != 0 || Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
-                        ZilleWarTable.Diagnose("F8");
+                        bool shift = (Event.current.modifiers & EventModifiers.Shift) != 0 || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
+                        if (ctrl && shift)
+
+                        {
+
+                            _forceShowDock = !_forceShowDock;
+
+                            if (_forceShowDock) _dockExpanded = true;
+
+                            Log.Msg($"[DOCK] Debug force-show Zille Dock = {_forceShowDock}");
+
+                            Event.current.Use();
+
+                        }
+
+                        else
+
+                        {
+
+                            ZilleProfiler.ForceReport();
+
+                            ZilleWarTable.Diagnose("F8");
+
+                        }
 
                     }
 
@@ -280,7 +314,7 @@ namespace GreatZilleSolution
 
                 bool nativeDeployment = ZilleWarTable.NativeDeploymentOpen();
 
-                if (nativeDeployment) _dockExpanded = false;
+                if (nativeDeployment && !_forceShowDock) _dockExpanded = false;
 
                 ZilleWarTable.DrawMapEditBar();
 
@@ -292,15 +326,21 @@ namespace GreatZilleSolution
 
 
 
-                if (!nativeDeployment)
+                if (!nativeDeployment || _forceShowDock)
 
                 {
 
                     GUI.color = Color.white;
 
-                    string statusText = "[ Great Zille v0.4.9 by JIFO (jifo.dev) | F6 Spawner | F9 Wojna | F10 Mapa | F11 Teatr ]";
+                    if (!nativeDeployment)
 
-                    GUI.Box(new Rect(Screen.width - 640, 10, 630, 28), statusText);
+                    {
+
+                        string statusText = "[ Great Zille v0.4.9 by JIFO (jifo.dev) | F6 Spawner | F9 Wojna | F10 Mapa | F11 Teatr ]";
+
+                        GUI.Box(new Rect(Screen.width - 640, 10, 630, 28), statusText);
+
+                    }
 
                     DrawBottomLeftToolbar();
 
@@ -350,6 +390,11 @@ namespace GreatZilleSolution
 
                 }
 
+                if (ZilleDecisions.ActiveModalDecision != null)
+                {
+                    DrawDecisionModal();
+                }
+
             }
 
             catch (System.Exception ex)
@@ -367,6 +412,59 @@ namespace GreatZilleSolution
         }
 
 
+
+        private void DrawDecisionModal()
+        {
+            var dec = ZilleDecisions.ActiveModalDecision;
+            if (dec == null) return;
+
+            float w = Mathf.Min(640f, Screen.width - 40f);
+            float h = 230f + dec.Options.Count * 46f;
+            float x = (Screen.width - w) * 0.5f;
+            float y = (Screen.height - h) * 0.5f;
+
+            GUI.color = new Color(0.08f, 0.09f, 0.12f, 0.96f);
+            GUI.Box(new Rect(x, y, w, h), "");
+            GUI.color = Color.white;
+
+            var titleStyle = new GUIStyle(GUI.skin.label)
+            {
+                fontSize = 16,
+                fontStyle = FontStyle.Bold,
+                wordWrap = true
+            };
+            var descStyle = new GUIStyle(GUI.skin.label)
+            {
+                fontSize = 13,
+                wordWrap = true
+            };
+
+            GUI.Label(new Rect(x + 20f, y + 16f, w - 70f, 30f), dec.Title, titleStyle);
+            if (GUI.Button(new Rect(x + w - 42f, y + 14f, 26f, 24f), "X"))
+            {
+                ZilleDecisions.CloseModal();
+                return;
+            }
+
+            GUI.Label(new Rect(x + 20f, y + 52f, w - 40f, 110f), dec.Description, descStyle);
+
+            float btnY = y + 170f;
+            foreach (var opt in dec.Options)
+            {
+                bool avail = opt.IsAvailable == null || opt.IsAvailable();
+                GUI.enabled = avail;
+                string label = avail
+                    ? opt.Text
+                    : $"{opt.Text}  [Requires: {opt.Condition}]";
+                if (GUI.Button(new Rect(x + 20f, btnY, w - 40f, 38f), label))
+                {
+                    opt.OnSelected?.Invoke();
+                    break;
+                }
+                GUI.enabled = true;
+                btnY += 44f;
+            }
+        }
 
         private void DrawBottomLeftToolbar()
 

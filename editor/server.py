@@ -6,15 +6,37 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
 import shutil
 
+import subprocess
+
 PORT = 5050
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_DIR = os.path.dirname(BASE_DIR)
 DATA_DIR = os.path.join(BASE_DIR, "data")
 CONV_DIR = os.path.join(DATA_DIR, "conversations")
+CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
 ASSETS_DIR = os.path.join(REPO_DIR, "assets")
+if not os.path.exists(ASSETS_DIR):
+    os.makedirs(ASSETS_DIR, exist_ok=True)
 OVERRIDES_FILE_REPO = os.path.join(ASSETS_DIR, "mod_dialogue_overrides.json")
-STEAM_MODS_DIR = r"C:\Program Files (x86)\Steam\steamapps\common\Suzerain\Mods\GreatZilleAssets"
-OVERRIDES_FILE_GAME = os.path.join(STEAM_MODS_DIR, "mod_dialogue_overrides.json")
+
+def load_config():
+    default_cfg = {"suzerain_path": r"C:\Program Files (x86)\Steam\steamapps\common\Suzerain"}
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+                cfg = json.load(f)
+                default_cfg.update(cfg)
+        except Exception:
+            pass
+    return default_cfg
+
+def save_config(cfg):
+    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+        json.dump(cfg, f, indent=2, ensure_ascii=False)
+
+def get_steam_mods_dir():
+    suzerain_path = load_config().get("suzerain_path", r"C:\Program Files (x86)\Steam\steamapps\common\Suzerain")
+    return os.path.join(suzerain_path, "Mods", "GreatZilleAssets")
 
 def ensure_overrides_file():
     if not os.path.exists(OVERRIDES_FILE_REPO):
@@ -31,9 +53,11 @@ def ensure_overrides_file():
             json.dump(initial, f, indent=2, ensure_ascii=False)
 
 def sync_to_game():
-    if os.path.exists(OVERRIDES_FILE_REPO) and os.path.exists(STEAM_MODS_DIR):
+    steam_mods_dir = get_steam_mods_dir()
+    overrides_file_game = os.path.join(steam_mods_dir, "mod_dialogue_overrides.json")
+    if os.path.exists(OVERRIDES_FILE_REPO) and os.path.exists(steam_mods_dir):
         try:
-            shutil.copy2(OVERRIDES_FILE_REPO, OVERRIDES_FILE_GAME)
+            shutil.copy2(OVERRIDES_FILE_REPO, overrides_file_game)
             return True
         except Exception as e:
             print(f"[WARN] Failed to copy to game directory: {e}")
@@ -90,6 +114,8 @@ class EditorRequestHandler(SimpleHTTPRequestHandler):
             self.send_json_file(os.path.join(DATA_DIR, "actors.json"))
         elif path == "/api/overrides":
             self.send_json_data(load_overrides())
+        elif path == "/api/config":
+            self.send_json_data(load_config())
         elif path == "/" or path == "":
             self.path = "/index.html"
             return super().do_GET()
@@ -104,6 +130,36 @@ class EditorRequestHandler(SimpleHTTPRequestHandler):
         post_body = self.rfile.read(content_length).decode('utf-8')
         try:
             req_data = json.loads(post_body) if post_body else {}
+        except Exception as e:
+            self.send_json_data({"status": "error", "message": f"Invalid JSON: {e}"}, 400)
+            return
+
+        if path == "/api/config":
+            cfg = load_config()
+            if "suzerain_path" in req_data:
+                cfg["suzerain_path"] = req_data["suzerain_path"].strip().strip('"')
+            save_config(cfg)
+            self.send_json_data({"status": "ok", "config": cfg})
+            return
+
+        if path == "/api/decompile":
+            suzerain_path = req_data.get("suzerain_path") or load_config().get("suzerain_path", "")
+            decompile_script = os.path.join(BASE_DIR, "decompile.py")
+            if not os.path.exists(decompile_script):
+                self.send_json_data({"status": "error", "message": "Brak pliku decompile.py!"}, 500)
+                return
+            try:
+                proc = subprocess.run(
+                    [sys.executable, decompile_script, "--game-dir", suzerain_path],
+                    capture_output=True, text=True, timeout=180
+                )
+                if proc.returncode == 0:
+                    self.send_json_data({"status": "ok", "message": "Dekompilacja zakończona sukcesem!", "output": proc.stdout[-1500:]})
+                else:
+                    self.send_json_data({"status": "error", "message": proc.stderr or proc.stdout or "Błąd dekompilacji"}, 500)
+            except Exception as e:
+                self.send_json_data({"status": "error", "message": str(e)}, 500)
+            return
         except Exception as e:
             self.send_error(400, f"Invalid JSON: {e}")
             return

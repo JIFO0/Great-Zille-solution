@@ -220,15 +220,16 @@ namespace GreatZilleSolution
             AddChoice(conv, 31, LucitaId, "Inquire_Lucita_Forces",
                 "\"Give me a hard count of our armor, fleet, and air power against Valdez's brigades.\"",
                 "Forget broad optimism—assess our terrain obstacles and give me an honest count of our armor, warships, and air support against Valdez.", -1,
-                "Variable[\"Zille_Plan_CheckedForces\"] = true;");
+                "Variable[\"Zille_Plan_CheckedForces\"] = true;",
+                "Variable[\"Zille_Plan_CheckedForces\"] ~= true");
 
             AddLine(conv, 35, LucitaId, RomusId, "Answer_Force_Strong",
-                "\"Our mechanized spearhead has strong tank support and the Royal Navy out of Monqiz can contest the Gulf of Moridia cleanly. Once we punch through the coastal marshes around Wiktrany, Valdez cannot contain an amphibious or armored envelopment.\"", 310,
+                "\"Our mechanized spearhead has strong tank support and the Royal Navy out of Monqiz can contest the Gulf of Moridia cleanly. Once we punch through the coastal marshes around Wiktrany, Valdez cannot contain an amphibious or armored envelopment—and if we secure Derdia's cooperation, Plan Ark could even strike Wehlen's southern flank by land.\"", 30,
                 "((Variable[\"RiziaDLC.Army_Unit_Tank_Total\"] or 0) >= 2) or ((Variable[\"Zille_Fleet_Total\"] or 0) >= 2)",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 135, CarlosId, RomusId, "Answer_Force_Lean",
-                "\"I will be blunt, Your Majesty: with limited heavy armor or naval escort hulls currently operational, an ambitious amphibious crossing would risk disaster. We must rely on disciplined infantry advances through Wiktrany's marshes and careful artillery concentration.\"", 310,
+                "\"I will be blunt, Your Majesty: with limited heavy armor or naval escort hulls currently operational, an ambitious amphibious crossing would risk disaster. We must rely on disciplined infantry advances through Wiktrany's marshes—unless diplomatic groundwork with Derdia opens a southern land corridor for Plan Ark.\"", 30,
                 "((Variable[\"RiziaDLC.Army_Unit_Tank_Total\"] or 0) < 2) and ((Variable[\"Zille_Fleet_Total\"] or 0) < 2)");
 
             AddLink(conv, 31, 35);
@@ -236,13 +237,13 @@ namespace GreatZilleSolution
 
             // Emergency Arms Procurement (-1 Budget -> +500 Weapons & +2 Readiness)
             AddChoice(conv, 391, ElenaId, "Order_Emergency_Arms_Procurement",
-                "\"Release 1 Budget immediately to procure 500 emergency rifles and artillery shells before mobilization!\"",
+                "\"Release royal funds immediately to procure 500 emergency rifles and artillery shells before mobilization!\"",
                 "Our depots cannot stay below a thousand weapons. Release emergency royal funds immediately to purchase 500 reserve arms and shells before we summon the houses!", 392,
                 "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 500; Variable[\"Zille_Emergency_Arms_Bought\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 and Variable[\"Zille_Emergency_Arms_Bought\"] ~= true");
 
             AddLine(conv, 392, ElenaId, RomusId, "Ack_Emergency_Arms",
-                "Elena frowned briefly at the sudden expenditure, then stamped the requisition warrant. \"An expensive rush order, Your Majesty, yet wise: five hundred crates of rifles and shells are rolling toward Brenas depots tonight.\"", 310);
+                "Elena frowned briefly at the sudden expenditure, then stamped the requisition warrant. \"An expensive rush order, Your Majesty, yet wise: five hundred crates of rifles and shells are rolling toward Brenas depots tonight.\"", 30);
 
             AddChoice(conv, 305, ElenaId, "Proceed_To_Econ",
                 "\"Our force posture is clear. Move to our treasury and energy grid.\"",
@@ -259,15 +260,16 @@ namespace GreatZilleSolution
             AddChoice(conv, 32, ElenaId, "Inquire_Elena_Reserves",
                 "\"Elena, detail the exact cost to our treasury and energy grid once Wehlen oil stops flowing.\"",
                 "Elena, calculate the exact damage to our treasury and energy grid once Smolak cuts off Wehlen crude oil deliveries.", -1,
-                "Variable[\"Zille_Plan_CheckedEcon\"] = true;");
+                "Variable[\"Zille_Plan_CheckedEcon\"] = true;",
+                "Variable[\"Zille_Plan_CheckedEcon\"] ~= true");
 
             AddLine(conv, 36, ElenaId, RomusId, "Answer_Elena_EnergyOK",
-                "\"Losing Wehlen crude will tighten our grid noticeably, yet with our current energy buffer we can fuel initial mechanized columns if we pair Brenas granaries with coastal convoys instead of burning diesel on long rail hauls.\"", 320,
+                "\"Losing Wehlen crude will tighten our grid noticeably, yet with our current energy buffer we can fuel initial mechanized columns if we pair Brenas granaries with coastal convoys instead of burning diesel on long rail hauls.\"", 310,
                 "not ((Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2)",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 136, ElenaId, RomusId, "Answer_Elena_EnergyLow",
-                "\"Frankly, Your Majesty, our energy buffer is already dangerously thin. Once Wehlen cuts the pipelines, armored offensives and naval patrols will face acute rationing unless we secure emergency energy supplies or pick the fuel-sparing Sazon route.\"", 320,
+                "\"Frankly, Your Majesty, our energy buffer is already dangerously thin. Once Wehlen cuts the pipelines, armored offensives and naval patrols will face acute rationing unless we secure emergency energy supplies—such as a southern pipeline accord with Derdia—or pick the fuel-sparing Sazon route.\"", 310,
                 "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2");
 
             AddLink(conv, 32, 36);
@@ -281,7 +283,7 @@ namespace GreatZilleSolution
                 "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) and Variable[\"Zille_Dossier_Compiled\"] ~= true");
 
             AddLine(conv, 394, LaurentoId, RomusId, "Ack_Compile_Dossier",
-                "Laurento slipped the black-bound folder into his briefcase with a razor-sharp smile. \"A formidable diplomatic weapon, Your Majesty. Neither Alvarez nor Smolak will bluff cleanly once they see this seal.\"", 320);
+                "Laurento slipped the black-bound folder into his briefcase with a razor-sharp smile. \"A formidable diplomatic weapon, Your Majesty. Neither Alvarez nor Smolak will bluff cleanly once they see this seal.\"", 310);
 
             AddChoice(conv, 315, LaurentoId, "Proceed_To_Diplomacy",
                 "\"The ledgers are noted. Let us review foreign reactions and our Zille underground.\"",
@@ -298,25 +300,27 @@ namespace GreatZilleSolution
             AddChoice(conv, 33, LaurentoId, "Inquire_Laurento_Powers",
                 "\"How will Rumburg, Lespia, Derdia, and Valgsland react when we move?\"",
                 "Map out the diplomatic chessboard: where do Rumburg, Lespia, Derdia, and Valgsland stand if we cross the frontier?", 37,
-                "Variable[\"Zille_Plan_CheckedDiplo\"] = true;");
+                "Variable[\"Zille_Plan_CheckedDiplo\"] = true;",
+                "Variable[\"Zille_Plan_CheckedDiplo\"] ~= true");
 
             AddLine(conv, 37, LaurentoId, RomusId, "Answer_Laurento",
-                "\"Your sister-in-law Queen Beatrice in Thornbourgh can shield us at the AN and send heavy 152mm shells if we keep faith with GRACE. Prime Minister Alvarez in Perla despises Smolak enough to sell aerial reconnaissance—unless we are fighting Pales. And Supreme Wiseman Azmal at Naeal will raid Wehlen's southern land frontier if we protect Golcondist pilgrims.\"", 330,
+                "\"Your sister-in-law Queen Beatrice in Thornbourgh can shield us at the AN and send heavy 152mm shells by sea if we keep faith with GRACE. Prime Minister Alvarez in Perla despises Smolak enough to sell aerial reconnaissance—unless we are fighting Pales. And in Derdia, Supreme Wiseman Azmal faces growing friction with Wehlen; if we lay proper diplomatic groundwork and persuade Naeal, Plan Ark could launch straight from Derdia's southern corridor instead of relying solely on sea landings—delivering far greater strategic shock.\"", 320,
                 "",
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddChoice(conv, 34, TitusId, "Inquire_Titus_Underground",
                 "\"Can Su Omina, ATA, and our guardsmen protect Queen Estela's home and Rizian civilians?\"",
                 "How reliable are our loyalist cells inside Zille, and can our vanguard shield Queen Mother Estela's childhood home?", -1,
-                "Variable[\"Zille_Plan_CheckedSecurity\"] = true;");
+                "Variable[\"Zille_Plan_CheckedSecurity\"] = true;",
+                "Variable[\"Zille_Plan_CheckedSecurity\"] ~= true");
 
             AddLine(conv, 38, TitusId, RomusId, "Answer_Titus",
-                "\"ATA organizers and Su Omina scouts already watch Valdez's supply piers, Your Majesty. My Golden Guardsmen will drop or ride into the harbor district first to secure the Queen Mother's childhood family house.\"", 330,
+                "\"ATA organizers and Su Omina scouts already watch Valdez's supply piers, Your Majesty. My Golden Guardsmen will drop or ride into the harbor district first to secure the Queen Mother's childhood family house.\"", 320,
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true",
                 "Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 138, CarlosId, RomusId, "Answer_Security_NoTitus",
-                "\"Our reconnaissance detachments carry strict orders to protect Zille's loyalist neighborhoods and the Queen Mother's childhood family home in the harbor quarter, Your Majesty.\"", 330,
+                "\"Our reconnaissance detachments carry strict orders to protect Zille's loyalist neighborhoods and the Queen Mother's childhood family home in the harbor quarter, Your Majesty.\"", 320,
                 "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
 
             AddLink(conv, 34, 38);
@@ -501,10 +505,10 @@ namespace GreatZilleSolution
 
             // Elena state-aware ledger audit
             AddLine(conv, 7, ElenaId, RomusId, "Elena_Ledger_Audit",
-                "Elena Werner adjusted her spectacles and tapped her fountain pen. \"Look at the arithmetic instead of family crests! The Azaro centralized rail plan guarantees rapid ammunition flow, yet running nonstop heavy trains from Montaklar drains refined fuel (-1 Energy) and stresses civilian lines.\"", 8);
+                "Elena Werner adjusted her spectacles and tapped her fountain pen. \"Look at the arithmetic instead of family crests! The Azaro centralized rail plan guarantees rapid ammunition flow, yet running nonstop heavy trains from Montaklar drains refined fuel reserves and stresses civilian lines.\"", 8);
 
             AddLine(conv, 8, ElenaId, RomusId, "Elena_Ledger_Audit_2",
-                "\"The Sazon syndicate plan uses Brenas granaries and coastal freighters along the Gulf of Moridia, sparing our fuel—but paying the guilds fair transit fees requires direct treasury outlays (-1 Budget). Imposing a joint Crown board avoids favoring either house, though it demands firm royal authority.\"", -1);
+                "\"The Sazon syndicate plan uses Brenas granaries and coastal freighters along the Gulf of Moridia, sparing our fuel—but paying the guilds fair transit fees requires direct treasury outlays. Imposing a joint Crown board avoids favoring either house, though it demands firm royal authority.\"", -1);
 
             AddLine(conv, 9, HugoId, RomusId, "Hugo_Unity_Plea",
                 "Hugo Toras shook his head gravely. \"Romus, a kingdom divided against itself will crack before Wiktor Smolak. Weigh both our coffers and our fuel reserves before decreeing your settlement.\"", 10,
@@ -524,19 +528,20 @@ namespace GreatZilleSolution
             disputeInquiry.outgoingLinks.Add(CreateLink(conv.id, 10, 12));
             disputeInquiry.outgoingLinks.Add(CreateLink(conv.id, 10, 13));
 
-            // Analytical interrogation nodes (all advance cleanly to verdict node 15!)
+            // Analytical interrogation nodes (multi-question hub returning to 10 until Skip_Logistics_Inquiry)
             AddChoice(conv, 11, ElenaId, "Inquire_Logistics_Numbers",
                 "\"Elena, can our treasury, energy grid, and arsenals actually handle what these houses propose?\"",
                 "Elena, give me the unvarnished figures right now: what does our current budget, energy, and equipment inventory dictate?", -1,
-                "Variable[\"Zille_Logistics_Audited\"] = true;");
+                "Variable[\"Zille_Logistics_Audited\"] = true;",
+                "Variable[\"Zille_Logistics_Audited\"] ~= true");
 
             AddLine(conv, 111, ElenaId, RomusId, "Answer_Logistics_StrongReserves",
-                "\"With healthy budget and energy cushions on our books, Your Majesty, you actually enjoy genuine freedom of choice—either subsidies for Sazon freighters or Azaro fuel prioritization are feasible without breaking the home front.\"", 15,
+                "\"With healthy budget and energy cushions on our books, Your Majesty, you actually enjoy genuine freedom of choice—either subsidies for Sazon freighters or Azaro fuel prioritization are feasible without breaking the home front.\"", 10,
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 112, ElenaId, RomusId, "Answer_Logistics_Strained",
-                "\"Honestly, Your Majesty, one or more columns on our ledger sit near zero! If treasury cash is empty, Sazon's syndicates will demand Crown customs pledges costing authority; if energy is exhausted, Azaro trains will force ruthless civilian rationing.\"", 15,
+                "\"Honestly, Your Majesty, one or more columns on our ledger sit near zero! If treasury cash is empty, Sazon's syndicates will demand Crown customs pledges costing authority; if energy is exhausted, Azaro trains will force ruthless civilian rationing.\"", 10,
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1 or (Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
@@ -546,15 +551,16 @@ namespace GreatZilleSolution
             AddChoice(conv, 12, LucitaId, "Inquire_Logistics_CrossExamine",
                 "\"Wait—what happens to civilian ports and Pales transit if military requisition goes wrong?\"",
                 "Wait: if enemy shells hit our marshaling yards or if Pales ties down rail rolling stock, how does each plan avoid collapse?", -1,
-                "Variable[\"Zille_Logistics_Examined\"] = true;");
+                "Variable[\"Zille_Logistics_Examined\"] = true;",
+                "Variable[\"Zille_Logistics_Examined\"] ~= true");
 
             AddLine(conv, 120, LucitaId, RomusId, "Answer_CrossExamine_SazonAzaro",
-                "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"—so long as military ammunition cars always hold right-of-way over commercial cargo.\"", 15,
+                "\"That is precisely why coastal freighters off Sallabes and redundant Brenas spurs matter, Your Majesty,\" Lucita admitted coolly, \"—so long as military ammunition cars always hold right-of-way over commercial cargo.\"", 10,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true",
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 122, CarlosId, RomusId, "Answer_CrossExamine_Carlos",
-                "\"Decentralized coastal barges protect us against bombed rail bridges, Your Majesty, provided military ammunition trains always hold priority signals.\"", 15,
+                "\"Decentralized coastal barges protect us against bombed rail bridges, Your Majesty, provided military ammunition trains always hold priority signals.\"", 10,
                 "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)",
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
@@ -576,14 +582,14 @@ namespace GreatZilleSolution
 
             // Option A1: Sazon Funded (requires Budget >= 1)
             AddChoice(conv, 20, ManusId, "Choice_Sazon_Route",
-                "\"House Sazon will manage logistics (-1 Budget). Use Brenas granaries and coastal freighters.\"",
-                "We will not crush Brenas to win a war. Release 1 Budget in subsidies so House Sazon's merchant guilds and coastal freighters keep the army supplied and Brenas's cities protected.", -1,
+                "\"House Sazon will manage logistics through Brenas granaries and coastal freighters.\"",
+                "We will not crush Brenas to win a war. Release treasury subsidies so House Sazon's merchant guilds and coastal freighters keep the army supplied and Brenas's cities protected.", -1,
                 "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
 
             // Option A2: Sazon Debt Charter (fallback when Budget < 1)
             AddChoice(conv, 200, ManusId, "Choice_Sazon_Debt_Route",
-                "\"Our coffers are bare—charter House Sazon on bonded port-customs IOUs (-1 Authority).\"",
+                "\"Our coffers are bare—charter House Sazon on bonded port-customs IOUs backed by royal authority.\"",
                 "Our royal treasury has no spare gold today, yet we still entrust rear supply to House Sazon under bonded port-customs IOUs guaranteed by the Crown.", -1,
                 "Variable[\"Zille_Logistics_Route\"] = \"Sazon\"; Variable[\"Zille_Logistics_House\"] = \"Sazon\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) - 1;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1");
@@ -633,14 +639,14 @@ namespace GreatZilleSolution
 
             // Option B1: Azaro Paid Fuel (requires Energy >= 1)
             AddChoice(conv, 30, LucitaId, "Choice_Azaro_Route",
-                "\"Military necessity rules: grant House Azaro full rail and depot requisition (-1 Energy).\"",
-                "Military necessity takes absolute priority. Grant House Azaro full requisition powers over Brenas's rail corridors and allocate 1 Energy to fuel an overwhelming mechanized thrust.", -1,
+                "\"Military necessity rules: grant House Azaro full rail and fuel-depot requisition.\"",
+                "Military necessity takes absolute priority. Grant House Azaro full requisition powers over Brenas's rail corridors and allocate strategic fuel reserves to power an overwhelming mechanized thrust.", -1,
                 "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 2; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1");
 
             // Option B2: Azaro Civilian Rationing (fallback when Energy < 1)
             AddChoice(conv, 300, LucitaId, "Choice_Azaro_Rationing",
-                "\"Our energy grid is empty—order forced civilian fuel rationing so Azaro's tanks roll (-1 Authority).\"",
+                "\"Our energy grid is empty—order forced civilian fuel rationing so Azaro's tanks roll.\"",
                 "Our strategic energy reserve is exhausted, yet the spearheads must move. Impose emergency civilian fuel rationing in Brenas and hand rail priority to House Azaro.", -1,
                 "Variable[\"Zille_Logistics_Route\"] = \"Azaro\"; Variable[\"Zille_Logistics_House\"] = \"Azaro\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) - 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) < 1");
@@ -691,7 +697,7 @@ namespace GreatZilleSolution
 
             // Option C: Royal Compromise (requires Authority >= 1)
             AddChoice(conv, 40, ElenaId, "Choice_Compromise_Route",
-                "\"Impose a Joint Logistical Board under Elena Werner (-1 Authority). Neither house dominates.\"",
+                "\"Impose a Joint Logistical Board under Elena Werner. Neither house dominates.\"",
                 "Neither house will dictate to the Crown. I expend royal authority to establish a Joint Logistical Board under Minister Elena Werner—guaranteeing priority munitions rails while Sazon syndicates protect civilian granaries and coastal barges.", 41,
                 "Variable[\"Zille_Logistics_Route\"] = \"Compromise\"; Variable[\"Zille_Logistics_House\"] = \"Compromise\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"RiziaDLC.Country_HouseAzaro\"] = (Variable[\"RiziaDLC.Country_HouseAzaro\"] or 0) + 1; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Authority\"] or 0) >= 1");
@@ -918,7 +924,8 @@ namespace GreatZilleSolution
                 "Across the mahogany table, the operational map awaited your royal seal. How will Rizia command the liberation of Zille?");
 
             commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 20)); // Romus: Operation Golden Sword
-            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 30)); // Romus: Operation Golden Ark (Fleet >= 2)
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 3100)); // Romus: Operation Golden Ark (Derdia Southern Corridor!)
+            commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 30)); // Romus: Operation Golden Ark (Maritime Fleet >= 2)
             commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 35)); // Romus: Operation Golden Ark Reckless (Fleet < 2 warning)
             commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 40)); // Staff Officers Command
             commandHub.outgoingLinks.Add(CreateLink(conv.id, 19, 50)); // Postpone
@@ -951,6 +958,16 @@ namespace GreatZilleSolution
             AddLink(conv, 21, 122);
             AddLink(conv, 121, 22);
             AddLink(conv, 121, 122);
+
+            // Operation Golden Ark (Derdia Southern Corridor - ONLY if Derdia Pact Signed!)
+            AddChoice(conv, 3100, LucitaId, "Choice_Golden_Ark_Derdia",
+                "\"I will command at the War Table: Authorize Operation Golden Ark via Derdia's Southern Corridor!\"",
+                "With Supreme Wiseman Azmal's alliance sealed, we need not gamble solely on sea landings! Authorize Operation Golden Ark through Derdia's northern frontier—strike straight out of Yol and Qerzan into Wehlen's soft southern underbelly while our ships seal the Gulf!", 3101,
+                "Variable[\"Zille_War_PlanType\"] = \"Romulus\"; Variable[\"Zille_War_RomulusPlan\"] = \"GoldenArk\"; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "Variable[\"Zille_DerdiaPact_Signed\"] == true");
+
+            AddLine(conv, 3101, LucitaId, RomusId, "Ack_Golden_Ark_Derdia",
+                "\"A masterstroke, Your Majesty!\" Lucita tapped the Derdian frontier passes on the map. \"Attacking Wehlen overland from Derdia's south gives our divisions devastating flanking power—Valdez cannot defend both Zille and Grodzizg at once. The War Table awaits your deployment!\"", 32);
 
             // Operation Golden Ark (Fleet >= 2)
             AddChoice(conv, 30, LucitaId, "Choice_Golden_Ark",
@@ -1145,7 +1162,7 @@ namespace GreatZilleSolution
                 "\"Your Majesty. The first blow has landed and our columns are pulling back to reorganize along the Mave Nortus railheads before Phase II.\"", -1);
 
             // Beat 2: Plan-Aware Realistic Territorial Assessment (SWORD vs ARK)
-            int leadSpeaker = LucitaId; // Conditionals handle unavailable portraits smoothly in text
+            int leadSpeaker = NarratorId; // Uses NarratorId so portrait never shows arrested/executed Lucita
             // SWORD variants
             AddLine(conv, 210, leadSpeaker, RomusId, "Assess_Sword_ZilleCity",
                 "\"Operation Righteous Sword's opening salvo shattered expectations along the coast—our spearheads actually fought their way into Zille City itself in Phase I! Our regrouping divisions only need to clear lingering border pockets in Phase II.\"", -1,
@@ -1330,9 +1347,13 @@ namespace GreatZilleSolution
 
             AddLine(conv, 256, NarratorId, RomusId, "ForeignAid_Integrated_None",
                 "\"No foreign power is fighting this war for us,\" Lucita noted crisply, tapping the brass compasses back into place. \"Every shell moving up to the line comes from Rizian foundries.\"", 258,
-                "Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
+                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
 
-            foreach (int aidOut in new[] { 256, 280, 281, 282, 283, 284, 285, 286 })
+            AddLine(conv, 257, CarlosId, RomusId, "ForeignAid_Integrated_None_Carlos",
+                "\"No foreign power is fighting this war for us,\" General Carlos Azaro noted flatly. \"Every shell moving up to the line comes from Rizian foundries.\"", 258,
+                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and Variable[\"Zille_Lespia_Intel\"] ~= true and Variable[\"Zille_Rumburg_Munitions\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
+
+            foreach (int aidOut in new[] { 256, 257, 280, 281, 282, 283, 284, 285, 286 })
             {
                 AddLink(conv, 250, aidOut);
                 AddLink(conv, 251, aidOut);

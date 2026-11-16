@@ -1481,3 +1481,526 @@ body {
   from { transform: translateX(50px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+
+
+/* ==========================================================================
+   SUZERAIN THEME (DEFAULT)
+   Inspired by Suzerain (Torpor Games): Deep charcoal slate, burgundy headers,
+   antique brass/gold borders, warm parchment typography, zero neon/AI glow.
+   ========================================================================== */
+
+[data-theme="suzerain"] {
+  --bg-deep: #0c0e10;
+  --bg-surface: #121518;
+  --bg-panel: #171b1f;
+  --bg-card: #1c2126;
+  --bg-card-hover: #232930;
+  --bg-card-active: #2a3139;
+
+  --border-dim: #2e2a23;
+  --border-bright: #5e4f34;
+  --border-neon-cyan: #7a6642;
+  --border-neon-amber: #9c7e47;
+
+  /* Muted Suzerain Palette (mapped to existing var names for seamless compatibility) */
+  --neon-cyan: #c4a661;       /* Antique Gold */
+  --neon-cyan-glow: none;
+
+  --neon-amber: #c9903e;      /* Ochre / Amber */
+  --neon-amber-glow: none;
+
+  --neon-green: #6b946b;      /* Muted Sage */
+  --neon-green-glow: none;
+
+  --neon-crimson: #9e3f3f;    /* Muted Crimson */
+  --neon-crimson-glow: none;
+
+  --neon-purple: #8c6d46;     /* Bronze / Brass */
+  --neon-purple-glow: none;
+
+  --neon-blue: #567d8c;       /* Slate Blue */
+
+  --text-main: #e6dfd1;       /* Warm Parchment */
+  --text-muted: #a39b8b;      /* Muted Stone */
+  --text-dim: #6e685c;        /* Dark Taupe */
+  --text-cyan: #d4b978;       /* Gold Accent */
+  --text-amber: #d9a75a;
+  --text-green: #7da67d;
+
+  --font-serif: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-narrative: 'Crimson Pro', Georgia, serif;
+  --font-sans: 'Crimson Pro', 'Inter', Georgia, serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  --suz-burgundy: #38141a;
+  --suz-burgundy-hover: #4a1b23;
+  --suz-burgundy-border: #6e4e3a;
+  --suz-gold: #c4a661;
+  --suz-gold-bright: #dfc382;
+}
+
+[data-theme="suzerain"] body {
+  background-color: var(--bg-deep);
+  background-image: radial-gradient(circle at 50% 0%, rgba(56, 20, 26, 0.14) 0%, transparent 65%);
+  color: var(--text-main);
+  font-family: var(--font-narrative);
+  font-size: 15px;
+}
+
+/* Top Bar */
+[data-theme="suzerain"] .top-hud {
+  background: linear-gradient(180deg, #16191d 0%, #101316 100%);
+  border-bottom: 1px solid #5e4f34;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="suzerain"] .jifocc-title h1 {
+  font-family: var(--font-serif);
+  color: var(--suz-gold-bright);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+[data-theme="suzerain"] .badge-ver {
+  background: var(--suz-burgundy);
+  border: 1px solid var(--suz-gold);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  border-radius: 2px;
+}
+
+[data-theme="suzerain"] .crest-icon-wrap {
+  background: var(--suz-burgundy);
+  border: 1px solid var(--suz-gold);
+  color: var(--suz-gold-bright);
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+[data-theme="suzerain"] .tel-pill {
+  background: #14171a;
+  border: 1px solid #3a3326;
+  color: var(--text-muted);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+[data-theme="suzerain"] .status-dot {
+  background: #6b946b;
+  box-shadow: none;
+}
+
+/* Main Navigation Tabs */
+[data-theme="suzerain"] .hud-tab {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: 2px;
+  color: var(--text-muted);
+}
+
+[data-theme="suzerain"] .hud-tab:hover {
+  background: rgba(196, 166, 97, 0.06);
+  color: var(--text-main);
+  border-color: #3a3326;
+}
+
+[data-theme="suzerain"] .hud-tab.active {
+  background: var(--suz-burgundy);
+  border: 1px solid #6e5c3b;
+  border-bottom: 2px solid var(--suz-gold-bright);
+  color: var(--suz-gold-bright);
+  box-shadow: none;
+}
+
+/* Action Buttons */
+[data-theme="suzerain"] .btn-hud,
+[data-theme="suzerain"] .btn-act,
+[data-theme="suzerain"] .btn-tag-add {
+  font-family: var(--font-serif);
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  box-shadow: none;
+  background: #1a1f24;
+  border: 1px solid #5e4f34;
+  color: var(--text-main);
+}
+
+[data-theme="suzerain"] .btn-hud:hover,
+[data-theme="suzerain"] .btn-act:hover,
+[data-theme="suzerain"] .btn-tag-add:hover {
+  background: #252b32;
+  border-color: var(--suz-gold);
+  color: var(--suz-gold-bright);
+  box-shadow: none;
+}
+
+[data-theme="suzerain"] .btn-hud-deploy,
+[data-theme="suzerain"] .btn-save-master {
+  background: var(--suz-burgundy);
+  border: 1px solid var(--suz-gold);
+  color: var(--suz-gold-bright);
+}
+
+[data-theme="suzerain"] .btn-hud-deploy:hover,
+[data-theme="suzerain"] .btn-save-master:hover {
+  background: var(--suz-burgundy-hover);
+  border-color: var(--suz-gold-bright);
+}
+
+[data-theme="suzerain"] .btn-hud-purple {
+  background: #1b2025;
+  border: 1px solid #5e4f34;
+  color: var(--suz-gold);
+}
+
+/* Sidebars & Panels */
+[data-theme="suzerain"] .sidebar,
+[data-theme="suzerain"] .inspector-panel,
+[data-theme="suzerain"] .modal-content {
+  background: var(--bg-panel);
+  border-color: #3a3326;
+  box-shadow: none;
+}
+
+[data-theme="suzerain"] .sidebar-header,
+[data-theme="suzerain"] .inspector-header,
+[data-theme="suzerain"] .modal-header {
+  background: var(--suz-burgundy);
+  border-bottom: 1px solid #6e5c3b;
+  font-family: var(--font-serif);
+  color: var(--suz-gold-bright);
+}
+
+[data-theme="suzerain"] .list-item {
+  background: var(--bg-card);
+  border: 1px solid #2e2a23;
+  border-radius: 2px;
+}
+
+[data-theme="suzerain"] .list-item:hover {
+  background: var(--bg-card-hover);
+  border-color: #5e4f34;
+}
+
+[data-theme="suzerain"] .list-item.active {
+  background: #241b1e;
+  border-color: var(--suz-gold);
+  box-shadow: inset 3px 0 0 var(--suz-gold);
+}
+
+/* Canvas & Nodes */
+[data-theme="suzerain"] .canvas-viewport,
+[data-theme="suzerain"] #graph-canvas-wrap {
+  background-color: #0f1215;
+  background-image:
+    linear-gradient(rgba(196, 166, 97, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 166, 97, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+[data-theme="suzerain"] .node-card {
+  background: #181c20;
+  border: 1px solid #4a402d;
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="suzerain"] .node-card:hover {
+  border-color: #8a744b;
+}
+
+[data-theme="suzerain"] .node-card.selected {
+  border-color: var(--suz-gold-bright);
+  box-shadow: 0 0 0 1px var(--suz-gold-bright), 0 6px 18px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="suzerain"] .node-card-header {
+  background: #23282e;
+  border-bottom: 1px solid #3a3326;
+  font-family: var(--font-serif);
+}
+
+[data-theme="suzerain"] .node-card.is-hub .node-card-header {
+  background: var(--suz-burgundy);
+  border-bottom: 1px solid var(--suz-gold);
+}
+
+[data-theme="suzerain"] .node-card-body,
+[data-theme="suzerain"] .node-dialogue-text,
+[data-theme="suzerain"] textarea,
+[data-theme="suzerain"] input[type="text"] {
+  font-family: var(--font-narrative);
+  color: var(--text-main);
+}
+
+[data-theme="suzerain"] input,
+[data-theme="suzerain"] textarea,
+[data-theme="suzerain"] select {
+  background: #101316;
+  border: 1px solid #3a3326;
+  border-radius: 2px;
+  color: var(--text-main);
+}
+
+[data-theme="suzerain"] input:focus,
+[data-theme="suzerain"] textarea:focus,
+[data-theme="suzerain"] select:focus {
+  border-color: var(--suz-gold);
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* Suzerain Dialogue Tree & Node Graph Overrides */
+[data-theme="suzerain"] .tree-view-container {
+  background-color: #0e1012;
+  background-image:
+    radial-gradient(circle at 50% 35%, rgba(56, 20, 26, 0.12) 0%, transparent 70%),
+    linear-gradient(rgba(196, 166, 97, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196, 166, 97, 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+[data-theme="suzerain"] .tree-node-card {
+  background: #171b1f;
+  border: 1px solid #4a402d;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="suzerain"] .tree-node-card:hover {
+  border-color: #8a744b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="suzerain"] .tree-node-card.active-tree-node {
+  border-color: var(--suz-gold-bright);
+  box-shadow: 0 0 0 1px var(--suz-gold-bright), 0 8px 22px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="suzerain"] .tree-node-card.tree-player-choice {
+  border-color: #6e5c3b;
+  background: #1c1917;
+}
+
+[data-theme="suzerain"] .tree-card-header {
+  background: #21262c;
+  border-bottom: 1px solid #3a3326;
+  font-family: var(--font-serif);
+}
+
+[data-theme="suzerain"] .tree-speaker-tag {
+  font-family: var(--font-serif);
+  color: var(--suz-gold-bright);
+  letter-spacing: 0.04em;
+  text-shadow: none;
+}
+
+[data-theme="suzerain"] .tree-speaker-tag.speaker-player {
+  color: #d9a75a;
+}
+
+[data-theme="suzerain"] .tree-card-body {
+  font-family: var(--font-narrative);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-main);
+}
+
+[data-theme="suzerain"] .tree-card-footer {
+  background: #131619;
+  border-top: 1px solid #2e2a23;
+  font-family: var(--font-serif);
+  color: var(--text-muted);
+}
+
+[data-theme="suzerain"] .tree-edge {
+  filter: none !important;
+  stroke: #6e5c3b;
+}
+
+[data-theme="suzerain"] .tree-edge.highlighted {
+  stroke: var(--suz-gold-bright);
+  filter: none !important;
+}
+
+[data-theme="suzerain"] .tree-edge.edge-choice {
+  stroke: #c9903e;
+}
+
+[data-theme="suzerain"] .tree-edge.edge-backlink {
+  stroke: #567d8c;
+}
+
+/* Remove any remaining neon glows & enforce Suzerain typography */
+[data-theme="suzerain"] * {
+  text-shadow: none !important;
+}
+
+[data-theme="suzerain"] .tree-toolbar,
+[data-theme="suzerain"] .tree-ctrl-btn,
+[data-theme="suzerain"] .tree-orient-btn,
+[data-theme="suzerain"] .tree-home-btn,
+[data-theme="suzerain"] .tree-jump-btn,
+[data-theme="suzerain"] .zoom-telemetry-pill {
+  background: #171b1f;
+  border-color: #4a402d;
+  color: var(--text-main);
+  font-family: var(--font-serif);
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+[data-theme="suzerain"] .tree-orient-btn.active {
+  background: var(--suz-burgundy);
+  border-color: var(--suz-gold);
+  color: var(--suz-gold-bright);
+}
+
+
+/* Prevent overlap & clipping in Suzerain theme */
+[data-theme="suzerain"] .top-hud {
+  gap: 10px;
+  padding: 0 14px;
+}
+
+[data-theme="suzerain"] .hud-left,
+[data-theme="suzerain"] .hud-center,
+[data-theme="suzerain"] .hud-right {
+  min-width: 0;
+  gap: 6px;
+}
+
+[data-theme="suzerain"] .hud-tab,
+[data-theme="suzerain"] .btn-hud {
+  white-space: nowrap;
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+[data-theme="suzerain"] .telemetry-status-pills {
+  display: none;
+}
+
+/* Muted Suzerain badges, pills & mod-status boxes (no neon green/red/blue) */
+[data-theme="suzerain"] .badge,
+[data-theme="suzerain"] .mod-badge,
+[data-theme="suzerain"] .scenario-pill,
+[data-theme="suzerain"] .tag-pill,
+[data-theme="suzerain"] .filter-pill,
+[data-theme="suzerain"] .link-pill {
+  background: #1a1e23 !important;
+  border: 1px solid #4a402d !important;
+  color: var(--text-main) !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+  font-family: var(--font-serif) !important;
+}
+
+[data-theme="suzerain"] .filter-pill.active {
+  background: var(--suz-burgundy) !important;
+  border-color: var(--suz-gold) !important;
+  color: var(--suz-gold-bright) !important;
+}
+
+[data-theme="suzerain"] .tree-node-card.tree-mod-injected {
+  border-color: #6b946b !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="suzerain"] .tree-node-card.tree-mod-edited {
+  border-color: #c9903e !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+
+/* Fix arrow clipping, vertical node overlap, and remaining navy/neon-red surfaces */
+[data-theme="suzerain"] .tree-svg-layer {
+  overflow: visible !important;
+}
+
+[data-theme="suzerain"] .tree-node-card {
+  max-height: 132px;
+  overflow: hidden;
+}
+
+[data-theme="suzerain"] .tree-card-body {
+  font-size: 13px;
+  line-height: 1.3;
+  max-height: 56px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+[data-theme="suzerain"] .inspector-drawer,
+[data-theme="suzerain"] .bottom-panel,
+[data-theme="suzerain"] .modal-box,
+[data-theme="suzerain"] .detail-panel,
+[data-theme="suzerain"] .editor-toolbar,
+[data-theme="suzerain"] .filter-bar {
+  background: var(--bg-panel) !important;
+  border-color: #4a402d !important;
+  box-shadow: none !important;
+}
+
+[data-theme="suzerain"] .btn-danger,
+[data-theme="suzerain"] .badge-danger,
+[data-theme="suzerain"] .text-crimson {
+  background: #3a161c !important;
+  border-color: #8c4343 !important;
+  color: #e6c5c5 !important;
+  box-shadow: none !important;
+}
+
+
+/* Suzerain Inspector Drawer & Delete Node Button */
+[data-theme="suzerain"] .inspector-drawer {
+  background: #14171a !important;
+  border-left: 1px solid #5e4f34 !important;
+  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="suzerain"] .drawer-header {
+  background: var(--suz-burgundy) !important;
+  border-bottom: 1px solid #6e5c3b !important;
+  font-family: var(--font-serif) !important;
+  color: var(--suz-gold-bright) !important;
+}
+
+[data-theme="suzerain"] .drawer-body {
+  background: #14171a !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme="suzerain"] button[onclick*="deleteDialogueNode"] {
+  background: #3a161c !important;
+  border: 1px solid #8c4343 !important;
+  color: #e6c5c5 !important;
+  font-family: var(--font-serif) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+[data-theme="suzerain"] button[onclick*="deleteDialogueNode"]:hover {
+  background: #4f1f27 !important;
+  border-color: #b56565 !important;
+}
+
+[data-theme="suzerain"] .node-inspector-drawer {
+  background: #14171a !important;
+  border-left: 1px solid #5e4f34 !important;
+  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="suzerain"] .node-inspector-drawer {
+  top: 64px !important;
+  height: calc(100vh - 64px) !important;
+}

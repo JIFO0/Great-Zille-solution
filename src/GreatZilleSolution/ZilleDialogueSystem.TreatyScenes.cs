@@ -106,7 +106,11 @@ namespace GreatZilleSolution
                 "Smolak ground his cigarette under his boot heel, his jaw twitching. \"Don't get drunk on victory, King Romus! Valdez blundered, sure—but I still have battalions in Wraclawitz, Contana whispering in Kyrute, and stubborn pride! I'll hand back Zille if you let my surviving boys sail home untouched—not one copper of reparations!\"", -1);
 
             AddLink(conv, 100, 101);
-            AddLink(conv, 100, 102);
+            AddLink(conv, 100, 1102);
+
+            AddLine(conv, 1102, NarratorId, RomusId, "Victory_NoCards_Bridge",
+                "With the military map settled between you, Smolak clenched his jaw and waited for your terms.", 102,
+                "not (((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1) or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true))");
 
             var vicDuelHub = AddLine(conv, 101, NarratorId, RomusId, "Victory_Leverage_Duel_Hub",
                 "Smolak was testing your nerve—trying to evacuate his beaten army without paying a cent for the ruin in Zille. You could press a concrete advantage from your dossier first, or move straight to dictating final terms.", -1,
@@ -149,8 +153,7 @@ namespace GreatZilleSolution
                 "Spare me the theatrics, Wiktor. Let us put the final evacuation terms on this table right now.", 102);
 
             var victoryChoiceHub = AddLine(conv, 102, NarratorId, RomusId, "Victory_Terms_Prompt",
-                "Smolak leaned over the scarred table—cornered, bruised, yet bargaining furiously for what remained of Wehlen.", -1,
-                "not (((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1) or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true))");
+                "Smolak leaned over the scarred table—cornered, bruised, yet bargaining furiously for what remained of Wehlen.", -1);
 
             victoryChoiceHub.outgoingLinks.Add(CreateLink(conv.id, 102, 110)); // Clean Zille Restoration
             victoryChoiceHub.outgoingLinks.Add(CreateLink(conv.id, 102, 112)); // Zille Restoration + POW Release
@@ -173,7 +176,7 @@ namespace GreatZilleSolution
                 "Smolak snatched the pen and scrawled his signature with vicious strokes. \"Done! Pack up, boys, we're sailing home! Enjoy your oilfields and your headaches, Romus!\"", -1);
 
             AddChoice(conv, 115, SmolakId, "Demand_Leveraged_Reparations",
-                "\"[LEVERAGE] Return Zille AND pay war reparations (+2 Budget, +2 Energy) for the ruin you left!\"",
+                "\"[LEVERAGE] Return Zille AND pay war reparations in gold and crude oil for the ruin you left!\"",
                 "You lack the cards to refuse, Smolak. Sign the unconditional return of Zille AND two million in gold reconstruction credits plus emergency crude deliveries—or our press and our fleet bury you tonight!", 116,
                 "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Reparations_Won\"] = true; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 2; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 2;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 3");
@@ -182,7 +185,7 @@ namespace GreatZilleSolution
                 "Smolak cursed viciously under his breath, glaring as if he wished his fountain pen were a dagger—then signed every schedule of gold and fuel deliveries. \"You squeezed every last drop, Romus! Take Zille and your blood money!\"", -1);
 
             AddChoice(conv, 120, SmolakId, "Demand_Overwhelming_Triumph",
-                "\"[TOTAL TRIUMPH] Cede Zille, pay massive indemnities (+4 Budget, +3 Energy), and free Grodzizg!\"",
+                "\"[TOTAL TRIUMPH] Cede Zille, pay massive indemnities, demilitarize the south, and free Grodzizg!\"",
                 "Our forward divisions already sit inside mainland Wehlen. Cede Zille unconditionally, pay massive gold and fuel indemnities, demilitarize your southern coast, and grant Free City autonomy to Grodzizg—or our armor pushes to Wraclawitz!", 121,
                 "Variable[\"Zille_War_Outcome\"] = 5; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 4; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 3;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) == 5 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
@@ -195,8 +198,14 @@ namespace GreatZilleSolution
                 "Smolak blew gray smoke toward the canvas roof. \"Neither of us can break the other cheaply, Romus. Your tanks stalled on Zille City's ring, and my boys can't crack Brenas. We can keep feeding men into artillery until Kyrute chains us both... or hear my compromise: a demilitarized Independent Buffer State in Zille!\"", -1);
 
             AddLink(conv, 200, 201);
-            AddLink(conv, 200, 202);
-            AddLink(conv, 200, 203);
+            AddLink(conv, 200, 1202);
+
+            string noStaleCards = "not ((((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or (Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true)))";
+
+            AddLine(conv, 1202, NarratorId, RomusId, "Stalemate_NoCards_Bridge",
+                "With neither side holding an overwhelming trump card at the table, Smolak tapped his ash onto the dirt and waited.", -1, noStaleCards);
+            AddLink(conv, 1202, 202);
+            AddLink(conv, 1202, 203);
 
             var staleDuelHub = AddLine(conv, 201, NarratorId, RomusId, "Stalemate_Leverage_Hub",
                 "Smolak watched your eyes like a card shark staking his final chip. If you have accumulated enough leverage—from bombing dossiers, full arsenals, naval blockade, or AN legitimacy—you might break this deadlock and force Zille back even without a total breakthrough.", -1,
@@ -235,15 +244,13 @@ namespace GreatZilleSolution
             AddLink(conv, 208, 202);
             AddLink(conv, 208, 203);
 
-            string noStaleCards = "not ((((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or (Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true)))";
-
             AddLine(conv, 202, NarratorId, RomusId, "Stalemate_Hub_Lucita",
                 "Lucita frowned beside you, awaiting your final call on whether to compromise, force victory through sheer leverage, or freeze the front.", -1,
-                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true and " + noStaleCards);
+                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 203, NarratorId, RomusId, "Stalemate_Hub_NoLucita",
                 "Your staff officers stood silent as Smolak awaited your final verdict on the stalemate.", -1,
-                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true) and " + noStaleCards);
+                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
 
             foreach (int h in new[] { 202, 203 })
             {
@@ -425,9 +432,13 @@ namespace GreatZilleSolution
             }
 
             // Outcome-routed multi-choice signing hubs (NEVER a 1-choice menu!)
+            var triumphHub = AddLine(conv, 7, NarratorId, RomusId, "Outcome_Triumph_Prompt",
+                "With Wehzek armies shattered deep inside their own heartland, the ambassadors rose in hushed awe as you stepped to the marble table to seal the Total Triumph.", -1,
+                "(Variable[\"Zille_War_Outcome\"] or 0) == 5 and Variable[\"Zille_Independent_Buffer\"] ~= true");
+
             var victoryHub = AddLine(conv, 3, NarratorId, RomusId, "Outcome_Victory_Prompt",
                 "You stepped forward to the marble table to affix the Great Seal of Rizia to the Treaty of Restoration. How do you dedicate this triumph before the realm and the watching envoys?", -1,
-                "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and Variable[\"Zille_Independent_Buffer\"] ~= true");
+                "((Variable[\"Zille_War_Outcome\"] or 0) == 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and Variable[\"Zille_Independent_Buffer\"] ~= true");
 
             var bufferHub = AddLine(conv, 4, NarratorId, RomusId, "Outcome_Buffer_Prompt",
                 "You stepped forward to the marble table to ratify the Charter of Neutrality for the Independent Republic of Zille.", -1,
@@ -443,11 +454,32 @@ namespace GreatZilleSolution
 
             foreach (int anId in new[] { 200, 201, 202 })
             {
+                AddLink(conv, anId, 7);
                 AddLink(conv, anId, 3);
                 AddLink(conv, anId, 4);
                 AddLink(conv, anId, 5);
                 AddLink(conv, anId, 6);
             }
+
+            triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 70));
+            triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 71));
+            triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 72));
+
+            AddChoice(conv, 70, HugoId, "Sign_Triumph_Derdia",
+                "\"Proclaim the Free City of Grodzizg under joint Rizian-Derdian protection and the restoration of Zille!\"",
+                "By the Great Seal of Rizia and the bond sworn with Supreme Wiseman Azmal, Zille returns to the Crown, Wehlen's southern border is demilitarized, and Grodzizg stands as a Free City of commerce and peace!", -1,
+                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;",
+                "Variable[\"Zille_DerdiaPact_Signed\"] == true");
+
+            AddChoice(conv, 71, HugoId, "Sign_Triumph_Crown",
+                "\"Proclaim Zille's restoration, Wehlen's indemnities, and the Free City Charter of Grodzizg!\"",
+                "Let every court in Merkopa witness this hour: Zille returns forever to House Toras, Wehlen pays full restitution, and Grodzizg rises as a protected Free City!", -1,
+                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;");
+
+            AddChoice(conv, 72, HugoId, "Sign_Triumph_Peace",
+                "\"Dedicate this overwhelming victory to lasting southern stability and the memory of our fallen.\"",
+                "With Wehlen's southern front dismantled and Zille restored to our kingdom, we dedicate this decisive peace to our fallen soldiers and the security of every Rizian home!", -1,
+                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
 
             // Victory choices (always 3 choices when Victory/Triumph!)
             victoryHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
@@ -479,13 +511,13 @@ namespace GreatZilleSolution
 
             AddLine(conv, 112, EstelaId, RomusId, "Estela_Treaty_Joy",
                 "From the royal gallery, Queen Mother Estela pressed a lace handkerchief to her eyes, smiling down at you with quiet, radiant pride for the fishing harbor of her youth.", -1,
-                "Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
 
             AddLine(conv, 113, ElenaId, RomusId, "Elena_Treaty_Indemnities",
                 "Elena leaned over the parchment ledger with rare satisfaction. \"And with Wehlen's reconstruction indemnities and crude deliveries sealed in black and white, Brenas will rebuild twice as fast.\"", -1,
                 "Variable[\"Zille_Reparations_Won\"] == true or Variable[\"Grodzizg_FreeCity\"] == true");
 
-            foreach (int vCh in new[] { 10, 15, 20 })
+            foreach (int vCh in new[] { 10, 15, 20, 70, 71, 72 })
             {
                 AddLink(conv, vCh, 11);
                 AddLink(conv, vCh, 111);

@@ -95,6 +95,14 @@ namespace GreatZilleSolution
             }
             if (__result == WarTile.TileActionType.Fortify && !ZilleWarTable.FortifyArmed)
                 __result = WarTile.TileActionType.Select;
+            var selFort = ZilleWarTable.SelectedUnit();
+            if (ZilleWarTable.FortifyArmed && selFort != null && __instance == selFort.GetCurrentWarTile()
+                && !selFort.IsDead() && !selFort.IsFortified() && !ZilleWarTable.IsTokenEngagedInBattle(selFort)
+                && ZilleWarTable.TurnHasPoints())
+            {
+                __result = WarTile.TileActionType.Fortify;
+                return;
+            }
             if (__result == WarTile.TileActionType.Attack && ZilleWarTable.AllySupportTarget(__instance))
                 __result = WarTile.TileActionType.Support;
             if (__result == WarTile.TileActionType.Support && !ZilleWarTable.LiveSupport(__instance))
@@ -395,6 +403,7 @@ namespace GreatZilleSolution
                 ZilleWarTable.UnlockAllTiles();
                 ZilleWarTable.RefreshAllTokenStatusEffects();
                 ZilleWarTable.RequestBoardRefresh();
+                ZilleWarTable.EnsurePlayerActionsPanelVisible();
                 var hud = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();
                 if (hud != null && ZilleWarTable.ScenarioStarted)
                 {
@@ -407,7 +416,7 @@ namespace GreatZilleSolution
             }
         }
 
-        /// <summary>A unit that already moved is locked out of a second move, but it still has to be clickable.</summary>
+        /// <summary>A unit that already moved or has depleted organization is locked out of moving, but it still has to be clickable so the player can fortify it.</summary>
         public static void IsSelectablePostfix(WarToken __instance, ref bool __result)
         {
             if (ZilleWarTable.IsEnemyTurnActive())
@@ -419,12 +428,46 @@ namespace GreatZilleSolution
             try
             {
                 if (__instance.GetTokenAllegiance() != WarToken.WarAllegiance.Player) return;
-                if (__instance.IsDead() || !__instance.IsMovementLocked()) return;
+                if (__instance.IsDead() || ZilleWarTable.IsCityToken(__instance)) return;
+                if (ZilleWarTable.IsTokenEngagedInBattle(__instance)) return;
+                if (!__instance.IsMovementLocked() && !__instance.IsOrganizationDepleted()) return;
                 var tile = __instance.GetCurrentWarTile();
-                if (tile != null && (tile.IsLocked() || tile.IsActionLocked())) return;
+                if (tile != null && (tile.IsLocked() || tile.IsActionLocked()) && !__instance.IsOrganizationDepleted()) return;
                 var battle = __instance.GetCurrentBattle();
                 if (battle != null && !battle.isBattleOver) return;
                 __result = true;
+            }
+            catch { }
+        }
+
+        public static void SetFortifyButtonInteractablePrefix(ref bool state, WarToken token)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return;
+            if (token == null) return;
+            try
+            {
+                if (token.GetTokenAllegiance() == WarToken.WarAllegiance.Player && !token.IsDead()
+                    && !token.IsFortified() && !ZilleWarTable.IsTokenEngagedInBattle(token)
+                    && ZilleWarTable.TurnHasPoints())
+                {
+                    state = true;
+                }
+            }
+            catch { }
+        }
+
+        public static void CanFortifyPostfix(WarToken __instance, WarTile targetTile, ref bool __result)
+        {
+            if (__result || __instance == null) return;
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return;
+            try
+            {
+                if (__instance.GetTokenAllegiance() == WarToken.WarAllegiance.Player && !__instance.IsDead()
+                    && !__instance.IsFortified() && !ZilleWarTable.IsTokenEngagedInBattle(__instance)
+                    && targetTile == __instance.GetCurrentWarTile() && ZilleWarTable.TurnHasPoints())
+                {
+                    __result = true;
+                }
             }
             catch { }
         }
@@ -577,6 +620,10 @@ namespace GreatZilleSolution
             ZilleWarTable.SyncBattleMovementLocks();
             ZilleWarTable.SyncBattleStatsUI(battle);
             ZilleWarTable.RequestBoardRefresh();
+            if (ZilleWarTable.IsEnemyTurnActive() || ZilleWarTable.IsFlowEnemyMoving())
+            {
+                ZilleWarTable.FocusBattleCamera(battle);
+            }
         }
 
         public static bool PlayTokenAnimationPrefix(WarToken __instance, WarToken.TokenAnimationType tokenAnimationType, UnityEngine.Events.UnityAction onAnimationEnd)
@@ -725,15 +772,24 @@ namespace GreatZilleSolution
         /// The stock walk InsertRange's a null collection and aborts the line.
         /// A road we built is connected; the manager can instantiate the animated segment.
         /// </summary>
-        public static bool SupplyConnectPrefix(ref bool __result)
+        public static bool SupplyConnectPrefix(WarSupplyLine supplyLine, WarTile tile, bool isCheckingAllSupplyLines, ref bool __result)
         {
-            __result = true;
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return true;
+            __result = ZilleWarTable.IsTileConnectedOnSupplyLine(supplyLine, tile, isCheckingAllSupplyLines);
             return false;
         }
 
-        public static bool CanFastMoveOnSupplyTilePrefix(ref bool __result)
+        public static bool IsTileConnectedToAnySupplySourcePrefix(WarTile tile, ref bool __result)
         {
-            __result = false;
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return true;
+            __result = ZilleWarTable.IsTileSuppliedForCurrentAllegiance(tile);
+            return false;
+        }
+
+        public static bool CanFastMoveOnSupplyTilePrefix(WarToken __instance, WarTile targetTile, ref bool __result)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return true;
+            __result = ZilleWarTable.CanFastMoveOnRoad(__instance, targetTile);
             return false;
         }
 
@@ -936,6 +992,27 @@ namespace GreatZilleSolution
                 }
             }
             catch { }
+        }
+
+        public static void EvaluateBattleCoroutinePrefix(WarBattleManager.WarBattle battle)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return;
+            ZilleWarTable.FocusBattleCamera(battle);
+        }
+
+        public static void PlayDamageAnimationsPrefix(WarBattleManager.WarBattleTurnResult battleTurnResult)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return;
+            if (battleTurnResult != null && battleTurnResult.battle != null)
+            {
+                ZilleWarTable.FocusBattleCamera(battleTurnResult.battle);
+            }
+        }
+
+        public static void CalculateAndFinalizeBattlePrefix(WarBattleManager.WarBattle battle)
+        {
+            if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille && !ZilleWarTable.SkinEnabled) return;
+            ZilleWarTable.FocusBattleCamera(battle);
         }
 
         public static void CalculateAndFinalizeBattlePostfix(WarBattleManager __instance, WarBattleManager.WarBattle battle)
@@ -1234,7 +1311,12 @@ namespace GreatZilleSolution
                 if (connect != null)
                 {
                     harmony.Patch(connect, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SupplyConnectPrefix))));
-                    MelonLogger.Msg("[Great Zille] Supply lines get a list before the connection walk.");
+                    MelonLogger.Msg("[Great Zille] Supply lines use live Zille graph connectivity.");
+                }
+                var connectAny = AccessTools.Method(typeof(WarSupplyLineManager), "IsTileConnectedToAnySupplySource");
+                if (connectAny != null)
+                {
+                    harmony.Patch(connectAny, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(IsTileConnectedToAnySupplySourcePrefix))));
                 }
 
                 var fastMove = AccessTools.Method(typeof(WarToken), "CanFastMoveOnSupplyTile");
@@ -1255,6 +1337,12 @@ namespace GreatZilleSolution
                 var armFortify = AccessTools.Method(typeof(WarPlayerActionsPanel), nameof(WarPlayerActionsPanel.OnWarFortify));
                 if (armFortify != null)
                     harmony.Patch(armFortify, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(ArmFortifyPrefix))));
+                var setFortifyBtn = AccessTools.Method(typeof(WarPlayerActionsPanel), nameof(WarPlayerActionsPanel.SetFortifyButtonInteractable));
+                if (setFortifyBtn != null)
+                    harmony.Patch(setFortifyBtn, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(SetFortifyButtonInteractablePrefix))));
+                var canFortify = AccessTools.Method(typeof(WarToken), "CanFortify");
+                if (canFortify != null)
+                    harmony.Patch(canFortify, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CanFortifyPostfix))));
                 foreach (var name in new[] { "OnWarAirStrike", "OnWarAirSupport", "OnWarParatrooper", "OnWarNavalInvasion" })
                 {
                     var other = AccessTools.Method(typeof(WarPlayerActionsPanel), name);
@@ -1402,9 +1490,17 @@ namespace GreatZilleSolution
                     harmony.Patch(actionsSetup, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayerActionsPanelSetupPostfix))));
 
                 // Status effects persistence across all battles & 1-turn DepletedOrganization guard
+                var evalBattle = AccessTools.Method(typeof(WarBattleManager), "EvaluateBattleCoroutine");
+                if (evalBattle != null)
+                    harmony.Patch(evalBattle, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(EvaluateBattleCoroutinePrefix))));
+                var playDmg = AccessTools.Method(typeof(WarBattleManager), "PlayDamageAnimations");
+                if (playDmg != null)
+                    harmony.Patch(playDmg, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(PlayDamageAnimationsPrefix))));
                 var calcBattle = AccessTools.Method(typeof(WarBattleManager), nameof(WarBattleManager.CalculateAndFinalizeBattle));
                 if (calcBattle != null)
-                    harmony.Patch(calcBattle, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CalculateAndFinalizeBattlePostfix))));
+                    harmony.Patch(calcBattle,
+                        prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CalculateAndFinalizeBattlePrefix))),
+                        postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(CalculateAndFinalizeBattlePostfix))));
                 var addStat = AccessTools.Method(typeof(WarToken), nameof(WarToken.AddTokenStatusEffect));
                 if (addStat != null)
                     harmony.Patch(addStat, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(WarTokenAddStatusEffectPrefix))));
@@ -1682,6 +1778,13 @@ namespace GreatZilleSolution
                         __instance.tokenNameText.text = "Mave Nortus Field HQ";
                     }
                 }
+                else if (tName.Contains("DerdiaVisit") || entityName.Contains("DerdiaVisit"))
+                {
+                    if (__instance.tokenNameText != null)
+                    {
+                        __instance.tokenNameText.text = "State Visit: Derdia";
+                    }
+                }
                 else if (tName.Contains("InvasionOfZille") || entityName.Contains("InvasionOfZille") || entityName.Contains("WarFragment_Zille") || tName.Contains("Zille War"))
                 {
                     if (__instance.tokenNameText != null)
@@ -1729,6 +1832,21 @@ namespace GreatZilleSolution
                         __instance.enabled = true;
                     }
                     else if (!wantMave && ZilleCampaignState.MaveNortusHQCompleted)
+                    {
+                        __instance.gameObject.SetActive(false);
+                    }
+                }
+                else if (n == "DerdiaVisit Event Variant" || ent == "Rizia_Event_DerdiaVisit")
+                {
+                    bool wantVisit = DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked")
+                                  && !DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")
+                                  && !ZilleCampaignState.IsDerdiaStateVisitDone;
+                    if (wantVisit && !__instance.gameObject.activeSelf)
+                    {
+                        __instance.gameObject.SetActive(true);
+                        __instance.enabled = true;
+                    }
+                    else if (!wantVisit)
                     {
                         __instance.gameObject.SetActive(false);
                     }
@@ -1795,6 +1913,16 @@ namespace GreatZilleSolution
                 string tName = token.gameObject.name ?? "";
                 string entityName = token.GetTokenDataEntityName() ?? "";
 
+                ZilleDecisions.EnsureRegistered();
+                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
+
+                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked")
+                    && !DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")
+                    && !ZilleCampaignState.IsDerdiaStateVisitDone)
+                {
+                    WarOperationZilleManager.SpawnDerdiaVisitEventToken();
+                }
+
                 MelonLogger.Msg($"[TOKEN PANEL] SetupPostfix: Token='{tName}', Entity='{entityName}'");
 
                 if (WarOperationZilleManager.PendingPhase2TokenSpawn
@@ -1823,33 +1951,59 @@ namespace GreatZilleSolution
                         }
                     }
 
-                    EnsureButtonExists(__instance, "(MODNEW) A royal briefing before the invasion of Zille", "Council Chambers, Palas Rezna", cd, () => {
-                        MelonLogger.Msg("[TOKEN PANEL] Starting Royal Briefing conversation from Porte Drazon event button!");
-                        WarOperationZilleManager.TriggerZilleWarBriefingConversation();
-                    });
+                    int turn = ZilleCampaignState.GetCurrentTurn();
+                    bool earlyWar = DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch") || DialogueHelper.GetBoolVariable("Zille_War_Active");
+                    bool planningDone = DialogueHelper.GetBoolVariable("Zille_War_Planning_Done");
+
+                    if ((planningDone || earlyWar) && !DialogueHelper.GetBoolVariable("Zille_War_Active"))
+                    {
+                        EnsureButtonExists(__instance, "(MODNEW) A royal briefing before the invasion of Zille", "Council Chambers, Palas Rezna", cd, () => {
+                            MelonLogger.Msg("[TOKEN PANEL] Starting Royal Briefing conversation from Porte Drazon event button!");
+                            WarOperationZilleManager.TriggerZilleWarBriefingConversation();
+                        });
+                    }
 
                     // Progression-driven Zille Council & Diplomatic Events on Porte Drazon
-                    if (!DialogueHelper.GetBoolVariable("Zille_War_Planning_Done"))
+                    if (!planningDone && (turn == 0 || turn >= 2 || earlyWar))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_WarPlanning", "Zille/WarPlanning");
                         });
                     }
-                    else if (string.IsNullOrEmpty(DialogueHelper.GetStringVariable("Zille_Logistics_Route")))
+                    else if (planningDone && string.IsNullOrEmpty(DialogueHelper.GetStringVariable("Zille_Logistics_Route")))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Supply Lines of Brenas: Azaro vs Sazon", "State Dining Hall, Palas Rezna", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_WarLogisticsDispute", "Zille/WarLogisticsDispute");
                         });
                     }
 
-                    if (DialogueHelper.GetBoolVariable("Zille_War_Planning_Done"))
+                    // Turn 4+ Derdia-Wehlen Border Sabotage Investigation (available earlier if early war started in Turn 3)
+                    if (!DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone") && (turn == 0 || turn >= 4 || earlyWar))
                     {
-                        if (!DialogueHelper.GetBoolVariable("Zille_DerdiaTalks_Done"))
-                        {
-                            EnsureButtonExists(__instance, "(MODNEW) Derdian Mission: Faith, Oil and Mercenaries", "Telecommunications Chamber", null, () => {
-                                WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaTalks", "Zille/DerdiaTalks");
-                            });
-                        }
+                        EnsureButtonExists(__instance, "(MODNEW) Sabotage Inquiry: Derdia-Wehlen Border Briefing", "Golden Guard Briefing Room", null, () => {
+                            WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaInvestigation", "Zille/DerdiaInvestigation");
+                        });
+                    }
+
+                    // Turn 5+ Long Derdia Talks (or immediately after Investigation during early war)
+                    if (!DialogueHelper.GetBoolVariable("Zille_DerdiaTalks_Done")
+                        && (turn == 0 || turn >= 5 || (earlyWar && DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone"))))
+                    {
+                        EnsureButtonExists(__instance, "(MODNEW) Derdian Mission: The Yol-Qerzan Sabotage", "Telecommunications Chamber", null, () => {
+                            WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaTalks", "Zille/DerdiaTalks");
+                        });
+                    }
+
+                    // Turn 6+ Warm Diplomatic Visit to Derdia (also accessible via world map token)
+                    if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked") && !DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone"))
+                    {
+                        EnsureButtonExists(__instance, "(MODNEW) State Visit to Derdia: Silver Garrison", "Silver Garrison, Naeal", null, () => {
+                            WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaStateVisit", "Zille/DerdiaStateVisit");
+                        });
+                    }
+
+                    if (planningDone || earlyWar)
+                    {
                         if (!DialogueHelper.GetBoolVariable("Zille_LespiaTalks_Done"))
                         {
                             EnsureButtonExists(__instance, "(MODNEW) Lespian Hotline: Air Recon and Munitions", "Foreign Ministry Communications", null, () => {
@@ -1922,6 +2076,20 @@ namespace GreatZilleSolution
                         });
                     }
                 }
+                // Case 2B: Derdia State Visit Event Token
+                else if (tName.Contains("DerdiaVisit") || entityName.Contains("DerdiaVisit"))
+                {
+                    if (__instance.titleText != null) __instance.titleText.text = "State Visit: Derdia";
+                    if (__instance.subtitleText != null) __instance.subtitleText.text = "Silver Garrison Alliance Talks";
+
+                    if (!DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone"))
+                    {
+                        EnsureButtonExists(__instance, "Diplomatic State Visit: Silver Garrison", "Seal the Southern Corridor & Pipeline Alliance", null, () => {
+                            MelonLogger.Msg("[TOKEN PANEL] Opening Derdia State Visit conversation!");
+                            WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaStateVisit", "Zille/DerdiaStateVisit");
+                        });
+                    }
+                }
                 // Case 3: Zille (War Operation Event)
                 else if (tName.Contains("InvasionOfZille") || entityName.Contains("InvasionOfZille") || entityName.Contains("WarFragment_Zille") || tName.Contains("Zille War"))
                 {
@@ -1959,6 +2127,18 @@ namespace GreatZilleSolution
                         MelonLogger.Msg($"[TOKEN PANEL] {opButtonTitle} opens the Zille war table.");
                         WarOperationZilleManager.EnterZilleWarTheatre();
                     });
+                }
+
+                // Inject normal-map Decisions matching the clicked city & turn timing
+                foreach (var dec in ZilleDecisions.AllDecisions)
+                {
+                    if (ZilleDecisions.IsDecisionAvailableForToken(dec, tName, entityName))
+                    {
+                        var localDec = dec;
+                        EnsureButtonExists(__instance, $"(DECISION) {localDec.Title}", "Royal Decree / Frontier Dilemma", null, () => {
+                            ZilleDecisions.OpenDecision(localDec);
+                        });
+                    }
                 }
             }
             catch (Exception ex)
@@ -2130,9 +2310,11 @@ namespace GreatZilleSolution
         {
             try
             {
+                ZilleDialogueSystem.EnsureAllConversationsRegistered();
                 DialogueOverrideManager.ApplyAllOverrides();
                 ZilleCampaignState.SyncFromLua();
                 ZilleCampaignState.SyncToLua();
+                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
             }
             catch { }
         }
@@ -2157,9 +2339,22 @@ namespace GreatZilleSolution
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FrontalAssault);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
+                else if (title == "Choice_Golden_Ark_Derdia")
+                {
+                    MelonLogger.Msg("[WAR COUNCIL] Operation Golden Ark (Derdia Southern Corridor) chosen by player!");
+                    ZilleCampaignState.PlanType = ZillePlanType.Romulus;
+                    ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Ark;
+                    ZilleCampaignState.IsDerdiaPactSigned = true;
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanArkDerdia);
+                    WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
+                    WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
+                }
                 else if (title == "Choice_Golden_Ark" || title == "Choice_Golden_Ark_WeakFleet" || script.Contains("Choice_Romulus_Ark") || title.Contains("Choice_Romulus_Ark") || menuText.Contains("Plan Romulus: Ark") || menuText.Contains("Operation Golden Ark"))
                 {
-                    var variant = ZilleCampaignState.IsDerdiaHybridSupportActive ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
+                    var variant = (ZilleCampaignState.IsDerdiaPactSigned || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed"))
+                        ? ZilleOperationVariant.PlanArkDerdia
+                        : ZilleOperationVariant.PlanArk;
                     MelonLogger.Msg($"[WAR COUNCIL] Operation Golden Ark chosen by player! Initializing variant {variant}.");
                     ZilleCampaignState.PlanType = ZillePlanType.Romulus;
                     ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Ark;
@@ -2217,7 +2412,33 @@ namespace GreatZilleSolution
                     ZilleCampaignState.LogisticsRoute = "Compromise";
                 }
                 // 3. Diplomatic pacts (Derdia, Lespia, Rumburg)
-                else if (title == "Accept_Holy_Coalition" || title == "Deal_Derdia_Weapons" || title == "Deal_Derdia_Budget" || title == "Counter_Pragmatic_Derdia")
+                else if (title == "DerdiaInv_GoldenGuard" || title == "DerdiaInv_MilitaryIntel" || title == "DerdiaInv_DiplomaticChannel")
+                {
+                    ZilleCampaignState.HasDerdiaSabotageEvidence = true;
+                }
+                else if (title == "Derdia_Accept_StateVisit")
+                {
+                    ZilleCampaignState.IsDerdiaIncidentShared = true;
+                }
+                else if (title == "Derdia_WarActive_VisitAndRaids" || title == "Deal_Derdia_Weapons")
+                {
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                }
+                else if (title == "DerdiaVisit_Sign_FullPipeline" || title == "DerdiaVisit_Sign_DiscountPipeline")
+                {
+                    ZilleCampaignState.IsDerdiaPactSigned = true;
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    ZilleCampaignState.IsDerdiaPipelineInvested = true;
+                    ZilleCampaignState.IsDerdiaMissilesAgreed = true;
+                    ZilleCampaignState.IsDerdiaStateVisitDone = true;
+                }
+                else if (title == "DerdiaVisit_Sign_CorridorOnly")
+                {
+                    ZilleCampaignState.IsDerdiaPactSigned = true;
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    ZilleCampaignState.IsDerdiaStateVisitDone = true;
+                }
+                else if (title == "Accept_Holy_Coalition" || title == "Deal_Derdia_Budget" || title == "Counter_Pragmatic_Derdia")
                 {
                     ZilleCampaignState.IsDerdiaHybridSupportActive = true;
                 }
