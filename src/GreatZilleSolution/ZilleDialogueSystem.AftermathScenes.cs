@@ -87,22 +87,25 @@ namespace GreatZilleSolution
 
             AddChoice(conv, 11, ElenaId, "HomeFront_Subsidize_Fuel",
                 "\"Release treasury funds to subsidize civilian heating oil and bakery deliveries.\"",
-                "We will not let ordinary families freeze while our armies fight for Zille. Release royal funds to stabilize civilian fuel and bread transport.", 20,
+                "We will not let ordinary families freeze while our armies fight for Zille. Release royal funds to stabilize civilian fuel and bread transport.", 15,
                 "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;",
                 "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
 
             AddChoice(conv, 12, ElenaId, "HomeFront_Industrial_Rationing",
                 "\"Enforce strict wartime rationing on luxury estates and non-essential motors.\"",
-                "Every drop of diesel belongs to the front and essential farms. Impose strict rationing on private estates and pleasure vehicles immediately.", 20,
+                "Every drop of diesel belongs to the front and essential farms. Impose strict rationing on private estates and pleasure vehicles immediately.", 15,
                 "Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 2; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddChoice(conv, 13, ElenaId, "HomeFront_Price_Controls",
                 "\"Freeze wholesale fuel prices by royal decree and audit speculators in Porte Drazon.\"",
-                "Freeze wholesale fuel prices by royal decree and send treasury auditors into the port warehouses to break hoarding.", 20,
+                "Freeze wholesale fuel prices by royal decree and send treasury auditors into the port warehouses to break hoarding.", 15,
                 "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
+            AddLine(conv, 15, ElenaId, RomusId, "Elena_HomeFront_Ack",
+                "\"Understood, Your Majesty. I will have the Ministry of Commerce issue the directives before noon so the provinces see the Crown is in command.\"", 20);
+
             // Topic 2: International Press & AN Sanctions
-            AddLine(conv, 20, LaurentoId, RomusId, "Laurento_HomeFront_AN",
+            AddLine(conv, 20, NarratorId, RomusId, "Laurento_HomeFront_AN",
                 "Laurento slid a sheaf of Konstantium telegrams across the table. \"On the diplomatic front, Your Majesty, Contanan and Wehzek envoys are circulating exaggerated stories of civilian hardship in Zille to push an Alliance of Nations embargo.\"", 30);
 
             var anPrompt = AddLine(conv, 30, NarratorId, RomusId, "HomeFront_AN_Prompt",
@@ -247,7 +250,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
-            AddLine(conv, 30, EstelaId, RomusId, "Estela_Liberation_Close",
+            AddLine(conv, 30, NarratorId, RomusId, "Estela_Liberation_Close",
                 "As the harbor bells chimed noon across Zille Bay, Queen Mother Estela smiled through her tears. \"Long live the King. Welcome home, Zille.\"", -1,
                 "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
 

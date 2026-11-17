@@ -10,7 +10,7 @@ namespace GreatZilleSolution
     public static partial class ZilleDialogueSystem
     {
         // ================= ACTOR IDS (1:1 Vanilla Rizia Metadata) =================
-        public const int NarratorId = 10;
+        public static int NarratorId = 10;
         public const int RomusId = 95;           // Player_Romus
         public const int RomusItalicId = 93;     // Player_Romus_Italic
         public const int HugoId = 68;            // Hugo Toras (Grand Vizier)
@@ -55,6 +55,25 @@ namespace GreatZilleSolution
             {
                 var db = DialogueManager.masterDatabase;
                 if (db == null) return;
+
+                try
+                {
+                    var narr = db.GetActor("Narrator");
+                    if (narr == null && db.actors != null)
+                    {
+                        for (int i = 0; i < db.actors.Count; i++)
+                        {
+                            var a = db.actors[i];
+                            if (a != null && a.Name != null && a.Name.IndexOf("Narrator", StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                narr = a;
+                                break;
+                            }
+                        }
+                    }
+                    if (narr != null && narr.id > 0) NarratorId = narr.id;
+                }
+                catch { }
 
                 if (db.GetConversation("Turn_Zille_WarPlanning") != null &&
                     db.GetConversation("Turn_Zille_WarBriefing") != null &&

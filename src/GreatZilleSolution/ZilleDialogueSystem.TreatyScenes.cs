@@ -102,7 +102,7 @@ namespace GreatZilleSolution
                 "", "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 2 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
 
             // ================= BRANCH A: DECISIVE VICTORY / OVERWHELMING TRIUMPH =================
-            AddLine(conv, 100, SmolakId, RomusId, "Smolak_Defeated_Rant",
+            AddLine(conv, 100, NarratorId, RomusId, "Smolak_Defeated_Rant",
                 "Smolak ground his cigarette under his boot heel, his jaw twitching. \"Don't get drunk on victory, King Romus! Valdez blundered, sure—but I still have battalions in Wraclawitz, Contana whispering in Kyrute, and stubborn pride! I'll hand back Zille if you let my surviving boys sail home untouched—not one copper of reparations!\"", -1);
 
             AddLink(conv, 100, 101);
@@ -127,7 +127,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Parley_UsedDossier\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
                 "((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true)");
 
-            AddLine(conv, 104, SmolakId, RomusId, "Ack_Vic_Dossier",
+            AddLine(conv, 104, NarratorId, RomusId, "Ack_Vic_Dossier",
                 "Smolak's eye twitched violently as you tapped the sealed black folder. \"You smug little vulture...\" he hissed softly, lowering his bluff by a notch.", 102);
 
             AddChoice(conv, 105, SmolakId, "Vic_Duel_Arsenal",
@@ -136,7 +136,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Parley_UsedArsenal\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
 
-            AddLine(conv, 106, SmolakId, RomusId, "Ack_Vic_Arsenal",
+            AddLine(conv, 106, NarratorId, RomusId, "Ack_Vic_Arsenal",
                 "Smolak glanced nervously toward the telegraph orderly outside the canvas flap. \"Keep your tanks anchored in Zille, Romus—nobody wants a march on Wraclawitz!\"", 102);
 
             AddChoice(conv, 107, SmolakId, "Vic_Duel_BlockadeDerdia",
@@ -145,7 +145,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Parley_UsedEncircle\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
                 "(Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true)");
 
-            AddLine(conv, 108, SmolakId, RomusId, "Ack_Vic_Encircle",
+            AddLine(conv, 108, NarratorId, RomusId, "Ack_Vic_Encircle",
                 "Smolak swallowed hard, ash falling from his cigarette onto his tunic. \"Alright, alright, King—you've got me boxed in! What is your price?\"", 102);
 
             AddChoice(conv, 109, SmolakId, "Vic_Duel_SkipToTerms",
@@ -172,7 +172,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
 
-            AddLine(conv, 111, SmolakId, RomusId, "Smolak_Signs_Decisive",
+            AddLine(conv, 111, NarratorId, RomusId, "Smolak_Signs_Decisive",
                 "Smolak snatched the pen and scrawled his signature with vicious strokes. \"Done! Pack up, boys, we're sailing home! Enjoy your oilfields and your headaches, Romus!\"", -1);
 
             AddChoice(conv, 115, SmolakId, "Demand_Leveraged_Reparations",
@@ -181,7 +181,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 4; Variable[\"Zille_Reparations_Won\"] = true; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 2; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 2;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) >= 4 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 3");
 
-            AddLine(conv, 116, SmolakId, RomusId, "Smolak_Signs_Reparations",
+            AddLine(conv, 116, NarratorId, RomusId, "Smolak_Signs_Reparations",
                 "Smolak cursed viciously under his breath, glaring as if he wished his fountain pen were a dagger—then signed every schedule of gold and fuel deliveries. \"You squeezed every last drop, Romus! Take Zille and your blood money!\"", -1);
 
             AddChoice(conv, 120, SmolakId, "Demand_Overwhelming_Triumph",
@@ -190,11 +190,11 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 5; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 4; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) + 3;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) == 5 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
 
-            AddLine(conv, 121, SmolakId, RomusId, "Smolak_Signs_Overwhelming",
+            AddLine(conv, 121, NarratorId, RomusId, "Smolak_Signs_Overwhelming",
                 "Smolak turned chalk-white as he stared at the map pins deep inside Wehlen. \"You're an absolute shark, Romus... Damn you, I'll sign! Just halt your tanks and keep Wraclawitz out of this!\"", -1);
 
             // ================= BRANCH B: BLOODY STALEMATE & LEVERAGE BREAKTHROUGH =================
-            AddLine(conv, 200, SmolakId, RomusId, "Smolak_Stalemate_Opening",
+            AddLine(conv, 200, NarratorId, RomusId, "Smolak_Stalemate_Opening",
                 "Smolak blew gray smoke toward the canvas roof. \"Neither of us can break the other cheaply, Romus. Your tanks stalled on Zille City's ring, and my boys can't crack Brenas. We can keep feeding men into artillery until Kyrute chains us both... or hear my compromise: a demilitarized Independent Buffer State in Zille!\"", -1);
 
             AddLink(conv, 200, 201);
@@ -221,7 +221,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Stale_PressedLaw\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
                 "(((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or (Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3)");
 
-            AddLine(conv, 205, SmolakId, RomusId, "Ack_Stale_Evidence",
+            AddLine(conv, 205, NarratorId, RomusId, "Ack_Stale_Evidence",
                 "Smolak's smirk cracked slightly as he rubbed his temple. \"Lawyers and files... Fine, Romus, you've got teeth in Konstantium. Put your final answer on the table.\"", -1);
 
             AddChoice(conv, 206, SmolakId, "Stalemate_Press_Steel",
@@ -230,7 +230,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Stale_PressedSteel\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
                 "((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true))");
 
-            AddLine(conv, 207, SmolakId, RomusId, "Ack_Stale_Steel",
+            AddLine(conv, 207, NarratorId, RomusId, "Ack_Stale_Steel",
                 "Smolak stubbed out his cigarette roughly, eyes darting to the map pins along the Strait of Kreleck. \"Damn your navy and damn your warehouses... What is your verdict?\"", -1);
 
             AddChoice(conv, 208, SmolakId, "Stalemate_Skip_Sparring",
@@ -274,7 +274,7 @@ namespace GreatZilleSolution
                 "An Independent Neutral Zille. It ends the bloodshed, frees Zille from your grip, and separates our armies under AN oversight. I accept.", 211,
                 "Variable[\"Zille_War_Outcome\"] = 3; Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;");
 
-            AddLine(conv, 211, SmolakId, RomusId, "Smolak_Buffer_Signed",
+            AddLine(conv, 211, NarratorId, RomusId, "Smolak_Buffer_Signed",
                 "Smolak smiled with shrewd relief, clinking his tin cup against the table. \"A statesman's compromise, Romus. Let the clerks in Konstantium draft the charters.\"", -1);
 
             AddChoice(conv, 220, SmolakId, "Reject_Buffer_Ceasefire",
@@ -282,11 +282,11 @@ namespace GreatZilleSolution
                 "I will never sign away our sovereignty to an artificial buffer state. We freeze the frontlines under an armed ceasefire—this reckoning is merely postponed.", 221,
                 "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;");
 
-            AddLine(conv, 221, SmolakId, RomusId, "Smolak_Ceasefire_Signed",
+            AddLine(conv, 221, NarratorId, RomusId, "Smolak_Ceasefire_Signed",
                 "Smolak snorted, tossing his butt into the mud. \"Suit yourself, King. An armed truce it is.\"", -1);
 
             // ================= BRANCH C: TACTICAL DEFEAT / TOTAL FIASCO (+ LEVERAGE SALVAGE) =================
-            AddLine(conv, 300, SmolakId, RomusId, "Smolak_Victorious_Mock",
+            AddLine(conv, 300, NarratorId, RomusId, "Smolak_Victorious_Mock",
                 "Smolak leaned back with a predatory grin, spreading his arms wide. \"How fast royal pride melts when the guns fall quiet, eh, Romus? General Valdez shattered your offensive!\"", -1);
 
             AddLine(conv, 301, SmolakId, RomusId, "Smolak_TacticalDefeat_Terms",
@@ -307,7 +307,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Brenas_Lost_To_Wehlen\"] = false; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 2; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true; Variable[\"Zille_Brenas_Saved_By_Leverage\"] = true;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and (Variable[\"Zille_Leverage\"] or 0) >= 4 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 2");
 
-            AddLine(conv, 306, SmolakId, RomusId, "Ack_Salvage_Brenas",
+            AddLine(conv, 306, NarratorId, RomusId, "Ack_Salvage_Brenas",
                 "Smolak froze halfway through his laughter, calculating rapidly behind narrowed eyes. \"Damn those Thornbourgh sharks... and damn your pocketbook. Fine, King—two million in gold, keep your Brenas towns, and crawl back south with nothing!\"", -1);
 
             AddChoice(conv, 310, SmolakId, "Accept_Tactical_Defeat",
@@ -322,7 +322,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 2; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) == 2 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
 
-            AddLine(conv, 311, SmolakId, RomusId, "Smolak_Signs_TacticalDefeat",
+            AddLine(conv, 311, NarratorId, RomusId, "Smolak_Signs_TacticalDefeat",
                 "Smolak cackled softly, signing with an exaggerated flourish. \"Enjoy explaining this triumph to your noble houses, Romus!\"", -1);
 
             AddChoice(conv, 320, SmolakId, "Accept_Total_Fiasco",
@@ -337,7 +337,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Outcome\"] = 1; Variable[\"Zille_Independent_Buffer\"] = false; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) == 1 or (Variable[\"Zille_War_Outcome\"] or 0) == 0)");
 
-            AddLine(conv, 321, SmolakId, RomusId, "Smolak_Signs_Fiasco",
+            AddLine(conv, 321, NarratorId, RomusId, "Smolak_Signs_Fiasco",
                 "Smolak laughed uproariously, slapping the table. \"History will remember today, King Romus! Your father gave me Zille; you just handed me Brenas! Good luck surviving your own generals tonight!\"", -1);
 
             AddLink(conv, 301, 310);

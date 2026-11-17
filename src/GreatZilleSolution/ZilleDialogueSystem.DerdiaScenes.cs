@@ -102,13 +102,13 @@ namespace GreatZilleSolution
                 "Have the Foreign Ministry pass our preliminary findings to Naeal and propose a quiet joint border verification.", 33,
                 "Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
-            AddLine(conv, 31, TitusId, RomusId, "DerdiaInv_Result_GG",
+            AddLine(conv, 31, NarratorId, RomusId, "DerdiaInv_Result_GG",
                 "Two days later, Titus laid a sealed folder on my desk: Wehzek military-grade detonators, factory lot numbers from Wraclawitz, and eyewitness sketches of uniformed sappers slipping back across the northern ridge. \"Hard proof, Your Majesty. Azmal cannot ignore this when you speak with him.\"", -1);
 
-            AddLine(conv, 32, LucitaId, RomusId, "DerdiaInv_Result_Mil",
+            AddLine(conv, 32, NarratorId, RomusId, "DerdiaInv_Result_Mil",
                 "Lucita's scouts delivered decrypted Wehzek field traffic alongside photographs of demolition teams withdrawing into Grodzizg barracks. \"Undeniable evidence, Your Majesty. Smolak is running a covert intimidation campaign against Derdia.\"", -1);
 
-            AddLine(conv, 33, LaurentoId, RomusId, "DerdiaInv_Result_Diplo",
+            AddLine(conv, 33, NarratorId, RomusId, "DerdiaInv_Result_Diplo",
                 "Within days, joint observers confirmed that the explosives bore Wraclawitz army markings—not Golcondist or Bludish contraband. \"Supreme Wiseman Azmal has agreed to speak with you directly, Your Majesty,\" Laurento reported.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaInvestigation", "Turn_Zille_DerdiaInvestigation");
@@ -178,7 +178,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             // Friendly ceremonial Duel of Generosity gesture
-            AddLine(conv, 20, AzmalId, RomusId, "DerdiaVisit_Duel_Offer",
+            AddLine(conv, 20, NarratorId, RomusId, "DerdiaVisit_Duel_Offer",
                 "Azmal's eyes crinkled with proud amusement as two Disciples brought forward ceremonial wooden staves. \"Among our people, alliances are sealed not merely with ink, but with the Duel of Generosity—a friendly test of spirit between comrades. Will you or your champion honor our tradition before we sign?\"", -1);
 
             AddLink(conv, 20, 21);
@@ -230,7 +230,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_DerdiaVisit_DiscussedPipeline\"] = true;",
                 "Variable[\"Zille_DerdiaVisit_DiscussedPipeline\"] ~= true");
 
-            AddLine(conv, 132, AzmalId, RomusId, "DerdiaVisit_Reply_Pipeline",
+            AddLine(conv, 132, NarratorId, RomusId, "DerdiaVisit_Reply_Pipeline",
                 "Azmal's eyes shone with sudden strategic clarity. \"You see beyond today's battlefield, Romus. With Rizian gold completing our pipeline and connecting to your coastal refineries, Derdia breaks free of Wraclawitz forever—and Rizia gains an inexhaustible, loyal source of energy and trade dividends even if ATO or Contana sanction you!\"", 30);
 
             AddChoice(conv, 33, AzmalId, "DerdiaVisit_Topic_Missiles",
@@ -271,10 +271,10 @@ namespace GreatZilleSolution
                 "We seal the Silver Garrison Defense Pact and open the Yol-Qerzan corridor for our armies immediately; once Wehlen is defeated, our treasuries will build the pipeline in peace.", 62,
                 "Variable[\"Zille_DerdiaPact_Signed\"] = true; Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"Zille_Derdia_StateVisitDone\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Allied\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
-            AddLine(conv, 61, AzmalId, RomusId, "DerdiaVisit_Close_Full",
+            AddLine(conv, 61, NarratorId, RomusId, "DerdiaVisit_Close_Full",
                 "Azmal pressed his signet ring into the crimson wax beside mine, then raised both hands in solemn blessing. \"Halaita! From this hour, Derdia's northern passes are your sword, our rockets guard your skies, and our oil feeds your realm! Let Wiktor Smolak tremble between two sovereign nations!\"", -1);
 
-            AddLine(conv, 62, AzmalId, RomusId, "DerdiaVisit_Close_Corridor",
+            AddLine(conv, 62, NarratorId, RomusId, "DerdiaVisit_Close_Corridor",
                 "Azmal pressed his signet ring beside mine with firm resolve. \"Halaita! Our northern frontier stands open to Rizia's banners, and three thousand Disciples ride at your flank. May victory bring both our kingdoms lasting peace!\"", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaStateVisit", "Turn_Zille_DerdiaStateVisit");

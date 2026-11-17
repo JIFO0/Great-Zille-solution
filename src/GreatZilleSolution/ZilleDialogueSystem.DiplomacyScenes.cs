@@ -176,7 +176,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Derdia_StateVisitUnlocked\"] = true; Variable[\"Zille_Derdia_IncidentShared\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Friendly\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true");
 
-            AddLine(conv, 41, AzmalId, RomusId, "Ack_Derdia_StateVisit",
+            AddLine(conv, 41, NarratorId, RomusId, "Ack_Derdia_StateVisit",
                 "Azmal's voice boomed warmly across the wire. \"Halaita! You will be received with full royal honor at the Silver Garrison, brother. Together we will give Wiktor Smolak an answer he cannot ignore.\"", -1);
 
             AddChoice(conv, 45, AzmalId, "Derdia_WarActive_VisitAndRaids",
@@ -288,14 +288,14 @@ namespace GreatZilleSolution
                 "Smolak's blockade threats poison commerce across the Gulf of Moridia. Removing him from Zille protects Lespian maritime trade whether you admit it or not.", -1,
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
-            AddLine(conv, 20, AlvarezId, RomusId, "Alvarez_Business_Pitch",
+            AddLine(conv, 20, NarratorId, RomusId, "Alvarez_Business_Pitch",
                 "Alvarez took a slow sip, dropping the jovial mask for pure capitalist predator. \"Look, Romus, I won't shed a tear if Valdez's boys end up in Zille's marshes. Yet Lespia doesn't run reconnaissance sorties out of charity. You want ATO high-altitude photography of Valdez's hidden bunkers and diplomatic shields in Kyrute.\"", 21,
                 "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
 
             AddLine(conv, 21, AlvarezId, RomusId, "Alvarez_Price_Demand",
                 "\"Here's my invoice: twenty percent preferential crude deliveries from your southern fields to Perla PLUS Rizia backing Lespia's seat on the MITZ board. Sign, and my bombers-turned-spotters will hand your generals Valdez's coordinates on a silver tray.\"", 22);
 
-            AddLine(conv, 120, AlvarezId, RomusId, "Alvarez_TwoFront_Pitch",
+            AddLine(conv, 120, NarratorId, RomusId, "Alvarez_TwoFront_Pitch",
                 "Alvarez laughed coldly into the line. \"You're fighting Reinhart on your eastern front in Pales and asking Perla for help on your southern front?! Bottom line, Romus: either halt the Pales war and yield oil + MITZ terms, or fight Smolak blind!\"", 22,
                 "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)");
 
@@ -324,7 +324,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_WehlenHelp\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 3;",
                 "(Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true)");
 
-            AddLine(conv, 36, AlvarezId, RomusId, "Ack_Blackmail_Alvarez",
+            AddLine(conv, 36, NarratorId, RomusId, "Ack_Blackmail_Alvarez",
                 "A sharp intake of breath hissed across the wire, followed by the dead silence of ice melting untouched. \"...You cold-blooded Toras bastard,\" Alvarez whispered through clenched teeth. \"Fine. Keep those files locked in your safe. ATO reconnaissance photos and diplomatic cover in Kyrute will hit your desk within the hour—free of charge.\"", -1);
 
             AddChoice(conv, 40, AlvarezId, "Accept_Alvarez_Pact",
@@ -333,7 +333,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Resources_Energy\"] = (Variable[\"RiziaDLC.Resources_Energy\"] or 0) - 1; Variable[\"RiziaDLC.CountryRelation_Lespia_Allied\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_WehlenHelp\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) >= 1");
 
-            AddLine(conv, 41, AlvarezId, RomusId, "Ack_Alvarez_Pact",
+            AddLine(conv, 41, NarratorId, RomusId, "Ack_Alvarez_Pact",
                 "Alvarez burst into a triumphant laugh, clinking his tumbler against the receiver. \"Now that is statesmanship! Our reconnaissance planes are scrambling out of Perla as we speak, Romus. Happy hunting!\"", -1);
 
             AddChoice(conv, 50, AlvarezId, "Hard_Bargain_Alvarez",
@@ -342,7 +342,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_WehlenHelp\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Lespia_NegotiatingPower\"] or 0) - 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true) and ((Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\"] == true or Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\"] == true) or (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_Leverage\"] or 0) >= 2)");
 
-            AddLine(conv, 51, AlvarezId, RomusId, "Ack_Hard_Bargain",
+            AddLine(conv, 51, NarratorId, RomusId, "Ack_Hard_Bargain",
                 "Alvarez swore softly under his breath before letting out a grudging bark of respect. \"You drive a harder bargain than your father ever dared, Your Majesty. Fine—ten percent commercial oil it is. Valdez's coordinates hit your war room within the hour.\"", -1);
 
             AddChoice(conv, 55, AlvarezId, "Stall_Alvarez_Neutrality",
@@ -350,7 +350,7 @@ namespace GreatZilleSolution
                 "I will not sign away Rizia's energy or MITZ rights tonight, Patricio. Stay neutral in Konstantium, and Rizian shipping lanes remain open to Lespian commerce after the guns fall quiet.", 56,
                 "Variable[\"Zille_LespiaPactAccepted\"] = false; Variable[\"Zille_Lespia_Intel\"] = false; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
-            AddLine(conv, 56, AlvarezId, RomusId, "Ack_Stall_Alvarez",
+            AddLine(conv, 56, NarratorId, RomusId, "Ack_Stall_Alvarez",
                 "Alvarez exhaled a slow plume of cigar smoke. \"Always the cautious Toras... Fine. No recon planes for you, then—but Perla won't shed tears in Konstantium if you keep the Gulf shipping lanes moving.\" The receiver clicked down.", -1);
 
             AddChoice(conv, 60, AlvarezId, "Reject_Alvarez_Greed",
@@ -358,7 +358,7 @@ namespace GreatZilleSolution
                 "Rizian soldiers will not bleed to enrich Lespian oil trusts, Prime Minister. We will defeat Wehlen with our own steel. Good day.", 61,
                 "Variable[\"Zille_LespiaPactAccepted\"] = false; Variable[\"Zille_Lespia_Intel\"] = false; Variable[\"RiziaDLC.CountryRelation_Lespia_Unfriendly\"] = true;");
 
-            AddLine(conv, 61, AlvarezId, RomusId, "Ack_Reject_Lespia",
+            AddLine(conv, 61, NarratorId, RomusId, "Ack_Reject_Lespia",
                 "Alvarez's amusement froze into venom. \"Good luck against Valdez's mines and bunkers then, Romus. Don't call Perla when your tanks bog down.\" The line snapped dead.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/LespiaTalks", "Turn_Zille_LespiaTalks");
@@ -460,11 +460,11 @@ namespace GreatZilleSolution
             AddLink(conv, 20, 121);
 
             // Context check: Low Equip (<1000) vs Strong Equip (>=1000) + Hugo fallback
-            AddLine(conv, 22, HugoId, RomusId, "Hugo_Beatrice_Support_NeedArms",
+            AddLine(conv, 22, NarratorId, RomusId, "Hugo_Beatrice_Support_NeedArms",
                 "Hugo inclined his head with relief. \"Your Majesty, with our own depots currently holding under a thousand reserve weapons, Thornbourgh's rail shipments of shells and rifles could save an entire offensive!\"", 30,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000");
 
-            AddLine(conv, 23, HugoId, RomusId, "Hugo_Beatrice_Support_FullArms",
+            AddLine(conv, 23, NarratorId, RomusId, "Hugo_Beatrice_Support_FullArms",
                 "Hugo nodded with deep pride. \"Our own armories already stand well above a thousand weapons, yet Rumburg's heavy 152mm shells and AN shield will make Valdez's bunkers indefensible!\"", 30,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000");
 
@@ -491,7 +491,7 @@ namespace GreatZilleSolution
                 "House Toras pledges steadfast solidarity to GRACE and our royal kinship, Beatrice. For Lena's memory and our sister crowns, accept my bond!", 41,
                 "Variable[\"Zille_Rumburg_Munitions\"] = true; Variable[\"RiziaDLC.CountryRelation_Rumburg_Allied\"] = true; Variable[\"RiziaDLC.Resources_Military_Equipment\"] = (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) + 600; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
-            AddLine(conv, 41, BeatriceId, RomusId, "Ack_Beatrice_Pledge",
+            AddLine(conv, 41, NarratorId, RomusId, "Ack_Beatrice_Pledge",
                 "Beatrice smiled with imperious satisfaction. \"Splendid, Romus. Three GRACE cargo steamers loaded with 152mm shells and six hundred crates of reserve armaments weigh anchor for Monqiz tonight. Claim what is yours.\"", -1);
 
             AddChoice(conv, 45, BeatriceId, "Purchase_Rumburg_Expansion",
@@ -662,7 +662,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Parley_Ready\"] = true; Variable[\"Zille_Parley_Uncompromising\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "((Variable[\"Zille_War_Outcome\"] or 0) >= 3 or (Variable[\"Zille_War_Outcome\"] or 0) == 0) and ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_Leverage\"] or 0) >= 2)");
 
-            AddLine(conv, 22, LucitaId, RomusId, "Ack_PreNeg_Lucita",
+            AddLine(conv, 22, NarratorId, RomusId, "Ack_PreNeg_Lucita",
                 "Lucita strapped on her sidearm and saluted with iron resolve. \"The royal escort is mounted, Your Majesty. Let us bring Zille home.\"", -1,
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 

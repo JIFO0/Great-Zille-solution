@@ -319,6 +319,54 @@ namespace GreatZilleSolution
             return true;
         }
 
+        public static void CleanupAllWarUIAndMarkers()
+        {
+            try
+            {
+                try { Panels.Instance?.WarHUDPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTurnPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarActionHoverPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarContextualHoverPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTokenSelectionPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarTokenIndicatorPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarDeploymentPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarPlayerActionsPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarBattlePanel?.HideAllBattles(); } catch { }
+                try { Panels.Instance?.WarObjectivePanel?.gameObject.SetActive(false); } catch { }
+                try { Panels.Instance?.WarInfoTextPanel?.Hide(); } catch { }
+                try { Panels.Instance?.WarFloatingTextPanel?.gameObject.SetActive(false); } catch { }
+                try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllInstances(); } catch { }
+
+                void DestroyTemplateInstances<T>() where T : Component
+                {
+                    var items = Resources.FindObjectsOfTypeAll<T>();
+                    if (items == null) return;
+                    for (int i = 0; i < items.Length; i++)
+                    {
+                        var it = items[i];
+                        if (it == null || it.gameObject == null || !it.gameObject.scene.IsValid()) continue;
+                        string n = it.gameObject.name ?? "";
+                        if (n.IndexOf("Template", StringComparison.OrdinalIgnoreCase) >= 0 && !n.Contains("(Clone)"))
+                        {
+                            it.gameObject.SetActive(false);
+                            continue;
+                        }
+                        UnityEngine.Object.Destroy(it.gameObject);
+                    }
+                }
+
+                DestroyTemplateInstances<TemplateTileStatusEffect>();
+                DestroyTemplateInstances<TemplateTokenStatusEffect>();
+                DestroyTemplateInstances<TemplateWarTokenUnitStats>();
+                DestroyTemplateInstances<TemplateWarTokenCityStats>();
+                DestroyTemplateInstances<TemplateWarObjectiveIndicator>();
+                DestroyTemplateInstances<TemplateBattle>();
+                DestroyTemplateInstances<TemplateBattleTokenStat>();
+                DestroyTemplateInstances<TemplateSupporterStats>();
+            }
+            catch { }
+        }
+
         public static void Restore()
         {
             try
@@ -392,6 +440,7 @@ namespace GreatZilleSolution
                 _cachedScreenCenters.Clear();
 
                 PurgeStaleWarManagerEntries(destroyAllTokens: true);
+                CleanupAllWarUIAndMarkers();
 
                 if (_savedVirtualCamPos.Count > 0)
                 {
@@ -2036,7 +2085,7 @@ namespace GreatZilleSolution
         }
 
         /// <summary>A fight is live until vanilla marks isBattleOver true.</summary>
-        private static bool BattleLive(WarBattleManager.WarBattle battle)
+        public static bool BattleLive(WarBattleManager.WarBattle battle)
         {
             if (battle == null) return false;
             try
@@ -2129,14 +2178,50 @@ namespace GreatZilleSolution
                 if (wt.IsTileSelectedTokensTile()) return false;
                 var ut = sel.GetWarUnitTypeData();
                 if (ut == null) return false;
+                if (!ut.CanMoveToTileType(wt.GetTileType())) return false;
                 if (ut.unitType != WarUnitTypeData.UnitType.NavalUnit && CanFastMoveOnRoad(sel, wt))
                     return true;
-                // Stock builds a ship's available moves at range 2 and a land unit's at range 1.
                 int range = ut.unitType == WarUnitTypeData.UnitType.NavalUnit ? 2 : 1;
-                if (!wt.IsTileAdjacentToSelectedToken(range)) return false;
-                return ut.CanMoveToTileType(wt.GetTileType());
+                var start = sel.GetCurrentWarTile();
+                return IsWithinTileRange(start, wt, range, ut);
             }
             catch { return false; }
+        }
+
+        private static bool IsWithinTileRange(WarTile start, WarTile target, int maxRange, WarUnitTypeData ut)
+        {
+            if (start == null || target == null || start == target || maxRange <= 0) return false;
+            if (maxRange == 1)
+            {
+                var adj = start.adjacentWarTiles;
+                if (adj != null && adj.Contains(target)) return true;
+                var adjT = target.adjacentWarTiles;
+                if (adjT != null && adjT.Contains(start)) return true;
+                return target.IsTileAdjacentToSelectedToken(1);
+            }
+            var visited = new HashSet<int> { start.GetInstanceID() };
+            var queue = new Queue<(WarTile tile, int dist)>();
+            queue.Enqueue((start, 0));
+            while (queue.Count > 0)
+            {
+                var (cur, d) = queue.Dequeue();
+                if (d >= maxRange) continue;
+                var adj = cur.adjacentWarTiles;
+                if (adj == null) continue;
+                for (int i = 0; i < adj.Count; i++)
+                {
+                    var nb = adj[i];
+                    if (nb == null) continue;
+                    if (nb == target) return true;
+                    int id = nb.GetInstanceID();
+                    if (visited.Contains(id)) continue;
+                    if (IsImpassableTile(nb)) continue;
+                    if (ut != null && !ut.CanMoveToTileType(nb.GetTileType())) continue;
+                    visited.Add(id);
+                    queue.Enqueue((nb, d + 1));
+                }
+            }
+            return target.IsTileAdjacentToSelectedToken(maxRange);
         }
 
         private static HashSet<string> ComputeSuppliedTileIds(string allegiance)
@@ -2338,9 +2423,9 @@ namespace GreatZilleSolution
             {
                 var ut = sel.GetWarUnitTypeData();
                 if (ut == null) return false;
+                if (!ut.CanMoveToTileType(target.GetTileType())) return false;
                 int range = ut.unitType == WarUnitTypeData.UnitType.NavalUnit ? 2 : 1;
-                if (!target.IsTileAdjacentToSelectedToken(range)) return false;
-                return ut.CanMoveToTileType(target.GetTileType());
+                return IsWithinTileRange(sel.GetCurrentWarTile(), target, range, ut);
             }
             catch { return false; }
         }
@@ -4030,10 +4115,13 @@ namespace GreatZilleSolution
         private static void RefreshBoard()
         {
             UpdateSupplyStatesAndRoadVisuals();
+            bool canUnlock = ScenarioStarted && !EditMode && !IsEnemyTurnActive();
             foreach (var tb in _tiles.Values)
             {
                 var wt = tb.Tile;
                 if (wt == null) continue;
+                if (canUnlock && !BattleLive(BattleOn(wt)))
+                    UnlockTile(wt);
                 var td = TileDataOf(wt);
                 if (td != null) TintTile(wt, td);
             }
@@ -5427,9 +5515,15 @@ namespace GreatZilleSolution
                 catch { }
 
                 // Play death particle effects, animation, and SFX (Pales style)
+                bool isNaval = false;
                 try
                 {
-                    token.isDead = true;
+                    var ut = token.GetWarUnitTypeData();
+                    isNaval = ut != null && ut.unitType == WarUnitTypeData.UnitType.NavalUnit;
+                }
+                catch { }
+                try
+                {
                     try
                     {
                         var audioMgr = Managers.Instance?.AudioManager ?? UnityEngine.Object.FindObjectOfType<AudioManager>();
@@ -5441,21 +5535,28 @@ namespace GreatZilleSolution
                         }
                     }
                     catch { }
+                    if (token.animator == null)
+                    {
+                        try { token.animator = token.GetComponentInChildren<UnityEngine.Animator>(); } catch { }
+                    }
                     if (token.animationEvents != null)
                     {
                         token.animationEvents.DustSlamParticle();
                         token.animationEvents.SmokeStart();
                     }
                     token.PlayTokenAnimation(WarToken.TokenAnimationType.Death, null);
+                    token.isDead = true;
                 }
                 catch (Exception aex)
                 {
+                    token.isDead = true;
                     MelonLogger.Warning("[ZTABLE] PlayTokenAnimation error: " + aex.Message);
                 }
 
                 // Delayed destroy so death animation plays in full
                 float delay = 1.4f;
                 try { if (token.deathAnimationDelay > 0.1f) delay = token.deathAnimationDelay; } catch { }
+                if (isNaval) MelonCoroutines.Start(SinkNavalToken(token, delay));
                 MelonCoroutines.Start(DelayedDestroyToken(token, delay));
 
                 MelonLogger.Msg("[ZTABLE] Unit playing death animation sequence: " + (token.gameObject != null ? token.gameObject.name : "token"));
@@ -5463,6 +5564,24 @@ namespace GreatZilleSolution
             catch (Exception ex)
             {
                 MelonLogger.Warning("[ZTABLE] KillUnit exception: " + ex.Message);
+            }
+        }
+
+        private static IEnumerator SinkNavalToken(WarToken token, float duration)
+        {
+            if (token == null || token.transform == null) yield break;
+            float elapsed = 0f;
+            float dur = Mathf.Max(0.8f, duration * 0.9f);
+            Vector3 startPos = token.transform.position;
+            Quaternion startRot = token.transform.rotation;
+            while (elapsed < dur)
+            {
+                if (token == null || token.gameObject == null) yield break;
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / dur);
+                token.transform.position = startPos + new Vector3(0f, -0.045f * t, 0f);
+                token.transform.rotation = startRot * Quaternion.Euler(18f * t, 0f, 12f * t);
+                yield return null;
             }
         }
 

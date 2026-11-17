@@ -1062,26 +1062,34 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Civilian) return;
             SuppressPalesWarMarker();
 
-            if (ZilleCampaignState.Phase1Finished && !ZilleCampaignState.MaveNortusHQCompleted)
+            bool warConcludedByNegotiation = DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                || DialogueHelper.GetBoolVariable("Zille_Negotiations_Done");
+            bool warActive = DialogueHelper.GetBoolVariable("Zille_War_Active")
+                || ZilleCampaignState.CurrentPhase != ZilleOperationPhase.NotStarted;
+
+            if (warConcludedByNegotiation)
             {
                 SuppressZilleWarEventToken();
+                SuppressMaveNortusHQEventToken();
+                return;
+            }
+
+            if (ZilleCampaignState.Phase1Finished && !ZilleCampaignState.MaveNortusHQCompleted)
+            {
                 if (_spawnedMaveNortusToken == null || !_spawnedMaveNortusToken.activeInHierarchy)
                 {
                     SpawnMaveNortusHQEventToken();
                 }
             }
-            else if (ZilleCampaignState.MaveNortusHQCompleted && !ZilleCampaignState.Phase2EventUnlocked)
+            else if (ZilleCampaignState.MaveNortusHQCompleted)
             {
-                SuppressZilleWarEventToken();
                 SuppressMaveNortusHQEventToken();
             }
-            else if (ZilleCampaignState.CurrentPhaseNumber == 2 && ZilleCampaignState.Phase2EventUnlocked)
+
+            // Keep the Zille Invasion marker permanently active on the map until negotiations conclude!
+            if (warActive && (_spawnedZilleWarToken == null || !_spawnedZilleWarToken.activeInHierarchy))
             {
-                SuppressMaveNortusHQEventToken();
-                if (_spawnedZilleWarToken == null || !_spawnedZilleWarToken.activeInHierarchy)
-                {
-                    SpawnZilleWarEventToken();
-                }
+                SpawnZilleWarEventToken();
             }
         }
 
@@ -1331,6 +1339,19 @@ namespace GreatZilleSolution
                         }
                     }
                     SuppressPalesWarMarker();
+
+                    // Register & display the mandatory '!' screen-edge and map token indicator
+                    try
+                    {
+                        var tip = Panels.Instance != null ? Panels.Instance.TokenIndicatorPanel : UnityEngine.Object.FindObjectOfType<TokenIndicatorPanel>();
+                        if (tip != null && tok != null)
+                        {
+                            tip.Setup();
+                            tip.ShowTokenIndicator(tok);
+                        }
+                    }
+                    catch { }
+
                     MelonLogger.Msg($"[WAR ENGINE] SpawnZilleWarEventToken final state: self={_spawnedZilleWarToken.activeSelf}, hier={_spawnedZilleWarToken.activeInHierarchy}, parent={_spawnedZilleWarToken.transform.parent?.name}:{_spawnedZilleWarToken.transform.parent?.gameObject.activeInHierarchy}, pos={_spawnedZilleWarToken.transform.position}");
 
                     string opName = GetOperationDisplayName();
@@ -1657,7 +1678,7 @@ namespace GreatZilleSolution
                             }
                             Panels.Instance?.ShowHUD();
 
-                            if (PendingZilleTokenSpawnAfterBriefing)
+                            if (PendingZilleTokenSpawnAfterBriefing || DialogueHelper.GetBoolVariable("Zille_War_Active"))
                             {
                                 PendingZilleTokenSpawnAfterBriefing = false;
                                 SpawnZilleWarEventToken();
@@ -2536,16 +2557,9 @@ namespace GreatZilleSolution
                     try { camMgr.ResetPosition(); } catch { }
                 }
 
-                // Hide war UI panels
-                try { Panels.Instance?.WarHUDPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarTurnPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarActionHoverPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarTokenSelectionPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarDeploymentPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarPlayerActionsPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarBattlePanel?.HideAllBattles(); } catch { }
+                // Hide all war UI panels and sticky map markers
+                ZilleWarTable.CleanupAllWarUIAndMarkers();
                 try { Panels.Instance?.ContinueButtonPanel?.Hide(); } catch { }
-                try { Panels.Instance?.WarTokenStatusEffectsPanel?.RemoveAllInstances(); } catch { }
 
                 // Suppress Pales invasion marker and orphaned shadow
                 SuppressPalesWarMarker();

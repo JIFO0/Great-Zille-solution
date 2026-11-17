@@ -116,6 +116,8 @@ namespace GreatZilleSolution
 
                 WarOperationZilleManager.RegisterNativeZilleEntities();
 
+                ZilleDialogueSystem.EnsureAllConversationsRegistered();
+                ZilleCampaignState.SyncFromLua();
                 DialogueInjectionPatches.InjectWarOptionsIntoVanillaConversations();
                 DialogueOverrideManager.ApplyAllOverrides();
                 ZilleDecisions.EnsureRegistered();

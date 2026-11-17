@@ -108,20 +108,46 @@ namespace GreatZilleSolution
             if (__result == WarTile.TileActionType.Support && !ZilleWarTable.LiveSupport(__instance))
                 __result = ZilleWarTable.CanMoveOnto(__instance) ? WarTile.TileActionType.Move : WarTile.TileActionType.None;
             var sel = ZilleWarTable.SelectedUnit();
+            if (__instance != null && !ZilleWarTable.IsEnemyTurnActive() && !ZilleWarTable.BattleLive(__instance.GetCurrentBattle()))
+            {
+                try
+                {
+                    if (__instance.IsLocked()) __instance.SetLockState(false);
+                    if (__instance.IsActionLocked()) __instance.SetActionLockState(false);
+                }
+                catch { }
+            }
             if (sel != null && __instance != null)
             {
                 var occ = __instance.GetCurrentToken();
-                if (occ != null && occ != sel && ZilleWarTable.CanOverrun(sel, occ))
+                if (occ != null && occ != sel && !occ.IsDead())
                 {
-                    if (ZilleWarTable.CanReachTile(sel, __instance))
+                    if (ZilleWarTable.CanOverrun(sel, occ) && ZilleWarTable.CanReachTile(sel, __instance))
                     {
                         __result = WarTile.TileActionType.Overrun;
+                        return;
+                    }
+                    if (__result == WarTile.TileActionType.None
+                        && occ.GetTokenAllegiance() == WarToken.WarAllegiance.Enemy
+                        && sel.GetTokenAllegiance() == WarToken.WarAllegiance.Player
+                        && !sel.IsMovementLocked() && !sel.IsOrganizationDepleted()
+                        && ZilleWarTable.CanReachTile(sel, __instance)
+                        && ZilleWarTable.TurnHasPoints())
+                    {
+                        __result = WarTile.TileActionType.Attack;
                         return;
                     }
                 }
             }
             if (__result == WarTile.TileActionType.Move && !ZilleWarTable.CanMoveOnto(__instance))
                 __result = WarTile.TileActionType.None;
+            else if (__result == WarTile.TileActionType.None
+                && sel != null && sel.GetTokenAllegiance() == WarToken.WarAllegiance.Player
+                && !sel.IsMovementLocked() && !sel.IsOrganizationDepleted()
+                && ZilleWarTable.CanMoveOnto(__instance) && ZilleWarTable.TurnHasPoints())
+            {
+                __result = WarTile.TileActionType.Move;
+            }
         }
 
         public static void ArmFortifyPrefix() => ZilleWarTable.ArmFortify();
@@ -431,8 +457,6 @@ namespace GreatZilleSolution
                 if (__instance.IsDead() || ZilleWarTable.IsCityToken(__instance)) return;
                 if (ZilleWarTable.IsTokenEngagedInBattle(__instance)) return;
                 if (!__instance.IsMovementLocked() && !__instance.IsOrganizationDepleted()) return;
-                var tile = __instance.GetCurrentWarTile();
-                if (tile != null && (tile.IsLocked() || tile.IsActionLocked()) && !__instance.IsOrganizationDepleted()) return;
                 var battle = __instance.GetCurrentBattle();
                 if (battle != null && !battle.isBattleOver) return;
                 __result = true;
@@ -730,6 +754,14 @@ namespace GreatZilleSolution
                 if (__instance.IsDead() || __instance.IsOrganizationDepleted() || ZilleWarTable.IsOverrun(__instance) || ZilleWarTable.IsTokenEngagedInBattle(__instance))
                 {
                     __result = false;
+                    return false;
+                }
+                if ((WarOperationZilleManager.CurrentTheatre == ActiveWarTheatre.Zille || ZilleWarTable.SkinEnabled)
+                    && __instance == ZilleWarTable.SelectedUnit()
+                    && !__instance.IsMovementLocked()
+                    && ZilleWarTable.CanMoveOnto(targetTile))
+                {
+                    __result = true;
                     return false;
                 }
             }
@@ -1094,6 +1126,11 @@ namespace GreatZilleSolution
                 ZilleWarTable.RefreshAllTokenStatusEffects();
                 ZilleWarTable.RequestBoardRefresh();
             }
+        }
+
+        public static void MapManagerLoadMapPrefix()
+        {
+            ZilleWarTable.CleanupAllWarUIAndMarkers();
         }
 
         public static void WarTokenKillPrefix(WarToken __instance, out ZilleWarTable.UnitLedgerSnapshot __state)
@@ -1520,6 +1557,9 @@ namespace GreatZilleSolution
                 var removeAllEff = AccessTools.Method(typeof(WarTokenStatusEffectsPanel), nameof(WarTokenStatusEffectsPanel.RemoveAllInstances));
                 if (removeAllEff != null)
                     harmony.Patch(removeAllEff, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BattleSettledStatusEffectsPostfix))));
+                var mapLoad = AccessTools.Method(typeof(MapManager), nameof(MapManager.LoadMap));
+                if (mapLoad != null)
+                    harmony.Patch(mapLoad, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MapManagerLoadMapPrefix))));
                 var warTokenKill = AccessTools.Method(typeof(WarToken), nameof(WarToken.Kill));
                 if (warTokenKill != null)
                 {
@@ -1825,13 +1865,9 @@ namespace GreatZilleSolution
                 }
                 else if (n == "MaveNortusHQ Event Variant" || ent == "Rizia_Event_MaveNortusHQ")
                 {
-                    bool wantMave = ZilleCampaignState.Phase1Finished && !ZilleCampaignState.MaveNortusHQCompleted;
-                    if (wantMave && !__instance.gameObject.activeSelf)
-                    {
-                        __instance.gameObject.SetActive(true);
-                        __instance.enabled = true;
-                    }
-                    else if (!wantMave && ZilleCampaignState.MaveNortusHQCompleted)
+                    // Never spawn a separate MaveNortusHQ token next to Mave Nortus city;
+                    // the Frontline Council action is attached directly to the existing Mave Nortus city token.
+                    if (__instance.gameObject.activeSelf)
                     {
                         __instance.gameObject.SetActive(false);
                     }
