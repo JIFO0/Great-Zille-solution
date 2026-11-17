@@ -60,7 +60,12 @@ The mod runs on:
 
 ## Developer Tools
 
-This mod was built using developer tools created primarily for this project. You are free to use these developer tools in other projects as well.
+This mod was built using developer tools created primarily for this project (located in `tools/`). You are free to use these developer tools in other projects under the MIT License.
+
+## License
+
+* **Mod (story, assets, and mod-specific code):** [CC BY-NC-ND 4.0](LICENSE)
+* **Developer Tools (`tools/`):** [MIT License](tools/LICENSE)
 
 ## Project Documentation
 
