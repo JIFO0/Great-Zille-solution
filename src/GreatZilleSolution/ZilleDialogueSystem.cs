@@ -46,6 +46,7 @@ namespace GreatZilleSolution
         public const int ConvId_RumburgTalks = 9997;
         public const int ConvId_DerdiaInvestigation = 10001;
         public const int ConvId_DerdiaStateVisit = 10002;
+        public const int ConvId_Op1AftermathCouncil = 10003;
 
         private static bool _conversationsRegistered = false;
 
@@ -78,6 +79,7 @@ namespace GreatZilleSolution
                 if (db.GetConversation("Turn_Zille_WarPlanning") != null &&
                     db.GetConversation("Turn_Zille_WarBriefing") != null &&
                     db.GetConversation("Turn_Zille_MaveNortusHQ") != null &&
+                    db.GetConversation("Turn_Zille_Op1AftermathCouncil") != null &&
                     db.GetConversation("Turn_Zille_DerdiaTalks") != null &&
                     db.GetConversation("Turn_Zille_DerdiaInvestigation") != null &&
                     db.GetConversation("Turn_Zille_DerdiaStateVisit") != null &&
@@ -97,6 +99,7 @@ namespace GreatZilleSolution
                 RegisterWarCouncilBriefing(db);
                 RegisterWarBalconySpeech(db);
                 RegisterMaveNortusHQ(db);
+                RegisterOp1AftermathCouncil(db);
                 RegisterDerdiaInvestigation(db);
                 RegisterDerdiaTalks(db);
                 RegisterDerdiaStateVisit(db);

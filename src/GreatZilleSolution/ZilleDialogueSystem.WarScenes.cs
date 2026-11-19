@@ -1645,5 +1645,211 @@ namespace GreatZilleSolution
             AddConversationWithAlias(db, conv, "Zille/WarBalconySpeech", "Turn_Zille_WarBalconySpeech");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected War Balcony Proclamation (ID 9989) into masterDatabase!");
         }
+
+        // =========================================================================
+        // SCENE 5B: Turn_Zille_Op1AftermathCouncil (ID 10003) - POST-OPERATION I COUNCIL
+        // Conditional negotiations vs transition to Operation 2: Operation: Total Repayment
+        // =========================================================================
+        public static void RegisterOp1AftermathCouncil(DialogueDatabase db)
+        {
+            if (db.GetConversation("Turn_Zille_Op1AftermathCouncil") != null && db.GetConversation("Zille/Op1AftermathCouncil") != null)
+                return;
+
+            var conv = new Conversation();
+            conv.id = ConvId_Op1AftermathCouncil;
+            conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
+            conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
+            conv.Title = "Zille/Op1AftermathCouncil";
+            conv.ActorID = RomusId;
+            conv.ConversantID = LucitaId;
+
+            var entry0 = CreateEntry(conv.id, 0, RomusId, LucitaId, "START", "", "", "Continue()");
+            entry0.isRoot = true;
+            entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
+            conv.dialogueEntries.Add(entry0);
+
+            AddLine(conv, 1, NarratorId, RomusId, "Op1Council_Open",
+                "Dawn broke slowly over the War Room of Palas Rezna. Telegraph ribbons littered the carpet around the relief table where pins marked the final positions of Operation I. Your ministers and generals stood awaiting the verdict: negotiate under the guns of the first offensive, or escalate into the full continental theater of Operation: Total Repayment.");
+
+            AddLine(conv, 2, HugoId, RomusId, "Op1Council_Hugo",
+                "\"Your Majesty, the first full operation across Zille has come to its pause,\" Hugo said quietly, adjusting his cuffs over the casualty rosters. \"Let the General Staff and Foreign Ministry weigh what this offensive achieved.\"", -1,
+                "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
+
+            AddLine(conv, 3, LaurentoId, RomusId, "Op1Council_NoHugo",
+                "\"Your Majesty, the dispatches from the southern front are all in,\" Laurento said calmly, laying two telegraph portfolios onto the table. \"Our next move will determine whether this ends at the table or widens across Wehlen.\"", -1,
+                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
+
+            AddLink(conv, 1, 2);
+            AddLink(conv, 1, 3);
+
+            // Operation I Doctrine & Progress Reflection
+            AddLine(conv, 10, LucitaId, RomusId, "Op1Report_Sword",
+                "\"In Operation: Righteous Sword, our Brenas divisions threw their weight straight across the peninsula's fortifications,\" Lucita reported, sweeping her baton over Wiktrany, Munat, and Zille City.", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+
+            AddLine(conv, 11, CarlosId, RomusId, "Op1Report_Sword_Carlos",
+                "\"Operation: Righteous Sword drove straight into the peninsula's central defenses between Wiktrany, Munat, and Zille City,\" General Carlos Azaro stated cleanly.", -1,
+                "Variable[\"Zille_Plan_IsSword\"] == true and (Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+
+            AddLine(conv, 12, LucitaId, RomusId, "Op1Report_Ark",
+                "\"In Operation: Golden Ark, our flanking columns bypassed Zille's central wall to strike Wehlen's mainland hubs around Kratsna, Rotsla, and Grodzizg,\" Lucita reported briskly.", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+
+            AddLine(conv, 13, CarlosId, RomusId, "Op1Report_Ark_Carlos",
+                "\"Operation: Golden Ark carried our flanking spearheads across the approaches to Kratsna, Rotsla, and Grodzizg,\" General Carlos Azaro reported concisely.", -1,
+                "Variable[\"Zille_Plan_IsSword\"] ~= true and (Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+
+            foreach (int h in new[] { 2, 3 })
+            {
+                AddLink(conv, h, 10);
+                AddLink(conv, h, 11);
+                AddLink(conv, h, 12);
+                AddLink(conv, h, 13);
+            }
+
+            // Combined casualty appraisal
+            AddLine(conv, 20, NarratorId, RomusId, "Op1Casualties_Heavy",
+                "Quartermasters read the cumulative toll of Phase I and Phase II alike: the Royal Army had paid in steep blood, yet battered Wehzek brigades stood stretched to breaking point along every frontier road.", -1,
+                "(Variable[\"War_Zille_TotalPlayerDead\"] or 0) >= 5");
+
+            AddLine(conv, 21, NarratorId, RomusId, "Op1Casualties_Disciplined",
+                "Quartermasters laid down the final ledger cleanly: losses across both initial phases remained contained while Smolak's garrison regiments had bled heavily in reserve armor and coastal artillery.", -1,
+                "(Variable[\"War_Zille_TotalPlayerDead\"] or 0) < 5");
+
+            foreach (int prev in new[] { 10, 11, 12, 13 })
+            {
+                AddLink(conv, prev, 20);
+                AddLink(conv, prev, 21);
+            }
+
+            // Conditional Branching:
+            // Case A: Sword Victory (Zille City + (Wiktrany or Munat or Nanta) & Brenas safe)
+            string condBrenasSafe = "(Variable[\"Zille_War_Outcome\"] or 0) ~= 1 and Variable[\"Brenas_Lost_To_Wehlen\"] ~= true";
+            string condSwordVictory = condBrenasSafe + " and Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)";
+            string condArkExchange = condBrenasSafe + " and not (Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)) and Variable[\"Zille_Cap_Grodzizg\"] == true and (Variable[\"Zille_Cap_Kratsna\"] == true or Variable[\"Zille_Cap_Isor\"] == true or (Variable[\"War_Zille_TotalEnemyDead\"] or 0) >= 6)";
+            string condCollapse = "(Variable[\"Zille_War_Outcome\"] or 0) == 1 or Variable[\"Brenas_Lost_To_Wehlen\"] == true";
+            string condUnresolved = condBrenasSafe + " and not (Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)) and not (Variable[\"Zille_Cap_Grodzizg\"] == true and (Variable[\"Zille_Cap_Kratsna\"] == true or Variable[\"Zille_Cap_Isor\"] == true or (Variable[\"War_Zille_TotalEnemyDead\"] or 0) >= 6))";
+
+            // --- CASE A: SWORD VICTORY (Conditional Negotiations Available!) ---
+            AddLine(conv, 30, LaurentoId, RomusId, "CaseA_SwordVictory_Laurento",
+                "\"An urgent cipher just arrived via our embassy in Konstantium!\" Laurento exclaimed, tapping the yellow ribbon. \"With Rizia holding Zille City itself and key peninsula approaches, Wiktor Smolak is pleading for an immediate ceasefire parley before our tanks cross onto mainland Wehlen.\"", 31,
+                condSwordVictory);
+
+            AddLine(conv, 31, NarratorId, RomusId, "CaseA_SwordVictory_ChoicePrompt",
+                "Your commanders noted both paths clearly: you may halt at the border and dictate peace terms to a shaken Smolak now, OR refuse his plea and unleash Operation: Total Repayment into mainland Wehlen to break Wraclawitz once and for all.");
+
+            AddChoice(conv, 310, LaurentoId, "Op1_Accept_Ceasefire_Sword",
+                "\"Our mission in Zille is accomplished. Halt the advance and summon Smolak to the negotiation table.\"",
+                "Zille is liberated and our honor stands vindicated. Spare our soldiers a deeper continental slaughter—accept the parley and summon Smolak to ratify the Treaty of Zille.", 320,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = true; Variable[\"Zille_Launch_TotalRepayment\"] = false; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2;");
+
+            AddChoice(conv, 311, LucitaId, "Op1_Reject_Ceasefire_Sword",
+                "\"Smolak only begs because Wraclawitz is naked! Authorize Operation: Total Repayment into mainland Wehlen!\"",
+                "He struck our people with bombs and defiance for twenty-five years—we do not stop halfway! Tear up his telegram and launch Operation: Total Repayment across the entire Wehlen frontier!", 321,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
+
+            AddLink(conv, 31, 310);
+            AddLink(conv, 31, 311);
+
+            AddLine(conv, 320, LaurentoId, RomusId, "Ack_CaseA_Parley",
+                "\"Wise statesmanship, Your Majesty. I will wire Kyrute and arrange the neutral pavilion on the frontier at once.\"", -1);
+
+            AddLine(conv, 321, NarratorId, RomusId, "Ack_CaseA_Repay",
+                "A fierce hush gripped the War Room as red operational arrows extended past Zille into mainland Wehlen. Operation: Total Repayment was unlocked across the southern theater.", -1);
+
+            // --- CASE B: ARK MAINLAND LEVERAGE (Conditional Exchange Negotiations Available!) ---
+            AddLine(conv, 40, LaurentoId, RomusId, "CaseB_ArkExchange_Laurento",
+                "\"Operation: Golden Ark turned the tables strategically!\" Laurento announced, unfolding a dispatch from Kyrute. \"Holding Grodzizg and threatening Wehlen's mainland arteries has panicked Wraclawitz. Smolak's envoy whispers that Wehlen will evacuate Zille City peacefully if we restore Grodzizg and stop short of total war.\"", 41,
+                condArkExchange);
+
+            AddLine(conv, 41, NarratorId, RomusId, "CaseB_ArkExchange_Prompt",
+                "You weighed the grand strategic bargain: accept Smolak's backchannel offer to trade mainland gains for an immediate negotiated return of Zille City, OR unleash Operation: Total Repayment to storm the entire Zille peninsula from both behind and across the frontier.");
+
+            AddChoice(conv, 410, LaurentoId, "Op1_Accept_Ark_Exchange",
+                "\"Use our hold on Grodzizg as leverage—open immediate exchange negotiations for the peaceful return of Zille City!\"",
+                "Our flanking strike broke Smolak's bluff without wasting a single battalion in Zille City's streets. Summon Smolak now: we trade mainland withdrawals for Zille's unconditional restoration.", 420,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = true; Variable[\"Zille_Launch_TotalRepayment\"] = false; Variable[\"Zille_Ark_ExchangeOffer\"] = true; Variable[\"Zille_City_Captured\"] = true; Variable[\"Zille_War_Outcome\"] = 4; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true;");
+
+            AddChoice(conv, 411, LucitaId, "Op1_Reject_Ark_Exchange",
+                "\"We do not bargain for what belongs to Rizia! Launch Operation: Total Repayment and liberate Zille City by arms!\"",
+                "Wehzek flags still fly over Zille City—and we did not cross the frontier to trade them away in backrooms! Unlock the whole theater: authorize Operation: Total Repayment!", 421,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
+
+            AddLink(conv, 41, 410);
+            AddLink(conv, 41, 411);
+
+            AddLine(conv, 420, LaurentoId, RomusId, "Ack_CaseB_Parley",
+                "\"A triumph of maneuver over slaughter, Your Majesty. Smolak cannot walk back this offer before AN witnesses.\"", -1);
+
+            AddLine(conv, 421, NarratorId, RomusId, "Ack_CaseB_Repay",
+                "Generals bent over the extended map sheets as every Zille and mainland Wehlen province unlocked simultaneously. Both fronts would burn in Operation: Total Repayment.", -1);
+
+            // --- CASE C: BRENAS COLLAPSE (Emergency Parley vs Desperate Total Repayment) ---
+            AddLine(conv, 50, LaurentoId, RomusId, "CaseC_Collapse_Warn",
+                "\"Your Majesty—we face mortal danger,\" Laurento said grimly, his hands trembling slightly beside the red pins inside Brenas. \"Wehzek armored spearheads broke our southern cities. Wraclawitz demands immediate capitulation talks—or our entire army risks encirclement.\"", -1,
+                condCollapse);
+
+            AddChoice(conv, 510, LaurentoId, "Op1_Emergency_Parley",
+                "\"Open emergency ceasefire negotiations immediately before Porte Drazon itself is imperiled.\"",
+                "We will face Smolak across the table before the heartland burns further. Arrange the parley immediately.", 520,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = true; Variable[\"Zille_Launch_TotalRepayment\"] = false;");
+
+            AddChoice(conv, 511, LucitaId, "Op1_Desperate_CounterOffensive",
+                "\"Call up the Crown's emergency reserves (-1 Budget, -1 Authority)! Launch Operation: Total Repayment to throw them out of Brenas!\"",
+                "I will not bargain with boots stamped on Brenas! Release emergency gold and issue total mobilization decrees—Operation: Total Repayment begins now!", 521,
+                "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1");
+
+            AddChoice(conv, 512, LucitaId, "Op1_Desperate_CounterOffensive_NoGold",
+                "\"Draft every reserve battalion by royal decree (-2 Authority)! Launch Operation: Total Repayment to defend our homeland!\"",
+                "Our coffers are bare, yet our steel endures! Issue emergency mobilization mandates across every estate—launch Operation: Total Repayment and throw Valdez out of Brenas!", 521,
+                "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 2; Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1");
+
+            AddLink(conv, 50, 510);
+            AddLink(conv, 50, 511);
+            AddLink(conv, 50, 512);
+
+            AddLine(conv, 520, LaurentoId, RomusId, "Ack_CaseC_Parley",
+                "\"I pray our diplomacy can salvage what the front could not, Your Majesty.\"", -1);
+
+            AddLine(conv, 521, NarratorId, RomusId, "Ack_CaseC_Repay",
+                "Sirens echoed across Palas Rezna's War Room as full-theater mobilization orders wired out to every surviving division under Operation: Total Repayment.", -1);
+
+            // --- CASE D: UNRESOLVED / STALEMATE (Negotiations UNAVAILABLE after Op 1 -> Mandatory Op 2: Total Repayment) ---
+            AddLine(conv, 60, LaurentoId, RomusId, "CaseD_Unresolved_Laurento",
+                "Laurento shook his head darkly, tossing Wraclawitz's brief diplomatic note onto the map. \"Negotiations are off the table, Your Majesty. Because Zille City remains under Wehzek guns and we lack decisive leverage inside mainland Wehlen, Smolak rejected every Konstantium mediation feeler with open mockery.\"", 61,
+                condUnresolved);
+
+            AddLine(conv, 61, NarratorId, RomusId, "CaseD_Unresolved_Military",
+                "Your generals turned squarely to the full-scale southern theater chart—all coastal marshes, mainland Wehzek rail arteries, and eastern corridors laid out together. To force Smolak back to the bargaining table, Rizia must escalate into Operation: Total Repayment.");
+
+            AddChoice(conv, 610, LucitaId, "Op1_Force_TotalRepayment_Armor",
+                "\"Authorize Operation: Total Repayment — Spearhead Doctrine: Mass armored assaults along every corridor (+1 Readiness).\"",
+                "Then Smolak has chosen ruin! Open every border sector under Operation: Total Repayment—drive mechanized spearheads straight toward Zille City and Wehlen's mainland hubs alike!", 620,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
+
+            AddChoice(conv, 611, LaurentoId, "Op1_Force_TotalRepayment_Siege",
+                "\"Authorize Operation: Total Repayment — Methodical Encirclement & Allied Strike Doctrine (+1 Leverage).\"",
+                "Smolak wants a war of endurance; we will choke him out across the entire map. Launch Operation: Total Repayment—coordinate our border breakthroughs, naval guns, and allied corridors to force his surrender!", 620,
+                "Variable[\"Zille_Negotiate_After_Op1\"] = false; Variable[\"Zille_Launch_TotalRepayment\"] = true; Variable[\"Zille_TotalRepayment_Unlocked\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+
+            AddLink(conv, 61, 610);
+            AddLink(conv, 61, 611);
+
+            AddLine(conv, 620, NarratorId, RomusId, "Ack_CaseD_TotalRepayment",
+                "The sealed orders slammed onto the table. All remaining sectors unlocked simultaneously as Rizian and Wehzek armies braced for the decisive campaign—Operation: Total Repayment.", -1);
+
+            foreach (int c in new[] { 20, 21 })
+            {
+                AddLink(conv, c, 30);
+                AddLink(conv, c, 40);
+                AddLink(conv, c, 50);
+                AddLink(conv, c, 60);
+            }
+
+            AddConversationWithAlias(db, conv, "Zille/Op1AftermathCouncil", "Turn_Zille_Op1AftermathCouncil");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Injected Post-Op I Aftermath Council (ID 10003) into masterDatabase!");
+        }
     }
 }

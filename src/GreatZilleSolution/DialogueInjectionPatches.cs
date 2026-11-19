@@ -2069,7 +2069,16 @@ namespace GreatZilleSolution
                         });
                     }
 
-                    if ((ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success")) && !DialogueHelper.GetBoolVariable("Zille_Liberation_Done"))
+                    if (ZilleCampaignState.Op1CouncilAvailable && !ZilleCampaignState.Op1CouncilCompleted)
+                    {
+                        EnsureButtonExists(__instance, "(MODNEW) Post-Operation I High Command Council", "War Room, Palas Rezna", null, () => {
+                            WarOperationZilleManager.ResolvePostOperation1Flow(ZilleCampaignState.Outcome, "Council Resumed");
+                        });
+                    }
+
+                    if ((ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
+                        && DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                        && !DialogueHelper.GetBoolVariable("Zille_Liberation_Done"))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Homecoming in Zille City: Harbor Quarter", "Zille City Harbor", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_ZilleLiberation", "Zille/ZilleLiberation");
@@ -2502,6 +2511,18 @@ namespace GreatZilleSolution
                 {
                     ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
                     ZilleCampaignState.CurrentPhaseNumber = 2;
+                }
+                else if (title == "Op1_Accept_Ark_Exchange")
+                {
+                    ZilleCampaignState.Outcome = ZilleWarOutcome.DecisiveVictory;
+                    ZilleCampaignState.ZilleCityCaptured = true;
+                    ZilleCampaignState.IsIndependentZilleAgreed = false;
+                }
+                else if (title == "Op1_Reject_Ceasefire_Sword" || title == "Op1_Reject_Ark_Exchange"
+                    || title == "Op1_Desperate_CounterOffensive" || title == "Op1_Desperate_CounterOffensive_NoGold"
+                    || title == "Op1_Force_TotalRepayment_Armor" || title == "Op1_Force_TotalRepayment_Siege")
+                {
+                    ZilleCampaignState.TotalRepaymentUnlocked = true;
                 }
                 else if (title == "Accept_Decisive_Surrender" || title == "Demand_Leveraged_Reparations" || title == "Force_Zille_Return_Leverage" || title == "Sign_Decisive_Victory" || title == "Sign_Victory_Reparations")
                 {

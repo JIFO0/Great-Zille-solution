@@ -438,6 +438,7 @@ namespace GreatZilleSolution
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarBalconySpeech", "Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "Zille/WarBalconySpeech");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "Zille/WarLogisticsDispute");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_MaveNortusHQ", "Turn_Zille_MaveNortusHQ", "Frontline Headquarters: The Battle for Zille", "Mayor's Hall, Mave Nortus", "Zille/MaveNortusHQ");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_Op1AftermathCouncil", "Turn_Zille_Op1AftermathCouncil", "Post-Operation I High Command Council", "War Room, Palas Rezna", "Zille/Op1AftermathCouncil");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaInvestigation", "Turn_Zille_DerdiaInvestigation", "Derdia-Wehlen Border: Sabotage Inquiry", "Golden Guard Briefing Room", "Zille/DerdiaInvestigation");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaTalks", "Turn_Zille_DerdiaTalks", "Derdian Mission: The Yol-Qerzan Sabotage", "Telecommunications Chamber, Palas Rezna", "Zille/DerdiaTalks");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_DerdiaStateVisit", "Turn_Zille_DerdiaStateVisit", "State Visit to Derdia: Silver Garrison", "Silver Garrison, Naeal", "Zille/DerdiaStateVisit");
@@ -1207,7 +1208,7 @@ namespace GreatZilleSolution
         {
             if (outcome == ZilleWarOutcome.TotalFiasco) return true;
             bool brenasSafe = !ZilleCampaignState.IsBrenasLost && DialogueHelper.GetIntVariable("Zille_Brenas_Lost") == 0;
-            bool swordVictory = ZilleCampaignState.CapZilleCity && (ZilleCampaignState.CapWiktrany || ZilleCampaignState.CapMunat) && brenasSafe;
+            bool swordVictory = ZilleCampaignState.CapZilleCity && (ZilleCampaignState.CapWiktrany || ZilleCampaignState.CapMunat || ZilleCampaignState.CapNanta) && brenasSafe;
             bool arkLeverage = ZilleCampaignState.CapGrodzizg && (ZilleCampaignState.CapKratsna || ZilleCampaignState.CapIsor || ZilleCampaignState.ZilleEnemyUnitsLostTotal >= 6);
             return swordVictory || arkLeverage || outcome >= ZilleWarOutcome.DecisiveVictory;
         }
@@ -1217,19 +1218,36 @@ namespace GreatZilleSolution
             if (CurrentTheatre != ActiveWarTheatre.Civilian) ReturnToCivilianMap();
             bool eligible = IsOp1NegotiationsEligible(outcome);
             DialogueHelper.SetVariable("Zille_Op1_NegotiationsEligible", eligible);
+            DialogueHelper.SetVariable("Zille_Negotiate_After_Op1", false);
+            DialogueHelper.SetVariable("Zille_Launch_TotalRepayment", false);
             ZilleCampaignState.Op1CouncilAvailable = true;
             ZilleCampaignState.Op1CouncilCompleted = false;
             ZilleCampaignState.SyncToLua();
 
-            MelonLogger.Msg($"[WAR ENGINE] ResolvePostOperation1Flow: outcome={outcome}, eligible={eligible}");
-            if (!eligible)
+            MelonLogger.Msg($"[WAR ENGINE] ResolvePostOperation1Flow: outcome={outcome}, eligible={eligible}. Launching Op1AftermathCouncil...");
+            TriggerConversation("Turn_Zille_Op1AftermathCouncil", "Zille/Op1AftermathCouncil", () =>
             {
-                StartTotalRepaymentOperation();
-            }
-            else
-            {
-                TriggerSmolakParley();
-            }
+                ZilleCampaignState.Op1CouncilCompleted = true;
+                ZilleCampaignState.Op1CouncilAvailable = false;
+                ZilleCampaignState.SyncFromLua();
+
+                if (DialogueHelper.GetBoolVariable("Zille_Negotiate_After_Op1"))
+                {
+                    if (DialogueHelper.GetBoolVariable("Zille_Ark_ExchangeOffer"))
+                    {
+                        ZilleCampaignState.Outcome = ZilleWarOutcome.DecisiveVictory;
+                        ZilleCampaignState.ZilleCityCaptured = true;
+                    }
+                    ZilleCampaignState.SyncToLua();
+                    MelonLogger.Msg("[WAR ENGINE] Post-Op I Council opted for conditional negotiations with Wehlen.");
+                    TriggerSmolakParley();
+                }
+                else
+                {
+                    MelonLogger.Msg("[WAR ENGINE] Post-Op I Council authorized Operation 2: Total Repayment.");
+                    StartTotalRepaymentOperation();
+                }
+            });
         }
 
         public static bool SpawnZilleWarEventToken()
