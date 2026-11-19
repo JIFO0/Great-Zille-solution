@@ -197,12 +197,18 @@ namespace GreatZilleSolution
             public string TileNumber;
             public string Allegiance;
             public int FortLevel;
+            public bool WasDisabled;
             public string UnitTypeName;
             public WarToken.WarAllegiance UnitAllegiance;
             public bool HasToken;
         }
 
         private static readonly List<SavedTileState> _phaseSavedState = new List<SavedTileState>();
+
+        public static bool HasSavedPhaseBoardState()
+        {
+            return _phaseSavedState != null && _phaseSavedState.Count > 0;
+        }
 
         public static void SavePhaseBoardState()
         {
@@ -218,7 +224,8 @@ namespace GreatZilleSolution
                 {
                     TileNumber = td.TileNumber,
                     Allegiance = td.Allegiance,
-                    FortLevel = td.FortLevel
+                    FortLevel = td.FortLevel,
+                    WasDisabled = td.IsDisabled
                 };
 
                 if (wt != null)
@@ -237,7 +244,45 @@ namespace GreatZilleSolution
                 }
                 _phaseSavedState.Add(state);
             }
-            MelonLogger.Msg($"[ZTABLE] Saved board state for Phase transition: {_phaseSavedState.Count} tiles.");
+            MelonLogger.Msg($"[ZTABLE] Saved board state for Op {ZilleCampaignState.CurrentOperationNumber} Phase {ZilleCampaignState.CurrentPhaseNumber} transition: {_phaseSavedState.Count} tiles.");
+        }
+
+        public static void PlaceV13DeploymentForNewlyUnlockedTiles(HashSet<string> previouslyDisabledTiles)
+        {
+            if (previouslyDisabledTiles == null || previouslyDisabledTiles.Count == 0) return;
+            ZilleDeployment.RefreshFromCampaign();
+            if (ZilleDeployment.Units.Count == 0 || UnitTypes().Count == 0) return;
+
+            var tiles = ZilleMapLayoutManager.CurrentConfig?.Tiles;
+            if (tiles == null) return;
+
+            int placed = 0, occupied = 0, skipped = 0;
+            for (int i = 0; i < ZilleDeployment.Units.Count; i++)
+            {
+                var entry = ZilleDeployment.Units[i];
+                if (string.IsNullOrEmpty(entry.TileNumber) || !previouslyDisabledTiles.Contains(entry.TileNumber)) continue;
+
+                ZilleTileData td = null;
+                for (int t = 0; t < tiles.Count; t++)
+                {
+                    if (tiles[t].TileNumber == entry.TileNumber) { td = tiles[t]; break; }
+                }
+                if (td == null || td.IsDisabled || td.IsCity || ZilleDeployment.IsForbiddenCity(td.TileNumber))
+                {
+                    skipped++;
+                    continue;
+                }
+                var wt = FindLiveTile(td.TileNumber);
+                if (wt == null) { skipped++; continue; }
+                if (wt.GetCurrentToken() != null) { occupied++; continue; }
+
+                var ut = MatchDeploymentUnit(entry.UnitType, null);
+                if (ut == null) { skipped++; continue; }
+
+                string msg = PlaceUnit(td, ut, true);
+                if (msg.StartsWith("Postawiono")) placed++;
+            }
+            MelonLogger.Msg($"[ZTABLE] Populated {placed} Wehlen '{ZilleDeployment.Preset}' units onto newly unlocked provinces (unlocked={previouslyDisabledTiles.Count}, occupied={occupied}, skipped={skipped}).");
         }
 
         public static bool RestorePhaseBoardState()
@@ -262,21 +307,43 @@ namespace GreatZilleSolution
 
             var types = UnitTypes();
             int restoredTokens = 0;
+            var newlyUnlockedTiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var state in _phaseSavedState)
             {
                 var td = cfg.Tiles.Find(t => t != null && t.TileNumber == state.TileNumber);
+                var wt = FindLiveTile(state.TileNumber);
+
+                if (state.WasDisabled)
+                {
+                    if (td != null && !td.IsDisabled)
+                    {
+                        newlyUnlockedTiles.Add(state.TileNumber);
+                        if (wt != null)
+                        {
+                            wt.SetTileAllegiance(ToAllegiance(td.Allegiance), false);
+                            if (td.FortLevel > 0) wt.ChangeWarTileFortLevelStat(td.FortLevel);
+                        }
+                    }
+                    continue;
+                }
+
                 if (td != null)
                 {
                     td.Allegiance = state.Allegiance;
                     td.FortLevel = state.FortLevel;
                 }
-                var wt = FindLiveTile(state.TileNumber);
                 if (wt != null)
                 {
                     var alleg = ToAllegiance(state.Allegiance);
                     wt.SetTileAllegiance(alleg, false);
                     if (state.FortLevel > 0) wt.ChangeWarTileFortLevelStat(state.FortLevel);
+
+                    var existingTok = wt.GetCurrentToken();
+                    if (existingTok != null && IsCityToken(existingTok) && existingTok.GetTokenAllegiance() != alleg)
+                    {
+                        try { existingTok.SetTokenAllegiance(alleg); } catch { }
+                    }
 
                     if (state.HasToken && !string.IsNullOrEmpty(state.UnitTypeName))
                     {
@@ -315,7 +382,15 @@ namespace GreatZilleSolution
                     }
                 }
             }
-            MelonLogger.Msg($"[ZTABLE] Restored Phase board state ({restoredTokens} units placed onto frontline).");
+
+            if (newlyUnlockedTiles.Count > 0)
+            {
+                PlaceV13DeploymentForNewlyUnlockedTiles(newlyUnlockedTiles);
+            }
+
+            _garrisonsPlaced = true;
+            RefreshBoard();
+            MelonLogger.Msg($"[ZTABLE] Restored board state ({restoredTokens} frontline units, {newlyUnlockedTiles.Count} newly unlocked provinces populated).");
             return true;
         }
 
@@ -544,6 +619,7 @@ namespace GreatZilleSolution
         public static Vector2 MapPxToLocal(float px, float py) => new Vector2(MapLeft + px * PxToWorld, MapTop - py * PxToWorld);
 
         public static bool HasLiveMap => _root != null;
+        public static bool IsLiveBoardReady => _root != null && _loggedApplied;
 
         public static void RequestApply() { _nextTick = 0f; }
 
@@ -6230,10 +6306,25 @@ namespace GreatZilleSolution
             return ZilleWarOutcome.BloodyStalemate;
         }
 
+        private static void ShowOperationContinuePrompt(string alertMsg)
+        {
+            try { DialogueHelper.ShowAlert(alertMsg); } catch { }
+            try
+            {
+                var cont = Panels.Instance?.ContinueButtonPanel ?? UnityEngine.Object.FindObjectOfType<ContinueButtonPanel>();
+                if (cont != null)
+                {
+                    if (!cont.gameObject.activeSelf) cont.gameObject.SetActive(true);
+                    cont.Show();
+                }
+            }
+            catch { }
+        }
+
         private static float _nextVictoryCheckTime;
         public static void CheckCityVictory(bool force = false)
         {
-            if ((_victoryShown && !force) || !ScenarioStarted || DeploymentPanelOpen()) return;
+            if ((_victoryShown && !force) || (!ScenarioStarted && !force) || DeploymentPanelOpen()) return;
             if (!force && Time.unscaledTime < _nextVictoryCheckTime) return;
             _nextVictoryCheckTime = Time.unscaledTime + 2.0f;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
@@ -6245,59 +6336,106 @@ namespace GreatZilleSolution
             if (outcome == ZilleWarOutcome.TotalFiasco)
             {
                 CaptureZillePhaseCasualties();
+                SavePhaseBoardState();
                 _victoryShown = true;
-                MelonLogger.Error($"[ZTABLE] Hex Campaign Collapse detected! Outcome: {outcome} ({summary})");
+                if (ZilleCampaignState.CurrentOperationNumber == 1)
+                {
+                    ZilleCampaignState.Operation1Finished = true;
+                }
+                MelonLogger.Error($"[ZTABLE] Hex Campaign Collapse detected (Op {ZilleCampaignState.CurrentOperationNumber} Phase {ZilleCampaignState.CurrentPhaseNumber})! Outcome: {outcome} ({summary})");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
-                try { DialogueHelper.ShowAlert($"Catastrophic Defeat: {summary}"); } catch { }
-                try { WarOperationZilleManager.TriggerSmolakParley(); } catch { }
+                if (!force)
+                {
+                    ShowOperationContinuePrompt($"Catastrophic Defeat: {summary}");
+                }
                 return;
             }
 
-            // Phase 1 handling
-            if (ZilleCampaignState.CurrentPhaseNumber == 1)
+            // Operation 1 (Golden Sword / Golden Ark)
+            if (ZilleCampaignState.CurrentOperationNumber <= 1)
+            {
+                // Op 1, Phase I -> saves board & transitions through Mave Nortus HQ into Phase II of the SAME operation
+                if (ZilleCampaignState.CurrentPhaseNumber <= 1)
+                {
+                    if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph || force)
+                    {
+                        CaptureZillePhaseCasualties();
+                        SavePhaseBoardState();
+                        _victoryShown = true;
+                        ZilleCampaignState.Phase1Finished = true;
+                        ZilleCampaignState.MaveNortusHQAvailable = true;
+                        ZilleCampaignState.MaveNortusHQCompleted = false;
+                        ZilleCampaignState.Phase2EventUnlocked = false;
+                        ZilleCampaignState.SyncToLua();
+                        MelonLogger.Msg($"[ZTABLE] Operation 1 Phase I concluded ({outcome}: {summary}). Mave Nortus Field HQ unlocked.");
+                        if (!force)
+                        {
+                            ShowOperationContinuePrompt($"Phase I Complete ({outcome}): Return to Mave Nortus Field HQ to authorize Phase II.");
+                        }
+                    }
+                    return;
+                }
+
+                // Op 1, Phase II -> evaluates Operation 1 outcome & opens post-Op 1 aftermath council / conditional parley vs Total Repayment
+                if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph || force)
+                {
+                    CaptureZillePhaseCasualties();
+                    SavePhaseBoardState();
+                    _victoryShown = true;
+                    ZilleCampaignState.Operation1Finished = true;
+                    ZilleCampaignState.SyncToLua();
+                    MelonLogger.Msg($"[ZTABLE] Operation 1 Phase II concluded! Outcome: {outcome} ({summary}).");
+                    try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
+                    if (!force)
+                    {
+                        ShowOperationContinuePrompt($"Operation I Complete ({outcome}): Click Continue for High Command aftermath council.");
+                    }
+                }
+                return;
+            }
+
+            // Operation 2 (Operation: Total Repayment)
+            if (ZilleCampaignState.CurrentPhaseNumber <= 1)
             {
                 if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
                 {
                     CaptureZillePhaseCasualties();
+                    SavePhaseBoardState();
                     _victoryShown = true;
-                    MelonLogger.Msg($"[ZTABLE] Early Decisive Victory achieved in Phase I! Outcome: {outcome} ({summary})");
+                    MelonLogger.Msg($"[ZTABLE] Operation Total Repayment Phase I achieved Victory! Outcome: {outcome} ({summary})");
                     try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
-                    try { DialogueHelper.ShowAlert($"Decisive Victory: {summary}"); } catch { }
+                    if (!force)
+                    {
+                        ShowOperationContinuePrompt($"Total Repayment Victory: {summary}");
+                    }
                 }
                 else if (force)
                 {
-                    // Phase I ended -> save board, mark Phase 1 complete, and transition civilian map to Mave Nortus Field HQ!
                     CaptureZillePhaseCasualties();
-                    MelonLogger.Msg($"[ZTABLE] Phase I complete ({summary}). Preparing Mave Nortus Field HQ event...");
                     SavePhaseBoardState();
-                    ZilleCampaignState.Phase1Finished = true;
-                    ZilleCampaignState.MaveNortusHQAvailable = true;
-                    ZilleCampaignState.MaveNortusHQCompleted = false;
-                    ZilleCampaignState.Phase2EventUnlocked = false;
+                    _victoryShown = true;
+                    ZilleCampaignState.CurrentPhaseNumber = 2;
+                    ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2_TotalRepayment;
+                    ZilleCampaignState.Phase2EventUnlocked = true;
                     ZilleCampaignState.SyncToLua();
-                    try { DialogueHelper.ShowAlert("Phase I Complete: Phase II briefings await at Mave Nortus Field HQ."); } catch { }
-                    try { WarOperationZilleManager.PreparePostPhase1CivilianEvents(); } catch { }
+                    MelonLogger.Msg($"[ZTABLE] Operation Total Repayment Phase I concluded ({summary}). Advancing to Total Repayment Phase II.");
+                    try { DialogueHelper.ShowAlert("Total Repayment Phase I Complete: Final offensive wave staging on the frontier."); } catch { }
                 }
                 return;
             }
 
-            // Phase 2 handling
-            if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph)
+            // Operation 2, Phase II -> Mandatory negotiations with Wehlen regardless of outcome
+            if (outcome == ZilleWarOutcome.DecisiveVictory || outcome == ZilleWarOutcome.OverwhelmingTriumph || force)
             {
                 CaptureZillePhaseCasualties();
+                SavePhaseBoardState();
                 _victoryShown = true;
-                MelonLogger.Msg($"[ZTABLE] Hex Campaign Victory achieved! Outcome: {outcome} ({summary})");
+                MelonLogger.Msg($"[ZTABLE] Operation Total Repayment Phase II concluded! Outcome: {outcome} ({summary}). Mandatory parley awaits.");
                 try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
-                try { DialogueHelper.ShowAlert($"Zille Operation Victory: {summary}"); } catch { }
-            }
-            else if (force)
-            {
-                CaptureZillePhaseCasualties();
-                _victoryShown = true;
-                MelonLogger.Msg($"[ZTABLE] Phase II concluded without full victory. Outcome: {outcome} ({summary}). Initiating peace parley...");
-                try { WarOperationZilleManager.TriggerOutcome(outcome, summary); } catch { }
-                try { DialogueHelper.ShowAlert($"Armistice Talks: {summary}"); } catch { }
-                try { WarOperationZilleManager.TriggerSmolakParley(); } catch { }
+                if (!force)
+                {
+                    ShowOperationContinuePrompt($"Operation Total Repayment Concluded ({outcome}): Proceed to border parley.");
+                }
             }
         }
 
@@ -7076,7 +7214,7 @@ namespace GreatZilleSolution
         /// <summary>The native Start button stays locked until every Rizian border province has a land unit. Place them through the deployment panel so the count and the refund list stay honest.</summary>
         private static void FillFrontlineFromPanel()
         {
-            if (ZilleCampaignState.CurrentPhaseNumber == 2) return;
+            if (ZilleCampaignState.CurrentPhaseNumber == 2 || (ZilleCampaignState.CurrentOperationNumber == 2 && HasSavedPhaseBoardState())) return;
             if (_frontFilled || _root == null) return;
             var panel = Panels.Instance != null ? Panels.Instance.WarDeploymentPanel : UnityEngine.Object.FindObjectOfType<WarDeploymentPanel>();
             if (panel == null || !panel.IsShowing()) return;
@@ -7108,7 +7246,7 @@ namespace GreatZilleSolution
         /// <summary>Places the selected v13 Wehlen preset. One unit per province, never on a city, never on a Rizia ship sea.</summary>
         private static void PlaceV13Deployment()
         {
-            if (ZilleCampaignState.CurrentPhaseNumber == 2)
+            if (ZilleCampaignState.CurrentPhaseNumber == 2 || (ZilleCampaignState.CurrentOperationNumber == 2 && HasSavedPhaseBoardState()))
             {
                 _garrisonsPlaced = true;
                 return;

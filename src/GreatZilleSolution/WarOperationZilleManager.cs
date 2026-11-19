@@ -38,6 +38,12 @@ namespace GreatZilleSolution
 
         public static string GetOperationDisplayName()
         {
+            if (ZilleCampaignState.CurrentOperationNumber >= 2
+                || ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.TotalRepayment
+                || ZilleCampaignState.CurrentVariant == ZilleOperationVariant.TotalRepaymentDerdia
+                || ZilleCampaignState.CurrentVariant == ZilleOperationVariant.TotalRepaymentNoDerdia)
+                return "Operation: Total Repayment";
+
             bool isArk = (ZilleCampaignState.PlanType == ZillePlanType.Romulus && ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.Ark)
                       || (ZilleCampaignState.PlanType == ZillePlanType.Staff && ZilleCampaignState.StaffPlan == ZilleStaffPlan.Ark)
                       || ZilleCampaignState.CurrentVariant == ZilleOperationVariant.PlanArk
@@ -1106,7 +1112,14 @@ namespace GreatZilleSolution
         public static void SpawnPhase2WarEventTokenNow()
         {
             _pendingPhase2TokenSpawn = false;
-            ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
+            if (ZilleCampaignState.CurrentOperationNumber <= 1)
+            {
+                ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2;
+            }
+            else
+            {
+                ZilleCampaignState.CurrentPhase = ZilleOperationPhase.Phase2_TotalRepayment;
+            }
             ZilleCampaignState.CurrentPhaseNumber = 2;
             ZilleCampaignState.Phase2EventUnlocked = true;
             ZilleCampaignState.SyncToLua();
@@ -1115,6 +1128,15 @@ namespace GreatZilleSolution
 
             // Refresh titles & re-arm WarFragment_Zille_1_1 so Token.Setup keeps the Phase II event alive!
             string opTitle = $"{GetOperationDisplayName()} - Phase II";
+            RearmZilleWarFragment(opTitle, ZilleCampaignState.CurrentOperationNumber >= 2 ? "Total Repayment - Phase II" : "Phase II Offensive");
+
+            SpawnZilleWarEventToken();
+            DialogueHelper.ShowAlert($"[Zille] Regrouping complete! {opTitle} is now open on the Zille border.");
+            MelonLogger.Msg($"[WAR ENGINE] Phase II event spawned at BorderEventPosition ({opTitle}).");
+        }
+
+        private static void RearmZilleWarFragment(string opTitle, string subtitle)
+        {
             try
             {
                 var allWar = GetEntityBackingList<WarFragmentData>("warFragmentsData") ?? EntityDataManager.AllWarFragmentsData;
@@ -1128,7 +1150,7 @@ namespace GreatZilleSolution
                             if (wfd.WarFragmentProperties != null)
                             {
                                 wfd.WarFragmentProperties.HubWarFragmentTitle = opTitle;
-                                wfd.WarFragmentProperties.HubWarFragmentSubtitle = "Phase II Offensive";
+                                wfd.WarFragmentProperties.HubWarFragmentSubtitle = subtitle;
                             }
                             if (wfd.StoryFragmentProperties != null)
                             {
@@ -1155,6 +1177,7 @@ namespace GreatZilleSolution
                         var op = allOps[i];
                         if (op != null && (op.NameInDatabase == "Operation_Zille_1" || op.Id == "Operation_Zille_1") && op.OperationProperties != null)
                         {
+                            op.OperationProperties.OperationName = opTitle;
                             op.OperationProperties.IsFinished = false;
                             break;
                         }
@@ -1162,10 +1185,51 @@ namespace GreatZilleSolution
                 }
             }
             catch { }
+        }
 
+        public static void StartTotalRepaymentOperation()
+        {
+            ZilleCampaignState.TransitionToTotalRepayment();
+            ZilleCampaignState.MaveNortusHQAvailable = false;
+            ZilleCampaignState.MaveNortusHQCompleted = true;
+            ZilleCampaignState.Phase2EventUnlocked = true;
+            ZilleCampaignState.SyncToLua();
+
+            SuppressMaveNortusHQEventToken();
+            string opTitle = "Operation: Total Repayment - Phase I";
+            RearmZilleWarFragment(opTitle, "Full-Scale Counter-Offensive");
             SpawnZilleWarEventToken();
-            DialogueHelper.ShowAlert($"[Zille] Regrouping complete! {opTitle} is now open on the Zille border.");
-            MelonLogger.Msg($"[WAR ENGINE] Phase II event spawned at BorderEventPosition ({opTitle}).");
+            DialogueHelper.ShowAlert("[Zille High Command] Operation: Total Repayment is now active at the Zille border!");
+            MelonLogger.Msg("[WAR ENGINE] Started Operation 2: Operation: Total Repayment.");
+        }
+
+        public static bool IsOp1NegotiationsEligible(ZilleWarOutcome outcome)
+        {
+            if (outcome == ZilleWarOutcome.TotalFiasco) return true;
+            bool brenasSafe = !ZilleCampaignState.IsBrenasLost && DialogueHelper.GetIntVariable("Zille_Brenas_Lost") == 0;
+            bool swordVictory = ZilleCampaignState.CapZilleCity && (ZilleCampaignState.CapWiktrany || ZilleCampaignState.CapMunat) && brenasSafe;
+            bool arkLeverage = ZilleCampaignState.CapGrodzizg && (ZilleCampaignState.CapKratsna || ZilleCampaignState.CapIsor || ZilleCampaignState.ZilleEnemyUnitsLostTotal >= 6);
+            return swordVictory || arkLeverage || outcome >= ZilleWarOutcome.DecisiveVictory;
+        }
+
+        public static void ResolvePostOperation1Flow(ZilleWarOutcome outcome, string summary)
+        {
+            if (CurrentTheatre != ActiveWarTheatre.Civilian) ReturnToCivilianMap();
+            bool eligible = IsOp1NegotiationsEligible(outcome);
+            DialogueHelper.SetVariable("Zille_Op1_NegotiationsEligible", eligible);
+            ZilleCampaignState.Op1CouncilAvailable = true;
+            ZilleCampaignState.Op1CouncilCompleted = false;
+            ZilleCampaignState.SyncToLua();
+
+            MelonLogger.Msg($"[WAR ENGINE] ResolvePostOperation1Flow: outcome={outcome}, eligible={eligible}");
+            if (!eligible)
+            {
+                StartTotalRepaymentOperation();
+            }
+            else
+            {
+                TriggerSmolakParley();
+            }
         }
 
         public static bool SpawnZilleWarEventToken()
@@ -1934,8 +1998,11 @@ namespace GreatZilleSolution
 
         public static void TriggerSmolakParley()
         {
-            MelonLogger.Msg("[WAR ENGINE] Returning to civilian map for Pre-Negotiations Briefing & Parley with Wiktor Smolak...");
-            ReturnToCivilianMap();
+            MelonLogger.Msg("[WAR ENGINE] Opening Pre-Negotiations Briefing & Parley with Wiktor Smolak...");
+            if (CurrentTheatre != ActiveWarTheatre.Civilian)
+            {
+                ReturnToCivilianMap();
+            }
             ZilleCampaignState.SyncToLua();
             TriggerConversation("Turn_Zille_WarPreNegotiationsBriefing", "Zille/WarPreNegotiationsBriefing", () => {
                 MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
@@ -2421,18 +2488,14 @@ namespace GreatZilleSolution
                 var turnPanel = Panels.Instance?.WarTurnPanel;
                 if (turnPanel != null && turnPanel.titleText != null)
                 {
-                    string opName = "Operation: Golden Sword";
-                    if (ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.GoldenArk) opName = "Operation: Golden Ark";
-                    else if (ZilleCampaignState.RomulusPlan == ZilleRomulusPlan.TotalRepayment) opName = "Operation: Total Repayment";
-                    else if (ZilleCampaignState.PlanType == ZillePlanType.Staff) opName = "Operation: " + ZilleCampaignState.StaffPlan;
-
+                    string opName = GetOperationDisplayName();
                     string phaseStr = ZilleCampaignState.CurrentPhaseNumber == 2 ? "Phase II" : "Phase I";
                     turnPanel.titleText.text = $"{opName} - {phaseStr}";
                 }
 
                 if (ZilleWarTable.EditMode)
                     ZilleWarTable.SuppressInvasionChrome();
-                else if (ZilleWarTable.HasLiveMap)
+                else if (ZilleWarTable.IsLiveBoardReady)
                     ActivateWarDeploymentPanel();
             }
             catch { }
@@ -2445,9 +2508,9 @@ namespace GreatZilleSolution
             if (_deploymentOpened) return;
             try
             {
-                if (ZilleCampaignState.CurrentPhaseNumber == 2)
+                if (ZilleCampaignState.CurrentPhaseNumber == 2 || (ZilleCampaignState.CurrentOperationNumber == 2 && ZilleWarTable.HasSavedPhaseBoardState()))
                 {
-                    // Phase II: Resume directly from saved Phase 1 frontline state!
+                    // Phase II or Op 2 (Total Repayment): Resume directly from saved frontline state!
                     ZilleWarTable.RestorePhaseBoardState();
                     ZilleWarTable.MarkOperationBegun();
                     var flow = Managers.Instance?.WarFlowManager ?? UnityEngine.Object.FindObjectOfType<WarFlowManager>();
@@ -2466,7 +2529,7 @@ namespace GreatZilleSolution
                         hud2.Show();
                     }
                     _deploymentOpened = true;
-                    MelonLogger.Msg("[WAR THEATRE] Phase II started directly on the frontline without initial deployment!");
+                    MelonLogger.Msg($"[WAR THEATRE] Op {ZilleCampaignState.CurrentOperationNumber} Phase {ZilleCampaignState.CurrentPhaseNumber} started directly on the restored frontline!");
                     return;
                 }
 
@@ -2611,21 +2674,52 @@ namespace GreatZilleSolution
             MelonLogger.Msg("[WAR ENGINE] ReturnToCivilianMapWithReport triggered.");
             try
             {
+                int opBefore = ZilleCampaignState.CurrentOperationNumber;
+                int phaseBefore = ZilleCampaignState.CurrentPhaseNumber;
+
                 ZilleWarTable.CheckCityVictory(true);
+                var outcome = ZilleCampaignState.Outcome;
+
                 ReturnToCivilianMap();
-                bool isPhase1Transition = ZilleCampaignState.CurrentPhaseNumber == 1
-                    && ZilleCampaignState.Phase1Finished
-                    && ZilleCampaignState.Outcome != ZilleWarOutcome.DecisiveVictory
-                    && ZilleCampaignState.Outcome != ZilleWarOutcome.OverwhelmingTriumph
-                    && ZilleCampaignState.Outcome != ZilleWarOutcome.TotalFiasco;
-                if (!isPhase1Transition)
+
+                if (opBefore <= 1 && phaseBefore <= 1 && outcome != ZilleWarOutcome.TotalFiasco)
+                {
+                    PreparePostPhase1CivilianEvents();
+                }
+                else if (opBefore <= 1 && (phaseBefore >= 2 || outcome == ZilleWarOutcome.TotalFiasco))
                 {
                     MelonCoroutines.Start(ShowConclusionReportCoroutine());
+                    MelonCoroutines.Start(DelayedPostOpDispatchCoroutine(opBefore, phaseBefore, outcome));
+                }
+                else if (opBefore >= 2 && phaseBefore <= 1
+                    && outcome != ZilleWarOutcome.DecisiveVictory
+                    && outcome != ZilleWarOutcome.OverwhelmingTriumph
+                    && outcome != ZilleWarOutcome.TotalFiasco)
+                {
+                    SpawnPhase2WarEventTokenNow();
+                }
+                else
+                {
+                    MelonCoroutines.Start(ShowConclusionReportCoroutine());
+                    MelonCoroutines.Start(DelayedPostOpDispatchCoroutine(opBefore, phaseBefore, outcome));
                 }
             }
             catch (Exception ex)
             {
                 MelonLogger.Error($"[WAR ENGINE] ReturnToCivilianMapWithReport error: {ex.Message}");
+            }
+        }
+
+        private static System.Collections.IEnumerator DelayedPostOpDispatchCoroutine(int opBefore, int phaseBefore, ZilleWarOutcome outcome)
+        {
+            yield return new WaitForSeconds(0.8f);
+            if (opBefore <= 1)
+            {
+                ResolvePostOperation1Flow(outcome, $"Operation I concluded ({outcome})");
+            }
+            else
+            {
+                TriggerSmolakParley();
             }
         }
 

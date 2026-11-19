@@ -85,11 +85,16 @@ namespace GreatZilleSolution
         public static ZilleOperationVariant CurrentVariant { get; set; } = ZilleOperationVariant.PlanSword;
         public static ZilleWarOutcome Outcome { get; set; } = ZilleWarOutcome.None;
         public static bool IsIndependentZilleAgreed { get; set; } = false;
+        public static int CurrentOperationNumber { get; set; } = 1;
         public static int CurrentPhaseNumber { get; set; } = 1;
         public static bool Phase1Finished { get; set; } = false;
         public static bool MaveNortusHQAvailable { get; set; } = false;
         public static bool MaveNortusHQCompleted { get; set; } = false;
         public static bool Phase2EventUnlocked { get; set; } = false;
+        public static bool Operation1Finished { get; set; } = false;
+        public static bool Op1CouncilAvailable { get; set; } = false;
+        public static bool Op1CouncilCompleted { get; set; } = false;
+        public static bool TotalRepaymentUnlocked { get; set; } = false;
         public static int StaffVictoryPoints { get; set; } = 0;
 
         // Per-city Phase I/II capture state (used in Mave Nortus debrief & outcomes)
@@ -110,40 +115,61 @@ namespace GreatZilleSolution
             {
                 case ZilleOperationVariant.PlanArk:
                     RomulusPlan = ZilleRomulusPlan.Ark;
+                    CurrentOperationNumber = 1;
                     CurrentPhase = ZilleOperationPhase.Phase1;
                     CurrentPhaseNumber = 1;
                     Phase1Finished = false;
                     MaveNortusHQAvailable = false;
                     MaveNortusHQCompleted = false;
                     Phase2EventUnlocked = false;
+                    Operation1Finished = false;
+                    Op1CouncilAvailable = false;
+                    Op1CouncilCompleted = false;
+                    TotalRepaymentUnlocked = false;
                     break;
                 case ZilleOperationVariant.PlanSword:
                     RomulusPlan = ZilleRomulusPlan.Sword;
+                    CurrentOperationNumber = 1;
                     CurrentPhase = ZilleOperationPhase.Phase1;
                     CurrentPhaseNumber = 1;
                     Phase1Finished = false;
                     MaveNortusHQAvailable = false;
                     MaveNortusHQCompleted = false;
                     Phase2EventUnlocked = false;
+                    Operation1Finished = false;
+                    Op1CouncilAvailable = false;
+                    Op1CouncilCompleted = false;
+                    TotalRepaymentUnlocked = false;
                     break;
                 case ZilleOperationVariant.PlanArkDerdia:
                     RomulusPlan = ZilleRomulusPlan.Ark;
+                    CurrentOperationNumber = 1;
                     CurrentPhase = ZilleOperationPhase.Phase1;
                     CurrentPhaseNumber = 1;
                     Phase1Finished = false;
                     MaveNortusHQAvailable = false;
                     MaveNortusHQCompleted = false;
                     Phase2EventUnlocked = false;
+                    Operation1Finished = false;
+                    Op1CouncilAvailable = false;
+                    Op1CouncilCompleted = false;
+                    TotalRepaymentUnlocked = false;
                     IsDerdiaHybridSupportActive = true;
                     break;
                 case ZilleOperationVariant.TotalRepaymentDerdia:
-                    CurrentPhase = ZilleOperationPhase.Phase2;
-                    CurrentPhaseNumber = 2;
+                    CurrentOperationNumber = 2;
+                    CurrentPhase = ZilleOperationPhase.Phase2_TotalRepayment;
+                    CurrentPhaseNumber = 1;
+                    RomulusPlan = ZilleRomulusPlan.TotalRepayment;
+                    TotalRepaymentUnlocked = true;
                     IsDerdiaHybridSupportActive = true;
                     break;
                 case ZilleOperationVariant.TotalRepaymentNoDerdia:
-                    CurrentPhase = ZilleOperationPhase.Phase2;
-                    CurrentPhaseNumber = 2;
+                    CurrentOperationNumber = 2;
+                    CurrentPhase = ZilleOperationPhase.Phase2_TotalRepayment;
+                    CurrentPhaseNumber = 1;
+                    RomulusPlan = ZilleRomulusPlan.TotalRepayment;
+                    TotalRepaymentUnlocked = true;
                     break;
             }
 
@@ -151,7 +177,25 @@ namespace GreatZilleSolution
             ZilleWarTable.NotifyVariantChanged();
             ZilleWarTable.RequestApply();
             ZilleWarTable.RequestBoardRefresh();
-            MelonLogger.Msg($"[WAR ENGINE] Set operation variant to {variant}: {active} active provinces.");
+            MelonLogger.Msg($"[WAR ENGINE] Set operation variant to {variant} (Op {CurrentOperationNumber} Phase {CurrentPhaseNumber}): {active} active provinces.");
+        }
+
+        /// <summary>Advances the campaign from Operation 1 (Sword/Ark) into Operation 2: Operation Total Repayment.</summary>
+        public static void TransitionToTotalRepayment()
+        {
+            bool derdiaActive = IsDerdiaHybridSupportActive
+                || IsDerdiaPactSigned
+                || CurrentVariant == ZilleOperationVariant.PlanArkDerdia
+                || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")
+                || DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive");
+
+            var targetVariant = derdiaActive
+                ? ZilleOperationVariant.TotalRepaymentDerdia
+                : ZilleOperationVariant.TotalRepaymentNoDerdia;
+
+            SetOperationVariant(targetVariant);
+            SyncToLua();
+            MelonLogger.Msg($"[WAR ENGINE] Transitioned campaign to Operation 2 ({targetVariant}).");
         }
 
                 // Logistics & Intelligence Doctrines
@@ -213,10 +257,14 @@ namespace GreatZilleSolution
         public static int ZillePlayerUnitsLostPhase2 { get; set; } = 0;
         public static int ZilleEnemyUnitsLostPhase1 { get; set; } = 0;
         public static int ZilleEnemyUnitsLostPhase2 { get; set; } = 0;
+        public static int Op2PlayerUnitsLostPhase1 { get; set; } = 0;
+        public static int Op2PlayerUnitsLostPhase2 { get; set; } = 0;
+        public static int Op2EnemyUnitsLostPhase1 { get; set; } = 0;
+        public static int Op2EnemyUnitsLostPhase2 { get; set; } = 0;
         public static int ZilleManpowerCasualties { get; set; } = 0;
 
-        public static int ZillePlayerUnitsLostTotal => ZillePlayerUnitsLostPhase1 + ZillePlayerUnitsLostPhase2;
-        public static int ZilleEnemyUnitsLostTotal => ZilleEnemyUnitsLostPhase1 + ZilleEnemyUnitsLostPhase2;
+        public static int ZillePlayerUnitsLostTotal => ZillePlayerUnitsLostPhase1 + ZillePlayerUnitsLostPhase2 + Op2PlayerUnitsLostPhase1 + Op2PlayerUnitsLostPhase2;
+        public static int ZilleEnemyUnitsLostTotal => ZilleEnemyUnitsLostPhase1 + ZilleEnemyUnitsLostPhase2 + Op2EnemyUnitsLostPhase1 + Op2EnemyUnitsLostPhase2;
 
         // Read-only view of Pales front casualties
         public static int PalesPlayerUnitsLost =>
@@ -284,19 +332,35 @@ namespace GreatZilleSolution
         {
             int p = Math.Max(0, playerUnitsLost);
             int e = Math.Max(0, enemyUnitsLost);
-            if (phaseNumber <= 1)
+            if (CurrentOperationNumber <= 1)
             {
-                ZillePlayerUnitsLostPhase1 = p;
-                ZilleEnemyUnitsLostPhase1 = e;
+                if (phaseNumber <= 1)
+                {
+                    ZillePlayerUnitsLostPhase1 = p;
+                    ZilleEnemyUnitsLostPhase1 = e;
+                }
+                else
+                {
+                    ZillePlayerUnitsLostPhase2 = p;
+                    ZilleEnemyUnitsLostPhase2 = e;
+                }
             }
             else
             {
-                ZillePlayerUnitsLostPhase2 = p;
-                ZilleEnemyUnitsLostPhase2 = e;
+                if (phaseNumber <= 1)
+                {
+                    Op2PlayerUnitsLostPhase1 = p;
+                    Op2EnemyUnitsLostPhase1 = e;
+                }
+                else
+                {
+                    Op2PlayerUnitsLostPhase2 = p;
+                    Op2EnemyUnitsLostPhase2 = e;
+                }
             }
             ZilleManpowerCasualties = ZillePlayerUnitsLostTotal * 1450;
             SyncToLua();
-            MelonLogger.Msg($"[CASUALTIES] Zille Phase {phaseNumber}: PlayerLost={p}, EnemyLost={e} | ZilleTotalPlayerLost={ZillePlayerUnitsLostTotal}, PalesTotalPlayerLost={PalesPlayerUnitsLost}");
+            MelonLogger.Msg($"[CASUALTIES] Zille Op {CurrentOperationNumber} Phase {phaseNumber}: PlayerLost={p}, EnemyLost={e} | ZilleTotalPlayerLost={ZillePlayerUnitsLostTotal}, PalesTotalPlayerLost={PalesPlayerUnitsLost}");
         }
 
         public static void AddMicroEffect(int leverageDelta = 0, int readinessDelta = 0, int pressureDelta = 0, int legitimacyDelta = 0)
@@ -450,7 +514,14 @@ namespace GreatZilleSolution
             {
                 DialogueHelper.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
                 DialogueHelper.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
+                DialogueHelper.SetVariable("Zille_War_OperationNumber", CurrentOperationNumber);
                 DialogueHelper.SetVariable("Zille_War_Phase", CurrentPhaseNumber);
+                DialogueHelper.SetVariable("Zille_Operation_Variant", CurrentVariant.ToString());
+                DialogueHelper.SetVariable("Zille_Phase1_Finished", Phase1Finished);
+                DialogueHelper.SetVariable("Zille_Op1_Finished", Operation1Finished);
+                DialogueHelper.SetVariable("Zille_Op1_CouncilAvailable", Op1CouncilAvailable);
+                DialogueHelper.SetVariable("Zille_Op1_CouncilCompleted", Op1CouncilCompleted);
+                DialogueHelper.SetVariable("Zille_TotalRepayment_Unlocked", TotalRepaymentUnlocked);
                 DialogueHelper.SetVariable("Zille_War_PlanType", PlanType.ToString());
                 DialogueHelper.SetVariable("Zille_War_StaffPlan", StaffPlan.ToString());
                 DialogueHelper.SetVariable("Zille_War_RomulusPlan", RomulusPlan.ToString());
