@@ -2015,7 +2015,7 @@ namespace GreatZilleSolution
                     }
 
                     // Turn 4+ Derdia-Wehlen Border Sabotage Investigation (available earlier if early war started in Turn 3)
-                    if (!DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone") && (turn == 0 || turn >= 4 || earlyWar))
+                    if (!DialogueHelper.GetBoolVariable("Zille_Derdia_BriefingDone") && (turn == 0 || turn >= 4 || earlyWar))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Sabotage Inquiry: Derdia-Wehlen Border Briefing", "Golden Guard Briefing Room", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaInvestigation", "Zille/DerdiaInvestigation");
@@ -2024,7 +2024,7 @@ namespace GreatZilleSolution
 
                     // Turn 5+ Long Derdia Talks (or immediately after Investigation during early war)
                     if (!DialogueHelper.GetBoolVariable("Zille_DerdiaTalks_Done")
-                        && (turn == 0 || turn >= 5 || (earlyWar && DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone"))))
+                        && (turn == 0 || turn >= 5 || (earlyWar && (DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone") || DialogueHelper.GetBoolVariable("Zille_Derdia_BriefingDone")))))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Derdian Mission: The Yol-Qerzan Sabotage", "Telecommunications Chamber", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaTalks", "Zille/DerdiaTalks");

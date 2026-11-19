@@ -894,17 +894,38 @@ namespace GreatZilleSolution
             data.tileType = td.IsSea ? WarTile.TileType.Sea : WarTile.TileType.Land;
             data.groundType = td.Terrain == "mountains" ? WarTile.GroundType.Mountain : WarTile.GroundType.Default;
             data.startingAllegiance = ToAllegiance(td.Allegiance);
-            data.fortLevel = td.FortLevel;
+
+            int effectiveFort = td.FortLevel;
+            string route = ZilleCampaignState.LogisticsRoute ?? "";
+            if (string.Equals(route, "Sazon", StringComparison.OrdinalIgnoreCase)
+                && td.Allegiance == "Rizia" && !td.IsSea && td.IsBorder && !td.IsImpassable)
+            {
+                effectiveFort = Math.Min(3, effectiveFort + 1);
+            }
+            if (string.Equals(route, "Azaro", StringComparison.OrdinalIgnoreCase)
+                && td.Allegiance == "Wehlen"
+                && (td.TileNumber == "51" || td.TileNumber == "46" || td.TileNumber == "47"))
+            {
+                effectiveFort = Math.Max(0, effectiveFort - 1);
+            }
+            if (ZilleCampaignState.IsDerdiaMissilesAgreed
+                && td.Allegiance == "Wehlen"
+                && (td.TileNumber == "9" || td.TileNumber == "23" || td.TileNumber == "51" || td.TileNumber == "71"))
+            {
+                effectiveFort = Math.Max(0, effectiveFort - 1);
+            }
+
+            data.fortLevel = effectiveFort;
             data.isShoreTile = td.IsSea || td.IsCoastal || td.IsPort;
             data.isEnemyAirfield = td.IsAirfield;
             data.isCoastalArtilleryTile = td.HasCoastalArtillery;
-            data.isAntiAirTile = td.HasNoAirZone;
+            data.isAntiAirTile = td.HasNoAirZone && !(ZilleCampaignState.IsLespiaIntelActive && td.Allegiance == "Wehlen" && td.TileNumber != "35");
             data.isInitialDeploymentTile = ((td.Allegiance == "Rizia" || td.Allegiance == "Derdia") && !td.IsSea) || td.IsNavalStart;
             data.isBorderTile = td.IsBorder;
             if (td.IsImpassable) data.tileDefenceType = WarTile.TileDefenceType.None;
             else if (td.IsCity) data.tileDefenceType = WarTile.TileDefenceType.City;
-            else if (td.FortLevel >= 2) data.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
-            else if (td.FortLevel > 0 || td.Terrain == "hills") data.tileDefenceType = WarTile.TileDefenceType.DefencePoint;
+            else if (effectiveFort >= 2) data.tileDefenceType = WarTile.TileDefenceType.FortifiedDefencePoint;
+            else if (effectiveFort > 0 || td.Terrain == "hills") data.tileDefenceType = WarTile.TileDefenceType.DefencePoint;
             else if (td.IsCitySurroundings) data.tileDefenceType = WarTile.TileDefenceType.CitySurroundings;
             else data.tileDefenceType = WarTile.TileDefenceType.None;
         }
@@ -1049,8 +1070,9 @@ namespace GreatZilleSolution
 
                 // Re-push whenever the inspector changes allegiance, a city, an airfield or a fort,
                 // so F10 edits show up on the table without leaving the theatre.
+                string modSig = (ZilleCampaignState.LogisticsRoute ?? "") + "|" + (ZilleCampaignState.IsDerdiaMissilesAgreed ? "1" : "0") + "|" + (ZilleCampaignState.IsLespiaIntelActive ? "1" : "0");
                 string sig = td.Allegiance + "|" + td.FortLevel + "|" + td.IsCity + "|" + td.IsAirfield + "|" + td.Terrain + "|" + td.IsSea
-                    + "|" + td.HasCoastalArtillery + "|" + td.HasNoAirZone + "|" + td.HasNoNavalLanding + "|" + td.IsNavalStart + "|" + td.IsBorder;
+                    + "|" + td.HasCoastalArtillery + "|" + td.HasNoAirZone + "|" + td.HasNoNavalLanding + "|" + td.IsNavalStart + "|" + td.IsBorder + "|" + modSig;
                 if (tb.PushedSig != sig)
                 {
                     try
@@ -1062,10 +1084,10 @@ namespace GreatZilleSolution
                             FillWarTileData(td, data);
                             wt.Setup(data, data.startingAllegiance);
                             if (curTok != null) wt.SetCurrentWarToken(curTok);
-                            if (td.FortLevel > 0) wt.ChangeWarTileFortLevelStat(td.FortLevel);
+                            wt.ChangeWarTileFortLevelStat(data.fortLevel > 0 ? data.fortLevel : 0);
                             wt.ChangeWarTileEnemyAirfieldStat(td.IsAirfield && td.Allegiance != "Rizia");
                             wt.ChangeWarTileCoastalArtilleryStat(td.HasCoastalArtillery);
-                            wt.ChangeWarTileAntiAirStat(td.HasNoAirZone);
+                            wt.ChangeWarTileAntiAirStat(data.isAntiAirTile);
                             wt.SetTileNavalBlockedBy(NavalBlock(td));
                             wt.SetIsReinforcementTile(td.IsReinforcementTile);
                             tb.GameplayPushed = true;
@@ -7043,12 +7065,31 @@ namespace GreatZilleSolution
 
         private static int _lastActionTurn = -1;
 
+        public static int GetPlayerActionPointsPerTurn()
+        {
+            int want = 5;
+            string route = ZilleCampaignState.LogisticsRoute ?? "";
+            if (string.Equals(route, "Sazon", StringComparison.OrdinalIgnoreCase))
+            {
+                bool sazonAligned = DialogueHelper.GetIntVariable("RiziaDLC.Country_HouseSazon") >= 2
+                    || (!DialogueHelper.GetBoolVariable("RiziaDLC.Country_HouseSazon_Enemy") && ZilleCampaignState.WarReadinessScore >= 3);
+                if (sazonAligned) want = 6;
+            }
+            else if (string.Equals(route, "Azaro", StringComparison.OrdinalIgnoreCase))
+            {
+                bool azaroAligned = DialogueHelper.GetIntVariable("RiziaDLC.Country_HouseAzaro") >= 2
+                    || (!DialogueHelper.GetBoolVariable("RiziaDLC.Country_HouseAzaro_Enemy") && ZilleCampaignState.WarReadinessScore >= 3);
+                if (azaroAligned) want = 6;
+            }
+            return want;
+        }
+
         /// <summary>This save starts the operation on zero action points, so the turn opens already finished. The budget has to be written before Start, and the banner the game shows at zero has to be dismissed once the turn actually has moves.</summary>
         private static void EnsureActionPoints()
         {
             var flow = FlowMgr();
             if (flow == null) return;
-            const int want = 5;
+            int want = GetPlayerActionPointsPerTurn();
             try
             {
                 var cfg = flow.warConfiguration;
@@ -7134,19 +7175,26 @@ namespace GreatZilleSolution
         private static int ResolveStateMilitaryCount(WarUnitTypeData u)
         {
             string n = (u.name + " " + (u.UnitName ?? "")).ToLowerInvariant();
+            string route = ZilleCampaignState.LogisticsRoute ?? "";
+            int sazonBonus = string.Equals(route, "Sazon", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
+            int azaroBonus = string.Equals(route, "Azaro", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
+            int rumburgBonus = ZilleCampaignState.IsRumburgMunitionsActive ? 1 : 0;
+            int lespiaBonus = ZilleCampaignState.IsLespiaIntelActive ? 1 : 0;
+            int derdiaBonus = ZilleCampaignState.IsDerdiaHybridSupportActive ? 1 : 0;
+
             if (n.Contains("bomber")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Bomber_Total");
-            if (n.Contains("fighter")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Fighter_Total");
+            if (n.Contains("fighter")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Fighter_Total") + lespiaBonus;
             if (n.Contains("flagship")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Flagship_Total");
             if (n.Contains("submarine")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Submarine_Total");
             if (n.Contains("militaryship") || n.Contains("ship") || n.Contains("destroyer") || n.Contains("battleship"))
                 return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Ship_Total");
-            if (n.Contains("azaro")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Azaro_Total");
-            if (n.Contains("sazon")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Sazon_Total");
+            if (n.Contains("azaro")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Azaro_Total") + azaroBonus;
+            if (n.Contains("sazon")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Sazon_Total") + sazonBonus;
             if (n.Contains("toras")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Toras_Total");
             if (n.Contains("golden")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_GoldenGuard_Total");
-            if (n.Contains("mercenary")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Mercenary_Total");
+            if (n.Contains("mercenary")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Mercenary_Total") + derdiaBonus;
             if (n.Contains("tank") || n.Contains("armor")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Tank_Total");
-            if (n.Contains("support")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Support_Total");
+            if (n.Contains("support")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Support_Total") + rumburgBonus;
             if (n.Contains("mountain")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Mountaineer_Total");
             if (n.Contains("paratroop")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Paratrooper_Total");
             if (n.Contains("marine")) return DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Marine_Total");

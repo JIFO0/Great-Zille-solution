@@ -1998,7 +1998,7 @@ namespace GreatZilleSolution
                             }
                             if (nameInDb == "Turn_Zille_DerdiaInvestigation")
                             {
-                                DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                                DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
                                 DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", true);
                             }
                             else if (nameInDb == "Turn_Zille_DerdiaTalks")
@@ -2656,7 +2656,7 @@ namespace GreatZilleSolution
                     if (flow != null)
                     {
                         flow.SetWarState(WarFlowManager.WarState.Operation);
-                        flow.currentActionPoints = 5;
+                        flow.currentActionPoints = ZilleWarTable.GetPlayerActionPointsPerTurn();
                         flow.PlayerTurn();
                     }
                     var hud2 = Panels.Instance != null ? Panels.Instance.WarHUDPanel : UnityEngine.Object.FindObjectOfType<WarHUDPanel>();

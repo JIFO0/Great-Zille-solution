@@ -126,7 +126,10 @@ namespace GreatZilleSolution
             AddModNewEvent("Turn_Zille_WarBriefing", "A Royal Briefing Before the Invasion of Zille", "Council Chambers, Palas Rezna", "MODNEW");
             AddModNewEvent("Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "MODNEW");
             AddModNewEvent("Turn_Zille_MaveNortusHQ", "Frontline Headquarters: The Battle for Zille (Mave Nortus)", "Mayor's Hall, Mave Nortus", "MODNEW");
+            AddModNewEvent("Turn_Zille_Op1AftermathCouncil", "Post-Operation I High Command Council", "War Room, Palas Rezna", "MODNEW");
+            AddModNewEvent("Turn_Zille_DerdiaInvestigation", "Sabotage Inquiry: Derdia-Wehlen Border Briefing (Turn 4)", "Golden Guard Briefing Room", "MODNEW");
             AddModNewEvent("Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "MODNEW");
+            AddModNewEvent("Turn_Zille_DerdiaStateVisit", "State Visit to Derdia: Audience with High Wiser Azmal (Turn 6)", "Silver Garrison, Naeal", "MODNEW");
             AddModNewEvent("Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "MODNEW");
             AddModNewEvent("Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "MODNEW");
             AddModNewEvent("Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "MODNEW");

@@ -354,7 +354,7 @@ namespace GreatZilleSolution
             AddOrUpdateReport(reps, "Rep_Derdia_Investigation_Turn4",
                 "Border Dossier: Wehzek Sabotage Confirmed",
                 "Rizian intelligence officers investigating the Yol-Qerzan frontier recovered military-grade detonators and encrypted supply orders linking the border sabotage directly to Wehlen's interior security apparatus.",
-                "Zille_Derdia_InvestigationDone", 4);
+                "Zille_Rep_DerdiaSabotageConfirmed", 4);
 
             AddOrUpdateReport(reps, "Rep_Derdia_StateVisit_Pact",
                 "Silver Garrison: Rizian-Derdian Alliance Sealed",
@@ -569,6 +569,10 @@ namespace GreatZilleSolution
             {
                 DialogueHelper.SetVariable("Zille_Derdia_SabotageSignals", true);
             }
+            DialogueHelper.SetVariable("Zille_Rep_DerdiaSabotageConfirmed",
+                (DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone") || DialogueHelper.GetBoolVariable("Zille_Derdia_BriefingDone"))
+                && !DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationIgnored")
+                && (ZilleCampaignState.HasDerdiaSabotageEvidence || DialogueHelper.GetBoolVariable("Zille_Derdia_SabotageEvidence")));
             DialogueHelper.SetVariable("Zille_Rep_Phase1Done", ZilleCampaignState.Phase1Finished);
             DialogueHelper.SetVariable("Zille_Rep_Phase2Done", ZilleCampaignState.Outcome != ZilleWarOutcome.None || ZilleCampaignState.CurrentPhase == ZilleOperationPhase.Completed_Outcome);
             DialogueHelper.SetVariable("Zille_Rep_DerdiaRejected", DialogueHelper.GetBoolVariable("Zille_DerdiaTalks_Done") && !ZilleCampaignState.IsDerdiaHybridSupportActive && !DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive"));

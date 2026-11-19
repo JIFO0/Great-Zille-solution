@@ -88,19 +88,19 @@ namespace GreatZilleSolution
             AddChoice(conv, 21, TitusId, "DerdiaInv_GoldenGuard",
                 "\"Send Golden Guard forensic specialists covertly to inspect the blasted pumping station and recover Wehzek ordnance.\"",
                 "Dispatch Golden Guard specialists under diplomatic courier cover to examine the Yol pumping station and trace every blasting cap.", 31,
-                "Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             AddChoice(conv, 22, LucitaId, "DerdiaInv_MilitaryIntel",
                 "\"Have House Azaro's border scouts intercept Wehzek sapper communications near Grodzizg.\"",
                 "Task military intelligence along the frontier to triangulate Wehzek sapper radios and map their staging camps near Grodzizg.", 32,
-                "Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddChoice(conv, 23, LaurentoId, "DerdiaInv_DiplomaticChannel",
                 "\"Share our preliminary intelligence quietly with Naeal and request joint border observers.\"",
                 "Have the Foreign Ministry pass our preliminary findings to Naeal and propose a quiet joint border verification.", 33,
-                "Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 31, NarratorId, RomusId, "DerdiaInv_Result_GG",
                 "Two days later, Titus laid a sealed folder on my desk: Wehzek military-grade detonators, factory lot numbers from Wraclawitz, and eyewitness sketches of uniformed sappers slipping back across the northern ridge. \"Hard proof, Your Majesty. Azmal cannot ignore this when you speak with him.\"", -1);
