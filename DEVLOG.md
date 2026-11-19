@@ -159,3 +159,8 @@
   - Integrated scene metadata into `EntityDataManager.AllConversationsData`.
 - **Surgical Injections into Vanilla Dialogue Trees:**
   - Injected options into Turn 1 (`EnT_CouncilBriefing`, `SnO_SecurityMilitaryMeeting`), Turn 2 (`FPnT_DiplomacyBriefing`, `FPnT_ZilleVisit`), Turn 3 (`SnO_ZilleSecurityDebrief`), Turn 4 (`FPnT_AlvarezCall`, `A_CouncilTalkAboutPales`), and Turn 8 (`FPnT_ZilleNegotiations`).
+
+### [2026-11-19] Mod logo / branding
+- Added the official Great Zille logo (vector, built on the Kingdom of Rizia emblem layout with the real v14 Zille shape and a gold sword on Zille City): `branding/` (SVG sources, PNG 16-1024 px, `.ico`, generator scripts).
+- In game (`ZilleBranding.cs`): ribbon logo on the Suzerain main menu, small icon next to the mod status bar and in the Theatre menu title, Windows window/taskbar icon from `great_zille.ico`. Files are deployed with the other assets to `Mods/GreatZilleAssets/branding`; a missing file is silently ignored.
+- Web editor: favicon and header logo. Start-menu shortcut uses the logo icon.

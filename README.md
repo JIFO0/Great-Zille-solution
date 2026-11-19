@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="branding/png/great_zille_logo_ribbon_512.png" alt="The Great Zille Solution logo" width="320">
+</p>
+
 # The Great Zille Solution
 
 A modification for *Suzerain* (*Kingdom of Rizia* DLC) that adds a military path to resolve the crisis over the Zille province occupied by Wehlen under Wiktor Smolak.
@@ -74,3 +78,4 @@ This mod was built using developer tools created primarily for this project (loc
 * [Master Implementation Plan](docs/MASTER_IMPLEMENTATION_PLAN_GREAT_ZILLE.md)
 * [Community Feedback & War System Architecture](docs/COMMUNITY_FEEDBACK_AND_EXPANSION_DESIGN.md)
 * [Devlog](DEVLOG.md)
+* [Logo & branding](branding/README.md)

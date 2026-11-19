@@ -104,7 +104,8 @@ namespace GreatZilleSolution
                 return;
             }
 
-            
+            // Mod logo: main menu badge + window icon (optional, never throws)
+            try { ZilleBranding.OnSceneLoaded(sceneName); } catch { }
 
             // Once game scene loads (DirectX is fully active), trigger texture loading and register entities
 
@@ -310,6 +311,8 @@ namespace GreatZilleSolution
 
 
 
+                ZilleBranding.DrawMainMenuLogo();
+
                 ZilleWarTable.HandlePlacementEvent(Event.current);
 
                 ZilleWarTable.HandleMapEdit(Event.current);
@@ -341,6 +344,8 @@ namespace GreatZilleSolution
                         string statusText = "[ Great Zille v0.4.9 by JIFO (jifo.dev) | F6 Spawner | F9 Wojna | F10 Mapa | F11 Teatr ]";
 
                         GUI.Box(new Rect(Screen.width - 640, 10, 630, 28), statusText);
+
+                        ZilleBranding.DrawIcon(new Rect(Screen.width - 640 - 36, 6, 32, 32));
 
                     }
 

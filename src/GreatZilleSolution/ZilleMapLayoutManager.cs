@@ -22,6 +22,9 @@ namespace GreatZilleSolution
 
         private static string _primaryAssetsDir = "";
 
+        /// <summary>Resolved Mods/GreatZilleAssets folder (or the repo assets folder in dev).</summary>
+        public static string AssetsDir => _primaryAssetsDir;
+
         private static string _configFilePath = "";
 
         private static bool _texturesLoaded = false;
