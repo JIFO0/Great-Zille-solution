@@ -630,30 +630,132 @@ namespace GreatZilleSolution
                     }
                 }
 
-                // 6. Register both story fragments into GameFlowManager.enabledNotDoneStoryFragments
-                var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
-                if (gfm != null)
-                {
-                    var enabledFrags = gfm.GetEnabledNotDoneStoryFragments();
-                    if (enabledFrags != null)
-                    {
-                        if (cd != null && !enabledFrags.Contains(cd))
-                        {
-                            enabledFrags.Add(cd);
-                            MelonLogger.Msg("[WAR ENGINE] Registered Turn_Zille_WarBriefing into GameFlowManager.enabledNotDoneStoryFragments!");
-                        }
-                        if (wfd != null && !enabledFrags.Contains(wfd))
-                        {
-                            enabledFrags.Add(wfd);
-                            MelonLogger.Msg("[WAR ENGINE] Registered WarFragment_Zille_1_1 into GameFlowManager.enabledNotDoneStoryFragments!");
-                        }
-                    }
-                }
+                // 6. Enforce accurate mandatory story fragment gating (so only currently unlocked steps gate Next Turn)
+                SyncMandatoryStoryFragmentsFromState();
             }
             catch (Exception ex)
             {
                 MelonLogger.Warning($"[WAR ENGINE] RegisterNativeZilleEntities error: {ex.Message}");
             }
+        }
+
+        public static void SetStoryFragmentMandatoryState(string fragmentNameOrTitle, bool isMandatoryActive)
+        {
+            if (string.IsNullOrEmpty(fragmentNameOrTitle)) return;
+            try
+            {
+                ConversationData targetConv = null;
+                WarFragmentData targetWar = null;
+
+                var allConv = GetEntityBackingList<ConversationData>("conversationsData") ?? EntityDataManager.AllConversationsData ?? EntityDataManager.ConversationsData;
+                if (allConv != null)
+                {
+                    for (int i = 0; i < allConv.Count; i++)
+                    {
+                        var c = allConv[i];
+                        if (c == null) continue;
+                        if (c.NameInDatabase == fragmentNameOrTitle || c.Id == fragmentNameOrTitle || c.ConversationProperties?.Dialogue == fragmentNameOrTitle)
+                        {
+                            targetConv = c;
+                            break;
+                        }
+                    }
+                }
+
+                if (targetConv == null)
+                {
+                    var allWar = GetEntityBackingList<WarFragmentData>("warFragmentsData") ?? EntityDataManager.AllWarFragmentsData;
+                    if (allWar != null)
+                    {
+                        for (int i = 0; i < allWar.Count; i++)
+                        {
+                            var w = allWar[i];
+                            if (w != null && (w.NameInDatabase == fragmentNameOrTitle || w.Id == fragmentNameOrTitle))
+                            {
+                                targetWar = w;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (targetConv?.StoryFragmentProperties != null)
+                {
+                    targetConv.StoryFragmentProperties.IsDone = !isMandatoryActive;
+                }
+                if (targetWar?.StoryFragmentProperties != null)
+                {
+                    targetWar.StoryFragmentProperties.IsDone = !isMandatoryActive;
+                }
+
+                StoryFragmentData target = (StoryFragmentData)targetConv ?? targetWar;
+                if (target == null) return;
+
+                var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
+                if (gfm != null)
+                {
+                    var enabledA = gfm.GetEnabledNotDoneStoryFragments();
+                    var enabledB = gfm.enabledNotDoneStoryFragments;
+                    if (isMandatoryActive)
+                    {
+                        if (enabledA != null && !enabledA.Contains(target)) enabledA.Add(target);
+                        if (enabledB != null && !enabledB.Contains(target)) enabledB.Add(target);
+                    }
+                    else
+                    {
+                        if (enabledA != null && enabledA.Contains(target)) enabledA.Remove(target);
+                        if (enabledB != null && enabledB.Contains(target)) enabledB.Remove(target);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] SetStoryFragmentMandatoryState({fragmentNameOrTitle}, {isMandatoryActive}) error: {ex.Message}");
+            }
+        }
+
+        public static void ClearAllMandatoryZilleFragments()
+        {
+            string[] zilleFragments = new[]
+            {
+                "Turn_Zille_WarPlanning",
+                "Turn_Zille_WarLogisticsDispute",
+                "Turn_Zille_WarBriefing",
+                "Turn_Zille_MaveNortusHQ",
+                "Turn_Zille_Op1AftermathCouncil",
+                "Turn_Zille_WarPreNegotiationsBriefing",
+                "Turn_Zille_WarSmolakFinalParley",
+                "Turn_Zille_WarPeaceTreaty",
+                "WarFragment_Zille_1_1"
+            };
+            for (int i = 0; i < zilleFragments.Length; i++)
+            {
+                SetStoryFragmentMandatoryState(zilleFragments[i], false);
+            }
+        }
+
+        public static void SyncMandatoryStoryFragmentsFromState()
+        {
+            bool treatySigned = DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed") || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
+            if (treatySigned)
+            {
+                ClearAllMandatoryZilleFragments();
+                return;
+            }
+
+            bool warActive = DialogueHelper.GetBoolVariable("Zille_War_Active");
+            bool planningDone = DialogueHelper.GetBoolVariable("Zille_War_Planning_Done");
+            bool earlyWar = DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch");
+
+            SetStoryFragmentMandatoryState("Turn_Zille_WarBriefing", (planningDone || earlyWar) && !warActive && ZilleCampaignState.CurrentPhase == ZilleOperationPhase.NotStarted);
+            SetStoryFragmentMandatoryState("Turn_Zille_MaveNortusHQ", ZilleCampaignState.MaveNortusHQAvailable && !ZilleCampaignState.MaveNortusHQCompleted);
+            SetStoryFragmentMandatoryState("Turn_Zille_Op1AftermathCouncil", ZilleCampaignState.Op1CouncilAvailable && !ZilleCampaignState.Op1CouncilCompleted);
+
+            bool warTokenRequired = warActive
+                && !ZilleCampaignState.MaveNortusHQAvailable
+                && !ZilleCampaignState.Op1CouncilAvailable
+                && (ZilleCampaignState.CurrentOperationNumber >= 2 || ZilleCampaignState.CurrentPhaseNumber == 1 || ZilleCampaignState.Phase2EventUnlocked);
+            SetStoryFragmentMandatoryState("WarFragment_Zille_1_1", warTokenRequired);
         }
 
         // ================= FOCUS PORTE DRAZON BRIEFING EVENT =================
@@ -932,6 +1034,8 @@ namespace GreatZilleSolution
                         }
                     }
 
+                    SetStoryFragmentMandatoryState("Turn_Zille_MaveNortusHQ", true);
+                    SetStoryFragmentMandatoryState("WarFragment_Zille_1_1", false);
                     MelonLogger.Msg($"[WAR ENGINE] Spawned Mave Nortus Field HQ event token at {mavePos} (city ref: {maveCity?.name ?? "fallback"}).");
                     return true;
                 }
@@ -1223,12 +1327,15 @@ namespace GreatZilleSolution
             ZilleCampaignState.Op1CouncilAvailable = true;
             ZilleCampaignState.Op1CouncilCompleted = false;
             ZilleCampaignState.SyncToLua();
+            SetStoryFragmentMandatoryState("Turn_Zille_Op1AftermathCouncil", true);
+            SetStoryFragmentMandatoryState("WarFragment_Zille_1_1", false);
 
             MelonLogger.Msg($"[WAR ENGINE] ResolvePostOperation1Flow: outcome={outcome}, eligible={eligible}. Launching Op1AftermathCouncil...");
             TriggerConversation("Turn_Zille_Op1AftermathCouncil", "Zille/Op1AftermathCouncil", () =>
             {
                 ZilleCampaignState.Op1CouncilCompleted = true;
                 ZilleCampaignState.Op1CouncilAvailable = false;
+                SetStoryFragmentMandatoryState("Turn_Zille_Op1AftermathCouncil", false);
                 ZilleCampaignState.SyncFromLua();
 
                 if (DialogueHelper.GetBoolVariable("Zille_Negotiate_After_Op1"))
@@ -1436,6 +1543,7 @@ namespace GreatZilleSolution
 
                     MelonLogger.Msg($"[WAR ENGINE] SpawnZilleWarEventToken final state: self={_spawnedZilleWarToken.activeSelf}, hier={_spawnedZilleWarToken.activeInHierarchy}, parent={_spawnedZilleWarToken.transform.parent?.name}:{_spawnedZilleWarToken.transform.parent?.gameObject.activeInHierarchy}, pos={_spawnedZilleWarToken.transform.position}");
 
+                    SetStoryFragmentMandatoryState("WarFragment_Zille_1_1", true);
                     string opName = GetOperationDisplayName();
                     string phaseTag = ZilleCampaignState.CurrentPhaseNumber == 2 ? "Phase II" : "Phase I";
                     DialogueHelper.ShowAlert($"[Zille] {opName} ({phaseTag}) event is now active at the Zille border.");
@@ -1913,8 +2021,13 @@ namespace GreatZilleSolution
                             else if (nameInDb == "Turn_Zille_HomeFrontCrisis") DialogueHelper.SetVariable("Zille_HomeFrontCrisis_Done", true);
                             else if (nameInDb == "Turn_Zille_ZilleLiberation") DialogueHelper.SetVariable("Zille_Liberation_Done", true);
                             else if (nameInDb == "Turn_Zille_WarSmolakFinalParley") DialogueHelper.SetVariable("Zille_Rep_ParleyDone", true);
-                            else if (nameInDb == "Turn_Zille_WarPeaceTreaty") DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
+                            else if (nameInDb == "Turn_Zille_WarPeaceTreaty")
+                            {
+                                DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
+                                ClearAllMandatoryZilleFragments();
+                            }
 
+                            SetStoryFragmentMandatoryState(nameInDb, false);
                             ZilleCampaignState.SyncFromLua();
                             ZilleReportsAndSituations.EnsureRegisteredAndSynced();
                             Panels.Instance?.ShowHUD();
@@ -2005,6 +2118,7 @@ namespace GreatZilleSolution
                 ZilleCampaignState.CurrentPhaseNumber = 2;
                 ZilleCampaignState.Phase2EventUnlocked = false;
                 ZilleCampaignState.SyncToLua();
+                SetStoryFragmentMandatoryState("Turn_Zille_MaveNortusHQ", false);
                 SuppressMaveNortusHQEventToken();
 
                 _pendingPhase2TokenSpawn = true;
@@ -2021,13 +2135,20 @@ namespace GreatZilleSolution
             {
                 ReturnToCivilianMap();
             }
+            SetStoryFragmentMandatoryState("WarFragment_Zille_1_1", false);
+            SetStoryFragmentMandatoryState("Turn_Zille_WarPreNegotiationsBriefing", true);
+            SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", true);
+            SetStoryFragmentMandatoryState("Turn_Zille_WarPeaceTreaty", true);
             ZilleCampaignState.SyncToLua();
             TriggerConversation("Turn_Zille_WarPreNegotiationsBriefing", "Zille/WarPreNegotiationsBriefing", () => {
+                SetStoryFragmentMandatoryState("Turn_Zille_WarPreNegotiationsBriefing", false);
                 MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
                 TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
+                    SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", false);
                     MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
                     TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
                         MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
+                        ClearAllMandatoryZilleFragments();
                         if (ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
                         {
                             TriggerConversation("Turn_Zille_ZilleLiberation", "Zille/ZilleLiberation");

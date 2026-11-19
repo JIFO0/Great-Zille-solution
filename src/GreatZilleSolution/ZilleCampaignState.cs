@@ -578,6 +578,10 @@ namespace GreatZilleSolution
                 DialogueHelper.SetVariable("Zille_Phase1_EnemyDead", ZilleEnemyUnitsLostPhase1);
                 DialogueHelper.SetVariable("Zille_Phase2_PlayerDead", ZillePlayerUnitsLostPhase2);
                 DialogueHelper.SetVariable("Zille_Phase2_EnemyDead", ZilleEnemyUnitsLostPhase2);
+                DialogueHelper.SetVariable("Zille_Op2_Phase1_PlayerDead", Op2PlayerUnitsLostPhase1);
+                DialogueHelper.SetVariable("Zille_Op2_Phase1_EnemyDead", Op2EnemyUnitsLostPhase1);
+                DialogueHelper.SetVariable("Zille_Op2_Phase2_PlayerDead", Op2PlayerUnitsLostPhase2);
+                DialogueHelper.SetVariable("Zille_Op2_Phase2_EnemyDead", Op2EnemyUnitsLostPhase2);
                 DialogueHelper.SetVariable("Zille_Manpower_Casualties", ZilleManpowerCasualties);
                 DialogueHelper.SetVariable("Zille_Pales_TotalPlayerDead", PalesPlayerUnitsLost);
                 DialogueHelper.SetVariable("Zille_Pales_TotalEnemyDead", PalesEnemyUnitsLost);
@@ -605,33 +609,101 @@ namespace GreatZilleSolution
         {
             try
             {
+                if (DialogueHelper.HasVariable("Zille_MilitarySentiment"))
+                    MilitarySentimentLevel = DialogueHelper.GetIntVariable("Zille_MilitarySentiment");
+
+                if (DialogueHelper.HasVariable("Zille_OperationPhase"))
+                {
+                    int opPhaseInt = DialogueHelper.GetIntVariable("Zille_OperationPhase");
+                    if (Enum.IsDefined(typeof(ZilleOperationPhase), opPhaseInt))
+                        CurrentPhase = (ZilleOperationPhase)opPhaseInt;
+                }
+
+                if (DialogueHelper.HasVariable("Zille_War_OperationNumber"))
+                    CurrentOperationNumber = Math.Max(1, DialogueHelper.GetIntVariable("Zille_War_OperationNumber"));
+
+                if (DialogueHelper.HasVariable("Zille_War_Phase"))
+                    CurrentPhaseNumber = Math.Max(1, DialogueHelper.GetIntVariable("Zille_War_Phase"));
+
+                if (DialogueHelper.HasVariable("Zille_War_PlanType"))
+                {
+                    string pt = DialogueHelper.GetStringVariable("Zille_War_PlanType");
+                    if (Enum.TryParse<ZillePlanType>(pt, true, out var parsedPt)) PlanType = parsedPt;
+                }
+                if (DialogueHelper.HasVariable("Zille_War_StaffPlan"))
+                {
+                    string sp = DialogueHelper.GetStringVariable("Zille_War_StaffPlan");
+                    if (Enum.TryParse<ZilleStaffPlan>(sp, true, out var parsedSp)) StaffPlan = parsedSp;
+                }
+                if (DialogueHelper.HasVariable("Zille_War_RomulusPlan"))
+                {
+                    string rp = DialogueHelper.GetStringVariable("Zille_War_RomulusPlan");
+                    if (Enum.TryParse<ZilleRomulusPlan>(rp, true, out var parsedRp)) RomulusPlan = parsedRp;
+                }
+                if (DialogueHelper.HasVariable("Zille_Operation_Variant"))
+                {
+                    string ov = DialogueHelper.GetStringVariable("Zille_Operation_Variant");
+                    if (Enum.TryParse<ZilleOperationVariant>(ov, true, out var parsedOv) && parsedOv != CurrentVariant)
+                    {
+                        CurrentVariant = parsedOv;
+                        if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille)
+                            ZilleMapLayoutManager.ApplyOperationVariant(parsedOv);
+                    }
+                }
+
+                if (DialogueHelper.HasVariable("Zille_Phase1_Finished")) Phase1Finished = DialogueHelper.GetBoolVariable("Zille_Phase1_Finished");
+                if (DialogueHelper.HasVariable("Zille_MaveNortusHQ_Available")) MaveNortusHQAvailable = DialogueHelper.GetBoolVariable("Zille_MaveNortusHQ_Available");
+                if (DialogueHelper.HasVariable("Zille_MaveNortusHQ_Completed")) MaveNortusHQCompleted = DialogueHelper.GetBoolVariable("Zille_MaveNortusHQ_Completed");
+                if (DialogueHelper.HasVariable("Zille_Phase2_Unlocked")) Phase2EventUnlocked = DialogueHelper.GetBoolVariable("Zille_Phase2_Unlocked");
+                if (DialogueHelper.HasVariable("Zille_Op1_Finished")) Operation1Finished = DialogueHelper.GetBoolVariable("Zille_Op1_Finished");
+                if (DialogueHelper.HasVariable("Zille_Op1_CouncilAvailable")) Op1CouncilAvailable = DialogueHelper.GetBoolVariable("Zille_Op1_CouncilAvailable");
+                if (DialogueHelper.HasVariable("Zille_Op1_CouncilCompleted")) Op1CouncilCompleted = DialogueHelper.GetBoolVariable("Zille_Op1_CouncilCompleted");
+                if (DialogueHelper.HasVariable("Zille_TotalRepayment_Unlocked")) TotalRepaymentUnlocked = DialogueHelper.GetBoolVariable("Zille_TotalRepayment_Unlocked");
+
+                if (DialogueHelper.HasVariable("Zille_City_Captured")) ZilleCityCaptured = DialogueHelper.GetBoolVariable("Zille_City_Captured");
+                if (DialogueHelper.HasVariable("Zille_Phase1_Cities")) Phase1CitiesCaptured = DialogueHelper.GetIntVariable("Zille_Phase1_Cities");
+                if (DialogueHelper.HasVariable("Zille_Phase2_Cities")) Phase2CitiesCaptured = DialogueHelper.GetIntVariable("Zille_Phase2_Cities");
+                if (DialogueHelper.HasVariable("Zille_Cap_ZilleCity")) CapZilleCity = DialogueHelper.GetBoolVariable("Zille_Cap_ZilleCity");
+                if (DialogueHelper.HasVariable("Zille_Cap_Wiktrany")) CapWiktrany = DialogueHelper.GetBoolVariable("Zille_Cap_Wiktrany");
+                if (DialogueHelper.HasVariable("Zille_Cap_Munat")) CapMunat = DialogueHelper.GetBoolVariable("Zille_Cap_Munat");
+                if (DialogueHelper.HasVariable("Zille_Cap_Nanta")) CapNanta = DialogueHelper.GetBoolVariable("Zille_Cap_Nanta");
+                if (DialogueHelper.HasVariable("Zille_Cap_Rotsla")) CapRotsla = DialogueHelper.GetBoolVariable("Zille_Cap_Rotsla");
+                if (DialogueHelper.HasVariable("Zille_Cap_Grodzizg")) CapGrodzizg = DialogueHelper.GetBoolVariable("Zille_Cap_Grodzizg");
+                if (DialogueHelper.HasVariable("Zille_Cap_Kratsna")) CapKratsna = DialogueHelper.GetBoolVariable("Zille_Cap_Kratsna");
+                if (DialogueHelper.HasVariable("Zille_Cap_Isor")) CapIsor = DialogueHelper.GetBoolVariable("Zille_Cap_Isor");
+                if (DialogueHelper.HasVariable("Zille_Cap_Count")) CapTotalCount = DialogueHelper.GetIntVariable("Zille_Cap_Count");
+
                 string route = DialogueHelper.GetStringVariable("Zille_Logistics_Route");
                 if (string.IsNullOrEmpty(route)) route = DialogueHelper.GetStringVariable("Zille_Logistics_House");
                 if (!string.IsNullOrEmpty(route)) LogisticsRoute = route;
 
-                if (DialogueHelper.GetBoolVariable("Zille_Rumburg_Munitions")) IsRumburgMunitionsActive = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Lespia_Intel")) IsLespiaIntelActive = true;
-                if (DialogueHelper.GetBoolVariable("Zille_LespiaPactAccepted")) IsLespiaPactAccepted = true;
-                if (DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive")) IsDerdiaHybridSupportActive = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_SabotageEvidence")) HasDerdiaSabotageEvidence = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_IncidentShared")) IsDerdiaIncidentShared = true;
-                if (DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")) IsDerdiaPactSigned = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_PipelineInvested")) IsDerdiaPipelineInvested = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_MissilesAgreed")) IsDerdiaMissilesAgreed = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")) IsDerdiaStateVisitDone = true;
-                if (DialogueHelper.GetBoolVariable("Zille_Independent_Buffer")) IsIndependentZilleAgreed = true;
+                if (DialogueHelper.HasVariable("Zille_NavalBlockadeActive")) IsNavalBlockadeActive = DialogueHelper.GetBoolVariable("Zille_NavalBlockadeActive");
+                if (DialogueHelper.HasVariable("Zille_MotherCaptured")) IsMotherCaptured = DialogueHelper.GetBoolVariable("Zille_MotherCaptured");
+                if (DialogueHelper.HasVariable("Zille_BrenasLost")) IsBrenasLost = DialogueHelper.GetBoolVariable("Zille_BrenasLost");
+                if (DialogueHelper.HasVariable("Zille_Rumburg_Munitions")) IsRumburgMunitionsActive = DialogueHelper.GetBoolVariable("Zille_Rumburg_Munitions");
+                if (DialogueHelper.HasVariable("Zille_Lespia_Intel")) IsLespiaIntelActive = DialogueHelper.GetBoolVariable("Zille_Lespia_Intel");
+                if (DialogueHelper.HasVariable("Zille_LespiaPactAccepted")) IsLespiaPactAccepted = DialogueHelper.GetBoolVariable("Zille_LespiaPactAccepted");
+                if (DialogueHelper.HasVariable("Zille_DerdiaHybridActive")) IsDerdiaHybridSupportActive = DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive");
+                if (DialogueHelper.HasVariable("Zille_Derdia_SabotageEvidence")) HasDerdiaSabotageEvidence = DialogueHelper.GetBoolVariable("Zille_Derdia_SabotageEvidence");
+                if (DialogueHelper.HasVariable("Zille_Derdia_IncidentShared")) IsDerdiaIncidentShared = DialogueHelper.GetBoolVariable("Zille_Derdia_IncidentShared");
+                if (DialogueHelper.HasVariable("Zille_DerdiaPact_Signed")) IsDerdiaPactSigned = DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed");
+                if (DialogueHelper.HasVariable("Zille_Derdia_PipelineInvested")) IsDerdiaPipelineInvested = DialogueHelper.GetBoolVariable("Zille_Derdia_PipelineInvested");
+                if (DialogueHelper.HasVariable("Zille_Derdia_MissilesAgreed")) IsDerdiaMissilesAgreed = DialogueHelper.GetBoolVariable("Zille_Derdia_MissilesAgreed");
+                if (DialogueHelper.HasVariable("Zille_Derdia_StateVisitDone")) IsDerdiaStateVisitDone = DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone");
+                if (DialogueHelper.HasVariable("Zille_Independent_Buffer")) IsIndependentZilleAgreed = DialogueHelper.GetBoolVariable("Zille_Independent_Buffer");
 
                 int outVal = DialogueHelper.GetIntVariable("Zille_War_Outcome");
-                if (outVal >= 1 && outVal <= 5) Outcome = (ZilleWarOutcome)outVal;
+                if (outVal >= 0 && outVal <= 5 && DialogueHelper.HasVariable("Zille_War_Outcome"))
+                    Outcome = (ZilleWarOutcome)outVal;
 
-                int p1P = DialogueHelper.GetIntVariable("Zille_Phase1_PlayerDead");
-                int p1E = DialogueHelper.GetIntVariable("Zille_Phase1_EnemyDead");
-                int p2P = DialogueHelper.GetIntVariable("Zille_Phase2_PlayerDead");
-                int p2E = DialogueHelper.GetIntVariable("Zille_Phase2_EnemyDead");
-                if (p1P > ZillePlayerUnitsLostPhase1) ZillePlayerUnitsLostPhase1 = p1P;
-                if (p1E > ZilleEnemyUnitsLostPhase1) ZilleEnemyUnitsLostPhase1 = p1E;
-                if (p2P > ZillePlayerUnitsLostPhase2) ZillePlayerUnitsLostPhase2 = p2P;
-                if (p2E > ZilleEnemyUnitsLostPhase2) ZilleEnemyUnitsLostPhase2 = p2E;
+                if (DialogueHelper.HasVariable("Zille_Phase1_PlayerDead")) ZillePlayerUnitsLostPhase1 = DialogueHelper.GetIntVariable("Zille_Phase1_PlayerDead");
+                if (DialogueHelper.HasVariable("Zille_Phase1_EnemyDead")) ZilleEnemyUnitsLostPhase1 = DialogueHelper.GetIntVariable("Zille_Phase1_EnemyDead");
+                if (DialogueHelper.HasVariable("Zille_Phase2_PlayerDead")) ZillePlayerUnitsLostPhase2 = DialogueHelper.GetIntVariable("Zille_Phase2_PlayerDead");
+                if (DialogueHelper.HasVariable("Zille_Phase2_EnemyDead")) ZilleEnemyUnitsLostPhase2 = DialogueHelper.GetIntVariable("Zille_Phase2_EnemyDead");
+                if (DialogueHelper.HasVariable("Zille_Op2_Phase1_PlayerDead")) Op2PlayerUnitsLostPhase1 = DialogueHelper.GetIntVariable("Zille_Op2_Phase1_PlayerDead");
+                if (DialogueHelper.HasVariable("Zille_Op2_Phase1_EnemyDead")) Op2EnemyUnitsLostPhase1 = DialogueHelper.GetIntVariable("Zille_Op2_Phase1_EnemyDead");
+                if (DialogueHelper.HasVariable("Zille_Op2_Phase2_PlayerDead")) Op2PlayerUnitsLostPhase2 = DialogueHelper.GetIntVariable("Zille_Op2_Phase2_PlayerDead");
+                if (DialogueHelper.HasVariable("Zille_Op2_Phase2_EnemyDead")) Op2EnemyUnitsLostPhase2 = DialogueHelper.GetIntVariable("Zille_Op2_Phase2_EnemyDead");
                 ZilleManpowerCasualties = ZillePlayerUnitsLostTotal * 1450;
 
                 int lev = DialogueHelper.GetIntVariable("Zille_Leverage");

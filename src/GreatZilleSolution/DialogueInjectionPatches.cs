@@ -2566,7 +2566,15 @@ namespace GreatZilleSolution
                 {
                     ZilleCampaignState.IsNavalBlockadeActive = true;
                 }
+                else
+                {
+                    goto SkipSyncToLua;
+                }
 
+                // Sync any C# mutations into Lua before the node script / Postfix runs
+                ZilleCampaignState.SyncToLua();
+
+                SkipSyncToLua:
                 // Sync back any Lua micro-effect deltas (Leverage, WarReadiness, Pressure, AN Legitimacy)
                 if (script.Contains("Zille_Leverage") || script.Contains("Zille_War_Readiness")
                     || script.Contains("Zille_Smolak_Pressure") || script.Contains("Zille_AN_Legitimacy"))
@@ -2584,8 +2592,13 @@ namespace GreatZilleSolution
         {
             try
             {
-                ZilleCampaignState.SyncFromLua();
-                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
+                string last = DialogueHelper.GetCurrentConversationTitle() ?? "";
+                string sc = e?.DestinationEntry?.userScript ?? "";
+                if (last.Contains("Zille") || sc.Contains("Zille_"))
+                {
+                    ZilleCampaignState.SyncFromLua();
+                    ZilleReportsAndSituations.EnsureRegisteredAndSynced();
+                }
             }
             catch { }
         }

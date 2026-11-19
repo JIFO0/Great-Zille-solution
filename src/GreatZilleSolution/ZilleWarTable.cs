@@ -207,7 +207,60 @@ namespace GreatZilleSolution
 
         public static bool HasSavedPhaseBoardState()
         {
-            return _phaseSavedState != null && _phaseSavedState.Count > 0;
+            return EnsureSavedBoardStateLoadedFromLua();
+        }
+
+        public static bool EnsureSavedBoardStateLoadedFromLua()
+        {
+            if (_phaseSavedState != null && _phaseSavedState.Count > 0) return true;
+            return ReloadSavedBoardStateFromLua();
+        }
+
+        public static bool ReloadSavedBoardStateFromLua()
+        {
+            try
+            {
+                string raw = DialogueHelper.GetStringVariable("Zille_SavedBoardState_Data");
+                if (string.IsNullOrEmpty(raw))
+                {
+                    if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Zille)
+                        _phaseSavedState.Clear();
+                    return false;
+                }
+
+                var parsed = new List<SavedTileState>();
+                string[] entries = raw.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < entries.Length; i++)
+                {
+                    string[] parts = entries[i].Split('|');
+                    if (parts.Length < 7) continue;
+                    int.TryParse(parts[2], out int fort);
+                    int.TryParse(parts[6], out int uAllegInt);
+                    parsed.Add(new SavedTileState
+                    {
+                        TileNumber = parts[0],
+                        Allegiance = parts[1],
+                        FortLevel = fort,
+                        WasDisabled = parts[3] == "1",
+                        HasToken = parts[4] == "1",
+                        UnitTypeName = parts[5],
+                        UnitAllegiance = (WarToken.WarAllegiance)uAllegInt
+                    });
+                }
+
+                if (parsed.Count > 0)
+                {
+                    _phaseSavedState.Clear();
+                    _phaseSavedState.AddRange(parsed);
+                    MelonLogger.Msg($"[ZTABLE] Loaded {_phaseSavedState.Count} saved tile states from Lua savegame.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[ZTABLE] ReloadSavedBoardStateFromLua error: {ex.Message}");
+            }
+            return false;
         }
 
         public static void SavePhaseBoardState()
@@ -216,6 +269,7 @@ namespace GreatZilleSolution
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             if (cfg?.Tiles == null) return;
 
+            var sb = new StringBuilder();
             foreach (var td in cfg.Tiles)
             {
                 if (td == null || string.IsNullOrEmpty(td.TileNumber)) continue;
@@ -243,8 +297,21 @@ namespace GreatZilleSolution
                     }
                 }
                 _phaseSavedState.Add(state);
+
+                if (sb.Length > 0) sb.Append(';');
+                string tileSafe = (state.TileNumber ?? "").Replace("|", "").Replace(";", "");
+                string allegSafe = (state.Allegiance ?? "").Replace("|", "").Replace(";", "");
+                string unitSafe = (state.UnitTypeName ?? "").Replace("|", "").Replace(";", "");
+                sb.Append(tileSafe).Append('|')
+                  .Append(allegSafe).Append('|')
+                  .Append(state.FortLevel).Append('|')
+                  .Append(state.WasDisabled ? '1' : '0').Append('|')
+                  .Append(state.HasToken ? '1' : '0').Append('|')
+                  .Append(unitSafe).Append('|')
+                  .Append((int)state.UnitAllegiance);
             }
-            MelonLogger.Msg($"[ZTABLE] Saved board state for Op {ZilleCampaignState.CurrentOperationNumber} Phase {ZilleCampaignState.CurrentPhaseNumber} transition: {_phaseSavedState.Count} tiles.");
+            DialogueHelper.SetVariable("Zille_SavedBoardState_Data", sb.ToString());
+            MelonLogger.Msg($"[ZTABLE] Saved & serialized board state for Op {ZilleCampaignState.CurrentOperationNumber} Phase {ZilleCampaignState.CurrentPhaseNumber} transition: {_phaseSavedState.Count} tiles.");
         }
 
         public static void PlaceV13DeploymentForNewlyUnlockedTiles(HashSet<string> previouslyDisabledTiles)
@@ -287,7 +354,7 @@ namespace GreatZilleSolution
 
         public static bool RestorePhaseBoardState()
         {
-            if (_phaseSavedState == null || _phaseSavedState.Count == 0) return false;
+            if (!EnsureSavedBoardStateLoadedFromLua() || _phaseSavedState == null || _phaseSavedState.Count == 0) return false;
             var cfg = ZilleMapLayoutManager.CurrentConfig;
             if (cfg?.Tiles == null) return false;
 
