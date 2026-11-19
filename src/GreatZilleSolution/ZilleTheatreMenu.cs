@@ -119,6 +119,7 @@ namespace GreatZilleSolution
             GUI.EndScrollView();
 
             GUI.Label(new Rect(10, 704, 520, 36), "<size=11><color=#d6d3c4>" + _status + "</color></size>");
+            ZilleBranding.DrawIcon(new Rect(518, 1, 18, 18));
             GUI.DragWindow(new Rect(0, 0, 540, 20));
         }
 

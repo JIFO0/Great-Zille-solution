@@ -108,6 +108,14 @@ body {
   gap: 10px;
 }
 
+.gz-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.6));
+}
+
 .crest-icon-wrap {
   width: 34px;
   height: 34px;
