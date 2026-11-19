@@ -7113,6 +7113,7 @@ namespace GreatZilleSolution
                 _garrisonsPlaced = true;
                 return;
             }
+            ZilleDeployment.RefreshFromCampaign();
             if (ZilleDeployment.Units.Count == 0)
             {
                 if (_warnedMissing.Add("no-deployment"))

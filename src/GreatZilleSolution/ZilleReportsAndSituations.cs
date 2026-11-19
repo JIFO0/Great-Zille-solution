@@ -211,6 +211,21 @@ namespace GreatZilleSolution
                 "Heavy ordnance trains from Thornbourgh are delivering 152mm shells and reserve rifles directly into Brenas staging yards.",
                 "Military", "Low", "Zille_Rumburg_Munitions");
 
+            AddOrUpdateSituation(sits, "Sit_Smolak_Alert_Minimal",
+                "Wehzek Border Posture: Complacent Garrisons",
+                "Royal intelligence assesses that President Smolak remains off-guard along the Gulf and Zille frontier. Wehlen holds forward border units at peacetime readiness without massed strike reserves.",
+                "Military", "Low", "Zille_Sit_SmolakMinimal");
+
+            AddOrUpdateSituation(sits, "Sit_Smolak_Alert_Suspicious",
+                "Wehzek Border Posture: Heightened Coastal Vigilance",
+                "Growing friction and frontier preparations have alerted Wraclawitz. General Valdez has reinforced coastal batteries, river crossings, and Gulf patrols across Zille.",
+                "Military", "Medium", "Zille_Sit_SmolakSuspicious");
+
+            AddOrUpdateSituation(sits, "Sit_Smolak_Alert_Prepared",
+                "Wehzek Border Posture: Full Combat Mobilization",
+                "Smolak anticipates a Rizian offensive. Wehlen has deployed sixty mainland and colonial land formations, deep air-defense screens, and border strike groups along both Brenas and the Derdian frontier.",
+                "Military", "High", "Zille_Sit_SmolakPrepared");
+
             // Economy
             AddOrUpdateSituation(sits, "Sit_Zille_Oil_Cutoff",
                 "Wehzek Crude Oil Cutoff",
@@ -534,6 +549,19 @@ namespace GreatZilleSolution
             DialogueHelper.SetVariable("Zille_Sit_ANOutcry", warActive && ZilleCampaignState.AnLegitimacyScore < 2);
             DialogueHelper.SetVariable("Zille_Sit_OutcomeRestored", outcome >= 4 || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"));
             DialogueHelper.SetVariable("Zille_Sit_OutcomeArmistice", outcome == 2 && !ZilleCampaignState.IsIndependentZilleAgreed);
+
+            // Smolak Suspicion Posture Situations
+            bool showSmolakPosture = !DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                && outcome == 0
+                && (ZilleCampaignState.MilitarySentimentLevel >= 1
+                    || warActive
+                    || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")
+                    || DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch")
+                    || ZilleCampaignState.GetCurrentTurn() >= 3);
+            string smolakPreset = ZilleCampaignState.GetSmolakSuspicionPreset(syncFromLua: false);
+            DialogueHelper.SetVariable("Zille_Sit_SmolakMinimal", showSmolakPosture && smolakPreset == "minimal");
+            DialogueHelper.SetVariable("Zille_Sit_SmolakSuspicious", showSmolakPosture && smolakPreset == "suspicious");
+            DialogueHelper.SetVariable("Zille_Sit_SmolakPrepared", showSmolakPosture && smolakPreset == "prepared");
 
             // Report triggers
             int currentTurn = ZilleCampaignState.GetCurrentTurn();

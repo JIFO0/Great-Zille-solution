@@ -1304,7 +1304,8 @@ namespace GreatZilleSolution
                 if (onSelectedMethod != null)
                 {
                     var prefix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnSelectedResponsePrefix));
-                    harmony.Patch(onSelectedMethod, prefix: new HarmonyMethod(prefix));
+                    var postfix = AccessTools.Method(typeof(DialogueInjectionPatches), nameof(OnSelectedResponsePostfix));
+                    harmony.Patch(onSelectedMethod, prefix: new HarmonyMethod(prefix), postfix: new HarmonyMethod(postfix));
                     MelonLogger.Msg("[Great Zille] Successfully hooked ConversationView.OnSelectedResponse!");
                 }
 
@@ -2556,6 +2557,16 @@ namespace GreatZilleSolution
             {
                 MelonLogger.Warning($"[Great Zille] Response selection error: {ex.Message}");
             }
+        }
+
+        public static void OnSelectedResponsePostfix(Il2CppSystem.Object sender, SelectedResponseEventArgs e)
+        {
+            try
+            {
+                ZilleCampaignState.SyncFromLua();
+                ZilleReportsAndSituations.EnsureRegisteredAndSynced();
+            }
+            catch { }
         }
     }
 }

@@ -44,24 +44,21 @@ namespace GreatZilleSolution
         /// <summary>Wehlen's opening army follows the campaign when no scenario file pins a preset.</summary>
         public static void RefreshFromCampaign()
         {
+            if (FindScenario(_assetsDir, _regionsDir) != null && Units.Count > 0) return;
             string next = PresetFromCampaign();
             if (next == Preset && Units.Count > 0 && PresetSource == "campaign") return;
             _campaignOverride = true;
             _campaignPreset = next;
             try { Load(_assetsDir, _regionsDir); }
             finally { _campaignOverride = false; }
-            MelonLogger.Msg("[ZilleMap] Wehlen deployment '" + Preset + "' follows the campaign.");
+            MelonLogger.Msg($"[ZilleMap] Wehlen deployment '{Preset}' loaded from SmolakPressureScore={ZilleCampaignState.SmolakPressureScore}.");
         }
 
         private static string PresetFromCampaign()
         {
             try
             {
-                if (ZilleCampaignState.IsTwoFrontWarThreat()) return "minimal";
-                int tanks = DialogueHelper.GetIntVariable("Military_Expanded_Tanks");
-                int infantry = DialogueHelper.GetIntVariable("Military_Expanded_Infantry");
-                if (ZilleCampaignState.IsLespiaPactAccepted || ZilleCampaignState.IsDerdiaHybridSupportActive || tanks + infantry >= 2)
-                    return "prepared";
+                return ZilleCampaignState.GetSmolakSuspicionPreset();
             }
             catch { }
             return "suspicious";

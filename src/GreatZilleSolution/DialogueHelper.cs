@@ -120,5 +120,25 @@ namespace GreatZilleSolution
                 return "";
             }
         }
+
+        public static bool HasVariable(string name)
+        {
+            try
+            {
+                string escaped = name.Replace("\\", "\\\\").Replace("\"", "\\\"");
+                var res = Lua.Run($"return Variable[\"{escaped}\"] ~= nil;");
+                if (res.asBool) return true;
+                if (!name.StartsWith("RiziaDLC.", StringComparison.OrdinalIgnoreCase))
+                {
+                    var res2 = Lua.Run($"return Variable[\"RiziaDLC.{escaped}\"] ~= nil;");
+                    return res2.asBool;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

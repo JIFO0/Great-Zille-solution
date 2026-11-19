@@ -202,7 +202,8 @@ namespace GreatZilleSolution
                             AddVar("RiziaDLC.Country_PublicOpinion", 1);
                             DialogueHelper.SetVariable("Zille_Dec_BrenasVigilance_Done", true);
                             DialogueHelper.SetVariable("Zille_Dec_BrenasVigilance_Quiet", true);
-                            FinalizeDecision("Brenas markets stayed calm under discreet customs patrols without alarming frontier towns.");
+                            ZilleCampaignState.AddMicroEffect(pressureDelta: -1);
+                            FinalizeDecision("Brenas markets stayed calm under discreet customs patrols, lulling Wehzek frontier scouts into lowering their guard.");
                         }
                     }
                 }

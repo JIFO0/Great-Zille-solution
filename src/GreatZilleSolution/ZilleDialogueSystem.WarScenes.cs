@@ -339,12 +339,12 @@ namespace GreatZilleSolution
             AddChoice(conv, 40, HugoId, "Conclude_Planning",
                 "\"Summon the noble houses openly: the Crown demands unity for the Logistics Summit.\"",
                 "The strategic blueprint is set. Draft the preliminary deployment directives and summon Houses Azaro and Sazon to settle our supply corridors in Brenas.", -1,
-                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3;");
+                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             AddChoice(conv, 400, HugoId, "Conclude_Planning_Discreet",
                 "\"Summon Azaro and Sazon discreetly under cover of a royal trade audit so Smolak stays blind.\"",
                 "The blueprint is set. Summon Houses Azaro and Sazon under cover of a routine Brenas trade and rail audit so Wehlen's spies suspect nothing until we are ready.", -1,
-                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
+                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; if (Variable[\"Zille_Smolak_Pressure\"] or 0) > 0 then Variable[\"Zille_Smolak_Pressure\"] = Variable[\"Zille_Smolak_Pressure\"] - 1; else Variable[\"Zille_Smolak_Pressure\"] = 0; end;");
 
             AddLine(conv, 41, HugoId, RomusId, "Hugo_Planning_Close",
                 "\"As your sovereign will decrees, Your Majesty. May Saint Wruhec guide our banners and preserve Rizia.\"", -1,
@@ -949,6 +949,7 @@ namespace GreatZilleSolution
             prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 14)); // Both Naval Blockade + AN Legal Dispatch (if Fleet>=2 & Energy>=1)
             prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 15)); // Naval Blockade only (if Fleet>=2 & Energy>=1)
             prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 17)); // AN Legal Dispatch only
+            prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 175)); // Counter-intel radio & rail deception (-1 Budget, -2 Pressure, +1 Readiness)
             prepHub.outgoingLinks.Add(CreateLink(conv.id, 10, 180)); // Proceed directly to Command Doctrine
 
             AddChoice(conv, 14, LaurentoId, "Choice_Blockade_And_AN",
@@ -974,6 +975,15 @@ namespace GreatZilleSolution
 
             AddLine(conv, 18, LaurentoId, RomusId, "Ack_AN_Legal_Dispatch",
                 "Laurento nodded with sharp approval. \"Encrypted diplomatic bags are moving to Kyrute immediately, Your Majesty. Smolak will lose the propaganda battle before dawn.\"", 19);
+
+            AddChoice(conv, 175, TitusId, "Choice_Deception_Masking",
+                "\"Execute radio and rail deception along Brenas to blind Wehlen's frontier scouts (-1 Budget, -2 Smolak Suspicion, +1 Readiness).\"",
+                "Have military intelligence transmit false rail schedules, dummy depot orders, and spoofed radio traffic toward southern Brenas so Smolak pulls his guards back right before dawn.", 176,
+                "Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) - 1; Variable[\"Zille_Deception_Op_Done\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; if (Variable[\"Zille_Smolak_Pressure\"] or 0) >= 2 then Variable[\"Zille_Smolak_Pressure\"] = Variable[\"Zille_Smolak_Pressure\"] - 2; else Variable[\"Zille_Smolak_Pressure\"] = 0; end;",
+                "(Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1 and Variable[\"Zille_Deception_Op_Done\"] ~= true");
+
+            AddLine(conv, 176, TitusId, RomusId, "Ack_Deception_Masking",
+                "\"Dummy wireless traffic is already rolling south toward Sallabes,\" came the brisk report from Signals. \"Wehzek interceptors are chasing phantoms while our real spearheads stage in silence.\"", 10);
 
             AddChoice(conv, 180, LucitaId, "Choice_Skip_PreMeasures",
                 "\"Keep radio silence—move straight to choosing our operational command doctrine.\"",

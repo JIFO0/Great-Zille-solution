@@ -304,9 +304,26 @@ namespace GreatZilleSolution
             SyncFromLua();
             LeverageScore += leverageDelta;
             WarReadinessScore += readinessDelta;
-            SmolakPressureScore += pressureDelta;
+            SmolakPressureScore = Math.Max(0, SmolakPressureScore + pressureDelta);
             AnLegitimacyScore += legitimacyDelta;
             SyncToLua();
+        }
+
+        /// <summary>
+        /// Maps SmolakPressureScore (and Pales two-front distraction) into one of the three
+        /// Wehlen v14 deployment presets: "minimal", "suspicious", or "prepared".
+        /// </summary>
+        public static string GetSmolakSuspicionPreset(bool syncFromLua = true)
+        {
+            if (syncFromLua) SyncFromLua();
+            int pressure = Math.Max(0, SmolakPressureScore);
+            if (IsTwoFrontWarThreat() && pressure <= 3)
+            {
+                return "minimal";
+            }
+            if (pressure <= 2) return "minimal";
+            if (pressure <= 5) return "suspicious";
+            return "prepared";
         }
 
         /// <summary>
@@ -550,10 +567,10 @@ namespace GreatZilleSolution
                 int rdy = DialogueHelper.GetIntVariable("Zille_War_Readiness");
                 int prs = DialogueHelper.GetIntVariable("Zille_Smolak_Pressure");
                 int leg = DialogueHelper.GetIntVariable("Zille_AN_Legitimacy");
-                if (lev != 0) LeverageScore = lev;
-                if (rdy != 0) WarReadinessScore = rdy;
-                if (prs != 0) SmolakPressureScore = prs;
-                if (leg != 0) AnLegitimacyScore = leg;
+                if (DialogueHelper.HasVariable("Zille_Leverage") || lev != 0) LeverageScore = lev;
+                if (DialogueHelper.HasVariable("Zille_War_Readiness") || rdy != 0) WarReadinessScore = rdy;
+                if (DialogueHelper.HasVariable("Zille_Smolak_Pressure") || prs != 0) SmolakPressureScore = Math.Max(0, prs);
+                if (DialogueHelper.HasVariable("Zille_AN_Legitimacy") || leg != 0) AnLegitimacyScore = leg;
             }
             catch (Exception ex)
             {
