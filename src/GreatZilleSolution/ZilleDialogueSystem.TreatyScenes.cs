@@ -110,7 +110,7 @@ namespace GreatZilleSolution
 
             AddLine(conv, 1102, NarratorId, RomusId, "Victory_NoCards_Bridge",
                 "With the military map settled between you, Smolak clenched his jaw and waited for your terms.", 102,
-                "not (((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Budget\"] or 0) >= 1) or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true))");
+                "Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] ~= true and Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] ~= true and Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] ~= true and ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 or (Variable[\"RiziaDLC.Resources_Budget\"] or 0) < 1) and Variable[\"Zille_NavalBlockadeActive\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true");
 
             var vicDuelHub = AddLine(conv, 101, NarratorId, RomusId, "Victory_Leverage_Duel_Hub",
                 "Smolak was testing your nerve—trying to evacuate his beaten army without paying a cent for the ruin in Zille. You could press a concrete advantage from your dossier first, or move straight to dictating final terms.", -1,
@@ -200,7 +200,7 @@ namespace GreatZilleSolution
             AddLink(conv, 200, 201);
             AddLink(conv, 200, 1202);
 
-            string noStaleCards = "not ((((Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true) or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true) or (Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) or ((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true)))";
+            string noStaleCards = "Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] ~= true and Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] ~= true and Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] ~= true and (Variable[\"Zille_AN_Legitimacy\"] or 0) < 3 and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 and Variable[\"Zille_NavalBlockadeActive\"] ~= true and Variable[\"Zille_DerdiaHybridActive\"] ~= true";
 
             AddLine(conv, 1202, NarratorId, RomusId, "Stalemate_NoCards_Bridge",
                 "With neither side holding an overwhelming trump card at the table, Smolak tapped his ash onto the dirt and waited.", -1, noStaleCards);
@@ -431,11 +431,11 @@ namespace GreatZilleSolution
 
             AddLine(conv, 201, LaurentoId, RomusId, "Treaty_AN_PalesShadow",
                 "\"While our Zille casualty ledger stands distinct, fighting concurrently against Pales has stretched foreign sympathy thin—we must ratify cleanly and stabilize the realm.\"", -1,
-                "not ((Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) and (((Variable[\"Zille_Pales_TotalPlayerDead\"] or 0) > 0 or Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true))");
+                "(Variable[\"Zille_AN_Legitimacy\"] or 0) < 3 and ((Variable[\"Zille_Pales_TotalPlayerDead\"] or 0) > 0 or Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)");
 
             AddLine(conv, 202, LaurentoId, RomusId, "Treaty_AN_Standard",
                 "\"Both superpowers are closely observing the exact clauses inscribed on this parchment today, Your Majesty.\"", -1,
-                "not ((Variable[\"Zille_AN_Legitimacy\"] or 0) >= 3) and (((Variable[\"Zille_Pales_TotalPlayerDead\"] or 0) <= 0 and Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true))");
+                "(Variable[\"Zille_AN_Legitimacy\"] or 0) < 3 and ((Variable[\"Zille_Pales_TotalPlayerDead\"] or 0) <= 0 and Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
 
             foreach (int h in new[] { 2, 102 })
             {

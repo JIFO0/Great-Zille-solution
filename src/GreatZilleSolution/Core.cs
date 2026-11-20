@@ -118,7 +118,7 @@ namespace GreatZilleSolution
                 WarOperationZilleManager.RegisterNativeZilleEntities();
 
                 ZilleDialogueSystem.EnsureAllConversationsRegistered();
-                ZilleCampaignState.SyncFromLua();
+                ZilleCampaignState.SyncFromLua(resetMissing: true);
                 ZilleWarTable.ReloadSavedBoardStateFromLua();
                 DialogueInjectionPatches.InjectWarOptionsIntoVanillaConversations();
                 DialogueOverrideManager.ApplyAllOverrides();
@@ -155,7 +155,16 @@ namespace GreatZilleSolution
                     _nextFlagCheck = Time.unscaledTime + 1.0f;
                     string flag1 = System.IO.Path.Combine(Application.dataPath, "..", "run_test.flag");
                     string flag2 = @"c:\Projects\Great Zille solution\run_test.flag";
-                    if (System.IO.File.Exists(flag1) || System.IO.File.Exists(flag2))
+                    string eflag1 = System.IO.Path.Combine(Application.dataPath, "..", "run_events_test.flag");
+                    string eflag2 = @"c:\Projects\Great Zille solution\run_events_test.flag";
+                    if (System.IO.File.Exists(eflag1) || System.IO.File.Exists(eflag2))
+                    {
+                        try { if (System.IO.File.Exists(eflag1)) System.IO.File.Delete(eflag1); } catch { }
+                        try { if (System.IO.File.Exists(eflag2)) System.IO.File.Delete(eflag2); } catch { }
+                        Log.Msg("[AUTOTEST] run_events_test.flag detected! Starting autonomous Events, Portraits & Saves playtest suite...");
+                        MelonCoroutines.Start(ZillePlaytest.RunAutonomousEventsAndSavesSuiteCoroutine());
+                    }
+                    else if (System.IO.File.Exists(flag1) || System.IO.File.Exists(flag2))
                     {
                         try { if (System.IO.File.Exists(flag1)) System.IO.File.Delete(flag1); } catch { }
                         try { if (System.IO.File.Exists(flag2)) System.IO.File.Delete(flag2); } catch { }

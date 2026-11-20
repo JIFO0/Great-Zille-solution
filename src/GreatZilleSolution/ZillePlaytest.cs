@@ -10,7 +10,7 @@ using Il2CppPixelCrushers.DialogueSystem;
 
 namespace GreatZilleSolution
 {
-    public static class ZillePlaytest
+    public static partial class ZillePlaytest
     {
         private static readonly string ScreenshotDir = @"C:\Users\iwo\.gemini\antigravity\brain\48356619-f2a2-453f-8a43-85ce37e0404b\scratch";
 

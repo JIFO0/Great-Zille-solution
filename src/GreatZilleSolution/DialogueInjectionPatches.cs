@@ -1558,9 +1558,19 @@ namespace GreatZilleSolution
                 var removeAllEff = AccessTools.Method(typeof(WarTokenStatusEffectsPanel), nameof(WarTokenStatusEffectsPanel.RemoveAllInstances));
                 if (removeAllEff != null)
                     harmony.Patch(removeAllEff, postfix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(BattleSettledStatusEffectsPostfix))));
-                var mapLoad = AccessTools.Method(typeof(MapManager), nameof(MapManager.LoadMap));
-                if (mapLoad != null)
-                    harmony.Patch(mapLoad, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MapManagerLoadMapPrefix))));
+                try
+                {
+                    var mapLoadType = AccessTools.Method(typeof(MapManager), nameof(MapManager.LoadMap), new Type[] { typeof(MapConfiguration.MapType) });
+                    if (mapLoadType != null)
+                        harmony.Patch(mapLoadType, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MapManagerLoadMapPrefix))));
+                    var mapLoadCfg = AccessTools.Method(typeof(MapManager), nameof(MapManager.LoadMap), new Type[] { typeof(MapConfiguration) });
+                    if (mapLoadCfg != null)
+                        harmony.Patch(mapLoadCfg, prefix: new HarmonyMethod(AccessTools.Method(typeof(DialogueInjectionPatches), nameof(MapManagerLoadMapPrefix))));
+                }
+                catch (Exception mapEx)
+                {
+                    MelonLogger.Warning($"[Great Zille] MapManager.LoadMap patch warning: {mapEx.Message}");
+                }
                 var warTokenKill = AccessTools.Method(typeof(WarToken), nameof(WarToken.Kill));
                 if (warTokenKill != null)
                 {
@@ -2558,6 +2568,13 @@ namespace GreatZilleSolution
                     ZilleCampaignState.Outcome = ZilleWarOutcome.TotalFiasco;
                     ZilleCampaignState.IsBrenasLost = true;
                     ZilleCampaignState.IsIndependentZilleAgreed = false;
+                    if (title == "Refuse_Parley_Collapse")
+                    {
+                        DialogueHelper.SetVariable("Zille_Parley_Refused", true);
+                        DialogueHelper.SetVariable("Zille_Azaro_Coup_Collapse", true);
+                        DialogueHelper.SetVariable("RiziaDLC.Epilogue_Exile_Forced", true);
+                        DialogueHelper.SetVariable("RiziaDLC.Epilogue_Exile_CoupWarning", true);
+                    }
                 }
                 // 5. Vanilla conversation war posture injections
                 else if (title.Contains("Zille_Turn3_Bombing_WarOption") || title.Contains("Zille_Turn8_War_Ultimatum"))

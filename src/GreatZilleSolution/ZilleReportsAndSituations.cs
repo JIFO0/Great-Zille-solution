@@ -19,12 +19,9 @@ namespace GreatZilleSolution
         {
             try
             {
-                if (!_registered)
-                {
-                    RegisterAllSituations();
-                    RegisterAllReports();
-                    _registered = true;
-                }
+                RegisterAllSituations();
+                RegisterAllReports();
+                _registered = true;
                 SyncVariables();
             }
             catch (Exception ex)
@@ -142,7 +139,7 @@ namespace GreatZilleSolution
 
         private static void RegisterAllSituations()
         {
-            var sits = EntityDataManager.SituationsData;
+            var sits = EntityDataManager.situationsData ?? EntityDataManager.SituationsData;
             if (sits == null) return;
 
             // Military
@@ -308,7 +305,7 @@ namespace GreatZilleSolution
 
         private static void RegisterAllReports()
         {
-            var reps = EntityDataManager.ReportsData;
+            var reps = EntityDataManager.reportsData ?? EntityDataManager.ReportsData;
             if (reps == null) return;
 
             AddOrUpdateReport(reps, "Rep_Zille_WarPlanning_Complete",

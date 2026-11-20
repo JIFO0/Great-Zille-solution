@@ -2113,6 +2113,19 @@ namespace GreatZilleSolution
             SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", true);
             SetStoryFragmentMandatoryState("Turn_Zille_WarPeaceTreaty", true);
             ZilleCampaignState.SyncToLua();
+            if (DialogueHelper.GetBoolVariable("Zille_Parley_Refused") || DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse"))
+            {
+                MelonLogger.Msg("[WAR ENGINE] Collapse/Refused state active -> routing directly to Turn_Zille_ExileEpilogue...");
+                SetStoryFragmentMandatoryState("Turn_Zille_WarPreNegotiationsBriefing", false);
+                SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", false);
+                SetStoryFragmentMandatoryState("Turn_Zille_WarPeaceTreaty", false);
+                SetStoryFragmentMandatoryState("Turn_Zille_ExileEpilogue", true);
+                TriggerConversation("Turn_Zille_ExileEpilogue", "Zille/ExileEpilogue", () => {
+                    DialogueHelper.SetVariable("Zille_ExileEpilogue_Done", true);
+                    ClearAllMandatoryZilleFragments();
+                });
+                return;
+            }
             TriggerConversation("Turn_Zille_WarPreNegotiationsBriefing", "Zille/WarPreNegotiationsBriefing", () => {
                 SetStoryFragmentMandatoryState("Turn_Zille_WarPreNegotiationsBriefing", false);
                 MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
@@ -2154,19 +2167,29 @@ namespace GreatZilleSolution
                 case "Hugo":
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Arrested")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Executed")
-                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Resigned");
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Resigned")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Exiled")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Dead");
                 case "Lucita":
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Arrested")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Dead")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.BirthdayGathering_LucitaExiled");
                 case "Titus":
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Arrested")
-                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Executed");
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Dead")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Betrayal");
                 case "Taddeus":
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Arrested")
-                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Executed");
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Dead");
                 case "Carlos":
-                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Carlos_Arrested");
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Carlos_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Carlos_Dead");
+                case "Laurento":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Laurento_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Laurento_Dead");
                 case "Angelica":
                     return DialogueHelper.GetBoolVariable("RiziaDLC.Relations_HouseSazon_AngelicaPardoned")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Angelica_Arrested")
@@ -2175,10 +2198,12 @@ namespace GreatZilleSolution
                     if (sceneKey == "Turn_Zille_ExileEpilogue")
                     {
                         return !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Executed")
-                            && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_DiesInWar");
+                            && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_DiesInWar")
+                            && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Dead");
                     }
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Arrested")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Dead")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Gone")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_EarlyExile")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_DiesInWar")
@@ -2188,7 +2213,8 @@ namespace GreatZilleSolution
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Leona_Executed");
                 case "Sal":
                     return !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Arrested")
-                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Executed");
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Dead");
                 case "Estela":
                     return !DialogueHelper.GetBoolVariable("QueenMother_Estela_Dead")
                         && !DialogueHelper.GetBoolVariable("RiziaDLC.Estela_Dead")

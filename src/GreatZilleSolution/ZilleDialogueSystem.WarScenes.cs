@@ -276,7 +276,7 @@ namespace GreatZilleSolution
 
             AddLine(conv, 36, ElenaId, RomusId, "Answer_Elena_EnergyOK",
                 "\"Losing Wehlen crude will tighten our grid noticeably, yet with our current energy buffer we can fuel initial mechanized columns if we pair Brenas granaries with coastal convoys instead of burning diesel on long rail hauls.\"", 310,
-                "not ((Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2)",
+                "(Variable[\"RiziaDLC.Resources_Energy\"] or 0) > 2",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 136, ElenaId, RomusId, "Answer_Elena_EnergyLow",
@@ -799,7 +799,7 @@ namespace GreatZilleSolution
 
             AddLine(conv, 105, LaurentoId, RomusId, "Laurento_Briefing_Open_NoHugo",
                 "Your Majesty. All ministerial seals are prepared. Within hours, Rizia's armed forces will move to enforce the expiration of the 1927 treaty.", -1,
-                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and not ((Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] == true and Variable[\"RiziaDLC.Angelica_Arrested\"] ~= true and Variable[\"RiziaDLC.Angelica_Executed\"] ~= true) and not ((Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] ~= true and Variable[\"RiziaDLC.Council_GrandVizier_Sal\"] == true and Variable[\"RiziaDLC.Sal_Arrested\"] ~= true and Variable[\"RiziaDLC.Sal_Executed\"] ~= true)");
+                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true) and (Variable[\"RiziaDLC.Council_GrandVizier_Angelica\"] ~= true or Variable[\"RiziaDLC.Angelica_Arrested\"] == true or Variable[\"RiziaDLC.Angelica_Executed\"] == true) and (Variable[\"RiziaDLC.Council_GrandVizier_Sal\"] ~= true or Variable[\"RiziaDLC.Sal_Arrested\"] == true or Variable[\"RiziaDLC.Sal_Executed\"] == true)");
 
             foreach (int hId in new[] { 2, 102, 103, 104, 105 })
             {
@@ -1378,7 +1378,7 @@ namespace GreatZilleSolution
             // Beat 4: Logistics, Foreign Support & Regrouping Tactic (flowing smoothly from casualties!)
             AddLine(conv, 250, NarratorId, RomusId, "Logistics_WellStocked",
                 "A rail quartermaster unrolled the Brenas depot manifest beside the map. \"Over a thousand reserve rifles, spare gun barrels, and full diesel drums stand parked on Mave Nortus sidings, Your Majesty—mechanized spearheads can regroup cleanly for Phase II.\"", -1,
-                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and not ((Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 2)",
+                "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 and (Variable[\"RiziaDLC.Resources_Energy\"] or 0) > 2",
                 "Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 251, NarratorId, RomusId, "Logistics_Strained",
@@ -1737,9 +1737,11 @@ namespace GreatZilleSolution
             // Case A: Sword Victory (Zille City + (Wiktrany or Munat or Nanta) & Brenas safe)
             string condBrenasSafe = "(Variable[\"Zille_War_Outcome\"] or 0) ~= 1 and Variable[\"Brenas_Lost_To_Wehlen\"] ~= true";
             string condSwordVictory = condBrenasSafe + " and Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)";
-            string condArkExchange = condBrenasSafe + " and not (Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)) and Variable[\"Zille_Cap_Grodzizg\"] == true and (Variable[\"Zille_Cap_Kratsna\"] == true or Variable[\"Zille_Cap_Isor\"] == true or (Variable[\"War_Zille_TotalEnemyDead\"] or 0) >= 6)";
+            string condNotSwordVictory = "(Variable[\"Zille_Cap_ZilleCity\"] ~= true or (Variable[\"Zille_Cap_Wiktrany\"] ~= true and Variable[\"Zille_Cap_Munat\"] ~= true and Variable[\"Zille_Cap_Nanta\"] ~= true))";
+            string condNotArkExchange = "(Variable[\"Zille_Cap_Grodzizg\"] ~= true or (Variable[\"Zille_Cap_Kratsna\"] ~= true and Variable[\"Zille_Cap_Isor\"] ~= true and (Variable[\"War_Zille_TotalEnemyDead\"] or 0) < 6))";
+            string condArkExchange = condBrenasSafe + " and " + condNotSwordVictory + " and Variable[\"Zille_Cap_Grodzizg\"] == true and (Variable[\"Zille_Cap_Kratsna\"] == true or Variable[\"Zille_Cap_Isor\"] == true or (Variable[\"War_Zille_TotalEnemyDead\"] or 0) >= 6)";
             string condCollapse = "(Variable[\"Zille_War_Outcome\"] or 0) == 1 or Variable[\"Brenas_Lost_To_Wehlen\"] == true";
-            string condUnresolved = condBrenasSafe + " and not (Variable[\"Zille_Cap_ZilleCity\"] == true and (Variable[\"Zille_Cap_Wiktrany\"] == true or Variable[\"Zille_Cap_Munat\"] == true or Variable[\"Zille_Cap_Nanta\"] == true)) and not (Variable[\"Zille_Cap_Grodzizg\"] == true and (Variable[\"Zille_Cap_Kratsna\"] == true or Variable[\"Zille_Cap_Isor\"] == true or (Variable[\"War_Zille_TotalEnemyDead\"] or 0) >= 6))";
+            string condUnresolved = condBrenasSafe + " and " + condNotSwordVictory + " and " + condNotArkExchange;
 
             // --- CASE A: SWORD VICTORY (Conditional Negotiations Available!) ---
             AddLine(conv, 30, LaurentoId, RomusId, "CaseA_SwordVictory_Laurento",

@@ -605,10 +605,84 @@ namespace GreatZilleSolution
             }
         }
 
-        public static void SyncFromLua()
+        public static void ResetToDefaults()
+        {
+            MilitarySentimentLevel = 0;
+            CurrentPhase = ZilleOperationPhase.NotStarted;
+            ChosenPath = ZilleOperationPath.None;
+            PlanType = ZillePlanType.None;
+            StaffPlan = ZilleStaffPlan.None;
+            RomulusPlan = ZilleRomulusPlan.None;
+            CurrentVariant = ZilleOperationVariant.PlanSword;
+            Outcome = ZilleWarOutcome.None;
+            IsIndependentZilleAgreed = false;
+            CurrentOperationNumber = 1;
+            CurrentPhaseNumber = 1;
+            Phase1Finished = false;
+            MaveNortusHQAvailable = false;
+            MaveNortusHQCompleted = false;
+            Phase2EventUnlocked = false;
+            Operation1Finished = false;
+            Op1CouncilAvailable = false;
+            Op1CouncilCompleted = false;
+            TotalRepaymentUnlocked = false;
+            StaffVictoryPoints = 0;
+
+            CapZilleCity = false;
+            CapWiktrany = false;
+            CapMunat = false;
+            CapNanta = false;
+            CapRotsla = false;
+            CapGrodzizg = false;
+            CapKratsna = false;
+            CapIsor = false;
+            CapTotalCount = 0;
+
+            LogisticsRoute = "None";
+            IsRumburgMunitionsActive = false;
+            IsLespiaIntelActive = false;
+            Phase1CitiesCaptured = 0;
+            Phase2CitiesCaptured = 0;
+            ZilleCityCaptured = false;
+            IsNavalBlockadeActive = false;
+            IsLespiaPactAccepted = false;
+            IsDerdiaHybridSupportActive = false;
+            HasDerdiaSabotageEvidence = false;
+            IsDerdiaIncidentShared = false;
+            IsDerdiaPactSigned = false;
+            IsDerdiaPipelineInvested = false;
+            IsDerdiaMissilesAgreed = false;
+            IsDerdiaStateVisitDone = false;
+            IsMotherCaptured = false;
+            IsBrenasLost = false;
+
+            GoldBudgetDrainPerTurn = 0;
+            EnergyDeficitPerTurn = 0;
+            UnitsCommittedToPales = 0;
+            UnitsCommittedToZille = 0;
+
+            ZillePlayerUnitsLostPhase1 = 0;
+            ZillePlayerUnitsLostPhase2 = 0;
+            ZilleEnemyUnitsLostPhase1 = 0;
+            ZilleEnemyUnitsLostPhase2 = 0;
+            Op2PlayerUnitsLostPhase1 = 0;
+            Op2PlayerUnitsLostPhase2 = 0;
+            Op2EnemyUnitsLostPhase1 = 0;
+            Op2EnemyUnitsLostPhase2 = 0;
+            ZilleManpowerCasualties = 0;
+
+            LeverageScore = 0;
+            WarReadinessScore = 0;
+            SmolakPressureScore = 0;
+            AnLegitimacyScore = 0;
+        }
+
+        public static void SyncFromLua(bool resetMissing = false)
         {
             try
             {
+                if (resetMissing) ResetToDefaults();
+
                 if (DialogueHelper.HasVariable("Zille_MilitarySentiment"))
                     MilitarySentimentLevel = DialogueHelper.GetIntVariable("Zille_MilitarySentiment");
 

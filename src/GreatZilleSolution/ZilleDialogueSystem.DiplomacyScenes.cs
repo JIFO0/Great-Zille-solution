@@ -558,7 +558,7 @@ namespace GreatZilleSolution
 
             AddLine(conv, 103, LaurentoId, RomusId, "Laurento_PreNeg_LowLeverage",
                 "The Alliance of Nations presses for settlement, Your Majesty. Because our diplomatic leverage remains limited, what you salvage or dictate across that table will depend almost entirely on what our soldiers presently hold on the ground.", -1,
-                "not ((Variable[\"Zille_Leverage\"] or 0) >= 4)");
+                "(Variable[\"Zille_Leverage\"] or 0) < 4");
 
             foreach (int p in new[] { 2, 102 })
             {
