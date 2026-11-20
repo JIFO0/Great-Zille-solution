@@ -50,7 +50,7 @@ namespace GreatZilleSolution
             AddLink(conv, 1, 103);
 
             var hub = AddLine(conv, 10, NarratorId, RomusId, "DerdiaInv_Hub",
-                "Before ordering an intelligence sweep along the mountain frontier, I weighed what we already knew and which arm of the Crown should lead the inquiry.");
+                "Before ordering an intelligence sweep along the mountain frontier, you weighed what the court already knew and which arm of the Crown should lead the inquiry.");
 
             hub.outgoingLinks.Add(CreateLink(conv.id, 10, 11));
             hub.outgoingLinks.Add(CreateLink(conv.id, 10, 12));
@@ -103,7 +103,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 31, NarratorId, RomusId, "DerdiaInv_Result_GG",
-                "Two days later, Titus laid a sealed folder on my desk: Wehzek military-grade detonators, factory lot numbers from Wraclawitz, and eyewitness sketches of uniformed sappers slipping back across the northern ridge. \"Hard proof, Your Majesty. Azmal cannot ignore this when you speak with him.\"", -1);
+                "Two days later, Titus laid a sealed folder on your desk: Wehzek military-grade detonators, factory lot numbers from Wraclawitz, and eyewitness sketches of uniformed sappers slipping back across the northern ridge. \"Hard proof, Your Majesty. Azmal cannot ignore this when you speak with him.\"", -1);
 
             AddLine(conv, 32, NarratorId, RomusId, "DerdiaInv_Result_Mil",
                 "Lucita's scouts delivered decrypted Wehzek field traffic alongside photographs of demolition teams withdrawing into Grodzizg barracks. \"Undeniable evidence, Your Majesty. Smolak is running a covert intimidation campaign against Derdia.\"", -1);
@@ -142,21 +142,21 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "DerdiaVisit_Arrival",
-                "Crisp mountain air greeted my motorcade as we climbed the winding approach to the Silver Garrison outside Naeal. Instead of cold suspicion, rows of Golcondist Disciples lined the stone courtyard with lowered halberds in royal salute, banners bearing the golden crescent fluttering beside the Toras standard.", -1);
+                "Crisp mountain air greeted your motorcade as you climbed the winding approach to the Silver Garrison outside Naeal. Instead of cold suspicion, rows of Golcondist Disciples lined the stone courtyard with lowered halberds in royal salute, banners bearing the golden crescent fluttering beside the Toras standard.", -1);
 
             AddLine(conv, 2, AzmalId, RomusId, "DerdiaVisit_WarmGreeting",
                 "Supreme Wiseman Jorga Azmal descended the carved steps with both hands extended—his gravelly baritone ringing with rare, genuine warmth. \"Halaita, King Romus! A monarch who brings truth to his neighbor's gate enters not as a stranger, but as a brother-in-arms. Your dossier exposed the snakes creeping across our northern passes!\"", 3,
                 "Variable[\"Zille_War_Active\"] ~= true");
 
             AddLine(conv, 102, AzmalId, RomusId, "DerdiaVisit_WarmGreeting_War",
-                "Supreme Wiseman Jorga Azmal strode down the stone steps to clasp my forearm warmly. \"Halaita, King Romus! While your soldiers bleed against Smolak's brigades in the west, you still found honor enough to warn Derdia of his northern saboteurs. The Silver Garrison welcomes a true warrior-king!\"", 3,
+                "Supreme Wiseman Jorga Azmal strode down the stone steps to clasp your forearm warmly. \"Halaita, King Romus! While your soldiers bleed against Smolak's brigades in the west, you still found honor enough to warn Derdia of his northern saboteurs. The Silver Garrison welcomes a true warrior-king!\"", 3,
                 "Variable[\"Zille_War_Active\"] == true");
 
             AddLink(conv, 1, 2);
             AddLink(conv, 1, 102);
 
             var greetHub = AddLine(conv, 3, NarratorId, RomusId, "DerdiaVisit_Greet_Hub",
-                "Carved silver goblets of chilled rosewater were brought forth as Azmal invited me into the sunlit council hall.");
+                "Carved silver goblets of chilled rosewater were brought forth as Azmal invited you into the sunlit council hall.");
 
             greetHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
             greetHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
@@ -204,7 +204,7 @@ namespace GreatZilleSolution
                 "Titus and the Derdian champion traded crisp, laughing blows until both staves clattered down in mutual respect—drawing thunderous applause from the Disciples.", 30);
 
             AddLine(conv, 25, NarratorId, RomusId, "DerdiaVisit_Duel_Romus_Result",
-                "My shoulders ached from the brisk exchange, yet when Azmal clapped my back with a booming laugh, every Wiseman in the hall rose in genuine admiration.", 30);
+                "Your shoulders ached from the brisk exchange, yet when Azmal clapped your back with a booming laugh, every Wiseman in the hall rose in genuine admiration.", 30);
 
             // Multi-topic Negotiation Hub for the Alliance & Economic Package
             var negHub = AddLine(conv, 30, AzmalId, RomusId, "DerdiaVisit_Negotiation_Hub",
@@ -248,7 +248,7 @@ namespace GreatZilleSolution
 
             // Final Pact & Economic Investment Selection
             var signHub = AddLine(conv, 50, NarratorId, RomusId, "DerdiaVisit_Sign_Hub",
-                "The gilded treaty parchment lay open between us. All that remained was to decide the scope of Rizia's economic and military investment in the new alliance.");
+                "The gilded treaty parchment lay open between you and Supreme Wiseman Azmal. All that remained was to decide the scope of Rizia's economic and military investment in the new alliance.");
 
             signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 51)); // Full Grand Alliance + Pipeline Investment (-2 Budget -> +3 Energy, Pipeline, Corridor, Missiles)
             signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 52)); // Discounted Grand Alliance (if Budget >= 1 and good Derdia relations/ban lifted)

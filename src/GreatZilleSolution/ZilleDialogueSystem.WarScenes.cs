@@ -74,8 +74,8 @@ namespace GreatZilleSolution
             AddLink(conv, 405, 102);
             AddLink(conv, 405, 103);
 
-            var stanceHub = AddLine(conv, 3, RomusId, HugoId, "Romus_Planning_Posture_Prompt",
-                "I looked across the gathered faces of my council, measuring both their counsel and the actual state of the kingdom's arsenals.");
+            var stanceHub = AddLine(conv, 3, NarratorId, RomusId, "Romus_Planning_Posture_Prompt",
+                "You looked across the gathered faces of your council, measuring both their counsel and the actual state of the kingdom's arsenals.");
 
             stanceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Decisive force
             stanceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11)); // Pragmatic caution
@@ -786,7 +786,7 @@ namespace GreatZilleSolution
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] ~= true");
 
             AddLine(conv, 102, HugoId, RomusId, "Hugo_Briefing_Open_Hostile",
-                "Your Majesty. Despite the bitter rift between us, I cannot ignore the duty of my office: before dawn, Rizia goes to war for Zille. May God shield the realm from the consequences.", -1,
+                "Your Majesty. Despite the bitter rift between us, I cannot ignore the duty of my office: before dawn, Rizia goes to war for Zille. May Nur shield the realm from the consequences.", -1,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and Variable[\"RiziaDLC.Country_HouseToras_Enemy\"] == true");
 
             AddLine(conv, 103, AngelicaId, RomusId, "Angelica_Vizier_Briefing_Open",
@@ -1629,7 +1629,7 @@ namespace GreatZilleSolution
             closingHub.outgoingLinks.Add(CreateLink(conv.id, 40, 43)); // Cite bombing atrocities publicly (if dossier exists!)
 
             AddChoice(conv, 41, HugoId, "Closing_Civilian_Charter",
-                "\"I pledge before God: Rizian, Bludish, and peaceful Wehzek residents in Zille shall know law, not vengeance!\"",
+                "\"I pledge before Nur: Rizian, Bludish, and peaceful Wehzek residents in Zille shall know law, not vengeance!\"",
                 "Hear this royal vow: every Rizian, Bludish, and law-abiding Wehzek resident inside Zille will be shielded by our courts. We bring lawful peace, never blind reprisal! Glovurius axa Rizia!", 51,
                 "Variable[\"Zille_BalconySpeech_Done\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
@@ -1827,7 +1827,7 @@ namespace GreatZilleSolution
                 "\"I pray our diplomacy can salvage what the front could not, Your Majesty.\"", -1);
 
             AddLine(conv, 521, NarratorId, RomusId, "Ack_CaseC_Repay",
-                "Sirens echoed across Palas Rezna's War Room as full-theater mobilization orders wired out to every surviving division under Operation: Total Repayment.", -1);
+                "Telegraph keys clattered across Palas Rezna's War Room as full-theater mobilization orders wired out to every surviving division under Operation: Total Repayment.", -1);
 
             // --- CASE D: UNRESOLVED / STALEMATE (Negotiations UNAVAILABLE after Op 1 -> Mandatory Op 2: Total Repayment) ---
             AddLine(conv, 60, LaurentoId, RomusId, "CaseD_Unresolved_Laurento",

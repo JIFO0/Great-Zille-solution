@@ -663,14 +663,22 @@ namespace GreatZilleSolution
                 if (!invoked) yield break;
 
                 yield return null;
-                yield return null;
-                yield return new WaitForSeconds(0.30f);
+                float openWait = 0f;
+                while (!DialogueManager.isConversationActive && openWait < 2.2f)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    openWait += 0.05f;
+                }
+                yield return new WaitForSeconds(0.20f);
 
                 var convPanel = Panels.Instance?.ConversationPanel ?? UnityEngine.Object.FindObjectOfType<ConversationPanel>();
                 if (convPanel == null || !DialogueManager.isConversationActive)
                 {
                     rep.LogFail($"Portrait Panel Active [{label}]", $"isConvActive={DialogueManager.isConversationActive}, panelNull={convPanel == null}");
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     try { DialogueManager.StopConversation(); } catch { }
+                    try { convPanel?.Hide(); } catch { }
+                    yield return new WaitForSeconds(0.15f);
                     yield break;
                 }
 
@@ -724,9 +732,10 @@ namespace GreatZilleSolution
                     yield return SaveUiShotCoroutine("pt_events_exile_epilogue.png");
                 }
 
+                WarOperationZilleManager.CancelPendingConversationLaunches();
                 try { DialogueManager.StopConversation(); } catch { }
                 try { convPanel.Hide(); } catch { }
-                yield return null;
+                yield return new WaitForSeconds(0.15f);
 
                 if (ok)
                     rep.LogPass($"Live Portraits [{label}]", $"count={activeNames.Count} [{joined}]");
@@ -876,6 +885,12 @@ namespace GreatZilleSolution
 
             if (signEntry != null)
             {
+                float treatyWait = 0f;
+                while (!DialogueManager.isConversationActive && treatyWait < 2.2f)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    treatyWait += 0.05f;
+                }
                 yield return new WaitForSeconds(0.15f);
                 try
                 {
@@ -892,6 +907,7 @@ namespace GreatZilleSolution
                     bool signed = DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed");
                     bool repDone = DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
                     bool negDone = DialogueHelper.GetBoolVariable("Zille_Negotiations_Done");
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     DialogueManager.StopConversation();
                     try { Panels.Instance?.ConversationPanel?.Hide(); } catch { }
 
@@ -903,6 +919,7 @@ namespace GreatZilleSolution
                 catch (Exception ex)
                 {
                     rep.LogFail("Peace Treaty Live Signing Check", ex.ToString());
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     try { DialogueManager.StopConversation(); } catch { }
                 }
             }
@@ -947,6 +964,12 @@ namespace GreatZilleSolution
 
             if (refuseEntry != null)
             {
+                float parleyOpenWait = 0f;
+                while (!DialogueManager.isConversationActive && parleyOpenWait < 2.2f)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    parleyOpenWait += 0.05f;
+                }
                 yield return new WaitForSeconds(0.15f);
                 try
                 {
@@ -961,6 +984,7 @@ namespace GreatZilleSolution
                 bool parleyRef = false, azaroCollapse = false, endCoup = false, forcedExile = false, outcomeFiasco = false;
                 try
                 {
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     DialogueManager.StopConversation();
                     try { Panels.Instance?.ConversationPanel?.Hide(); } catch { }
                     parleyRef = DialogueHelper.GetBoolVariable("Zille_Parley_Refused");
@@ -974,11 +998,18 @@ namespace GreatZilleSolution
                 {
                     rep.LogFail("Refuse Parley Collapse Routing", ex.ToString());
                 }
-                yield return new WaitForSeconds(0.25f);
+                float exileWait = 0f;
+                while (!DialogueManager.isConversationActive && exileWait < 2.2f)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    exileWait += 0.05f;
+                }
+                yield return new WaitForSeconds(0.15f);
                 try
                 {
                     string activeConv = DialogueManager.lastConversationStarted ?? "";
                     bool launchedExile = DialogueManager.isConversationActive && (activeConv.IndexOf("Exile", StringComparison.OrdinalIgnoreCase) >= 0);
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     DialogueManager.StopConversation();
                     try { Panels.Instance?.ConversationPanel?.Hide(); } catch { }
 
@@ -990,6 +1021,7 @@ namespace GreatZilleSolution
                 catch (Exception ex)
                 {
                     rep.LogFail("Refuse Parley Collapse Verification", ex.ToString());
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
                     try { DialogueManager.StopConversation(); } catch { }
                 }
             }
@@ -1037,6 +1069,9 @@ namespace GreatZilleSolution
                 rep.LogFail("Decisions/Reports/Situations Audit", ex.ToString());
                 try { ZilleDecisions.CloseModal(); } catch { }
             }
+            WarOperationZilleManager.CancelPendingConversationLaunches();
+            try { DialogueManager.StopConversation(); } catch { }
+            try { Panels.Instance?.ConversationPanel?.Hide(); } catch { }
         }
 
         private static IEnumerator RunStage3RealSavesCoroutine(EventsAuditReport rep)

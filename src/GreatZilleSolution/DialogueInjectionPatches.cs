@@ -2011,13 +2011,18 @@ namespace GreatZilleSolution
                     }
 
                     // Progression-driven Zille Council & Diplomatic Events on Porte Drazon
+                    string logRoute = DialogueHelper.GetStringVariable("Zille_Logistics_Route");
+                    bool hasLogisticsRoute = !string.IsNullOrEmpty(logRoute)
+                        && !string.Equals(logRoute, "None", StringComparison.OrdinalIgnoreCase)
+                        && !string.Equals(logRoute, "nil", StringComparison.OrdinalIgnoreCase);
+
                     if (!planningDone && (turn == 0 || turn >= 2 || earlyWar))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_WarPlanning", "Zille/WarPlanning");
                         });
                     }
-                    else if (planningDone && string.IsNullOrEmpty(DialogueHelper.GetStringVariable("Zille_Logistics_Route")))
+                    else if (planningDone && !hasLogisticsRoute)
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Supply Lines of Brenas: Azaro vs Sazon", "State Dining Hall, Palas Rezna", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_WarLogisticsDispute", "Zille/WarLogisticsDispute");

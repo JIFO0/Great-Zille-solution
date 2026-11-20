@@ -61,8 +61,8 @@ namespace GreatZilleSolution
             AddLine(conv, 2, SmolakId, RomusId, "Smolak_Parley_Greeting",
                 "Look who finally arrived! The great King Romus of Rizia in the flesh. Tell me, Your Majesty... Care for some hospitality? Wehzek chicory blend. Tastes like gunpowder and wet mud, yet it keeps a man awake while the guns bark.", 3);
 
-            var parleyHub = AddLine(conv, 3, RomusId, SmolakId, "Romus_Parley_Posture_Prompt",
-                "I sat across the scarred folding table, facing the bloodshot, calculating eyes of the Wehzek dictator.");
+            var parleyHub = AddLine(conv, 3, NarratorId, RomusId, "Romus_Parley_Posture_Prompt",
+                "You sat across the scarred folding table, facing the bloodshot, calculating eyes of the Wehzek dictator.");
 
             parleyHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10)); // Victory posture
             parleyHub.outgoingLinks.Add(CreateLink(conv.id, 3, 20)); // Stalemate posture 1
@@ -604,7 +604,7 @@ namespace GreatZilleSolution
 
             AddChoice(conv, 50, HugoId, "Sign_Total_Fiasco",
                 "\"Sign the Instrument of Surrender to spare Porte Drazon from destruction.\"",
-                "To prevent the destruction of Porte Drazon, I sign this humiliating peace. May God forgive me for the tragedy that has befallen our kingdom.", -1,
+                "To prevent the destruction of Porte Drazon, I sign this humiliating peace. May Nur forgive me for the tragedy that has befallen our kingdom.", -1,
                 treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true;");
 
             AddChoice(conv, 52, HugoId, "Sign_Total_Fiasco_Silent",

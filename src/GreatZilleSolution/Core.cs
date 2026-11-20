@@ -113,6 +113,14 @@ namespace GreatZilleSolution
 
             {
 
+                if (sceneName.Equals("Main Menu", System.StringComparison.OrdinalIgnoreCase)
+                    || sceneName.Equals("Rizia", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    WarOperationZilleManager.CancelPendingConversationLaunches();
+                    WarOperationZilleManager.CurrentTheatre = ActiveWarTheatre.Civilian;
+                    ZilleWarTable.ScenarioStarted = false;
+                }
+
                 ZilleMapLayoutManager.EnsureTexturesLoaded();
 
                 WarOperationZilleManager.RegisterNativeZilleEntities();
@@ -157,7 +165,16 @@ namespace GreatZilleSolution
                     string flag2 = @"c:\Projects\Great Zille solution\run_test.flag";
                     string eflag1 = System.IO.Path.Combine(Application.dataPath, "..", "run_events_test.flag");
                     string eflag2 = @"c:\Projects\Great Zille solution\run_events_test.flag";
-                    if (System.IO.File.Exists(eflag1) || System.IO.File.Exists(eflag2))
+                    string dflag1 = System.IO.Path.Combine(Application.dataPath, "..", "run_deep_test.flag");
+                    string dflag2 = @"c:\Projects\Great Zille solution\run_deep_test.flag";
+                    if (System.IO.File.Exists(dflag1) || System.IO.File.Exists(dflag2))
+                    {
+                        try { if (System.IO.File.Exists(dflag1)) System.IO.File.Delete(dflag1); } catch { }
+                        try { if (System.IO.File.Exists(dflag2)) System.IO.File.Delete(dflag2); } catch { }
+                        Log.Msg("[AUTOTEST] run_deep_test.flag detected! Starting Deep Brute-Force Walkthrough & Multi-Campaign Save suite...");
+                        MelonCoroutines.Start(ZillePlaytest.RunDeepWalkthroughSuiteCoroutine());
+                    }
+                    else if (System.IO.File.Exists(eflag1) || System.IO.File.Exists(eflag2))
                     {
                         try { if (System.IO.File.Exists(eflag1)) System.IO.File.Delete(eflag1); } catch { }
                         try { if (System.IO.File.Exists(eflag2)) System.IO.File.Delete(eflag2); } catch { }

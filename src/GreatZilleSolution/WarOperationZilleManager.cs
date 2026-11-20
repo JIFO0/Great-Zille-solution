@@ -20,7 +20,7 @@ namespace GreatZilleSolution
         public const string OPERATION_PHASE_1_ID = "OP_Zille_RighteousSword";
         public const string OPERATION_PHASE_2_ID = "OP_Zille_TotalRepayment";
 
-        public static ActiveWarTheatre CurrentTheatre { get; set; } = ActiveWarTheatre.None;
+        public static ActiveWarTheatre CurrentTheatre { get; set; } = ActiveWarTheatre.Civilian;
 
         public static GameObject SpawnedZilleWarToken => _spawnedZilleWarToken;
         public static Vector3 TokenBasePos { get; set; } = new Vector3(0.4673f, 0.08f, 0.8262f);
@@ -196,7 +196,7 @@ namespace GreatZilleSolution
 
                 string logistics = DialogueHelper.GetStringVariable("Zille_Logistics_Route");
                 if (string.IsNullOrEmpty(logistics)) logistics = DialogueHelper.GetStringVariable("Zille_Logistics_House");
-                if (string.IsNullOrEmpty(logistics)) logistics = DialogueHelper.GetStringVariable("Zille_War_Logistics");
+                if (string.IsNullOrEmpty(logistics)) logistics = ZilleCampaignState.LogisticsRoute;
                 if (logistics == "Sazon" || logistics == "Azaro" || logistics == "Compromise") score += 1;
 
                 if (ZilleCampaignState.IsLespiaPactAccepted || ZilleCampaignState.IsLespiaIntelActive) score += 2;
@@ -320,8 +320,14 @@ namespace GreatZilleSolution
             int totalBattalions = 8;
             try
             {
-                totalBattalions += DialogueHelper.GetIntVariable("Military_Expanded_Infantry") * 2;
-                totalBattalions += DialogueHelper.GetIntVariable("Military_Expanded_Tanks") * 2;
+                int realInf = DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Infantry_Total");
+                int realTank = DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Tank_Total");
+                int realSup = DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Support_Total");
+                int realHouse = DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Azaro_Total")
+                              + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Sazon_Total")
+                              + DialogueHelper.GetIntVariable("RiziaDLC.Army_Unit_Toras_Total");
+                int realTotal = realInf + realTank + realSup + realHouse;
+                if (realTotal > 0) totalBattalions = realTotal;
             }
             catch { }
 
@@ -1864,11 +1870,6 @@ namespace GreatZilleSolution
                             {
                                 convPanel.inputBlockerPanel.gameObject.SetActive(false);
                             }
-                            var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
-                            if (gfm != null && cd != null)
-                            {
-                                gfm.FinishStoryFragment(cd, null);
-                            }
                             Panels.Instance?.ShowHUD();
 
                             if (PendingZilleTokenSpawnAfterBriefing || DialogueHelper.GetBoolVariable("Zille_War_Active"))
@@ -1884,33 +1885,9 @@ namespace GreatZilleSolution
                     };
 
                     PrepareSceneConversationMetadata("Turn_Zille_WarBriefing", "Zille/WarCouncil_Briefing");
-
-                    if (cd != null)
-                    {
-                        convPanel.Setup(cd, onFinish, false);
-                    }
-                    else
-                    {
-                        convPanel.ForceStartConversation("Zille/WarCouncil_Briefing");
-                    }
-
-                    if (!DialogueManager.isConversationActive)
-                    {
-                        MelonLogger.Msg("[WAR ENGINE] Starting conversation 'Zille/WarCouncil_Briefing' via DialogueManager...");
-                        DialogueManager.StartConversation("Zille/WarCouncil_Briefing");
-                    }
-
-                    PopulateActiveConversationParticipants(convPanel, "Turn_Zille_WarBriefing");
-
-                    convPanel.Show();
-                    if (!DialogueManager.isConversationActive)
-                    {
-                        MelonLogger.Warning("[WAR ENGINE] Briefing conversation did not remain active; cleaning up to prevent black screen.");
-                        convPanel.Hide();
-                        onFinish();
-                        return false;
-                    }
-                    MelonLogger.Msg("[WAR ENGINE] Native ConversationPanel opened for Zille War Council!");
+                    int launchGen = ++_launchGeneration;
+                    MelonCoroutines.Start(LaunchConversationCleanlyCoroutine(convPanel, cd, "Turn_Zille_WarBriefing", "Zille/WarCouncil_Briefing", onFinish, launchGen));
+                    MelonLogger.Msg("[WAR ENGINE] Launching clean native ConversationPanel coroutine for Zille War Council...");
                     return true;
                 }
                 else
@@ -1925,6 +1902,162 @@ namespace GreatZilleSolution
                 MelonLogger.Error($"[WAR ENGINE] DialogueManager.StartConversation failed: {ex.Message}");
                 return false;
             }
+        }
+
+        private static int _launchGeneration = 0;
+
+        public static void CancelPendingConversationLaunches()
+        {
+            _launchGeneration++;
+        }
+
+        private static void ClearStaleConversationUI(ConversationPanel convPanel)
+        {
+            try
+            {
+                if (DialogueManager.isConversationActive)
+                {
+                    DialogueManager.StopConversation();
+                }
+                if (convPanel == null) return;
+
+                try { convPanel.StopAllCoroutines(); } catch { }
+
+                var handler = convPanel.conversationHandler;
+                if (handler != null)
+                {
+                    try { handler.StopAllCoroutines(); } catch { }
+                    try { handler.continueCoroutine = null; } catch { }
+                    try { handler.ResetDialogueText(); } catch { }
+                    try
+                    {
+                        if (handler.instantiatedResponses != null)
+                        {
+                            for (int i = handler.instantiatedResponses.Count - 1; i >= 0; i--)
+                            {
+                                var r = handler.instantiatedResponses[i];
+                                if (r != null && r.gameObject != null) UnityEngine.Object.Destroy(r.gameObject);
+                            }
+                            handler.instantiatedResponses.Clear();
+                        }
+                    }
+                    catch { }
+                    try { if (handler.responseContainer != null) handler.responseContainer.gameObject.SetActive(true); } catch { }
+                    try { if (handler.responsesContainer != null) handler.responsesContainer.gameObject.SetActive(true); } catch { }
+                    try { if (handler.continueButton != null) handler.continueButton.gameObject.SetActive(false); } catch { }
+                    try { handler.responsesAreShown = false; } catch { }
+                    try { handler.isInConversation = false; } catch { }
+                }
+
+                try { convPanel.ResetConversants(); } catch { }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] ClearStaleConversationUI warning: {ex.Message}");
+            }
+        }
+
+        private static System.Collections.IEnumerator LaunchConversationCleanlyCoroutine(
+            ConversationPanel convPanel,
+            ConversationData cd,
+            string nameInDb,
+            string dialogueTitle,
+            Action finishAction,
+            int expectedGen)
+        {
+            if (expectedGen != _launchGeneration) yield break;
+            if (convPanel == null)
+            {
+                DialogueManager.StartConversation(dialogueTitle);
+                yield break;
+            }
+
+            ClearStaleConversationUI(convPanel);
+            yield return null;
+            if (expectedGen != _launchGeneration || convPanel == null) yield break;
+
+            PrepareSceneConversationMetadata(nameInDb, dialogueTitle);
+            convPanel.gameObject.SetActive(true);
+            if (convPanel.inputBlockerPanel != null)
+            {
+                convPanel.inputBlockerPanel.gameObject.SetActive(true);
+            }
+
+            if (cd != null)
+            {
+                convPanel.Setup(cd, finishAction, false);
+            }
+            else
+            {
+                convPanel.ForceStartConversation(dialogueTitle);
+            }
+
+            float wait = 0f;
+            while (!DialogueManager.isConversationActive && wait < 1.5f)
+            {
+                yield return null;
+                if (expectedGen != _launchGeneration || convPanel == null) yield break;
+                wait += Time.unscaledDeltaTime;
+            }
+
+            if (!DialogueManager.isConversationActive)
+            {
+                MelonLogger.Msg($"[WAR ENGINE] SetupCoroutine did not start '{dialogueTitle}' within 1.5s; starting via DialogueManager fallback.");
+                DialogueManager.StartConversation(dialogueTitle);
+                convPanel.Show();
+                yield return null;
+            }
+            else
+            {
+                yield return null;
+            }
+
+            if (expectedGen != _launchGeneration || convPanel == null) yield break;
+
+            PopulateActiveConversationParticipants(convPanel, nameInDb);
+
+            if (!DialogueManager.isConversationActive)
+            {
+                float grace = 0f;
+                while (!DialogueManager.isConversationActive && grace < 0.2f)
+                {
+                    yield return null;
+                    if (expectedGen != _launchGeneration || convPanel == null) yield break;
+                    grace += Time.unscaledDeltaTime;
+                }
+            }
+
+            if (expectedGen != _launchGeneration || convPanel == null) yield break;
+
+            if (!DialogueManager.isConversationActive)
+            {
+                MelonLogger.Warning($"[WAR ENGINE] Conversation '{dialogueTitle}' did not remain active; cleaning up to prevent black screen.");
+                convPanel.Hide();
+                finishAction?.Invoke();
+                yield break;
+            }
+
+            MelonLogger.Msg($"[WAR ENGINE] Triggered conversation '{dialogueTitle}' ({nameInDb}) cleanly!");
+        }
+
+        private static System.Collections.IEnumerator DelayedTriggerConversationCoroutine(
+            float delay,
+            string nameInDb,
+            string dialogueTitle,
+            int expectedGen,
+            Action onFinish = null)
+        {
+            yield return new WaitForSeconds(delay);
+            if (expectedGen != _launchGeneration) yield break;
+            float activeWait = 0f;
+            while (DialogueManager.isConversationActive && activeWait < 2.5f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                if (expectedGen != _launchGeneration) yield break;
+                activeWait += 0.1f;
+            }
+            if (expectedGen != _launchGeneration) yield break;
+            TriggerConversation(nameInDb, dialogueTitle, onFinish);
         }
 
                 public static bool TriggerConversation(string nameInDb, string dialogueTitle, Action onFinish = null)
@@ -1978,11 +2111,6 @@ namespace GreatZilleSolution
                             {
                                 convPanel.inputBlockerPanel.gameObject.SetActive(false);
                             }
-                            var gfm = Managers.Instance?.GameFlowManager ?? UnityEngine.Object.FindObjectOfType<GameFlowManager>();
-                            if (gfm != null && cd != null)
-                            {
-                                gfm.FinishStoryFragment(cd, null);
-                            }
                             if (nameInDb == "Turn_Zille_DerdiaInvestigation")
                             {
                                 DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
@@ -2034,32 +2162,8 @@ namespace GreatZilleSolution
                     };
 
                     PrepareSceneConversationMetadata(nameInDb, dialogueTitle);
-
-                    if (cd != null)
-                    {
-                        convPanel.Setup(cd, finishAction, false);
-                    }
-                    else
-                    {
-                        convPanel.ForceStartConversation(dialogueTitle);
-                    }
-
-                    if (!DialogueManager.isConversationActive)
-                    {
-                        DialogueManager.StartConversation(dialogueTitle);
-                    }
-
-                    PopulateActiveConversationParticipants(convPanel, nameInDb);
-
-                    convPanel.Show();
-                    if (!DialogueManager.isConversationActive)
-                    {
-                        MelonLogger.Warning($"[WAR ENGINE] Conversation '{dialogueTitle}' did not remain active; cleaning up to prevent black screen.");
-                        convPanel.Hide();
-                        finishAction();
-                        return false;
-                    }
-                    MelonLogger.Msg($"[WAR ENGINE] Triggered conversation '{dialogueTitle}' ({nameInDb})!");
+                    int launchGen = ++_launchGeneration;
+                    MelonCoroutines.Start(LaunchConversationCleanlyCoroutine(convPanel, cd, nameInDb, dialogueTitle, finishAction, launchGen));
                     return true;
                 }
                 else
@@ -2129,21 +2233,24 @@ namespace GreatZilleSolution
             TriggerConversation("Turn_Zille_WarPreNegotiationsBriefing", "Zille/WarPreNegotiationsBriefing", () => {
                 SetStoryFragmentMandatoryState("Turn_Zille_WarPreNegotiationsBriefing", false);
                 MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
-                TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
+                int g1 = ++_launchGeneration;
+                MelonCoroutines.Start(DelayedTriggerConversationCoroutine(0.75f, "Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", g1, () => {
                     SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", false);
                     if (DialogueHelper.GetBoolVariable("Zille_Parley_Refused") || DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse"))
                     {
                         MelonLogger.Msg("[WAR ENGINE] Smolak Parley refused under collapse! Triggering Azaro Coup & Exile Epilogue...");
                         SetStoryFragmentMandatoryState("Turn_Zille_WarPeaceTreaty", false);
                         SetStoryFragmentMandatoryState("Turn_Zille_ExileEpilogue", true);
-                        TriggerConversation("Turn_Zille_ExileEpilogue", "Zille/ExileEpilogue", () => {
+                        int gExile = ++_launchGeneration;
+                        MelonCoroutines.Start(DelayedTriggerConversationCoroutine(0.75f, "Turn_Zille_ExileEpilogue", "Zille/ExileEpilogue", gExile, () => {
                             DialogueHelper.SetVariable("Zille_ExileEpilogue_Done", true);
                             ClearAllMandatoryZilleFragments();
-                        });
+                        }));
                         return;
                     }
                     MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
-                    TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
+                    int gTreaty = ++_launchGeneration;
+                    MelonCoroutines.Start(DelayedTriggerConversationCoroutine(0.75f, "Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", gTreaty, () => {
                         MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
                         DialogueHelper.SetVariable("Zille_PeaceTreaty_Signed", true);
                         DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
@@ -2151,10 +2258,11 @@ namespace GreatZilleSolution
                         ClearAllMandatoryZilleFragments();
                         if (ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
                         {
-                            TriggerConversation("Turn_Zille_ZilleLiberation", "Zille/ZilleLiberation");
+                            int gLib = ++_launchGeneration;
+                            MelonCoroutines.Start(DelayedTriggerConversationCoroutine(0.75f, "Turn_Zille_ZilleLiberation", "Zille/ZilleLiberation", gLib));
                         }
-                    });
-                });
+                    }));
+                }));
             });
         }
 

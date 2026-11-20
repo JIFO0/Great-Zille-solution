@@ -36,7 +36,7 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Derdia_Intro_1",
-                "I stepped into the private royal telecommunications chamber beneath Palas Rezna, where the air hung thick with sandalwood, frankincense, and ozone from the humming vacuum tubes. On the walnut table lay our intelligence dossier on the Yol-Qerzan explosions beside the gilded cipher receiver.", -1);
+                "You stepped into the private royal telecommunications chamber beneath Palas Rezna, where the air hung thick with sandalwood, frankincense, and ozone from the humming vacuum tubes. On the walnut table lay the intelligence dossier on the Yol-Qerzan explosions beside the gilded cipher receiver.", -1);
 
             AddChoice(conv, 401, NarratorId, "Derdia_Stimulus_Rosewater",
                 "Pour a small glass of rosewater and let the cipher clerk finish tuning the Naeal frequency.",
@@ -47,10 +47,10 @@ namespace GreatZilleSolution
                 "", 405, "");
 
             AddLine(conv, 404, NarratorId, RomusId, "Derdia_Entry_Calm",
-                "The rosewater cooled my throat as the green signal lamp steadied. A moment later, Supreme Wiseman Jorga Azmal's gravelly baritone rolled across the mountain wire.", -1);
+                "The rosewater cooled your throat as the green signal lamp steadied. A moment later, Supreme Wiseman Jorga Azmal's gravelly baritone rolled across the mountain wire.", -1);
 
             AddLine(conv, 405, NarratorId, RomusId, "Derdia_Entry_Brisk",
-                "The cold bakelite earpiece pressed against my temple; the cipher clerk snapped the final toggle, and Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
+                "The cold bakelite earpiece pressed against your temple; the cipher clerk snapped the final toggle, and Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
 
             AddLink(conv, 1, 401);
             AddLink(conv, 1, 402);
@@ -67,7 +67,7 @@ namespace GreatZilleSolution
 
             // Opening 3: Peace, Normal/Friendly relations
             AddLine(conv, 2, AzmalId, RomusId, "Azmal_Opening_Greeting",
-                "May God's light guide you, Your Majesty. The mountain winds carry smoke from both Zille and our own northern passes near Yol. What brings Porte Drazon onto the Silver Garrison line?", 3,
+                "May Nur's light guide you, Your Majesty. The mountain winds carry smoke from both Zille and our own northern passes near Yol. What brings Porte Drazon onto the Silver Garrison line?", 3,
                 "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Derdia_Hostile\"] ~= true");
 
             AddLink(conv, 404, 103);
@@ -77,8 +77,8 @@ namespace GreatZilleSolution
             AddLink(conv, 405, 102);
             AddLink(conv, 405, 2);
 
-            var azmalHub = AddLine(conv, 3, RomusId, AzmalId, "Romus_Azmal_Open_Prompt",
-                "I leaned toward the gilded receiver, knowing Azmal respects sovereignty and truth far more than transactional haggling.");
+            var azmalHub = AddLine(conv, 3, NarratorId, RomusId, "Romus_Azmal_Open_Prompt",
+                "You leaned toward the cipher receiver, knowing Azmal respects sovereignty and candor far more than transactional haggling.");
 
             azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
             azmalHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
@@ -105,7 +105,7 @@ namespace GreatZilleSolution
 
             // Multi-topic deep discussion hub (visited flags!)
             var topicHub = AddLine(conv, 21, NarratorId, RomusId, "Derdia_Topic_Hub",
-                "The tension on the line had shifted from cold protocol to urgent strategic inquiry. Several threads lay open between us.");
+                "The tension on the line had shifted from cold protocol to urgent strategic inquiry. Several threads lay open between Porte Drazon and Naeal.");
 
             AddLink(conv, 20, 21);
             topicHub.outgoingLinks.Add(CreateLink(conv.id, 21, 22)); // Topic 1: Sabotage details & evidence
@@ -131,11 +131,11 @@ namespace GreatZilleSolution
 
             AddLine(conv, 123, AzmalId, RomusId, "Azmal_Reply_Pilgrims_Open",
                 "\"You showed wisdom in lifting harsh barriers against our pilgrims, Your Majesty,\" Azmal replied evenly. \"That goodwill is remembered in every prayer house of Naeal—and makes brotherhood against Wehlen natural.\"", 21,
-                "Variable[\"RiziaDLC.DerdianBan\"] ~= true and Variable[\"RiziaDLC.DerdianBorderBan\"] ~= true");
+                "Variable[\"RiziaDLC.Situation_Order_Wehlen_Terrorism_BludishDerdianBan\"] ~= true and Variable[\"RiziaDLC.Decision_Turn04_GolcondistPilgrimsPlavo_DeportDerdia\"] ~= true");
 
             AddLine(conv, 124, AzmalId, RomusId, "Azmal_Reply_Pilgrims_Banned",
                 "\"Your border restrictions on our pilgrims still wound the faithful,\" Azmal admitted candidly, \"yet even Grand Wiseman Sal knows Smolak's persecution of believers in Wehlen is a far darker sin. Ease our travelers' passage when we meet in person, and the Silver Garrison will remember.\"", 21,
-                "Variable[\"RiziaDLC.DerdianBan\"] == true or Variable[\"RiziaDLC.DerdianBorderBan\"] == true");
+                "Variable[\"RiziaDLC.Situation_Order_Wehlen_Terrorism_BludishDerdianBan\"] == true or Variable[\"RiziaDLC.Decision_Turn04_GolcondistPilgrimsPlavo_DeportDerdia\"] == true");
 
             AddLink(conv, 23, 123);
             AddLink(conv, 23, 124);
@@ -163,7 +163,7 @@ namespace GreatZilleSolution
                 "Our positions are clear, Supreme Wiseman. Let us decide how Rizia and Derdia move forward from this hour.", 31);
 
             var pactHub = AddLine(conv, 31, NarratorId, RomusId, "Derdia_Pact_Hub_Prompt",
-                "Azmal awaited my proposal across the quiet hum of the cipher line.");
+                "Azmal awaited your proposal across the quiet hum of the cipher line.");
 
             pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 40)); // Accept Invitation to State Visit (if IncidentShared)
             pactHub.outgoingLinks.Add(CreateLink(conv.id, 31, 45)); // Active War urgent raids + State Visit invitation
@@ -203,7 +203,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_DerdiaHybridActive\"] = false; Variable[\"RiziaDLC.CountryRelation_Derdia_Unfriendly\"] = true;");
 
             AddLine(conv, 61, AzmalId, RomusId, "Ack_Reject_Derdia",
-                "Static hissed across the wire as Azmal's tone cooled. \"Then may God guard both our borders separately, Your Majesty.\" The line clicked silent.", -1);
+                "Static hissed across the wire as Azmal's tone cooled. \"Then may Nur guard both our borders separately, Your Majesty.\" The line clicked silent.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaTalks", "Turn_Zille_DerdiaTalks");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected expanded Derdia Talks (ID 9995) into masterDatabase!");
@@ -267,8 +267,8 @@ namespace GreatZilleSolution
             AddLink(conv, 405, 2);
             AddLink(conv, 405, 102);
 
-            var alvarezHub = AddLine(conv, 3, RomusId, AlvarezId, "Romus_Alvarez_Open_Prompt",
-                "I leaned against the console, matching Alvarez's brisk shark's tempo while checking what cards lay in my briefcase.");
+            var alvarezHub = AddLine(conv, 3, NarratorId, RomusId, "Romus_Alvarez_Open_Prompt",
+                "You leaned against the console, matching Alvarez's brisk tempo while checking the dossiers laid out beside the handset.");
 
             alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
             alvarezHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
@@ -391,7 +391,7 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Rumburg_Intro_1",
-                "In the quiet cedar-paneled Imperial Diplomatic Cabinet, a framed oil portrait of your late wife, Queen Lena Livingston, hung beside the gilded crest of GRACE—a reminder of King Valero's blood-and-coal alliance with Thornbourgh. On the desk, the ivory-inlaid royal trunk line clicked live as Queen Beatrice's palace switchboard bridged the call.", -1);
+                "In the quiet cedar-paneled Imperial Diplomatic Cabinet, a framed oil portrait of your late wife, Queen Lena Toras, hung beside the gilded crest of GRACE—a reminder of King Valero's blood-and-coal alliance with Thornbourgh. On the desk, the ivory-inlaid royal trunk line clicked live as Queen Beatrice's palace switchboard bridged the call.", -1);
 
             AddChoice(conv, 401, NarratorId, "Rumburg_Stimulus_Portrait",
                 "Let your gaze linger briefly on Lena's portrait before lifting the ivory receiver.",
@@ -423,8 +423,8 @@ namespace GreatZilleSolution
             AddLink(conv, 405, 2);
             AddLink(conv, 405, 102);
 
-            var beatriceHub = AddLine(conv, 3, RomusId, BeatriceId, "Romus_Beatrice_Open_Prompt",
-                "I straightened my tunic, addressing Lena's sister with the formal dignity expected between royal courts.");
+            var beatriceHub = AddLine(conv, 3, NarratorId, RomusId, "Romus_Beatrice_Open_Prompt",
+                "You straightened your tunic, addressing Lena's sister with the formal dignity expected between royal courts.");
 
             beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
             beatriceHub.outgoingLinks.Add(CreateLink(conv.id, 3, 11));
@@ -580,8 +580,8 @@ namespace GreatZilleSolution
                 AddLink(conv, prev, 104);
             }
 
-            var preNegHub = AddLine(conv, 10, RomusId, LaurentoId, "Romus_PreNeg_Prompt",
-                "I studied the final map positions, our separate casualty ledgers, and my leather briefcase before stepping down to the waiting armored motorcade.");
+            var preNegHub = AddLine(conv, 10, NarratorId, RomusId, "Romus_PreNeg_Prompt",
+                "You studied the final map positions, the separate casualty ledgers, and your leather briefcase before stepping down to the waiting armored motorcade.");
 
             preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 11)); // Review separate Zille vs Pales losses & armory stamina
             preNegHub.outgoingLinks.Add(CreateLink(conv.id, 10, 12)); // Review Leverage cards in briefcase

@@ -332,8 +332,8 @@ namespace GreatZilleSolution
             AddLine(conv, 3, NarratorId, RomusId, "Exile_CivilWar_Brewing",
                 "Worse still, that humiliating partition shattered every pact holding the nobility together. Dispatches tonight confirm that open civil war of all houses—Azaro juntas in Montaklar, Sazon banners in Brenas, furious Toras cousins, and armed radicals—is boiling over across Rizia.", 10);
 
-            var choiceHub = AddLine(conv, 10, RomusId, NarratorId, "Exile_Destiny_Hub",
-                "I folded the Konstantium Telegraph beside my half-packed travel valise. Torn between the ghosts of House Toras and the few modest doors still ajar in exile, I had to decide my final path.");
+            var choiceHub = AddLine(conv, 10, NarratorId, RomusId, "Exile_Destiny_Hub",
+                "You folded the Konstantium Telegraph beside your half-packed travel valise. Torn between the ghosts of House Toras and the few modest doors still ajar in exile, you had to decide your final path.");
 
             choiceHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20));
             choiceHub.outgoingLinks.Add(CreateLink(conv.id, 10, 30));
@@ -377,7 +377,7 @@ namespace GreatZilleSolution
 
             // Branch 2B: Vina without Manus (if Manus died in Pales/executed)
             AddLine(conv, 132, VinaId, RomusId, "Airport_Vina_Only_Warn",
-                "At the rainy departure gate, Princess Vina stepped out from a crowd of weeping exiles, eyes hollow with smoke and grief. \"Father—stop! You cannot go back! Valenqiris and Brenas are tearing themselves apart under Azaro martial law after you refused peace! Everyone inside Rizia lays this bloodbath at your door—return across that tarmac, and the only court waiting for you is a military tribunal and certain execution!\"", -1,
+                "At the rainy departure gate, Princess Vina stepped out from a crowd of weeping exiles, her face pale and drawn with exhaustion and grief. \"Father—stop! You cannot go back! Valenqiris and Brenas are tearing themselves apart under Azaro martial law after you refused peace! Everyone inside Rizia lays this bloodbath at your door—return across that tarmac, and the only court waiting for you is a military tribunal and certain execution!\"", -1,
                 vinaAliveCond + " and " + manDeadCond);
 
             // Branch 2C: Manus without Vina (if Vina passed away)
@@ -395,7 +395,7 @@ namespace GreatZilleSolution
             AddLink(conv, 31, 232);
             AddLink(conv, 31, 332);
 
-            var airportHub = AddLine(conv, 40, RomusId, NarratorId, "Airport_Final_Reflection",
+            var airportHub = AddLine(conv, 40, NarratorId, RomusId, "Airport_Final_Reflection",
                 "Over the terminal loudspeakers, the final boarding bell echoed down the cold corridor as diplomatic couriers brushed past an ignored former king.");
 
             foreach (int prev in new[] { 34, 132, 232, 332 })
