@@ -72,7 +72,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_DerdiaInv_AskedMil\"] ~= true and Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 112, LucitaId, RomusId, "DerdiaInv_Reply_Military",
-                "\"Everything, Your Majesty. Right now Plan Ark relies on risky amphibious landings across the Gulf of Moridia. If Derdia's mountain passes at Yol and Qerzan ever opened to Rizian divisions, we could strike Wehlen's soft southern belly by land—forcing Valdez to split his army in two!\"", 10);
+                "\"Everything, Your Majesty. Right now Plan Ark relies on risky amphibious landings across the Gulf of Moridia. If Derdia's mountain passes at Yol and Qerzan ever opened to Rizian divisions, we could strike Wehlen's soft southern belly by land—forcing Smolak's command to split its army in two!\"", 10);
 
             AddChoice(conv, 15, TitusId, "DerdiaInv_Proceed_Action",
                 "\"Let us decide how Rizia investigates the Yol-Qerzan sabotage.\"",

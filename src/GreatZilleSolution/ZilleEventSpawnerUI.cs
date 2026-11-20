@@ -129,7 +129,7 @@ namespace GreatZilleSolution
             AddModNewEvent("Turn_Zille_Op1AftermathCouncil", "Post-Operation I High Command Council", "War Room, Palas Rezna", "MODNEW");
             AddModNewEvent("Turn_Zille_DerdiaInvestigation", "Sabotage Inquiry: Derdia-Wehlen Border Briefing (Turn 4)", "Golden Guard Briefing Room", "MODNEW");
             AddModNewEvent("Turn_Zille_DerdiaTalks", "Derdian Mission: Faith, Oil and Mercenaries", "Derdian Mission, Porte Drazon", "MODNEW");
-            AddModNewEvent("Turn_Zille_DerdiaStateVisit", "State Visit to Derdia: Audience with High Wiser Azmal (Turn 6)", "Silver Garrison, Naeal", "MODNEW");
+            AddModNewEvent("Turn_Zille_DerdiaStateVisit", "State Visit to Derdia: Audience with Supreme Wiseman Azmal (Turn 6)", "Silver Garrison, Naeal", "MODNEW");
             AddModNewEvent("Turn_Zille_LespiaTalks", "Lespian Diplomatic Hotline: Air Recon and Munitions", "Foreign Ministry Communications Room", "MODNEW");
             AddModNewEvent("Turn_Zille_RumburgTalks", "Imperial Telegram from Thornbourgh: Rumburgian Munitions", "Imperial Diplomatic Cabinet", "MODNEW");
             AddModNewEvent("Turn_Zille_WarPreNegotiationsBriefing", "Pre-Negotiations Briefing & Foreign Hotlines", "War Room & Communications Cabinet", "MODNEW");
@@ -137,6 +137,7 @@ namespace GreatZilleSolution
             AddModNewEvent("Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "MODNEW");
             AddModNewEvent("Turn_Zille_HomeFrontCrisis", "Wartime Home Front: Energy & AN Pressure", "Cabinet Room, Palas Rezna", "MODNEW");
             AddModNewEvent("Turn_Zille_ZilleLiberation", "Homecoming in Zille City: The Harbor Quarter", "Zille City Harbor", "MODNEW");
+            AddModNewEvent("Turn_Zille_ExileEpilogue", "Exile in Kyrute: The Shattered Kingdom", "Konstantium & Kyrute Airport", "MODNEW");
 
 
             // 3. Scan EntityDataManager.AllConversationsData

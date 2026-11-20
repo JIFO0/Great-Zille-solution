@@ -183,7 +183,7 @@ namespace GreatZilleSolution
 
             AddOrUpdateSituation(sits, "Sit_Zille_Derdia_Raids",
                 "Derdian Cross-Border Raids",
-                "Golcondist irregulars from the Silver Garrison are raiding Wehlen's southern supply roads, forcing General Valdez to divert brigades away from Zille.",
+                "Golcondist irregulars from the Silver Garrison are raiding Wehlen's southern supply roads, forcing Wraclawitz to divert brigades away from Zille.",
                 "Military", "Medium", "Zille_DerdiaHybridActive");
 
             AddOrUpdateSituation(sits, "Sit_Derdia_BorderSabotage",
@@ -218,7 +218,7 @@ namespace GreatZilleSolution
 
             AddOrUpdateSituation(sits, "Sit_Smolak_Alert_Suspicious",
                 "Wehzek Border Posture: Heightened Coastal Vigilance",
-                "Growing friction and frontier preparations have alerted Wraclawitz. General Valdez has reinforced coastal batteries, river crossings, and Gulf patrols across Zille.",
+                "Growing friction and frontier preparations have alerted Wraclawitz. Smolak's frontier commanders have reinforced coastal batteries, river crossings, and Gulf patrols across Zille.",
                 "Military", "Medium", "Zille_Sit_SmolakSuspicious");
 
             AddOrUpdateSituation(sits, "Sit_Smolak_Alert_Prepared",
@@ -373,7 +373,7 @@ namespace GreatZilleSolution
 
             AddOrUpdateReport(reps, "Rep_Zille_Lespia_Intel",
                 "Perla Hotline: ATO Aerial Recon Secured",
-                "Lespian reconnaissance sorties are delivering high-altitude photography of General Valdez's fortified bunkers and reserve depots.",
+                "Lespian reconnaissance sorties are delivering high-altitude photography of Wehlen's fortified bunkers and reserve depots across Zille.",
                 "Zille_Lespia_Intel");
 
             AddOrUpdateReport(reps, "Rep_Zille_Lespia_Rejected",

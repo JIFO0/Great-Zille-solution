@@ -10,6 +10,11 @@ namespace GreatZilleSolution
         public const int ConvId_HomeFrontCrisis = 9998;
         public const int ConvId_ZilleLiberation = 9999;
 
+        internal const string EstelaAliveCond = "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_EarlyExile\"] ~= true";
+        internal const string EstelaDeadCond = "(Variable[\"QueenMother_Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_EarlyExile\"] == true)";
+        internal const string VinaPresentCond = "Variable[\"RiziaDLC.Vina_FuneralHappened\"] ~= true and Variable[\"RiziaDLC.Vina_Dead\"] ~= true and Variable[\"RiziaDLC.Vina_Escapes\"] ~= true and Variable[\"RiziaDLC.Vina_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Vina_Hostage\"] ~= true and Variable[\"RiziaDLC.Vina_InPales\"] ~= true and Variable[\"RiziaDLC.AxelVina_Married_Official\"] ~= true and Variable[\"RiziaDLC.BirthdayGathering_VinaExiled\"] ~= true";
+        internal const string VinaAbsentCond = "(Variable[\"RiziaDLC.Vina_FuneralHappened\"] == true or Variable[\"RiziaDLC.Vina_Dead\"] == true or Variable[\"RiziaDLC.Vina_Escapes\"] == true or Variable[\"RiziaDLC.Vina_EarlyExile\"] == true or Variable[\"RiziaDLC.Vina_Hostage\"] == true or Variable[\"RiziaDLC.Vina_InPales\"] == true or Variable[\"RiziaDLC.AxelVina_Married_Official\"] == true or Variable[\"RiziaDLC.BirthdayGathering_VinaExiled\"] == true)";
+
         // =========================================================================
         // SCENE 12: Turn_Zille_HomeFrontCrisis (ID 9998) - WARTIME HOME FRONT CRISIS
         // Covers the missing mid-war domestic & international fallout:
@@ -184,23 +189,33 @@ namespace GreatZilleSolution
 
             AddLine(conv, 2, EstelaId, RomusId, "Estela_Homecoming_Line",
                 "Queen Mother Estela stood beside the weathered blue door of her father's old house, her gloved hand trembling slightly against the doorframe as tears shone in her eyes. \"Romus... Look at the harbor bell tower. I never thought I would hear it ring under our flag again. Your father carried that regret to his grave—and you washed it away.\"", -1,
-                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                EstelaAliveCond);
 
             AddLine(conv, 102, VinaId, RomusId, "Vina_Homecoming_Line",
-                "Princess Vina looked out over the sunlit fishing boats bobbing in the harbor. \"Father... This city feels older and braver than all the marble halls of Porte Drazon. People here waited twenty-five years for this morning.\"", -1,
-                "(Variable[\"QueenMother_Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_Dead\"] == true)");
+                "Princess Vina looked out over the sunlit fishing boats bobbing in the harbor. \"Father... This city feels older and braver than all the marble halls of Porte Drazon. People here waited twenty-five years for this morning.\"", 10,
+                EstelaDeadCond + " and " + VinaPresentCond);
+
+            AddLine(conv, 103, LaurentoId, RomusId, "Laurento_Homecoming_Fallback",
+                "Laurento removed his hat in quiet reverence beside the stone quay. \"Twenty-five years of foreign banners erased in a single dawn, Your Majesty. Zille breathes free air again.\"", 10,
+                EstelaDeadCond + " and " + VinaAbsentCond);
 
             AddLink(conv, 404, 2);
             AddLink(conv, 404, 102);
+            AddLink(conv, 404, 103);
             AddLink(conv, 405, 2);
             AddLink(conv, 405, 102);
+            AddLink(conv, 405, 103);
 
             AddLine(conv, 3, VinaId, RomusId, "Vina_Harbor_Reflection",
                 "Vina slipped her arm through yours quietly. \"We have Zille back, Father—now the world will judge how House Toras governs it.\"", 10,
-                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                EstelaAliveCond + " and " + VinaPresentCond);
+
+            AddLine(conv, 104, NarratorId, RomusId, "Harbor_Estela_Alone_Reflection",
+                "You rested a steadying hand beside your mother on the harbor parapet, watching fishermen haul gold-and-crimson pennants up the lighthouse mast.", 10,
+                EstelaAliveCond + " and " + VinaAbsentCond);
 
             AddLink(conv, 2, 3);
-            AddLink(conv, 102, 10);
+            AddLink(conv, 2, 104);
 
             // Topic 1: Wehzek residents & collaborators
             var justicePrompt = AddLine(conv, 10, NarratorId, RomusId, "Liberation_Justice_Prompt",
@@ -208,6 +223,7 @@ namespace GreatZilleSolution
 
             justicePrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 11));
             justicePrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 12));
+            justicePrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 112));
             justicePrompt.outgoingLinks.Add(CreateLink(conv.id, 10, 13));
 
             AddChoice(conv, 11, LaurentoId, "Liberation_Lawful_Courts",
@@ -218,9 +234,16 @@ namespace GreatZilleSolution
             AddChoice(conv, 12, TitusId, "Liberation_Security_Vetting",
                 "\"Have the Golden Guard and provosts screen all Wehzek administration officials and confiscate weapons caches.\"",
                 "Stability comes first. Have the Golden Guard vet every former Wehzek clerk and clear all weapons caches before civil courts reopen.", 20,
-                "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+                "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;",
+                "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
-            AddChoice(conv, 13, HugoId, "Liberation_Royal_Amnesty",
+            AddChoice(conv, 112, CarlosId, "Liberation_Military_Provost_Vetting",
+                "\"Order military provosts to vet all former Wehzek administration officials and clear remaining weapons caches.\"",
+                "Stability comes first. Deploy Royal Army provosts to vet every former Wehzek clerk and secure weapons caches before civil courts reopen.", 20,
+                "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;",
+                "(Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true)");
+
+            AddChoice(conv, 13, LaurentoId, "Liberation_Royal_Amnesty",
                 "\"Proclaim a broad Royal Amnesty for low-level clerks so Zille's ports and mines reopen tomorrow.\"",
                 "Proclaim a royal amnesty for minor municipal clerks and tradesmen. Zille needs working docks and open schools, not endless tribunals.", 20,
                 "Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Budget\"] = (Variable[\"RiziaDLC.Resources_Budget\"] or 0) + 1;");
@@ -233,38 +256,171 @@ namespace GreatZilleSolution
             adminPrompt.outgoingLinks.Add(CreateLink(conv.id, 20, 22));
             adminPrompt.outgoingLinks.Add(CreateLink(conv.id, 20, 122));
 
-            AddChoice(conv, 21, HugoId, "Liberation_Admin_RoyalCharter",
+            AddChoice(conv, 21, LaurentoId, "Liberation_Admin_RoyalCharter",
                 "\"Place Zille under a special Royal Reconstruction Charter reporting directly to the Crown.\"",
-                "For the next five years, Zille shall be governed under a Royal Reconstruction Charter reporting directly to the Crown so gold revenues rebuild her harbor first.", 30,
+                "For the next five years, Zille shall be governed under a Royal Reconstruction Charter reporting directly to the Crown so gold revenues rebuild her harbor first.", -1,
                 "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Royal\"; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
 
             AddChoice(conv, 22, ManusId, "Liberation_Admin_Brenas",
                 "\"Restore Zille immediately to the provincial administration of House Sazon and Brenas.\"",
-                "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial representation and House Sazon's civil charter.", 30,
+                "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial representation and House Sazon's civil charter.", -1,
                 "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;",
                 "Variable[\"RiziaDLC.Manus_Arrested\"] ~= true and Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_Gone\"] ~= true and Variable[\"RiziaDLC.Manus_EarlyExile\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true");
 
             AddChoice(conv, 122, LeonaId, "Liberation_Admin_Brenas_NoManus",
                 "\"Restore Zille immediately to the provincial administration of Brenas.\"",
-                "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial administration.", 30,
+                "Zille was torn from Brenas in 1927, and to Brenas it returns today under full provincial administration.", -1,
                 "Variable[\"Zille_Liberation_Done\"] = true; Variable[\"Zille_Admin_Charter\"] = \"Brenas\"; Variable[\"RiziaDLC.Country_HouseSazon\"] = (Variable[\"RiziaDLC.Country_HouseSazon\"] or 0) + 2;",
                 "(Variable[\"RiziaDLC.Manus_Arrested\"] == true or Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_Gone\"] == true or Variable[\"RiziaDLC.Manus_EarlyExile\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)");
 
-            AddLine(conv, 30, NarratorId, RomusId, "Estela_Liberation_Close",
+            AddLine(conv, 30, EstelaId, RomusId, "Estela_Liberation_Close",
                 "As the harbor bells chimed noon across Zille Bay, Queen Mother Estela smiled through her tears. \"Long live the King. Welcome home, Zille.\"", -1,
-                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                EstelaAliveCond);
 
             AddLine(conv, 130, NarratorId, RomusId, "Liberation_Close_Fallback",
                 "As the harbor bells chimed noon across Zille Bay, the gold-and-crimson banner of House Toras climbed the flagpole above the town hall to thunderous cheers.", -1,
-                "(Variable[\"QueenMother_Estela_Dead\"] == true or Variable[\"RiziaDLC.Estela_Dead\"] == true)");
+                EstelaDeadCond);
 
+            AddLink(conv, 21, 30);
             AddLink(conv, 21, 130);
+            AddLink(conv, 22, 30);
             AddLink(conv, 22, 130);
             AddLink(conv, 122, 30);
             AddLink(conv, 122, 130);
 
             AddConversationWithAlias(db, conv, "Zille/ZilleLiberation", "Turn_Zille_ZilleLiberation");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Zille Liberation Homecoming (ID 9999) into masterDatabase!");
+        }
+
+        // =========================================================================
+        // SCENE 16: Turn_Zille_ExileEpilogue (ID 10004) - AZARO COUP & EXILE EPILOGUE
+        // Triggered if Rizia collapses after refusing negotiations when the nation
+        // can no longer endure:
+        // - House Azaro seizes dying Rizia, nearly drowns it in blood, and signs a
+        //   rotten armistice ceding major territory
+        // - Civil war among all houses erupts back home
+        // - Romus chooses between:
+        //   (1) Returning to Rizia to intervene personally
+        //   (2) Working as a lowly, barely respected AN official in Kyrute
+        //       -> stopped at Kyrute Airport by fleeing Vina & Manus blaming Romus
+        //       and warning of certain trial & death back in Rizia!
+        // =========================================================================
+        public static void RegisterExileEpilogue(DialogueDatabase db)
+        {
+            if (db.GetConversation("Turn_Zille_ExileEpilogue") != null && db.GetConversation("Zille/ExileEpilogue") != null)
+                return;
+
+            var conv = new Conversation();
+            conv.id = ConvId_ExileEpilogue;
+            conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
+            conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
+            conv.Title = "Zille/ExileEpilogue";
+            conv.ActorID = RomusId;
+            conv.ConversantID = NarratorId;
+
+            var entry0 = CreateEntry(conv.id, 0, RomusId, NarratorId, "START", "", "", "Continue()");
+            entry0.isRoot = true;
+            entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
+            conv.dialogueEntries.Add(entry0);
+
+            AddLine(conv, 1, NarratorId, RomusId, "Exile_Kyrute_Dispatch",
+                "Six grim months had passed since your hurried flight across the Antacean Sea. In a modest rented flat overlooking Konstantium's rain-streaked harbor in Kyrute, stacked newspapers and smudged refugee cables told the story of the kingdom you left behind after walking out of the Zille parley.", 2);
+
+            AddLine(conv, 2, NarratorId, RomusId, "Exile_Azaro_Bloodbath_Brief",
+                "With the royal army broken and bread queues turning violent in Valenqiris, House Azaro had seized Porte Drazon in the name of martial survival. Their generals nearly drowned the realm in blood crushing workers' strikes, Sazon militias, and Toras dissenters—only to collapse before Smolak's offensive anyway and sign a rotten armistice surrendering Zille alongside vast stretches of southern Brenas.", 3);
+
+            AddLine(conv, 3, NarratorId, RomusId, "Exile_CivilWar_Brewing",
+                "Worse still, that humiliating partition shattered every pact holding the nobility together. Dispatches tonight confirm that open civil war of all houses—Azaro juntas in Montaklar, Sazon banners in Brenas, furious Toras cousins, and armed radicals—is boiling over across Rizia.", 10);
+
+            var choiceHub = AddLine(conv, 10, RomusId, NarratorId, "Exile_Destiny_Hub",
+                "I folded the Konstantium Telegraph beside my half-packed travel valise. Torn between the ghosts of House Toras and the few modest doors still ajar in exile, I had to decide my final path.");
+
+            choiceHub.outgoingLinks.Add(CreateLink(conv.id, 10, 20));
+            choiceHub.outgoingLinks.Add(CreateLink(conv.id, 10, 30));
+
+            // Path 1: Return to Rizia & Intervene Personally
+            AddChoice(conv, 20, NarratorId, "Exile_Return_To_Intervene",
+                "Hire a clandestine coastal freighter and return to Rizia immediately to intervene in the civil war.",
+                "If all houses are tearing Rizia apart, then a Toras must stand in the fire himself. I will slip back across the Antacean tonight and rally whoever still remembers the Crown.", 21,
+                "Variable[\"Zille_Exile_Choice\"] = \"ReturnIntervene\"; Variable[\"RiziaDLC.Epilogue_CivilWar_AzaroEnemy\"] = true; Variable[\"RiziaDLC.Epilogue_CivilWar_DecidedInEpilogue\"] = true;");
+
+            AddLine(conv, 21, NarratorId, RomusId, "Exile_Return_Landing",
+                "Three nights later, beneath low thunderclouds off Valenqiris, an unmarked trawler lowered a skiff toward the rocky cove. Distant artillery flashes pulsed behind the cliffs—the sound of Rizian cannons shelling Rizian towns while Wehzek frontier posts stood untouched upon ceded Brenas soil.", 22);
+
+            AddLine(conv, 22, NarratorId, RomusId, "Exile_Return_Close",
+                "Wrapping a torn greatcoat over your shoulders, you stepped into the cold surf. Whether loyalists rallied to the Toras signet or Azaro patrols hunted you through burning streets before dawn, King Romus IX would meet Rizia's ruin on native ground.", -1);
+
+            // Path 2: Attempt to calm the situation as a poorly respected AN official -> Airport encounter with Vina & Manus
+            AddChoice(conv, 30, NarratorId, "Exile_Work_As_AN_Official",
+                "Try to defuse the catastrophe from Konstantium as a lowly, little-respected Alliance of Nations envoy.",
+                "One more sword landing in Porte Drazon will only pile corpses on corpses. I still hold an honorary clerkship at the AN Secretariat in Kyrute—perhaps my name can still buy a ceasefire corridor.", 31,
+                "Variable[\"Zille_Exile_Choice\"] = \"ANDiplomat\"; Variable[\"Zille_Exile_ANOfficial\"] = true;");
+
+            AddLine(conv, 31, NarratorId, RomusId, "Exile_Airport_Confrontation_Intro",
+                "In Konstantium, though, an uncrowned king carried little weight. Delegates nodded politely behind glass doors and ignored your memorandums. Determined to board an AN observer shuttle toward the southern sea anyway, you hurried through Kyrute International Airport—when a bruised, soot-stained column of Rizian refugees pushed through customs toward the gate.", -1);
+
+            string manAliveCond = "Variable[\"RiziaDLC.Manus_Executed\"] ~= true and Variable[\"RiziaDLC.Manus_DiesInWar\"] ~= true";
+            string manDeadCond = "(Variable[\"RiziaDLC.Manus_Executed\"] == true or Variable[\"RiziaDLC.Manus_DiesInWar\"] == true)";
+            string vinaAliveCond = "Variable[\"RiziaDLC.Vina_FuneralHappened\"] ~= true and Variable[\"RiziaDLC.Vina_Dead\"] ~= true";
+            string vinaDeadCond = "(Variable[\"RiziaDLC.Vina_FuneralHappened\"] == true or Variable[\"RiziaDLC.Vina_Dead\"] == true)";
+
+            // Branch 2A: Both Vina and Manus fleeing Rizia meet Romus at Kyrute Airport (Primary Canon Case)
+            AddLine(conv, 32, VinaId, RomusId, "Airport_Vina_Blame",
+                "Through the rain-blurred terminal glass, Princess Vina stopped dead in her tracks beside a pale, bandaged Manus Sazon, both gripping battered leather suitcases. \"Father?!\" Vina's voice cracked with exhaustion and fury as she stepped right into your path. \"Stop right there—look at us! We barely made the last cargo charter out of Valenqiris while Azaro shells rained over residential streets!\"", 33,
+                vinaAliveCond + " and " + manAliveCond);
+
+            AddLine(conv, 33, ManusId, RomusId, "Airport_Manus_Blame",
+                "Manus's dark coat smelled sharply of woodsmoke and hospital antiseptic. \"Do not talk to us about AN committees, Your Majesty,\" he said bitterly, stepping beside Vina. \"When our armies were finished and the cities starved, you walked out of that tent out of pride! House Azaro butchered hundreds in the streets to seize power, signed away half of Brenas to Smolak anyway, and now every noble banner is burning the rest of the country!\"", 34);
+
+            AddLine(conv, 34, VinaId, RomusId, "Airport_Vina_Trial_Warn",
+                "Vina gripped your sleeve—not in warmth, but to keep you from taking another step toward the boarding ramp. \"Even your precious AN secretaries laugh behind your back, Father! And hear me well: if you fly back into Rizia tonight, there is no crown, no reconciliation. Both the Azaro junta and the rebel courts blame your name for every grave—at Porte Drazon only a summary tribunal and the firing squad wait for you!\"", -1);
+
+            // Branch 2B: Vina without Manus (if Manus died in Pales/executed)
+            AddLine(conv, 132, VinaId, RomusId, "Airport_Vina_Only_Warn",
+                "At the rainy departure gate, Princess Vina stepped out from a crowd of weeping exiles, eyes hollow with smoke and grief. \"Father—stop! You cannot go back! Valenqiris and Brenas are tearing themselves apart under Azaro martial law after you refused peace! Everyone inside Rizia lays this bloodbath at your door—return across that tarmac, and the only court waiting for you is a military tribunal and certain execution!\"", -1,
+                vinaAliveCond + " and " + manDeadCond);
+
+            // Branch 2C: Manus without Vina (if Vina passed away)
+            AddLine(conv, 232, ManusId, RomusId, "Airport_Manus_Only_Warn",
+                "By the misty Kyrute terminal gate, Manus Sazon pushed out of the last evacuation flight, arm in a blood-stained sling. \"Put that pathetic AN badge away, Romus! Rizia is burning in a four-way civil war because you rejected peace when the kingdom was bled dry! House Azaro drowned Porte Drazon in blood and gave Smolak our southern border—and if your plane touches Rizian tarmac, a summary court-martial awaits you!\"", -1,
+                vinaDeadCond + " and " + manAliveCond);
+
+            // Branch 2D: Courier fallback if both dead
+            AddLine(conv, 332, NarratorId, RomusId, "Airport_Fallback_Refugee_Warn",
+                "Among the exhausted exiles stumbling off the final Valenqiris evacuation flight, former palace aides grabbed your sleeve in tears—reporting Azaro's bloody crackdown, the rotten Brenas concessions to Wehlen, and posters declaring Romus Toras a traitor sentenced to immediate death if he ever crossed the border.", -1,
+                vinaDeadCond + " and " + manDeadCond);
+
+            AddLink(conv, 31, 32);
+            AddLink(conv, 31, 132);
+            AddLink(conv, 31, 232);
+            AddLink(conv, 31, 332);
+
+            var airportHub = AddLine(conv, 40, RomusId, NarratorId, "Airport_Final_Reflection",
+                "Over the terminal loudspeakers, the final boarding bell echoed down the cold corridor as diplomatic couriers brushed past an ignored former king.");
+
+            foreach (int prev in new[] { 34, 132, 232, 332 })
+            {
+                AddLink(conv, prev, 40);
+            }
+
+            airportHub.outgoingLinks.Add(CreateLink(conv.id, 40, 41));
+            airportHub.outgoingLinks.Add(CreateLink(conv.id, 40, 42));
+
+            AddChoice(conv, 41, NarratorId, "Airport_Submit_To_Exile",
+                "Step back from the boarding gate, letting the evacuation doors shut while remaining in thankless exile.",
+                "Perhaps you are right... Let the young inherit whatever survives the ashes. I will stay in Konstantium, swallow their contempt, and beg for whatever scraps of aid reach the refugees.", 50,
+                "Variable[\"Zille_Exile_AcceptedTruth\"] = true;");
+
+            AddChoice(conv, 42, NarratorId, "Airport_Defend_Refusal",
+                "\"I refused to sign a slave's parchment in Zille—if Rizia condemns me for that, so be it.\"",
+                "I did not burn Porte Drazon—Taddeus's ambition and Smolak's guns did. Yet even here on foreign concrete, I will not apologize for refusing to kneel!", 50,
+                "Variable[\"Zille_Exile_Defiant\"] = true;");
+
+            AddLine(conv, 50, NarratorId, RomusId, "Exile_Kyrute_Final_Curtain",
+                "Rain streaked the wide windows of Kyrute Airport as the southern shuttle lifted into leaden clouds without you. Years later in dusty AN side offices, diplomats only half-remembered the gray-haired Rizian clerk whose reports nobody read—a king who refused a bitter peace until his crown, his provinces, and his own family slipped forever beyond reach.", -1);
+
+            AddConversationWithAlias(db, conv, "Zille/ExileEpilogue", "Turn_Zille_ExileEpilogue");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Injected Azaro Collapse & Exile Epilogue (ID 10004) into masterDatabase!");
         }
     }
 }

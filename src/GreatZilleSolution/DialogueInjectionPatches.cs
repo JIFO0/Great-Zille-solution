@@ -2085,6 +2085,14 @@ namespace GreatZilleSolution
                         });
                     }
 
+                    if ((DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse") || DialogueHelper.GetBoolVariable("Zille_Parley_Refused"))
+                        && !DialogueHelper.GetBoolVariable("Zille_ExileEpilogue_Done"))
+                    {
+                        EnsureButtonExists(__instance, "(MODNEW) Exile in Kyrute: The Shattered Kingdom", "Konstantium & Kyrute Airport", null, () => {
+                            WarOperationZilleManager.TriggerConversation("Turn_Zille_ExileEpilogue", "Zille/ExileEpilogue");
+                        });
+                    }
+
                     // Injected spawned events from Spawner
                     var spawned = ZilleEventSpawnerManager.SpawnedInPorteDrazon;
                     if (spawned != null)
@@ -2539,13 +2547,13 @@ namespace GreatZilleSolution
                     ZilleCampaignState.Outcome = ZilleWarOutcome.BloodyStalemate;
                     ZilleCampaignState.IsIndependentZilleAgreed = true;
                 }
-                else if (title == "Reject_Buffer_Ceasefire" || title == "Accept_Tactical_Defeat" || title == "Salvage_Brenas_Leverage" || title == "Sign_Tactical_Defeat")
+                else if (title == "Reject_Buffer_Ceasefire" || title == "Accept_Tactical_Defeat" || title == "Accept_Tactical_Defeat_Defiant" || title == "Salvage_Brenas_Leverage" || title == "Sign_Tactical_Defeat" || title == "Sign_Tactical_Defeat_Warning")
                 {
                     ZilleCampaignState.Outcome = ZilleWarOutcome.TacticalDefeat;
                     ZilleCampaignState.IsBrenasLost = false;
                     ZilleCampaignState.IsIndependentZilleAgreed = false;
                 }
-                else if (title == "Accept_Total_Fiasco" || title == "Sign_Total_Fiasco")
+                else if (title == "Accept_Total_Fiasco" || title == "Accept_Total_Fiasco_Silent" || title == "Sign_Total_Fiasco" || title == "Sign_Total_Fiasco_Silent" || title == "Refuse_Parley_Collapse")
                 {
                     ZilleCampaignState.Outcome = ZilleWarOutcome.TotalFiasco;
                     ZilleCampaignState.IsBrenasLost = true;

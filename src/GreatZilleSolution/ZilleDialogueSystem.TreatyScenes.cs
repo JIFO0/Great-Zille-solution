@@ -53,7 +53,7 @@ namespace GreatZilleSolution
                 "You took the battered tin cup. The chicory brew smelled of burnt grain and woodsmoke, yet your hand remained steady as Smolak grinned around his cigarette.", 2);
 
             AddLine(conv, 405, NarratorId, RomusId, "Parley_Entry_Briefcase",
-                "The leather case landed with a heavy thud that rattled Smolak's tin saucer. His eyes flicked down to the royal crest on the brass clasp before returning to your face.", 2);
+                "The leather case landed with a heavy thud that rattled Smolak's tin saucer. His eyes flicked down to the gilded Toras crest stamped on the leather before returning to your face.", 2);
 
             AddLink(conv, 1, 401);
             AddLink(conv, 1, 402);
@@ -103,7 +103,7 @@ namespace GreatZilleSolution
 
             // ================= BRANCH A: DECISIVE VICTORY / OVERWHELMING TRIUMPH =================
             AddLine(conv, 100, NarratorId, RomusId, "Smolak_Defeated_Rant",
-                "Smolak ground his cigarette under his boot heel, his jaw twitching. \"Don't get drunk on victory, King Romus! Valdez blundered, sure—but I still have battalions in Wraclawitz, Contana whispering in Kyrute, and stubborn pride! I'll hand back Zille if you let my surviving boys sail home untouched—not one copper of reparations!\"", -1);
+                "Smolak ground his cigarette under his boot heel, his jaw twitching. \"Don't get drunk on victory, King Romus! My Zille garrison blundered, sure—but I still have battalions in Wraclawitz, Contana whispering in Kyrute, and stubborn pride! I'll hand back Zille if you let my surviving boys sail home untouched—not one copper of reparations!\"", -1);
 
             AddLink(conv, 100, 101);
             AddLink(conv, 100, 1102);
@@ -225,8 +225,8 @@ namespace GreatZilleSolution
                 "Smolak's smirk cracked slightly as he rubbed his temple. \"Lawyers and files... Fine, Romus, you've got teeth in Konstantium. Put your final answer on the table.\"", -1);
 
             AddChoice(conv, 206, SmolakId, "Stalemate_Press_Steel",
-                "\"Look at our Brenas depots and the Gulf—over a thousand spare arms while Valdez's convoys starve!\"",
-                "Your trenches in Zille are running dry while our depots hold over a thousand reserve weapons and our ships/allies choke your resupply! You will break first in a war of attrition, Wiktor!", 207,
+                "\"Look at our Brenas depots and the Gulf—over a thousand spare arms while Wehlen's convoys starve!\"",
+                "Your trenches in Zille are running dry while our depots hold over a thousand reserve weapons and our ships and allies choke your resupply! You will break first in a war of attrition, Wiktor!", 207,
                 "Variable[\"Zille_Stale_PressedSteel\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;",
                 "((Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_NavalBlockadeActive\"] == true or Variable[\"Zille_DerdiaHybridActive\"] == true))");
 
@@ -245,12 +245,11 @@ namespace GreatZilleSolution
             AddLink(conv, 208, 203);
 
             AddLine(conv, 202, NarratorId, RomusId, "Stalemate_Hub_Lucita",
-                "Lucita frowned beside you, awaiting your final call on whether to compromise, force victory through sheer leverage, or freeze the front.", -1,
-                "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
+                "Beside the canvas flap, your chief operations staff kept rigid silence, awaiting your final call on whether to compromise, force victory through sheer leverage, or freeze the front.", -1);
 
             AddLine(conv, 203, NarratorId, RomusId, "Stalemate_Hub_NoLucita",
                 "Your staff officers stood silent as Smolak awaited your final verdict on the stalemate.", -1,
-                "(Variable[\"RiziaDLC.Lucita_Arrested\"] == true or Variable[\"RiziaDLC.Lucita_Executed\"] == true)");
+                "false");
 
             foreach (int h in new[] { 202, 203 })
             {
@@ -287,7 +286,7 @@ namespace GreatZilleSolution
 
             // ================= BRANCH C: TACTICAL DEFEAT / TOTAL FIASCO (+ LEVERAGE SALVAGE) =================
             AddLine(conv, 300, NarratorId, RomusId, "Smolak_Victorious_Mock",
-                "Smolak leaned back with a predatory grin, spreading his arms wide. \"How fast royal pride melts when the guns fall quiet, eh, Romus? General Valdez shattered your offensive!\"", -1);
+                "Smolak leaned back with a predatory grin, spreading his arms wide. \"How fast royal pride melts when the guns fall quiet, eh, Romus? Wehlen's divisions shattered your offensive!\"", -1);
 
             AddLine(conv, 301, SmolakId, RomusId, "Smolak_TacticalDefeat_Terms",
                 "\"You bled for zero ground gained! Withdraw behind the Brenas line, drop all claim to Zille, and swallow an armistice while my mood stays generous.\"", -1,
@@ -340,14 +339,28 @@ namespace GreatZilleSolution
             AddLine(conv, 321, NarratorId, RomusId, "Smolak_Signs_Fiasco",
                 "Smolak laughed uproariously, slapping the table. \"History will remember today, King Romus! Your father gave me Zille; you just handed me Brenas! Good luck surviving your own generals tonight!\"", -1);
 
+            // REFUSE NEGOTIATIONS WHEN COUNTRY CANNOT ENDURE -> HOUSE AZARO COUP & EXILE!
+            AddChoice(conv, 330, SmolakId, "Refuse_Parley_Collapse",
+                "\"Tear up his surrender terms and walk out—Rizia refuses to ratify this shame even if the throne burns!\"",
+                "Put your pen down, Wiktor. Even shattered and bled white, a King of House Toras does not sign away Rizia's soil at gunpoint. Let the artillery speak until the end!", 331,
+                "Variable[\"Zille_Parley_Refused\"] = true; Variable[\"Zille_Azaro_Coup_Collapse\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true; Variable[\"RiziaDLC.Ending_Coup_Azaro\"] = true; Variable[\"RiziaDLC.Epilogue_Exile_Forced\"] = true; Variable[\"RiziaDLC.Epilogue_Exile_CoupWarning\"] = true;");
+
+            AddLine(conv, 331, SmolakId, RomusId, "Smolak_Parley_Refused_Warn",
+                "Smolak's jaw dropped for half a second before breaking into a harsh, barking laugh. \"Walk out into the mud if you want, Your Majesty! Our shells start falling toward Mave Nortus within the hour—and see if Taddeus Azaro's officers leave the gates of Palas Rezna open for you when your country cracks!\"", 332);
+
+            AddLine(conv, 332, NarratorId, RomusId, "Carlos_Coup_Alert_Collapse",
+                "You strode out of the pavilion into cold rain—and never reached Palas Rezna. Halfway down the highway, frantic encrypted wires caught your motorcade: rail strikes and bread riots had erupted across Valenqiris, depleted battalions refused to march back to the guns, and House Azaro's commanders had proclaimed an emergency junta in Porte Drazon. Before midnight, loyal outriders rushed you toward a waiting plane bound for Kyrute.", -1);
+
             AddLink(conv, 301, 310);
             AddLink(conv, 301, 312);
             AddLink(conv, 301, 320);
             AddLink(conv, 301, 322);
             AddLink(conv, 301, 305);
+            AddLink(conv, 301, 330);
             AddLink(conv, 302, 320);
             AddLink(conv, 302, 322);
             AddLink(conv, 302, 305);
+            AddLink(conv, 302, 330);
 
             AddConversationWithAlias(db, conv, "Zille/WarSmolakFinalParley", "Turn_Zille_WarSmolakFinalParley");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Smolak Final Parley (ID 9992) into masterDatabase!");
@@ -393,7 +406,7 @@ namespace GreatZilleSolution
                 "A ripple of rustling velvet and clinking sabers answered your nod—the realm's estates watching closely to see how their King carried the weight of the peace.", -1);
 
             AddLine(conv, 405, NarratorId, RomusId, "Treaty_Entry_Seal",
-                "Your boots echoed crisply across the quiet stone floor. Behind the velvet ropes, foreign correspondents raised their pencils as you reached the dais.", -1);
+                "Your boots echoed cleanly across the quiet marble floor. Behind the velvet ropes, foreign correspondents raised their pencils as you reached the dais.", -1);
 
             AddLink(conv, 1, 401);
             AddLink(conv, 1, 402);
@@ -465,21 +478,23 @@ namespace GreatZilleSolution
             triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 71));
             triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 72));
 
+            string treatyDoneVars = "Variable[\"Zille_PeaceTreaty_Signed\"] = true; Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"Zille_Negotiations_Done\"] = true; ";
+
             AddChoice(conv, 70, HugoId, "Sign_Triumph_Derdia",
                 "\"Proclaim the Free City of Grodzizg under joint Rizian-Derdian protection and the restoration of Zille!\"",
                 "By the Great Seal of Rizia and the bond sworn with Supreme Wiseman Azmal, Zille returns to the Crown, Wehlen's southern border is demilitarized, and Grodzizg stands as a Free City of commerce and peace!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;",
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;",
                 "Variable[\"Zille_DerdiaPact_Signed\"] == true");
 
             AddChoice(conv, 71, HugoId, "Sign_Triumph_Crown",
                 "\"Proclaim Zille's restoration, Wehlen's indemnities, and the Free City Charter of Grodzizg!\"",
                 "Let every court in Merkopa witness this hour: Zille returns forever to House Toras, Wehlen pays full restitution, and Grodzizg rises as a protected Free City!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true;");
 
             AddChoice(conv, 72, HugoId, "Sign_Triumph_Peace",
                 "\"Dedicate this overwhelming victory to lasting southern stability and the memory of our fallen.\"",
                 "With Wehlen's southern front dismantled and Zille restored to our kingdom, we dedicate this decisive peace to our fallen soldiers and the security of every Rizian home!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"Grodzizg_FreeCity\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
 
             // Victory choices (always 3 choices when Victory/Triumph!)
             victoryHub.outgoingLinks.Add(CreateLink(conv.id, 3, 10));
@@ -489,17 +504,17 @@ namespace GreatZilleSolution
             AddChoice(conv, 10, HugoId, "Sign_Victory_Dynasty",
                 "\"Dedicate this restoration to House Toras and the healing of King Valero's 1927 wound!\"",
                 "In the presence of Saint Wruhec and the noble estates of Rizia, I affix the royal seal. The wound of 1927 is healed—Zille returns to the Crown of Rizia!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true;");
 
             AddChoice(conv, 15, HugoId, "Sign_Victory_Soldiers",
                 "\"Dedicate this treaty to the fallen soldiers and the steadfast people of Zille and Brenas!\"",
                 "This seal honors every Rizian soldier who bled on those hills and every citizen of Zille who kept faith in darkness. Today our kingdom stands whole again!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1;");
 
             AddChoice(conv, 20, HugoId, "Sign_Victory_Sovereignty",
                 "\"Proclaim to every embassy in Konstantium: Rizia's borders are inviolable!\"",
                 "Let every ambassador here carry one message back to Konstantium: Rizia honors her treaties, and Rizia defends her sovereignty without flinching!", -1,
-                "Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = true; Variable[\"RiziaDLC.Zille_PromisedToHouseToras\"] = true; Variable[\"RiziaDLC.MapLayer_Zille_Brenas\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 11, HugoId, RomusId, "Ack_Decisive_Ceremony",
                 "The throne room erupted into thunderous cheers, bells pealing from every sanctuary in Porte Drazon. Hugo wiped tears of joy from his eyes, bowing deeply before his King. \"Nearly thirty years of grief washed away in triumph! Long live King Romus the Restorer!\"", -1,
@@ -509,13 +524,19 @@ namespace GreatZilleSolution
                 "Thunderous applause shook the marble pillars as cathedral bells rang across Porte Drazon. Laurento bowed deeply. \"A historic restoration, Your Majesty. Zille is home.\"", -1,
                 "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
 
+            string estelaAliveCond = "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_EarlyExile\"] ~= true";
+            string repOrGrodCond = "(Variable[\"Zille_Reparations_Won\"] == true or Variable[\"Grodzizg_FreeCity\"] == true)";
+
             AddLine(conv, 112, EstelaId, RomusId, "Estela_Treaty_Joy",
                 "From the royal gallery, Queen Mother Estela pressed a lace handkerchief to her eyes, smiling down at you with quiet, radiant pride for the fishing harbor of her youth.", -1,
-                "Variable[\"QueenMother_Estela_Dead\"] ~= true and Variable[\"RiziaDLC.Estela_Dead\"] ~= true");
+                estelaAliveCond);
 
             AddLine(conv, 113, ElenaId, RomusId, "Elena_Treaty_Indemnities",
                 "Elena leaned over the parchment ledger with rare satisfaction. \"And with Wehlen's reconstruction indemnities and crude deliveries sealed in black and white, Brenas will rebuild twice as fast.\"", -1,
-                "Variable[\"Zille_Reparations_Won\"] == true or Variable[\"Grodzizg_FreeCity\"] == true");
+                repOrGrodCond);
+
+            AddLine(conv, 114, NarratorId, RomusId, "Treaty_Victory_FinalClose",
+                "With the crimson wax cooled upon the Great Seal of House Toras, marshals and foreign envoys alike bowed—Rizia's southern star once more shone over an undivided realm.", -1);
 
             foreach (int vCh in new[] { 10, 15, 20, 70, 71, 72 })
             {
@@ -523,10 +544,14 @@ namespace GreatZilleSolution
                 AddLink(conv, vCh, 111);
             }
             AddLink(conv, 11, 112);
-            AddLink(conv, 111, 112);
             AddLink(conv, 11, 113);
+            AddLink(conv, 11, 114);
+            AddLink(conv, 111, 112);
             AddLink(conv, 111, 113);
+            AddLink(conv, 111, 114);
             AddLink(conv, 112, 113);
+            AddLink(conv, 112, 114);
+            AddLink(conv, 113, 114);
 
             // Buffer choices (always 2 choices!)
             bufferHub.outgoingLinks.Add(CreateLink(conv.id, 4, 30));
@@ -535,12 +560,12 @@ namespace GreatZilleSolution
             AddChoice(conv, 30, HugoId, "Sign_Independent_Buffer",
                 "\"Praise international peace and open transit across the Strait of Kreleck.\"",
                 "To spare our people further carnage, I sign the charter establishing the Independent Neutral State of Zille. May this neutral territory stand as a peaceful bridge rather than a battlefield.", 31,
-                "Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;");
+                treatyDoneVars + "Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false;");
 
             AddChoice(conv, 32, HugoId, "Sign_Independent_Buffer_Ties",
                 "\"Affix the seal and pledge Rizia's enduring cultural and economic protection to Zille's citizens.\"",
                 "Though Zille walks as a neutral state under AN charter, Rizia will never sever the bonds of kinship, trade, and faith linking our peoples.", 31,
-                "Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+                treatyDoneVars + "Variable[\"Zille_Independent_Buffer\"] = true; Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 31, LaurentoId, RomusId, "Ack_Buffer_Ceremony",
                 "Laurento bowed solemnly. \"The Alliance of Nations applauds your royal restraint, Your Majesty. Peace and guaranteed transit across the Strait of Kreleck are secured.\"", -1);
@@ -552,12 +577,12 @@ namespace GreatZilleSolution
             AddChoice(conv, 40, HugoId, "Sign_Tactical_Defeat",
                 "\"Sign the Armed Armistice with somber resolve: Brenas endures.\"",
                 "With a heavy heart, I sign this armistice. Our soldiers fought with valor, yet Brenas must endure while we rebuild our strength. Zille remains outside our grasp... for now.", -1,
-                "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true;");
 
             AddChoice(conv, 42, HugoId, "Sign_Tactical_Defeat_Warning",
                 "\"Sign, yet warn every ambassador present that Rizia's lawful claim is only suspended.\"",
                 "I place my seal upon this truce to spare our wounded, yet let Konstantium record this truth: Rizia suspends her sword—never her rightful claim.", -1,
-                "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"RiziaDLC.ZilleReferendum_Lost\"] = true;");
 
             AddLine(conv, 41, HugoId, RomusId, "Ack_Tactical_Defeat",
                 "A somber silence fell over the throne room. Hugo sighed deeply, his shoulders bowed. \"A bitter day for House Toras, Romus—yet Brenas survives, and the realm endures.\"", -1,
@@ -580,12 +605,12 @@ namespace GreatZilleSolution
             AddChoice(conv, 50, HugoId, "Sign_Total_Fiasco",
                 "\"Sign the Instrument of Surrender to spare Porte Drazon from destruction.\"",
                 "To prevent the destruction of Porte Drazon, I sign this humiliating peace. May God forgive me for the tragedy that has befallen our kingdom.", -1,
-                "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true;");
 
             AddChoice(conv, 52, HugoId, "Sign_Total_Fiasco_Silent",
                 "\"Press the Great Seal into the wax in dead silence, accepting the Crown's responsibility.\"",
                 "I offer no excuses before this court. I affix the seal to save our capital, and I bear the reckoning alone.", -1,
-                "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true;");
+                treatyDoneVars + "Variable[\"RiziaDLC.ZilleReturn_Success\"] = false; Variable[\"Brenas_Lost_To_Wehlen\"] = true; Variable[\"RiziaDLC.Azaro_HasPowerToCoup\"] = true;");
 
             AddLine(conv, 51, NarratorId, RomusId, "Ack_Total_Fiasco",
                 "Shouts of outrage broke out among the assembled officers. Duke Taddeus stormed from the hall in disgust while dark whispers of a military coup echoed through the stone corridors.", -1,

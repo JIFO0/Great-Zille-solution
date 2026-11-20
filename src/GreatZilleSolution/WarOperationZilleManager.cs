@@ -449,6 +449,7 @@ namespace GreatZilleSolution
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPeaceTreaty", "Turn_Zille_WarPeaceTreaty", "The Treaty of Zille", "Treaty Pavilion", "Zille/WarPeaceTreaty");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_HomeFrontCrisis", "Turn_Zille_HomeFrontCrisis", "Wartime Home Front: Energy & AN Pressure", "Cabinet Room, Palas Rezna", "Zille/HomeFrontCrisis");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_ZilleLiberation", "Turn_Zille_ZilleLiberation", "Homecoming in Zille City: The Harbor Quarter", "Zille City Harbor", "Zille/ZilleLiberation");
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_ExileEpilogue", "Turn_Zille_ExileEpilogue", "Exile in Kyrute: The Shattered Kingdom", "Konstantium & Kyrute Airport", "Zille/ExileEpilogue");
 
                 ZilleReportsAndSituations.EnsureRegisteredAndSynced();
 
@@ -726,6 +727,7 @@ namespace GreatZilleSolution
                 "Turn_Zille_WarPreNegotiationsBriefing",
                 "Turn_Zille_WarSmolakFinalParley",
                 "Turn_Zille_WarPeaceTreaty",
+                "Turn_Zille_ExileEpilogue",
                 "WarFragment_Zille_1_1"
             };
             for (int i = 0; i < zilleFragments.Length; i++)
@@ -737,7 +739,8 @@ namespace GreatZilleSolution
         public static void SyncMandatoryStoryFragmentsFromState()
         {
             bool treatySigned = DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed") || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
-            if (treatySigned)
+            bool exileCollapse = DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse") || DialogueHelper.GetBoolVariable("Zille_Parley_Refused");
+            if (treatySigned || (exileCollapse && DialogueHelper.GetBoolVariable("Zille_ExileEpilogue_Done")))
             {
                 ClearAllMandatoryZilleFragments();
                 return;
@@ -1880,6 +1883,8 @@ namespace GreatZilleSolution
                         }
                     };
 
+                    PrepareSceneConversationMetadata("Turn_Zille_WarBriefing", "Zille/WarCouncil_Briefing");
+
                     if (cd != null)
                     {
                         convPanel.Setup(cd, onFinish, false);
@@ -1895,25 +1900,7 @@ namespace GreatZilleSolution
                         DialogueManager.StartConversation("Zille/WarCouncil_Briefing");
                     }
 
-                    // Populate conversant portraits for Titus, Lucita, Hugo, Elena, and Laurento in ConversationPanel
-                    var chars = EntityDataManager.CharactersData;
-                    if (chars != null)
-                    {
-                        for (int i = 0; i < chars.Count; i++)
-                        {
-                            var ch = chars[i];
-                            if (ch == null) continue;
-                            string cName = ch.CharacterName ?? ch.NameInDatabase ?? "";
-                            if (cName.IndexOf("Titus", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                cName.IndexOf("Lucita", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                cName.IndexOf("Hugo", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                cName.IndexOf("Elena", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                cName.IndexOf("Laurento", StringComparison.OrdinalIgnoreCase) >= 0)
-                            {
-                                convPanel.AddConversant(ch);
-                            }
-                        }
-                    }
+                    PopulateActiveConversationParticipants(convPanel, "Turn_Zille_WarBriefing");
 
                     convPanel.Show();
                     if (!DialogueManager.isConversationActive)
@@ -2021,9 +2008,16 @@ namespace GreatZilleSolution
                             else if (nameInDb == "Turn_Zille_HomeFrontCrisis") DialogueHelper.SetVariable("Zille_HomeFrontCrisis_Done", true);
                             else if (nameInDb == "Turn_Zille_ZilleLiberation") DialogueHelper.SetVariable("Zille_Liberation_Done", true);
                             else if (nameInDb == "Turn_Zille_WarSmolakFinalParley") DialogueHelper.SetVariable("Zille_Rep_ParleyDone", true);
+                            else if (nameInDb == "Turn_Zille_ExileEpilogue")
+                            {
+                                DialogueHelper.SetVariable("Zille_ExileEpilogue_Done", true);
+                                ClearAllMandatoryZilleFragments();
+                            }
                             else if (nameInDb == "Turn_Zille_WarPeaceTreaty")
                             {
+                                DialogueHelper.SetVariable("Zille_PeaceTreaty_Signed", true);
                                 DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
+                                DialogueHelper.SetVariable("Zille_Negotiations_Done", true);
                                 ClearAllMandatoryZilleFragments();
                             }
 
@@ -2039,6 +2033,8 @@ namespace GreatZilleSolution
                         }
                     };
 
+                    PrepareSceneConversationMetadata(nameInDb, dialogueTitle);
+
                     if (cd != null)
                     {
                         convPanel.Setup(cd, finishAction, false);
@@ -2053,30 +2049,7 @@ namespace GreatZilleSolution
                         DialogueManager.StartConversation(dialogueTitle);
                     }
 
-                    // Populate conversant portraits so all characters show properly in custom scenes
-                    var chars = EntityDataManager.CharactersData;
-                    if (chars != null)
-                    {
-                        string[] portraitNames = new[] {
-                            "Titus", "Lucita", "Hugo", "Elena", "Laurento", "Taddeus",
-                            "Manus", "Angelica", "Leona", "Carlos", "Sal", "Smolak",
-                            "Alvarez", "Hegel", "Beatrice", "Azmal", "Vina", "Estela"
-                        };
-                        for (int i = 0; i < chars.Count; i++)
-                        {
-                            var ch = chars[i];
-                            if (ch == null) continue;
-                            string cName = ch.CharacterName ?? ch.NameInDatabase ?? "";
-                            foreach (var p in portraitNames)
-                            {
-                                if (cName.IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)
-                                {
-                                    convPanel.AddConversant(ch);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    PopulateActiveConversationParticipants(convPanel, nameInDb);
 
                     convPanel.Show();
                     if (!DialogueManager.isConversationActive)
@@ -2145,9 +2118,23 @@ namespace GreatZilleSolution
                 MelonLogger.Msg("[WAR ENGINE] Pre-Negotiations Briefing finished. Proceeding to Smolak Parley...");
                 TriggerConversation("Turn_Zille_WarSmolakFinalParley", "Zille/WarSmolakFinalParley", () => {
                     SetStoryFragmentMandatoryState("Turn_Zille_WarSmolakFinalParley", false);
+                    if (DialogueHelper.GetBoolVariable("Zille_Parley_Refused") || DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse"))
+                    {
+                        MelonLogger.Msg("[WAR ENGINE] Smolak Parley refused under collapse! Triggering Azaro Coup & Exile Epilogue...");
+                        SetStoryFragmentMandatoryState("Turn_Zille_WarPeaceTreaty", false);
+                        SetStoryFragmentMandatoryState("Turn_Zille_ExileEpilogue", true);
+                        TriggerConversation("Turn_Zille_ExileEpilogue", "Zille/ExileEpilogue", () => {
+                            DialogueHelper.SetVariable("Zille_ExileEpilogue_Done", true);
+                            ClearAllMandatoryZilleFragments();
+                        });
+                        return;
+                    }
                     MelonLogger.Msg("[WAR ENGINE] Smolak Parley finished. Proceeding to Treaty of Zille ceremony...");
                     TriggerConversation("Turn_Zille_WarPeaceTreaty", "Zille/WarPeaceTreaty", () => {
                         MelonLogger.Msg("[WAR ENGINE] Treaty of Zille concluded!");
+                        DialogueHelper.SetVariable("Zille_PeaceTreaty_Signed", true);
+                        DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
+                        DialogueHelper.SetVariable("Zille_Negotiations_Done", true);
                         ClearAllMandatoryZilleFragments();
                         if (ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
                         {
@@ -2156,6 +2143,340 @@ namespace GreatZilleSolution
                     });
                 });
             });
+        }
+
+        // ================= SCENE-ACCURATE CONVERSATION PARTICIPANT PORTRAITS =================
+
+        private static bool IsCharacterAvailableForScene(string actorKey, string sceneKey)
+        {
+            switch (actorKey)
+            {
+                case "Hugo":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Hugo_Resigned");
+                case "Lucita":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Lucita_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.BirthdayGathering_LucitaExiled");
+                case "Titus":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Titus_Executed");
+                case "Taddeus":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Taddeus_Executed");
+                case "Carlos":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Carlos_Arrested");
+                case "Angelica":
+                    return DialogueHelper.GetBoolVariable("RiziaDLC.Relations_HouseSazon_AngelicaPardoned")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Angelica_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Angelica_Executed");
+                case "Manus":
+                    if (sceneKey == "Turn_Zille_ExileEpilogue")
+                    {
+                        return !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Executed")
+                            && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_DiesInWar");
+                    }
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Executed")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_Gone")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_EarlyExile")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Manus_DiesInWar")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.BirthdayGathering_ManusExiled");
+                case "Leona":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Leona_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Leona_Executed");
+                case "Sal":
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Arrested")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Sal_Executed");
+                case "Estela":
+                    return !DialogueHelper.GetBoolVariable("QueenMother_Estela_Dead")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Estela_Dead")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Estela_EarlyExile");
+                case "Vina":
+                    if (sceneKey == "Turn_Zille_ExileEpilogue")
+                    {
+                        return !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_FuneralHappened")
+                            && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_Dead");
+                    }
+                    return !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_FuneralHappened")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_Dead")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_Escapes")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_EarlyExile")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_Hostage")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.Vina_InPales")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.AxelVina_Married_Official")
+                        && !DialogueHelper.GetBoolVariable("RiziaDLC.BirthdayGathering_VinaExiled");
+                default:
+                    return true;
+            }
+        }
+
+        private static string MatchCharacterKey(CharacterData ch)
+        {
+            if (ch == null) return null;
+            string name = (ch.CharacterName ?? "").Trim();
+            string dbName = (ch.NameInDatabase ?? "").Trim();
+            string combined = (name + " " + dbName).Trim();
+            if (string.IsNullOrEmpty(combined)) return null;
+
+            // Use explicit full/character names so short substrings like "Sal" never hit unrelated characters
+            if (combined.IndexOf("Hugo", StringComparison.OrdinalIgnoreCase) >= 0) return "Hugo";
+            if (combined.IndexOf("Lucita", StringComparison.OrdinalIgnoreCase) >= 0) return "Lucita";
+            if (combined.IndexOf("Elena", StringComparison.OrdinalIgnoreCase) >= 0) return "Elena";
+            if (combined.IndexOf("Laurento", StringComparison.OrdinalIgnoreCase) >= 0) return "Laurento";
+            if (combined.IndexOf("Titus", StringComparison.OrdinalIgnoreCase) >= 0) return "Titus";
+            if (combined.IndexOf("Taddeus", StringComparison.OrdinalIgnoreCase) >= 0) return "Taddeus";
+            if (combined.IndexOf("Carlos", StringComparison.OrdinalIgnoreCase) >= 0) return "Carlos";
+            if (combined.IndexOf("Angelica", StringComparison.OrdinalIgnoreCase) >= 0) return "Angelica";
+            if (combined.IndexOf("Manus", StringComparison.OrdinalIgnoreCase) >= 0) return "Manus";
+            if (combined.IndexOf("Leona", StringComparison.OrdinalIgnoreCase) >= 0) return "Leona";
+            if (combined.IndexOf("Ignacius", StringComparison.OrdinalIgnoreCase) >= 0
+                || string.Equals(name, "Sal", StringComparison.OrdinalIgnoreCase)
+                || dbName.EndsWith("_Sal", StringComparison.OrdinalIgnoreCase)) return "Sal";
+            if (combined.IndexOf("Smolak", StringComparison.OrdinalIgnoreCase) >= 0) return "Smolak";
+            if (combined.IndexOf("Alvarez", StringComparison.OrdinalIgnoreCase) >= 0) return "Alvarez";
+            if (combined.IndexOf("Hegel", StringComparison.OrdinalIgnoreCase) >= 0) return "Hegel";
+            if (combined.IndexOf("Beatrice", StringComparison.OrdinalIgnoreCase) >= 0) return "Beatrice";
+            if (combined.IndexOf("Azmal", StringComparison.OrdinalIgnoreCase) >= 0) return "Azmal";
+            if (combined.IndexOf("Estela", StringComparison.OrdinalIgnoreCase) >= 0) return "Estela";
+            if (combined.IndexOf("Vina", StringComparison.OrdinalIgnoreCase) >= 0) return "Vina";
+            return null;
+        }
+
+        private static string NormalizeSceneKey(string nameInDb)
+        {
+            if (string.IsNullOrEmpty(nameInDb)) return "";
+            if (!nameInDb.StartsWith("Turn_Zille_", StringComparison.OrdinalIgnoreCase) && nameInDb.StartsWith("Zille/", StringComparison.OrdinalIgnoreCase))
+            {
+                string tail = nameInDb.Substring("Zille/".Length);
+                if (tail == "WarCouncil_Briefing") return "Turn_Zille_WarBriefing";
+                return "Turn_Zille_" + tail;
+            }
+            return nameInDb;
+        }
+
+        public static List<string> GetExpectedParticipantsForScene(string nameInDb)
+        {
+            string scene = NormalizeSceneKey(nameInDb);
+            var list = new List<string>();
+            void AddIfAvail(string key)
+            {
+                if (IsCharacterAvailableForScene(key, scene) && !list.Contains(key)) list.Add(key);
+            }
+
+            bool hugoAvail = IsCharacterAvailableForScene("Hugo", scene);
+            bool lucitaAvail = IsCharacterAvailableForScene("Lucita", scene);
+            bool taddeusAvail = IsCharacterAvailableForScene("Taddeus", scene);
+            bool titusAvail = IsCharacterAvailableForScene("Titus", scene);
+            bool angelicaAvail = IsCharacterAvailableForScene("Angelica", scene);
+            bool manusAvail = IsCharacterAvailableForScene("Manus", scene);
+
+            switch (scene)
+            {
+                case "Turn_Zille_WarPlanning":
+                    if (hugoAvail) list.Add("Hugo");
+                    AddIfAvail("Laurento");
+                    AddIfAvail("Elena");
+                    if (lucitaAvail) list.Add("Lucita");
+                    else if (taddeusAvail) list.Add("Taddeus");
+                    if (!lucitaAvail || !taddeusAvail || !titusAvail) AddIfAvail("Carlos");
+                    if (titusAvail) list.Add("Titus");
+                    break;
+
+                case "Turn_Zille_WarLogisticsDispute":
+                    AddIfAvail("Taddeus");
+                    AddIfAvail("Lucita");
+                    if (!lucitaAvail || !taddeusAvail) AddIfAvail("Carlos");
+                    AddIfAvail("Angelica");
+                    AddIfAvail("Manus");
+                    if (!angelicaAvail && !manusAvail) AddIfAvail("Leona");
+                    AddIfAvail("Elena");
+                    if (hugoAvail) list.Add("Hugo");
+                    else AddIfAvail("Laurento");
+                    break;
+
+                case "Turn_Zille_WarBriefing":
+                    if (hugoAvail) list.Add("Hugo");
+                    else if (DialogueHelper.GetBoolVariable("RiziaDLC.Council_GrandVizier_Angelica")
+                             && !DialogueHelper.GetBoolVariable("RiziaDLC.Angelica_Arrested")
+                             && !DialogueHelper.GetBoolVariable("RiziaDLC.Angelica_Executed"))
+                        list.Add("Angelica");
+                    else if (DialogueHelper.GetBoolVariable("RiziaDLC.Council_GrandVizier_Sal")
+                             && IsCharacterAvailableForScene("Sal", scene))
+                        list.Add("Sal");
+                    AddIfAvail("Laurento");
+                    if (lucitaAvail) list.Add("Lucita");
+                    else if (taddeusAvail) list.Add("Taddeus");
+                    if (!lucitaAvail || !titusAvail) AddIfAvail("Carlos");
+                    AddIfAvail("Titus");
+                    AddIfAvail("Elena");
+                    break;
+
+                case "Turn_Zille_WarBalconySpeech":
+                    if (hugoAvail) list.Add("Hugo");
+                    AddIfAvail("Laurento");
+                    break;
+
+                case "Turn_Zille_MaveNortusHQ":
+                    AddIfAvail("Taddeus");
+                    AddIfAvail("Lucita");
+                    if (!taddeusAvail || !lucitaAvail || DialogueHelper.GetBoolVariable("Zille_Fighting_Pales"))
+                        AddIfAvail("Carlos");
+                    break;
+
+                case "Turn_Zille_Op1AftermathCouncil":
+                    if (hugoAvail) list.Add("Hugo");
+                    AddIfAvail("Laurento");
+                    if (lucitaAvail) list.Add("Lucita");
+                    else AddIfAvail("Carlos");
+                    break;
+
+                case "Turn_Zille_DerdiaInvestigation":
+                    if (titusAvail) list.Add("Titus");
+                    else AddIfAvail("Carlos");
+                    AddIfAvail("Laurento");
+                    AddIfAvail("Lucita");
+                    break;
+
+                case "Turn_Zille_DerdiaTalks":
+                    list.Add("Azmal");
+                    break;
+
+                case "Turn_Zille_DerdiaStateVisit":
+                    list.Add("Azmal");
+                    AddIfAvail("Titus");
+                    break;
+
+                case "Turn_Zille_LespiaTalks":
+                    list.Add("Alvarez");
+                    list.Add("Laurento");
+                    break;
+
+                case "Turn_Zille_RumburgTalks":
+                    list.Add("Beatrice");
+                    if (hugoAvail) list.Add("Hugo");
+                    else list.Add("Laurento");
+                    break;
+
+                case "Turn_Zille_WarPreNegotiationsBriefing":
+                    AddIfAvail("Laurento");
+                    AddIfAvail("Elena");
+                    if (hugoAvail) list.Add("Hugo");
+                    if (lucitaAvail) list.Add("Lucita");
+                    else AddIfAvail("Carlos");
+                    break;
+
+                case "Turn_Zille_WarSmolakFinalParley":
+                    list.Add("Smolak");
+                    break;
+
+                case "Turn_Zille_WarPeaceTreaty":
+                    if (hugoAvail) list.Add("Hugo");
+                    AddIfAvail("Laurento");
+                    if (IsCharacterAvailableForScene("Estela", scene)) list.Add("Estela");
+                    if (DialogueHelper.GetBoolVariable("Zille_Reparations_Won") || DialogueHelper.GetBoolVariable("Grodzizg_FreeCity"))
+                        AddIfAvail("Elena");
+                    break;
+
+                case "Turn_Zille_HomeFrontCrisis":
+                    AddIfAvail("Elena");
+                    AddIfAvail("Laurento");
+                    if (hugoAvail) list.Add("Hugo");
+                    break;
+
+                case "Turn_Zille_ZilleLiberation":
+                    AddIfAvail("Estela");
+                    AddIfAvail("Vina");
+                    AddIfAvail("Laurento");
+                    if (titusAvail) list.Add("Titus");
+                    else AddIfAvail("Carlos");
+                    AddIfAvail("Manus");
+                    if (!manusAvail) AddIfAvail("Leona");
+                    break;
+
+                case "Turn_Zille_ExileEpilogue":
+                    if (IsCharacterAvailableForScene("Vina", scene)) list.Add("Vina");
+                    if (IsCharacterAvailableForScene("Manus", scene)) list.Add("Manus");
+                    break;
+            }
+
+            return list;
+        }
+
+        private static int ActorIdForKey(string actorKey)
+        {
+            return actorKey switch
+            {
+                "Hugo" => ZilleDialogueSystem.HugoId,
+                "Lucita" => ZilleDialogueSystem.LucitaId,
+                "Elena" => ZilleDialogueSystem.ElenaId,
+                "Laurento" => ZilleDialogueSystem.LaurentoId,
+                "Titus" => ZilleDialogueSystem.TitusId,
+                "Taddeus" => ZilleDialogueSystem.TaddeusId,
+                "Carlos" => ZilleDialogueSystem.CarlosId,
+                "Angelica" => ZilleDialogueSystem.AngelicaId,
+                "Manus" => ZilleDialogueSystem.ManusId,
+                "Leona" => ZilleDialogueSystem.LeonaId,
+                "Sal" => ZilleDialogueSystem.SalId,
+                "Smolak" => ZilleDialogueSystem.SmolakId,
+                "Alvarez" => ZilleDialogueSystem.AlvarezId,
+                "Hegel" => ZilleDialogueSystem.HegelId,
+                "Beatrice" => ZilleDialogueSystem.BeatriceId,
+                "Azmal" => ZilleDialogueSystem.AzmalId,
+                "Estela" => ZilleDialogueSystem.EstelaId,
+                "Vina" => ZilleDialogueSystem.VinaId,
+                _ => ZilleDialogueSystem.NarratorId
+            };
+        }
+
+        private static void PrepareSceneConversationMetadata(string nameInDb, string dialogueTitle)
+        {
+            try
+            {
+                var db = DialogueManager.masterDatabase;
+                if (db == null) return;
+                var expected = GetExpectedParticipantsForScene(nameInDb);
+                int primaryConvId = expected.Count > 0 ? ActorIdForKey(expected[0]) : ZilleDialogueSystem.NarratorId;
+
+                foreach (var title in new[] { nameInDb, dialogueTitle })
+                {
+                    if (string.IsNullOrEmpty(title)) continue;
+                    var conv = db.GetConversation(title);
+                    if (conv == null) continue;
+                    conv.ConversantID = primaryConvId;
+                    ZilleDialogueSystem.EnsureConvField(conv, "Conversant", primaryConvId.ToString(), FieldType.Actor);
+                }
+            }
+            catch { }
+        }
+
+        public static void PopulateActiveConversationParticipants(ConversationPanel convPanel, string nameInDb)
+        {
+            if (convPanel == null) return;
+            var expected = GetExpectedParticipantsForScene(nameInDb);
+            var expectedSet = new HashSet<string>(expected, StringComparer.OrdinalIgnoreCase);
+
+            var chars = EntityDataManager.CharactersData;
+            if (chars == null) return;
+
+            for (int i = 0; i < chars.Count; i++)
+            {
+                var ch = chars[i];
+                if (ch == null) continue;
+                string key = MatchCharacterKey(ch);
+                if (string.IsNullOrEmpty(key)) continue;
+
+                if (expectedSet.Contains(key))
+                {
+                    try { convPanel.AddConversant(ch); } catch { }
+                }
+                else
+                {
+                    try { convPanel.RemoveConversant(ch); } catch { }
+                }
+            }
+            MelonLogger.Msg($"[WAR ENGINE] Participants for '{nameInDb}': [{string.Join(", ", expected)}]");
         }
 
         // ================= SCHEDULED THEATRE TRANSITION =================

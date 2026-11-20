@@ -47,6 +47,7 @@ namespace GreatZilleSolution
         public const int ConvId_DerdiaInvestigation = 10001;
         public const int ConvId_DerdiaStateVisit = 10002;
         public const int ConvId_Op1AftermathCouncil = 10003;
+        public const int ConvId_ExileEpilogue = 10004;
 
         private static bool _conversationsRegistered = false;
 
@@ -78,6 +79,7 @@ namespace GreatZilleSolution
 
                 if (db.GetConversation("Turn_Zille_WarPlanning") != null &&
                     db.GetConversation("Turn_Zille_WarBriefing") != null &&
+                    db.GetConversation("Turn_Zille_WarBalconySpeech") != null &&
                     db.GetConversation("Turn_Zille_MaveNortusHQ") != null &&
                     db.GetConversation("Turn_Zille_Op1AftermathCouncil") != null &&
                     db.GetConversation("Turn_Zille_DerdiaTalks") != null &&
@@ -86,13 +88,17 @@ namespace GreatZilleSolution
                     db.GetConversation("Turn_Zille_LespiaTalks") != null &&
                     db.GetConversation("Turn_Zille_RumburgTalks") != null &&
                     db.GetConversation("Turn_Zille_WarLogisticsDispute") != null &&
+                    db.GetConversation("Turn_Zille_WarPreNegotiationsBriefing") != null &&
+                    db.GetConversation("Turn_Zille_WarSmolakFinalParley") != null &&
+                    db.GetConversation("Turn_Zille_WarPeaceTreaty") != null &&
                     db.GetConversation("Turn_Zille_HomeFrontCrisis") != null &&
-                    db.GetConversation("Turn_Zille_ZilleLiberation") != null)
+                    db.GetConversation("Turn_Zille_ZilleLiberation") != null &&
+                    db.GetConversation("Turn_Zille_ExileEpilogue") != null)
                 {
                     return;
                 }
 
-                MelonLogger.Msg("[ZILLE DIALOGUE] Registering all 15 Great Zille narrative scenes into masterDatabase...");
+                MelonLogger.Msg("[ZILLE DIALOGUE] Registering all 17 Great Zille narrative scenes into masterDatabase...");
 
                 RegisterWarPlanning(db);
                 RegisterWarLogisticsDispute(db);
@@ -110,10 +116,11 @@ namespace GreatZilleSolution
                 RegisterWarPeaceTreaty(db);
                 RegisterHomeFrontCrisis(db);
                 RegisterZilleLiberation(db);
+                RegisterExileEpilogue(db);
 
                 _conversationsRegistered = true;
                 DialogueOverrideManager.ApplyAllOverrides();
-                MelonLogger.Msg("[ZILLE DIALOGUE] All 15 custom scenes successfully registered into masterDatabase!");
+                MelonLogger.Msg("[ZILLE DIALOGUE] All 17 custom scenes successfully registered into masterDatabase!");
             }
             catch (Exception ex)
             {
@@ -321,9 +328,26 @@ namespace GreatZilleSolution
                         if (InjectTurn4PalesCouncilChoice(conv, db)) patchedCount++;
                     }
                     // 8. Turn 8 Zille Final Negotiations (FPnT_ZilleNegotiations)
-                    else if (conv.Title.IndexOf("FPnT_ZilleNegotiations", StringComparison.OrdinalIgnoreCase) >= 0)
+                    else if (conv.Title.IndexOf("FPnT_ZilleNegotiations", StringComparison.OrdinalIgnoreCase) >= 0
+                          || conv.Title.IndexOf("ZilleNegotiations", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         if (InjectTurn8ZilleNegotiationsWarChoice(conv, db)) patchedCount++;
+                    }
+                    // 9. Turn 9 Zille Referendum & Handback [INTERRUPT] guards when military campaign supersedes diplomacy
+                    else if (conv.Title.IndexOf("ZilleReferendum", StringComparison.OrdinalIgnoreCase) >= 0
+                          || conv.Title.IndexOf("ZilleHandback", StringComparison.OrdinalIgnoreCase) >= 0
+                          || conv.Title.IndexOf("ZilleReturnedSpeech", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectZilleReferendumWarInterrupt(conv, db)) patchedCount++;
+                    }
+                    // 10. Vanilla Exile Epilogue (426_Exile / Exile): Zille Azaro Collapse Branch
+                    else if ((conv.Title.IndexOf("426_Exile", StringComparison.OrdinalIgnoreCase) >= 0
+                              || (conv.Title.IndexOf("Exile", StringComparison.OrdinalIgnoreCase) >= 0
+                                  && conv.Title.IndexOf("EarlyExile", StringComparison.OrdinalIgnoreCase) < 0))
+                          && conv.Title.IndexOf("Zille/", StringComparison.OrdinalIgnoreCase) < 0
+                          && conv.Title.IndexOf("Turn_Zille_", StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        if (InjectVanillaExileCollapseBranch(conv, db)) patchedCount++;
                     }
                 }
 
@@ -518,7 +542,7 @@ namespace GreatZilleSolution
             SetEntryScript(choice, "Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             var replyLucita = CreateEntry(conv.id, replyLucitaId, LucitaId, RomusId, "Lucita_Turn3_EarlyWar_Response",
-                "\"Your Majesty, launching an unprepared offensive right now—before securing fuel corridors, munitions, and diplomatic cover—would invite slaughter against Valdez's coastal redoubts! Let us prepare properly first.\"");
+                "\"Your Majesty, launching an unprepared offensive right now—before securing fuel corridors, munitions, and diplomatic cover—would invite slaughter against Wehlen's coastal redoubts! Let us prepare properly first.\"");
             SetEntryCondition(replyLucita, "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             var replyTitus = CreateEntry(conv.id, replyTitusId, TitusId, RomusId, "Titus_Turn3_EarlyWar_Response",
@@ -592,7 +616,7 @@ namespace GreatZilleSolution
             SetEntryScript(choice, "Variable[\"Lespia_Zille_Intelligence_Asked\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             var replyNormal = CreateEntry(conv.id, replyNormalId, AlvarezId, RomusId, "Alvarez_Turn4_AntiSmolak_Response",
-                "Alvarez chuckled over the static of the line. \"Smolak is a nuisance, Romus, but intelligence isn't free. Help Lespia in the MITZ talks, and maybe our reconnaissance planes will happen to photograph Valdez's bunker network for you.\"");
+                "Alvarez chuckled over the static of the line. \"Smolak is a nuisance, Romus, but intelligence isn't free. Help Lespia in the MITZ talks, and maybe our reconnaissance planes will happen to photograph Wehlen's bunker network for you.\"");
             SetEntryCondition(replyNormal, "Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] ~= true and Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] ~= true");
 
             var replyBlackmail = CreateEntry(conv.id, replyBlackmailId, AlvarezId, RomusId, "Alvarez_Turn4_Blackmail_Response",
@@ -636,7 +660,7 @@ namespace GreatZilleSolution
             SetEntryScript(choice, "Variable[\"Zille_Priority_Over_Pales\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             var replyLow = CreateEntry(conv.id, replyLowId, ElenaId, RomusId, "Elena_Turn4_TwoFront_LowStock",
-                "\"For Dast's sake, Your Majesty, you are entirely right! With under a thousand reserve weapons or tight energy cushions, fighting on both Pales' eastern frontier and Zille would hemorrhage our treasury and stall every tank.\"");
+                "\"In Saint Wruhec's name, Your Majesty, you are entirely right! With fewer than a thousand reserve arms or thin energy cushions, fighting on both Pales' eastern frontier and Zille would drain our exchequer and stall every tank.\"");
             SetEntryCondition(replyLow, "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 or (Variable[\"RiziaDLC.Resources_Energy\"] or 0) <= 3");
 
             var replyReady = CreateEntry(conv.id, replyReadyId, ElenaId, RomusId, "Elena_Turn4_TwoFront_Equipped",
@@ -680,12 +704,12 @@ namespace GreatZilleSolution
             SetEntryScript(choice, "Variable[\"Zille_War_UltimatumGiven\"] = true; Variable[\"Zille_War_Active\"] = true; Variable[\"Zille_War_Mobilization\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
 
             var replyLever = CreateEntry(conv.id, replyLeverId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Shaken",
-                "Smolak's face darkened as he gripped the table inside the airship cabin, his eyes darting to the thick dossier in your hand. \"So you're actually ready to bleed for it, Romus? Go ahead then—send your well-armed nobles! General Valdez will fight you for every hillside!\"");
+                "Smolak's face darkened as he gripped the table inside the airship cabin, his eyes darting to the thick dossier in your hand. \"So you're actually ready to bleed for it, Romus? Go ahead then—send your well-armed nobles! My Zille garrisons will fight you for every hillside!\"");
             SetEntryCondition(replyLever, "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] == true or (Variable[\"Zille_Leverage\"] or 0) >= 2");
             SetEntryScript(replyLever, "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             var replyBluff = CreateEntry(conv.id, replyBluffId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Bluff",
-                "Smolak slammed his glass down and barked a harsh laugh inside the airship gondola. \"Threats with half-empty depots and no real leverage? Send your shiny parade brigades if you dare, King Romus—Valdez will bury them in the mud of Zille!\"");
+                "Smolak slammed his glass down and barked a harsh laugh inside the airship gondola. \"Threats with half-empty depots and no real leverage? Send your shiny parade brigades if you dare, King Romus—we will bury them in the mud of Zille!\"");
             SetEntryCondition(replyBluff, "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000 and Variable[\"RiziaDLC.Wehlen_Zille_SharedEvidence\"] ~= true and (Variable[\"Zille_Leverage\"] or 0) < 2");
 
             choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyLeverId));
@@ -701,6 +725,126 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(choice);
             conv.dialogueEntries.Add(replyLever);
             conv.dialogueEntries.Add(replyBluff);
+            return true;
+        }
+
+        private static bool InjectZilleReferendumWarInterrupt(Conversation conv, DialogueDatabase db)
+        {
+            if (conv?.dialogueEntries == null) return false;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_WarSupersedes_Interrupt") return true;
+            }
+
+            DialogueEntry root = null;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                var e = conv.dialogueEntries[i];
+                if (e != null && (e.isRoot || e.id == 0))
+                {
+                    root = e;
+                    break;
+                }
+            }
+            if (root == null || root.outgoingLinks == null || root.outgoingLinks.Count == 0) return false;
+
+            int interruptId = 99181;
+            int ackId = 99182;
+
+            var interruptEntry = CreateEntry(conv.id, interruptId, LaurentoId, RomusId, "Zille_WarSupersedes_Interrupt",
+                "\"[DISPATCH] With the Zille frontier already settled by open arms and the Crown's military accords, Smolak's referendum timetable in Konstantium has been formally voided by events on the ground.\"",
+                "", "");
+            SetEntryCondition(interruptEntry, "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true or (Variable[\"Zille_War_Outcome\"] or 0) > 0");
+            SetEntryScript(interruptEntry, "Variable[\"RiziaDLC.ZilleReferendum_StoppedByAN\"] = true;");
+            interruptEntry.outgoingLinks.Add(CreateLink(conv.id, interruptId, ackId));
+
+            var ackEntry = CreateEntry(conv.id, ackId, RomusId, LaurentoId, "Zille_WarSupersedes_Close",
+                "So be it. History in Zille has already passed beyond ballot boxes.");
+            conv.dialogueEntries.Add(interruptEntry);
+            conv.dialogueEntries.Add(ackEntry);
+
+            // Insert at index 0 so PixelCrushers checks the war-supersedes interrupt BEFORE vanilla referendum flow
+            root.outgoingLinks.Insert(0, CreateLink(conv.id, root.id, interruptId));
+            return true;
+        }
+
+        private static bool InjectVanillaExileCollapseBranch(Conversation conv, DialogueDatabase db)
+        {
+            if (conv?.dialogueEntries == null) return false;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_VanillaExile_CoupReport") return true;
+            }
+
+            DialogueEntry root = null;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                var e = conv.dialogueEntries[i];
+                if (e != null && (e.isRoot || e.id == 0))
+                {
+                    root = e;
+                    break;
+                }
+            }
+            if (root == null || root.outgoingLinks == null) return false;
+
+            int repId = 99191;
+            int optInterveneId = 99192;
+            int optANId = 99193;
+            int airportId = 99194;
+            int airportEndId = 99195;
+            int interveneEndId = 99196;
+
+            string exileCond = "Variable[\"Zille_Azaro_Coup_Collapse\"] == true or Variable[\"Zille_Parley_Refused\"] == true";
+
+            var rep = CreateEntry(conv.id, repId, NarratorId, RomusId, "Zille_VanillaExile_CoupReport",
+                "Across the Antacean Sea in Kyrute, morning dispatches bring bitter truth from Rizia: after you refused to capitulate in the border pavilion, House Azaro seized the crumbling realm, nearly drowned Porte Drazon and Brenas in blood, and still signed a rotten armistice ceding large swaths of territory to Wehlen. Now full civil war among the great houses threatens to tear Rizia apart.",
+                "", "");
+            SetEntryCondition(rep, exileCond);
+            rep.outgoingLinks.Add(CreateLink(conv.id, repId, optInterveneId));
+            rep.outgoingLinks.Add(CreateLink(conv.id, repId, optANId));
+
+            var optIntervene = CreateEntry(conv.id, optInterveneId, RomusId, NarratorId, "Zille_Exile_VanillaReturn",
+                "Book passage aboard a smugglers' vessel and return to Rizia to intervene personally.",
+                "\"I will not watch Rizia burn from a hotel room in Konstantium. Book a secret crossing back to the coast—I will rally Toras banners and stop this madness myself!\"");
+            SetEntryScript(optIntervene, "Variable[\"Zille_Exile_Choice\"] = \"ReturnIntervene\"; Variable[\"RiziaDLC.Epilogue_CivilWar_AzaroEnemy\"] = true; Variable[\"RiziaDLC.Epilogue_CivilWar_DecidedInEpilogue\"] = true;");
+            optIntervene.outgoingLinks.Add(CreateLink(conv.id, optInterveneId, interveneEndId));
+
+            var interveneEnd = CreateEntry(conv.id, interveneEndId, NarratorId, RomusId, "Zille_Exile_VanillaReturn_End",
+                "Under moonless skies off Valenqiris, you stepped back onto fractured homeland soil—casting your last die into a kingdom consumed by fratricide.");
+
+            var optAN = CreateEntry(conv.id, optANId, RomusId, NarratorId, "Zille_Exile_VanillaANOfficial",
+                "Remain in Kyrute as a lowly Alliance of Nations official and try to defuse the crisis through diplomacy.",
+                "\"More Rizian blood will not mend Rizia. As an AN diplomatic advisor here in Konstantium, I will petition every commission on earth to halt this civil war before there is nothing left to save.\"");
+            SetEntryScript(optAN, "Variable[\"Zille_Exile_Choice\"] = \"ANDiplomat\";");
+            optAN.outgoingLinks.Add(CreateLink(conv.id, optANId, airportId));
+
+            var airport = CreateEntry(conv.id, airportId, VinaId, RomusId, "Zille_Exile_VanillaAirportEncounter",
+                "At Kyrute's rain-swept airport terminal, trying to board a modest envoy flight as a side-lined AN clerk, you collide with Vina and Manus arriving off a battered refugee charter from Valenqiris. Smoke still clings to their coats. \"Father—Look at what is left of Rizia!\" Vina snaps, Manus nodding grimly beside her. \"Azaro shells flatten Brenas while Sazon and Toras levies tear the heartland in half—and every pamphlet lays the ruin at your feet! If you set foot in Porte Drazon, there is no restoration—only a summary tribunal and a certain sentence of death!\"",
+                "", "");
+            SetEntryCondition(airport, "Variable[\"RiziaDLC.Vina_FuneralHappened\"] ~= true and Variable[\"RiziaDLC.Vina_Dead\"] ~= true");
+            airport.outgoingLinks.Add(CreateLink(conv.id, airportId, airportEndId));
+
+            int airportAltId = 99197;
+            var airportAlt = CreateEntry(conv.id, airportAltId, NarratorId, RomusId, "Zille_Exile_VanillaAirportEncounter_Alt",
+                "On the wet tarmac of Kyrute's airport, diplomatic couriers arriving off the last evacuation plane from Valenqiris block your way in grim disgust: Azaro shells fall across rebel provinces, half of Rizia curses the day you walked away from that tent, and any plane carrying Romus Toras into Porte Drazon ends before a firing squad.",
+                "", "");
+            SetEntryCondition(airportAlt, "Variable[\"RiziaDLC.Vina_FuneralHappened\"] == true or Variable[\"RiziaDLC.Vina_Dead\"] == true");
+            airportAlt.outgoingLinks.Add(CreateLink(conv.id, airportAltId, airportEndId));
+            optAN.outgoingLinks.Add(CreateLink(conv.id, optANId, airportAltId));
+
+            var airportEnd = CreateEntry(conv.id, airportEndId, NarratorId, RomusId, "Zille_Exile_VanillaANDiplomat_End",
+                "Watching the evacuation tail-lights fade across the wet concrete of Kyrute, you realized how small an exiled king becomes—a minor AN clerk in a borrowed trenchcoat, begging foreign secretaries to spare a homeland that would execute him at the border.");
+
+            conv.dialogueEntries.Add(rep);
+            conv.dialogueEntries.Add(optIntervene);
+            conv.dialogueEntries.Add(interveneEnd);
+            conv.dialogueEntries.Add(optAN);
+            conv.dialogueEntries.Add(airport);
+            conv.dialogueEntries.Add(airportAlt);
+            conv.dialogueEntries.Add(airportEnd);
+
+            root.outgoingLinks.Insert(0, CreateLink(conv.id, root.id, repId));
             return true;
         }
 

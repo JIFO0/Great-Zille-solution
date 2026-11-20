@@ -43,14 +43,14 @@ namespace GreatZilleSolution
                 "", 404, "");
 
             AddChoice(conv, 402, NarratorId, "Derdia_Stimulus_Headset",
-                "Lift the heavy brass receiver immediately, cutting through the static with royal urgency.",
+                "Lift the heavy slate-and-ebony receiver immediately, cutting through the static with royal urgency.",
                 "", 405, "");
 
             AddLine(conv, 404, NarratorId, RomusId, "Derdia_Entry_Calm",
                 "The rosewater cooled my throat as the green signal lamp steadied. A moment later, Supreme Wiseman Jorga Azmal's gravelly baritone rolled across the mountain wire.", -1);
 
             AddLine(conv, 405, NarratorId, RomusId, "Derdia_Entry_Brisk",
-                "The brass earpiece was cool against my temple; the cipher clerk snapped the final toggle, and Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
+                "The cold bakelite earpiece pressed against my temple; the cipher clerk snapped the final toggle, and Supreme Wiseman Jorga Azmal's gravelly baritone cut cleanly through the hum.", -1);
 
             AddLink(conv, 1, 401);
             AddLink(conv, 1, 402);
@@ -195,7 +195,7 @@ namespace GreatZilleSolution
                 "(Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000");
 
             AddLine(conv, 51, AzmalId, RomusId, "Ack_Derdia_Weapons",
-                "\"Good steel speaks clearly on a mountain pass, Your Majesty,\" Azmal replied with measured respect. \"Our scouts will harrying Wehlen's southern roads if war breaks out—though our full corridor remains closed until we speak face to face.\"", -1);
+                "\"Good steel speaks clearly on a mountain pass, Your Majesty,\" Azmal replied with measured respect. \"Our scouts will harry Wehlen's southern roads if war breaks out—though our full corridor remains closed until we speak face to face.\"", -1);
 
             AddChoice(conv, 60, AzmalId, "Reject_Derdia_Demands",
                 "\"Rizia has shared what we know. Beyond that, each realm must guard its own frontier.\"",
@@ -235,7 +235,7 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Lespia_Intro_1",
-                "In the Foreign Ministry's cramped communications cabinet, brass-rimmed scramblers hummed beside a tall window overlooking Porte Drazon's harbor cranes. Laurento checked his silver pocket watch as the red secure hotline to Perla clicked alive—bringing the unmistakable clink of ice against crystal and a raspy, cigar-thickened cough.", -1);
+                "In the Foreign Ministry's cramped communications cabinet, steel-cased scramblers hummed beside a tall window overlooking Porte Drazon's harbor cranes. Laurento checked his silver pocket watch as the red secure hotline to Perla clicked alive—bringing the unmistakable clink of ice against crystal and a raspy, cigar-thickened cough.", -1);
 
             AddChoice(conv, 401, NarratorId, "Lespia_Stimulus_Window",
                 "Glance down at the merchant freighters loading in Porte Drazon harbor before lifting the receiver.",
@@ -289,14 +289,14 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddLine(conv, 20, NarratorId, RomusId, "Alvarez_Business_Pitch",
-                "Alvarez took a slow sip, dropping the jovial mask for pure capitalist predator. \"Look, Romus, I won't shed a tear if Valdez's boys end up in Zille's marshes. Yet Lespia doesn't run reconnaissance sorties out of charity. You want ATO high-altitude photography of Valdez's hidden bunkers and diplomatic shields in Kyrute.\"", 21,
+                "Alvarez took a slow sip, dropping the jovial mask for pure Arcasian-school balance sheets. \"Look, Romus, nobody in Perla will shed a tear if Smolak's border regiments sink into Zille's marshes—that twenty-five-year Zille lease was always a ticking bomb since your father signed it. Yet Lespia doesn't scramble reconnaissance wings out of charity. You want ATO high-altitude photography of Wehzek bunkers and diplomatic cover in Konstantium.\"", 21,
                 "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true)");
 
             AddLine(conv, 21, AlvarezId, RomusId, "Alvarez_Price_Demand",
-                "\"Here's my invoice: twenty percent preferential crude deliveries from your southern fields to Perla PLUS Rizia backing Lespia's seat on the MITZ board. Sign, and my bombers-turned-spotters will hand your generals Valdez's coordinates on a silver tray.\"", 22);
+                "\"Here's my invoice: twenty percent preferential crude deliveries from your southern fields to Perla—away from Wraclawitz's hands and Aureus disputes alike—PLUS Rizia backing Lespia's seat on the MITZ board. Sign, and our reconnaissance pilots hand your generals every Wehzek battery coordinate on a silver tray.\"", 22);
 
             AddLine(conv, 120, NarratorId, RomusId, "Alvarez_TwoFront_Pitch",
-                "Alvarez laughed coldly into the line. \"You're fighting Reinhart on your eastern front in Pales and asking Perla for help on your southern front?! Bottom line, Romus: either halt the Pales war and yield oil + MITZ terms, or fight Smolak blind!\"", 22,
+                "Alvarez laughed coldly into the line. \"You're firing on our allies in Pales over the Aureus gas fields right now, and expecting Perla to spot targets for you against Wehlen?! Bottom line, Romus: either halt the Pales war and yield oil + MITZ terms, or fight Smolak blind!\"", 22,
                 "(Variable[\"RiziaDLC.Pales_War\"] == true or Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] == true or Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] == true)");
 
             foreach (int chId in new[] { 10, 11, 12 })
@@ -320,7 +320,7 @@ namespace GreatZilleSolution
             // NEW: Blackmail Alvarez with Zille Bombing Evidence!
             AddChoice(conv, 35, AlvarezId, "Blackmail_Alvarez_Zille",
                 "\"[DOSSIER LEVERAGE] Drop your price, Patricio—or we publish Perla's fingerprints on the Zille bombing!\"",
-                "Drop the corporate ransom, Patricio. My intelligence services hold hard evidence linking Lespian agents to the Zille Friendship Day bombing. Hand over Valdez's bunker coordinates and guard us at the AN—or I read every page to the press in Konstantium!", 36,
+                "Drop the corporate ransom, Patricio. My intelligence services hold hard evidence linking Lespian agents to the Zille Friendship Day bombing. Hand over Wehzek bunker coordinates and guard us at the AN—or I read every page to the press in Konstantium!", 36,
                 "Variable[\"Zille_LespiaPactAccepted\"] = true; Variable[\"Zille_Lespia_Intel\"] = true; Variable[\"RiziaDLC.Diplomacy_Lespia_WehlenHelp\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 3;",
                 "(Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement\"] == true or Variable[\"RiziaDLC.Zille_Discovered_LespianInvolvement_Rusty\"] == true)");
 
@@ -343,7 +343,7 @@ namespace GreatZilleSolution
                 "(Variable[\"RiziaDLC.Pales_War\"] ~= true and Variable[\"RiziaDLC.Diplomacy_Pales_DeclareWar\"] ~= true and Variable[\"RiziaDLC.CountryRelation_Pales_AtWar\"] ~= true) and ((Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Overwhelming\"] == true or Variable[\"RiziaDLC.Situation_Diplomacy_PowerProjection_Strong\"] == true) or (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000 or (Variable[\"Zille_Leverage\"] or 0) >= 2)");
 
             AddLine(conv, 51, NarratorId, RomusId, "Ack_Hard_Bargain",
-                "Alvarez swore softly under his breath before letting out a grudging bark of respect. \"You drive a harder bargain than your father ever dared, Your Majesty. Fine—ten percent commercial oil it is. Valdez's coordinates hit your war room within the hour.\"", -1);
+                "Alvarez swore softly under his breath before letting out a grudging bark of respect. \"You drive a harder bargain than your father ever dared, Your Majesty. Fine—ten percent commercial oil it is. Wehlen's coordinates hit your war room within the hour.\"", -1);
 
             AddChoice(conv, 55, AlvarezId, "Stall_Alvarez_Neutrality",
                 "\"No energy concessions today, Patricio—stay out of our way at the AN and Rizian ports stay open to Perla.\"",
@@ -359,7 +359,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_LespiaPactAccepted\"] = false; Variable[\"Zille_Lespia_Intel\"] = false; Variable[\"RiziaDLC.CountryRelation_Lespia_Unfriendly\"] = true;");
 
             AddLine(conv, 61, NarratorId, RomusId, "Ack_Reject_Lespia",
-                "Alvarez's amusement froze into venom. \"Good luck against Valdez's mines and bunkers then, Romus. Don't call Perla when your tanks bog down.\" The line snapped dead.", -1);
+                "Alvarez's amusement froze into venom. \"Good luck against Smolak's mines and coastal bunkers then, Romus. Don't call Perla when your tanks bog down.\" The line snapped dead.", -1);
 
             AddConversationWithAlias(db, conv, "Zille/LespiaTalks", "Turn_Zille_LespiaTalks");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Lespia Talks (ID 9996) into masterDatabase!");
@@ -391,7 +391,7 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "Rumburg_Intro_1",
-                "In the quiet cedar-paneled Imperial Diplomatic Cabinet, a framed oil portrait of your late wife, Queen Lena Livingston, hung beside the gilded crest of GRACE. On the desk, the brass-and-ivory royal trunk line to Thornbourgh hummed with crystal clarity as Queen Beatrice's secretary announced the connection.", -1);
+                "In the quiet cedar-paneled Imperial Diplomatic Cabinet, a framed oil portrait of your late wife, Queen Lena Livingston, hung beside the gilded crest of GRACE—a reminder of King Valero's blood-and-coal alliance with Thornbourgh. On the desk, the ivory-inlaid royal trunk line clicked live as Queen Beatrice's palace switchboard bridged the call.", -1);
 
             AddChoice(conv, 401, NarratorId, "Rumburg_Stimulus_Portrait",
                 "Let your gaze linger briefly on Lena's portrait before lifting the ivory receiver.",
@@ -465,7 +465,7 @@ namespace GreatZilleSolution
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) < 1000");
 
             AddLine(conv, 23, NarratorId, RomusId, "Hugo_Beatrice_Support_FullArms",
-                "Hugo nodded with deep pride. \"Our own armories already stand well above a thousand weapons, yet Rumburg's heavy 152mm shells and AN shield will make Valdez's bunkers indefensible!\"", 30,
+                "Hugo nodded with deep pride. \"Our own armories already stand well above a thousand weapons, yet Rumburg's heavy 152mm shells arriving at Monqiz Royal Dockyard and AN shield will make Wehlen's bunkers indefensible!\"", 30,
                 "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true and (Variable[\"RiziaDLC.Resources_Military_Equipment\"] or 0) >= 1000");
 
             AddLine(conv, 122, LaurentoId, RomusId, "Laurento_Beatrice_Support",
@@ -630,14 +630,14 @@ namespace GreatZilleSolution
                 "", 404, "");
 
             AddChoice(conv, 402, NarratorId, "PreNeg_Stimulus_Briefcase",
-                "Keep the glass sealed and run your thumb over the brass clasp of the leather dossier on your knee.",
+                "Keep the armored window sealed and run your thumb over the monogrammed lock of the leather dossier on your knee.",
                 "", 405, "");
 
             AddLine(conv, 404, NarratorId, RomusId, "PreNeg_Travel_Wave",
                 "Cold coastal wind rushed into the cabin, smelling of wet pine and distant cordite. A corporal with a bandaged wrist grinned through the grime as your gloved hand appeared at the glass. Up ahead, the white flags of the neutral pavilion came into view on the ridge.", 16);
 
             AddLine(conv, 405, NarratorId, RomusId, "PreNeg_Travel_Briefcase",
-                "Inside the quiet, leather-scented cabin, the muffled thrum of the engine steadied your thoughts. Every signature, cargo manifest, and intelligence cable you had gathered lay beneath that brass clasp. Up ahead, the white flags of the neutral pavilion rose against the gray sky.", 16);
+                "Inside the quiet, leather-scented cabin, the muffled thrum of the engine steadied your thoughts. Every signature, cargo manifest, and intelligence cable you had gathered lay beneath that iron clasp. Up ahead, the white flags of the neutral pavilion rose against the gray sky.", 16);
 
             var finalPosture = AddLine(conv, 16, NarratorId, RomusId, "PreNeg_Pavilion_Approach",
                 "The motorcade slowed before the cordoned perimeter. Your escort awaited your final instruction before you stepped out to face Wiktor Smolak.");
