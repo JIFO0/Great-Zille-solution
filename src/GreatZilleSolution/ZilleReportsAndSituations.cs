@@ -181,7 +181,7 @@ namespace GreatZilleSolution
             AddOrUpdateSituation(sits, "Sit_Zille_Derdia_Raids",
                 "Derdian Cross-Border Raids",
                 "Golcondist irregulars from the Silver Garrison are raiding Wehlen's southern supply roads, forcing Wraclawitz to divert brigades away from Zille.",
-                "Military", "Medium", "Zille_DerdiaHybridActive");
+                "Military", "Medium", "Zille_Sit_DerdiaRaids");
 
             AddOrUpdateSituation(sits, "Sit_Derdia_BorderSabotage",
                 "Derdia-Wehlen Border Sabotage",
@@ -191,7 +191,7 @@ namespace GreatZilleSolution
             AddOrUpdateSituation(sits, "Sit_Derdia_Corridor_Pact",
                 "Derdian Southern War Corridor",
                 "Under the Silver Garrison Accord, Supreme Wiseman Azmal has opened Derdia's northern frontier near Yol and Qerzan as a staging corridor for Rizian divisions.",
-                "Military", "Low", "Zille_DerdiaPact_Signed");
+                "Military", "Low", "Zille_Sit_DerdiaCorridor");
 
             AddOrUpdateSituation(sits, "Sit_Derdia_Pipeline_Corridor",
                 "Derdia-Rizia Southern Energy Pipeline",
@@ -530,31 +530,32 @@ namespace GreatZilleSolution
             int outcome = (int)ZilleCampaignState.Outcome;
             if (outcome == 0) outcome = DialogueHelper.GetIntVariable("Zille_War_Outcome");
 
-            DialogueHelper.SetVariable("Zille_Sit_Mobilization", DialogueHelper.GetBoolVariable("Zille_War_Planning_Done") && !warActive && outcome == 0);
+            bool warPlanned = ZilleCampaignState.IsZilleWarPlanned();
+            bool zilleSettled = ZilleCampaignState.IsZilleResolvedPeacefully()
+                || DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
+
+            DialogueHelper.SetVariable("Zille_Sit_Mobilization", warPlanned && !zilleSettled && DialogueHelper.GetBoolVariable("Zille_War_Planning_Done") && !warActive && outcome == 0);
             DialogueHelper.SetVariable("Zille_Sit_Sword", warActive && isSword && outcome == 0);
             DialogueHelper.SetVariable("Zille_Sit_Ark", warActive && isArk && outcome == 0);
-            DialogueHelper.SetVariable("Zille_Sit_ArsenalLow", equip < 1000 && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
-            DialogueHelper.SetVariable("Zille_Sit_ArsenalHigh", equip >= 1000 && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
+            DialogueHelper.SetVariable("Zille_Sit_ArsenalLow", equip < 1000 && warPlanned && !zilleSettled && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
+            DialogueHelper.SetVariable("Zille_Sit_ArsenalHigh", equip >= 1000 && warPlanned && !zilleSettled && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
             DialogueHelper.SetVariable("Zille_Sit_OilCutoff", warActive && energy <= 3);
             DialogueHelper.SetVariable("Zille_Sit_LogSazon", string.Equals(route, "Sazon", StringComparison.OrdinalIgnoreCase));
             DialogueHelper.SetVariable("Zille_Sit_LogAzaro", string.Equals(route, "Azaro", StringComparison.OrdinalIgnoreCase));
             DialogueHelper.SetVariable("Zille_Sit_LogCompromise", string.Equals(route, "Compromise", StringComparison.OrdinalIgnoreCase));
             DialogueHelper.SetVariable("Zille_Sit_Refugees", ZilleCampaignState.Phase1Finished || ZilleCampaignState.MaveNortusHQCompleted);
             DialogueHelper.SetVariable("Zille_Sit_HasDossier", hasEvidence);
-            DialogueHelper.SetVariable("Zille_Sit_Underground", warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done"));
+            DialogueHelper.SetVariable("Zille_Sit_Underground", warPlanned && !zilleSettled && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
+            DialogueHelper.SetVariable("Zille_Sit_DerdiaRaids", warActive && !zilleSettled && (ZilleCampaignState.IsDerdiaHybridSupportActive || DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive")));
+            DialogueHelper.SetVariable("Zille_Sit_DerdiaCorridor", warPlanned && !zilleSettled && (ZilleCampaignState.IsDerdiaPactSigned || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")));
             DialogueHelper.SetVariable("Zille_Sit_ANHigh", ZilleCampaignState.AnLegitimacyScore >= 3);
             DialogueHelper.SetVariable("Zille_Sit_ANOutcry", warActive && ZilleCampaignState.AnLegitimacyScore < 2);
             DialogueHelper.SetVariable("Zille_Sit_OutcomeRestored", outcome >= 4 || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"));
             DialogueHelper.SetVariable("Zille_Sit_OutcomeArmistice", outcome == 2 && !ZilleCampaignState.IsIndependentZilleAgreed);
 
             // Smolak Suspicion Posture Situations
-            bool showSmolakPosture = !DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
-                && outcome == 0
-                && (ZilleCampaignState.MilitarySentimentLevel >= 1
-                    || warActive
-                    || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")
-                    || DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch")
-                    || ZilleCampaignState.GetCurrentTurn() >= 3);
+            bool showSmolakPosture = warPlanned && !zilleSettled && outcome == 0;
             string smolakPreset = ZilleCampaignState.GetSmolakSuspicionPreset(syncFromLua: false);
             DialogueHelper.SetVariable("Zille_Sit_SmolakMinimal", showSmolakPosture && smolakPreset == "minimal");
             DialogueHelper.SetVariable("Zille_Sit_SmolakSuspicious", showSmolakPosture && smolakPreset == "suspicious");

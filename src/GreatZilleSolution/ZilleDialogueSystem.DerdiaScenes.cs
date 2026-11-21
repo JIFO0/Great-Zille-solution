@@ -253,6 +253,7 @@ namespace GreatZilleSolution
             signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 51)); // Full Grand Alliance + Pipeline Investment (-2 Budget -> +3 Energy, Pipeline, Corridor, Missiles)
             signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 52)); // Discounted Grand Alliance (if Budget >= 1 and good Derdia relations/ban lifted)
             signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 53)); // Military Corridor Pact Only (no budget spent)
+            signHub.outgoingLinks.Add(CreateLink(conv.id, 50, 54)); // Peaceful Trade & Mutual Deterrence Pact (no war)
 
             AddChoice(conv, 51, AzmalId, "DerdiaVisit_Sign_FullPipeline",
                 "\"Sign the Grand Alliance AND invest royal treasury funds to build the Derdia-Rizia Southern Pipeline!\"",
@@ -271,11 +272,20 @@ namespace GreatZilleSolution
                 "We seal the Silver Garrison Defense Pact and open the Yol-Qerzan corridor for our armies immediately; once Wehlen is defeated, our treasuries will build the pipeline in peace.", 62,
                 "Variable[\"Zille_DerdiaPact_Signed\"] = true; Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"Zille_Derdia_StateVisitDone\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Allied\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
+            AddChoice(conv, 54, AzmalId, "DerdiaVisit_Sign_PeaceAccord",
+                "\"Seal a peaceful Trade & Mutual Deterrence Pact—no war corridors, only diplomacy and border security.\"",
+                "Rizia seeks peace, not an invasion corridor. Let us sign a Treaty of Trade and Mutual Deterrence that binds Porte Drazon and Naeal against Smolak's saboteurs without plunging South Merkopa into war.", 63,
+                "Variable[\"Zille_Derdia_StateVisitDone\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Allied\"] = true; Variable[\"RiziaDLC.Policy_Diplomacy_TradeDeal_Derdia\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_Planning_Done\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true");
+
             AddLine(conv, 61, NarratorId, RomusId, "DerdiaVisit_Close_Full",
                 "Azmal pressed his signet ring into the crimson wax beside mine, then raised both hands in solemn blessing. \"Halaita! From this hour, Derdia's northern passes are your sword, our rockets guard your skies, and our oil feeds your realm! Let Wiktor Smolak tremble between two sovereign nations!\"", -1);
 
             AddLine(conv, 62, NarratorId, RomusId, "DerdiaVisit_Close_Corridor",
                 "Azmal pressed his signet ring beside mine with firm resolve. \"Halaita! Our northern frontier stands open to Rizia's banners, and three thousand Disciples ride at your flank. May victory bring both our kingdoms lasting peace!\"", -1);
+
+            AddLine(conv, 63, NarratorId, RomusId, "DerdiaVisit_Close_PeaceAccord",
+                "Azmal pressed his signet ring into the crimson wax beside yours with quiet respect. \"Halaita! Peace guarded by steady friends is stronger than reckless conquest. Let Wraclawitz see that Derdia and Rizia stand united in trade and vigilance.\"", -1);
 
             AddConversationWithAlias(db, conv, "Zille/DerdiaStateVisit", "Turn_Zille_DerdiaStateVisit");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Derdia State Visit (ID 10002) into masterDatabase!");

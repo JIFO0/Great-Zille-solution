@@ -404,6 +404,10 @@ namespace GreatZilleSolution
             if (def == null) return false;
             if (WarOperationZilleManager.CurrentTheatre != ActiveWarTheatre.Civilian) return false;
             if (DialogueHelper.GetBoolVariable(def.DoneVar)) return false;
+            if (ZilleCampaignState.IsZilleResolvedPeacefully()
+                || DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone"))
+                return false;
 
             bool matchesToken = false;
             if (def.AssignedToken == "Rizia_City_PorteDrazon" && (tokenName.Contains("PorteDrazon") || tokenName.Contains("Porte Drazon") || entityName.Contains("PorteDrazon")))

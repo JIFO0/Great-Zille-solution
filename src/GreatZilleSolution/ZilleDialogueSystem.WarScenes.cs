@@ -346,16 +346,33 @@ namespace GreatZilleSolution
 
             concludeHub.outgoingLinks.Add(CreateLink(conv.id, 330, 40));
             concludeHub.outgoingLinks.Add(CreateLink(conv.id, 330, 400));
+            concludeHub.outgoingLinks.Add(CreateLink(conv.id, 330, 406));
 
             AddChoice(conv, 40, NarratorId, "Conclude_Planning",
                 "\"Summon the noble houses openly: the Crown demands unity for the Logistics Summit.\"",
                 "The strategic blueprint is set. Draft the preliminary deployment directives and summon Houses Azaro and Sazon to settle our supply corridors in Brenas.", -1,
-                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
+                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             AddChoice(conv, 400, NarratorId, "Conclude_Planning_Discreet",
                 "\"Summon Azaro and Sazon discreetly under cover of a royal trade audit so Smolak stays blind.\"",
                 "The blueprint is set. Summon Houses Azaro and Sazon under cover of a routine Brenas trade and rail audit so Wehlen's spies suspect nothing until we are ready.", -1,
-                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; if (Variable[\"Zille_Smolak_Pressure\"] or 0) > 0 then Variable[\"Zille_Smolak_Pressure\"] = Variable[\"Zille_Smolak_Pressure\"] - 1; else Variable[\"Zille_Smolak_Pressure\"] = 0; end;");
+                "Variable[\"Zille_War_Planning_Done\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_War_Sentiment\"] = 3; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; if (Variable[\"Zille_Smolak_Pressure\"] or 0) > 0 then Variable[\"Zille_Smolak_Pressure\"] = Variable[\"Zille_Smolak_Pressure\"] - 1; else Variable[\"Zille_Smolak_Pressure\"] = 0; end;");
+
+            AddChoice(conv, 406, NarratorId, "Conclude_Planning_StandDown",
+                "\"We will not march on Zille. Stand down all military planning and pursue diplomacy.\"",
+                "We have weighed the cost in gold, fuel, and blood. I will not lead Rizia into war over Zille—stand down all invasion planning and leave the province to the Foreign Ministry.", -1,
+                "Variable[\"Zille_War_Declined\"] = true; Variable[\"Zille_War_Planning_Done\"] = false; Variable[\"Zille_War_EarlyLaunch\"] = false; Variable[\"Zille_War_Mobilization\"] = false; Variable[\"Zille_War_UltimatumGiven\"] = false; Variable[\"Zille_War_Postpone\"] = true; Variable[\"Zille_MilitarySentiment\"] = 0; Variable[\"Zille_Military_Posture\"] = 0; Variable[\"Zille_StaffPlanning_Started\"] = false; Variable[\"Lespia_Zille_Intelligence_Asked\"] = false; if (Variable[\"Zille_Smolak_Pressure\"] or 0) > 0 then Variable[\"Zille_Smolak_Pressure\"] = Variable[\"Zille_Smolak_Pressure\"] - 1; end;");
+
+            AddLine(conv, 407, HugoId, RomusId, "Hugo_Planning_StandDown",
+                "Hugo exhaled with visible relief and bowed his head. \"A restrained and sovereign judgment, Romus. The General Staff will shelve the Zille operational charts, and the realm will seek peace without bloodshed.\"", -1,
+                "Variable[\"RiziaDLC.Hugo_Arrested\"] ~= true and Variable[\"RiziaDLC.Hugo_Executed\"] ~= true and Variable[\"RiziaDLC.Hugo_Resigned\"] ~= true");
+
+            AddLine(conv, 408, LaurentoId, RomusId, "Laurento_Planning_StandDown",
+                "Laurento inclined his head with quiet relief. \"A statesmanlike course, Your Majesty. The military staff will stand down, and the Foreign Ministry will pursue Zille's return strictly through diplomacy.\"", -1,
+                "(Variable[\"RiziaDLC.Hugo_Arrested\"] == true or Variable[\"RiziaDLC.Hugo_Executed\"] == true or Variable[\"RiziaDLC.Hugo_Resigned\"] == true)");
+
+            AddLink(conv, 406, 407);
+            AddLink(conv, 406, 408);
 
             AddLine(conv, 41, HugoId, RomusId, "Hugo_Planning_Close",
                 "\"As your sovereign will decrees, Your Majesty. May Saint Wruhec guide our banners and preserve Rizia.\"", -1,
@@ -1863,6 +1880,154 @@ namespace GreatZilleSolution
 
             AddConversationWithAlias(db, conv, "Zille/Op1AftermathCouncil", "Turn_Zille_Op1AftermathCouncil");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Post-Op I Aftermath Council (ID 10003) into masterDatabase!");
+        }
+
+        // =========================================================================
+        // SCENE 18: Turn_Zille_SovereigntyDeclaration (ID 10005) - CROWN STANCE: SOVEREIGNTY OVER ZILLE
+        // Turn 3 Extraordinary Council prior to/alongside the Zille Statement decision.
+        // Provides:
+        // - Branch A: Peaceful diplomacy and reassurance.
+        // - Branch B: Firm Valero Pact legalism and international pressure.
+        // - Branch C: Hawkish escalation / March announcement -> Council pales, Hugo/Elena panic,
+        //   Laurento's international analysis, Romus's iconic command:
+        //   "THAT'S ENOUGH. Zille is a part of Rizia and Wehlen will do everything it can to stop the transfer..."
+        // =========================================================================
+        public static void RegisterSovereigntyDeclaration(DialogueDatabase db)
+        {
+            if (db.GetConversation("Turn_Zille_SovereigntyDeclaration") != null && db.GetConversation("Zille/SovereigntyDeclaration") != null)
+                return;
+
+            var conv = new Conversation();
+            conv.id = ConvId_SovereigntyDeclaration;
+            conv.fields = new Il2CppSystem.Collections.Generic.List<Field>();
+            conv.dialogueEntries = new Il2CppSystem.Collections.Generic.List<DialogueEntry>();
+            conv.Title = "Zille/SovereigntyDeclaration";
+            conv.ActorID = RomusId;
+            conv.ConversantID = HugoId;
+
+            var entry0 = CreateEntry(conv.id, 0, RomusId, HugoId, "START", "", "", "Continue()");
+            entry0.isRoot = true;
+            entry0.outgoingLinks.Add(CreateLink(conv.id, 0, 1));
+            conv.dialogueEntries.Add(entry0);
+
+            AddLine(conv, 1, NarratorId, RomusId, "Sovereignty_Atmosphere",
+                "The Council Chamber of Palas Rezna was thick with nervous tension. Maps of South Merkopa and the contested Zille frontier lay unrolled across the long mahogany table. Sunlight filtered through tall arched windows, casting sharp shadows over the anxious faces of the royal ministers.", 10);
+
+            AddLine(conv, 10, HugoId, RomusId, "Hugo_Sovereignty_Open",
+                "\"Your Majesty, the bombing in Zille has sent shockwaves across South Merkopa. Smolak is beating his chest, and foreign embassies are buzzing. The 1927 lease expires in just a few short years—yet instead of discussing terms of orderly transition, Wehlen is accusing our subjects of treason and murder. We must define the Crown's grand posture before issuing any public proclamation.\"", 11);
+
+            AddLine(conv, 11, ElenaId, RomusId, "Elena_Sovereignty_Warning",
+                "\"The commercial sector is in dread, Sire. Rizian trade through the Zille corridor is already feeling the pinch of arbitrary Wehzek transit fees. Whatever stance we take must safeguard our fiscal stability and foreign trade credit.\"", 12);
+
+            AddLine(conv, 12, LucitaId, RomusId, "Lucita_Sovereignty_Strength",
+                "\"Fiscal stability means nothing if our frontiers are defenseless, Elena. Smolak senses weakness. If the King does not make Rizia's sovereign intent unmistakably clear, Wehlen will fabricate reasons to hold Zille indefinitely.\"", 13);
+
+            AddLine(conv, 13, LaurentoId, RomusId, "Laurento_Sovereignty_Inquiry",
+                "\"The eyes of Kyrute and the Alliance of Nations will be on us, Your Majesty. Every word spoken here will echo in foreign ministries across Merkopa. How does the Crown intend to approach the Zille question?\"", 20);
+
+            // HUB 20: Stance Selection
+            AddLine(conv, 20, NarratorId, RomusId, "Sovereignty_Stance_Hub",
+                "The ministers leaned forward, waiting for the King's word.", -1);
+
+            // Choice 21: Peaceful diplomacy
+            AddChoice(conv, 21, ElenaId, "Choice_Sovereignty_Peaceful",
+                "Calm yourselves. We will reclaim Zille through patient diplomacy and international law.",
+                "\"Calm yourselves. Everything is under control. We will reclaim Zille through patient diplomacy and international law. We must not be provoked by Smolak's theatrics.\"",
+                30,
+                "Variable[\"Zille_Stance_Peaceful\"] = true; Variable[\"Zille_SovereigntyDeclaration_Done\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+
+            // Choice 22: Firm Valero legalism
+            AddChoice(conv, 22, LaurentoId, "Choice_Sovereignty_Legalist",
+                "We will strictly hold Wehlen to the 1927 Valero Pact. When the lease expires, Zille returns by right of law.",
+                "\"We will strictly hold Wehlen to the 1927 Valero Pact. When the lease expires, Zille returns to Rizia by right of law. We shall rally our allies in the AN to hold Smolak accountable.\"",
+                40,
+                "Variable[\"Zille_Stance_Legalist\"] = true; Variable[\"Zille_SovereigntyDeclaration_Done\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+
+            // Choice 23: March announcement (Escalation pathway)
+            AddChoice(conv, 23, HugoId, "Choice_Sovereignty_MarchAnnouncement",
+                "Enough pretense. Rizia will march into Zille upon expiration of the treaty regardless of Smolak's stance!",
+                "\"Enough pretense. The Valero treaty had a deadline, and Rizia will march into Zille upon its expiration regardless of Wiktor Smolak's stance!\"",
+                50,
+                "Variable[\"Zille_Council_HawkishStance\"] = true;");
+
+            AddLink(conv, 20, 21);
+            AddLink(conv, 20, 22);
+            AddLink(conv, 20, 23);
+
+            // Branch A (Peaceful)
+            AddLine(conv, 30, ElenaId, RomusId, "Elena_Peaceful_Relief",
+                "\"A wise and measured approach, Sire. War or panic would frighten foreign capital and shatter our royal budget. Trade and quiet negotiation are our sharpest instruments.\"", 31);
+            AddLine(conv, 31, HugoId, RomusId, "Hugo_Peaceful_Approve",
+                "\"Smolak expects us to rage. Denying him that pretext keeps the moral high ground firmly in Rizian hands. We shall instruct the press to emphasize patience and restraint.\"", 32);
+            AddLine(conv, 32, LucitaId, RomusId, "Lucita_Peaceful_Vigilant",
+                "\"A peaceful handover is ideal, Your Majesty—so long as our patience is not mistaken for weakness. House Azaro will keep our frontier garrisons vigilant, just in case.\"", 33);
+            AddLine(conv, 33, LaurentoId, RomusId, "Laurento_Peaceful_Plan",
+                "\"I shall prepare diplomatic dispatches to Wehlen emphasizing our shared interests in a peaceful resolution. God grant that Smolak listens to reason.\"", 90);
+
+            // Branch B (Firm Legalist)
+            AddLine(conv, 40, LaurentoId, RomusId, "Laurento_Legalist_Support",
+                "\"International law is on our side, Sire. Smolak signed that treaty in blood and ink. If we present our legal case forcefully in Kyrute, even Wehlen's lukewarm supporters will find it difficult to back his posturing.\"", 41);
+            AddLine(conv, 41, LucitaId, RomusId, "Lucita_Legalist_Garrisons",
+                "\"A firm legal stance must be backed by quiet strength. The frontier garrisons should begin routine logistics exercises, simply to remind Wehlen that the treaty carries weight.\"", 42);
+            AddLine(conv, 42, HugoId, RomusId, "Hugo_Legalist_Prudence",
+                "\"A balanced middle course, Your Majesty. It asserts our rights without needlessly lighting the powder keg. Let the legal clerks and diplomats do their work.\"", 90);
+
+            // Branch C (Escalation / Shock)
+            AddLine(conv, 50, NarratorId, RomusId, "Sovereignty_Council_Shock",
+                "A heavy, suffocating silence gripped the council chamber. Hugo went pale, his tea cup trembling against the saucer. Elena's eyes widened in sheer disbelief, her hands gripping the edge of her ledger until her knuckles turned white.", 51);
+            AddLine(conv, 51, HugoId, RomusId, "Hugo_March_Panic",
+                "\"Sweet Saint Drezet, Your Majesty! Have you lost your senses?! Walking into Zille by force—ignoring Wehlen's sovereignty—is not statecraft, it is an open declaration of war! The entire Alliance of Nations will brand us rogue aggressors!\"", 52);
+            AddLine(conv, 52, ElenaId, RomusId, "Elena_March_Sanctions",
+                "\"Our treasury cannot endure an international embargo, Sire! If sanctions strike our wine, gold, and shipping lines, the kingdom's economy will collapse into ruin before a single regiment crosses the frontier!\"", 53);
+            AddLine(conv, 53, LucitaId, RomusId, "Lucita_March_Calculation",
+                "\"Smolak has five infantry divisions dug into the Zille coastal ridges, Sire. If we move without total preparation and an ironclad casus belli, we walk into a fortified trap.\"", 54);
+            AddLine(conv, 54, LaurentoId, RomusId, "Laurento_March_Assessment",
+                "\"We still don't know if the Wehzeks will actually want to fight for that piece of land, but the international implications will be tough. We would need to address all possible avenues to sway the international opinion to our side.\"", 60);
+
+            // HUB 60: Romus's Decisive Command
+            AddLine(conv, 60, NarratorId, RomusId, "Sovereignty_Command_Hub",
+                "Every eye in the chamber was locked upon you. The destiny of the realm hung upon your next command.", -1);
+
+            // Choice 61: The Iconic Command
+            AddChoice(conv, 61, LucitaId, "Choice_Command_MarchIntoZille",
+                "(ENOUGH. Prepare to march into Zille) THAT'S ENOUGH. Zille is a part of Rizia and Wehlen will do everything it can to stop the transfer from happening. Prepare the plans for transition of power regardless of Wehlen Cooperation.... And prepare the military if Smolak happens to resist.",
+                "\"THAT'S ENOUGH! Zille is a part of Rizia and Wehlen will do everything it can to stop the transfer from happening. Prepare the plans for transition of power regardless of Wehlen cooperation.... And prepare the military if Smolak happens to resist.\"",
+                70,
+                "Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"Zille_Council_HawkishStance\"] = true; Variable[\"Zille_SovereigntyDeclaration_Done\"] = true; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 2; Variable[\"RiziaDLC.HouseAzaro_Opinion\"] = (Variable[\"RiziaDLC.HouseAzaro_Opinion\"] or 0) + 1; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
+
+            // Choice 62: Tempered Hawkish
+            AddChoice(conv, 62, HugoId, "Choice_Command_TemperedHawkish",
+                "Perhaps you are right. We must make our resolve unmistakable, but exhaust every diplomatic channel first.",
+                "\"Perhaps you are right. We must make our resolve unmistakable to Smolak, but we will exhaust every diplomatic channel in the AN before firing a single shot.\"",
+                75,
+                "Variable[\"Zille_War_Postpone\"] = true; Variable[\"Zille_Stance_Legalist\"] = true; Variable[\"Zille_SovereigntyDeclaration_Done\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+
+            AddLink(conv, 60, 61);
+            AddLink(conv, 60, 62);
+
+            // Choice 61 resolution
+            AddLine(conv, 70, LucitaId, RomusId, "Lucita_Command_Salute",
+                "\"As you command, Your Majesty! House Azaro and the General Staff will draft operational staging plans at Mave Nortus immediately. Smolak will find no weakness here.\"", 71);
+            AddLine(conv, 71, HugoId, RomusId, "Hugo_Command_Prayer",
+                "\"May the saints preserve us. If blood must flow, let it at least flow swiftly... God save King Romus.\"", 72);
+            AddLine(conv, 72, LaurentoId, RomusId, "Laurento_Command_DiplomaticGroundwork",
+                "\"I will begin laying diplomatic groundwork in the AN immediately, Sire. We must frame Smolak as the obstinate leaseholder breaking solemn covenants, while Rizia acts as the lawful protector.\"", 90);
+
+            // Choice 62 resolution
+            AddLine(conv, 75, HugoId, RomusId, "Hugo_Tempered_Relief",
+                "\"A prudent course, Sire. A sword held at the throat is far more persuasive when the sheath has not yet been cast away.\"", 76);
+            AddLine(conv, 76, LucitaId, RomusId, "Lucita_Tempered_Readiness",
+                "\"We shall prepare the troops quietly. Smolak will feel the steel behind our diplomats' words.\"", 90);
+
+            // Scene Conclusion
+            AddLine(conv, 90, NarratorId, RomusId, "Sovereignty_Conclusion",
+                "With the Crown's grand posture settled, the ministers collected their folios. The royal proclamation to the press and the Alliance of Nations would now reflect the King's sovereign command.", 2);
+
+            var entry2 = CreateEntry(conv.id, 2, NarratorId, RomusId, "END", "", "", "");
+            conv.dialogueEntries.Add(entry2);
+
+            AddConversationWithAlias(db, conv, "Zille/SovereigntyDeclaration", "Turn_Zille_SovereigntyDeclaration");
+            MelonLogger.Msg("[ZILLE DIALOGUE] Injected Crown Stance: Sovereignty Over Zille (ID 10005) into masterDatabase!");
         }
     }
 }

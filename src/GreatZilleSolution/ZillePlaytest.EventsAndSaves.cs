@@ -89,6 +89,7 @@ namespace GreatZilleSolution
 
         private static readonly (string DbName, string TitlePath)[] AllModScenes = new[]
         {
+            ("Turn_Zille_SovereigntyDeclaration", "Zille/SovereigntyDeclaration"),
             ("Turn_Zille_DerdiaInvestigation", "Zille/DerdiaInvestigation"),
             ("Turn_Zille_WarPlanning", "Zille/WarPlanning"),
             ("Turn_Zille_WarLogisticsDispute", "Zille/WarLogisticsDispute"),
@@ -259,9 +260,14 @@ namespace GreatZilleSolution
                 "Zille_Rumburg_Accepted", "Zille_Rebellion_Suppressed",
                 "Zille_Op1_Negotiations_Unlocked", "Zille_Op2_Unlocked",
                 "Zille_IndependentBuffer_Agreed", "Zille_War_Active",
-                "Zille_EarlyWar_Triggered", "Zille_War_Early"
+                "Zille_EarlyWar_Triggered", "Zille_War_Early",
+                "Zille_War_Declined", "Zille_War_Postpone",
+                "Zille_War_UltimatumGiven", "Zille_War_Mobilization",
+                "Zille_StaffPlanning_Started", "Lespia_Zille_Intelligence_Asked",
+                "Zille_War_Planning_Done", "Zille_War_EarlyLaunch"
             };
             foreach (var v in clearBoolVars) DialogueHelper.SetVariable(v, false);
+            DialogueHelper.SetVariable("Zille_Military_Posture", 0);
 
             DialogueHelper.SetVariable("RiziaDLC.Turn", 8);
             DialogueHelper.SetVariable("RiziaDLC.Resources_Energy", 4);
@@ -1210,7 +1216,12 @@ namespace GreatZilleSolution
                     try { tip.Hide(); } catch { }
                 }
 
-                if (actualTurn != expectedTurn)
+                bool warPlanned = ZilleCampaignState.IsZilleWarPlanned();
+                if (!warPlanned && modButtonsFound.Exists(b => b.Contains("Emergency Crown Council") || b.Contains("Supply Lines of Brenas") || b.Contains("A royal briefing") || b.Contains("A Royal Proclamation of War")))
+                {
+                    rep.LogFail($"Save [T{expectedTurn}] Unplanned War Button Leak", string.Join(" | ", modButtonsFound));
+                }
+                else if (actualTurn != expectedTurn)
                 {
                     rep.LogFail($"Save [T{expectedTurn}] Turn Mismatch", $"expectedTurn={expectedTurn}, actualTurn={actualTurn}, activeFile='{pm.activeSaveFile?.fileName}'");
                 }
@@ -1221,7 +1232,7 @@ namespace GreatZilleSolution
                 else
                 {
                     rep.LogPass($"Real Save [Turn {expectedTurn}] ({saveName})",
-                        $"loadedTurn={actualTurn}, tokensChecked={tokensChecked}, modButtons=[{(modButtonsFound.Count > 0 ? string.Join(" | ", modButtonsFound) : "none active")}]");
+                        $"loadedTurn={actualTurn}, warPlanned={warPlanned}, tokensChecked={tokensChecked}, modButtons=[{(modButtonsFound.Count > 0 ? string.Join(" | ", modButtonsFound) : "none active")}]");
                 }
             }
         }

@@ -244,6 +244,44 @@ namespace GreatZilleSolution
                 || IsDerdiaPactSigned;
         }
 
+        public static bool IsVanillaPalesWarActive()
+        {
+            return DialogueHelper.GetBoolVariable("RiziaDLC.Pales_War")
+                || DialogueHelper.GetBoolVariable("RiziaDLC.Diplomacy_Pales_DeclareWar")
+                || DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Pales_AtWar");
+        }
+
+        public static bool IsZilleResolvedPeacefully()
+        {
+            return DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success")
+                && !DialogueHelper.GetBoolVariable("Zille_War_Active")
+                && CurrentPhase == ZilleOperationPhase.NotStarted
+                && Outcome == ZilleWarOutcome.None
+                && !DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                && !DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
+        }
+
+        public static bool IsZilleWarPlanned()
+        {
+            if (IsZilleResolvedPeacefully()) return false;
+
+            bool warActive = DialogueHelper.GetBoolVariable("Zille_War_Active")
+                || CurrentPhase != ZilleOperationPhase.NotStarted;
+            if (warActive) return true;
+
+            if (DialogueHelper.GetBoolVariable("Zille_War_Declined")) return false;
+
+            return DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")
+                || DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch")
+                || DialogueHelper.GetBoolVariable("Zille_War_UltimatumGiven")
+                || DialogueHelper.GetBoolVariable("Zille_War_Mobilization")
+                || DialogueHelper.GetBoolVariable("Zille_StaffPlanning_Started")
+                || DialogueHelper.GetIntVariable("Zille_Military_Posture") >= 1
+                || DialogueHelper.GetBoolVariable("Lespia_Zille_Intelligence_Asked")
+                || DialogueHelper.GetIntVariable("Zille_MilitarySentiment") >= 1
+                || MilitarySentimentLevel >= 1;
+        }
+
         // Economic Impact Trackers
         public static int GoldBudgetDrainPerTurn { get; set; } = 0;
         public static int EnergyDeficitPerTurn { get; set; } = 0;

@@ -440,6 +440,7 @@ namespace GreatZilleSolution
                 }
 
                 // Register all custom Great Zille scenes in EntityDataManager
+                RegisterAdditionalConversationData(allConvList, "Conv_Zille_SovereigntyDeclaration", "Turn_Zille_SovereigntyDeclaration", "Crown Stance: Sovereignty Over Zille", "Council Chamber, Palas Rezna", "Zille/SovereigntyDeclaration");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarPlanning", "Turn_Zille_WarPlanning", "Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", "Zille/WarPlanning");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarBalconySpeech", "Turn_Zille_WarBalconySpeech", "A Royal Proclamation of War", "Palas Rezna Balcony", "Zille/WarBalconySpeech");
                 RegisterAdditionalConversationData(allConvList, "Conv_Zille_WarLogisticsDispute", "Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "Zille/WarLogisticsDispute");
@@ -725,6 +726,7 @@ namespace GreatZilleSolution
         {
             string[] zilleFragments = new[]
             {
+                "Turn_Zille_SovereigntyDeclaration",
                 "Turn_Zille_WarPlanning",
                 "Turn_Zille_WarLogisticsDispute",
                 "Turn_Zille_WarBriefing",
@@ -746,7 +748,10 @@ namespace GreatZilleSolution
         {
             bool treatySigned = DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed") || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
             bool exileCollapse = DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse") || DialogueHelper.GetBoolVariable("Zille_Parley_Refused");
-            if (treatySigned || (exileCollapse && DialogueHelper.GetBoolVariable("Zille_ExileEpilogue_Done")))
+            if (treatySigned
+                || (exileCollapse && DialogueHelper.GetBoolVariable("Zille_ExileEpilogue_Done"))
+                || ZilleCampaignState.IsZilleResolvedPeacefully()
+                || !ZilleCampaignState.IsZilleWarPlanned())
             {
                 ClearAllMandatoryZilleFragments();
                 return;
@@ -755,8 +760,13 @@ namespace GreatZilleSolution
             bool warActive = DialogueHelper.GetBoolVariable("Zille_War_Active");
             bool planningDone = DialogueHelper.GetBoolVariable("Zille_War_Planning_Done");
             bool earlyWar = DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch");
+            bool ultimatumGiven = DialogueHelper.GetBoolVariable("Zille_War_UltimatumGiven")
+                || DialogueHelper.GetBoolVariable("Zille_War_Mobilization");
+            bool postponed = DialogueHelper.GetBoolVariable("Zille_War_Postpone")
+                || DialogueHelper.GetBoolVariable("Zille_War_Declined");
 
-            SetStoryFragmentMandatoryState("Turn_Zille_WarBriefing", (planningDone || earlyWar) && !warActive && ZilleCampaignState.CurrentPhase == ZilleOperationPhase.NotStarted);
+            SetStoryFragmentMandatoryState("Turn_Zille_WarBriefing",
+                (planningDone || earlyWar || ultimatumGiven) && !warActive && !postponed && ZilleCampaignState.CurrentPhase == ZilleOperationPhase.NotStarted);
             SetStoryFragmentMandatoryState("Turn_Zille_MaveNortusHQ", ZilleCampaignState.MaveNortusHQAvailable && !ZilleCampaignState.MaveNortusHQCompleted);
             SetStoryFragmentMandatoryState("Turn_Zille_Op1AftermathCouncil", ZilleCampaignState.Op1CouncilAvailable && !ZilleCampaignState.Op1CouncilCompleted);
 
@@ -825,6 +835,12 @@ namespace GreatZilleSolution
 
         public static void SuppressPalesWarMarker()
         {
+            if (ZilleCampaignState.IsVanillaPalesWarActive()) return;
+            bool zilleWarOrTokenActive = DialogueHelper.GetBoolVariable("Zille_War_Active")
+                || ZilleCampaignState.CurrentPhase != ZilleOperationPhase.NotStarted
+                || (_spawnedZilleWarToken != null && _spawnedZilleWarToken.activeSelf);
+            if (!zilleWarOrTokenActive) return;
+
             try
             {
                 var allObjs = Resources.FindObjectsOfTypeAll<GameObject>();
@@ -1415,8 +1431,8 @@ namespace GreatZilleSolution
 
                     if (palesWarTemplate != null)
                     {
-                        // Ensure Pales template remains untouched and inactive in Turn 2!
-                        palesWarTemplate.SetActive(false);
+                        bool keepPalesActive = ZilleCampaignState.IsVanillaPalesWarActive() && palesWarTemplate.activeSelf;
+                        if (!keepPalesActive) palesWarTemplate.SetActive(false);
 
                         Transform parent = palesWarTemplate.transform.parent;
                         _spawnedZilleWarToken = UnityEngine.Object.Instantiate(palesWarTemplate, parent);
@@ -1476,8 +1492,8 @@ namespace GreatZilleSolution
                         }
 
                         _spawnedZilleWarToken.SetActive(true);
-                        palesWarTemplate.SetActive(false); // Ensure Pales template stays hidden in Turn 2!
-                        MelonLogger.Msg($"[WAR ENGINE] Successfully instantiated separate InvasionOfZille Event Variant at {zilleWarPos} (Pales marker untouched)!");
+                        if (!keepPalesActive) palesWarTemplate.SetActive(false);
+                        MelonLogger.Msg($"[WAR ENGINE] Successfully instantiated separate InvasionOfZille Event Variant at {zilleWarPos} (Pales marker keepActive={keepPalesActive})!");
                     }
                 }
 
@@ -1870,6 +1886,9 @@ namespace GreatZilleSolution
                             {
                                 convPanel.inputBlockerPanel.gameObject.SetActive(false);
                             }
+                            SetStoryFragmentMandatoryState("Turn_Zille_WarBriefing", false);
+                            ZilleCampaignState.SyncFromLua();
+                            ZilleReportsAndSituations.EnsureRegisteredAndSynced();
                             Panels.Instance?.ShowHUD();
 
                             if (PendingZilleTokenSpawnAfterBriefing || DialogueHelper.GetBoolVariable("Zille_War_Active"))
@@ -2457,6 +2476,14 @@ namespace GreatZilleSolution
                     AddIfAvail("Lucita");
                     if (!taddeusAvail || !lucitaAvail || DialogueHelper.GetBoolVariable("Zille_Fighting_Pales"))
                         AddIfAvail("Carlos");
+                    break;
+
+                case "Turn_Zille_SovereigntyDeclaration":
+                    if (hugoAvail) list.Add("Hugo");
+                    AddIfAvail("Laurento");
+                    if (lucitaAvail) list.Add("Lucita");
+                    else AddIfAvail("Carlos");
+                    AddIfAvail("Elena");
                     break;
 
                 case "Turn_Zille_Op1AftermathCouncil":

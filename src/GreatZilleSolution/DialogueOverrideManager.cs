@@ -86,6 +86,7 @@ namespace GreatZilleSolution
                 {
                     ApplyDecisionOverrides(decsArray);
                 }
+                EnsureZilleBombDenounceOptions();
 
                 // 3. Apply Report Overrides
                 if (root.TryGetProperty("reports", out var repsArray) && repsArray.ValueKind == JsonValueKind.Array)
@@ -279,6 +280,14 @@ namespace GreatZilleSolution
                                     if (optElem.TryGetProperty("instruction", out var iProp)) opt.Instruction = iProp.GetString() ?? "";
                                 }
                             }
+                            else
+                            {
+                                var newOpt = new DecisionProperties.DecisionOption();
+                                if (optElem.TryGetProperty("text", out var tProp)) newOpt.Text = tProp.GetString() ?? "";
+                                if (optElem.TryGetProperty("condition", out var cProp)) newOpt.Condition = cProp.GetString() ?? "";
+                                if (optElem.TryGetProperty("instruction", out var iProp)) newOpt.Instruction = iProp.GetString() ?? "";
+                                match.DecisionProperties.Options.Add(newOpt);
+                            }
                             optIdx++;
                         }
                     }
@@ -294,6 +303,60 @@ namespace GreatZilleSolution
             catch (Exception ex)
             {
                 MelonLogger.Warning($"[DIALOGUE OVERRIDES] Error overriding decisions: {ex.Message}");
+            }
+        }
+
+        public static void EnsureZilleBombDenounceOptions()
+        {
+            try
+            {
+                var allDecisions = EntityDataManager.AllDecisionsData ?? EntityDataManager.DecisionsData;
+                if (allDecisions == null) return;
+
+                for (int i = 0; i < allDecisions.Count; i++)
+                {
+                    var d = allDecisions[i];
+                    if (d != null && (d.NameInDatabase == "Turn03_Decision_ZilleBombDenounceSO" || d.Id == "Turn03_Decision_ZilleBombDenounceSO"))
+                    {
+                        if (d.DecisionProperties != null && d.DecisionProperties.Options != null)
+                        {
+                            bool hasOpt3 = false;
+                            bool hasOpt4 = false;
+                            for (int j = 0; j < d.DecisionProperties.Options.Count; j++)
+                            {
+                                var opt = d.DecisionProperties.Options[j];
+                                if (opt == null) continue;
+                                if (opt.Instruction != null && opt.Instruction.Contains("Zille_Pact_Stance_DiplomaticStaging")) hasOpt3 = true;
+                                if (opt.Instruction != null && opt.Instruction.Contains("Zille_Pact_Stance_UnconditionalEnforcement")) hasOpt4 = true;
+                            }
+
+                            if (!hasOpt3)
+                            {
+                                var opt3 = new DecisionProperties.DecisionOption();
+                                opt3.Text = "Issue a diplomatic response demanding peaceful handover and prepare for walking into Zille after the date is due";
+                                opt3.Condition = "";
+                                opt3.Instruction = "Variable[\"Zille_Pact_Stance_DiplomaticStaging\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1; Variable[\"RiziaDLC.Country_SuOmina_Neutral\"] = true;";
+                                d.DecisionProperties.Options.Add(opt3);
+                            }
+
+                            if (!hasOpt4)
+                            {
+                                var opt4 = new DecisionProperties.DecisionOption();
+                                opt4.Text = "Proclaim that Rizia will stick to the Valero Pact unconditionally and take over Zille after the deal is due";
+                                opt4.Condition = "";
+                                opt4.Instruction = "Variable[\"Zille_Pact_Stance_UnconditionalEnforcement\"] = true; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 2; Variable[\"RiziaDLC.HouseAzaro_Opinion\"] = (Variable[\"RiziaDLC.HouseAzaro_Opinion\"] or 0) + 1; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1; Variable[\"RiziaDLC.Country_SuOmina_Defended\"] = true;";
+                                d.DecisionProperties.Options.Add(opt4);
+                            }
+
+                            MelonLogger.Msg($"[DIALOGUE OVERRIDES] Turn03_Decision_ZilleBombDenounceSO verified with {d.DecisionProperties.Options.Count} total options!");
+                        }
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Warning($"[DIALOGUE OVERRIDES] Error in EnsureZilleBombDenounceOptions: {ex.Message}");
             }
         }
 

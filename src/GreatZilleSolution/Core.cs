@@ -133,7 +133,9 @@ namespace GreatZilleSolution
                 ZilleDecisions.EnsureRegistered();
                 ZilleReportsAndSituations.EnsureRegisteredAndSynced();
 
-                if (DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked")
+                if (!ZilleCampaignState.IsZilleResolvedPeacefully()
+                    && !DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                    && DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitUnlocked")
                     && !DialogueHelper.GetBoolVariable("Zille_Derdia_StateVisitDone")
                     && !ZilleCampaignState.IsDerdiaStateVisitDone)
                 {

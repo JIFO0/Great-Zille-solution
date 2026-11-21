@@ -121,6 +121,7 @@ namespace GreatZilleSolution
             MelonLogger.Msg("[EVENT SPAWNER] Building event spawner catalog...");
 
                         // 1. Mod events registered prominently at the top
+            AddModNewEvent("Turn_Zille_SovereigntyDeclaration", "Crown Stance: Sovereignty Over Zille", "Council Chamber, Palas Rezna", "MODNEW");
             AddModNewEvent("Turn_Zille_WarPlanning", "Emergency Crown Council: The Fate of Zille", "Council Chamber, Palas Rezna", "MODNEW");
             AddModNewEvent("Turn_Zille_WarLogisticsDispute", "Supply Lines of Brenas: Azaro vs Sazon", "Ministry of War, Porte Drazon", "MODNEW");
             AddModNewEvent("Turn_Zille_WarBriefing", "A Royal Briefing Before the Invasion of Zille", "Council Chambers, Palas Rezna", "MODNEW");

@@ -665,6 +665,21 @@ namespace GreatZilleSolution
                     tip.Setup(pd);
                     yield return null;
 
+                    // 1. Verify peaceful no-war gating BEFORE enabling any war intent!
+                    bool plannedInitial = ZilleCampaignState.IsZilleWarPlanned();
+                    bool leakedPlanning = FindPanelButton(tip, "Emergency Crown Council: The Fate of Zille") != null;
+                    bool leakedLogistics = FindPanelButton(tip, "Supply Lines of Brenas") != null;
+                    bool leakedBriefing = FindPanelButton(tip, "A royal briefing before the invasion of Zille") != null;
+                    bool leakedLespia = FindPanelButton(tip, "Lespian Hotline") != null;
+                    bool leakedRumburg = FindPanelButton(tip, "Imperial Trunk Line") != null;
+                    bool leakedSmolakSit = DialogueHelper.GetBoolVariable("Zille_Sit_SmolakMinimal")
+                        || DialogueHelper.GetBoolVariable("Zille_Sit_SmolakSuspicious")
+                        || DialogueHelper.GetBoolVariable("Zille_Sit_SmolakPrepared");
+                    if (!plannedInitial && !leakedPlanning && !leakedLogistics && !leakedBriefing && !leakedLespia && !leakedRumburg && !leakedSmolakSit)
+                        rep.LogPass("Turn 4 Peaceful No-War Gating", "Untouched peaceful Turn 4 save hides Emergency Crown Council, Supply Lines, War Briefing, Hotlines, and Smolak Suspicion situations.");
+                    else
+                        rep.LogFail("Turn 4 Peaceful No-War Gating", $"planned={plannedInitial}, plan={leakedPlanning}, log={leakedLogistics}, brief={leakedBriefing}, lespia={leakedLespia}, rumb={leakedRumburg}, smolakSit={leakedSmolakSit}");
+
                     var sabBtn = FindPanelButton(tip, "Sabotage Along the Derdia-Wehlen Border");
                     if (sabBtn != null && sabBtn.button != null)
                     {
@@ -708,12 +723,51 @@ namespace GreatZilleSolution
                         rep.LogFail("Turn 4 Decision Button Missing", $"Sabotage Along the Derdia-Wehlen Border not found on Porte Drazon (theatre={WarOperationZilleManager.CurrentTheatre}, buttons=[{string.Join(" | ", foundTitles)}]).");
                     }
 
-                    // Click real (MODNEW) Emergency Crown Council button & walk conversation live to END
+                    // 2. Simulate explicit war intent -> Emergency Crown Council unlocks -> choose Stand Down!
+                    DialogueHelper.SetVariable("Zille_StaffPlanning_Started", true);
+                    ZilleCampaignState.SyncFromLua();
+                    tip.gameObject.SetActive(true);
+                    tip.Setup(pd);
+                    yield return null;
+
+                    var standDownPlanBtn = FindPanelButton(tip, "Emergency Crown Council: The Fate of Zille");
+                    if (standDownPlanBtn != null && standDownPlanBtn.button != null)
+                    {
+                        standDownPlanBtn.button.onClick.Invoke();
+                        yield return WalkActiveConversationCoroutine(rep, "Turn4_WarPlanning_StandDown", new[] { "Conclude_Planning_StandDown", "Stand down", "Proceed_To_" });
+                        yield return new WaitForSeconds(0.4f);
+
+                        bool declinedAfter = DialogueHelper.GetBoolVariable("Zille_War_Declined");
+                        bool plannedAfterStandDown = ZilleCampaignState.IsZilleWarPlanned();
+                        tip.gameObject.SetActive(true);
+                        tip.Setup(pd);
+                        yield return null;
+                        bool planBtnGone = FindPanelButton(tip, "Emergency Crown Council: The Fate of Zille") == null;
+                        bool briefBtnGone = FindPanelButton(tip, "A royal briefing before the invasion of Zille") == null;
+                        if (declinedAfter && !plannedAfterStandDown && planBtnGone && briefBtnGone)
+                            rep.LogPass("Turn 4 WarPlanning Stand-Down Exit", "Choosing Conclude_Planning_StandDown hid Emergency Crown Council & War Briefing with zero mandatory lock.");
+                        else
+                            rep.LogFail("Turn 4 WarPlanning Stand-Down Exit", $"declined={declinedAfter}, planned={plannedAfterStandDown}, planBtnGone={planBtnGone}, briefBtnGone={briefBtnGone}");
+                    }
+                    else
+                    {
+                        rep.LogFail("Turn 4 WarPlanning Unlock", "Emergency Crown Council button missing even after Zille_StaffPlanning_Started=true.");
+                    }
+
+                    // 3. Re-opt into war planning -> Emergency Crown Council -> proceed to WarPlanning_Done -> Supply Lines & Briefing unlock!
+                    DialogueHelper.SetVariable("Zille_War_Declined", false);
+                    DialogueHelper.SetVariable("Zille_War_Postpone", false);
+                    DialogueHelper.SetVariable("Zille_StaffPlanning_Started", true);
+                    ZilleCampaignState.SyncFromLua();
+                    tip.gameObject.SetActive(true);
+                    tip.Setup(pd);
+                    yield return null;
+
                     var planBtn = FindPanelButton(tip, "Emergency Crown Council: The Fate of Zille");
                     if (planBtn != null && planBtn.button != null)
                     {
                         planBtn.button.onClick.Invoke();
-                        yield return WalkActiveConversationCoroutine(rep, "Turn4_Clicked_WarPlanning", new[] { "Sword", "Azaro" });
+                        yield return WalkActiveConversationCoroutine(rep, "Turn4_Clicked_WarPlanning", new[] { "Conclude_Planning_Discreet", "Proceed_To_" });
                         yield return new WaitForSeconds(0.4f);
 
                         bool planDone = DialogueHelper.GetBoolVariable("Zille_War_Planning_Done");
@@ -721,14 +775,15 @@ namespace GreatZilleSolution
                         tip.Setup(pd);
                         yield return null;
                         var logBtn = FindPanelButton(tip, "Supply Lines of Brenas");
-                        if (planDone && logBtn != null)
-                            rep.LogPass("Turn 4 Real Button -> WarPlanning Progression", "Walking WarPlanning via real button click set Zille_War_Planning_Done=true and unlocked Supply Lines of Brenas!");
+                        var briefBtn = FindPanelButton(tip, "A royal briefing before the invasion of Zille");
+                        if (planDone && logBtn != null && briefBtn != null)
+                            rep.LogPass("Turn 4 Real Button -> WarPlanning Progression", "Walking WarPlanning via real button click set Zille_War_Planning_Done=true and unlocked Supply Lines of Brenas & Royal Briefing!");
                         else
-                            rep.LogFail("Turn 4 Real Button -> WarPlanning Progression", $"planDone={planDone}, logisticsBtn={(logBtn != null)}");
+                            rep.LogFail("Turn 4 Real Button -> WarPlanning Progression", $"planDone={planDone}, logisticsBtn={(logBtn != null)}, briefBtn={(briefBtn != null)}");
                     }
                     else
                     {
-                        rep.LogFail("Turn 4 WarPlanning Button", "Emergency Crown Council button missing on Porte Drazon.");
+                        rep.LogFail("Turn 4 WarPlanning Button", "Emergency Crown Council button missing after re-enabling war intent.");
                     }
 
                     try { tip.Hide(); } catch { }
@@ -794,16 +849,38 @@ namespace GreatZilleSolution
                 rep.LogInfo($"Loading Campaign='{sfT9.saveData.campaignName}', Turn={sfT9.saveData.turnNo} ({sfT9.fileName})...");
                 yield return LoadRealSaveCoroutine(pm, sfT9);
                 int t9 = ZilleCampaignState.GetCurrentTurn();
-                if (t9 == 9)
-                    rep.LogPass("Turn 9 Clean Save Load", $"Campaign='Divine Nature', loadedTurn={t9}.");
+                bool t9Planned = ZilleCampaignState.IsZilleWarPlanned();
+                var pd9 = FindActiveCityToken("PorteDrazon");
+                var tip9 = Panels.Instance?.TokenInteractionPanel ?? UnityEngine.Object.FindObjectOfType<TokenInteractionPanel>();
+                bool t9Leaked = false;
+                if (pd9 != null && tip9 != null)
+                {
+                    tip9.gameObject.SetActive(true);
+                    tip9.Setup(pd9);
+                    yield return null;
+                    t9Leaked = FindPanelButton(tip9, "Emergency Crown Council") != null
+                            || FindPanelButton(tip9, "A royal briefing before the invasion of Zille") != null;
+                    try { tip9.Hide(); } catch { }
+                }
+                if (t9 == 9 && !t9Planned && !t9Leaked)
+                    rep.LogPass("Turn 9 Clean Save Load", $"Campaign='Divine Nature', loadedTurn={t9}, peaceful no-war gating clean.");
                 else
-                    rep.LogFail("Turn 9 Clean Save Load", $"Expected 9, got {t9}.");
+                    rep.LogFail("Turn 9 Clean Save Load", $"t9={t9}, planned={t9Planned}, leaked={t9Leaked}.");
             }
 
             // =========================================================================
-            // PHASE B: Brute-Force Full Walkthrough of All 17 Scenes Across 21 Branches
+            // PHASE B: Brute-Force Full Walkthrough of All 18 Scenes Across 24 Branches
             // =========================================================================
-            rep.Header("PHASE B: Brute-Force Walkthrough of All 17 Scenes (21 Branches)");
+            rep.Header("PHASE B: Brute-Force Walkthrough of All 18 Scenes (24 Branches)");
+
+            yield return WalkSceneCoroutine(rep, "00A_SovereigntyDeclaration_HawkishMarch", "Turn_Zille_SovereigntyDeclaration", "Zille/SovereigntyDeclaration",
+                "P1_Baseline_Op1", new[] { "MarchAnnouncement", "MarchIntoZille" });
+
+            yield return WalkSceneCoroutine(rep, "00B_SovereigntyDeclaration_Peaceful", "Turn_Zille_SovereigntyDeclaration", "Zille/SovereigntyDeclaration",
+                "P1_Baseline_Op1", new[] { "Peaceful" });
+
+            yield return WalkSceneCoroutine(rep, "00C_SovereigntyDeclaration_Legalist", "Turn_Zille_SovereigntyDeclaration", "Zille/SovereigntyDeclaration",
+                "P1_Baseline_Op1", new[] { "Legalist" });
 
             yield return WalkSceneCoroutine(rep, "01_DerdiaInvestigation", "Turn_Zille_DerdiaInvestigation", "Zille/DerdiaInvestigation",
                 "P1_Baseline_Op1", new[] { "DerdiaInv_GoldenGuard", "DerdiaInv_Proceed_Action" });
