@@ -1917,7 +1917,7 @@ namespace GreatZilleSolution
                 "\"Your Majesty, the bombing in Zille has sent shockwaves across South Merkopa. Smolak is beating his chest, and foreign embassies are buzzing. The 1927 lease expires in just a few short years—yet instead of discussing terms of orderly transition, Wehlen is accusing our subjects of treason and murder. We must define the Crown's grand posture before issuing any public proclamation.\"", 11);
 
             AddLine(conv, 11, ElenaId, RomusId, "Elena_Sovereignty_Warning",
-                "\"The commercial sector is in dread, Sire. Rizian trade through the Zille corridor is already feeling the pinch of arbitrary Wehzek transit fees. Whatever stance we take must safeguard our fiscal stability and foreign trade credit.\"", 12);
+                "\"The commercial sector is in dread, Your Majesty. Rizian trade through the Zille corridor is already feeling the pinch of arbitrary Wehzek transit fees. Whatever stance we take must safeguard our fiscal stability and foreign trade credit.\"", 12);
 
             AddLine(conv, 12, LucitaId, RomusId, "Lucita_Sovereignty_Strength",
                 "\"Fiscal stability means nothing if our frontiers are defenseless, Elena. Smolak senses weakness. If the King does not make Rizia's sovereign intent unmistakably clear, Wehlen will fabricate reasons to hold Zille indefinitely.\"", 13);
@@ -1956,7 +1956,7 @@ namespace GreatZilleSolution
 
             // Branch A (Peaceful)
             AddLine(conv, 30, ElenaId, RomusId, "Elena_Peaceful_Relief",
-                "\"A wise and measured approach, Sire. War or panic would frighten foreign capital and shatter our royal budget. Trade and quiet negotiation are our sharpest instruments.\"", 31);
+                "\"A wise and measured approach, Your Majesty. War or panic would frighten foreign capital and shatter our royal budget. Trade and quiet negotiation are our sharpest instruments.\"", 31);
             AddLine(conv, 31, HugoId, RomusId, "Hugo_Peaceful_Approve",
                 "\"Smolak expects us to rage. Denying him that pretext keeps the moral high ground firmly in Rizian hands. We shall instruct the press to emphasize patience and restraint.\"", 32);
             AddLine(conv, 32, LucitaId, RomusId, "Lucita_Peaceful_Vigilant",
@@ -1966,7 +1966,7 @@ namespace GreatZilleSolution
 
             // Branch B (Firm Legalist)
             AddLine(conv, 40, LaurentoId, RomusId, "Laurento_Legalist_Support",
-                "\"International law is on our side, Sire. Smolak signed that treaty in blood and ink. If we present our legal case forcefully in Kyrute, even Wehlen's lukewarm supporters will find it difficult to back his posturing.\"", 41);
+                "\"International law is on our side, Your Majesty. Smolak signed that treaty in blood and ink. If we present our legal case forcefully in Kyrute, even Wehlen's lukewarm supporters will find it difficult to back his posturing.\"", 41);
             AddLine(conv, 41, LucitaId, RomusId, "Lucita_Legalist_Garrisons",
                 "\"A firm legal stance must be backed by quiet strength. The frontier garrisons should begin routine logistics exercises, simply to remind Wehlen that the treaty carries weight.\"", 42);
             AddLine(conv, 42, HugoId, RomusId, "Hugo_Legalist_Prudence",
@@ -1978,9 +1978,9 @@ namespace GreatZilleSolution
             AddLine(conv, 51, HugoId, RomusId, "Hugo_March_Panic",
                 "\"Sweet Saint Drezet, Your Majesty! Have you lost your senses?! Walking into Zille by force—ignoring Wehlen's sovereignty—is not statecraft, it is an open declaration of war! The entire Alliance of Nations will brand us rogue aggressors!\"", 52);
             AddLine(conv, 52, ElenaId, RomusId, "Elena_March_Sanctions",
-                "\"Our treasury cannot endure an international embargo, Sire! If sanctions strike our wine, gold, and shipping lines, the kingdom's economy will collapse into ruin before a single regiment crosses the frontier!\"", 53);
+                "\"Our treasury cannot endure an international embargo, Your Majesty! If sanctions strike our wine, gold, and shipping lines, the kingdom's economy will collapse into ruin before a single regiment crosses the frontier!\"", 53);
             AddLine(conv, 53, LucitaId, RomusId, "Lucita_March_Calculation",
-                "\"Smolak has five infantry divisions dug into the Zille coastal ridges, Sire. If we move without total preparation and an ironclad casus belli, we walk into a fortified trap.\"", 54);
+                "\"Smolak has five infantry divisions dug into the Zille coastal ridges, Your Majesty. If we move without total preparation and an ironclad casus belli, we walk into a fortified trap.\"", 54);
             AddLine(conv, 54, LaurentoId, RomusId, "Laurento_March_Assessment",
                 "\"We still don't know if the Wehzeks will actually want to fight for that piece of land, but the international implications will be tough. We would need to address all possible avenues to sway the international opinion to our side.\"", 60);
 
@@ -2011,11 +2011,11 @@ namespace GreatZilleSolution
             AddLine(conv, 71, HugoId, RomusId, "Hugo_Command_Prayer",
                 "\"May the saints preserve us. If blood must flow, let it at least flow swiftly... God save King Romus.\"", 72);
             AddLine(conv, 72, LaurentoId, RomusId, "Laurento_Command_DiplomaticGroundwork",
-                "\"I will begin laying diplomatic groundwork in the AN immediately, Sire. We must frame Smolak as the obstinate leaseholder breaking solemn covenants, while Rizia acts as the lawful protector.\"", 90);
+                "\"I will begin laying diplomatic groundwork in the AN immediately, Your Majesty. We must frame Smolak as the obstinate leaseholder breaking solemn covenants, while Rizia acts as the lawful protector.\"", 90);
 
             // Choice 62 resolution
             AddLine(conv, 75, HugoId, RomusId, "Hugo_Tempered_Relief",
-                "\"A prudent course, Sire. A sword held at the throat is far more persuasive when the sheath has not yet been cast away.\"", 76);
+                "\"A prudent course, Your Majesty. A sword held at the throat is far more persuasive when the sheath has not yet been cast away.\"", 76);
             AddLine(conv, 76, LucitaId, RomusId, "Lucita_Tempered_Readiness",
                 "\"We shall prepare the troops quietly. Smolak will feel the steel behind our diplomats' words.\"", 90);
 

@@ -643,7 +643,7 @@ namespace GreatZilleSolution
             SetEntryScript(valeroChoice, "Variable[\"Zille_Turn3_ValeroUltimatum\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
 
             var valeroReplyLucita = CreateEntry(conv.id, valeroReplyLucitaId, LucitaId, RomusId, "Lucita_Turn3_ValeroUltimatum_Reply",
-                "\"That is the iron language Smolak understands, Sire. If the General Staff begins strategic reconnaissance along the border ridges now, Wehlen will realize their lease is running out in blood if not in ink.\"");
+                "\"That is the iron language Smolak understands, Your Majesty. If the General Staff begins strategic reconnaissance along the border ridges now, Wehlen will realize their lease is running out in blood if not in ink.\"");
             SetEntryCondition(valeroReplyLucita, "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             var valeroReplyHugo = CreateEntry(conv.id, valeroReplyHugoId, HugoId, RomusId, "Hugo_Turn3_ValeroUltimatum_Reply",
@@ -672,7 +672,7 @@ namespace GreatZilleSolution
             SetEntryScript(commChoice, "Variable[\"Zille_Turn3_ArmedCommissionDemanded\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
 
             var commReplyTitus = CreateEntry(conv.id, commReplyTitusId, TitusId, RomusId, "Titus_Turn3_ArmedCommission_Reply",
-                "\"The Golden Guard is ready to deploy an armed detachment to the blast epicenter within hours, Sire. We will not allow Wehzek agents to tamper with physical evidence or plant false leads.\"");
+                "\"The Golden Guard is ready to deploy an armed detachment to the blast epicenter within hours, Your Majesty. We will not allow Wehzek agents to tamper with physical evidence or plant false leads.\"");
             SetEntryCondition(commReplyTitus, "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             var commReplyLucita = CreateEntry(conv.id, commReplyLucitaId, LucitaId, RomusId, "Lucita_Turn3_ArmedCommission_Reply",
