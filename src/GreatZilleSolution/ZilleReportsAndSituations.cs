@@ -277,6 +277,16 @@ namespace GreatZilleSolution
                 "Rumburgian rivals and Malenyevist delegates at the Alliance of Nations are pressing for sanctions over Rizian military escalation.",
                 "Diplomacy", "High", "Zille_Sit_ANOutcry");
 
+            AddOrUpdateSituation(sits, "Sit_Zille_EarlyArk_Sanctions",
+                "International Outrage: Mainland Wehlen Raid",
+                "Landing Rizian troops on mainland Wehlen under Operation Golden Ark while publicly proclaiming a peaceful Valero treaty handover has triggered fierce condemnation across Konstantium.",
+                "Diplomacy", "High", "Zille_EarlyArk_Backlash");
+
+            AddOrUpdateSituation(sits, "Sit_Zille_BombingLie_Scrutiny",
+                "Foreign Scrutiny Over Bombing Claim",
+                "King Romus's broadcast accusation that Wehlen fabricated the Friendship Day bombing electrified the home front, yet foreign intelligence attachés in Kyrute are openly questioning the nonexistent dossier.",
+                "Diplomacy", "Medium", "Zille_Speech_LiedAboutBombing");
+
             AddOrUpdateSituation(sits, "Sit_Zille_Outcome_Restored",
                 "Zille Reunited with Rizia",
                 "The Treaty of Zille has restored Rizia's historic northwestern province to the Crown after more than twenty-five years of separation.",
@@ -506,8 +516,28 @@ namespace GreatZilleSolution
 
             AddOrUpdateReport(reps, "Rep_Zille_EarlyEscalation",
                 "Crown Council: Early Frontier Escalation",
-                "Following the Zille Friendship Day bombing, King Romus authorized immediate military escalation rather than waiting for the scheduled referendum.",
+                "Following the Zille Friendship Day bombing, King Romus authorized an early enforcement of the expiring 1927 Valero agreement regardless of Wehlen's protests.",
                 "Zille_War_EarlyLaunch", 3, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Zille_LateEscalation",
+                "Crown Council: Diplomatic Exhaustion Over Zille",
+                "After years of rejected overtures and Smolak's extortion, King Romus formally authorized military operations to liberate Zille.",
+                "Zille_War_UltimatumGiven", 8, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Zille_EarlyArk_Backlash",
+                "Konstantium Outcry: Operation Golden Ark Backlash",
+                "Foreign delegations reacted with fury after Rizia launched amphibious strikes onto mainland Wehlen despite proclaiming a lawful, limited entry into Zille under the Valero pact.",
+                "Zille_EarlyArk_Backlash", 4, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Zille_LateSword_Friction",
+                "AN Concern: Urban Fighting in Zille",
+                "Neutral observers in Konstantium voiced measured concern over heavy urban clashes along Operation Golden Sword's frontal axis through Zille's coastal towns.",
+                "Zille_LateSword_Friction", 8, "Rizia_City_PorteDrazon");
+
+            AddOrUpdateReport(reps, "Rep_Zille_BombingLie_Published",
+                "Palace Broadcast: Wehlen Accused of Friendship Day Plot",
+                "King Romus stunned domestic and foreign audiences alike by claiming Rizian intelligence holds irrefutable proof that Wehlen fabricated the Friendship Day bombing to keep Zille—rallying domestic fervor while drawing sharp skepticism abroad.",
+                "Zille_Speech_LiedAboutBombing", 4, "Rizia_City_PorteDrazon");
         }
 
         public static void SyncVariables()
@@ -532,6 +562,7 @@ namespace GreatZilleSolution
 
             bool warPlanned = ZilleCampaignState.IsZilleWarPlanned();
             bool zilleSettled = ZilleCampaignState.IsZilleResolvedPeacefully()
+                || ZilleCampaignState.HasZilleWarOccurred()
                 || DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
                 || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
 
@@ -549,8 +580,8 @@ namespace GreatZilleSolution
             DialogueHelper.SetVariable("Zille_Sit_Underground", warPlanned && !zilleSettled && (warActive || DialogueHelper.GetBoolVariable("Zille_War_Planning_Done")));
             DialogueHelper.SetVariable("Zille_Sit_DerdiaRaids", warActive && !zilleSettled && (ZilleCampaignState.IsDerdiaHybridSupportActive || DialogueHelper.GetBoolVariable("Zille_DerdiaHybridActive")));
             DialogueHelper.SetVariable("Zille_Sit_DerdiaCorridor", warPlanned && !zilleSettled && (ZilleCampaignState.IsDerdiaPactSigned || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")));
-            DialogueHelper.SetVariable("Zille_Sit_ANHigh", ZilleCampaignState.AnLegitimacyScore >= 3);
-            DialogueHelper.SetVariable("Zille_Sit_ANOutcry", warActive && ZilleCampaignState.AnLegitimacyScore < 2);
+            DialogueHelper.SetVariable("Zille_Sit_ANHigh", ZilleCampaignState.AnLegitimacyScore >= 3 && !ZilleCampaignState.EarlyArkBacklashActive);
+            DialogueHelper.SetVariable("Zille_Sit_ANOutcry", (warActive && ZilleCampaignState.AnLegitimacyScore < 2) || ZilleCampaignState.EarlyArkBacklashActive);
             DialogueHelper.SetVariable("Zille_Sit_OutcomeRestored", outcome >= 4 || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"));
             DialogueHelper.SetVariable("Zille_Sit_OutcomeArmistice", outcome == 2 && !ZilleCampaignState.IsIndependentZilleAgreed);
 

@@ -341,12 +341,61 @@ namespace GreatZilleSolution
                     {
                         if (InjectTurn8ZilleNegotiationsWarChoice(conv, db)) patchedCount++;
                     }
+                    // 8B. Turn 5 Bilateral Wehlen Negotiations (FPnT_WehlenNegotiations) [INTERRUPT] when war active/done
+                    else if (conv.Title.IndexOf("FPnT_WehlenNegotiations", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectWehlenWarSupersedesInterrupt(conv, db, "Zille_Turn5_WehlenNeg_Interrupt", 99301,
+                            "\"[DISPATCH] With Rizian and Wehzek forces already bound by open conflict and the Crown's war footing over Zille, President Smolak's scheduled bilateral trade delegation to Porte Drazon has been formally canceled.\"",
+                            "There is nothing left to haggle over with Wraclawitz while steel speaks on the frontier.")) patchedCount++;
+                    }
+                    // 8C. Turn 5 MITZ Hegel Call (FPnT_MITZHegelCall) [FLAVOR INJECT]
+                    else if (conv.Title.IndexOf("FPnT_MITZHegelCall", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectTurn5HegelZilleWarFlavor(conv, db)) patchedCount++;
+                    }
+                    // 8D. Turn 7 Zille Treaty Discussion (Zille_Treaty_Discussion) [INTERRUPT] when war active/done
+                    else if (conv.Title.IndexOf("Zille_Treaty_Discussion", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectWehlenWarSupersedesInterrupt(conv, db, "Zille_Turn7_TreatyDisc_Interrupt", 99311,
+                            "\"[COUNCIL BRIEF] Because the Crown has already pursued the reclamation of Zille by arms, the pre-war treaty negotiation agenda has been superseded by our active military command and post-war settlement protocols.\"",
+                            "Good. Keep the Council focused on the reality at the frontier, not obsolete diplomatic drafts.")) patchedCount++;
+                    }
+                    // 8E. Turn 8 AN General Assembly (FPnT_ANSession) [FLAVOR INJECT]
+                    else if (conv.Title.IndexOf("FPnT_ANSession", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectTurn8ANSessionZilleWarFlavor(conv, db)) patchedCount++;
+                    }
+                    // 8F. Turn 9 Casual Call With Smolak (FPnT_CallWithSmolak) [INTERRUPT] when war active/done
+                    else if (conv.Title.IndexOf("FPnT_CallWithSmolak", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectWehlenWarSupersedesInterrupt(conv, db, "Zille_Turn9_SmolakCall_Interrupt", 99321,
+                            "\"[TELEGRAPH DISPATCH] Diplomatic trunk lines between Monqiz and Wraclawitz remain severed following the Zille war. Any communication with President Smolak proceeds strictly through formal military parley channels.\"",
+                            "As expected. Smolak's evening pleasantries ended the day our divisions crossed the border.")) patchedCount++;
+                    }
+                    // 8G. Turn 9 Wehlen-Derdia Mediation (Wehlen_Derdia_Meditation) [INTERRUPT] when war active/done
+                    else if (conv.Title.IndexOf("Wehlen_Derdia_Meditation", StringComparison.OrdinalIgnoreCase) >= 0
+                          || conv.Title.IndexOf("Wehlen_Derdia_Mediation", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectWehlenWarSupersedesInterrupt(conv, db, "Zille_Turn9_WehlenDerdiaMed_Interrupt", 99331,
+                            "\"[DISPATCH] With Rizia having engaged Wehlen in open war over Zille, Wraclawitz has withdrawn its request for Rizian arbitration with Derdia. Naeal and Porte Drazon now speak directly as sovereign neighbors.\"",
+                            "Smolak never sought honest mediation anyway. Let Derdia know Rizia stands by its word.")) patchedCount++;
+                    }
                     // 9. Turn 9 Zille Referendum & Handback [INTERRUPT] guards when military campaign supersedes diplomacy
                     else if (conv.Title.IndexOf("ZilleReferendum", StringComparison.OrdinalIgnoreCase) >= 0
                           || conv.Title.IndexOf("ZilleHandback", StringComparison.OrdinalIgnoreCase) >= 0
                           || conv.Title.IndexOf("ZilleReturnedSpeech", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         if (InjectZilleReferendumWarInterrupt(conv, db)) patchedCount++;
+                    }
+                    // 9B. Turn 10 Queen Mother Estela's Birthday Gathering (Birthday_Gathering) [FLAVOR INJECT]
+                    else if (conv.Title.IndexOf("Birthday_Gathering", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectTurn10BirthdayZilleWarFlavor(conv, db)) patchedCount++;
+                    }
+                    // 9C. Turn 11 Ending Speech (Ending_Speech) [FLAVOR INJECT]
+                    else if (conv.Title.IndexOf("Ending_Speech", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        if (InjectTurn11EndingSpeechZilleWarFlavor(conv, db)) patchedCount++;
                     }
                     // 10. Vanilla Exile Epilogue (426_Exile / Exile): Zille Azaro Collapse Branch
                     else if ((conv.Title.IndexOf("426_Exile", StringComparison.OrdinalIgnoreCase) >= 0
@@ -547,7 +596,7 @@ namespace GreatZilleSolution
             var choice = CreateEntry(conv.id, choiceId, RomusId, LucitaId, "Zille_Turn3_Bombing_WarOption",
                 "This bombing is a blatant provocation by Wehlen. Order the Third and Fourth Corps to advance across the border immediately!",
                 "\"This bombing is a blatant Wehzek provocation! Order our divisions to cross the border and reclaim Zille immediately!\"");
-            SetEntryScript(choice, "Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
+            SetEntryScript(choice, "Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Variant\"] = \"Early\"; Variable[\"Zille_War_IsEarly\"] = true; Variable[\"Zille_War_IsLate\"] = false; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             var replyLucita = CreateEntry(conv.id, replyLucitaId, LucitaId, RomusId, "Lucita_Turn3_EarlyWar_Response",
                 "\"Your Majesty, launching an unprepared offensive right now—before securing fuel corridors, munitions, and diplomatic cover—would invite slaughter against Wehlen's coastal redoubts! Let us prepare properly first.\"");
@@ -640,7 +689,7 @@ namespace GreatZilleSolution
             var valeroChoice = CreateEntry(conv.id, valeroChoiceId, RomusId, LucitaId, "Zille_Turn3_ValeroUltimatum_Choice",
                 "The Valero treaty is non-negotiable. If Wehlen refuses to prepare the handover, their soldiers will be treated as illegal occupiers.",
                 "\"The Valero treaty is non-negotiable. If Wehlen refuses to prepare the handover of Zille, Smolak's soldiers will be treated as an illegal hostile occupation.\"");
-            SetEntryScript(valeroChoice, "Variable[\"Zille_Turn3_ValeroUltimatum\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
+            SetEntryScript(valeroChoice, "Variable[\"Zille_Turn3_ValeroUltimatum\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Variant\"] = \"Early\"; Variable[\"Zille_War_IsEarly\"] = true; Variable[\"Zille_War_IsLate\"] = false; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
 
             var valeroReplyLucita = CreateEntry(conv.id, valeroReplyLucitaId, LucitaId, RomusId, "Lucita_Turn3_ValeroUltimatum_Reply",
                 "\"That is the iron language Smolak understands, Your Majesty. If the General Staff begins strategic reconnaissance along the border ridges now, Wehlen will realize their lease is running out in blood if not in ink.\"");
@@ -746,7 +795,7 @@ namespace GreatZilleSolution
             var noticeChoice = CreateEntry(conv.id, noticeChoiceId, RomusId, NarratorId, "Zille_Turn4_AN_ValeroNotice",
                 "I officially place this Assembly on notice: when the 1927 pact expires, any Wehzek soldiers remaining in Zille will be an illegal foreign occupation.",
                 "\"I officially place the Alliance of Nations on notice: when the 1927 Valero treaty expires, Rizian sovereignty resumes automatically. Any Wehzek armed presence beyond that date will be classified as a foreign military occupation, and met accordingly.\"");
-            SetEntryScript(noticeChoice, "Variable[\"Zille_AN_ValeroNotice\"] = true; Variable[\"RiziaDLC.Diplomacy_Wehlen_ANSpeech_Aggression\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
+            SetEntryScript(noticeChoice, "Variable[\"Zille_AN_ValeroNotice\"] = true; Variable[\"RiziaDLC.Diplomacy_Wehlen_ANSpeech_Aggression\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"Zille_War_EarlyLaunch\"] = true; Variable[\"Zille_War_Variant\"] = \"Early\"; Variable[\"Zille_War_IsEarly\"] = true; Variable[\"Zille_War_IsLate\"] = false; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] = (Variable[\"RiziaDLC.Diplomacy_Wehlen_NegotiatingPower\"] or 0) - 1;");
 
             var noticeReplyNarr = CreateEntry(conv.id, noticeReplyNarrId, NarratorId, RomusId, "Narrator_Turn4_AN_NoticeReaction",
                 "Chancellor Hegel tilted his head, watching with keen amusement, while Patricio Alvarez scowled openly. The legal gauntlet had been thrown before the eyes of the international community.");
@@ -874,6 +923,12 @@ namespace GreatZilleSolution
 
         private static bool InjectTurn8ZilleNegotiationsWarChoice(Conversation conv, DialogueDatabase db)
         {
+            // First, insert a root [INTERRUPT] so peaceful Turn 8 airship negotiations with Smolak
+            // NEVER run if the Early War is active or has already concluded!
+            InjectWehlenWarSupersedesInterrupt(conv, db, "Zille_Turn8_Negotiations_Interrupt", 99178,
+                "\"[DISPATCH] With the question of Zille already decided by armed conflict and the Crown's war settlement, President Smolak's scheduled Turn 8 airship summit has been formally voided.\"",
+                "History moved past Smolak's airship bargaining the day our banners crossed the frontier.");
+
             for (int i = 0; i < conv.dialogueEntries.Count; i++)
             {
                 if (conv.dialogueEntries[i]?.Title == "Zille_Turn8_War_Ultimatum") return true;
@@ -890,7 +945,8 @@ namespace GreatZilleSolution
             var choice = CreateEntry(conv.id, choiceId, RomusId, SmolakId, "Zille_Turn8_War_Ultimatum",
                 "Enough of your extortion, Smolak! The 1927 agreement expired years ago. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!",
                 "\"Enough of your extortion, Smolak! The 1927 agreement expired years ago. Order your troops to vacate Zille immediately, or the Royal Army will reclaim our sovereign land by force!\"");
-            SetEntryScript(choice, "Variable[\"Zille_War_UltimatumGiven\"] = true; Variable[\"Zille_War_Mobilization\"] = true; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_MilitarySentiment\"] = 3; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
+            SetEntryCondition(choice, "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_Completed\"] ~= true and Variable[\"Zille_PeaceTreaty_Signed\"] ~= true and (Variable[\"Zille_War_Outcome\"] or 0) == 0");
+            SetEntryScript(choice, "Variable[\"Zille_War_UltimatumGiven\"] = true; Variable[\"Zille_War_Mobilization\"] = true; Variable[\"Zille_War_Variant\"] = \"Late\"; Variable[\"Zille_War_IsLate\"] = true; Variable[\"Zille_War_IsEarly\"] = false; Variable[\"Zille_War_Declined\"] = false; Variable[\"Zille_War_Postpone\"] = false; Variable[\"Zille_MilitarySentiment\"] = 3; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 2;");
 
             var replyLever = CreateEntry(conv.id, replyLeverId, SmolakId, RomusId, "Smolak_Turn8_Ultimatum_Shaken",
                 "Smolak's face darkened as he gripped the table inside the airship cabin, his eyes darting to the thick dossier in your hand. \"So you're actually ready to bleed for it, Romus? Go ahead then—send your well-armed nobles! My Zille garrisons will fight you for every hillside!\"");
@@ -914,6 +970,190 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(choice);
             conv.dialogueEntries.Add(replyLever);
             conv.dialogueEntries.Add(replyBluff);
+            return true;
+        }
+
+        private static bool InjectWehlenWarSupersedesInterrupt(Conversation conv, DialogueDatabase db, string entryTitle, int baseId, string dispatchText, string ackText)
+        {
+            if (conv?.dialogueEntries == null) return false;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == entryTitle) return true;
+            }
+
+            DialogueEntry root = null;
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                var e = conv.dialogueEntries[i];
+                if (e != null && (e.isRoot || e.id == 0))
+                {
+                    root = e;
+                    break;
+                }
+            }
+            if (root == null || root.outgoingLinks == null || root.outgoingLinks.Count == 0) return false;
+
+            int interruptId = baseId;
+            int ackId = baseId + 1;
+
+            var interruptEntry = CreateEntry(conv.id, interruptId, LaurentoId, RomusId, entryTitle, dispatchText, "", "");
+            SetEntryCondition(interruptEntry, "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_War_Completed\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true or (Variable[\"Zille_War_Outcome\"] or 0) > 0");
+            interruptEntry.outgoingLinks.Add(CreateLink(conv.id, interruptId, ackId));
+
+            var ackEntry = CreateEntry(conv.id, ackId, RomusId, LaurentoId, entryTitle + "_Close", ackText);
+            conv.dialogueEntries.Add(interruptEntry);
+            conv.dialogueEntries.Add(ackEntry);
+
+            root.outgoingLinks.Insert(0, CreateLink(conv.id, root.id, interruptId));
+            return true;
+        }
+
+        private static bool InjectTurn5HegelZilleWarFlavor(Conversation conv, DialogueDatabase db)
+        {
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_Turn5_Hegel_WarClash") return true;
+            }
+
+            DialogueEntry parent = FindSuitableHub(conv, "MITZ", "Morella", "Lespia", "Wehlen", "shares");
+            if (parent == null) return false;
+
+            int choiceId = 99341;
+            int replyArkId = 99342;
+            int replyStdId = 99343;
+
+            var choice = CreateEntry(conv.id, choiceId, RomusId, HegelId, "Zille_Turn5_Hegel_WarClash",
+                "Before we speak of MITZ, Chancellor—Valgsland should stay clear of our lawful enforcement of the 1927 Zille treaty.",
+                "\"Before we discuss MITZ shares, Chancellor Hegel: Valgsland would do well to stay out of our lawful reclamation of Zille.\"");
+            SetEntryCondition(choice, "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_War_Completed\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true");
+
+            var replyArk = CreateEntry(conv.id, replyArkId, HegelId, RomusId, "Hegel_Turn5_EarlyArk_Fury",
+                "Hegel's shoe slammed onto his desk across the wire. \"Lawful reclamation?! Your warships landed troops on mainland Wehlen while your palace spoke of a peaceful lease handover! Contana and Valgsland will not forget this imperialist hypocrisy, King Romus!\"");
+            SetEntryCondition(replyArk, "Variable[\"Zille_EarlyArk_Backlash\"] == true");
+
+            var replyStd = CreateEntry(conv.id, replyStdId, HegelId, RomusId, "Hegel_Turn5_ZilleWar_Warning",
+                "Hegel snorted sharply over the static. \"Monarchs always call artillery 'law,' Your Majesty. Smolak is no saint, yet shedding blood across South Merkopa tests Contana's patience. Keep your cannons far from Morellan refineries!\"");
+            SetEntryCondition(replyStd, "Variable[\"Zille_EarlyArk_Backlash\"] ~= true");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyArkId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyStdId));
+            int nextId = FindConvergenceTarget(conv, parent);
+            if (nextId >= 0)
+            {
+                replyArk.outgoingLinks.Add(CreateLink(conv.id, replyArkId, nextId));
+                replyStd.outgoingLinks.Add(CreateLink(conv.id, replyStdId, nextId));
+            }
+
+            parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
+            conv.dialogueEntries.Add(choice);
+            conv.dialogueEntries.Add(replyArk);
+            conv.dialogueEntries.Add(replyStd);
+            return true;
+        }
+
+        private static bool InjectTurn8ANSessionZilleWarFlavor(Conversation conv, DialogueDatabase db)
+        {
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_Turn8_AN_DefendWar") return true;
+            }
+
+            DialogueEntry parent = FindSuitableHub(conv, "Zille", "Assembly", "Wehlen", "peace", "South Merkopa");
+            if (parent == null) return false;
+
+            int choiceId = 99351;
+            int replyId = 99352;
+
+            var choice = CreateEntry(conv.id, choiceId, RomusId, NarratorId, "Zille_Turn8_AN_DefendWar",
+                "Address the Assembly on Rizia's military enforcement of the 1927 Zille treaty and our post-war commitment to regional peace.",
+                "\"Delegates of the Alliance of Nations: Rizia never sought bloodshed in Zille, yet no sovereign crown can permit an expired treaty to become permanent occupation. Our actions upheld international law, and we stand ready to rebuild South Merkopa in peace.\"");
+            SetEntryCondition(choice, "Variable[\"Zille_War_Active\"] == true or Variable[\"Zille_War_Completed\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true");
+            SetEntryScript(choice, "Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+
+            var reply = CreateEntry(conv.id, replyId, NarratorId, RomusId, "Narrator_Turn8_AN_ZilleWar_Reaction",
+                "Mixed applause and tense murmurs swept the great hall in Konstantium. GRACE delegates applauded firmly, while Contanan and Wehzek envoys glared across the aisle at Rizia's banner.");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            int nextId = FindConvergenceTarget(conv, parent);
+            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+
+            parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
+            conv.dialogueEntries.Add(choice);
+            conv.dialogueEntries.Add(reply);
+            return true;
+        }
+
+        private static bool InjectTurn10BirthdayZilleWarFlavor(Conversation conv, DialogueDatabase db)
+        {
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_Turn10_Birthday_Toast") return true;
+            }
+
+            DialogueEntry parent = FindSuitableHub(conv, "Mother", "Estela", "toast", "birthday", "Zille");
+            if (parent == null) return false;
+
+            int choiceId = 99361;
+            int replyWinId = 99362;
+            int replyHardId = 99363;
+
+            var choice = CreateEntry(conv.id, choiceId, RomusId, EstelaId, "Zille_Turn10_Birthday_Toast",
+                "Raise your glass to Queen Mother Estela and remember what Rizia endured in the Zille War.",
+                "\"To you, Mother—and to every Rizian soldier and family who carried us through the fire of the Zille War.\"");
+            SetEntryCondition(choice, "Variable[\"Zille_War_Completed\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true or (Variable[\"Zille_War_Outcome\"] or 0) > 0");
+
+            var replyWin = CreateEntry(conv.id, replyWinId, EstelaId, RomusId, "Estela_Turn10_Birthday_Victory",
+                "Queen Mother Estela's eyes shone warmly over her crystal glass. \"You brought my childhood harbor home beneath our own flag, Romus—not by begging Wiktor Smolak, but with the courage of a true King. Your father would be so proud tonight.\"");
+            SetEntryCondition(replyWin, "(Variable[\"Zille_War_Outcome\"] or 0) >= 4 or Variable[\"RiziaDLC.ZilleReturn_Success\"] == true");
+
+            var replyHard = CreateEntry(conv.id, replyHardId, EstelaId, RomusId, "Estela_Turn10_Birthday_Bitter",
+                "Queen Mother Estela's smile softened with quiet sorrow as she lifted her glass. \"The war over Zille cost this kingdom dearly, my son... Let us pray our houses find the strength to heal what the guns left behind.\"");
+            SetEntryCondition(replyHard, "(Variable[\"Zille_War_Outcome\"] or 0) < 4 and Variable[\"RiziaDLC.ZilleReturn_Success\"] ~= true");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyWinId));
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyHardId));
+            int nextId = FindConvergenceTarget(conv, parent);
+            if (nextId >= 0)
+            {
+                replyWin.outgoingLinks.Add(CreateLink(conv.id, replyWinId, nextId));
+                replyHard.outgoingLinks.Add(CreateLink(conv.id, replyHardId, nextId));
+            }
+
+            parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
+            conv.dialogueEntries.Add(choice);
+            conv.dialogueEntries.Add(replyWin);
+            conv.dialogueEntries.Add(replyHard);
+            return true;
+        }
+
+        private static bool InjectTurn11EndingSpeechZilleWarFlavor(Conversation conv, DialogueDatabase db)
+        {
+            for (int i = 0; i < conv.dialogueEntries.Count; i++)
+            {
+                if (conv.dialogueEntries[i]?.Title == "Zille_Turn11_EndingSpeech_Legacy") return true;
+            }
+
+            DialogueEntry parent = FindSuitableHub(conv, "Zille", "reign", "Rizia", "legacy", "future");
+            if (parent == null) return false;
+
+            int choiceId = 99371;
+            int replyId = 99372;
+
+            var choice = CreateEntry(conv.id, choiceId, RomusId, NarratorId, "Zille_Turn11_EndingSpeech_Legacy",
+                "\"History will remember how Rizia stood firm in the Zille War—refusing to bow to Wehlen's extortion!\"",
+                "\"When history writes the chronicle of my reign, let it remember our resolve in the Zille War: that Rizia refused to kneel before foreign extortion, honored the fallen, and defended her sovereign destiny!\"");
+            SetEntryCondition(choice, "Variable[\"Zille_War_Completed\"] == true or Variable[\"Zille_PeaceTreaty_Signed\"] == true or (Variable[\"Zille_War_Outcome\"] or 0) > 0");
+
+            var reply = CreateEntry(conv.id, replyId, NarratorId, RomusId, "Narrator_Turn11_EndingSpeech_Reaction",
+                "A resonant cheer rolled through the assembly hall, veterans of the Brenas-Zille front rising to salute as your words echoed into history.");
+
+            choice.outgoingLinks.Add(CreateLink(conv.id, choiceId, replyId));
+            int nextId = FindConvergenceTarget(conv, parent);
+            if (nextId >= 0) reply.outgoingLinks.Add(CreateLink(conv.id, replyId, nextId));
+
+            parent.outgoingLinks.Add(CreateLink(conv.id, parent.id, choiceId));
+            conv.dialogueEntries.Add(choice);
+            conv.dialogueEntries.Add(reply);
             return true;
         }
 

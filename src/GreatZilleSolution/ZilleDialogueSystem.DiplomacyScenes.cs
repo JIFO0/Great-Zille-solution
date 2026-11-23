@@ -125,7 +125,7 @@ namespace GreatZilleSolution
 
             AddChoice(conv, 23, AzmalId, "Derdia_Topic_Pilgrims",
                 "\"Speak on our religious laws and the status of Golcondist pilgrims traveling toward Plavo.\"",
-                "I know our kingdoms have been estranged over border laws and Golcondist pilgrims seeking Plavo. Where do matters stand in your eyes today?", 123,
+                "I know our kingdoms have been estranged over border laws and Golcondist pilgrims seeking Plavo. Where do matters stand in your eyes today?", -1,
                 "Variable[\"Zille_DerdiaTalks_DiscussedFaith\"] = true;",
                 "Variable[\"Zille_DerdiaTalks_DiscussedFaith\"] ~= true");
 

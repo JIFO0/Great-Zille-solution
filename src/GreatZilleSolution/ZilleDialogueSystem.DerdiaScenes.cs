@@ -31,7 +31,24 @@ namespace GreatZilleSolution
             conv.dialogueEntries.Add(entry0);
 
             AddLine(conv, 1, NarratorId, RomusId, "DerdiaInv_Intro",
-                "Dawn light filtered through the tall shutters of the Golden Guard briefing room in Palas Rezna. Spread across the slate table lay reconnaissance sketches of the northern Derdian mountain passes around Yol and Qerzan, charred fragments of blasting wire, and intercepted border telegrams.", -1);
+                "Dawn light filtered through the tall shutters of the Golden Guard briefing room in Palas Rezna. Spread across the slate table lay reconnaissance sketches of the northern Derdian mountain passes around Yol and Qerzan, charred fragments of blasting wire sealed in glass jars, and stacks of intercepted border telegrams smelling faintly of ozone.", -1);
+
+            AddChoice(conv, 401, NarratorId, "DerdiaInv_Stimulus_Wire",
+                "Pick up one of the glass evidence jars and examine the stamped metal blasting cap inside.",
+                "", 404, "");
+
+            AddChoice(conv, 402, NarratorId, "DerdiaInv_Stimulus_Map",
+                "Trace the jagged red contour lines along the Yol and Qerzan mountain passes on the reconnaissance chart.",
+                "", 405, "");
+
+            AddLine(conv, 404, NarratorId, RomusId, "DerdiaInv_Entry_Wire",
+                "Even to an untrained eye, the machined brass casing looked far too uniform for mountain smugglers. You set the jar back onto the slate as your officers stepped forward.", -1);
+
+            AddLine(conv, 405, NarratorId, RomusId, "DerdiaInv_Entry_Map",
+                "The narrow passes sat directly astride Derdia's proposed southern pipeline—and less than forty miles from Wehlen's garrisons at Grodzizg. Your intelligence chief cleared his throat.", -1);
+
+            AddLink(conv, 1, 401);
+            AddLink(conv, 1, 402);
 
             AddLine(conv, 2, TitusId, RomusId, "DerdiaInv_Titus_Peace",
                 "\"Your Majesty, the explosions along the Derdia-Wehlen frontier were no ordinary smuggling squabble. Someone blew up a Derdian pipeline pumping station and burned Silver Garrison supply dumps—and Wraclawitz immediately used the chaos to move armored columns toward Grodzizg.\"", 10,
@@ -45,9 +62,12 @@ namespace GreatZilleSolution
                 "\"Your Majesty, military intelligence has traced the recent explosions along the Yol and Qerzan passes on Derdia's northern frontier. Wraclawitz blames Golcondist smugglers, yet the demolition signatures look unmistakably regular-army.\"", 10,
                 "Variable[\"RiziaDLC.Titus_Arrested\"] == true or Variable[\"RiziaDLC.Titus_Executed\"] == true");
 
-            AddLink(conv, 1, 2);
-            AddLink(conv, 1, 102);
-            AddLink(conv, 1, 103);
+            AddLink(conv, 404, 2);
+            AddLink(conv, 404, 102);
+            AddLink(conv, 404, 103);
+            AddLink(conv, 405, 2);
+            AddLink(conv, 405, 102);
+            AddLink(conv, 405, 103);
 
             var hub = AddLine(conv, 10, NarratorId, RomusId, "DerdiaInv_Hub",
                 "Before ordering an intelligence sweep along the mountain frontier, you weighed what the court already knew and which arm of the Crown should lead the inquiry.");
@@ -72,7 +92,7 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_DerdiaInv_AskedMil\"] ~= true and Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddLine(conv, 112, LucitaId, RomusId, "DerdiaInv_Reply_Military",
-                "\"Everything, Your Majesty. Right now Plan Ark relies on risky amphibious landings across the Gulf of Moridia. If Derdia's mountain passes at Yol and Qerzan ever opened to Rizian divisions, we could strike Wehlen's soft southern belly by land—forcing Smolak's command to split its army in two!\"", 10);
+                "\"Everything, Your Majesty. Right now Plan Ark relies on risky amphibious landings across the Gulf of Moridia. If we lay proper diplomatic groundwork before a later campaign and Derdia's mountain passes at Yol and Qerzan open to Rizian divisions, we could strike Wehlen's soft southern belly by land—forcing Smolak's command to split its army in two!\"", 10);
 
             AddChoice(conv, 15, TitusId, "DerdiaInv_Proceed_Action",
                 "\"Let us decide how Rizia investigates the Yol-Qerzan sabotage.\"",
@@ -88,19 +108,19 @@ namespace GreatZilleSolution
             AddChoice(conv, 21, TitusId, "DerdiaInv_GoldenGuard",
                 "\"Send Golden Guard forensic specialists covertly to inspect the blasted pumping station and recover Wehzek ordnance.\"",
                 "Dispatch Golden Guard specialists under diplomatic courier cover to examine the Yol pumping station and trace every blasting cap.", 31,
-                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;",
                 "Variable[\"RiziaDLC.Titus_Arrested\"] ~= true and Variable[\"RiziaDLC.Titus_Executed\"] ~= true");
 
             AddChoice(conv, 22, LucitaId, "DerdiaInv_MilitaryIntel",
                 "\"Have House Azaro's border scouts intercept Wehzek sapper communications near Grodzizg.\"",
                 "Task military intelligence along the frontier to triangulate Wehzek sapper radios and map their staging camps near Grodzizg.", 32,
-                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;",
                 "Variable[\"RiziaDLC.Lucita_Arrested\"] ~= true and Variable[\"RiziaDLC.Lucita_Executed\"] ~= true");
 
             AddChoice(conv, 23, LaurentoId, "DerdiaInv_DiplomaticChannel",
                 "\"Share our preliminary intelligence quietly with Naeal and request joint border observers.\"",
                 "Have the Foreign Ministry pass our preliminary findings to Naeal and propose a quiet joint border verification.", 33,
-                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
+                "Variable[\"Zille_Derdia_BriefingDone\"] = true; Variable[\"Zille_Derdia_InvestigationDone\"] = true; Variable[\"Zille_Derdia_SabotageEvidence\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 1;");
 
             AddLine(conv, 31, NarratorId, RomusId, "DerdiaInv_Result_GG",
                 "Two days later, Titus laid a sealed folder on your desk: Wehzek military-grade detonators, factory lot numbers from Wraclawitz, and eyewitness sketches of uniformed sappers slipping back across the northern ridge. \"Hard proof, Your Majesty. Azmal cannot ignore this when you speak with him.\"", -1);
@@ -208,21 +228,29 @@ namespace GreatZilleSolution
 
             // Multi-topic Negotiation Hub for the Alliance & Economic Package
             var negHub = AddLine(conv, 30, AzmalId, RomusId, "DerdiaVisit_Negotiation_Hub",
-                "We gathered around the cedar table where maps of Yol, Qerzan, and southern Wehlen lay beside energy blueprints. \"Speak openly, brother,\" Azmal urged. \"Let us settle the military corridor, the southern pipeline, and our mutual defense before we affix our seals.\"");
+                "You and Azmal gathered around the cedar table where maps of Yol, Qerzan, and southern Wehlen lay beside energy blueprints. \"Speak openly, brother,\" Azmal urged. \"Let us settle the military corridor, the southern pipeline, and our mutual defense before we affix our seals.\"");
 
-            negHub.outgoingLinks.Add(CreateLink(conv.id, 30, 31)); // Topic 1: Southern Corridor (PlanArkDerdia)
+            negHub.outgoingLinks.Add(CreateLink(conv.id, 30, 31)); // Topic 1: Southern Corridor (PlanArkDerdia / Op2)
             negHub.outgoingLinks.Add(CreateLink(conv.id, 30, 32)); // Topic 2: Southern Energy Pipeline Investment
             negHub.outgoingLinks.Add(CreateLink(conv.id, 30, 33)); // Topic 3: Missiles & Disciples
             negHub.outgoingLinks.Add(CreateLink(conv.id, 30, 40)); // Proceed to Final Treaty Signing
 
             AddChoice(conv, 31, AzmalId, "DerdiaVisit_Topic_Corridor",
                 "\"Let us finalize the northern staging corridor through Yol and Qerzan for Rizia's southern offensive.\"",
-                "With Wehlen already staging saboteurs across your passes, opening the Yol-Qerzan corridor lets Rizian divisions strike Smolak's soft southern flank directly.", 131,
+                "With Wehlen already staging saboteurs across your passes, opening the Yol-Qerzan corridor lets Rizian divisions strike Smolak's soft southern flank directly.", -1,
                 "Variable[\"Zille_DerdiaVisit_DiscussedCorridor\"] = true;",
                 "Variable[\"Zille_DerdiaVisit_DiscussedCorridor\"] ~= true");
 
-            AddLine(conv, 131, AzmalId, RomusId, "DerdiaVisit_Reply_Corridor",
-                "\"Agreed in principle,\" Azmal nodded gravely. \"Our northern passes around Dertea, Merzil, Haldesh, and Qerzan will open to your columns—while Yol itself remains a sacred, demilitarized logistics hub under Silver Garrison guard. In return, your troops respect our shrines, and after victory Wehlen's southern border is demilitarized.\"", 30);
+            AddLine(conv, 131, AzmalId, RomusId, "DerdiaVisit_Reply_Corridor_Late",
+                "\"Agreed in principle,\" Azmal nodded gravely. \"Our northern passes around Dertea, Merzil, Haldesh, and Qerzan will open to your columns—while Yol itself remains a sacred, demilitarized logistics hub under Silver Garrison guard. If war comes, your Operation Golden Ark can strike straight from our frontier. In return, your troops respect our shrines, and after victory Wehlen's southern border is demilitarized.\"", 30,
+                "Variable[\"Zille_War_IsEarly\"] ~= true");
+
+            AddLine(conv, 1131, AzmalId, RomusId, "DerdiaVisit_Reply_Corridor_Early",
+                "\"Agreed in principle, though be realistic about mountain logistics, brother,\" Azmal nodded gravely. \"Our Disciples can raid Wehlen's southern depots immediately—yet moving full Rizian armored corps through Dertea, Merzil, and Qerzan takes weeks of staging. Our northern corridor will be ready should your campaign widen into Operation: Total Repayment.\"", 30,
+                "Variable[\"Zille_War_IsEarly\"] == true");
+
+            AddLink(conv, 31, 131);
+            AddLink(conv, 31, 1131);
 
             AddChoice(conv, 32, AzmalId, "DerdiaVisit_Topic_Pipeline",
                 "\"Rizia can finance your stalled southern energy pipeline—giving you export markets and freeing us from Wehlen's oil!\"",
@@ -269,7 +297,7 @@ namespace GreatZilleSolution
 
             AddChoice(conv, 53, AzmalId, "DerdiaVisit_Sign_CorridorOnly",
                 "\"Seal the Military Corridor and Defense Pact today; defer pipeline financing until after victory.\"",
-                "We seal the Silver Garrison Defense Pact and open the Yol-Qerzan corridor for our armies immediately; once Wehlen is defeated, our treasuries will build the pipeline in peace.", 62,
+                "We seal the Silver Garrison Defense Pact and open the Yol-Qerzan corridor for our armies; once Wehlen is defeated, our treasuries will build the pipeline in peace.", 62,
                 "Variable[\"Zille_DerdiaPact_Signed\"] = true; Variable[\"Zille_DerdiaHybridActive\"] = true; Variable[\"Zille_Derdia_StateVisitDone\"] = true; Variable[\"RiziaDLC.CountryRelation_Derdia_Allied\"] = true; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 2; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;");
 
             AddChoice(conv, 54, AzmalId, "DerdiaVisit_Sign_PeaceAccord",
@@ -279,10 +307,10 @@ namespace GreatZilleSolution
                 "Variable[\"Zille_War_Active\"] ~= true and Variable[\"Zille_War_Planning_Done\"] ~= true and Variable[\"Zille_War_EarlyLaunch\"] ~= true");
 
             AddLine(conv, 61, NarratorId, RomusId, "DerdiaVisit_Close_Full",
-                "Azmal pressed his signet ring into the crimson wax beside mine, then raised both hands in solemn blessing. \"Halaita! From this hour, Derdia's northern passes are your sword, our rockets guard your skies, and our oil feeds your realm! Let Wiktor Smolak tremble between two sovereign nations!\"", -1);
+                "Azmal pressed his signet ring into the crimson wax beside yours, then raised both hands in solemn blessing. \"Halaita! From this hour, Derdia's northern passes are your sword, our rockets guard your skies, and our oil feeds your realm! Let Wiktor Smolak tremble between two sovereign nations!\"", -1);
 
             AddLine(conv, 62, NarratorId, RomusId, "DerdiaVisit_Close_Corridor",
-                "Azmal pressed his signet ring beside mine with firm resolve. \"Halaita! Our northern frontier stands open to Rizia's banners, and three thousand Disciples ride at your flank. May victory bring both our kingdoms lasting peace!\"", -1);
+                "Azmal pressed his signet ring beside yours with firm resolve. \"Halaita! Our northern frontier stands open to Rizia's banners, and three thousand Disciples ride at your flank. May victory bring both our kingdoms lasting peace!\"", -1);
 
             AddLine(conv, 63, NarratorId, RomusId, "DerdiaVisit_Close_PeaceAccord",
                 "Azmal pressed his signet ring into the crimson wax beside yours with quiet respect. \"Halaita! Peace guarded by steady friends is stronger than reckless conquest. Let Wraclawitz see that Derdia and Rizia stand united in trade and vigilance.\"", -1);

@@ -2051,6 +2051,7 @@ namespace GreatZilleSolution
                     bool planningDone = DialogueHelper.GetBoolVariable("Zille_War_Planning_Done");
                     bool warPlanned = ZilleCampaignState.IsZilleWarPlanned();
                     bool zilleSettled = ZilleCampaignState.IsZilleResolvedPeacefully()
+                        || ZilleCampaignState.HasZilleWarOccurred()
                         || DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
                         || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
 
@@ -2069,7 +2070,7 @@ namespace GreatZilleSolution
                         && !string.Equals(logRoute, "nil", StringComparison.OrdinalIgnoreCase);
 
                     // Turn 3 Crown Council Stance: Sovereignty Over Zille
-                    if (!zilleSettled && !DialogueHelper.GetBoolVariable("Zille_SovereigntyDeclaration_Done") && (turn == 0 || turn >= 3))
+                    if (!zilleSettled && !warActive && !DialogueHelper.GetBoolVariable("Zille_SovereigntyDeclaration_Done") && (turn == 0 || turn >= 3))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Crown Stance: Sovereignty Over Zille", "Council Chamber, Palas Rezna", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_SovereigntyDeclaration", "Zille/SovereigntyDeclaration");
@@ -2089,8 +2090,8 @@ namespace GreatZilleSolution
                         });
                     }
 
-                    // Turn 4+ Derdia-Wehlen Border Sabotage Investigation (available earlier if early war started in Turn 3)
-                    if (!zilleSettled && !DialogueHelper.GetBoolVariable("Zille_Derdia_BriefingDone") && !DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationIgnored") && (turn == 0 || turn >= 4 || earlyWar))
+                    // Turn 4+ Derdia-Wehlen Border Sabotage Investigation (available earlier if early war started in Turn 3; hidden once investigated or ignored!)
+                    if (!zilleSettled && !DialogueHelper.GetBoolVariable("Zille_Derdia_BriefingDone") && !DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationDone") && !DialogueHelper.GetBoolVariable("Zille_Derdia_InvestigationIgnored") && (turn == 0 || turn >= 4 || earlyWar))
                     {
                         EnsureButtonExists(__instance, "(MODNEW) Sabotage Inquiry: Derdia-Wehlen Border Briefing", "Golden Guard Briefing Room", null, () => {
                             WarOperationZilleManager.TriggerConversation("Turn_Zille_DerdiaInvestigation", "Zille/DerdiaInvestigation");
@@ -2462,6 +2463,11 @@ namespace GreatZilleSolution
                 if (title == "Choice_Golden_Sword" || script.Contains("Choice_Romulus_Sword") || title.Contains("Choice_Romulus_Sword") || menuText.Contains("Righteous Sword") || menuText.Contains("Operation Golden Sword"))
                 {
                     MelonLogger.Msg("[WAR COUNCIL] Operation Golden Sword chosen by player! Initializing Sword variant.");
+                    ZilleCampaignState.WarVariant = ZilleCampaignState.IsEarlyWarVariant() ? ZilleWarVariant.Early : ZilleWarVariant.Late;
+                    if (ZilleCampaignState.WarVariant == ZilleWarVariant.Late)
+                    {
+                        ZilleCampaignState.LateSwordFrictionActive = true;
+                    }
                     ZilleCampaignState.PlanType = ZillePlanType.Romulus;
                     ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Sword;
                     ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanSword);
@@ -2470,21 +2476,39 @@ namespace GreatZilleSolution
                 }
                 else if (title == "Choice_Golden_Ark_Derdia")
                 {
-                    MelonLogger.Msg("[WAR COUNCIL] Operation Golden Ark (Derdia Southern Corridor) chosen by player!");
+                    // Guard: Ark with Derdia is strictly unavailable in Early variant
+                    bool early = ZilleCampaignState.IsEarlyWarVariant();
+                    var variant = early ? ZilleOperationVariant.PlanArk : ZilleOperationVariant.PlanArkDerdia;
+                    ZilleCampaignState.WarVariant = early ? ZilleWarVariant.Early : ZilleWarVariant.Late;
+                    MelonLogger.Msg($"[WAR COUNCIL] Operation Golden Ark (Derdia Corridor) chosen -> variant {variant} (early={early}).");
                     ZilleCampaignState.PlanType = ZillePlanType.Romulus;
                     ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Ark;
-                    ZilleCampaignState.IsDerdiaPactSigned = true;
-                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
-                    ZilleCampaignState.SetOperationVariant(ZilleOperationVariant.PlanArkDerdia);
+                    if (!early)
+                    {
+                        ZilleCampaignState.IsDerdiaPactSigned = true;
+                        ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    }
+                    else
+                    {
+                        ZilleCampaignState.EarlyArkBacklashActive = true;
+                    }
+                    ZilleCampaignState.SetOperationVariant(variant);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
                     WarOperationZilleManager.PendingZilleTokenSpawnAfterBriefing = true;
                 }
                 else if (title == "Choice_Golden_Ark" || title == "Choice_Golden_Ark_WeakFleet" || script.Contains("Choice_Romulus_Ark") || title.Contains("Choice_Romulus_Ark") || menuText.Contains("Plan Romulus: Ark") || menuText.Contains("Operation Golden Ark"))
                 {
-                    var variant = (ZilleCampaignState.IsDerdiaPactSigned || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed"))
+                    bool early = ZilleCampaignState.IsEarlyWarVariant();
+                    ZilleCampaignState.WarVariant = early ? ZilleWarVariant.Early : ZilleWarVariant.Late;
+                    // Never allow PlanArkDerdia in Early variant!
+                    var variant = (!early && (ZilleCampaignState.IsDerdiaPactSigned || DialogueHelper.GetBoolVariable("Zille_DerdiaPact_Signed")))
                         ? ZilleOperationVariant.PlanArkDerdia
                         : ZilleOperationVariant.PlanArk;
-                    MelonLogger.Msg($"[WAR COUNCIL] Operation Golden Ark chosen by player! Initializing variant {variant}.");
+                    if (early)
+                    {
+                        ZilleCampaignState.EarlyArkBacklashActive = true;
+                    }
+                    MelonLogger.Msg($"[WAR COUNCIL] Operation Golden Ark chosen by player! Initializing variant {variant} (early={early}).");
                     ZilleCampaignState.PlanType = ZillePlanType.Romulus;
                     ZilleCampaignState.RomulusPlan = ZilleRomulusPlan.Ark;
                     ZilleCampaignState.SetOperationVariant(variant);
@@ -2493,18 +2517,24 @@ namespace GreatZilleSolution
                 }
                 else if (title == "Authorize_Staff_Hawk" || title == "Choice_Staff_Hawk")
                 {
+                    ZilleCampaignState.WarVariant = ZilleCampaignState.IsEarlyWarVariant() ? ZilleWarVariant.Early : ZilleWarVariant.Late;
                     WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Hawk);
                 }
                 else if (title == "Authorize_Staff_Sword" || title == "Choice_Staff_Sword")
                 {
+                    ZilleCampaignState.WarVariant = ZilleCampaignState.IsEarlyWarVariant() ? ZilleWarVariant.Early : ZilleWarVariant.Late;
+                    if (ZilleCampaignState.WarVariant == ZilleWarVariant.Late) ZilleCampaignState.LateSwordFrictionActive = true;
                     WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Sword);
                 }
                 else if (title == "Authorize_Staff_Ark" || title == "Authorize_Staff_Ark_WeakFleet" || title == "Choice_Staff_Ark")
                 {
+                    ZilleCampaignState.WarVariant = ZilleCampaignState.IsEarlyWarVariant() ? ZilleWarVariant.Early : ZilleWarVariant.Late;
+                    if (ZilleCampaignState.WarVariant == ZilleWarVariant.Early) ZilleCampaignState.EarlyArkBacklashActive = true;
                     WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Ark);
                 }
                 else if (title == "Authorize_Staff_Spear" || title == "Choice_Staff_Spear")
                 {
+                    ZilleCampaignState.WarVariant = ZilleCampaignState.IsEarlyWarVariant() ? ZilleWarVariant.Early : ZilleWarVariant.Late;
                     WarOperationZilleManager.InitializeStaffPlan(ZilleStaffPlan.Spear);
                 }
                 else if (script.Contains("Zille_War_Alfa") || title.Contains("Choice_Plan_Alpha") || title.Contains("Choice_Alpha") || menuText.Contains("Plan Alpha"))
@@ -2516,7 +2546,8 @@ namespace GreatZilleSolution
                 }
                 else if (script.Contains("Zille_War_Beta") || title.Contains("Choice_Plan_Beta") || title.Contains("Choice_Beta") || menuText.Contains("Plan Beta"))
                 {
-                    var variant = ZilleCampaignState.IsDerdiaHybridSupportActive ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
+                    bool early = ZilleCampaignState.IsEarlyWarVariant();
+                    var variant = (!early && ZilleCampaignState.IsDerdiaHybridSupportActive) ? ZilleOperationVariant.PlanArkDerdia : ZilleOperationVariant.PlanArk;
                     MelonLogger.Msg($"[WAR COUNCIL] Plan Beta chosen by player in native dialogue! Initializing variant {variant}.");
                     ZilleCampaignState.SetOperationVariant(variant);
                     WarOperationZilleManager.InitializeOperation(ZilleOperationPath.FlankViktranyMunat);
@@ -2533,11 +2564,20 @@ namespace GreatZilleSolution
                 }
                 else if (title == "Choice_Command_MarchIntoZille" || script.Contains("Romus_Command_MarchIntoZille") || menuText.Contains("ENOUGH. Prepare to march into Zille"))
                 {
-                    MelonLogger.Msg("[SOVEREIGNTY COUNCIL] Romus issued the decisive command: march into Zille regardless of Wehzek cooperation!");
+                    MelonLogger.Msg("[SOVEREIGNTY COUNCIL] Romus issued the decisive command: march into Zille regardless of Wehzek cooperation (Early Variant)!");
+                    ZilleCampaignState.WarVariant = ZilleWarVariant.Early;
                     DialogueHelper.SetVariable("Zille_War_EarlyLaunch", true);
+                    DialogueHelper.SetVariable("Zille_War_Variant", "Early");
+                    DialogueHelper.SetVariable("Zille_War_IsEarly", true);
+                    DialogueHelper.SetVariable("Zille_War_IsLate", false);
                     DialogueHelper.SetVariable("Zille_Council_HawkishStance", true);
                     DialogueHelper.SetVariable("Zille_SovereigntyDeclaration_Done", true);
                     ZilleCampaignState.AddMicroEffect(readinessDelta: 2, leverageDelta: 1);
+                }
+                else if (title == "Speech_Bombing_Lie")
+                {
+                    MelonLogger.Msg("[BALCONY SPEECH] Romus lied publicly about possessing proof Wehlen staged the Friendship Day bombing!");
+                    ZilleCampaignState.LiedAboutFriendshipBombing = true;
                 }
                 else if (title == "Choice_Sovereignty_Peaceful" || script.Contains("Zille_Stance_Peaceful"))
                 {
@@ -2597,7 +2637,12 @@ namespace GreatZilleSolution
                 {
                     ZilleCampaignState.IsDerdiaIncidentShared = true;
                 }
-                else if (title == "Derdia_WarActive_VisitAndRaids" || title == "Deal_Derdia_Weapons")
+                else if (title == "Derdia_WarActive_VisitAndRaids")
+                {
+                    ZilleCampaignState.IsDerdiaHybridSupportActive = true;
+                    ZilleCampaignState.IsDerdiaIncidentShared = true;
+                }
+                else if (title == "Deal_Derdia_Weapons")
                 {
                     ZilleCampaignState.IsDerdiaHybridSupportActive = true;
                 }
@@ -2691,24 +2736,50 @@ namespace GreatZilleSolution
                     {
                         DialogueHelper.SetVariable("Zille_Parley_Refused", true);
                         DialogueHelper.SetVariable("Zille_Azaro_Coup_Collapse", true);
+                        DialogueHelper.SetVariable("Zille_War_Completed", true);
+                        ZilleCampaignState.IsWarCompleted = true;
                         DialogueHelper.SetVariable("RiziaDLC.Epilogue_Exile_Forced", true);
                         DialogueHelper.SetVariable("RiziaDLC.Epilogue_Exile_CoupWarning", true);
                     }
                 }
-                // 5. Vanilla conversation war posture injections
-                else if (title.Contains("Zille_Turn3_Bombing_WarOption") || title.Contains("Zille_Turn8_War_Ultimatum"))
+                // 5. Vanilla conversation war posture injections (guarded against triggering a second war!)
+                else if (title.Contains("Zille_Turn3_Bombing_WarOption") || title.Contains("Zille_Turn3_ValeroUltimatum_Choice"))
                 {
-                    MelonLogger.Msg("[DIPLOMACY] Player chose immediate military escalation over Zille!");
-                    DialogueHelper.SetVariable("Zille_War_Declined", false);
-                    DialogueHelper.SetVariable("Zille_War_Postpone", false);
-                    ZilleCampaignState.MilitarySentimentLevel = 3;
+                    if (!ZilleCampaignState.HasZilleWarOccurred())
+                    {
+                        MelonLogger.Msg("[DIPLOMACY] Player chose Turn 3 Early military escalation over Zille!");
+                        ZilleCampaignState.WarVariant = ZilleWarVariant.Early;
+                        DialogueHelper.SetVariable("Zille_War_Variant", "Early");
+                        DialogueHelper.SetVariable("Zille_War_IsEarly", true);
+                        DialogueHelper.SetVariable("Zille_War_IsLate", false);
+                        DialogueHelper.SetVariable("Zille_War_Declined", false);
+                        DialogueHelper.SetVariable("Zille_War_Postpone", false);
+                        ZilleCampaignState.MilitarySentimentLevel = 3;
+                    }
+                }
+                else if (title.Contains("Zille_Turn8_War_Ultimatum"))
+                {
+                    if (!ZilleCampaignState.HasZilleWarOccurred())
+                    {
+                        MelonLogger.Msg("[DIPLOMACY] Player issued Turn 8 Late war ultimatum over Zille!");
+                        ZilleCampaignState.WarVariant = ZilleWarVariant.Late;
+                        DialogueHelper.SetVariable("Zille_War_Variant", "Late");
+                        DialogueHelper.SetVariable("Zille_War_IsLate", true);
+                        DialogueHelper.SetVariable("Zille_War_IsEarly", false);
+                        DialogueHelper.SetVariable("Zille_War_Declined", false);
+                        DialogueHelper.SetVariable("Zille_War_Postpone", false);
+                        ZilleCampaignState.MilitarySentimentLevel = 3;
+                    }
                 }
                 else if (title.Contains("Zille_War_Ultimatum") || title.Contains("Zille_Smolak_FaceToFace"))
                 {
-                    MelonLogger.Msg("[DIPLOMACY] Player threatened Wehlen with military invasion! Activating Zille war pathway.");
-                    DialogueHelper.SetVariable("Zille_War_Declined", false);
-                    DialogueHelper.SetVariable("Zille_War_Postpone", false);
-                    ZilleCampaignState.MilitarySentimentLevel = 2;
+                    if (!ZilleCampaignState.HasZilleWarOccurred())
+                    {
+                        MelonLogger.Msg("[DIPLOMACY] Player threatened Wehlen with military invasion! Activating Zille war pathway.");
+                        DialogueHelper.SetVariable("Zille_War_Declined", false);
+                        DialogueHelper.SetVariable("Zille_War_Postpone", false);
+                        ZilleCampaignState.MilitarySentimentLevel = 2;
+                    }
                 }
                 else if (title == "Choice_Naval_Blockade" || script.Contains("Zille_NavalBlockadeActive = true"))
                 {

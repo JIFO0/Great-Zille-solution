@@ -478,7 +478,7 @@ namespace GreatZilleSolution
             triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 71));
             triumphHub.outgoingLinks.Add(CreateLink(conv.id, 7, 72));
 
-            string treatyDoneVars = "Variable[\"Zille_PeaceTreaty_Signed\"] = true; Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"Zille_Negotiations_Done\"] = true; ";
+            string treatyDoneVars = "Variable[\"Zille_PeaceTreaty_Signed\"] = true; Variable[\"Zille_Rep_TreatyDone\"] = true; Variable[\"Zille_Negotiations_Done\"] = true; Variable[\"Zille_War_Completed\"] = true; Variable[\"Zille_War_Active\"] = false; Variable[\"Zille_War_EarlyLaunch\"] = false; Variable[\"Zille_War_UltimatumGiven\"] = false; Variable[\"Zille_War_Mobilization\"] = false; ";
 
             AddChoice(conv, 70, HugoId, "Sign_Triumph_Derdia",
                 "\"Proclaim the Free City of Grodzizg under joint Rizian-Derdian protection and the restoration of Zille!\"",

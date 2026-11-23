@@ -38,6 +38,13 @@ namespace GreatZilleSolution
         TotalRepaymentNoDerdia
     }
 
+    public enum ZilleWarVariant
+    {
+        None = 0,
+        Early = 1,
+        Late = 2
+    }
+
     public enum ZilleWarOutcome
     {
         None = 0,
@@ -75,6 +82,12 @@ namespace GreatZilleSolution
     {
         // 0 = None, 1 = Early musings (Turn 1), 2 = Staff planning (Turn 2-3), 3 = Mobilization ready (Turn 8)
         public static int MilitarySentimentLevel { get; set; } = 0;
+
+        public static ZilleWarVariant WarVariant { get; set; } = ZilleWarVariant.None;
+        public static bool IsWarCompleted { get; set; } = false;
+        public static bool LiedAboutFriendshipBombing { get; set; } = false;
+        public static bool EarlyArkBacklashActive { get; set; } = false;
+        public static bool LateSwordFrictionActive { get; set; } = false;
 
         public static ZilleOperationPhase CurrentPhase { get; set; } = ZilleOperationPhase.NotStarted;
         public static ZilleOperationPath ChosenPath { get; set; } = ZilleOperationPath.None;
@@ -251,19 +264,56 @@ namespace GreatZilleSolution
                 || DialogueHelper.GetBoolVariable("RiziaDLC.CountryRelation_Pales_AtWar");
         }
 
+        /// <summary>True if the Zille War has already concluded (treaty signed, outcome reached, or collapse), preventing any second war trigger.</summary>
+        public static bool HasZilleWarOccurred()
+        {
+            return IsWarCompleted
+                || Outcome != ZilleWarOutcome.None
+                || DialogueHelper.GetBoolVariable("Zille_War_Completed")
+                || DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
+                || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone")
+                || DialogueHelper.GetIntVariable("Zille_War_Outcome") > 0
+                || DialogueHelper.GetBoolVariable("Zille_Azaro_Coup_Collapse")
+                || DialogueHelper.GetBoolVariable("Zille_Parley_Refused");
+        }
+
+        /// <summary>Determines whether the current/planned Zille war is the Early variant (Turn 3-6 Valero entry) vs Late variant (Turn 7-9 after failed diplomacy).</summary>
+        public static bool IsEarlyWarVariant()
+        {
+            if (WarVariant == ZilleWarVariant.Early) return true;
+            if (WarVariant == ZilleWarVariant.Late) return false;
+
+            string luaVar = DialogueHelper.GetStringVariable("Zille_War_Variant");
+            if (string.Equals(luaVar, "Early", StringComparison.OrdinalIgnoreCase)) return true;
+            if (string.Equals(luaVar, "Late", StringComparison.OrdinalIgnoreCase)) return false;
+
+            if (DialogueHelper.GetBoolVariable("Zille_War_IsEarly")) return true;
+            if (DialogueHelper.GetBoolVariable("Zille_War_IsLate")) return false;
+
+            if (DialogueHelper.GetBoolVariable("Zille_War_UltimatumGiven")) return false;
+            if (DialogueHelper.GetBoolVariable("Zille_War_EarlyLaunch")) return true;
+
+            int turn = GetCurrentTurn();
+            if (turn > 0 && turn <= 6) return true;
+            return false;
+        }
+
+        public static bool IsLateWarVariant()
+        {
+            return !IsEarlyWarVariant();
+        }
+
         public static bool IsZilleResolvedPeacefully()
         {
             return DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success")
                 && !DialogueHelper.GetBoolVariable("Zille_War_Active")
                 && CurrentPhase == ZilleOperationPhase.NotStarted
-                && Outcome == ZilleWarOutcome.None
-                && !DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed")
-                && !DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone");
+                && !HasZilleWarOccurred();
         }
 
         public static bool IsZilleWarPlanned()
         {
-            if (IsZilleResolvedPeacefully()) return false;
+            if (IsZilleResolvedPeacefully() || HasZilleWarOccurred()) return false;
 
             bool warActive = DialogueHelper.GetBoolVariable("Zille_War_Active")
                 || CurrentPhase != ZilleOperationPhase.NotStarted;
@@ -539,6 +589,30 @@ namespace GreatZilleSolution
 
                 DialogueHelper.SetVariable("Economy_Gold_Drain", GoldBudgetDrainPerTurn);
                 DialogueHelper.SetVariable("Economy_Energy_Deficit", EnergyDeficitPerTurn);
+
+                // International reception split by Early vs Late variant and Ark vs Sword doctrine:
+                // - Early + Ark: Severe international backlash (contradicts "peaceful entry to enforce Valero deal")
+                // - Late + Sword: Moderate international friction (urban casualties after years of deadlock, smaller scale)
+                bool isEarly = IsEarlyWarVariant();
+                bool isArk = (PlanType == ZillePlanType.Romulus && RomulusPlan == ZilleRomulusPlan.Ark)
+                          || (PlanType == ZillePlanType.Staff && StaffPlan == ZilleStaffPlan.Ark)
+                          || CurrentVariant == ZilleOperationVariant.PlanArk
+                          || CurrentVariant == ZilleOperationVariant.PlanArkDerdia;
+                if (isEarly && isArk && !EarlyArkBacklashActive)
+                {
+                    EarlyArkBacklashActive = true;
+                    AnLegitimacyScore -= 3;
+                    DialogueHelper.SetVariable("Zille_EarlyArk_Backlash", true);
+                    DialogueHelper.ShowAlert("[INTERNATIONAL OUTCRY] Landing on mainland Wehlen while claiming a peaceful Valero handover has provoked fierce condemnation in Konstantium!");
+                    MelonLogger.Msg("[GEOPOLITICS] Early Variant + Operation Ark: Severe AN Legitimacy penalty (-3) applied.");
+                }
+                else if (!isEarly && !isArk && !LateSwordFrictionActive)
+                {
+                    LateSwordFrictionActive = true;
+                    AnLegitimacyScore -= 1;
+                    DialogueHelper.SetVariable("Zille_LateSword_Friction", true);
+                    MelonLogger.Msg("[GEOPOLITICS] Late Variant + Operation Sword: Moderate AN Legitimacy penalty (-1) applied.");
+                }
             }
             catch (Exception ex)
             {
@@ -551,6 +625,22 @@ namespace GreatZilleSolution
             try
             {
                 DialogueHelper.SetVariable("Zille_MilitarySentiment", MilitarySentimentLevel);
+                bool resolvedEarly = IsEarlyWarVariant();
+                if (WarVariant != ZilleWarVariant.None)
+                {
+                    DialogueHelper.SetVariable("Zille_War_Variant", WarVariant.ToString());
+                }
+                else
+                {
+                    DialogueHelper.SetVariable("Zille_War_Variant", resolvedEarly ? "Early" : "Late");
+                }
+                DialogueHelper.SetVariable("Zille_War_IsEarly", resolvedEarly);
+                DialogueHelper.SetVariable("Zille_War_IsLate", !resolvedEarly);
+                DialogueHelper.SetVariable("Zille_War_Completed", IsWarCompleted || HasZilleWarOccurred());
+                DialogueHelper.SetVariable("Zille_Speech_LiedAboutBombing", LiedAboutFriendshipBombing);
+                DialogueHelper.SetVariable("Zille_EarlyArk_Backlash", EarlyArkBacklashActive);
+                DialogueHelper.SetVariable("Zille_LateSword_Friction", LateSwordFrictionActive);
+
                 DialogueHelper.SetVariable("Zille_OperationPhase", (int)CurrentPhase);
                 DialogueHelper.SetVariable("Zille_War_OperationNumber", CurrentOperationNumber);
                 DialogueHelper.SetVariable("Zille_War_Phase", CurrentPhaseNumber);
@@ -646,6 +736,11 @@ namespace GreatZilleSolution
         public static void ResetToDefaults()
         {
             MilitarySentimentLevel = 0;
+            WarVariant = ZilleWarVariant.None;
+            IsWarCompleted = false;
+            LiedAboutFriendshipBombing = false;
+            EarlyArkBacklashActive = false;
+            LateSwordFrictionActive = false;
             CurrentPhase = ZilleOperationPhase.NotStarted;
             ChosenPath = ZilleOperationPath.None;
             PlanType = ZillePlanType.None;
@@ -723,6 +818,26 @@ namespace GreatZilleSolution
 
                 if (DialogueHelper.HasVariable("Zille_MilitarySentiment"))
                     MilitarySentimentLevel = DialogueHelper.GetIntVariable("Zille_MilitarySentiment");
+
+                if (DialogueHelper.HasVariable("Zille_War_Variant"))
+                {
+                    string wv = DialogueHelper.GetStringVariable("Zille_War_Variant");
+                    if (Enum.TryParse<ZilleWarVariant>(wv, true, out var parsedWv)) WarVariant = parsedWv;
+                }
+                else if (DialogueHelper.GetBoolVariable("Zille_War_IsEarly")) WarVariant = ZilleWarVariant.Early;
+                else if (DialogueHelper.GetBoolVariable("Zille_War_IsLate")) WarVariant = ZilleWarVariant.Late;
+
+                if (DialogueHelper.HasVariable("Zille_War_Completed"))
+                    IsWarCompleted = DialogueHelper.GetBoolVariable("Zille_War_Completed");
+                if (DialogueHelper.GetBoolVariable("Zille_PeaceTreaty_Signed") || DialogueHelper.GetBoolVariable("Zille_Rep_TreatyDone"))
+                    IsWarCompleted = true;
+
+                if (DialogueHelper.HasVariable("Zille_Speech_LiedAboutBombing"))
+                    LiedAboutFriendshipBombing = DialogueHelper.GetBoolVariable("Zille_Speech_LiedAboutBombing");
+                if (DialogueHelper.HasVariable("Zille_EarlyArk_Backlash"))
+                    EarlyArkBacklashActive = DialogueHelper.GetBoolVariable("Zille_EarlyArk_Backlash");
+                if (DialogueHelper.HasVariable("Zille_LateSword_Friction"))
+                    LateSwordFrictionActive = DialogueHelper.GetBoolVariable("Zille_LateSword_Friction");
 
                 if (DialogueHelper.HasVariable("Zille_OperationPhase"))
                 {

@@ -86,6 +86,7 @@ namespace GreatZilleSolution
                         {
                             AddVar("RiziaDLC.Resources_Authority", -1);
                             DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                            DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
                             DialogueHelper.SetVariable("Zille_Derdia_InvestigationIgnored", true);
                             DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", false);
                             ZilleCampaignState.HasDerdiaSabotageEvidence = false;
@@ -103,6 +104,7 @@ namespace GreatZilleSolution
                             AddVar("RiziaDLC.Resources_Authority", 1);
                             AddVar("RiziaDLC.Resources_Budget", -1);
                             DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                            DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
                             DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", true);
                             ZilleCampaignState.HasDerdiaSabotageEvidence = true;
                             ZilleCampaignState.AddMicroEffect(leverageDelta: 2, readinessDelta: 1);
@@ -125,6 +127,7 @@ namespace GreatZilleSolution
                             AddVar("RiziaDLC.Diplomacy_Wehlen_NegotiatingPower", -1);
                             DialogueHelper.SetVariable("Zille_WehzekCitizens_Exploited", true);
                             DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                            DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
                             DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", true);
                             ZilleCampaignState.HasDerdiaSabotageEvidence = true;
                             ZilleCampaignState.AddMicroEffect(leverageDelta: 2, readinessDelta: 1);
@@ -143,6 +146,7 @@ namespace GreatZilleSolution
                             AddVar("RiziaDLC.Resources_Authority", -1);
                             DialogueHelper.SetVariable("Zille_Derdia_UniversityStudy", true);
                             DialogueHelper.SetVariable("Zille_Derdia_InvestigationDone", true);
+                            DialogueHelper.SetVariable("Zille_Derdia_BriefingDone", true);
                             DialogueHelper.SetVariable("Zille_Derdia_SabotageEvidence", true);
                             ZilleCampaignState.HasDerdiaSabotageEvidence = true;
                             ZilleCampaignState.AddMicroEffect(leverageDelta: 2, legitimacyDelta: 1);

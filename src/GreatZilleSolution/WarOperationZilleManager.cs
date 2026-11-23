@@ -1811,6 +1811,11 @@ namespace GreatZilleSolution
 
         public static bool TriggerZilleWarBriefingConversation()
         {
+            if (ZilleCampaignState.HasZilleWarOccurred())
+            {
+                MelonLogger.Msg("[WAR ENGINE] Blocked TriggerZilleWarBriefingConversation: Zille war has already concluded (cannot trigger twice).");
+                return false;
+            }
             MelonLogger.Msg("[WAR ENGINE] Launching native Royal War Council Briefing via ConversationPanel...");
             EnsureWarCouncilConversationRegistered();
 
@@ -2165,6 +2170,12 @@ namespace GreatZilleSolution
                                 DialogueHelper.SetVariable("Zille_PeaceTreaty_Signed", true);
                                 DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
                                 DialogueHelper.SetVariable("Zille_Negotiations_Done", true);
+                                DialogueHelper.SetVariable("Zille_War_Completed", true);
+                                DialogueHelper.SetVariable("Zille_War_Active", false);
+                                DialogueHelper.SetVariable("Zille_War_EarlyLaunch", false);
+                                DialogueHelper.SetVariable("Zille_War_UltimatumGiven", false);
+                                DialogueHelper.SetVariable("Zille_War_Mobilization", false);
+                                ZilleCampaignState.IsWarCompleted = true;
                                 ClearAllMandatoryZilleFragments();
                             }
 
@@ -2274,6 +2285,12 @@ namespace GreatZilleSolution
                         DialogueHelper.SetVariable("Zille_PeaceTreaty_Signed", true);
                         DialogueHelper.SetVariable("Zille_Rep_TreatyDone", true);
                         DialogueHelper.SetVariable("Zille_Negotiations_Done", true);
+                        DialogueHelper.SetVariable("Zille_War_Completed", true);
+                        DialogueHelper.SetVariable("Zille_War_Active", false);
+                        DialogueHelper.SetVariable("Zille_War_EarlyLaunch", false);
+                        DialogueHelper.SetVariable("Zille_War_UltimatumGiven", false);
+                        DialogueHelper.SetVariable("Zille_War_Mobilization", false);
+                        ZilleCampaignState.IsWarCompleted = true;
                         ClearAllMandatoryZilleFragments();
                         if (ZilleCampaignState.Outcome >= ZilleWarOutcome.DecisiveVictory || DialogueHelper.GetBoolVariable("RiziaDLC.ZilleReturn_Success"))
                         {

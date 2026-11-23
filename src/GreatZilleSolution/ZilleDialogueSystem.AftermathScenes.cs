@@ -107,27 +107,62 @@ namespace GreatZilleSolution
                 "Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) - 1; Variable[\"Zille_War_Readiness\"] = (Variable[\"Zille_War_Readiness\"] or 0) + 1;");
 
             AddLine(conv, 15, ElenaId, RomusId, "Elena_HomeFront_Ack",
-                "\"Understood, Your Majesty. I will have the Ministry of Commerce issue the directives before noon so the provinces see the Crown is in command.\"", 20);
+                "\"Understood, Your Majesty. I will have the Ministry of Commerce issue the directives before noon so the provinces see the Crown is in command.\"", -1);
 
-            // Topic 2: International Press & AN Sanctions
-            AddLine(conv, 20, NarratorId, RomusId, "Laurento_HomeFront_AN",
-                "Laurento slid a sheaf of Konstantium telegrams across the table. \"On the diplomatic front, Your Majesty, Contanan and Wehzek envoys are circulating exaggerated stories of civilian hardship in Zille to push an Alliance of Nations embargo.\"", 30);
+            // Topic 2: International Press & AN Sanctions (reacts to Early+Ark backlash, Late+Sword friction, and Bombing Lie!)
+            AddLine(conv, 20, LaurentoId, RomusId, "Laurento_HomeFront_AN_EarlyArk",
+                "Laurento slid a thick sheaf of red-stamped Konstantium cables across the table, his expression grim. \"On the diplomatic front, Your Majesty, we are absorbing the full storm I warned of. Because Operation Golden Ark struck mainland Wehlen while our proclamation spoke of a lawful Valero handover, even neutral delegations at the Alliance of Nations are backing Contanan sanctions motions!\"", -1,
+                "Variable[\"Zille_EarlyArk_Backlash\"] == true");
+
+            AddLine(conv, 201, LaurentoId, RomusId, "Laurento_HomeFront_AN_LateSword",
+                "Laurento slid a stack of Konstantium cables across the table. \"On the diplomatic front, Your Majesty, our frontal assault through Zille's populated towns under Operation Golden Sword has drawn sharp press criticism in Kyrute over urban casualties—manageable compared to a mainland raid, yet Smolak's envoys are trying to turn it into an embargo.\"", -1,
+                "Variable[\"Zille_EarlyArk_Backlash\"] ~= true and Variable[\"Zille_LateSword_Friction\"] == true");
+
+            AddLine(conv, 202, LaurentoId, RomusId, "Laurento_HomeFront_AN_Standard",
+                "Laurento slid a sheaf of Konstantium telegrams across the table. \"On the diplomatic front, Your Majesty, Contanan and Wehzek envoys are circulating exaggerated stories of civilian hardship in Zille to push an Alliance of Nations embargo.\"", -1,
+                "Variable[\"Zille_EarlyArk_Backlash\"] ~= true and Variable[\"Zille_LateSword_Friction\"] ~= true");
+
+            AddLink(conv, 15, 20);
+            AddLink(conv, 15, 201);
+            AddLink(conv, 15, 202);
+
+            // Optional Bombing Lie scrutiny beat if player lied on the balcony!
+            AddLine(conv, 25, LaurentoId, RomusId, "Laurento_HomeFront_BombingLie_Scrutiny",
+                "Laurento lowered his voice further, glancing toward the closed doors. \"Worse still, Your Majesty: foreign intelligence attachés in Konstantium are demanding to inspect the 'irrefutable proof' you cited on the balcony that Wehlen staged the Friendship Day bombing. Lespian diplomats know very well no such Wehzek dossier exists—and reporters are sniffing around.\"", 30,
+                "Variable[\"Zille_Speech_LiedAboutBombing\"] == true");
+
+            AddLine(conv, 26, NarratorId, RomusId, "HomeFront_AN_Bridge_NoLie",
+                "The Foreign Minister waited with a fountain pen poised over the draft diplomatic cables.", 30,
+                "Variable[\"Zille_Speech_LiedAboutBombing\"] ~= true");
+
+            foreach (int prev in new[] { 20, 201, 202 })
+            {
+                AddLink(conv, prev, 25);
+                AddLink(conv, prev, 26);
+            }
 
             var anPrompt = AddLine(conv, 30, NarratorId, RomusId, "HomeFront_AN_Prompt",
-                "How should Rizia answer Smolak's propaganda offensive in Kyrute?");
+                "How should Rizia answer the diplomatic storm in Kyrute?");
 
             anPrompt.outgoingLinks.Add(CreateLink(conv.id, 30, 31));
             anPrompt.outgoingLinks.Add(CreateLink(conv.id, 30, 32));
+            anPrompt.outgoingLinks.Add(CreateLink(conv.id, 30, 33));
 
             AddChoice(conv, 31, LaurentoId, "HomeFront_AN_WhitePaper",
                 "\"Publish a royal White Paper with independent observers' dispatches proving our soldiers protect civilians.\"",
-                "Open our rear depots and refugee clinics to neutral correspondents from Kyrute and publish a full White Paper on Wehlen's 1927 breach.", 40,
+                "Open our rear depots and refugee clinics to neutral correspondents from Kyrute and publish a full White Paper anchored strictly in Wehlen's 1927 treaty breach.", 40,
                 "Variable[\"Zille_HomeFrontCrisis_Done\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) + 2; Variable[\"Zille_Leverage\"] = (Variable[\"Zille_Leverage\"] or 0) + 1;");
 
             AddChoice(conv, 32, LaurentoId, "HomeFront_AN_SovereignDefiance",
                 "\"Remind Konstantium that Rizia's internal affairs and sovereign borders are not up for foreign debate.\"",
                 "Send a crisp note to Konstantium: Rizia answers to law and her own people, not to Smolak's theatrical complaints.", 40,
                 "Variable[\"Zille_HomeFrontCrisis_Done\"] = true; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1; Variable[\"RiziaDLC.Resources_Authority\"] = (Variable[\"RiziaDLC.Resources_Authority\"] or 0) + 1;");
+
+            AddChoice(conv, 33, LaurentoId, "HomeFront_AN_ClassifyBombingLie",
+                "\"Declare our Friendship Day bombing intelligence 'Crown State Secret'—refuse to show it while holding firm to the accusation!\"",
+                "Inform the Assembly that releasing our sources on Wehlen's bombing plot would expose active agents inside Wraclawitz. Classify the file and hold the line!", 40,
+                "Variable[\"Zille_HomeFrontCrisis_Done\"] = true; Variable[\"Zille_AN_Legitimacy\"] = (Variable[\"Zille_AN_Legitimacy\"] or 0) - 1; Variable[\"RiziaDLC.Country_PublicOpinion\"] = (Variable[\"RiziaDLC.Country_PublicOpinion\"] or 0) + 1; Variable[\"Zille_Smolak_Pressure\"] = (Variable[\"Zille_Smolak_Pressure\"] or 0) + 1;",
+                "Variable[\"Zille_Speech_LiedAboutBombing\"] == true");
 
             AddLine(conv, 40, HugoId, RomusId, "Hugo_HomeFront_Close",
                 "\"A steady hand on the home front keeps the army standing at the border, Your Majesty. The realm holds firm.\"", -1,
@@ -139,6 +174,7 @@ namespace GreatZilleSolution
 
             AddLink(conv, 31, 140);
             AddLink(conv, 32, 140);
+            AddLink(conv, 33, 140);
 
             AddConversationWithAlias(db, conv, "Zille/HomeFrontCrisis", "Turn_Zille_HomeFrontCrisis");
             MelonLogger.Msg("[ZILLE DIALOGUE] Injected Home Front Crisis (ID 9998) into masterDatabase!");
